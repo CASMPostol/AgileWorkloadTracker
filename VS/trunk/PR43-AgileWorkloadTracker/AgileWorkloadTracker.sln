@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Website", "Website\Website.csproj", "{3C290EF1-A0FA-46BB-BC4A-F6B22C832E5A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dashboards", "Dashboards\Dashboards.csproj", "{ACEDFFBA-2F1C-42B6-AB0B-F3958397523B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,12 @@ Global
 		{3C290EF1-A0FA-46BB-BC4A-F6B22C832E5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C290EF1-A0FA-46BB-BC4A-F6B22C832E5A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3C290EF1-A0FA-46BB-BC4A-F6B22C832E5A}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{ACEDFFBA-2F1C-42B6-AB0B-F3958397523B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACEDFFBA-2F1C-42B6-AB0B-F3958397523B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACEDFFBA-2F1C-42B6-AB0B-F3958397523B}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{ACEDFFBA-2F1C-42B6-AB0B-F3958397523B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACEDFFBA-2F1C-42B6-AB0B-F3958397523B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACEDFFBA-2F1C-42B6-AB0B-F3958397523B}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
