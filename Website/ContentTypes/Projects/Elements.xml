@@ -4,10 +4,11 @@
                Name="Projects"
                Group="CAS Agile Workload Tracker"
                Description="Projects Content Type"
-               Inherits="TRUE"
+               Inherits="FALSE"
                Overwrite="TRUE">
     <Folder TargetName="_cts/Projects" />
     <FieldRefs>
+      <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" DisplayName="Project name" />
       <FieldRef ID="{FC7FD148-7FA4-4581-AA48-12D0717EA6A1}" Name="ProjectNumber" />
       <FieldRef ID="{999E14E3-F1D2-477E-BABD-5E320BE561CA}" Name="ProjectYear" />
       <FieldRef ID="{AF8502BB-6752-4985-9789-E72A192ED542}" Name="ProjectHours" />

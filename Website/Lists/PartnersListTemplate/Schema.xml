@@ -1,20 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<List xmlns:ows="Microsoft SharePoint" Title="ProjectsListTemplate" FolderCreation="FALSE" Direction="$Resources:Direction;" Url="Lists/Website-ProjectsListTemplate" BaseType="0" xmlns="http://schemas.microsoft.com/sharepoint/">
+<List xmlns:ows="Microsoft SharePoint" Title="PartnersListTemplate" FolderCreation="FALSE" Direction="$Resources:Direction;" Url="Lists/Website-PartnersListTemplate" BaseType="0" xmlns="http://schemas.microsoft.com/sharepoint/">
   <MetaData>
     <ContentTypes>
-      <ContentType ID="0x01000c2ccabba2e1473ba2623efda04e749e" Name="Projects" Group="CAS Agile Workload Tracker" Description="Projects Content Type" Inherits="FALSE" Overwrite="TRUE">
-        <Folder TargetName="_cts/Projects" />
+      <ContentType ID="0x0100e64d1186d14d472eb1984f194359bb20" Name="Partners" Group="CAS Agile Workload Tracker" Description="Partners Content Type" Inherits="FALSE" Overwrite="TRUE">
+        <Folder TargetName="_cts/Partners" />
         <FieldRefs>
-          <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" DisplayName="Project name" />
-          <FieldRef ID="{FC7FD148-7FA4-4581-AA48-12D0717EA6A1}" Name="ProjectNumber" />
-          <FieldRef ID="{999E14E3-F1D2-477E-BABD-5E320BE561CA}" Name="ProjectYear" />
-          <FieldRef ID="{AF8502BB-6752-4985-9789-E72A192ED542}" Name="ProjectHours" />
-          <FieldRef ID="{F893F153-B6A0-4D2A-8746-0F57BBF010E7}" Name="ProjectStartDate" />
-          <FieldRef ID="{AD683CF5-ED2A-448E-AF62-A07F5B24A6FE}" Name="ProjectEndDate" />
-          <FieldRef ID="{75323F74-00A2-4582-A1A5-DFD990A369D1}" Name="ProjectWarrantyDate" />
-          <FieldRef ID="{3377518E-0E08-44C1-9A75-22A6680A5A83}" Name="ProjectBudget" />
-          <FieldRef ID="{0A8C105D-2805-4DA0-85C4-99D2CE5B86E1}" Name="ProjectCurrency" />
-          <FieldRef ID="{D1CBD0F6-3343-4C1D-B16C-AEB3E00AD645}" Name="ProjectComments" />
+          <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" DisplayName="Partner name" />
+          <FieldRef ID="{3f3a5c85-9d5a-4663-b925-8b68a678ea3a}" Name="WorkCountry" />
+          <FieldRef ID="{6ca7bd7f-b490-402e-af1b-2813cf087b1e}" Name="WorkCity" />
+          <FieldRef ID="{9a631556-3dac-49db-8d2f-fb033b0fdc24}" Name="WorkZip" />
+          <FieldRef ID="{fc2e188e-ba91-48c9-9dd3-16431afddd50}" Name="WorkAddress" />
+          <FieldRef ID="{fd630629-c165-4513-b43c-fdb16b86a14d}" Name="WorkPhone" />
+          <FieldRef ID="{9d1cacc8-f452-4bc1-a751-050595ad96e1}" Name="WorkFax" />
+          <FieldRef ID="{2a464df1-44c1-4851-949d-fcd270f0ccf2}" Name="CellPhone" />
+          <FieldRef ID="{fce16b4c-fe53-4793-aaab-b4892e736d15}" Name="EMail" />
+          <FieldRef ID="{9da97a8a-1da5-4a77-98d3-4bc10456e700}" Name="Comments" />
         </FieldRefs>
       </ContentType>
     </ContentTypes>
@@ -50,15 +50,15 @@
           </FieldRef>
           <FieldRef Name="LinkTitle">
           </FieldRef>
-          <FieldRef ID="{FC7FD148-7FA4-4581-AA48-12D0717EA6A1}" Name="ProjectNumber" />
-          <FieldRef ID="{999E14E3-F1D2-477E-BABD-5E320BE561CA}" Name="ProjectYear" />
-          <FieldRef ID="{AF8502BB-6752-4985-9789-E72A192ED542}" Name="ProjectHours" />
-          <FieldRef ID="{F893F153-B6A0-4D2A-8746-0F57BBF010E7}" Name="ProjectStartDate" />
-          <FieldRef ID="{AD683CF5-ED2A-448E-AF62-A07F5B24A6FE}" Name="ProjectEndDate" />
-          <FieldRef ID="{75323F74-00A2-4582-A1A5-DFD990A369D1}" Name="ProjectWarrantyDate" />
-          <FieldRef ID="{3377518E-0E08-44C1-9A75-22A6680A5A83}" Name="ProjectBudget" />
-          <FieldRef ID="{0A8C105D-2805-4DA0-85C4-99D2CE5B86E1}" Name="ProjectCurrency" />
-          <FieldRef ID="{D1CBD0F6-3343-4C1D-B16C-AEB3E00AD645}" Name="ProjectComments" />
+          <FieldRef ID="{3f3a5c85-9d5a-4663-b925-8b68a678ea3a}" Name="WorkCountry" />
+          <FieldRef ID="{6ca7bd7f-b490-402e-af1b-2813cf087b1e}" Name="WorkCity" />
+          <FieldRef ID="{9a631556-3dac-49db-8d2f-fb033b0fdc24}" Name="WorkZip" />
+          <FieldRef ID="{fc2e188e-ba91-48c9-9dd3-16431afddd50}" Name="WorkAddress" />
+          <FieldRef ID="{fd630629-c165-4513-b43c-fdb16b86a14d}" Name="WorkPhone" />
+          <FieldRef ID="{9d1cacc8-f452-4bc1-a751-050595ad96e1}" Name="WorkFax" />
+          <FieldRef ID="{2a464df1-44c1-4851-949d-fcd270f0ccf2}" Name="CellPhone" />
+          <FieldRef ID="{fce16b4c-fe53-4793-aaab-b4892e736d15}" Name="EMail" />
+          <FieldRef ID="{9da97a8a-1da5-4a77-98d3-4bc10456e700}" Name="Comments" />
         </ViewFields>
         <Query>
           <OrderBy>
