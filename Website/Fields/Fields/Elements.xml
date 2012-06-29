@@ -205,4 +205,17 @@
       <CHOICE>Warranty</CHOICE>
     </CHOICES>
   </Field>
+  <Field
+    Type="User"
+    DisplayName="User"
+    List="UserInfo"
+    Required="FALSE"
+    EnforceUniqueValues="FALSE"
+    ShowField="Title"
+    UserSelectionMode="PeopleOnly"
+    UserSelectionScope="0"
+    Group="CAS Smart Factory Shepherd"
+    ID="{78E726A0-C701-4CA3-B4CF-E21A575A822F}"
+    Name="EmployeeADAccount"
+    Overwrite="TRUE"  />
 </Elements>
