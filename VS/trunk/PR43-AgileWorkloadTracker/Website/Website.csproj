@@ -53,6 +53,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ContentTypes\Partners\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{3cbc661f-6727-4ab1-9bb5-755b45874a65}</SharePointProjectItemId>
+    </None>
     <None Include="ContentTypes\Projects\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{6dd5c4bd-0c8e-45e6-831f-e2c706aa287c}</SharePointProjectItemId>
     </None>
@@ -63,6 +66,12 @@
       <SharePointProjectItemId>{80eea8e7-44ab-4436-af6d-acad27b75246}</SharePointProjectItemId>
     </None>
     <None Include="key.snk" />
+    <None Include="Lists\PartnersListTemplate\PartnersList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{2791b920-330f-4eeb-bf95-3a3542928afe}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\PartnersListTemplate\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{6a575955-f846-4beb-a543-d77b9f6717e4}</SharePointProjectItemId>
+    </None>
     <None Include="Lists\ProjectsListTemplate\ProjectsList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{6b72d405-7c5e-4032-bba5-9dc74d459217}</SharePointProjectItemId>
     </None>
@@ -78,6 +87,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="ContentTypes\Partners\Elements.xml" />
     <Content Include="ContentTypes\Projects\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -85,6 +95,11 @@
       <DependentUpon>AWTWebsite.feature</DependentUpon>
     </Content>
     <Content Include="Fields\Fields\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Lists\PartnersListTemplate\Elements.xml" />
+    <Content Include="Lists\PartnersListTemplate\PartnersList\Elements.xml" />
+    <Content Include="Lists\PartnersListTemplate\Schema.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Lists\ProjectsListTemplate\Elements.xml">
