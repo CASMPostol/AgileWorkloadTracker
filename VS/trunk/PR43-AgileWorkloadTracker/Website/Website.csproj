@@ -56,6 +56,9 @@
     <None Include="ContentTypes\Contracts\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{d3246fce-ca51-4ce2-bf92-ae165a517a93}</SharePointProjectItemId>
     </None>
+    <None Include="ContentTypes\Hours\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{3bc371df-6530-4d89-8fea-f8ade77737cf}</SharePointProjectItemId>
+    </None>
     <None Include="ContentTypes\Partners\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{3cbc661f-6727-4ab1-9bb5-755b45874a65}</SharePointProjectItemId>
     </None>
@@ -68,12 +71,21 @@
     <None Include="Fields\Fields\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{80eea8e7-44ab-4436-af6d-acad27b75246}</SharePointProjectItemId>
     </None>
+    <None Include="Fields\LookupFields\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{9e78353d-face-4f57-95be-8a6a980bf355}</SharePointProjectItemId>
+    </None>
     <None Include="key.snk" />
     <None Include="Lists\ContractsListTemplate\ContractsList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{b9eb610d-f391-4262-b091-7e8993bdb306}</SharePointProjectItemId>
     </None>
     <None Include="Lists\ContractsListTemplate\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{385ffdf6-d2ac-4a5c-85a7-1b3e4a9026c5}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\HoursListTemplate\HoursList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{2e518a09-dc9e-48e0-988a-ab57c6846371}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\HoursListTemplate\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{9533e7f4-3a4a-4946-b6b0-c2ec1d1e8039}</SharePointProjectItemId>
     </None>
     <None Include="Lists\PartnersListTemplate\PartnersList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{2791b920-330f-4eeb-bf95-3a3542928afe}</SharePointProjectItemId>
@@ -97,6 +109,7 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="ContentTypes\Contracts\Elements.xml" />
+    <Content Include="ContentTypes\Hours\Elements.xml" />
     <Content Include="ContentTypes\Partners\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -109,9 +122,13 @@
     <Content Include="Fields\Fields\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Fields\LookupFields\Elements.xml" />
     <Content Include="Lists\ContractsListTemplate\Elements.xml" />
     <Content Include="Lists\ContractsListTemplate\ContractsList\Elements.xml" />
     <Content Include="Lists\ContractsListTemplate\Schema.xml" />
+    <Content Include="Lists\HoursListTemplate\Elements.xml" />
+    <Content Include="Lists\HoursListTemplate\HoursList\Elements.xml" />
+    <Content Include="Lists\HoursListTemplate\Schema.xml" />
     <Content Include="Lists\PartnersListTemplate\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
