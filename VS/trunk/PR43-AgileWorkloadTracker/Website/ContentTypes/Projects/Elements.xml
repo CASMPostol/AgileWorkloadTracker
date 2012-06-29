@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <ContentType ID="0x01000c2ccabba2e1473ba2623efda04e749e"
+               Name="Projects"
+               Group="CAS Agile Workload Tracker"
+               Description="Projects Content Type"
+               Inherits="TRUE"
+               Overwrite="TRUE">
+    <Folder TargetName="_cts/Projects" />
+    <FieldRefs>
+      <FieldRef ID="{FC7FD148-7FA4-4581-AA48-12D0717EA6A1}" Name="ProjectNumber" />
+      <FieldRef ID="{999E14E3-F1D2-477E-BABD-5E320BE561CA}" Name="ProjectYear" />
+      <FieldRef ID="{AF8502BB-6752-4985-9789-E72A192ED542}" Name="ProjectHours" />
+      <FieldRef ID="{F893F153-B6A0-4D2A-8746-0F57BBF010E7}" Name="ProjectStartDate" />
+      <FieldRef ID="{AD683CF5-ED2A-448E-AF62-A07F5B24A6FE}" Name="ProjectEndDate" />
+      <FieldRef ID="{75323F74-00A2-4582-A1A5-DFD990A369D1}" Name="ProjectWarrantyDate" />
+      <FieldRef ID="{3377518E-0E08-44C1-9A75-22A6680A5A83}" Name="ProjectBudget" />
+      <FieldRef ID="{0A8C105D-2805-4DA0-85C4-99D2CE5B86E1}" Name="ProjectCurrency" />
+      <FieldRef ID="{D1CBD0F6-3343-4C1D-B16C-AEB3E00AD645}" Name="ProjectComments" />
+    </FieldRefs>
+  </ContentType>
+</Elements>

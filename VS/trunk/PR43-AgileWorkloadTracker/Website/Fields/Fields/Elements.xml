@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Field
+    Name="ProjectNumber"
+    ID="{FC7FD148-7FA4-4581-AA48-12D0717EA6A1}"
+    Type="Text"
+    DisplayName="Project number"
+    Group="CAS Agile Workload Tracker"
+    />
+  <Field
+    Name="ProjectYear"
+    ID="{999E14E3-F1D2-477E-BABD-5E320BE561CA}"
+    Type="Choice"
+    DisplayName="Year"
+    Group="CAS Agile Workload Tracker" >
+    <Default>2012</Default>
+    <CHOICES>
+      <CHOICE>2012</CHOICE>
+      <CHOICE>2013</CHOICE>
+      <CHOICE>2014</CHOICE>
+      <CHOICE>2015</CHOICE>
+      <CHOICE>2016</CHOICE>
+      <CHOICE>2017</CHOICE>
+      <CHOICE>2018</CHOICE>
+      <CHOICE>2019</CHOICE>
+      <CHOICE>2020</CHOICE>
+    </CHOICES>
+  </Field>
+  <Field
+    Name="ProjectHours"
+    ID="{AF8502BB-6752-4985-9789-E72A192ED542}"
+    Type="Number"
+    Decimals="1"
+    DisplayName="Hours"
+    Group="CAS Agile Workload Tracker"
+    />
+  <Field
+    ID="{F893F153-B6A0-4D2A-8746-0F57BBF010E7}"
+    Name="ProjectStartDate"
+    Group="CAS Agile Workload Tracker"
+    Type="DateTime"
+    Format="DateOnly"
+    DisplayName="Start date">
+    <Default>[today]</Default>
+  </Field>
+  <Field
+   ID="{AD683CF5-ED2A-448E-AF62-A07F5B24A6FE}"
+   Name="ProjectEndDate"
+   Group="CAS Agile Workload Tracker"
+   Type="DateTime"
+   Format="DateOnly"
+   DisplayName="End date">
+    <Default>[today]</Default>
+  </Field>
+  <Field
+   ID="{75323F74-00A2-4582-A1A5-DFD990A369D1}"
+   Name="ProjectWarrantyDate"
+   Group="CAS Agile Workload Tracker"
+   Type="DateTime"
+   Format="DateOnly"
+   DisplayName="Warranty date">
+    <Default>[today]</Default>
+  </Field>
+  <Field
+    Name="ProjectBudget"
+    ID="{3377518E-0E08-44C1-9A75-22A6680A5A83}"
+    Type="Number"
+    Decimals="2"
+    DisplayName="Budget"
+    Group="CAS Agile Workload Tracker"
+    />
+  <Field
+    Name="ProjectCurrency"
+    ID="{0A8C105D-2805-4DA0-85C4-99D2CE5B86E1}"
+    Type="Choice"
+    DisplayName="Currency"
+    Group="CAS Agile Workload Tracker" >
+    <Default>PLN</Default>
+    <CHOICES>
+      <CHOICE>PLN</CHOICE>
+      <CHOICE>USD</CHOICE>
+      <CHOICE>EUR</CHOICE>
+    </CHOICES>
+  </Field>
+  <Field
+   Name="ProjectComments"
+   ID="{D1CBD0F6-3343-4C1D-B16C-AEB3E00AD645}"
+   Type="Note"
+   DisplayName="Comments"
+   Group="CAS Agile Workload Tracker"
+    />
+</Elements>
