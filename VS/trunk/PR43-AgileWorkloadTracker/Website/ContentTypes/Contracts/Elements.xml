@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <ContentType ID="0x0100dabe2f02363f46bcb5699b2e6dda8a82"
+               Name="Contracts"
+               Group="CAS Agile Workload Tracker"
+               Description="Contracts Content Type"
+               Inherits="FALSE"
+               Overwrite="TRUE">
+    <Folder TargetName="_cts/Contracts" />
+    <FieldRefs>
+      <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" DisplayName="Contract name" />
+      <FieldRef ID="{A4A5C09A-1354-4BAB-9965-ADEC28AB28CA}" Name="ContractNumber" />
+      <FieldRef ID="{CEE81663-0512-4771-AA85-7910EE1E718B}" Name="ContractSubject" />
+      <FieldRef ID="{520BD0CF-FB6C-45C4-969F-83E943FAFDD5}" Name="ContractDate" />
+      <FieldRef ID="{163BDA65-C553-4C21-B122-5CE0DC233FE0}" Name="ContractEndDate" />
+      <FieldRef ID="{35431003-BE6B-43D8-B115-A347D389305B}" Name="ContractWarrantyDate" />
+      <FieldRef ID="{65679DE3-0BE0-48CE-8B0F-94635F748267}" Name="ContractOffer" />
+      <FieldRef ID="{E6FB06C2-7A51-4A2E-8C88-9F899921740D}" Name="ContractValue" />
+      <FieldRef ID="{0A8C105D-2805-4DA0-85C4-99D2CE5B86E1}" Name="Currency" />
+      <FieldRef ID="{9da97a8a-1da5-4a77-98d3-4bc10456e700}" Name="Comments" />
+    </FieldRefs>
+  </ContentType>
+</Elements>
