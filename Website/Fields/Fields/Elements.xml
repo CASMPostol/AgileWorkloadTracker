@@ -161,4 +161,48 @@
    DisplayName="Value"
    Group="CAS Agile Workload Tracker"
     />
+  <Field
+    ID="{C65F72DA-FA56-4C8C-9302-F7E4CB5E2049}"
+    Name="HoursDate"
+    Group="CAS Agile Workload Tracker"
+    Type="DateTime"
+    Format="DateOnly"
+    DisplayName="Date">
+    <Default>[today]</Default>
+  </Field>
+  <Field
+   Name="Hours"
+   ID="{2B9FEE87-CC98-4CA5-8BA7-C547D05AFCDD}"
+   Type="Number"
+   Decimals="0"
+   DisplayName="Hours"
+   Group="CAS Agile Workload Tracker"
+    />
+  <Field
+    Name="Minutes"
+    ID="{25F24E14-A1D1-4DBA-AB5F-793C7E8D2252}"
+    Type="Choice"
+    DisplayName="Minutes"
+    Group="CAS Agile Workload Tracker" >
+    <Default>00</Default>
+    <CHOICES>
+      <CHOICE>00</CHOICE>
+      <CHOICE>15</CHOICE>
+      <CHOICE>30</CHOICE>
+      <CHOICE>45</CHOICE>
+    </CHOICES>
+  </Field>
+  <Field
+    Name="HoursStatus"
+    ID="{4CC57A5D-9118-41F6-89AB-F90E8D719A4C}"
+    Type="Choice"
+    DisplayName="Status"
+    Group="CAS Agile Workload Tracker" >
+    <Default>Realization</Default>
+    <CHOICES>
+      <CHOICE>Realization</CHOICE>
+      <CHOICE>Completion</CHOICE>
+      <CHOICE>Warranty</CHOICE>
+    </CHOICES>
+  </Field>
 </Elements>
