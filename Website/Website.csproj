@@ -53,7 +53,22 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ContentTypes\Projects\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{6dd5c4bd-0c8e-45e6-831f-e2c706aa287c}</SharePointProjectItemId>
+    </None>
+    <None Include="Features\AWTWebsite\AWTWebsite.feature">
+      <FeatureId>{26be2f85-61c8-4212-b8f4-fa500cd71747}</FeatureId>
+    </None>
+    <None Include="Fields\Fields\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{80eea8e7-44ab-4436-af6d-acad27b75246}</SharePointProjectItemId>
+    </None>
     <None Include="key.snk" />
+    <None Include="Lists\ProjectsListTemplate\ProjectsList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{6b72d405-7c5e-4032-bba5-9dc74d459217}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\ProjectsListTemplate\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{eedccfa6-b04f-47b7-8156-8e70404b0c16}</SharePointProjectItemId>
+    </None>
     <None Include="Package\Package.package">
       <PackageId>{f224c84d-bdc8-4fae-8444-ed652e9f1a3a}</PackageId>
     </None>
@@ -61,8 +76,24 @@
       <DependentUpon>Package.package</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Features\" />
+    <Content Include="ContentTypes\Projects\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Features\AWTWebsite\AWTWebsite.Template.xml">
+      <DependentUpon>AWTWebsite.feature</DependentUpon>
+    </Content>
+    <Content Include="Fields\Fields\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Lists\ProjectsListTemplate\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Lists\ProjectsListTemplate\ProjectsList\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Lists\ProjectsListTemplate\Schema.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\SharePointTools\Microsoft.VisualStudio.SharePoint.targets" />
