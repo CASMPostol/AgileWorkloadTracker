@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
   <ContentType ID="0x010091a504ec7e3342bdb25efeb93b60a5fa"
-               Name="Employees"
+               Name="Resources"
                Group="CAS Agile Workload Tracker"
-               Description="Employees Content Type"
+               Description="Resources Content Type"
                Inherits="FALSE"
                Overwrite="TRUE">
     <Folder TargetName="_cts/Employees" />

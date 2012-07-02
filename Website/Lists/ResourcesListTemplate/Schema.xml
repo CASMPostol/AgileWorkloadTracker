@@ -2,7 +2,12 @@
 <List xmlns:ows="Microsoft SharePoint" Title="EmployeesListTemplate" FolderCreation="FALSE" Direction="$Resources:Direction;" Url="Lists/Website-EmployeesListTemplate" BaseType="0" xmlns="http://schemas.microsoft.com/sharepoint/">
   <MetaData>
     <ContentTypes>
-      <ContentType ID="0x010091a504ec7e3342bdb25efeb93b60a5fa" Name="Employees" Group="CAS Agile Workload Tracker" Description="Employees Content Type" Inherits="FALSE" Overwrite="TRUE">
+      <ContentType ID="0x010091a504ec7e3342bdb25efeb93b60a5fa"
+               Name="Resources"
+               Group="CAS Agile Workload Tracker"
+               Description="Resources Content Type"
+               Inherits="FALSE"
+               Overwrite="TRUE">
         <Folder TargetName="_cts/Employees" />
         <FieldRefs>
           <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" DisplayName="Name and surname" />
