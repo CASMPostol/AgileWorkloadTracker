@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+    <ListTemplate
+        Name="StageListTemplate"
+        Type="10005"
+        BaseType="0"
+        OnQuickLaunch="TRUE"
+        SecurityBits="11"
+        Sequence="410"
+        DisplayName="Stage ListTemplate"
+        Description="My List Definition"
+        Image="/_layouts/images/itgen.png"/>
+</Elements>

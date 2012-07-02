@@ -65,14 +65,14 @@
     <None Include="ContentTypes\Projects\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{6dd5c4bd-0c8e-45e6-831f-e2c706aa287c}</SharePointProjectItemId>
     </None>
+    <None Include="ContentTypes\Stage\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{d2aca013-2c26-40f3-9f10-059a1bde0fbf}</SharePointProjectItemId>
+    </None>
     <None Include="ContentTypes\Workload\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{4137428c-d596-4d12-a04f-cda9c9f0320f}</SharePointProjectItemId>
     </None>
     <None Include="Features\AWTWebsite\AWTWebsite.feature">
       <FeatureId>{26be2f85-61c8-4212-b8f4-fa500cd71747}</FeatureId>
-    </None>
-    <None Include="Features\Feature1\Feature1.feature">
-      <FeatureId>{3b8f4967-9889-4aeb-a816-3cd17426e5c4}</FeatureId>
     </None>
     <None Include="Fields\Fields\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{80eea8e7-44ab-4436-af6d-acad27b75246}</SharePointProjectItemId>
@@ -105,6 +105,12 @@
     <None Include="Lists\ProjectsListTemplate\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{eedccfa6-b04f-47b7-8156-8e70404b0c16}</SharePointProjectItemId>
     </None>
+    <None Include="Lists\StageListTemplate\StageList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{70a8f5d1-5c9a-43e9-a07f-43362c77ef3f}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\StageListTemplate\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{5d637cf5-e980-4a3b-8c78-7300c4dfd73b}</SharePointProjectItemId>
+    </None>
     <None Include="Lists\Workload\WorkloadList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{e9222ad0-6b29-47a1-b972-d79737cc9487}</SharePointProjectItemId>
     </None>
@@ -121,19 +127,19 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="ContentTypes\Contracts\Elements.xml" />
-    <Content Include="ContentTypes\Employees\Elements.xml" />
+    <Content Include="ContentTypes\Employees\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="ContentTypes\Partners\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="ContentTypes\Projects\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="ContentTypes\Stage\Elements.xml" />
     <Content Include="ContentTypes\Workload\Elements.xml" />
     <Content Include="Features\AWTWebsite\AWTWebsite.Template.xml">
       <DependentUpon>AWTWebsite.feature</DependentUpon>
-    </Content>
-    <Content Include="Features\Feature1\Feature1.Template.xml">
-      <DependentUpon>Feature1.feature</DependentUpon>
     </Content>
     <Content Include="Fields\Fields\Elements.xml">
       <SubType>Designer</SubType>
@@ -163,6 +169,9 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Lists\ProjectsListTemplate\Schema.xml" />
+    <Content Include="Lists\StageListTemplate\Elements.xml" />
+    <Content Include="Lists\StageListTemplate\StageList\Elements.xml" />
+    <Content Include="Lists\StageListTemplate\Schema.xml" />
     <Content Include="Lists\Workload\Elements.xml" />
     <Content Include="Lists\Workload\WorkloadList\Elements.xml" />
     <Content Include="Lists\Workload\Schema.xml" />
