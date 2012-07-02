@@ -13,7 +13,6 @@
       <FieldRef ID="{10DE0472-6E78-472E-B9DF-E883DA6F35D8}" Name="Task2ResourcesTitle" />
       <FieldRef ID="{3CDE96BD-665B-45B6-9EFB-368262C8140D}" Name="Task2MilestoneDefinedInTitle" />
       <FieldRef ID="{689D6173-44B0-4953-839F-4AFBBCB51138}" Name="Task2MilestoneResolvedInTitle" />
-      <FieldRef ID="{9da97a8a-1da5-4a77-98d3-4bc10456e700}" Name="Comments" />
     </FieldRefs>
   </ContentType>
 </Elements>

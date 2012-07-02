@@ -1,6 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
   <Field
+   Name="TaskComments2TaskTitle"
+   ID="{C5844200-805E-4D1A-B787-6A200C723634}"
+   Type="Lookup"
+   List="Lists/TaskList"
+   ShowField="Title"
+   UnlimitedLengthInDocumentLibrary="False"
+   Indexed="True"
+   RelationshipDeleteBehavior="None"
+   DisplayName="Task"
+   Group="CAS Agile Workload Tracker"
+   Required="True"
+   Hidden="False"
+   DisplaceOnUpgrade="True"
+   EnforceUniqueValues="False"
+   ReadOnly="False"
+    />
+  <Field
    Name="Task2MilestoneDefinedInTitle"
    ID="{3CDE96BD-665B-45B6-9EFB-368262C8140D}"
    Type="Lookup"
