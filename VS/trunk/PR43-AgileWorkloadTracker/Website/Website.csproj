@@ -56,6 +56,9 @@
     <None Include="ContentTypes\Contracts\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{d3246fce-ca51-4ce2-bf92-ae165a517a93}</SharePointProjectItemId>
     </None>
+    <None Include="ContentTypes\Estimation\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{31c9b882-47e6-403f-bb3c-804f67f93a29}</SharePointProjectItemId>
+    </None>
     <None Include="ContentTypes\Milestone\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{dffd98ed-9738-4638-ab68-98207c4f8b89}</SharePointProjectItemId>
     </None>
@@ -98,6 +101,12 @@
     </None>
     <None Include="Lists\ContractsListTemplate\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{385ffdf6-d2ac-4a5c-85a7-1b3e4a9026c5}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\EstimationListTemplate\EstimationList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{eeffe9b1-cdf9-4aed-b6e3-5d80828608d3}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\EstimationListTemplate\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{5285ff88-07d2-43de-bc6f-db32065df064}</SharePointProjectItemId>
     </None>
     <None Include="Lists\MilestoneListTemplate\MilestoneList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{1382c049-f1bd-47af-a8e8-f6fc35284503}</SharePointProjectItemId>
@@ -163,6 +172,7 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="ContentTypes\Contracts\Elements.xml" />
+    <Content Include="ContentTypes\Estimation\Elements.xml" />
     <Content Include="ContentTypes\Milestone\Elements.xml" />
     <Content Include="ContentTypes\Partners\Elements.xml">
       <SubType>Designer</SubType>
@@ -190,6 +200,9 @@
     <Content Include="Lists\ContractsListTemplate\Elements.xml" />
     <Content Include="Lists\ContractsListTemplate\ContractsList\Elements.xml" />
     <Content Include="Lists\ContractsListTemplate\Schema.xml" />
+    <Content Include="Lists\EstimationListTemplate\Elements.xml" />
+    <Content Include="Lists\EstimationListTemplate\EstimationList\Elements.xml" />
+    <Content Include="Lists\EstimationListTemplate\Schema.xml" />
     <Content Include="Lists\MilestoneListTemplate\Elements.xml" />
     <Content Include="Lists\MilestoneListTemplate\MilestoneList\Elements.xml" />
     <Content Include="Lists\MilestoneListTemplate\Schema.xml" />
