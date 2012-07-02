@@ -76,6 +76,7 @@
     </None>
     <None Include="ContentTypes\Task\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{137cba77-695d-497a-ad84-b2178b081f46}</SharePointProjectItemId>
+      <SubType>Designer</SubType>
     </None>
     <None Include="ContentTypes\Workload\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{4137428c-d596-4d12-a04f-cda9c9f0320f}</SharePointProjectItemId>
@@ -138,11 +139,11 @@
     <None Include="Lists\TaskListTemplate\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{49f5b4ef-f0bb-41a3-a0ec-7a8420b57e47}</SharePointProjectItemId>
     </None>
-    <None Include="Lists\Workload\WorkloadList\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{e9222ad0-6b29-47a1-b972-d79737cc9487}</SharePointProjectItemId>
+    <None Include="Lists\WorkloadListTemplate\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{69da074e-d7f4-4c84-b0ba-4b37e6990375}</SharePointProjectItemId>
     </None>
-    <None Include="Lists\Workload\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{5a74b517-afea-455c-870e-b8161bfbeb91}</SharePointProjectItemId>
+    <None Include="Lists\WorkloadListTemplate\WorkloadList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{da73a843-0083-4a96-a2a6-fb3f30e64719}</SharePointProjectItemId>
     </None>
     <None Include="Package\Package.package">
       <PackageId>{f224c84d-bdc8-4fae-8444-ed652e9f1a3a}</PackageId>
@@ -209,9 +210,9 @@
     <Content Include="Lists\TaskListTemplate\Elements.xml" />
     <Content Include="Lists\TaskListTemplate\TaskList\Elements.xml" />
     <Content Include="Lists\TaskListTemplate\Schema.xml" />
-    <Content Include="Lists\Workload\Elements.xml" />
-    <Content Include="Lists\Workload\WorkloadList\Elements.xml" />
-    <Content Include="Lists\Workload\Schema.xml" />
+    <Content Include="Lists\WorkloadListTemplate\Elements.xml" />
+    <Content Include="Lists\WorkloadListTemplate\Schema.xml" />
+    <Content Include="Lists\WorkloadListTemplate\WorkloadList\Elements.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\SharePointTools\Microsoft.VisualStudio.SharePoint.targets" />
