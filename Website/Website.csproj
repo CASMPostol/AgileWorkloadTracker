@@ -71,6 +71,9 @@
     <None Include="ContentTypes\Stage\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{d2aca013-2c26-40f3-9f10-059a1bde0fbf}</SharePointProjectItemId>
     </None>
+    <None Include="ContentTypes\TaskComments\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{3c8ef904-a4ad-41b9-a950-f395701ae63b}</SharePointProjectItemId>
+    </None>
     <None Include="ContentTypes\Task\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{137cba77-695d-497a-ad84-b2178b081f46}</SharePointProjectItemId>
     </None>
@@ -123,6 +126,12 @@
     <None Include="Lists\StageListTemplate\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{5d637cf5-e980-4a3b-8c78-7300c4dfd73b}</SharePointProjectItemId>
     </None>
+    <None Include="Lists\TaskCommentsListTemplate\TaskCommentsList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{6a29b2ad-7dc7-4d67-b397-ee2aaadbcbfe}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\TaskCommentsListTemplate\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{76916b7e-8491-4809-819e-994a3c2708f8}</SharePointProjectItemId>
+    </None>
     <None Include="Lists\TaskListTemplate\TaskList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{0aa9c80e-4d00-4cd3-ba3e-a28038a2cdd8}</SharePointProjectItemId>
     </None>
@@ -154,6 +163,7 @@
     </Content>
     <Content Include="ContentTypes\Resources\Elements.xml" />
     <Content Include="ContentTypes\Stage\Elements.xml" />
+    <Content Include="ContentTypes\TaskComments\Elements.xml" />
     <Content Include="ContentTypes\Task\Elements.xml" />
     <Content Include="ContentTypes\Workload\Elements.xml" />
     <Content Include="Features\AWTWebsite\AWTWebsite.Template.xml">
@@ -193,6 +203,9 @@
     <Content Include="Lists\StageListTemplate\Elements.xml" />
     <Content Include="Lists\StageListTemplate\StageList\Elements.xml" />
     <Content Include="Lists\StageListTemplate\Schema.xml" />
+    <Content Include="Lists\TaskCommentsListTemplate\Elements.xml" />
+    <Content Include="Lists\TaskCommentsListTemplate\TaskCommentsList\Elements.xml" />
+    <Content Include="Lists\TaskCommentsListTemplate\Schema.xml" />
     <Content Include="Lists\TaskListTemplate\Elements.xml" />
     <Content Include="Lists\TaskListTemplate\TaskList\Elements.xml" />
     <Content Include="Lists\TaskListTemplate\Schema.xml" />
