@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
     <ListTemplate
-        Name="HoursListTemplate"
+        Name="WorkloadListTemplate"
         Type="10003"
         BaseType="0"
         OnQuickLaunch="TRUE"
         SecurityBits="11"
         Sequence="410"
-        DisplayName="Hours List Template"
-        Description="Hours List Definition"
+        DisplayName="Workload List Template"
+        Description="Workload List Definition"
         Image="/_layouts/images/itgen.png"/>
 </Elements>

@@ -162,8 +162,8 @@
    Group="CAS Agile Workload Tracker"
     />
   <Field
-    ID="{C65F72DA-FA56-4C8C-9302-F7E4CB5E2049}"
-    Name="HoursDate"
+    ID="{185EA532-C9E0-40C2-AF0E-BFA6EAF95D07}"
+    Name="WorkloadDate"
     Group="CAS Agile Workload Tracker"
     Type="DateTime"
     Format="DateOnly"
@@ -193,19 +193,6 @@
     </CHOICES>
   </Field>
   <Field
-    Name="HoursStatus"
-    ID="{4CC57A5D-9118-41F6-89AB-F90E8D719A4C}"
-    Type="Choice"
-    DisplayName="Status"
-    Group="CAS Agile Workload Tracker" >
-    <Default>Realization</Default>
-    <CHOICES>
-      <CHOICE>Realization</CHOICE>
-      <CHOICE>Completion</CHOICE>
-      <CHOICE>Warranty</CHOICE>
-    </CHOICES>
-  </Field>
-  <Field
     Type="User"
     DisplayName="User"
     List="UserInfo"
@@ -214,7 +201,7 @@
     ShowField="Title"
     UserSelectionMode="PeopleOnly"
     UserSelectionScope="0"
-    Group="CAS Smart Factory Shepherd"
+    Group="CAS Agile Workload Tracker"
     ID="{78E726A0-C701-4CA3-B4CF-E21A575A822F}"
     Name="EmployeeADAccount"
     Overwrite="TRUE"  />
