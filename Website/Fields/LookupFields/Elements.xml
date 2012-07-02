@@ -17,4 +17,21 @@
     EnforceUniqueValues="False"
     ReadOnly="False"
     />
+  <Field
+    Name="Milestone2StageTitle"
+    ID="{6BD75CAC-1416-413C-A758-12EF7ED9050A}"
+    Type="Lookup"
+    List="Lists/StageList"
+    ShowField="Title"
+    UnlimitedLengthInDocumentLibrary="False"
+    Indexed="True"
+    RelationshipDeleteBehavior="None"
+    DisplayName="Stage"
+    Group="CAS Agile Workload Tracker"
+    Required="False"
+    Hidden="False"
+    DisplaceOnUpgrade="True"
+    EnforceUniqueValues="False"
+    ReadOnly="False"
+    />
 </Elements>

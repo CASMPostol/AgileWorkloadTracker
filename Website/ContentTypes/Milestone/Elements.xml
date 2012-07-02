@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <ContentType ID="0x0100eb00a9f1b21f48a699409a797c893b5a"
+               Name="Milestone"
+               Group="CAS Agile Workload Tracker"
+               Description="Milestone Content Type"
+               Inherits="FALSE"
+               Overwrite="TRUE">
+    <Folder TargetName="_cts/Stage" />
+    <FieldRefs>
+      <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" DisplayName="Milestone" />
+      <FieldRef ID="{6BD75CAC-1416-413C-A758-12EF7ED9050A}" Name="Milestone2StageTitle" />
+    </FieldRefs>
+  </ContentType>
+</Elements>
