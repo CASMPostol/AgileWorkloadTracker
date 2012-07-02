@@ -62,6 +62,9 @@
     <None Include="ContentTypes\Partners\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{3cbc661f-6727-4ab1-9bb5-755b45874a65}</SharePointProjectItemId>
     </None>
+    <None Include="ContentTypes\ProjectResources\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{859d07ae-e946-4f3f-98e2-8dfa3907d230}</SharePointProjectItemId>
+    </None>
     <None Include="ContentTypes\Projects\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{6dd5c4bd-0c8e-45e6-831f-e2c706aa287c}</SharePointProjectItemId>
     </None>
@@ -74,9 +77,8 @@
     <None Include="ContentTypes\TaskComments\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{3c8ef904-a4ad-41b9-a950-f395701ae63b}</SharePointProjectItemId>
     </None>
-    <None Include="ContentTypes\Task\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{137cba77-695d-497a-ad84-b2178b081f46}</SharePointProjectItemId>
-      <SubType>Designer</SubType>
+    <None Include="ContentTypes\Tasks\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{8a51afd8-f1be-48eb-9516-6f97015f3132}</SharePointProjectItemId>
     </None>
     <None Include="ContentTypes\Workload\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{4137428c-d596-4d12-a04f-cda9c9f0320f}</SharePointProjectItemId>
@@ -108,6 +110,12 @@
     </None>
     <None Include="Lists\PartnersListTemplate\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{6a575955-f846-4beb-a543-d77b9f6717e4}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\ProjectResourcesListTemplate\ProjectResourcesList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{4b1e6ec3-7544-491e-801e-dad84bede00b}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\ProjectResourcesListTemplate\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{8c680648-19d7-4950-8ecc-45d38c255413}</SharePointProjectItemId>
     </None>
     <None Include="Lists\ProjectsListTemplate\ProjectsList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{6b72d405-7c5e-4032-bba5-9dc74d459217}</SharePointProjectItemId>
@@ -159,13 +167,16 @@
     <Content Include="ContentTypes\Partners\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="ContentTypes\ProjectResources\Elements.xml" />
     <Content Include="ContentTypes\Projects\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="ContentTypes\Resources\Elements.xml" />
-    <Content Include="ContentTypes\Stage\Elements.xml" />
+    <Content Include="ContentTypes\Stage\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="ContentTypes\TaskComments\Elements.xml" />
-    <Content Include="ContentTypes\Task\Elements.xml" />
+    <Content Include="ContentTypes\Tasks\Elements.xml" />
     <Content Include="ContentTypes\Workload\Elements.xml" />
     <Content Include="Features\AWTWebsite\AWTWebsite.Template.xml">
       <DependentUpon>AWTWebsite.feature</DependentUpon>
@@ -191,6 +202,9 @@
     <Content Include="Lists\PartnersListTemplate\Schema.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Lists\ProjectResourcesListTemplate\Elements.xml" />
+    <Content Include="Lists\ProjectResourcesListTemplate\ProjectResourcesList\Elements.xml" />
+    <Content Include="Lists\ProjectResourcesListTemplate\Schema.xml" />
     <Content Include="Lists\ProjectsListTemplate\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -210,7 +224,9 @@
     <Content Include="Lists\TaskListTemplate\Elements.xml" />
     <Content Include="Lists\TaskListTemplate\TaskList\Elements.xml" />
     <Content Include="Lists\TaskListTemplate\Schema.xml" />
-    <Content Include="Lists\WorkloadListTemplate\Elements.xml" />
+    <Content Include="Lists\WorkloadListTemplate\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Lists\WorkloadListTemplate\Schema.xml" />
     <Content Include="Lists\WorkloadListTemplate\WorkloadList\Elements.xml" />
   </ItemGroup>

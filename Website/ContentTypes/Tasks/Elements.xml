@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
   <ContentType ID="0x01005d39260836ce498d8e0d443ad5cad3ac"
-               Name="Task"
+               Name="Tasks"
                Group="CAS Agile Workload Tracker"
-               Description="Task Content Type"
+               Description="Tasks Content Type"
                Inherits="FALSE"
                Overwrite="TRUE">
-    <Folder TargetName="_cts/Task" />
+    <Folder TargetName="_cts/Tasks" />
     <FieldRefs>
       <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" DisplayName="Task" />
       <FieldRef ID="{77D4EF86-BA42-4604-9C33-BEF60CAFBF51}" Name="Task2ProjectTitle" />
