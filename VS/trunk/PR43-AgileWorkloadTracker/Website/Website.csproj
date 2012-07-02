@@ -56,9 +56,6 @@
     <None Include="ContentTypes\Contracts\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{d3246fce-ca51-4ce2-bf92-ae165a517a93}</SharePointProjectItemId>
     </None>
-    <None Include="ContentTypes\Employees\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{83eb190c-a1cd-4325-a8d9-a9776c93a740}</SharePointProjectItemId>
-    </None>
     <None Include="ContentTypes\Milestone\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{dffd98ed-9738-4638-ab68-98207c4f8b89}</SharePointProjectItemId>
     </None>
@@ -67,6 +64,9 @@
     </None>
     <None Include="ContentTypes\Projects\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{6dd5c4bd-0c8e-45e6-831f-e2c706aa287c}</SharePointProjectItemId>
+    </None>
+    <None Include="ContentTypes\Resources\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{31ed6ebb-bafe-4929-8e8e-d1dcecee0db3}</SharePointProjectItemId>
     </None>
     <None Include="ContentTypes\Stage\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{d2aca013-2c26-40f3-9f10-059a1bde0fbf}</SharePointProjectItemId>
@@ -90,12 +90,6 @@
     <None Include="Lists\ContractsListTemplate\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{385ffdf6-d2ac-4a5c-85a7-1b3e4a9026c5}</SharePointProjectItemId>
     </None>
-    <None Include="Lists\EmployeesListTemplate\EmployeesList\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{80fa2c96-268a-4732-ae59-5664a13246d8}</SharePointProjectItemId>
-    </None>
-    <None Include="Lists\EmployeesListTemplate\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{545a8414-ac32-4be2-bc24-af5037bfd18c}</SharePointProjectItemId>
-    </None>
     <None Include="Lists\MilestoneListTemplate\MilestoneList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{1382c049-f1bd-47af-a8e8-f6fc35284503}</SharePointProjectItemId>
     </None>
@@ -113,6 +107,12 @@
     </None>
     <None Include="Lists\ProjectsListTemplate\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{eedccfa6-b04f-47b7-8156-8e70404b0c16}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\ResourcesListTemplate\ResourcesList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{7df40daa-135f-464e-8871-7158ac63470d}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\ResourcesListTemplate\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{8d5a02a8-c94a-4847-b36c-43bee866950f}</SharePointProjectItemId>
     </None>
     <None Include="Lists\StageListTemplate\StageList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{70a8f5d1-5c9a-43e9-a07f-43362c77ef3f}</SharePointProjectItemId>
@@ -136,9 +136,6 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="ContentTypes\Contracts\Elements.xml" />
-    <Content Include="ContentTypes\Employees\Elements.xml">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="ContentTypes\Milestone\Elements.xml" />
     <Content Include="ContentTypes\Partners\Elements.xml">
       <SubType>Designer</SubType>
@@ -146,6 +143,7 @@
     <Content Include="ContentTypes\Projects\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="ContentTypes\Resources\Elements.xml" />
     <Content Include="ContentTypes\Stage\Elements.xml" />
     <Content Include="ContentTypes\Workload\Elements.xml" />
     <Content Include="Features\AWTWebsite\AWTWebsite.Template.xml">
@@ -160,9 +158,6 @@
     <Content Include="Lists\ContractsListTemplate\Elements.xml" />
     <Content Include="Lists\ContractsListTemplate\ContractsList\Elements.xml" />
     <Content Include="Lists\ContractsListTemplate\Schema.xml" />
-    <Content Include="Lists\EmployeesListTemplate\Elements.xml" />
-    <Content Include="Lists\EmployeesListTemplate\EmployeesList\Elements.xml" />
-    <Content Include="Lists\EmployeesListTemplate\Schema.xml" />
     <Content Include="Lists\MilestoneListTemplate\Elements.xml" />
     <Content Include="Lists\MilestoneListTemplate\MilestoneList\Elements.xml" />
     <Content Include="Lists\MilestoneListTemplate\Schema.xml" />
@@ -182,6 +177,9 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Lists\ProjectsListTemplate\Schema.xml" />
+    <Content Include="Lists\ResourcesListTemplate\Elements.xml" />
+    <Content Include="Lists\ResourcesListTemplate\ResourcesList\Elements.xml" />
+    <Content Include="Lists\ResourcesListTemplate\Schema.xml" />
     <Content Include="Lists\StageListTemplate\Elements.xml" />
     <Content Include="Lists\StageListTemplate\StageList\Elements.xml" />
     <Content Include="Lists\StageListTemplate\Schema.xml" />
