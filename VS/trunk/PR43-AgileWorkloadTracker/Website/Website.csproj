@@ -59,6 +59,9 @@
     <None Include="ContentTypes\Employees\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{83eb190c-a1cd-4325-a8d9-a9776c93a740}</SharePointProjectItemId>
     </None>
+    <None Include="ContentTypes\Milestone\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{dffd98ed-9738-4638-ab68-98207c4f8b89}</SharePointProjectItemId>
+    </None>
     <None Include="ContentTypes\Partners\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{3cbc661f-6727-4ab1-9bb5-755b45874a65}</SharePointProjectItemId>
     </None>
@@ -92,6 +95,12 @@
     </None>
     <None Include="Lists\EmployeesListTemplate\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{545a8414-ac32-4be2-bc24-af5037bfd18c}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\MilestoneListTemplate\MilestoneList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{1382c049-f1bd-47af-a8e8-f6fc35284503}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\MilestoneListTemplate\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{66bd5530-35ae-4f1f-b616-ba1502c5ab8d}</SharePointProjectItemId>
     </None>
     <None Include="Lists\PartnersListTemplate\PartnersList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{2791b920-330f-4eeb-bf95-3a3542928afe}</SharePointProjectItemId>
@@ -130,6 +139,7 @@
     <Content Include="ContentTypes\Employees\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="ContentTypes\Milestone\Elements.xml" />
     <Content Include="ContentTypes\Partners\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -153,6 +163,9 @@
     <Content Include="Lists\EmployeesListTemplate\Elements.xml" />
     <Content Include="Lists\EmployeesListTemplate\EmployeesList\Elements.xml" />
     <Content Include="Lists\EmployeesListTemplate\Schema.xml" />
+    <Content Include="Lists\MilestoneListTemplate\Elements.xml" />
+    <Content Include="Lists\MilestoneListTemplate\MilestoneList\Elements.xml" />
+    <Content Include="Lists\MilestoneListTemplate\Schema.xml" />
     <Content Include="Lists\PartnersListTemplate\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
