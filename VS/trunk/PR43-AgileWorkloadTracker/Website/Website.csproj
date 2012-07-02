@@ -59,17 +59,20 @@
     <None Include="ContentTypes\Employees\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{83eb190c-a1cd-4325-a8d9-a9776c93a740}</SharePointProjectItemId>
     </None>
-    <None Include="ContentTypes\Hours\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{3bc371df-6530-4d89-8fea-f8ade77737cf}</SharePointProjectItemId>
-    </None>
     <None Include="ContentTypes\Partners\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{3cbc661f-6727-4ab1-9bb5-755b45874a65}</SharePointProjectItemId>
     </None>
     <None Include="ContentTypes\Projects\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{6dd5c4bd-0c8e-45e6-831f-e2c706aa287c}</SharePointProjectItemId>
     </None>
+    <None Include="ContentTypes\Workload\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{4137428c-d596-4d12-a04f-cda9c9f0320f}</SharePointProjectItemId>
+    </None>
     <None Include="Features\AWTWebsite\AWTWebsite.feature">
       <FeatureId>{26be2f85-61c8-4212-b8f4-fa500cd71747}</FeatureId>
+    </None>
+    <None Include="Features\Feature1\Feature1.feature">
+      <FeatureId>{3b8f4967-9889-4aeb-a816-3cd17426e5c4}</FeatureId>
     </None>
     <None Include="Fields\Fields\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{80eea8e7-44ab-4436-af6d-acad27b75246}</SharePointProjectItemId>
@@ -90,12 +93,6 @@
     <None Include="Lists\EmployeesListTemplate\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{545a8414-ac32-4be2-bc24-af5037bfd18c}</SharePointProjectItemId>
     </None>
-    <None Include="Lists\HoursListTemplate\HoursList\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{2e518a09-dc9e-48e0-988a-ab57c6846371}</SharePointProjectItemId>
-    </None>
-    <None Include="Lists\HoursListTemplate\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{9533e7f4-3a4a-4946-b6b0-c2ec1d1e8039}</SharePointProjectItemId>
-    </None>
     <None Include="Lists\PartnersListTemplate\PartnersList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{2791b920-330f-4eeb-bf95-3a3542928afe}</SharePointProjectItemId>
     </None>
@@ -108,6 +105,12 @@
     <None Include="Lists\ProjectsListTemplate\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{eedccfa6-b04f-47b7-8156-8e70404b0c16}</SharePointProjectItemId>
     </None>
+    <None Include="Lists\Workload\WorkloadList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{e9222ad0-6b29-47a1-b972-d79737cc9487}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\Workload\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{5a74b517-afea-455c-870e-b8161bfbeb91}</SharePointProjectItemId>
+    </None>
     <None Include="Package\Package.package">
       <PackageId>{f224c84d-bdc8-4fae-8444-ed652e9f1a3a}</PackageId>
     </None>
@@ -119,29 +122,31 @@
   <ItemGroup>
     <Content Include="ContentTypes\Contracts\Elements.xml" />
     <Content Include="ContentTypes\Employees\Elements.xml" />
-    <Content Include="ContentTypes\Hours\Elements.xml" />
     <Content Include="ContentTypes\Partners\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="ContentTypes\Projects\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="ContentTypes\Workload\Elements.xml" />
     <Content Include="Features\AWTWebsite\AWTWebsite.Template.xml">
       <DependentUpon>AWTWebsite.feature</DependentUpon>
+    </Content>
+    <Content Include="Features\Feature1\Feature1.Template.xml">
+      <DependentUpon>Feature1.feature</DependentUpon>
     </Content>
     <Content Include="Fields\Fields\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Fields\LookupFields\Elements.xml" />
+    <Content Include="Fields\LookupFields\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Lists\ContractsListTemplate\Elements.xml" />
     <Content Include="Lists\ContractsListTemplate\ContractsList\Elements.xml" />
     <Content Include="Lists\ContractsListTemplate\Schema.xml" />
     <Content Include="Lists\EmployeesListTemplate\Elements.xml" />
     <Content Include="Lists\EmployeesListTemplate\EmployeesList\Elements.xml" />
     <Content Include="Lists\EmployeesListTemplate\Schema.xml" />
-    <Content Include="Lists\HoursListTemplate\Elements.xml" />
-    <Content Include="Lists\HoursListTemplate\HoursList\Elements.xml" />
-    <Content Include="Lists\HoursListTemplate\Schema.xml" />
     <Content Include="Lists\PartnersListTemplate\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -158,6 +163,9 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Lists\ProjectsListTemplate\Schema.xml" />
+    <Content Include="Lists\Workload\Elements.xml" />
+    <Content Include="Lists\Workload\WorkloadList\Elements.xml" />
+    <Content Include="Lists\Workload\Schema.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\SharePointTools\Microsoft.VisualStudio.SharePoint.targets" />

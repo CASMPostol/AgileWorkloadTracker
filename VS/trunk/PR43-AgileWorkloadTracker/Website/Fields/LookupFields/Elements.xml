@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
   <Field
-    Name="Hours2ProjectTitle"
-    ID="{50592A69-24D3-455A-9D96-3928DC5A9401}"
+    Name="Workload2ProjectTitle"
+    ID="{294A1B63-BEB9-4860-AE0C-41B5EECE9E41}"
     Type="Lookup"
     List="Lists/ProjectList"
     ShowField="Title"

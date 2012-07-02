@@ -1,19 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
   <ContentType ID="0x0100ce075a94aa894cdaa771e6a734832a77"
-               Name="Hours"
+               Name="Workload"
                Group="CAS Agile Workload Tracker"
-               Description="Hours Content Type"
+               Description="Workload Content Type"
                Inherits="FALSE"
                Overwrite="TRUE">
     <Folder TargetName="_cts/Hours" />
     <FieldRefs>
-      <FieldRef ID="{50592A69-24D3-455A-9D96-3928DC5A9401}" Name="Hours2ProjectTitle" />
+      <FieldRef ID="{294A1B63-BEB9-4860-AE0C-41B5EECE9E41}" Name="Workload2ProjectTitle" />
       <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" DisplayName="Description" />
-      <FieldRef ID="{C65F72DA-FA56-4C8C-9302-F7E4CB5E2049}" Name="HoursDate" />
+      <FieldRef ID="{185EA532-C9E0-40C2-AF0E-BFA6EAF95D07}" Name="WorkloadDate" />
       <FieldRef ID="{2B9FEE87-CC98-4CA5-8BA7-C547D05AFCDD}" Name="Hours" />
       <FieldRef ID="{25F24E14-A1D1-4DBA-AB5F-793C7E8D2252}" Name="Minutes" />
-      <FieldRef ID="{4CC57A5D-9118-41F6-89AB-F90E8D719A4C}" Name="HoursStatus" />
     </FieldRefs>
   </ContentType>
 </Elements>
