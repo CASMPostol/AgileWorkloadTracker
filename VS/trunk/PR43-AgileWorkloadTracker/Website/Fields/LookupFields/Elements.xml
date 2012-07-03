@@ -1,6 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
   <Field
+   Name="Workload2StageTitle"
+   ID="{1165525F-54E1-4725-9826-8F15AFD07002}"
+   Type="Lookup"
+   List="Lists/StageList"
+   ShowField="Title"
+   UnlimitedLengthInDocumentLibrary="False"
+   Indexed="True"
+   RelationshipDeleteBehavior="None"
+   DisplayName="Stage"
+   Group="CAS Agile Workload Tracker"
+   Required="True"
+   Hidden="False"
+   DisplaceOnUpgrade="True"
+   EnforceUniqueValues="False"
+   ReadOnly="False"
+    />
+  <Field
+   Name="Workload2TaskTitle"
+   ID="{8E9CE62A-E7D5-4A96-9384-A88C384A40DF}"
+   Type="Lookup"
+   List="Lists/TaskList"
+   ShowField="Title"
+   UnlimitedLengthInDocumentLibrary="False"
+   Indexed="True"
+   RelationshipDeleteBehavior="None"
+   DisplayName="Task"
+   Group="CAS Agile Workload Tracker"
+   Required="True"
+   Hidden="False"
+   DisplaceOnUpgrade="True"
+   EnforceUniqueValues="False"
+   ReadOnly="False"
+    />
+  <Field
    Name="Task2TypeTitle"
    ID="{3738BE6B-264A-4AAF-A178-30C5790657AE}"
    Type="Lookup"
