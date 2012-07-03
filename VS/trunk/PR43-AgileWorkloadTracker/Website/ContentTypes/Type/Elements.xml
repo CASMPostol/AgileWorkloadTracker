@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <ContentType ID="0x01004d5362e631ba41c39e9a3d2364d55efb"
+               Name="Type"
+               Group="CAS Agile Workload Tracker"
+               Description="Type Content Type"
+               Inherits="FALSE"
+               Overwrite="TRUE">
+    <Folder TargetName="_cts/Type" />
+    <FieldRefs>
+      <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" DisplayName="Type" />
+    </FieldRefs>
+  </ContentType>
+</Elements>

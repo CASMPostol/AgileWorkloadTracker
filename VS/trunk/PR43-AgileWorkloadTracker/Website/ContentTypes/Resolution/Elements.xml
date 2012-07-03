@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <ContentType ID="0x010088405be8a9c847f89e13957fba7e2d59"
+               Name="Resolution"
+               Group="CAS Agile Workload Tracker"
+               Description="Resolution Content Type"
+               Inherits="FALSE"
+               Overwrite="TRUE">
+    <Folder TargetName="_cts/Resolution" />
+    <FieldRefs>
+      <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" DisplayName="Resolution" />
+    </FieldRefs>
+  </ContentType>
+</Elements>
