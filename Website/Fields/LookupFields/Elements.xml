@@ -1,6 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
   <Field
+   Name="Workload2ResourcesTitle"
+   ID="{BB5BB442-045C-48C1-8E71-18F751EDBAB9}"
+   Type="Lookup"
+   List="Lists/ResourcesList"
+   ShowField="Title"
+   UnlimitedLengthInDocumentLibrary="False"
+   Indexed="True"
+   RelationshipDeleteBehavior="None"
+   DisplayName="Resources"
+   Group="CAS Agile Workload Tracker"
+   Required="True"
+   Hidden="False"
+   DisplaceOnUpgrade="True"
+   EnforceUniqueValues="False"
+   ReadOnly="False"
+    />
+  <Field
    Name="Workload2StageTitle"
    ID="{1165525F-54E1-4725-9826-8F15AFD07002}"
    Type="Lookup"
