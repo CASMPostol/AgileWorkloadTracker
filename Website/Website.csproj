@@ -77,6 +77,9 @@
     <None Include="ContentTypes\Stage\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{d2aca013-2c26-40f3-9f10-059a1bde0fbf}</SharePointProjectItemId>
     </None>
+    <None Include="ContentTypes\Status\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{5b5f7e65-68e1-4db9-b2f3-a430860d09c3}</SharePointProjectItemId>
+    </None>
     <None Include="ContentTypes\TaskComments\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{3c8ef904-a4ad-41b9-a950-f395701ae63b}</SharePointProjectItemId>
     </None>
@@ -185,6 +188,7 @@
     <Content Include="ContentTypes\Stage\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="ContentTypes\Status\Elements.xml" />
     <Content Include="ContentTypes\TaskComments\Elements.xml" />
     <Content Include="ContentTypes\Tasks\Elements.xml" />
     <Content Include="ContentTypes\Workload\Elements.xml" />
@@ -202,7 +206,9 @@
     <Content Include="Lists\ContractsListTemplate\Schema.xml" />
     <Content Include="Lists\EstimationListTemplate\Elements.xml" />
     <Content Include="Lists\EstimationListTemplate\EstimationList\Elements.xml" />
-    <Content Include="Lists\EstimationListTemplate\Schema.xml" />
+    <Content Include="Lists\EstimationListTemplate\Schema.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Lists\MilestoneListTemplate\Elements.xml" />
     <Content Include="Lists\MilestoneListTemplate\MilestoneList\Elements.xml" />
     <Content Include="Lists\MilestoneListTemplate\Schema.xml" />
