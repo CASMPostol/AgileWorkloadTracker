@@ -6,9 +6,12 @@
                Description="Workload Content Type"
                Inherits="FALSE"
                Overwrite="TRUE">
-    <Folder TargetName="_cts/Hours" />
+    <Folder TargetName="_cts/Workload" />
     <FieldRefs>
       <FieldRef ID="{294A1B63-BEB9-4860-AE0C-41B5EECE9E41}" Name="Workload2ProjectTitle" />
+      <FieldRef ID="{8E9CE62A-E7D5-4A96-9384-A88C384A40DF}" Name="Workload2TaskTitle" />
+      <FieldRef ID="{1165525F-54E1-4725-9826-8F15AFD07002}" Name="Workload2StageTitle" />
+      <FieldRef ID="{BB5BB442-045C-48C1-8E71-18F751EDBAB9}" Name="Workload2ResourcesTitle" />
       <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" DisplayName="Description" />
       <FieldRef ID="{185EA532-C9E0-40C2-AF0E-BFA6EAF95D07}" Name="WorkloadDate" />
       <FieldRef ID="{2B9FEE87-CC98-4CA5-8BA7-C547D05AFCDD}" Name="Hours" />
