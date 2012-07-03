@@ -65,6 +65,9 @@
     <None Include="ContentTypes\Partners\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{3cbc661f-6727-4ab1-9bb5-755b45874a65}</SharePointProjectItemId>
     </None>
+    <None Include="ContentTypes\Priority\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{6aaa080f-4779-4e2e-9d2b-f40826a2fb3e}</SharePointProjectItemId>
+    </None>
     <None Include="ContentTypes\ProjectResources\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{859d07ae-e946-4f3f-98e2-8dfa3907d230}</SharePointProjectItemId>
     </None>
@@ -123,6 +126,12 @@
     <None Include="Lists\PartnersListTemplate\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{6a575955-f846-4beb-a543-d77b9f6717e4}</SharePointProjectItemId>
     </None>
+    <None Include="Lists\PriorityListTemplate\PriorityList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{b8ac3db4-903e-401b-a7bf-cb8075455e29}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\PriorityListTemplate\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{2ad2b32b-8989-492b-ae26-15afa09c3287}</SharePointProjectItemId>
+    </None>
     <None Include="Lists\ProjectResourcesListTemplate\ProjectResourcesList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{4b1e6ec3-7544-491e-801e-dad84bede00b}</SharePointProjectItemId>
     </None>
@@ -146,6 +155,12 @@
     </None>
     <None Include="Lists\StageListTemplate\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{5d637cf5-e980-4a3b-8c78-7300c4dfd73b}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\StatusListTemplate\StatusList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{18f19a8e-0992-4f47-b132-1063167da9cb}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\StatusListTemplate\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{326693f7-cda6-4324-a2b2-f92012cf9a19}</SharePointProjectItemId>
     </None>
     <None Include="Lists\TaskCommentsListTemplate\TaskCommentsList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{6a29b2ad-7dc7-4d67-b397-ee2aaadbcbfe}</SharePointProjectItemId>
@@ -180,6 +195,7 @@
     <Content Include="ContentTypes\Partners\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="ContentTypes\Priority\Elements.xml" />
     <Content Include="ContentTypes\ProjectResources\Elements.xml" />
     <Content Include="ContentTypes\Projects\Elements.xml">
       <SubType>Designer</SubType>
@@ -221,6 +237,9 @@
     <Content Include="Lists\PartnersListTemplate\Schema.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Lists\PriorityListTemplate\Elements.xml" />
+    <Content Include="Lists\PriorityListTemplate\PriorityList\Elements.xml" />
+    <Content Include="Lists\PriorityListTemplate\Schema.xml" />
     <Content Include="Lists\ProjectResourcesListTemplate\Elements.xml" />
     <Content Include="Lists\ProjectResourcesListTemplate\ProjectResourcesList\Elements.xml" />
     <Content Include="Lists\ProjectResourcesListTemplate\Schema.xml" />
@@ -237,6 +256,9 @@
     <Content Include="Lists\StageListTemplate\Elements.xml" />
     <Content Include="Lists\StageListTemplate\StageList\Elements.xml" />
     <Content Include="Lists\StageListTemplate\Schema.xml" />
+    <Content Include="Lists\StatusListTemplate\Elements.xml" />
+    <Content Include="Lists\StatusListTemplate\StatusList\Elements.xml" />
+    <Content Include="Lists\StatusListTemplate\Schema.xml" />
     <Content Include="Lists\TaskCommentsListTemplate\Elements.xml" />
     <Content Include="Lists\TaskCommentsListTemplate\TaskCommentsList\Elements.xml" />
     <Content Include="Lists\TaskCommentsListTemplate\Schema.xml" />

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <ContentType ID="0x01008a82ac63b9a949da95daa3e970754393"
+               Name="Priority"
+               Group="CAS Agile Workload Tracker"
+               Description="Priority Content Type"
+               Inherits="FALSE"
+               Overwrite="TRUE">
+    <Folder TargetName="_cts/Priority" />
+    <FieldRefs>
+      <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" DisplayName="Priority" />
+    </FieldRefs>
+  </ContentType>
+</Elements>
