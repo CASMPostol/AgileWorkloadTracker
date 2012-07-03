@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+    <ListTemplate
+        Name="ResolutionListTemplate"
+        Type="10013"
+        BaseType="0"
+        OnQuickLaunch="TRUE"
+        SecurityBits="11"
+        Sequence="410"
+        DisplayName="Resolution List Template"
+        Description="Resolution List Definition"
+        Image="/_layouts/images/itgen.png"/>
+</Elements>

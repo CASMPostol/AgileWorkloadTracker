@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <ListInstance Title="Resolution"
+                OnQuickLaunch="TRUE"
+                TemplateType="10013"
+                Url="Lists/ResolutionList"
+                Description="Resolution List Instance">
+  </ListInstance>
+</Elements>

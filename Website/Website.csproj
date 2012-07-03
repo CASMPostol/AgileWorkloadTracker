@@ -74,6 +74,9 @@
     <None Include="ContentTypes\Projects\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{6dd5c4bd-0c8e-45e6-831f-e2c706aa287c}</SharePointProjectItemId>
     </None>
+    <None Include="ContentTypes\Resolution\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{3e297c61-b340-4e14-9135-961e6b176d19}</SharePointProjectItemId>
+    </None>
     <None Include="ContentTypes\Resources\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{31ed6ebb-bafe-4929-8e8e-d1dcecee0db3}</SharePointProjectItemId>
     </None>
@@ -88,6 +91,9 @@
     </None>
     <None Include="ContentTypes\Tasks\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{8a51afd8-f1be-48eb-9516-6f97015f3132}</SharePointProjectItemId>
+    </None>
+    <None Include="ContentTypes\Type\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{82bb196c-efe6-4164-8b0b-8e175af468cf}</SharePointProjectItemId>
     </None>
     <None Include="ContentTypes\Workload\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{4137428c-d596-4d12-a04f-cda9c9f0320f}</SharePointProjectItemId>
@@ -144,6 +150,12 @@
     <None Include="Lists\ProjectsListTemplate\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{eedccfa6-b04f-47b7-8156-8e70404b0c16}</SharePointProjectItemId>
     </None>
+    <None Include="Lists\ResolutionListTemplate\ResolutionList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{266da799-5cea-4c8b-bdf5-f625e09331e2}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\ResolutionListTemplate\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{6bc32eb8-a82b-431b-b2b7-6bcf658c3127}</SharePointProjectItemId>
+    </None>
     <None Include="Lists\ResourcesListTemplate\ResourcesList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{7df40daa-135f-464e-8871-7158ac63470d}</SharePointProjectItemId>
     </None>
@@ -174,6 +186,12 @@
     <None Include="Lists\TaskListTemplate\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{49f5b4ef-f0bb-41a3-a0ec-7a8420b57e47}</SharePointProjectItemId>
     </None>
+    <None Include="Lists\TypeListTemplate\TypeList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{203e9f4f-0840-4988-be6b-9b53b0b730af}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\TypeListTemplate\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{98221b36-7a9c-4907-bc1d-d6e70938a9aa}</SharePointProjectItemId>
+    </None>
     <None Include="Lists\WorkloadListTemplate\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{69da074e-d7f4-4c84-b0ba-4b37e6990375}</SharePointProjectItemId>
     </None>
@@ -200,6 +218,7 @@
     <Content Include="ContentTypes\Projects\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="ContentTypes\Resolution\Elements.xml" />
     <Content Include="ContentTypes\Resources\Elements.xml" />
     <Content Include="ContentTypes\Stage\Elements.xml">
       <SubType>Designer</SubType>
@@ -207,6 +226,7 @@
     <Content Include="ContentTypes\Status\Elements.xml" />
     <Content Include="ContentTypes\TaskComments\Elements.xml" />
     <Content Include="ContentTypes\Tasks\Elements.xml" />
+    <Content Include="ContentTypes\Type\Elements.xml" />
     <Content Include="ContentTypes\Workload\Elements.xml" />
     <Content Include="Features\AWTWebsite\AWTWebsite.Template.xml">
       <DependentUpon>AWTWebsite.feature</DependentUpon>
@@ -250,6 +270,9 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Lists\ProjectsListTemplate\Schema.xml" />
+    <Content Include="Lists\ResolutionListTemplate\Elements.xml" />
+    <Content Include="Lists\ResolutionListTemplate\ResolutionList\Elements.xml" />
+    <Content Include="Lists\ResolutionListTemplate\Schema.xml" />
     <Content Include="Lists\ResourcesListTemplate\Elements.xml" />
     <Content Include="Lists\ResourcesListTemplate\ResourcesList\Elements.xml" />
     <Content Include="Lists\ResourcesListTemplate\Schema.xml" />
@@ -265,6 +288,9 @@
     <Content Include="Lists\TaskListTemplate\Elements.xml" />
     <Content Include="Lists\TaskListTemplate\TaskList\Elements.xml" />
     <Content Include="Lists\TaskListTemplate\Schema.xml" />
+    <Content Include="Lists\TypeListTemplate\Elements.xml" />
+    <Content Include="Lists\TypeListTemplate\TypeList\Elements.xml" />
+    <Content Include="Lists\TypeListTemplate\Schema.xml" />
     <Content Include="Lists\WorkloadListTemplate\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
