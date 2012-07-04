@@ -264,7 +264,7 @@
    UnlimitedLengthInDocumentLibrary="False"
    Indexed="True"
    RelationshipDeleteBehavior="None"
-   DisplayName="Resource"
+   DisplayName="Assigned To"
    Group="CAS Agile Workload Tracker"
    Required="True"
    Hidden="False"
