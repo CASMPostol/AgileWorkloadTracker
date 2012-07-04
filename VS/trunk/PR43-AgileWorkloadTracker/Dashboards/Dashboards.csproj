@@ -40,19 +40,36 @@
     <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.SharePoint.Linq, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.SharePoint" />
     <Reference Include="Microsoft.SharePoint.Security" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SPMetalHelper\SPEntities\AgileWorkloadTracker\Entities.cs">
+      <Link>SPEntities\Entities.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Webparts\WorkloadManagement\WorkloadManagement.cs" />
+    <Compile Include="Webparts\WorkloadManagement\WorkloadManagementUserControl.ascx.cs">
+      <DependentUpon>WorkloadManagementUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Webparts\WorkloadManagement\WorkloadManagementUserControl.ascx.designer.cs">
+      <DependentUpon>WorkloadManagementUserControl.ascx.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Features\Feature1\Feature1.feature">
+      <FeatureId>{5760eced-aec8-4231-b2ae-e10fe7973f91}</FeatureId>
+    </None>
     <None Include="key.snk" />
     <None Include="Package\Package.package">
       <PackageId>{92f33941-32f8-4ccd-a47e-35ce3cc13bcd}</PackageId>
@@ -60,9 +77,20 @@
     <None Include="Package\Package.Template.xml">
       <DependentUpon>Package.package</DependentUpon>
     </None>
+    <None Include="Webparts\WorkloadManagement\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{100a3882-20bf-46bc-9633-0d96d3701271}</SharePointProjectItemId>
+    </None>
+    <None Include="Webparts\WorkloadManagement\WorkloadManagement.webpart" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Features\" />
+    <Content Include="Features\Feature1\Feature1.Template.xml">
+      <DependentUpon>Feature1.feature</DependentUpon>
+    </Content>
+    <Content Include="Webparts\WorkloadManagement\Elements.xml" />
+    <Content Include="Webparts\WorkloadManagement\WorkloadManagementUserControl.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\SharePointTools\Microsoft.VisualStudio.SharePoint.targets" />

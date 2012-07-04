@@ -17,7 +17,7 @@ namespace CAS.SharePoint.SPMetalParameters
     /// </summary>
     /// <param name="_URL">The URL of the site collection.</param>
     /// <returns>An object of <see cref="PRWeb"/> type containing SPMetal configuration parameters.</returns>
-    public static PRWeb ImportDataModel(string _URL)
+    public static PRWeb ImportDataModel(string _URL, string _className)
     {
       PRWeb _ret = null;
       using (SPSite site = new SPSite(_URL))
@@ -60,7 +60,7 @@ namespace CAS.SharePoint.SPMetalParameters
           _ret = new PRWeb()
           {
             AccessModifier = PRAccessModifier.Internal,
-            Class = "EntitiesDataContext",
+            Class = _className,
             ContentType = _cts.ToArray(),
             List = _lists.ToArray()
           };

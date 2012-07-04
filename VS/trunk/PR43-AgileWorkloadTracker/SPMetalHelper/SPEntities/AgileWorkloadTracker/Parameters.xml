@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Web xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Class="EntitiesDataContext" AccessModifier="Internal" xmlns="http://schemas.microsoft.com/SharePoint/2009/spmetal">
+<Web xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Class="Entities" AccessModifier="Internal" xmlns="http://schemas.microsoft.com/SharePoint/2009/spmetal">
   <List Name="Announcements" />
   <List Name="Calendar" />
   <List Name="Contracts" />

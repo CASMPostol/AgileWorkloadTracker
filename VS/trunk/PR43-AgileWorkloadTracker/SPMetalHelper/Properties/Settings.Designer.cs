@@ -40,5 +40,17 @@ namespace CAS.AgileWorkloadTracker.SPMetalHelper.Properties {
                 return ((string)(this["FileName"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Entities")]
+        public string LinqEntitiesClassName {
+            get {
+                return ((string)(this["LinqEntitiesClassName"]));
+            }
+            set {
+                this["LinqEntitiesClassName"] = value;
+            }
+        }
     }
 }
