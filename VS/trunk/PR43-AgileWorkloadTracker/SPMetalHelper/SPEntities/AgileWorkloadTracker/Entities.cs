@@ -57,9 +57,9 @@ namespace CAS.AgileWorkloadTracker.Linq {
 		/// Estimation List Instance
 		/// </summary>
 		[Microsoft.SharePoint.Linq.ListAttribute(Name="Estimation")]
-		public Microsoft.SharePoint.Linq.EntityList<EstimationEstimation> Estimation {
+		public Microsoft.SharePoint.Linq.EntityList<Estimation> Estimation {
 			get {
-				return this.GetList<EstimationEstimation>("Estimation");
+				return this.GetList<Estimation>("Estimation");
 			}
 		}
 		
@@ -2086,11 +2086,11 @@ namespace CAS.AgileWorkloadTracker.Linq {
 		
 		private System.Nullable<double> _contractValue;
 		
-		private string _comments;
+		private string _body;
 		
 		private System.Nullable<Currency> _currency;
 		
-		private Microsoft.SharePoint.Linq.EntityRef<Partners> _partner;
+		private Microsoft.SharePoint.Linq.EntityRef<Partners> _contracts2PartnersTitle;
 		
 		private Microsoft.SharePoint.Linq.EntitySet<Projects> _projects;
 		
@@ -2101,10 +2101,10 @@ namespace CAS.AgileWorkloadTracker.Linq {
 		#endregion
 		
 		public Contracts() {
-			this._partner = new Microsoft.SharePoint.Linq.EntityRef<Partners>();
-			this._partner.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Partners>>(this.OnPartnerSync);
-			this._partner.OnChanged += new System.EventHandler(this.OnPartnerChanged);
-			this._partner.OnChanging += new System.EventHandler(this.OnPartnerChanging);
+			this._contracts2PartnersTitle = new Microsoft.SharePoint.Linq.EntityRef<Partners>();
+			this._contracts2PartnersTitle.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Partners>>(this.OnContracts2PartnersTitleSync);
+			this._contracts2PartnersTitle.OnChanged += new System.EventHandler(this.OnContracts2PartnersTitleChanged);
+			this._contracts2PartnersTitle.OnChanging += new System.EventHandler(this.OnContracts2PartnersTitleChanging);
 			this._projects = new Microsoft.SharePoint.Linq.EntitySet<Projects>();
 			this._projects.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Projects>>(this.OnProjectsSync);
 			this._projects.OnChanged += new System.EventHandler(this.OnProjectsChanged);
@@ -2210,16 +2210,16 @@ namespace CAS.AgileWorkloadTracker.Linq {
 			}
 		}
 		
-		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="Comments", Storage="_comments", FieldType="Note")]
-		public string Comments {
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="Body", Storage="_body", FieldType="Note")]
+		public string Body {
 			get {
-				return this._comments;
+				return this._body;
 			}
 			set {
-				if ((value != this._comments)) {
-					this.OnPropertyChanging("Comments", this._comments);
-					this._comments = value;
-					this.OnPropertyChanged("Comments");
+				if ((value != this._body)) {
+					this.OnPropertyChanging("Body", this._body);
+					this._body = value;
+					this.OnPropertyChanged("Body");
 				}
 			}
 		}
@@ -2238,13 +2238,13 @@ namespace CAS.AgileWorkloadTracker.Linq {
 			}
 		}
 		
-		[Microsoft.SharePoint.Linq.AssociationAttribute(Name="Contracts2PartnersTitle", Storage="_partner", MultivalueType=Microsoft.SharePoint.Linq.AssociationType.Single, List="Partners")]
-		public Partners Partner {
+		[Microsoft.SharePoint.Linq.AssociationAttribute(Name="Contracts2PartnersTitle", Storage="_contracts2PartnersTitle", MultivalueType=Microsoft.SharePoint.Linq.AssociationType.Single, List="Partners")]
+		public Partners Contracts2PartnersTitle {
 			get {
-				return this._partner.GetEntity();
+				return this._contracts2PartnersTitle.GetEntity();
 			}
 			set {
-				this._partner.SetEntity(value);
+				this._contracts2PartnersTitle.SetEntity(value);
 			}
 		}
 		
@@ -2258,15 +2258,15 @@ namespace CAS.AgileWorkloadTracker.Linq {
 			}
 		}
 		
-		private void OnPartnerChanging(object sender, System.EventArgs e) {
-			this.OnPropertyChanging("Partner", this._partner.Clone());
+		private void OnContracts2PartnersTitleChanging(object sender, System.EventArgs e) {
+			this.OnPropertyChanging("Contracts2PartnersTitle", this._contracts2PartnersTitle.Clone());
 		}
 		
-		private void OnPartnerChanged(object sender, System.EventArgs e) {
-			this.OnPropertyChanged("Partner");
+		private void OnContracts2PartnersTitleChanged(object sender, System.EventArgs e) {
+			this.OnPropertyChanged("Contracts2PartnersTitle");
 		}
 		
-		private void OnPartnerSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Partners> e) {
+		private void OnContracts2PartnersTitleSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Partners> e) {
 			if ((Microsoft.SharePoint.Linq.AssociationChangedState.Added == e.State)) {
 				e.Item.Contracts.Add(this);
 			}
@@ -2297,7 +2297,6 @@ namespace CAS.AgileWorkloadTracker.Linq {
 	/// Estimation Content Type
 	/// </summary>
 	[Microsoft.SharePoint.Linq.ContentTypeAttribute(Name="Estimation", Id="0x01001AF97106D9F1498B82C9980861B39EA1")]
-	[Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type=typeof(EstimationEstimation))]
 	internal partial class Estimation : Element {
 		
 		private System.Nullable<double> _estimatedWorkload;
@@ -2335,6 +2334,17 @@ namespace CAS.AgileWorkloadTracker.Linq {
 					this._estimatedWorkload = value;
 					this.OnPropertyChanged("EstimatedWorkload");
 				}
+			}
+		}
+		
+		[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+		[Microsoft.SharePoint.Linq.RemovedColumnAttribute()]
+		public override string Tytuł {
+			get {
+				throw new System.InvalidOperationException("Pole Title zostało usunięte z typu zawartości Estimation.");
+			}
+			set {
+				throw new System.InvalidOperationException("Pole Title zostało usunięte z typu zawartości Estimation.");
 			}
 		}
 		
@@ -2531,7 +2541,7 @@ namespace CAS.AgileWorkloadTracker.Linq {
 		
 		private string _eMail;
 		
-		private string _comments;
+		private string _body;
 		
 		private Microsoft.SharePoint.Linq.EntitySet<Contracts> _contracts;
 		
@@ -2661,16 +2671,16 @@ namespace CAS.AgileWorkloadTracker.Linq {
 			}
 		}
 		
-		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="Comments", Storage="_comments", FieldType="Note")]
-		public string Comments {
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="Body", Storage="_body", FieldType="Note")]
+		public string Body {
 			get {
-				return this._comments;
+				return this._body;
 			}
 			set {
-				if ((value != this._comments)) {
-					this.OnPropertyChanging("Comments", this._comments);
-					this._comments = value;
-					this.OnPropertyChanged("Comments");
+				if ((value != this._body)) {
+					this.OnPropertyChanging("Body", this._body);
+					this._body = value;
+					this.OnPropertyChanged("Body");
 				}
 			}
 		}
@@ -2695,10 +2705,10 @@ namespace CAS.AgileWorkloadTracker.Linq {
 		
 		private void OnContractsSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Contracts> e) {
 			if ((Microsoft.SharePoint.Linq.AssociationChangedState.Added == e.State)) {
-				e.Item.Partner = this;
+				e.Item.Contracts2PartnersTitle = this;
 			}
 			else {
-				e.Item.Partner = null;
+				e.Item.Contracts2PartnersTitle = null;
 			}
 		}
 	}
@@ -2865,7 +2875,7 @@ namespace CAS.AgileWorkloadTracker.Linq {
 		
 		private System.Nullable<double> _projectBudget;
 		
-		private string _comments;
+		private string _body;
 		
 		private System.Nullable<ProjectType> _projectType;
 		
@@ -3009,16 +3019,16 @@ namespace CAS.AgileWorkloadTracker.Linq {
 			}
 		}
 		
-		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="Comments", Storage="_comments", FieldType="Note")]
-		public string Comments {
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="Body", Storage="_body", FieldType="Note")]
+		public string Body {
 			get {
-				return this._comments;
+				return this._body;
 			}
 			set {
-				if ((value != this._comments)) {
-					this.OnPropertyChanging("Comments", this._comments);
-					this._comments = value;
-					this.OnPropertyChanged("Comments");
+				if ((value != this._body)) {
+					this.OnPropertyChanging("Body", this._body);
+					this._body = value;
+					this.OnPropertyChanged("Body");
 				}
 			}
 		}
@@ -4065,7 +4075,7 @@ namespace CAS.AgileWorkloadTracker.Linq {
 	[Microsoft.SharePoint.Linq.ContentTypeAttribute(Name="TaskComments", Id="0x0100E615647B0FDE44E6AE8B778DFC56438D")]
 	internal partial class TaskComments : Element {
 		
-		private string _comments;
+		private string _body;
 		
 		private Microsoft.SharePoint.Linq.EntityRef<Tasks> _taskComments2TaskTitle;
 		
@@ -4083,16 +4093,16 @@ namespace CAS.AgileWorkloadTracker.Linq {
 			this.OnCreated();
 		}
 		
-		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="Comments", Storage="_comments", FieldType="Note")]
-		public string Comments {
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="Body", Storage="_body", FieldType="Note")]
+		public string Body {
 			get {
-				return this._comments;
+				return this._body;
 			}
 			set {
-				if ((value != this._comments)) {
-					this.OnPropertyChanging("Comments", this._comments);
-					this._comments = value;
-					this.OnPropertyChanged("Comments");
+				if ((value != this._body)) {
+					this.OnPropertyChanging("Body", this._body);
+					this._body = value;
+					this.OnPropertyChanged("Body");
 				}
 			}
 		}
@@ -4611,34 +4621,6 @@ namespace CAS.AgileWorkloadTracker.Linq {
 		}
 		
 		private void OnPoprzednikiSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Element> e) {
-		}
-	}
-	
-	/// <summary>
-	/// Estimation Content Type
-	/// </summary>
-	[Microsoft.SharePoint.Linq.ContentTypeAttribute(Name="Estimation", Id="0x01001AF97106D9F1498B82C9980861B39EA1", List="Estimation")]
-	internal partial class EstimationEstimation : Estimation {
-		
-		#region Extensibility Method Definitions
-		partial void OnLoaded();
-		partial void OnValidate();
-		partial void OnCreated();
-		#endregion
-		
-		public EstimationEstimation() {
-			this.OnCreated();
-		}
-		
-		[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
-		[Microsoft.SharePoint.Linq.RemovedColumnAttribute()]
-		public override string Tytuł {
-			get {
-				throw new System.InvalidOperationException("Pole Title zostało usunięte z typu zawartości Estimation.");
-			}
-			set {
-				throw new System.InvalidOperationException("Pole Title zostało usunięte z typu zawartości Estimation.");
-			}
 		}
 	}
 	
