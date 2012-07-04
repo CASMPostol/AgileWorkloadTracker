@@ -9,6 +9,7 @@
     <Folder TargetName="_cts/Contracts" />
     <FieldRefs>
       <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" DisplayName="Contract name" />
+      <FieldRef ID="{26E16F7C-156E-4DF0-BC32-FA8A1EC94345}" Name="Contracts2PartnersTitle" />
       <FieldRef ID="{A4A5C09A-1354-4BAB-9965-ADEC28AB28CA}" Name="ContractNumber" />
       <FieldRef ID="{CEE81663-0512-4771-AA85-7910EE1E718B}" Name="ContractSubject" />
       <FieldRef ID="{520BD0CF-FB6C-45C4-969F-83E943FAFDD5}" Name="ContractDate" />
