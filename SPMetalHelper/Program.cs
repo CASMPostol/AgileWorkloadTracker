@@ -15,7 +15,7 @@ namespace CAS.AgileWorkloadTracker.SPMetalHelper
     {
       try
       {
-        PRWeb _web = PRWeb.ImportDataModel(Properties.Settings.Default.URL);
+        PRWeb _web = PRWeb.ImportDataModel(Properties.Settings.Default.URL, Properties.Settings.Default.LinqEntitiesClassName);
         using (Stream _str = new FileInfo(Properties.Settings.Default.FileName).Create())
           PRWeb.ImportDocument(_str, _web);
         string _endText = String.Format("Operation finisched, the file is located at: {0}", Environment.CurrentDirectory);

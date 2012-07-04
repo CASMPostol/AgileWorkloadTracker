@@ -8,17 +8,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CAS.AgileWorkloadTracker.SPEntitie {
+namespace CAS.AgileWorkloadTracker.Linq {
 	using System;
 	
 	
-	internal partial class EntitiesDataContext : Microsoft.SharePoint.Linq.DataContext {
+	internal partial class Entities : Microsoft.SharePoint.Linq.DataContext {
 		
 		#region Extensibility Method Definitions
 		partial void OnCreated();
 		#endregion
 		
-		public EntitiesDataContext(string requestUrl) : 
+		public Entities(string requestUrl) : 
 				base(requestUrl) {
 			this.OnCreated();
 		}

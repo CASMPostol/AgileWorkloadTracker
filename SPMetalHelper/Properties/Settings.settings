@@ -8,5 +8,8 @@
     <Setting Name="FileName" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Parameters.xml</Value>
     </Setting>
+    <Setting Name="LinqEntitiesClassName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Entities</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
