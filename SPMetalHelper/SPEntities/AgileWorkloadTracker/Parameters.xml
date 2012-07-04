@@ -4,7 +4,6 @@
   <List Name="Calendar" />
   <List Name="Contracts" />
   <List Name="Estimation" />
-  <List Name="IssueTracker" />
   <List Name="Links" />
   <!--<List Name="List Template Gallery" />-->
   <List Name="Master Page Gallery" />
@@ -42,15 +41,15 @@
     <Column Name="ProjectWarrantyDate" Member="ProjectWarrantyDate" />
     <Column Name="ProjectBudget" Member="ProjectBudget" />
     <Column Name="Currency" Member="Currency" />
-    <Column Name="Comments" Member="Comments" />
+    <Column Name="Body" Member="Body" />
     <Column Name="Project2ResourcesTitle" Member="Project2ResourcesTitle" />
     <Column Name="Project2ContractTitle" Member="Project2ContractTitle" />
     <Column Name="Project2StageTitle" Member="Project2StageTitle" />
   </ContentType>
   <ContentType Name="Estimation" Class="Estimation">
-    <Column Name="Title" Member="Title" />
     <Column Name="Estimation2ResourcesTitle" Member="Estimation2ResourcesTitle" />
     <Column Name="Estimation2ProjectTitle" Member="Estimation2ProjectTitle" />
+    <Column Name="EstimatedWorkload" Member="EstimatedWorkload" />
   </ContentType>
   <ContentType Name="ProjectResources" Class="ProjectResources">
     <Column Name="ProjectResources2ProjectTitle" Member="ProjectResources2ProjectTitle" />
@@ -100,6 +99,7 @@
   </ContentType>
   <ContentType Name="Contracts" Class="Contracts">
     <Column Name="Title" Member="Title" />
+    <Column Name="Contracts2PartnersTitle" Member="Contracts2PartnersTitle" />
     <Column Name="ContractNumber" Member="ContractNumber" />
     <Column Name="ContractSubject" Member="ContractSubject" />
     <Column Name="ContractDate" Member="ContractDate" />
@@ -108,11 +108,11 @@
     <Column Name="ContractOffer" Member="ContractOffer" />
     <Column Name="ContractValue" Member="ContractValue" />
     <Column Name="Currency" Member="Currency" />
-    <Column Name="Comments" Member="Comments" />
+    <Column Name="Body" Member="Body" />
   </ContentType>
   <ContentType Name="TaskComments" Class="TaskComments">
     <Column Name="TaskComments2TaskTitle" Member="TaskComments2TaskTitle" />
-    <Column Name="Comments" Member="Comments" />
+    <Column Name="Body" Member="Body" />
   </ContentType>
   <ContentType Name="Partners" Class="Partners">
     <Column Name="Title" Member="Title" />
@@ -124,7 +124,7 @@
     <Column Name="WorkFax" Member="WorkFax" />
     <Column Name="CellPhone" Member="CellPhone" />
     <Column Name="EMail" Member="EMail" />
-    <Column Name="Comments" Member="Comments" />
+    <Column Name="Body" Member="Body" />
   </ContentType>
   <ContentType Name="Milestone" Class="Milestone">
     <Column Name="Title" Member="Title" />
