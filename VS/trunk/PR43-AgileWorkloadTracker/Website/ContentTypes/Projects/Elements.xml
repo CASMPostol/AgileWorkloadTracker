@@ -18,7 +18,7 @@
       <FieldRef ID="{75323F74-00A2-4582-A1A5-DFD990A369D1}" Name="ProjectWarrantyDate" />
       <FieldRef ID="{3377518E-0E08-44C1-9A75-22A6680A5A83}" Name="ProjectBudget" />
       <FieldRef ID="{0A8C105D-2805-4DA0-85C4-99D2CE5B86E1}" Name="Currency" />
-      <FieldRef ID="{9da97a8a-1da5-4a77-98d3-4bc10456e700}" Name="Comments" />
+      <FieldRef ID="{7662cd2c-f069-4dba-9e35-082cf976e170}" Name="Body" />
       <FieldRef ID="{DBEF0351-9BA4-407F-8F2F-4D5ECF70F0D4}" Name="Project2ResourcesTitle" />
       <FieldRef ID="{69A5CEAC-AC11-4177-85C7-567BF662AC62}" Name="Project2ContractTitle" />
       <FieldRef ID="{6CD370BF-B6C2-4231-B324-EC1FA5C71BC8}" Name="Project2StageTitle" />
