@@ -67,16 +67,25 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Dashboards\AddEditWorkload\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{d8ba6986-a3c7-4140-82ab-5aa83c1626a9}</SharePointProjectItemId>
+    </None>
     <None Include="Features\AWTDashboards\AWTDashboards.feature">
       <FeatureId>{5760eced-aec8-4231-b2ae-e10fe7973f91}</FeatureId>
     </None>
     <None Include="key.snk" />
     <Compile Include="Linq\Entities.partial.cs" />
+    <None Include="Layouts\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{efec32db-6b6f-4943-8e35-f36de2a5221c}</SharePointProjectItemId>
+    </None>
     <None Include="Package\Package.package">
       <PackageId>{92f33941-32f8-4ccd-a47e-35ce3cc13bcd}</PackageId>
     </None>
     <None Include="Package\Package.Template.xml">
       <DependentUpon>Package.package</DependentUpon>
+    </None>
+    <None Include="WebPartPages\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{b12ffa68-4e15-4ec7-b7cf-290c320b096d}</SharePointProjectItemId>
     </None>
     <None Include="Webparts\WorkloadManagement\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{100a3882-20bf-46bc-9633-0d96d3701271}</SharePointProjectItemId>
@@ -85,9 +94,13 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Dashboards\AddEditWorkload\Elements.xml" />
     <Content Include="Features\AWTDashboards\AWTDashboards.Template.xml">
       <DependentUpon>AWTDashboards.feature</DependentUpon>
     </Content>
+    <Content Include="Layouts\AWT_Dashboards\CAS_AWT.css" />
+    <Content Include="WebPartPages\AddEditWorkloadTemplate.aspx" />
+    <Content Include="WebPartPages\Elements.xml" />
     <Content Include="Webparts\WorkloadManagement\Elements.xml" />
     <Content Include="Webparts\WorkloadManagement\WorkloadManagementUserControl.ascx">
       <SubType>ASPXCodeBehind</SubType>
