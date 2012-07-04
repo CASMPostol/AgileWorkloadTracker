@@ -10,7 +10,7 @@
     <FieldRefs>
       <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" Hidden="TRUE" />
       <FieldRef ID="{C5844200-805E-4D1A-B787-6A200C723634}" Name="TaskComments2TaskTitle" />
-      <FieldRef ID="{9da97a8a-1da5-4a77-98d3-4bc10456e700}" Name="Comments" />
+      <FieldRef ID="{7662cd2c-f069-4dba-9e35-082cf976e170}" Name="Body" />
     </FieldRefs>
   </ContentType>
 </Elements>

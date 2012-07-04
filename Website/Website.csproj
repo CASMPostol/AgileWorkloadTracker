@@ -289,7 +289,9 @@
     <Content Include="Lists\TaskListTemplate\TaskList\Elements.xml" />
     <Content Include="Lists\TaskListTemplate\Schema.xml" />
     <Content Include="Lists\TypeListTemplate\Elements.xml" />
-    <Content Include="Lists\TypeListTemplate\TypeList\Elements.xml" />
+    <Content Include="Lists\TypeListTemplate\TypeList\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Lists\TypeListTemplate\Schema.xml" />
     <Content Include="Lists\WorkloadListTemplate\Elements.xml">
       <SubType>Designer</SubType>
