@@ -61,7 +61,7 @@
           <FieldRef ID="{51684BCE-00ED-49FA-9E37-CEFC7DBAB2D6}" Name="Task2StatusTitle" />
           <FieldRef ID="{0EE32675-C015-41AD-B9FD-2D2A72B2B662}" Name="Task2SPriorityTitle" />
           <FieldRef ID="{AF244E9A-DE86-43B9-BA90-0904FE6BCBB8}" Name="Task2SResolutionTitle" />
-          <FieldRef ID="{3738BE6B-264A-4AAF-A178-30C5790657AE}" Name="Task2TypeTitle" />>
+          <FieldRef ID="{3738BE6B-264A-4AAF-A178-30C5790657AE}" Name="Task2TypeTitle" />
         </ViewFields>
         <Query>
           <OrderBy>
