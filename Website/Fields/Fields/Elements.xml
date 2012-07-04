@@ -188,17 +188,9 @@
   <Field
     Name="Minutes"
     ID="{25F24E14-A1D1-4DBA-AB5F-793C7E8D2252}"
-    Type="Choice"
+    Type="Number"
     DisplayName="Minutes"
-    Group="CAS Agile Workload Tracker" >
-    <Default>00</Default>
-    <CHOICES>
-      <CHOICE>00</CHOICE>
-      <CHOICE>15</CHOICE>
-      <CHOICE>30</CHOICE>
-      <CHOICE>45</CHOICE>
-    </CHOICES>
-  </Field>
+    Group="CAS Agile Workload Tracker" />
   <Field
     Type="User"
     DisplayName="User"

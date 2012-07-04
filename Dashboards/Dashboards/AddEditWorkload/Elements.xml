@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="AddEditWorkload">
+    <File Path="WebPartPages\AddEditWorkloadTemplate.aspx" Url="WebPartPages/AddEditWorkload.aspx">
+      <AllUsersWebPart WebPartZoneID="Main" WebPartOrder="0">
+        <![CDATA[<webParts>
+          <webPart xmlns="http://schemas.microsoft.com/WebPart/v3">
+            <metaData>
+              <type name="CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement.WorkloadManagement, $SharePoint.Project.AssemblyFullName$" />
+              <importErrorMessage>$Resources:core,ImportErrorMessage;</importErrorMessage>
+            </metaData>
+            <data>
+              <properties>
+                <property name="Title" type="string">WorkloadManagement</property>
+                <property name="Description" type="string">My Visual WebPart</property>
+              </properties>
+            </data>
+          </webPart>
+        </webParts>]]>
+      </AllUsersWebPart>
+    </File>
+  </Module>
+</Elements>

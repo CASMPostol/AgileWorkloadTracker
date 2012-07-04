@@ -269,7 +269,9 @@
     <Content Include="Lists\ProjectsListTemplate\ProjectsList\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Lists\ProjectsListTemplate\Schema.xml" />
+    <Content Include="Lists\ProjectsListTemplate\Schema.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Lists\ResolutionListTemplate\Elements.xml" />
     <Content Include="Lists\ResolutionListTemplate\ResolutionList\Elements.xml" />
     <Content Include="Lists\ResolutionListTemplate\Schema.xml" />
