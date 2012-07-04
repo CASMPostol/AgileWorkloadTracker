@@ -67,7 +67,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Features\Feature1\Feature1.feature">
+    <None Include="Features\AWTDashboards\AWTDashboards.feature">
       <FeatureId>{5760eced-aec8-4231-b2ae-e10fe7973f91}</FeatureId>
     </None>
     <None Include="key.snk" />
@@ -84,8 +84,8 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="Features\Feature1\Feature1.Template.xml">
-      <DependentUpon>Feature1.feature</DependentUpon>
+    <Content Include="Features\AWTDashboards\AWTDashboards.Template.xml">
+      <DependentUpon>AWTDashboards.feature</DependentUpon>
     </Content>
     <Content Include="Webparts\WorkloadManagement\Elements.xml" />
     <Content Include="Webparts\WorkloadManagement\WorkloadManagementUserControl.ascx">
