@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<Web xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Class="EntitiesDataContext" AccessModifier="Internal" xmlns="http://schemas.microsoft.com/SharePoint/2009/spmetal">
+  <List Name="Announcements" />
+  <List Name="Calendar" />
+  <List Name="Contracts" />
+  <List Name="Estimation" />
+  <List Name="IssueTracker" />
+  <List Name="Links" />
+  <!--<List Name="List Template Gallery" />-->
+  <List Name="Master Page Gallery" />
+  <List Name="Milestone" />
+  <List Name="Partners" />
+  <List Name="Priority" />
+  <List Name="Project resources" />
+  <List Name="Projects" />
+  <List Name="Resolution" />
+  <List Name="Resources" />
+  <List Name="Shared Documents" />
+  <List Name="Site Assets" />
+  <List Name="Site Pages" />
+  <!--<List Name="Solution Gallery" />-->
+  <List Name="Stage" />
+  <List Name="Status" />
+  <List Name="Style Library" />
+  <List Name="Task" />
+  <List Name="Task comments" />
+  <List Name="Tasks" />
+  <List Name="Team Discussion" />
+  <!--<List Name="Theme Gallery" />-->
+  <List Name="Type" />
+  <List Name="User Information List" />
+  <!--<List Name="Web Part Gallery" />-->
+  <List Name="Workload" />
+  <ContentType Name="Projects" Class="Projects">
+    <Column Name="Title" Member="Title" />
+    <Column Name="ProjectType" Member="ProjectType" />
+    <Column Name="ProjectNumber" Member="ProjectNumber" />
+    <Column Name="ProjectYear" Member="ProjectYear" />
+    <Column Name="ProjectHours" Member="ProjectHours" />
+    <Column Name="ProjectStartDate" Member="ProjectStartDate" />
+    <Column Name="ProjectEndDate" Member="ProjectEndDate" />
+    <Column Name="ProjectWarrantyDate" Member="ProjectWarrantyDate" />
+    <Column Name="ProjectBudget" Member="ProjectBudget" />
+    <Column Name="Currency" Member="Currency" />
+    <Column Name="Comments" Member="Comments" />
+    <Column Name="Project2ResourcesTitle" Member="Project2ResourcesTitle" />
+    <Column Name="Project2ContractTitle" Member="Project2ContractTitle" />
+    <Column Name="Project2StageTitle" Member="Project2StageTitle" />
+  </ContentType>
+  <ContentType Name="Estimation" Class="Estimation">
+    <Column Name="Title" Member="Title" />
+    <Column Name="Estimation2ResourcesTitle" Member="Estimation2ResourcesTitle" />
+    <Column Name="Estimation2ProjectTitle" Member="Estimation2ProjectTitle" />
+  </ContentType>
+  <ContentType Name="ProjectResources" Class="ProjectResources">
+    <Column Name="ProjectResources2ProjectTitle" Member="ProjectResources2ProjectTitle" />
+    <Column Name="ProjectResources2ResourcesTitle" Member="ProjectResources2ResourcesTitle" />
+  </ContentType>
+  <ContentType Name="Type" Class="Type">
+    <Column Name="Title" Member="Title" />
+  </ContentType>
+  <ContentType Name="Tasks" Class="Tasks">
+    <Column Name="Title" Member="Title" />
+    <Column Name="Task2ProjectTitle" Member="Task2ProjectTitle" />
+    <Column Name="Task2ResourcesTitle" Member="Task2ResourcesTitle" />
+    <Column Name="Task2MilestoneDefinedInTitle" Member="Task2MilestoneDefinedInTitle" />
+    <Column Name="Task2MilestoneResolvedInTitle" Member="Task2MilestoneResolvedInTitle" />
+    <Column Name="Task2StatusTitle" Member="Task2StatusTitle" />
+    <Column Name="Task2SPriorityTitle" Member="Task2SPriorityTitle" />
+    <Column Name="Task2SResolutionTitle" Member="Task2SResolutionTitle" />
+    <Column Name="Task2TypeTitle" Member="Task2TypeTitle" />
+  </ContentType>
+  <ContentType Name="Status" Class="Status">
+    <Column Name="Title" Member="Title" />
+  </ContentType>
+  <ContentType Name="Stage" Class="Stage">
+    <Column Name="Title" Member="Title" />
+  </ContentType>
+  <ContentType Name="Resolution" Class="Resolution">
+    <Column Name="Title" Member="Title" />
+  </ContentType>
+  <ContentType Name="Priority" Class="Priority">
+    <Column Name="Title" Member="Title" />
+  </ContentType>
+  <ContentType Name="Resources" Class="Resources">
+    <Column Name="Title" Member="Title" />
+    <Column Name="EmployeeADAccount" Member="EmployeeADAccount" />
+    <Column Name="JobTitle" Member="JobTitle" />
+    <Column Name="EMail" Member="EMail" />
+  </ContentType>
+  <ContentType Name="Workload" Class="Workload">
+    <Column Name="Workload2ProjectTitle" Member="Workload2ProjectTitle" />
+    <Column Name="Workload2TaskTitle" Member="Workload2TaskTitle" />
+    <Column Name="Workload2StageTitle" Member="Workload2StageTitle" />
+    <Column Name="Workload2ResourcesTitle" Member="Workload2ResourcesTitle" />
+    <Column Name="Title" Member="Title" />
+    <Column Name="WorkloadDate" Member="WorkloadDate" />
+    <Column Name="Hours" Member="Hours" />
+    <Column Name="Minutes" Member="Minutes" />
+  </ContentType>
+  <ContentType Name="Contracts" Class="Contracts">
+    <Column Name="Title" Member="Title" />
+    <Column Name="ContractNumber" Member="ContractNumber" />
+    <Column Name="ContractSubject" Member="ContractSubject" />
+    <Column Name="ContractDate" Member="ContractDate" />
+    <Column Name="ContractEndDate" Member="ContractEndDate" />
+    <Column Name="ContractWarrantyDate" Member="ContractWarrantyDate" />
+    <Column Name="ContractOffer" Member="ContractOffer" />
+    <Column Name="ContractValue" Member="ContractValue" />
+    <Column Name="Currency" Member="Currency" />
+    <Column Name="Comments" Member="Comments" />
+  </ContentType>
+  <ContentType Name="TaskComments" Class="TaskComments">
+    <Column Name="TaskComments2TaskTitle" Member="TaskComments2TaskTitle" />
+    <Column Name="Comments" Member="Comments" />
+  </ContentType>
+  <ContentType Name="Partners" Class="Partners">
+    <Column Name="Title" Member="Title" />
+    <Column Name="WorkCountry" Member="WorkCountry" />
+    <Column Name="WorkCity" Member="WorkCity" />
+    <Column Name="WorkZip" Member="WorkZip" />
+    <Column Name="WorkAddress" Member="WorkAddress" />
+    <Column Name="WorkPhone" Member="WorkPhone" />
+    <Column Name="WorkFax" Member="WorkFax" />
+    <Column Name="CellPhone" Member="CellPhone" />
+    <Column Name="EMail" Member="EMail" />
+    <Column Name="Comments" Member="Comments" />
+  </ContentType>
+  <ContentType Name="Milestone" Class="Milestone">
+    <Column Name="Title" Member="Title" />
+    <Column Name="Milestone2StageTitle" Member="Milestone2StageTitle" />
+  </ContentType>
+</Web>
