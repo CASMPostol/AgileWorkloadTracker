@@ -71,6 +71,7 @@
       <FeatureId>{5760eced-aec8-4231-b2ae-e10fe7973f91}</FeatureId>
     </None>
     <None Include="key.snk" />
+    <Compile Include="Linq\Entities.partial.cs" />
     <None Include="Package\Package.package">
       <PackageId>{92f33941-32f8-4ccd-a47e-35ce3cc13bcd}</PackageId>
     </None>
