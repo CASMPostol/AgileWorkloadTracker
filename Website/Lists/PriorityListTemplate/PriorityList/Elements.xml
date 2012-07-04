@@ -5,5 +5,24 @@
                 TemplateType="10012"
                 Url="Lists/PriorityList"
                 Description="Priority List Instance">
+    <Data>
+      <Rows>
+        <Row>
+          <Field Name="Title">Blocker</Field>
+        </Row>
+        <Row>
+          <Field Name="Title">Critical</Field>
+        </Row>
+        <Row>
+          <Field Name="Title">Major</Field>
+        </Row>
+        <Row>
+          <Field Name="Title">Minor</Field>
+        </Row>
+        <Row>
+          <Field Name="Title">Trivial</Field>
+        </Row>
+      </Rows>
+    </Data>
   </ListInstance>
 </Elements>

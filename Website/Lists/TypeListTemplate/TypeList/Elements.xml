@@ -5,5 +5,24 @@
                 TemplateType="10014"
                 Url="Lists/TypeList"
                 Description="Type List Instance">
+    <Data>
+      <Rows>
+        <Row>
+          <Field Name="Title">Any</Field>
+        </Row>
+        <Row>
+          <Field Name="Title">Bug</Field>
+        </Row>
+        <Row>
+          <Field Name="Title">New Feature</Field>
+        </Row>
+        <Row>
+          <Field Name="Title">Task</Field>
+        </Row>
+        <Row>
+          <Field Name="Title">Improvement</Field>
+        </Row>
+      </Rows>
+    </Data>
   </ListInstance>
 </Elements>
