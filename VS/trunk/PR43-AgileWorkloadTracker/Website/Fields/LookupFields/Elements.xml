@@ -1,6 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
   <Field
+   Name="Contracts2PartnersTitle"
+   ID="{26E16F7C-156E-4DF0-BC32-FA8A1EC94345}"
+   Type="Lookup"
+   List="Lists/PartnersList"
+   ShowField="Title"
+   UnlimitedLengthInDocumentLibrary="False"
+   Indexed="True"
+   RelationshipDeleteBehavior="None"
+   DisplayName="Partner"
+   Group="CAS Agile Workload Tracker"
+   Required="False"
+   Hidden="False"
+   DisplaceOnUpgrade="True"
+   EnforceUniqueValues="False"
+   ReadOnly="False"
+    />
+  <Field
    Name="Workload2ResourcesTitle"
    ID="{BB5BB442-045C-48C1-8E71-18F751EDBAB9}"
    Type="Lookup"
