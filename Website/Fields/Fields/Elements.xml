@@ -1,6 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
   <Field
+    Name="EstimatedWorkload"
+    ID="{FB496A0B-6E13-424A-B513-16762C0699BD}"
+    Type="Number"
+    DisplayName="Estimated workload"
+    Group="CAS Agile Workload Tracker"
+    />
+  <Field
     Name="ProjectNumber"
     ID="{FC7FD148-7FA4-4581-AA48-12D0717EA6A1}"
     Type="Text"
