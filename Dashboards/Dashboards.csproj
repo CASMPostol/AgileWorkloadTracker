@@ -53,8 +53,8 @@
     <Reference Include="Microsoft.SharePoint.Security" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\SPMetalHelper\SPEntities\AgileWorkloadTracker\Entities.cs">
-      <Link>SPEntities\Entities.cs</Link>
+    <Compile Include="..\SPMetalHelper\Linq\AgileWorkloadTracker\Entities.cs">
+      <Link>Linq\Entities.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Webparts\WorkloadManagement\WorkloadManagement.cs" />
