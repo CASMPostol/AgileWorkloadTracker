@@ -5,5 +5,33 @@
                 TemplateType="10013"
                 Url="Lists/ResolutionList"
                 Description="Resolution List Instance">
+    <Data>
+      <Rows>
+        <Row>
+          <Field Name="Title">Unresolved</Field>
+        </Row>
+        <Row>
+          <Field Name="Title">Fixed</Field>
+        </Row>
+        <Row>
+          <Field Name="Title">Invalid</Field>
+        </Row>
+        <Row>
+          <Field Name="Title">Won't Fix</Field>
+        </Row>
+        <Row>
+          <Field Name="Title">Fix Later</Field>
+        </Row>
+        <Row>
+          <Field Name="Title">Remind</Field>
+        </Row>
+        <Row>
+          <Field Name="Title">Duplicated</Field>
+        </Row>
+        <Row>
+          <Field Name="Title">Works For Me</Field>
+        </Row>
+      </Rows>
+    </Data>
   </ListInstance>
 </Elements>
