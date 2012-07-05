@@ -49,13 +49,13 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement {
         protected global::System.Web.UI.WebControls.Panel Panel1;
         
         /// <summary>
-        /// Calendar1 control.
+        /// m_Calendar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar Calendar1;
+        protected global::System.Web.UI.WebControls.Calendar m_Calendar;
         
         /// <summary>
         /// m_TableWorkloadData control.
@@ -211,12 +211,12 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement {
         protected global::System.Web.UI.WebControls.Panel m_PanelSelect;
         
         /// <summary>
-        /// GridView1 control.
+        /// m_GridView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        protected global::System.Web.UI.WebControls.GridView m_GridView;
     }
 }
