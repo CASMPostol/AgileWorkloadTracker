@@ -17,13 +17,13 @@
         <asp:TableRow>
             <asp:TableCell>
                 <asp:Panel ID="Panel1" runat="server" BorderColor="ActiveCaptionText" GroupingText="Select day" >
-                    <asp:Calendar ID="Calendar1" runat="server" BackColor="White" BorderColor="#999999"
+                    <asp:Calendar ID="Calendar1" runat="server" BackColor="White" BorderColor="#91cdf2"
                       CellPadding="4" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt" ForeColor="Black"
                       Height="62px" OnSelectionChanged="Calendar1_SelectionChanged" Width="131px">
-                      <SelectedDayStyle BackColor="#666666" Font-Bold="True" ForeColor="White" />
-                      <TodayDayStyle BackColor="#CCCCCC" ForeColor="Black" />
-                      <SelectorStyle BackColor="#CCCCCC" />
-                      <WeekendDayStyle BackColor="#FFFFCC" />
+                      <SelectedDayStyle BackColor="#91cdf2" Font-Bold="True" ForeColor="White" />
+                      <TodayDayStyle BackColor="#addbf7" ForeColor="Black" />
+                      <SelectorStyle BackColor="#addbf7" />
+                      <WeekendDayStyle BackColor="#d5edfb" />
                       <OtherMonthDayStyle ForeColor="Gray" />
                       <NextPrevStyle VerticalAlign="Bottom" />
                       <DayHeaderStyle BackColor="#CCCCCC" Font-Bold="True" Font-Size="7pt" />
