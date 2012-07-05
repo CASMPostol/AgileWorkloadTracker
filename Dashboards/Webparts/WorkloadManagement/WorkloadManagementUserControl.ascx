@@ -26,8 +26,8 @@
                       <WeekendDayStyle BackColor="#d5edfb" />
                       <OtherMonthDayStyle ForeColor="Gray" />
                       <NextPrevStyle VerticalAlign="Bottom" />
-                      <DayHeaderStyle BackColor="#CCCCCC" Font-Bold="True" Font-Size="7pt" />
-                      <TitleStyle BackColor="#999999" BorderColor="Black" Font-Bold="True" />
+                      <DayHeaderStyle BackColor="#d5edfb" Font-Bold="True" Font-Size="7pt" />
+                      <TitleStyle BackColor="#91cdf2" BorderColor="Black" Font-Bold="True" />
                     </asp:Calendar>
                 </asp:Panel>
             </asp:TableCell>
