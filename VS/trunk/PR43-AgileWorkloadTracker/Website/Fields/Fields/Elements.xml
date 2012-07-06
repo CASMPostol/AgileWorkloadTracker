@@ -1,6 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
   <Field
+    Name="Active"
+    ID="{50EDDF56-D28E-44C6-B6CB-109FBCDE886F}"
+    Type="Boolean"
+    DisplayName="Active"
+    Group="CAS Agile Workload Tracker"
+    />
+  <Field
     Name="EstimatedWorkload"
     ID="{FB496A0B-6E13-424A-B513-16762C0699BD}"
     Type="Number"
@@ -14,25 +21,6 @@
     DisplayName="Project number"
     Group="CAS Agile Workload Tracker"
     />
-  <Field
-    Name="ProjectYear"
-    ID="{999E14E3-F1D2-477E-BABD-5E320BE561CA}"
-    Type="Choice"
-    DisplayName="Year"
-    Group="CAS Agile Workload Tracker" >
-    <Default>2012</Default>
-    <CHOICES>
-      <CHOICE>2012</CHOICE>
-      <CHOICE>2013</CHOICE>
-      <CHOICE>2014</CHOICE>
-      <CHOICE>2015</CHOICE>
-      <CHOICE>2016</CHOICE>
-      <CHOICE>2017</CHOICE>
-      <CHOICE>2018</CHOICE>
-      <CHOICE>2019</CHOICE>
-      <CHOICE>2020</CHOICE>
-    </CHOICES>
-  </Field>
   <Field
     Name="ProjectType"
     ID="{4EEBA38D-858D-4AB3-B554-407F6751B41E}"
