@@ -15,9 +15,9 @@
     <asp:TableRow>
       <asp:TableCell>
         <asp:Panel ID="Panel1" runat="server" BorderColor="ActiveCaptionText" GroupingText="Select day">
-          <asp:Calendar ID="m_Calendar" runat="server" BackColor="White" BorderColor="#91cdf2"
+          <asp:Calendar ID="m_Calendar" runat="server" SelectionMode="Day" BackColor="White" BorderColor="#91cdf2"
             CellPadding="4" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt" ForeColor="Black"
-            Height="62px" OnSelectionChanged="Calendar1_SelectionChanged" Width="131px">
+            Height="62px" OnSelectionChanged="m_Calendar_SelectionChanged" Width="131px">
             <SelectedDayStyle BackColor="#91cdf2" Font-Bold="True" ForeColor="White" />
             <TodayDayStyle BackColor="#addbf7" ForeColor="Black" />
             <SelectorStyle BackColor="#addbf7" />
@@ -93,7 +93,7 @@
 <asp:Panel ID="m_PanelSelect" runat="server" BorderColor="ActiveCaptionText" GroupingText="Current workload">
   <asp:GridView ID="m_GridView" runat="server" AutoGenerateColumns="False" BackColor="White"
     BorderColor="#FFFFFF" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="ID"
-    ForeColor="Black" GridLines="Vertical" OnRowCommand="GridView1_RowCommand" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+    ForeColor="Black" GridLines="Vertical" OnSelectedIndexChanged="m_GridView_SelectedIndexChanged" AutoGenerateSelectButton=true>
     <%--              <Columns>
                 <asp:CommandField ButtonType="Button" SelectText="Zaznacz" ShowCancelButton="False"
                   ShowSelectButton="True" />

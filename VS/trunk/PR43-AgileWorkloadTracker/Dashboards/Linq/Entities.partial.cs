@@ -85,9 +85,15 @@ namespace CAS.AgileWorkloadTracker.Linq
   {
     internal static Resources FindForUser(Entities edc, SPUser _user)
     {
-      if (edc.Resources == null)
+      EntityList<CAS.AgileWorkloadTracker.Linq.Resources> _res = edc.Resources;
+      if (_res == null || _res.Count() == 0)
         return null;
-      return edc.Resources.FirstOrDefault(idx => String.IsNullOrEmpty(idx.EmployeeADAccount.Tytuł) ? false : idx.EmployeeADAccount.Tytuł.Contains(_user.Name));
+      return (
+                from idx in _res
+                let _account = idx.EmployeeADAccount
+                where _account.Tytuł.Contains(_user.Name)
+                select idx
+              ).FirstOrDefault();
     }
   }
 }
