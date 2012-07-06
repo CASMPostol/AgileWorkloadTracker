@@ -93,7 +93,12 @@
     </None>
     <None Include="Webparts\WorkloadManagement\WorkloadManagement.webpart" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\SharePoint\SharePoint.csproj">
+      <Project>{B9D9FCCA-6132-4BF5-BC17-32EA752D6AD7}</Project>
+      <Name>SharePoint</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Dashboards\AddEditWorkload\Elements.xml" />
     <Content Include="Features\AWTDashboards\AWTDashboards.Template.xml">

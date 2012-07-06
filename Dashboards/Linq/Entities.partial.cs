@@ -6,6 +6,10 @@ using Microsoft.SharePoint.Linq;
 
 namespace CAS.AgileWorkloadTracker.Linq
 {
+  internal partial class Entities
+  {
+    public Entities() : base(SPContext.Current.Web.Url) { }
+  }
   /// <summary>
   /// Partial classes for the Linq entities.
   /// </summary>
