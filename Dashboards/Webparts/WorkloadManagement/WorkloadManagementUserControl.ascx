@@ -83,7 +83,7 @@
           <asp:Button runat="server" ID="m_ButtonAddNew" Text="Add new" CssClass="Button" /><br />
           <asp:Button runat="server" ID="m_ButtonEdit" Text="Edit" CssClass="Button" /><br />
           <asp:Button runat="server" ID="m_ButtonSave" Text="Save" CssClass="Button" /><br />
-          <asp:Button runat="server" ID="m_ButtonDelete" Text="Delete" CssClass="Button" /><br />
+          <asp:Button runat="server" ID="m_ButtonDelete" Text="Delete" CssClass="Button" OnClientClick="return confirm('Na pewno zmodyfikować?');" /><br />
           <asp:Button runat="server" ID="m_ButtonCancel" Text="Cancel" CssClass="Button" /><br />
         </asp:Panel>
       </asp:TableCell>
