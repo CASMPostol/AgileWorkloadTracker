@@ -97,6 +97,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
         Projects _cp = Element.GetAtIndex<Projects>(_entt.DataContext.Projects, m_ProjectDropDown.SelectedValue);
         foreach (Tasks _taskIdx in from _tidx in _cp.Tasks select _tidx)
           m_TaskDropDown.Items.Add(new ListItem(_taskIdx.Tytuł, _taskIdx.Identyfikator.ToString()));
+        //TODO liczba godzin w projekcie planowane i wykorzystane 
       }
     }
     /// <summary>
@@ -152,31 +153,44 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
         FillupTaskaDropDown();
         m_ProjectDropDown.SelectedIndexChanged += new EventHandler(m_ProjectDropDown_SelectedIndexChanged);
         At = "FindForUser";
-        CAS.AgileWorkloadTracker.Linq.Resources _me = CAS.AgileWorkloadTracker.Linq.Resources.FindForUser(_entt.DataContext, SPContext.Current.Web.CurrentUser);
-        if (_me == null)
-        {
-          this.Controls.Add(new Literal() { Text = "User not recognized - you must be added to the Recourses" });
-          m_GridView.Visible = false;
-        }
-        else
-        {
-          this.Controls.Add(new Literal() { Text = "Welcome: " + _me.EmployeeADAccount.Tytuł });
-          At = "m_GridView.DataSource";
-          m_GridView.DataSource = from _wlidx in _me.Workload
-                                  where _wlidx.WorkloadDate.Value == m_Calendar.SelectedDate
-                                  select new
-                                  {
-                                    Task = _wlidx.Workload2TaskTitle == null ? m_SelectTaskDropDownEntry : _wlidx.Workload2TaskTitle.Tytuł,
-                                    Hours = _wlidx.Hours.GetValueOrDefault(0),
-                                    Project = _wlidx.Workload2ProjectTitle == null ? m_SelectProjectDropDownEntry : _wlidx.Workload2ProjectTitle.Tytuł,
-                                    ID = _wlidx.Identyfikator
-                                  };
-          m_GridView.DataBind();
-        }
+        FillupWorkflowGridView();
       }
       catch (Exception ex)
       {
         ReportException(ex);
+      }
+    }
+    private void FillupWorkflowGridView()
+    {
+      if (Me == null)
+      {
+        this.Controls.Add(new Literal() { Text = "User not recognized - you must be added to the Recourses" });
+        m_GridView.Visible = false;
+      }
+      else
+      {
+        this.Controls.Add(new Literal() { Text = "Welcome: " + Me.EmployeeADAccount.Tytuł });
+        At = "m_GridView.DataSource";
+        m_GridView.DataSource = from _wlidx in Me.Workload
+                                where _wlidx.WorkloadDate.Value.Date == m_Calendar.SelectedDate.Date
+                                select new
+                                {
+                                  Task = _wlidx.Workload2TaskTitle == null ? m_SelectTaskDropDownEntry : _wlidx.Workload2TaskTitle.Tytuł,
+                                  Hours = _wlidx.Hours.GetValueOrDefault(0),
+                                  Project = _wlidx.Workload2ProjectTitle == null ? m_SelectProjectDropDownEntry : _wlidx.Workload2ProjectTitle.Tytuł,
+                                  ID = _wlidx.Identyfikator
+                                };
+        m_GridView.DataBind();
+      }
+    }
+    CAS.AgileWorkloadTracker.Linq.Resources p_me = null;
+    private CAS.AgileWorkloadTracker.Linq.Resources Me
+    {
+      get
+      {
+        if (p_me == null)
+          p_me = CAS.AgileWorkloadTracker.Linq.Resources.FindForUser(_entt.DataContext, SPContext.Current.Web.CurrentUser);
+        return p_me;
       }
     }
     private void ReportException(Exception ex)
@@ -185,259 +199,52 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
       this.Controls.Add(new Literal() { Text = String.Format(_format, At, ex.Message) });
     }
     #region event handlers
-
     private void m_ProjectDropDown_SelectedIndexChanged(object sender, EventArgs e)
     {
       FillupTaskaDropDown();
     }
+    protected void m_GridView_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      try
+      {
+        if (m_GridView.SelectedIndex < 0)
+          return;
+        string _selection = m_GridView.SelectedDataKey.Value.ToString();
+        Workload _ld = Element.GetAtIndex<Workload>(_entt.DataContext.Workload, _selection);
+        m_WorkloadDescriptionTextBox.Text = _ld.Tytuł;
+        m_WorkloadHoursTextBox.Text = _ld.Hours.GetValueOrDefault(0).ToString();
+      }
+      catch (Exception _ex)
+      {
+        ReportException(_ex);
+      }
+    }
     #endregion
-    //Label1.Text = main.pracownik(UserName).NAZWISKO_IMIE;
-
-    //    if (Request.Params["Proj"] != null)
-    //    {
-    //      proj = Request.Params["Proj"].ToString();
-    //      string[] temp = proj.Split('/');
-    //      date = temp[1];
-    //      Label16.Text = String.Format("Aktualnie masz wpisanych {0} godzin", main.sumadaily(UserName, date));
-    //      m_Calendar.SelectedDate = Convert.ToDateTime(date);
-    //      m_Calendar.VisibleDate = Convert.ToDateTime(date);
-    //      if (temp[2] == "1")
-    //        Label8.Text = txt;
-    //      else
-    //        Label8.Text = String.Empty;
-    //    }
-    //    else
-    //    {
-    //      ObjectDataSource.SelectParameters[0].DefaultValue = DateTime.Now.Date.ToString();
-    //      Label16.Text = String.Format("Aktualnie masz wpisanych {0} godzin", main.sumadaily(UserName, DateTime.Now.Date.ToString()));
-    //    }
-    //    FirstKat_Load();
-    //    Kat_Load();
-    //    int numberKat = m_CategoryDropDownList.Items.Count;
-    //    if (numberKat > 0)
-    //      m_CategoryDropDownList.SelectedIndex = numberKat - 1;
-    //    FirstPodkat_Load();
-    //    Podkat_Load();
-    //    int numberPodkat = DropDownList_SubCategory.Items.Count;
-    //    if (numberPodkat > 0)
-    //      DropDownList_SubCategory.SelectedIndex = numberPodkat - 1;
-    //    FirstProj_Load();
-
-    //    int numberProj = DropDownList_Project.Items.Count;
-    //    if (Request.Params["Proj"] != null)
-    //    {
-    //      proj = Request.Params["Proj"].ToString();
-    //      string[] temp = proj.Split('/');
-    //      if (numberProj > 0)
-    //        DropDownList_Project.SelectedIndex = numberProj - 1;
-    //      if (temp[0] != "")
-    //      {
-    //        proj = temp[0];
-    //        DropDownList_Project.SelectedValue = proj;
-    //        PlanDataSource.SelectParameters[0].DefaultValue = main.projekty(DropDownList_Project.SelectedValue, Convert.ToDecimal(CurrentYear)).ID.ToString();
-    //        Label12.Text = String.Format("Aktualnie masz {0} godzin w tym projekcie",
-    //          main.suma(main.projekty(DropDownList_Project.SelectedValue,
-    //          Convert.ToDecimal(CurrentYear)).ID, UserName));
-    //        Label14.Text = String.Format("Aktualnie masz zaplanowane {0} godzin w kategorii {1}",
-    //          main.plankatsum(UserName, main.projekty(DropDownList_Project.SelectedValue,
-    //          Convert.ToDecimal(CurrentYear)).ID_KATEGORII,
-    //          Convert.ToDecimal(CurrentYear)),
-    //          main.kategorie(main.projekty(DropDownList_Project.SelectedValue, Convert.ToDecimal(CurrentYear)).ID_KATEGORII).NAZWA);
-    //        Label14.BackColor = Color.White;
-    //        Label15.Text = String.Format("Aktualnie masz przepracowane {0} godzin w kategorii {1}", main.godzinykatsum(UserName, main.projekty(DropDownList_Project.SelectedValue, Convert.ToDecimal(CurrentYear)).ID_KATEGORII, Convert.ToDecimal(CurrentYear)), main.kategorie(main.projekty(DropDownList_Project.SelectedValue, Convert.ToDecimal(CurrentYear)).ID_KATEGORII).NAZWA);
-    //        Label15.BackColor = Color.White;
-    //      }
-    //    }
-    //    else
-    //    {
-    //      if (numberProj > 0)
-    //        DropDownList_Project.SelectedIndex = numberProj - 1;
-    //    }
-    //    foreach (GodzinySchema.STATUSYRow row3 in main.godzinySchema.STATUSY)
-    //      DropDownList_State.Items.Add(new Main.statusyRowClass(row3).ToString());
-    //    if (DropDownList_State.Items.Count > 0)
-    //      DropDownList_State.SelectedIndex = 2;
-    //    FirstRodz_Load();
-    //    Rodz_Load();
-    //    int numberRodz = DropDownList_TypeOfWork.Items.Count;
-    //    if (numberRodz > 0)
-    //      DropDownList_TypeOfWork.SelectedIndex = numberRodz - 1;
-    //    RefreshGodziny();
-    //  }
-    //}
-    ///// <summary>
-    ///// Method filtering subcategory and projects in DropDownList_SubCategory 
-    ///// and DropDownList_Project using category name parameter
-    ///// </summary>
-    ///// <param name="kategorieRow">Main.kategorieRowClass object</param>
-    //protected void SelectProjekty(Main.kategorieRowClass kategorieRow)
-    //{
-    //  DropDownList_SubCategory.Visible = true;
-    //  DropDownList_SubCategory.Items.Clear();
-    //  DropDownList_Project.Visible = true;
-    //  DropDownList_Project.Items.Clear();
-    //  foreach (GodzinySchema.PODKATEGORIERow podkategorieRow in
-    //      main.godzinySchema.PODKATEGORIE)
-    //  {
-    //    if (kategorieRow.ID == 0 ||
-    //        podkategorieRow.ID_KATEGORII == kategorieRow.ID)
-    //    {
-    //      DropDownList_SubCategory.Items.Add(new Main.podkategorieRowClass(podkategorieRow).ToString());
-    //    }
-    //  }
-    //  foreach (GodzinySchema.PROJEKTYRow projektyRow in main.godzinySchema.PROJEKTY)
-    //  {
-    //    if (kategorieRow.ID == 0 ||
-    //        (projektyRow.ID_KATEGORII == kategorieRow.ID &&
-    //        main.statusy(DropDownList_State.SelectedValue).ID == projektyRow.ID_STATUSU) && projektyRow.NAZWA_KROTKA != "GUS")
-    //    {
-    //      DropDownList_Project.Items.Add(new Main.projektyRowClass(projektyRow).ToString());
-    //    }
-    //  }
-    //  GodzinySchema.PODKATEGORIERow podkatrow = this.main.godzinySchema.PODKATEGORIE.NewPODKATEGORIERow();
-    //  podkatrow.NAZWA = Resources.Resources.text_sellect_subcategory;
-    //  podkatrow.ID = 0;
-    //  podkatrow.OPIS = " ";
-    //  podkatrow.ID_KATEGORII = 0;
-    //  GodzinySchema.PROJEKTYRow projektyrow = this.main.godzinySchema.PROJEKTY.NewPROJEKTYRow();
-    //  projektyrow.NAZWA = Resources.Resources.text_sellect_project;
-    //  projektyrow.NAZWA_KROTKA = Resources.Resources.text_sellect_project;
-    //  projektyrow.ID = 0;
-    //  projektyrow.ID_UMOWY = 0;
-    //  projektyrow.ROK = DateTime.Now.Year;
-    //  projektyrow.LICZBA_GODZIN = 0;
-    //  projektyrow.DATA_START = DateTime.Now;
-    //  projektyrow.DATA_KONIEC = DateTime.Now;
-    //  projektyrow.DATA_GWARANCJA = DateTime.Now;
-    //  projektyrow.ID_KATEGORII = 0;
-    //  projektyrow.ID_STATUSU = 0;
-    //  projektyrow.ID_PODKATEGORII = 0;
-    //  int numberPodkat = DropDownList_SubCategory.Items.Count;
-    //  int numberProj = DropDownList_Project.Items.Count;
-    //  if (numberPodkat > 0 && numberProj > 0)
-    //  {
-    //    DropDownList_SubCategory.Items.Add(new Main.podkategorieRowClass(podkatrow).ToString());
-    //    DropDownList_SubCategory.SelectedIndex = numberPodkat;
-    //    DropDownList_Project.Items.Add(new Main.projektyRowClass(projektyrow).ToString());
-    //    DropDownList_Project.SelectedIndex = numberProj;
-    //  }
-    //  else
-    //  {
-    //    DropDownList_SubCategory.Visible = false;
-    //    DropDownList_Project.Visible = false;
-    //  }
-    //  DropDownList_SubCategory.DataBind();
-    //  DropDownList_Project.DataBind();
-    //}
-
-    ///// <summary>
-    ///// Method filtering projects in DropDownList_Project using subcategory name parameter
-    ///// </summary>
-    ///// <param name="podkategorieRow">Main.podkategorieRowClass object</param>
-    //protected void SelectProjekty2(Main.podkategorieRowClass podkategorieRow)
-    //{
-    //  DropDownList_Project.Visible = true;
-    //  DropDownList_Project.Items.Clear();
-    //  foreach (GodzinySchema.PROJEKTYRow projektyRow in main.godzinySchema.PROJEKTY)
-    //  {
-    //    if (podkategorieRow.ID == 0 || (projektyRow.ID_PODKATEGORII == podkategorieRow.ID &&
-    //        main.statusy(DropDownList_State.SelectedValue).ID == projektyRow.ID_STATUSU) && projektyRow.NAZWA_KROTKA != "GUS")
-    //    {
-    //      DropDownList_Project.Items.Add(new Main.projektyRowClass(projektyRow).ToString());
-    //    }
-    //  }
-    //  GodzinySchema.PROJEKTYRow projektyrow = this.main.godzinySchema.PROJEKTY.NewPROJEKTYRow();
-    //  projektyrow.NAZWA = Resources.Resources.text_sellect_project;
-    //  projektyrow.NAZWA_KROTKA = Resources.Resources.text_sellect_project;
-    //  projektyrow.ID = 0;
-    //  projektyrow.ID_UMOWY = 0;
-    //  projektyrow.ROK = DateTime.Now.Year;
-    //  projektyrow.LICZBA_GODZIN = 0;
-    //  projektyrow.DATA_START = DateTime.Now;
-    //  projektyrow.DATA_KONIEC = DateTime.Now;
-    //  projektyrow.DATA_GWARANCJA = DateTime.Now;
-    //  projektyrow.ID_KATEGORII = 0;
-    //  projektyrow.ID_STATUSU = 0;
-    //  projektyrow.ID_PODKATEGORII = 0;
-    //  int numberProj = DropDownList_Project.Items.Count;
-    //  if (numberProj > 0)
-    //  {
-    //    DropDownList_Project.Items.Add(new Main.projektyRowClass(projektyrow).ToString());
-    //    DropDownList_Project.SelectedIndex = numberProj;
-    //  }
-    //  else
-    //  {
-    //    DropDownList_Project.Visible = false;
-    //  }
-    //  DropDownList_Project.DataBind();
-    //}
-    ///// <summary>
-    ///// Button_new Click method inserting new GODZINY Table row
-    ///// </summary>
-    ///// <param name="sender"></param>
-    ///// <param name="e"></param>
-    //protected void Button_new_Click(object sender, EventArgs e)
-    //{
-    //  if (Page.IsValid)
-    //  {
-    //    string error;
-    //    error = "0";
-    //    hours = Convert.ToDecimal(TextBox1.Text);
-    //    try
-    //    {
-    //      if (main.projekty(DropDownList_Project.SelectedValue,
-    //          Convert.ToDecimal(CurrentYear)).ID_STATUSU != main.statusy("Koniec").ID)
-    //      {
-    //        main.godzinyTableadapter.InsertQuery(main.pracownik(UserName).ID,
-    //            m_Calendar.SelectedDate.Date,
-    //            hours + Convert.ToDecimal(DropDownList_minutes.SelectedValue) / 60,
-    //            TextBox_work_description.Text, main.projekty(DropDownList_Project.SelectedValue,
-    //            Convert.ToDecimal(CurrentYear)).ID,
-    //            main.statusy(DropDownList_State.SelectedValue).ID,
-    //            main.rodzaje(DropDownList_TypeOfWork.SelectedValue).ID);
-    //        RefreshGodziny();
-    //      }
-    //      else
-    //      {
-    //        Label8.Text = "Projekt zakończony, proszę wybrać inny";
-    //      }
-    //    }
-    //    catch (System.Data.SqlClient.SqlException exOra)
-    //    {
-    //      if (exOra.ErrorCode == -2146232008)
-    //      {
-    //        error = "1";
-    //      }
-    //    }
-    //    catch (ConstraintException ex)
-    //    {
-    //      throw new Exception("Problem: " + ex.Message);
-    //    }
-    //    if (Label8.Text == String.Empty)
-    //    {
-    //      System.Text.StringBuilder redirecturl = new System.Text.StringBuilder();
-    //      redirecturl.Append("GodzinyInsert.aspx?Proj=");
-    //      redirecturl.Append(DropDownList_Project.SelectedValue.ToString());
-    //      redirecturl.Append("/");
-    //      redirecturl.Append(m_Calendar.SelectedDate.Date.Year.ToString());
-    //      redirecturl.Append("-");
-    //      redirecturl.Append(m_Calendar.SelectedDate.Date.Month.ToString());
-    //      redirecturl.Append("-");
-    //      redirecturl.Append(m_Calendar.SelectedDate.Date.Day.ToString());
-    //      if (error == "1")
-    //      {
-    //        redirecturl.Append("/");
-    //        redirecturl.Append("1");
-    //      }
-    //      else
-    //      {
-    //        redirecturl.Append("/");
-    //        redirecturl.Append("0");
-    //      }
-    //      Response.Redirect(redirecturl.ToString());
-    //    }
-    //  }
-    //}
+    /// <summary>
+    /// Button_new Click method inserting new GODZINY Table row
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void CreateNewWokload()
+    {
+      if (!Page.IsValid)
+        return;
+      double _hours = Convert.ToDouble(m_WorkloadHoursTextBox.Text);
+      Projects _project = Element.GetAtIndex<Projects>(_entt.DataContext.Projects, m_ProjectDropDown.SelectedValue);
+      Tasks _task = Element.GetAtIndex<Tasks>(_entt.DataContext.Task, m_TaskDropDown.SelectedValue);
+      Workload _newOne = new Workload()
+      {
+        Hours = _hours,
+        Tytuł = m_WorkloadDescriptionTextBox.Text,
+        Workload2ProjectTitle = _project,
+        Workload2ResourcesTitle = Me,
+        Workload2StageTitle = _project.Project2StageTitle,
+        Workload2TaskTitle = _task,
+        WorkloadDate = m_Calendar.SelectedDate.Date
+      };
+      _entt.DataContext.Workload.InsertOnSubmit(_newOne);
+      _entt.DataContext.SubmitChanges();
+    }
     ///// <summary>
     ///// m_CategoryDropDownList Selected Index Changed method
     ///// </summary>
@@ -481,145 +288,103 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     ///// </summary>
     ///// <param name="sender"></param>
     ///// <param name="e"></param>
-    protected void m_GridView_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      try
-      {
-        if (m_GridView.SelectedIndex < 0)
-          return;
-        string _selection = m_GridView.SelectedDataKey.Value.ToString();
-        Workload _ld = Element.GetAtIndex<Workload>(_entt.DataContext.Workload, _selection);
-        m_WorkloadDescriptionTextBox.Text = _ld.Tytuł;
-        m_WorkloadHoursTextBox.Text = _ld.Hours.GetValueOrDefault(0).ToString();
-      }
-      catch (Exception _ex)
-      {
-        ReportException(_ex);
-      }
-      //  int id;
-      //  id = Convert.ToInt32(GridView1.SelectedValue);
-      //  DropDownList_Project.SelectedValue = main.projekty(main.godziny(id).ID_PROJEKTU).ToString();
-      //  DropDownList_State.SelectedValue = main.statusy(main.godziny(id).ID_STATUSU).NAZWA;
-      //  DropDownList_TypeOfWork.SelectedValue = main.rodzaje(Convert.ToInt32(main.godziny(id).ToString())).NAZWAPRACY;
-      //  string[] val;
-      //  val = main.godziny(id).LICZBA_GODZIN.ToString().Split(@",".ToCharArray(), StringSplitOptions.None);
-      //  TextBox1.Text = val[0];
-      //  if (val.Length == 2)
-      //    DropDownList_minutes.SelectedValue = Convert.ToString(((Convert.ToDecimal(val[1]) * 60) / 100));
-      //  TextBox_work_description.Text = main.godziny(id).OPIS;
-      //  m_Calendar.SelectedDate = main.godziny(id).DATA.Date;
-      //  PlanDataSource.SelectParameters[0].DefaultValue = main.projekty(DropDownList_Project.SelectedValue, Convert.ToDecimal(CurrentYear)).ID.ToString();
-      //  Label12.Text = String.Format("Aktualnie masz {0} godzin w tym projekcie", main.suma(main.projekty(DropDownList_Project.SelectedValue, Convert.ToDecimal(CurrentYear)).ID, UserName));
-      //  Label14.Text = String.Format("Aktualnie masz zaplanowane {0} godzin w kategorii {1}", main.plankatsum(UserName, main.projekty(DropDownList_Project.SelectedValue, Convert.ToDecimal(CurrentYear)).ID_KATEGORII, Convert.ToDecimal(CurrentYear)), main.kategorie(main.projekty(DropDownList_Project.SelectedValue, Convert.ToDecimal(CurrentYear)).ID_KATEGORII).NAZWA);
-      //  Label14.BackColor = Color.White;
-      //  Label15.Text = String.Format("Aktualnie masz przepracowane {0} godzin w kategorii {1}", main.godzinykatsum(UserName, main.projekty(DropDownList_Project.SelectedValue, Convert.ToDecimal(CurrentYear)).ID_KATEGORII, Convert.ToDecimal(CurrentYear)), main.kategorie(main.projekty(DropDownList_Project.SelectedValue, Convert.ToDecimal(CurrentYear)).ID_KATEGORII).NAZWA);
-      //  Label15.BackColor = Color.White;
-      //  Label16.Text = String.Format("Aktualnie masz wpisanych {0} godzin", main.sumadaily(UserName, Calendar1.SelectedDate.Date.ToString()));
-      //  Button_new.Enabled = false;
-      //  m_CategoryDropDownList.Enabled = false;
-      //  DropDownList_SubCategory.Enabled = false;
-      //  DropDownList_Project.Enabled = false;
-      //  DropDownList_State.Enabled = false;
-      //  Label8.Text = string.Empty;
-      //  TextBox_work_description.Enabled = true;
-    }
     ///// <summary>
     ///// GridView1 Row Deleting method
     ///// </summary>
     ///// <param name="sender"></param>
     ///// <param name="e"></param>
-    protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
-    {
-      //  decimal categoryID = Convert.ToDecimal(GridView1.DataKeys[e.RowIndex].Value);
-      //  main.godzinyTableadapter.DeleteQuery(categoryID);
-      //  RefreshGodziny();
-    }
+    //protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    //{
+    //  decimal categoryID = Convert.ToDecimal(GridView1.DataKeys[e.RowIndex].Value);
+    //  main.godzinyTableadapter.DeleteQuery(categoryID);
+    //  RefreshGodziny();
+    //}
     /// <summary>
     /// GridView1 Row Command method 
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e">Commands: Update, Delete, Cancel</param>
-    protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
-    {
-      //  decimal id;
-      //  id = Convert.ToDecimal(GridView1.SelectedValue);
-      //  int categoryID = 0;
-      //  categoryID = Convert.ToInt32(e.CommandArgument);
-      //  string error;
-      //  error = "0";
-      //  if (e.CommandName == "Update")
-      //  {
-      //    try
-      //    {
-      //      if (GridView1.SelectedIndex != -1)
-      //      {
-      //        if (id == categoryID)
-      //        {
-      //          main.godzinyTableadapter.UpdateQuery(main.projekty(DropDownList_Project.SelectedValue, Convert.ToDecimal(CurrentYear)).ID, Convert.ToDecimal(TextBox1.Text) + Convert.ToDecimal(DropDownList_minutes.SelectedValue) / 60, TextBox_work_description.Text, main.statusy(DropDownList_State.SelectedValue).ID, main.rodzaje(DropDownList_TypeOfWork.SelectedValue).ID, Convert.ToDecimal(categoryID));
-      //          RefreshGodziny();
-      //        }
-      //      }
-      //    }
-      //    catch (System.Data.SqlClient.SqlException exOra)
-      //    {
-      //      if (exOra.ErrorCode == -2146232008)
-      //      {
-      //        error = "1";
-      //      }
-      //    }
-      //    catch (ConstraintException ex)
-      //    {
-      //      throw new Exception("Problem: " + ex.Message);
-      //    }
-      //    System.Text.StringBuilder redirecturl = new System.Text.StringBuilder();
-      //    redirecturl.Append("GodzinyInsert.aspx?Proj=");
-      //    redirecturl.Append("/");
-      //    redirecturl.Append(Calendar1.SelectedDate.Date.Year.ToString());
-      //    redirecturl.Append("-");
-      //    redirecturl.Append(Calendar1.SelectedDate.Date.Month.ToString());
-      //    redirecturl.Append("-");
-      //    redirecturl.Append(Calendar1.SelectedDate.Date.Day.ToString());
-      //    if (error == "1")
-      //    {
-      //      redirecturl.Append("/");
-      //      redirecturl.Append("1");
-      //    }
-      //    else
-      //    {
-      //      redirecturl.Append("/");
-      //      redirecturl.Append("0");
-      //    }
-      //    Response.Redirect(redirecturl.ToString());
-      //  }
-      //  else if (e.CommandName == "Delete")
-      //  {
-      //    categoryID = Convert.ToInt32(e.CommandArgument);
-      //    try
-      //    {
-      //      main.godzinyTableadapter.DeleteQuery(Convert.ToDecimal(categoryID));
-      //      RefreshGodziny();
-      //    }
-      //    catch (System.Data.SqlClient.SqlException exOra)
-      //    {
-      //      throw new Exception("Problem z baza danych: " + exOra.Message);
-      //    }
-      //    catch (ConstraintException ex)
-      //    {
-      //      throw new Exception("Problem: " + ex.Message);
-      //    }
-      //    System.Text.StringBuilder redirecturl = new System.Text.StringBuilder();
-      //    redirecturl.Append("GodzinyInsert.aspx?Proj=");
-      //    redirecturl.Append("/");
-      //    redirecturl.Append(Calendar1.SelectedDate.Date.Year.ToString());
-      //    redirecturl.Append("-");
-      //    redirecturl.Append(Calendar1.SelectedDate.Date.Month.ToString());
-      //    redirecturl.Append("-");
-      //    redirecturl.Append(Calendar1.SelectedDate.Date.Day.ToString());
-      //    redirecturl.Append("/");
-      //    redirecturl.Append("0");
-      //    Response.Redirect(redirecturl.ToString());
-      //  }
-    }
+    //protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+    //{
+    //  decimal id;
+    //  id = Convert.ToDecimal(GridView1.SelectedValue);
+    //  int categoryID = 0;
+    //  categoryID = Convert.ToInt32(e.CommandArgument);
+    //  string error;
+    //  error = "0";
+    //  if (e.CommandName == "Update")
+    //  {
+    //    try
+    //    {
+    //      if (GridView1.SelectedIndex != -1)
+    //      {
+    //        if (id == categoryID)
+    //        {
+    //          main.godzinyTableadapter.UpdateQuery(main.projekty(DropDownList_Project.SelectedValue, Convert.ToDecimal(CurrentYear)).ID, Convert.ToDecimal(TextBox1.Text) + Convert.ToDecimal(DropDownList_minutes.SelectedValue) / 60, TextBox_work_description.Text, main.statusy(DropDownList_State.SelectedValue).ID, main.rodzaje(DropDownList_TypeOfWork.SelectedValue).ID, Convert.ToDecimal(categoryID));
+    //          RefreshGodziny();
+    //        }
+    //      }
+    //    }
+    //    catch (System.Data.SqlClient.SqlException exOra)
+    //    {
+    //      if (exOra.ErrorCode == -2146232008)
+    //      {
+    //        error = "1";
+    //      }
+    //    }
+    //    catch (ConstraintException ex)
+    //    {
+    //      throw new Exception("Problem: " + ex.Message);
+    //    }
+    //    System.Text.StringBuilder redirecturl = new System.Text.StringBuilder();
+    //    redirecturl.Append("GodzinyInsert.aspx?Proj=");
+    //    redirecturl.Append("/");
+    //    redirecturl.Append(Calendar1.SelectedDate.Date.Year.ToString());
+    //    redirecturl.Append("-");
+    //    redirecturl.Append(Calendar1.SelectedDate.Date.Month.ToString());
+    //    redirecturl.Append("-");
+    //    redirecturl.Append(Calendar1.SelectedDate.Date.Day.ToString());
+    //    if (error == "1")
+    //    {
+    //      redirecturl.Append("/");
+    //      redirecturl.Append("1");
+    //    }
+    //    else
+    //    {
+    //      redirecturl.Append("/");
+    //      redirecturl.Append("0");
+    //    }
+    //    Response.Redirect(redirecturl.ToString());
+    //  }
+    //  else if (e.CommandName == "Delete")
+    //  {
+    //    categoryID = Convert.ToInt32(e.CommandArgument);
+    //    try
+    //    {
+    //      main.godzinyTableadapter.DeleteQuery(Convert.ToDecimal(categoryID));
+    //      RefreshGodziny();
+    //    }
+    //    catch (System.Data.SqlClient.SqlException exOra)
+    //    {
+    //      throw new Exception("Problem z baza danych: " + exOra.Message);
+    //    }
+    //    catch (ConstraintException ex)
+    //    {
+    //      throw new Exception("Problem: " + ex.Message);
+    //    }
+    //    System.Text.StringBuilder redirecturl = new System.Text.StringBuilder();
+    //    redirecturl.Append("GodzinyInsert.aspx?Proj=");
+    //    redirecturl.Append("/");
+    //    redirecturl.Append(Calendar1.SelectedDate.Date.Year.ToString());
+    //    redirecturl.Append("-");
+    //    redirecturl.Append(Calendar1.SelectedDate.Date.Month.ToString());
+    //    redirecturl.Append("-");
+    //    redirecturl.Append(Calendar1.SelectedDate.Date.Day.ToString());
+    //    redirecturl.Append("/");
+    //    redirecturl.Append("0");
+    //    Response.Redirect(redirecturl.ToString());
+    //  }
+    //}
     ///// <summary>
     ///// DropDownList_Project Selected Index Changed method
     ///// </summary>
@@ -656,6 +421,8 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
       m_ButtonAddNew.Enabled = true;
       m_WorkloadHoursTextBox.Text = String.Empty;
       m_WorkloadDescriptionTextBox.Text = String.Empty;
+      FillupWorkflowGridView();
+      //this.f
       //if (m_GridView.SelectedRow == null)
       //{
       //CurrentYear = m_Calendar.SelectedDate.Year;
@@ -762,7 +529,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     //}
     private string At { get; set; }
     private const string m_SelectProjectDropDownEntry = "  -- select project -- ";
-    private const string m_SelectTaskDropDownEntry = "  -- select project -- ";
+    private const string m_SelectTaskDropDownEntry = "  -- select task -- ";
     private const string m_keyCurrentYear = "CurrentYear";
     private DataContextManagement<Entities> _entt = null;
   }
