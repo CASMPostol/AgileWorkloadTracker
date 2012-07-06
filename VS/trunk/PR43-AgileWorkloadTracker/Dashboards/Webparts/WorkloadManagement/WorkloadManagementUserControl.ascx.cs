@@ -1,20 +1,15 @@
 ﻿using System;
+using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Data;
 using CAS.AgileWorkloadTracker.Linq;
-using System.Linq;
 using Microsoft.SharePoint;
+using CAS.SharePoint.Linq;
 
 namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
 {
   public partial class WorkloadManagementUserControl : UserControl
   {
-    //protected string UserName;
-    //protected decimal hours;
-    //protected string txt;
-    ////private Main main = new Main();
     private int CurrentYear
     {
       get
@@ -31,7 +26,6 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
         //Session[m_keyCurrentYear] = value;
       }
     }
-
     /// <summary>
     /// Method loading KATEGORIE Table rows to m_CategoryDropDownList
     /// </summary>
@@ -91,7 +85,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     //  rodzrow.OPIS = " ";
     //  this.main.godzinySchema.RODZAJPRACY.AddRODZAJPRACYRow(rodzrow);
     //}
-    private void FillupTaskaDropDown(Entities _entt)
+    private void FillupTaskaDropDown()
     {
       m_TaskDropDown.Items.Clear();
       if (m_ProjectDropDown.SelectedIndex <= 0)
@@ -100,7 +94,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
       {
         m_TaskDropDown.Items.Clear();
         m_TaskDropDown.Items.Add(new ListItem(m_SelectTaskDropDownEntry, String.Empty) { Selected = true });
-        Projects _cp = Element.GetAtIndex<Projects>(_entt.Projects, m_ProjectDropDown.SelectedValue);
+        Projects _cp = Element.GetAtIndex<Projects>(_entt.DataContext.Projects, m_ProjectDropDown.SelectedValue);
         foreach (Tasks _taskIdx in from _tidx in _cp.Tasks select _tidx)
           m_TaskDropDown.Items.Add(new ListItem(_taskIdx.Tytuł, _taskIdx.Identyfikator.ToString()));
       }
@@ -109,12 +103,12 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     /// Method loading KATEGORIE, PODKATEGORIE and PROJEKTY Table rows into DropDownLists 
     /// and selecting first indexes of these DropDownLists
     /// </summary>
-    private void FillupProjectDropDown(Entities _entt)
+    private void FillupProjectDropDown()
     {
       //TODO [AWT-3488] Change the ProjectYear column in the Projects
       m_ProjectDropDown.Items.Clear();
       m_ProjectDropDown.Items.Add(new ListItem(m_SelectProjectDropDownEntry, String.Empty) { Selected = true });
-      foreach (var _row2 in from _pidx in _entt.Projects select _pidx)
+      foreach (var _row2 in from _pidx in _entt.DataContext.Projects select _pidx)
         m_ProjectDropDown.Items.Add(new ListItem(_row2.Tytuł, _row2.Identyfikator.ToString()));
     }
     ///// <summary>
@@ -124,6 +118,11 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     //{
     //  main.godzinySchema.AcceptChanges();
     //}
+    protected override void OnInit(EventArgs e)
+    {
+      base.OnInit(e);
+      _entt = new DataContextManagement<Entities>(this);
+    }
     /// <summary>
     /// Page Load method
     /// </summary>
@@ -134,48 +133,45 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
       //  UserName = UserIdentityHelper.GetCurrentUser(Session);
       try
       {
-        using (Entities _entt = new Entities(SPContext.Current.Web.Url))
+        if (!this.IsPostBack)
         {
-          if (!this.IsPostBack)
-          {
-            //Grid setup
-            m_GridView.EmptyDataText = "No workload defined";
-            m_GridView.Columns.Add(new BoundField() { DataField = "Task", HeaderText = "Task" });
-            m_GridView.Columns.Add(new BoundField() { DataField = "Hours", HeaderText = "Workload [h]" });
-            m_GridView.Columns.Add(new BoundField() { DataField = "Project", HeaderText = "Project" });
-            m_GridView.Columns.Add(new BoundField() { DataField = "ID", HeaderText = "ID", Visible = false });
-            m_GridView.DataKeyNames = new String[] { "ID" };
-            //Calendar setup
-            m_Calendar.SelectedDate = DateTime.Now.Date;
-            m_Calendar.VisibleDate = DateTime.Now.Date;
-            //DropDownList'c setup 
-            FillupProjectDropDown(_entt);
-          }
-          At = "FillupTaskaDropDown";
-          FillupTaskaDropDown(_entt);
-          m_ProjectDropDown.SelectedIndexChanged += new EventHandler(m_ProjectDropDown_SelectedIndexChanged);
-          At = "FindForUser";
-          CAS.AgileWorkloadTracker.Linq.Resources _me = CAS.AgileWorkloadTracker.Linq.Resources.FindForUser(_entt, SPContext.Current.Web.CurrentUser);
-          if (_me == null)
-          {
-            this.Controls.Add(new Literal() { Text = "User not recognized - you must be added to the Recourses" });
-            m_GridView.Visible = false;
-          }
-          else
-          {
-            this.Controls.Add(new Literal() { Text = "Welcome: " + _me.EmployeeADAccount.Tytuł });
-            At = "m_GridView.DataSource";
-            m_GridView.DataSource = from _wlidx in _me.Workload
-                                    where _wlidx.WorkloadDate.Value == m_Calendar.SelectedDate
-                                    select new
-                                    {
-                                      Task = _wlidx.Workload2TaskTitle == null ? m_SelectTaskDropDownEntry : _wlidx.Workload2TaskTitle.Tytuł,
-                                      Hours = _wlidx.Hours.GetValueOrDefault(0),
-                                      Project = _wlidx.Workload2ProjectTitle == null ? m_SelectProjectDropDownEntry : _wlidx.Workload2ProjectTitle.Tytuł,
-                                      ID = _wlidx.Identyfikator
-                                    };
-            m_GridView.DataBind();
-          }
+          //Grid setup
+          m_GridView.EmptyDataText = "No workload defined";
+          m_GridView.Columns.Add(new BoundField() { DataField = "Task", HeaderText = "Task" });
+          m_GridView.Columns.Add(new BoundField() { DataField = "Hours", HeaderText = "Workload [h]" });
+          m_GridView.Columns.Add(new BoundField() { DataField = "Project", HeaderText = "Project" });
+          m_GridView.Columns.Add(new BoundField() { DataField = "ID", HeaderText = "ID", Visible = false });
+          m_GridView.DataKeyNames = new String[] { "ID" };
+          //Calendar setup
+          m_Calendar.SelectedDate = DateTime.Now.Date;
+          m_Calendar.VisibleDate = DateTime.Now.Date;
+          //DropDownList'c setup 
+          FillupProjectDropDown();
+        }
+        At = "FillupTaskaDropDown";
+        FillupTaskaDropDown();
+        m_ProjectDropDown.SelectedIndexChanged += new EventHandler(m_ProjectDropDown_SelectedIndexChanged);
+        At = "FindForUser";
+        CAS.AgileWorkloadTracker.Linq.Resources _me = CAS.AgileWorkloadTracker.Linq.Resources.FindForUser(_entt.DataContext, SPContext.Current.Web.CurrentUser);
+        if (_me == null)
+        {
+          this.Controls.Add(new Literal() { Text = "User not recognized - you must be added to the Recourses" });
+          m_GridView.Visible = false;
+        }
+        else
+        {
+          this.Controls.Add(new Literal() { Text = "Welcome: " + _me.EmployeeADAccount.Tytuł });
+          At = "m_GridView.DataSource";
+          m_GridView.DataSource = from _wlidx in _me.Workload
+                                  where _wlidx.WorkloadDate.Value == m_Calendar.SelectedDate
+                                  select new
+                                  {
+                                    Task = _wlidx.Workload2TaskTitle == null ? m_SelectTaskDropDownEntry : _wlidx.Workload2TaskTitle.Tytuł,
+                                    Hours = _wlidx.Hours.GetValueOrDefault(0),
+                                    Project = _wlidx.Workload2ProjectTitle == null ? m_SelectProjectDropDownEntry : _wlidx.Workload2ProjectTitle.Tytuł,
+                                    ID = _wlidx.Identyfikator
+                                  };
+          m_GridView.DataBind();
         }
       }
       catch (Exception ex)
@@ -192,10 +188,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
 
     private void m_ProjectDropDown_SelectedIndexChanged(object sender, EventArgs e)
     {
-      using (Entities _entt = new Entities(SPContext.Current.Web.Url))
-      {
-        FillupTaskaDropDown(_entt);
-      }
+      FillupTaskaDropDown();
     }
     #endregion
     //Label1.Text = main.pracownik(UserName).NAZWISKO_IMIE;
@@ -492,15 +485,12 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     {
       try
       {
-        using (Entities _entt = new Entities(SPContext.Current.Web.Url))
-        {
-          if (m_GridView.SelectedIndex < 0)
-            return;
-          string _selection = m_GridView.SelectedDataKey.Value.ToString();
-          Workload _ld = Element.GetAtIndex<Workload>(_entt.Workload, _selection);
-          m_WorkloadDescriptionTextBox.Text = _ld.Tytuł;
-          m_WorkloadHoursTextBox.Text = _ld.Hours.GetValueOrDefault(0).ToString();
-        }
+        if (m_GridView.SelectedIndex < 0)
+          return;
+        string _selection = m_GridView.SelectedDataKey.Value.ToString();
+        Workload _ld = Element.GetAtIndex<Workload>(_entt.DataContext.Workload, _selection);
+        m_WorkloadDescriptionTextBox.Text = _ld.Tytuł;
+        m_WorkloadHoursTextBox.Text = _ld.Hours.GetValueOrDefault(0).ToString();
       }
       catch (Exception _ex)
       {
@@ -662,20 +652,17 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     /// <param name="e"></param>
     protected void m_Calendar_SelectionChanged(object sender, EventArgs e)
     {
-      using (Entities _entt = new Entities(SPContext.Current.Web.Url))
-      {
-        //double _hoursADay = (from _widx in _entt.Workload where _widx.WorkloadDate == m_Calendar.SelectedDate select _widx.Hours.Value ).ToList<double>().AsQueryable().Sum<double>();
-        m_ButtonAddNew.Enabled = true;
-        m_WorkloadHoursTextBox.Text = String.Empty;
-        m_WorkloadDescriptionTextBox.Text = String.Empty;
-        //if (m_GridView.SelectedRow == null)
-        //{
-        //CurrentYear = m_Calendar.SelectedDate.Year;
-        //main.projektyTableadapter.Fill(main.godzinySchema.PROJEKTY, Convert.ToDecimal(CurrentYear));
-        //PopulateProjectList_SelectedState_Or_Date_HasBeenChanged();
-        //}
+      //double _hoursADay = (from _widx in _entt.Workload where _widx.WorkloadDate == m_Calendar.SelectedDate select _widx.Hours.Value ).ToList<double>().AsQueryable().Sum<double>();
+      m_ButtonAddNew.Enabled = true;
+      m_WorkloadHoursTextBox.Text = String.Empty;
+      m_WorkloadDescriptionTextBox.Text = String.Empty;
+      //if (m_GridView.SelectedRow == null)
+      //{
+      //CurrentYear = m_Calendar.SelectedDate.Year;
+      //main.projektyTableadapter.Fill(main.godzinySchema.PROJEKTY, Convert.ToDecimal(CurrentYear));
+      //PopulateProjectList_SelectedState_Or_Date_HasBeenChanged();
+      //}
 
-      }
     }
     //protected void DropDownList_State_SelectedIndexChanged(object sender, EventArgs e)
     //{
@@ -777,5 +764,6 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     private const string m_SelectProjectDropDownEntry = "  -- select project -- ";
     private const string m_SelectTaskDropDownEntry = "  -- select project -- ";
     private const string m_keyCurrentYear = "CurrentYear";
+    private DataContextManagement<Entities> _entt = null;
   }
 }

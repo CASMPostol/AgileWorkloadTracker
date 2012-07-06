@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CAS.SharePoint</RootNamespace>
-    <AssemblyName>CASSharePoint</AssemblyName>
+    <AssemblyName>CAS.SharePoint</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,16 +30,25 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SharePoint.Linq, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Linq\DataContextManagement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SPMetalParameters\SPMetalParameters.cs">
       <DependentUpon>SPMetalParameters.xsd</DependentUpon>
@@ -50,6 +59,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <None Include="key.snk" />
     <None Include="SPMetalParameters\Scripts\CreateCs.ps1" />
     <None Include="SPMetalParameters\SPMetalParameters.xsd">
       <SubType>Designer</SubType>
