@@ -5,5 +5,28 @@
                 TemplateType="10005"
                 Url="Lists/StageList"
                 Description="Stage List Instance">
+    <Data>
+      <Rows>
+        <Row>
+          <Field Name="Title">Feasibility study</Field>
+        </Row>
+        <Row>
+          <Field Name="Title">Design</Field>
+        </Row>
+        <Row>
+          <Field Name="Title">Development</Field>
+        </Row>
+        <Row>
+          <Field Name="Title">Testing</Field>
+        </Row>
+        <Row>
+          <Field Name="Title">Deployment</Field>
+        </Row>
+        <Row>
+          <Field Name="Title">Management</Field>
+        </Row>
+      </Rows>
+    </Data>
   </ListInstance>
 </Elements>
+
