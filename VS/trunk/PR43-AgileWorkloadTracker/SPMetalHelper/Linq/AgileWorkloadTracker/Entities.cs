@@ -2865,6 +2865,8 @@ namespace CAS.AgileWorkloadTracker.Linq {
 		
 		private string _projectNumber;
 		
+		private System.Nullable<bool> _active;
+		
 		private System.Nullable<double> _projectHours;
 		
 		private System.Nullable<System.DateTime> _projectStartDate;
@@ -2878,8 +2880,6 @@ namespace CAS.AgileWorkloadTracker.Linq {
 		private string _body;
 		
 		private System.Nullable<ProjectType> _projectType;
-		
-		private System.Nullable<ProjectYear> _projectYear;
 		
 		private System.Nullable<Currency> _currency;
 		
@@ -2945,6 +2945,20 @@ namespace CAS.AgileWorkloadTracker.Linq {
 					this.OnPropertyChanging("ProjectNumber", this._projectNumber);
 					this._projectNumber = value;
 					this.OnPropertyChanged("ProjectNumber");
+				}
+			}
+		}
+		
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="Active", Storage="_active", FieldType="Boolean")]
+		public System.Nullable<bool> Active {
+			get {
+				return this._active;
+			}
+			set {
+				if ((value != this._active)) {
+					this.OnPropertyChanging("Active", this._active);
+					this._active = value;
+					this.OnPropertyChanged("Active");
 				}
 			}
 		}
@@ -3043,20 +3057,6 @@ namespace CAS.AgileWorkloadTracker.Linq {
 					this.OnPropertyChanging("ProjectType", this._projectType);
 					this._projectType = value;
 					this.OnPropertyChanged("ProjectType");
-				}
-			}
-		}
-		
-		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="ProjectYear", Storage="_projectYear", FieldType="Choice")]
-		public System.Nullable<ProjectYear> ProjectYear {
-			get {
-				return this._projectYear;
-			}
-			set {
-				if ((value != this._projectYear)) {
-					this.OnPropertyChanging("ProjectYear", this._projectYear);
-					this._projectYear = value;
-					this.OnPropertyChanged("ProjectYear");
 				}
 			}
 		}
@@ -4206,7 +4206,7 @@ namespace CAS.AgileWorkloadTracker.Linq {
 		
 		private System.Nullable<double> _hours;
 		
-		private System.Nullable<Minutes> _minutes;
+		private System.Nullable<double> _minutes;
 		
 		private Microsoft.SharePoint.Linq.EntityRef<Projects> _workload2ProjectTitle;
 		
@@ -4270,8 +4270,8 @@ namespace CAS.AgileWorkloadTracker.Linq {
 			}
 		}
 		
-		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="Minutes", Storage="_minutes", FieldType="Choice")]
-		public System.Nullable<Minutes> Minutes {
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="Minutes", Storage="_minutes", FieldType="Number")]
+		public System.Nullable<double> Minutes {
 			get {
 				return this._minutes;
 			}
@@ -4731,58 +4731,5 @@ namespace CAS.AgileWorkloadTracker.Linq {
 		
 		[Microsoft.SharePoint.Linq.ChoiceAttribute(Value="After sales services")]
 		AfterSalesServices = 64,
-	}
-	
-	internal enum ProjectYear : int {
-		
-		None = 0,
-		
-		Invalid = 1,
-		
-		[Microsoft.SharePoint.Linq.ChoiceAttribute(Value="2012")]
-		_2012 = 2,
-		
-		[Microsoft.SharePoint.Linq.ChoiceAttribute(Value="2013")]
-		_2013 = 4,
-		
-		[Microsoft.SharePoint.Linq.ChoiceAttribute(Value="2014")]
-		_2014 = 8,
-		
-		[Microsoft.SharePoint.Linq.ChoiceAttribute(Value="2015")]
-		_2015 = 16,
-		
-		[Microsoft.SharePoint.Linq.ChoiceAttribute(Value="2016")]
-		_2016 = 32,
-		
-		[Microsoft.SharePoint.Linq.ChoiceAttribute(Value="2017")]
-		_2017 = 64,
-		
-		[Microsoft.SharePoint.Linq.ChoiceAttribute(Value="2018")]
-		_2018 = 128,
-		
-		[Microsoft.SharePoint.Linq.ChoiceAttribute(Value="2019")]
-		_2019 = 256,
-		
-		[Microsoft.SharePoint.Linq.ChoiceAttribute(Value="2020")]
-		_2020 = 512,
-	}
-	
-	internal enum Minutes : int {
-		
-		None = 0,
-		
-		Invalid = 1,
-		
-		[Microsoft.SharePoint.Linq.ChoiceAttribute(Value="00")]
-		_00 = 2,
-		
-		[Microsoft.SharePoint.Linq.ChoiceAttribute(Value="15")]
-		_15 = 4,
-		
-		[Microsoft.SharePoint.Linq.ChoiceAttribute(Value="30")]
-		_30 = 8,
-		
-		[Microsoft.SharePoint.Linq.ChoiceAttribute(Value="45")]
-		_45 = 16,
 	}
 }
