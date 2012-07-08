@@ -3,9 +3,46 @@ using System.Linq;
 using CAS.AgileWorkloadTracker.Dashboards;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Linq;
+using System.Diagnostics;
 
 namespace CAS.AgileWorkloadTracker.Linq
 {
+  /// <summary>
+  /// Adds a message to the Event log list.
+  /// </summary>
+  internal partial class Anons
+  {
+    /// <summary>
+    /// Creates an entry with the given message text and application-defined event identifier to the event log list.
+    /// </summary>
+    /// <param name="source">The source denominator of the message.</param>
+    /// <param name="message">The string to write to the event log.</param>
+    internal Anons(string source, string message)
+    {
+      Tytuł = source;
+      Treść = message;
+      this.Wygasa = DateTime.Now + new TimeSpan(2, 0, 0, 0);
+    }
+    /// <summary>
+    /// Writes an entry with the given message text and application-defined event identifier to the event log list. 
+    /// </summary>
+    /// <param name="edc">Provides LINQ (Language Integrated Query) access to, and change tracking for, 
+    /// the lists and document libraries of a Windows SharePoint Services "14" Web site.</param>
+    /// <param name="source">The source denominator of the message.</param>
+    /// <param name="message">The string to write to the event log.</param>
+    internal static void WriteEntry(Entities edc, string source, string message)
+    {
+      if (edc == null)
+      {
+        EventLog.WriteEntry("CAS.SmartFActory", "Cannot open \"Event Log List\" list", EventLogEntryType.Error, 114);
+        return;
+      }
+      Anons log = new Anons(source, message);
+      edc.Announcements.InsertOnSubmit(log);
+      edc.SubmitChanges();
+    }
+  }
+
   internal partial class Entities
   {
     public Entities() : base(SPContext.Current.Web.Url) { }

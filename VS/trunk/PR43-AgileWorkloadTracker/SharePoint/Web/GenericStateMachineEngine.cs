@@ -17,20 +17,19 @@ namespace CAS.SharePoint.Web
     public class ActionResult
     {
       #region public
-      public ActionResult(Exception _excptn, string _src)
-      {
-        _excptn.Source += " at " + _src;
-        ActionException = _excptn;
-        LastActionResult = Result.Exception;
-      }
       public enum Result { Success, NotValidated, Exception }
       public Result LastActionResult { get; private set; }
       public Exception ActionException { get; private set; }
       public bool ActionSucceeded { get { return LastActionResult == Result.Success; } }
-      public static ActionResult Success { get { return new ActionResult(Result.Success); } }
-      public static ActionResult NotValidated(string _msg) 
+      public static ActionResult Exception(Exception _excptn, string _src)
       {
-        return new ActionResult(Result.NotValidated) { ActionException = new ApplicationException(_msg) };  
+        _excptn.Source += " at " + _src;
+        return new ActionResult(Result.Exception) { ActionException = _excptn };
+      }
+      public static ActionResult Success { get { return new ActionResult(Result.Success); } }
+      public static ActionResult NotValidated(string _msg)
+      {
+        return new ActionResult(Result.NotValidated) { ActionException = new ApplicationException(_msg) };
       }
       #endregion
 
@@ -166,18 +165,7 @@ namespace CAS.SharePoint.Web
     protected abstract void ClearUserInterface();
     protected abstract void SetEnabled(ControlsSet _buttons);
     protected abstract void SMError(InterfaceEvent interfaceEvent);
-    protected virtual void ShowActionResult(ActionResult _rslt)
-    {
-      
-      //if (_rslt.LastActionResult != ActionResult.Result.Exception)
-      //  return;
-      //Anons _entry = new Anons(_rslt.ActionException.Source, _rslt.ActionException.Message);
-      //using (EntitiesDataContext _EDC = new EntitiesDataContext(SPContext.Current.Web.Url))
-      //{
-      //  _EDC.EventLogList.InsertOnSubmit(_entry);
-      //  _EDC.SubmitChanges();
-      //}
-    }
+    protected abstract void ShowActionResult(ActionResult _rslt);
     #endregion
 
     protected abstract InterfaceState CurrentMachineState { get; set; }
