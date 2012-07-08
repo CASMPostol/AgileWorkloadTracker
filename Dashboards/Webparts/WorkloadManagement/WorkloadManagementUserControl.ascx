@@ -79,7 +79,7 @@
         </asp:Panel>
       </asp:TableCell>
       <asp:TableCell>
-        <asp:Panel runat="server" BorderColor="ActiveCaptionText" GroupingText="Actions">
+        <asp:Panel runat="server" BorderColor="ActiveCaptionText" GroupingText="Actions" Enabled="true">
           <asp:Button runat="server" ID="m_ButtonAddNew" Text="Add new" CssClass="Button" /><br />
           <asp:Button runat="server" ID="m_ButtonEdit" Text="Edit" CssClass="Button" /><br />
           <asp:Button runat="server" ID="m_ButtonSave" Text="Save" CssClass="Button" /><br />

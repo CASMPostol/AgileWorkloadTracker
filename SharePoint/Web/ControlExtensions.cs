@@ -18,7 +18,7 @@ namespace CAS.SharePoint.Web
       _ddl.SelectedIndex = -1;
       ListItem _li = _ddl.Items.FindByValue(_row.ToString());
       if (_li == null)
-        return;
+        throw new ApplicationException(String.Format("DropDownList does not contain ListItem with Value = {0}.", _row)) { Source = "ControlExtensions.Select" };
       _li.Selected = true;
     }
   }
