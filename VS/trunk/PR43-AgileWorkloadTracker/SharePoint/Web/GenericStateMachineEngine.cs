@@ -2,33 +2,33 @@
 
 namespace CAS.SharePoint.Web
 {
-  internal abstract class GenericStateMachineEngine
+  public abstract class GenericStateMachineEngine
   {
     #region public
     public GenericStateMachineEngine() { }
     [Flags]
-    internal enum ControlsSet
+    public enum ControlsSet
     {
       SaveOn = 0x01, EditOn = 0x02, CancelOn = 0x04, NewOn = 0x08,
       DeleteOn = 0x10, EditModeOn = 0x20
     }
-    internal enum InterfaceEvent { SaveClick, EditClick, CancelClick, NewClick, NewData };
-    internal enum InterfaceState { ViewState, EditState, NewState }
-    internal class ActionResult
+    public enum InterfaceEvent { SaveClick, EditClick, CancelClick, NewClick, NewData };
+    public enum InterfaceState { ViewState, EditState, NewState }
+    public class ActionResult
     {
       #region public
-      internal ActionResult(Exception _excptn, string _src)
+      public ActionResult(Exception _excptn, string _src)
       {
         _excptn.Source += " at " + _src;
         ActionException = _excptn;
         LastActionResult = Result.Exception;
       }
-      internal enum Result { Success, NotValidated, Exception }
-      internal Result LastActionResult { get; private set; }
-      internal Exception ActionException { get; private set; }
-      internal bool ActionSucceeded { get { return LastActionResult == Result.Success; } }
-      internal static ActionResult Success { get { return new ActionResult(Result.Success); } }
-      internal static ActionResult NotValidated(string _msg) 
+      public enum Result { Success, NotValidated, Exception }
+      public Result LastActionResult { get; private set; }
+      public Exception ActionException { get; private set; }
+      public bool ActionSucceeded { get { return LastActionResult == Result.Success; } }
+      public static ActionResult Success { get { return new ActionResult(Result.Success); } }
+      public static ActionResult NotValidated(string _msg) 
       {
         return new ActionResult(Result.NotValidated) { ActionException = new ApplicationException(_msg) };  
       }
@@ -44,7 +44,7 @@ namespace CAS.SharePoint.Web
     #endregion
 
     #region Event Handlers
-    internal void NewButton_Click(object sender, EventArgs e)
+    public void NewButton_Click(object sender, EventArgs e)
     {
       switch (CurrentMachineState)
       {
@@ -59,7 +59,7 @@ namespace CAS.SharePoint.Web
           break;
       }
     }
-    internal void SaveButton_Click(object sender, EventArgs e)
+    public void SaveButton_Click(object sender, EventArgs e)
     {
       switch (CurrentMachineState)
       {
@@ -101,7 +101,7 @@ namespace CAS.SharePoint.Web
           break;
       };
     }
-    internal void CancelButton_Click(object sender, EventArgs e)
+    public void CancelButton_Click(object sender, EventArgs e)
     {
       switch (CurrentMachineState)
       {
@@ -116,7 +116,7 @@ namespace CAS.SharePoint.Web
           break;
       }
     }
-    internal void EditButton_Click(object sender, EventArgs e)
+    public void EditButton_Click(object sender, EventArgs e)
     {
       switch (CurrentMachineState)
       {
@@ -130,7 +130,7 @@ namespace CAS.SharePoint.Web
           break;
       }
     }
-    internal void DeleteButton_Click(object sender, EventArgs e)
+    public void DeleteButton_Click(object sender, EventArgs e)
     {
       switch (CurrentMachineState)
       {
