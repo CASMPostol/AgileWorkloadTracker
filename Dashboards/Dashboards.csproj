@@ -58,6 +58,7 @@
     </Compile>
     <Compile Include="Extensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Webparts\WorkloadManagement\StateMachine.cs" />
     <Compile Include="Webparts\WorkloadManagement\WorkloadManagement.cs" />
     <Compile Include="Webparts\WorkloadManagement\WorkloadManagementUserControl.ascx.cs">
       <DependentUpon>WorkloadManagementUserControl.ascx</DependentUpon>
