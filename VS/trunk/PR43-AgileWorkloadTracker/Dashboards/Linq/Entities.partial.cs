@@ -138,8 +138,8 @@ namespace CAS.AgileWorkloadTracker.Linq
         return null;
       return (
                 from idx in _res
-                let _account = idx.EmployeeADAccount
-                where _account.Title.Contains(_user.Name)
+                let _account = idx._employeeADAccountTitle
+                where _account.Contains(_user.Name)
                 select idx
               ).FirstOrDefault();
     }

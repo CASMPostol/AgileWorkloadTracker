@@ -16,21 +16,21 @@
   <List Name="Resources" />
   <List Name="Shared Documents" />
   <List Name="Site Assets" />
-  <List Name="Site Pages" />
+  <!--<List Name="Site Pages" />-->
   <!--<List Name="Solution Gallery" />-->
   <List Name="Stage" />
   <List Name="Status" />
   <List Name="Style Library" />
   <List Name="Task" />
   <List Name="Task comments" />
-  <List Name="Tasks" />
-  <List Name="Team Discussion" />
+  <!--<List Name="Tasks" />-->
+  <!--<List Name="Team Discussion" />-->
   <!--<List Name="Theme Gallery" />-->
   <List Name="Type" />
-  <List Name="User Information List" />
+  <!--<List Name="User Information List" />-->
   <!--<List Name="Web Part Gallery" />-->
   <List Name="Workload" />
-  <!--<ExcludeOtherLists/>-->
+  <ExcludeOtherLists/>
   <ContentType Name="Element" Class="Element">
     <!--<Column Name="ContentType" Member="ContentType" />-->
     <Column Name="Title" Member="Title" />
