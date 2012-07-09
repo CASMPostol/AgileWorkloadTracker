@@ -25,7 +25,7 @@ namespace CAS.AgileWorkloadTracker.SPMetalHelper.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://casmp/sites/a01")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://casmp/sites/a03")]
         public string URL {
             get {
                 return ((string)(this["URL"]));

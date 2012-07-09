@@ -325,7 +325,7 @@ namespace CAS.AgileWorkloadTracker.Linq {
 		
 		private System.Collections.Generic.IDictionary<string, object> _originalValues;
 		
-		protected string _tytuł;
+		protected string _title;
 		
 		#region Extensibility Method Definitions
 		partial void OnLoaded();
@@ -399,16 +399,16 @@ namespace CAS.AgileWorkloadTracker.Linq {
 			}
 		}
 		
-		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="Title", Storage="_tytuł", Required=true, FieldType="Text")]
-		public virtual string Tytuł {
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="Title", Storage="_title", Required=true, FieldType="Text")]
+		public virtual string Title {
 			get {
-				return this._tytuł;
+				return this._title;
 			}
 			set {
-				if ((value != this._tytuł)) {
-					this.OnPropertyChanging("Tytuł", this._tytuł);
-					this._tytuł = value;
-					this.OnPropertyChanged("Tytuł");
+				if ((value != this._title)) {
+					this.OnPropertyChanging("Title", this._title);
+					this._title = value;
+					this.OnPropertyChanged("Title");
 				}
 			}
 		}
@@ -529,7 +529,7 @@ namespace CAS.AgileWorkloadTracker.Linq {
 		
 		[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
 		[Microsoft.SharePoint.Linq.RemovedColumnAttribute()]
-		public override string Tytuł {
+		public override string Title {
 			get {
 				throw new System.InvalidOperationException("Pole Title zostało usunięte z typu zawartości Folder.");
 			}
@@ -823,7 +823,7 @@ namespace CAS.AgileWorkloadTracker.Linq {
 		
 		[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
 		[Microsoft.SharePoint.Linq.RemovedColumnAttribute()]
-		public override string Tytuł {
+		public override string Title {
 			get {
 				throw new System.InvalidOperationException("Pole Title zostało usunięte z typu zawartości Łącze.");
 			}
@@ -1193,7 +1193,7 @@ namespace CAS.AgileWorkloadTracker.Linq {
 		
 		[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
 		[Microsoft.SharePoint.Linq.RemovedColumnAttribute()]
-		public override string Tytuł {
+		public override string Title {
 			get {
 				throw new System.InvalidOperationException("Pole Title zostało usunięte z typu zawartości Wiadomość.");
 			}
@@ -1702,7 +1702,7 @@ namespace CAS.AgileWorkloadTracker.Linq {
 		
 		[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
 		[Microsoft.SharePoint.Linq.RemovedColumnAttribute()]
-		public override string Tytuł {
+		public override string Title {
 			get {
 				throw new System.InvalidOperationException("Pole Title zostało usunięte z typu zawartości Strona typu wiki.");
 			}
@@ -1893,16 +1893,16 @@ namespace CAS.AgileWorkloadTracker.Linq {
 			this.OnCreated();
 		}
 		
-		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="Title", Storage="_tytuł", Required=true, FieldType="Text")]
-		public override string Tytuł {
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="Title", Storage="_title", Required=true, FieldType="Text")]
+		public override string Title {
 			get {
-				return this._tytuł;
+				return this._title;
 			}
 			set {
-				if ((value != this._tytuł)) {
-					this.OnPropertyChanging("Tytuł", this._tytuł);
-					this._tytuł = value;
-					this.OnPropertyChanged("Tytuł");
+				if ((value != this._title)) {
+					this.OnPropertyChanging("Title", this._title);
+					this._title = value;
+					this.OnPropertyChanged("Title");
 				}
 			}
 		}
@@ -2339,7 +2339,7 @@ namespace CAS.AgileWorkloadTracker.Linq {
 		
 		[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
 		[Microsoft.SharePoint.Linq.RemovedColumnAttribute()]
-		public override string Tytuł {
+		public override string Title {
 			get {
 				throw new System.InvalidOperationException("Pole Title zostało usunięte z typu zawartości Estimation.");
 			}
@@ -2793,7 +2793,7 @@ namespace CAS.AgileWorkloadTracker.Linq {
 		
 		[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
 		[Microsoft.SharePoint.Linq.RemovedColumnAttribute()]
-		public override string Tytuł {
+		public override string Title {
 			get {
 				throw new System.InvalidOperationException("Pole Title zostało usunięte z typu zawartości ProjectResources.");
 			}
@@ -4109,7 +4109,7 @@ namespace CAS.AgileWorkloadTracker.Linq {
 		
 		[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
 		[Microsoft.SharePoint.Linq.RemovedColumnAttribute()]
-		public override string Tytuł {
+		public override string Title {
 			get {
 				throw new System.InvalidOperationException("Pole Title zostało usunięte z typu zawartości TaskComments.");
 			}
@@ -4542,7 +4542,7 @@ namespace CAS.AgileWorkloadTracker.Linq {
 		
 		[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
 		[Microsoft.SharePoint.Linq.RemovedColumnAttribute()]
-		public override string Tytuł {
+		public override string Title {
 			get {
 				throw new System.InvalidOperationException("Pole Title zostało usunięte z typu zawartości Strona wzorcowa.");
 			}

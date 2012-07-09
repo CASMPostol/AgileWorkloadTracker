@@ -31,10 +31,9 @@ namespace CAS.SharePoint.SPMetalParameters
             PRList _nlist = new PRList() { Name = _lix.Title };
             _lists.Add(_nlist);
           }
-
           foreach (SPContentType _contentType in _wb.AvailableContentTypes)
           {
-            if (!_contentType.Group.Contains("CAS"))
+            if (!_contentType.Group.Contains("CAS") && !_contentType.Name.Contains("Element"))
               continue;
             List<PRColumn> _columns = new List<PRColumn>();
             foreach (SPField _fx in _contentType.Fields)

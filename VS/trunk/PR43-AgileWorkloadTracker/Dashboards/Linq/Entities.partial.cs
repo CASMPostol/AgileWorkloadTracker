@@ -19,7 +19,7 @@ namespace CAS.AgileWorkloadTracker.Linq
     /// <param name="message">The string to write to the event log.</param>
     internal Anons(string source, string message)
     {
-      Tytuł = source;
+      Title = source;
       Treść = message;
       this.Wygasa = DateTime.Now + new TimeSpan(2, 0, 0, 0);
     }
@@ -139,7 +139,7 @@ namespace CAS.AgileWorkloadTracker.Linq
       return (
                 from idx in _res
                 let _account = idx.EmployeeADAccount
-                where _account.Tytuł.Contains(_user.Name)
+                where _account.Title.Contains(_user.Name)
                 select idx
               ).FirstOrDefault();
     }

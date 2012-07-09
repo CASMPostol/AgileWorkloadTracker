@@ -202,29 +202,36 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     }
     private GenericStateMachineEngine.ActionResult CreateNewWokload()
     {
+       string at = "starting";
       if (!Page.IsValid)
         return GenericStateMachineEngine.ActionResult.NotValidated("Required information must be provided.");
+
       try
       {
         double _hours = TextBoxToHours();
         Projects _project = Element.GetAtIndex<Projects>(m_DataContext.DataContext.Projects, m_ProjectDropDown.SelectedValue);
         Tasks _task = Element.GetAtIndex<Tasks>(m_DataContext.DataContext.Task, m_TaskDropDown.SelectedValue);
+        at = "newOne";
         Workload _newOne = new Workload()
         {
           Hours = _hours,
-          Tytuł = m_WorkloadDescriptionTextBox.Text,
+          Title = m_WorkloadDescriptionTextBox.Text,
           Workload2ProjectTitle = _project,
-          Workload2ResourcesTitle = Me,
           Workload2StageTitle = _project.Project2StageTitle,
           Workload2TaskTitle = _task,
           WorkloadDate = m_Calendar.SelectedDate.Date
         };
+        at = "InsertOnSubmit";
         m_DataContext.DataContext.Workload.InsertOnSubmit(_newOne);
+        at = "SubmitChanges #1";
+        m_DataContext.DataContext.SubmitChanges();
+        _newOne.Workload2ResourcesTitle = Me;
+        at = "SubmitChanges #2";
         m_DataContext.DataContext.SubmitChanges();
       }
       catch (Exception _ex)
       {
-        return GenericStateMachineEngine.ActionResult.Exception(_ex, "CreateNewWokload");
+        return GenericStateMachineEngine.ActionResult.Exception(_ex, "CreateNewWokload at: " + at);
       }
       return GenericStateMachineEngine.ActionResult.Success;
     }
@@ -283,7 +290,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
         Workload _wkl = Element.GetAtIndex<Workload>(m_DataContext.DataContext.Workload, m_GridView.SelectedDataKey.Value.ToString());
         Tasks _task = Element.GetAtIndex<Tasks>(m_DataContext.DataContext.Task, m_TaskDropDown.SelectedValue);
         _wkl.Hours = _hours;
-        _wkl.Tytuł = m_WorkloadDescriptionTextBox.Text;
+        _wkl.Title = m_WorkloadDescriptionTextBox.Text;
         _wkl.WorkloadDate = m_Calendar.SelectedDate.Date;
         _wkl.Workload2TaskTitle = _task;
         m_DataContext.DataContext.SubmitChanges();
@@ -310,7 +317,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
         this.Controls.Add(new Literal() { Text = String.Format(CAS.SharePoint.Web.CommonDefinitions.ErrorMessageFormat, "User not recognized - you must be added to the Recourses") });
       }
       else
-        this.Controls.Add(new Literal() { Text = String.Format(CAS.SharePoint.Web.CommonDefinitions.ErrorMessageFormat, "Welcome: " + Me.EmployeeADAccount.Tytuł) });
+        this.Controls.Add(new Literal() { Text = String.Format(CAS.SharePoint.Web.CommonDefinitions.ErrorMessageFormat, "Welcome: " + Me.EmployeeADAccount.Title) });
     }
     private void FillupWorkflowGridView()
     {
@@ -324,8 +331,8 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
                                 select new
                                 {
                                   Hours = _wlidx.Hours.GetValueOrDefault(0),
-                                  Project = _wlidx.Workload2ProjectTitle == null ? m_SelectProjectDropDownEntry : _wlidx.Workload2ProjectTitle.Tytuł,
-                                  Task = _wlidx.Workload2TaskTitle == null ? m_SelectTaskDropDownEntry : _wlidx.Workload2TaskTitle.Tytuł,
+                                  Project = _wlidx.Workload2ProjectTitle == null ? m_SelectProjectDropDownEntry : _wlidx.Workload2ProjectTitle.Title,
+                                  Task = _wlidx.Workload2TaskTitle == null ? m_SelectTaskDropDownEntry : _wlidx.Workload2TaskTitle.Title,
                                   ID = _wlidx.Identyfikator
                                 };
       }
@@ -343,7 +350,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
         m_TaskDropDown.Items.Add(new ListItem(m_SelectTaskDropDownEntry, String.Empty) { Selected = true });
         Projects _cp = Element.GetAtIndex<Projects>(m_DataContext.DataContext.Projects, m_ProjectDropDown.SelectedValue);
         foreach (Tasks _taskIdx in from _tidx in _cp.Tasks select _tidx)
-          m_TaskDropDown.Items.Add(new ListItem(_taskIdx.Tytuł, _taskIdx.Identyfikator.ToString()));
+          m_TaskDropDown.Items.Add(new ListItem(_taskIdx.Title, _taskIdx.Identyfikator.ToString()));
         //TODO liczba godzin w projekcie planowane i wykorzystane 
       }
     }
@@ -353,7 +360,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
       m_ProjectDropDown.Items.Clear();
       m_ProjectDropDown.Items.Add(new ListItem(m_SelectProjectDropDownEntry, String.Empty) { Selected = true });
       foreach (var _row2 in from _pidx in m_DataContext.DataContext.Projects select _pidx)
-        m_ProjectDropDown.Items.Add(new ListItem(_row2.Tytuł, _row2.Identyfikator.ToString()));
+        m_ProjectDropDown.Items.Add(new ListItem(_row2.Title, _row2.Identyfikator.ToString()));
     }
     private string At { get; set; }
     #endregion
@@ -371,7 +378,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
           return;
         string _selection = m_GridView.SelectedDataKey.Value.ToString();
         Workload _workload = Element.GetAtIndex<Workload>(m_DataContext.DataContext.Workload, _selection);
-        m_WorkloadDescriptionTextBox.Text = _workload.Tytuł;
+        m_WorkloadDescriptionTextBox.Text = _workload.Title;
         m_WorkloadHoursTextBox.Text = _workload.Hours.GetValueOrDefault(0).ToString();
         m_ProjectDropDown.Select(_workload.Workload2ProjectTitle != null ? _workload.Workload2ProjectTitle.Identyfikator.Value : 0);
         FillupTaskaDropDown();
