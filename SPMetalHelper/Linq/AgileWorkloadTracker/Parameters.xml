@@ -6,7 +6,7 @@
   <List Name="Estimation" />
   <List Name="Links" />
   <!--<List Name="List Template Gallery" />-->
-  <List Name="Master Page Gallery" />
+  <!--<List Name="Master Page Gallery" />-->
   <List Name="Milestone" />
   <List Name="Partners" />
   <List Name="Priority" />
@@ -30,11 +30,16 @@
   <List Name="User Information List" />
   <!--<List Name="Web Part Gallery" />-->
   <List Name="Workload" />
+  <ExcludeOtherLists/>
+  <ContentType Name="Element" Class="Element">
+    <!--<Column Name="ContentType" Member="ContentType" />-->
+    <Column Name="Title" Member="Title" />
+  </ContentType>
   <ContentType Name="Projects" Class="Projects">
     <Column Name="Title" Member="Title" />
     <Column Name="ProjectType" Member="ProjectType" />
     <Column Name="ProjectNumber" Member="ProjectNumber" />
-    <Column Name="ProjectYear" Member="ProjectYear" />
+    <Column Name="Active" Member="Active" />
     <Column Name="ProjectHours" Member="ProjectHours" />
     <Column Name="ProjectStartDate" Member="ProjectStartDate" />
     <Column Name="ProjectEndDate" Member="ProjectEndDate" />
