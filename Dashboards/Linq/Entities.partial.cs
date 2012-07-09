@@ -30,16 +30,23 @@ namespace CAS.AgileWorkloadTracker.Linq
     /// the lists and document libraries of a Windows SharePoint Services "14" Web site.</param>
     /// <param name="source">The source denominator of the message.</param>
     /// <param name="message">The string to write to the event log.</param>
-    internal static void WriteEntry(Entities edc, string source, string message)
+    internal static void WriteEntry(string source, string message)
     {
-      if (edc == null)
+      try
       {
-        EventLog.WriteEntry("CAS.SmartFActory", "Cannot open \"Event Log List\" list", EventLogEntryType.Error, 114);
-        return;
+        using (Entities edc = new Entities(SPContext.Current.Web.Url))
+        {
+          Anons log = new Anons(source, message);
+          edc.Announcements.InsertOnSubmit(log);
+          edc.SubmitChanges();
+        }
       }
-      Anons log = new Anons(source, message);
-      edc.Announcements.InsertOnSubmit(log);
-      edc.SubmitChanges();
+      catch (Exception _ex)
+      {
+        string _msg = String.Format("Cannot write to \"Event Log List\" because of error: {0}", _ex.Message);
+        EventLog.WriteEntry("CAS.SmartFActory", _msg, EventLogEntryType.Error, 114);
+      } 
+      return;
     }
   }
 

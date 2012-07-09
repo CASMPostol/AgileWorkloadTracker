@@ -279,10 +279,14 @@
     <Content Include="Lists\ResourcesListTemplate\ResourcesList\Elements.xml" />
     <Content Include="Lists\ResourcesListTemplate\Schema.xml" />
     <Content Include="Lists\StageListTemplate\Elements.xml" />
-    <Content Include="Lists\StageListTemplate\StageList\Elements.xml" />
+    <Content Include="Lists\StageListTemplate\StageList\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Lists\StageListTemplate\Schema.xml" />
     <Content Include="Lists\StatusListTemplate\Elements.xml" />
-    <Content Include="Lists\StatusListTemplate\StatusList\Elements.xml" />
+    <Content Include="Lists\StatusListTemplate\StatusList\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Lists\StatusListTemplate\Schema.xml" />
     <Content Include="Lists\TaskCommentsListTemplate\Elements.xml" />
     <Content Include="Lists\TaskCommentsListTemplate\TaskCommentsList\Elements.xml" />

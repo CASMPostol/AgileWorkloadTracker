@@ -416,11 +416,11 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
         return;
       if (_rslt.LastActionResult == GenericStateMachineEngine.ActionResult.Result.Exception)
       {
-        Anons.WriteEntry(m_DataContext.DataContext, _rslt.ActionException.Source, _rslt.ActionException.Message);
 #if DEBUG
         string _format = String.Format(CAS.SharePoint.Web.CommonDefinitions.ErrorMessageFormat, "Exception at: {0} of : {1}.");
         this.Controls.Add(new Literal() { Text = String.Format(_format, _rslt.ActionException.Source + At, _rslt.ActionException.Message) });
 #endif
+        Anons.WriteEntry(_rslt.ActionException.Source, _rslt.ActionException.Message);
       }
       else
       {
