@@ -117,213 +117,16 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     protected override void OnPreRender(EventArgs e)
     {
       SetEnabled(m_ControlState.SetEnabled);
+      if (m_GridView.SelectedIndex == -1)
+      {
+        m_ButtonDelete.Enabled = false;
+        m_ButtonEdit.Enabled = false;
+      }
       base.OnPreRender(e);
     }
     #endregion
 
-    private GenericStateMachineEngine.ActionResult CreateNewWokload()
-    {
-      if (!Page.IsValid)
-        return GenericStateMachineEngine.ActionResult.NotValidated("Required information must be provided.");
-      try
-      {
-        double _hours = TextBoxToHours();
-        Projects _project = Element.GetAtIndex<Projects>(m_DataContext.DataContext.Projects, m_ProjectDropDown.SelectedValue);
-        Tasks _task = Element.GetAtIndex<Tasks>(m_DataContext.DataContext.Task, m_TaskDropDown.SelectedValue);
-        Workload _newOne = new Workload()
-        {
-          Hours = _hours,
-          Tytuł = m_WorkloadDescriptionTextBox.Text,
-          Workload2ProjectTitle = _project,
-          Workload2ResourcesTitle = Me,
-          Workload2StageTitle = _project.Project2StageTitle,
-          Workload2TaskTitle = _task,
-          WorkloadDate = m_Calendar.SelectedDate.Date
-        };
-        m_DataContext.DataContext.Workload.InsertOnSubmit(_newOne);
-        m_DataContext.DataContext.SubmitChanges();
-      }
-      catch (Exception _ex)
-      {
-        return GenericStateMachineEngine.ActionResult.Exception(_ex, "CreateNewWokload");
-      }
-      return GenericStateMachineEngine.ActionResult.Success;
-    }
-    private double TextBoxToHours()
-    {
-      return Convert.ToDouble(m_WorkloadHoursTextBox.Text);
-    }
-    private GenericStateMachineEngine.ActionResult Delete()
-    {
-      try
-      {
-        Workload _wkl = Element.GetAtIndex<Workload>(m_DataContext.DataContext.Workload, m_GridView.SelectedDataKey.Value.ToString());
-        m_GridView.SelectedIndex = -1;
-        m_DataContext.DataContext.Workload.RecycleOnSubmit(_wkl);
-      }
-      catch (Exception _ex)
-      {
-        return GenericStateMachineEngine.ActionResult.Exception(_ex, "Delete");
-      }
-      return GenericStateMachineEngine.ActionResult.Success;
-    }
-    private void SetEnabled(GenericStateMachineEngine.ControlsSet _set)
-    {
-      m_WorkloadMinutesDropDown.Enabled = (_set & GenericStateMachineEngine.ControlsSet.EditModeOn) != 0;
-      m_WorkloadHoursTextBox.Enabled = (_set & GenericStateMachineEngine.ControlsSet.EditModeOn) != 0;
-      m_WorkloadDescriptionTextBox.Enabled = (_set & GenericStateMachineEngine.ControlsSet.EditModeOn) != 0;
-      m_ProjectDropDown.Enabled = (_set & GenericStateMachineEngine.ControlsSet.EditModeOn) != 0;
-      m_TaskDropDown.Enabled = (_set & GenericStateMachineEngine.ControlsSet.EditModeOn) != 0;
-      m_GridView.Enabled = (_set & GenericStateMachineEngine.ControlsSet.EditModeOn) == 0;
-      m_Calendar.Enabled = (_set & GenericStateMachineEngine.ControlsSet.EditModeOn) == 0;
-      //Buttons
-      m_ButtonSave.Enabled = (_set & GenericStateMachineEngine.ControlsSet.SaveOn) != 0;
-      m_ButtonDelete.Enabled = (_set & GenericStateMachineEngine.ControlsSet.DeleteOn) != 0;
-      m_ButtonCancel.Enabled = (_set & GenericStateMachineEngine.ControlsSet.CancelOn) != 0;
-      m_ButtonEdit.Enabled = ((_set & GenericStateMachineEngine.ControlsSet.EditOn) != 0);
-      m_ButtonAddNew.Enabled = (_set & GenericStateMachineEngine.ControlsSet.NewOn) != 0;
-    }
-    private GenericStateMachineEngine.ActionResult Show()
-    {
-      try
-      {
-        this.FillupWorkflowGridView();
-      }
-      catch (Exception _ex)
-      {
-        return GenericStateMachineEngine.ActionResult.Exception(_ex, "GenericStateMachineEngine.ActionResult");
-      };
-      return GenericStateMachineEngine.ActionResult.Success;
-    }
-    private GenericStateMachineEngine.ActionResult Update()
-    {
-      double _hours = TextBoxToHours();
-      try
-      {
-        Workload _wkl = Element.GetAtIndex<Workload>(m_DataContext.DataContext.Workload, m_GridView.SelectedDataKey.Value.ToString());
-        Tasks _task = Element.GetAtIndex<Tasks>(m_DataContext.DataContext.Task, m_TaskDropDown.SelectedValue);
-        _wkl.Hours = _hours;
-        _wkl.Tytuł = m_WorkloadDescriptionTextBox.Text;
-        _wkl.WorkloadDate = m_Calendar.SelectedDate.Date;
-        _wkl.Workload2TaskTitle = _task;
-      }
-      catch (Exception _ex)
-      {
-        return GenericStateMachineEngine.ActionResult.Exception(_ex, "GenericStateMachineEngine.ActionResult");
-      }
-      return GenericStateMachineEngine.ActionResult.Success;
-    }
-    private void ClearUserInterface()
-    {
-      m_GridView.SelectedIndex = -1;
-      m_WorkloadDescriptionTextBox.Text = String.Empty;
-      m_WorkloadHoursTextBox.Text = String.Empty;
-    }
-    private void ShouwUserInformation()
-    {
-      if (Me == null)
-      {
-        this.Controls.Add(new Literal() { Text = String.Format(CAS.SharePoint.Web.CommonDefinitions.ErrorMessageFormat, "User not recognized - you must be added to the Recourses") });
-      }
-      else
-        this.Controls.Add(new Literal() { Text = String.Format(CAS.SharePoint.Web.CommonDefinitions.ErrorMessageFormat, "Welcome: " + Me.EmployeeADAccount.Tytuł) });
-    }
-    private void FillupWorkflowGridView()
-    {
-      if (Me == null)
-        m_GridView.DataSource = null;
-      else
-      {
-        At = "m_GridView.DataSource";
-        m_GridView.DataSource = from _wlidx in Me.Workload
-                                where _wlidx.WorkloadDate.Value.Date == m_Calendar.SelectedDate.Date
-                                select new
-                                {
-                                  Hours = _wlidx.Hours.GetValueOrDefault(0),
-                                  Project = _wlidx.Workload2ProjectTitle == null ? m_SelectProjectDropDownEntry : _wlidx.Workload2ProjectTitle.Tytuł,
-                                  Task = _wlidx.Workload2TaskTitle == null ? m_SelectTaskDropDownEntry : _wlidx.Workload2TaskTitle.Tytuł,
-                                  ID = _wlidx.Identyfikator
-                                };
-      }
-      m_GridView.DataBind();
-    }
-    private void FillupTaskaDropDown()
-    {
-      m_TaskDropDown.Items.Clear();
-      if (m_ProjectDropDown.SelectedIndex <= 0)
-        m_TaskDropDown.Items.Add(new ListItem(m_SelectProjectDropDownEntry, String.Empty) { Selected = true });
-      else
-      {
-        m_TaskDropDown.Items.Clear();
-        m_TaskDropDown.Items.Add(new ListItem(m_SelectTaskDropDownEntry, String.Empty) { Selected = true });
-        Projects _cp = Element.GetAtIndex<Projects>(m_DataContext.DataContext.Projects, m_ProjectDropDown.SelectedValue);
-        foreach (Tasks _taskIdx in from _tidx in _cp.Tasks select _tidx)
-          m_TaskDropDown.Items.Add(new ListItem(_taskIdx.Tytuł, _taskIdx.Identyfikator.ToString()));
-        //TODO liczba godzin w projekcie planowane i wykorzystane 
-      }
-    }
-    private void FillupProjectDropDown()
-    {
-      //TODO [AWT-3488] Change the ProjectYear column in the Projects
-      m_ProjectDropDown.Items.Clear();
-      m_ProjectDropDown.Items.Add(new ListItem(m_SelectProjectDropDownEntry, String.Empty) { Selected = true });
-      foreach (var _row2 in from _pidx in m_DataContext.DataContext.Projects select _pidx)
-        m_ProjectDropDown.Items.Add(new ListItem(_row2.Tytuł, _row2.Identyfikator.ToString()));
-    }    private string At { get; set; }
-
-    #region event handlers
-    private void m_ProjectDropDown_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      FillupTaskaDropDown();
-    }
-    protected void m_GridView_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      try
-      {
-        if (m_GridView.SelectedIndex < 0)
-          return;
-        string _selection = m_GridView.SelectedDataKey.Value.ToString();
-        Workload _workload = Element.GetAtIndex<Workload>(m_DataContext.DataContext.Workload, _selection);
-        m_WorkloadDescriptionTextBox.Text = _workload.Tytuł;
-        m_WorkloadHoursTextBox.Text = _workload.Hours.GetValueOrDefault(0).ToString();
-        m_ProjectDropDown.Select(_workload.Workload2ProjectTitle != null ? _workload.Workload2ProjectTitle.Identyfikator.Value : 0);
-        FillupTaskaDropDown();
-        m_TaskDropDown.Select(_workload.Workload2TaskTitle != null ? _workload.Workload2TaskTitle.Identyfikator.Value : 0);
-      }
-      catch (Exception _ex)
-      {
-        ShowActionResult(GenericStateMachineEngine.ActionResult.Exception(_ex, "m_GridView_SelectedIndexChanged"));
-      }
-    }
-    /// <summary>
-    /// Calendar Selection Changed method
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    protected void m_Calendar_SelectionChanged(object sender, EventArgs e)
-    {
-      //double _hoursADay = (from _widx in _entt.Workload where _widx.WorkloadDate == m_Calendar.SelectedDate select _widx.Hours.Value ).ToList<double>().AsQueryable().Sum<double>();
-      m_ButtonAddNew.Enabled = true;
-      m_WorkloadHoursTextBox.Text = String.Empty;
-      m_WorkloadDescriptionTextBox.Text = String.Empty;
-      FillupWorkflowGridView();
-      //this.f
-      //if (m_GridView.SelectedRow == null)
-      //{
-      //CurrentYear = m_Calendar.SelectedDate.Year;
-      //main.projektyTableadapter.Fill(main.godzinySchema.PROJEKTY, Convert.ToDecimal(CurrentYear));
-      //PopulateProjectList_SelectedState_Or_Date_HasBeenChanged();
-      //}
-
-    }
-    #endregion
-
-    #region vars
-    private const string m_SelectProjectDropDownEntry = "  -- select project -- ";
-    private const string m_SelectTaskDropDownEntry = "  -- select task -- ";
-    private const string m_keyCurrentYear = "CurrentYear";
-    private DataContextManagement<Entities> m_DataContext = null;
-    private ControlState m_ControlState = new ControlState(null);
+    #region State machine
     private LocalStateMachine m_StateMachineEngine;
     private class LocalStateMachine : StateMachine
     {
@@ -397,6 +200,217 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
       #endregion
 
     }
+    private GenericStateMachineEngine.ActionResult CreateNewWokload()
+    {
+      if (!Page.IsValid)
+        return GenericStateMachineEngine.ActionResult.NotValidated("Required information must be provided.");
+      try
+      {
+        double _hours = TextBoxToHours();
+        Projects _project = Element.GetAtIndex<Projects>(m_DataContext.DataContext.Projects, m_ProjectDropDown.SelectedValue);
+        Tasks _task = Element.GetAtIndex<Tasks>(m_DataContext.DataContext.Task, m_TaskDropDown.SelectedValue);
+        Workload _newOne = new Workload()
+        {
+          Hours = _hours,
+          Tytuł = m_WorkloadDescriptionTextBox.Text,
+          Workload2ProjectTitle = _project,
+          Workload2ResourcesTitle = Me,
+          Workload2StageTitle = _project.Project2StageTitle,
+          Workload2TaskTitle = _task,
+          WorkloadDate = m_Calendar.SelectedDate.Date
+        };
+        m_DataContext.DataContext.Workload.InsertOnSubmit(_newOne);
+        m_DataContext.DataContext.SubmitChanges();
+      }
+      catch (Exception _ex)
+      {
+        return GenericStateMachineEngine.ActionResult.Exception(_ex, "CreateNewWokload");
+      }
+      return GenericStateMachineEngine.ActionResult.Success;
+    }
+    private double TextBoxToHours()
+    {
+      return Convert.ToDouble(m_WorkloadHoursTextBox.Text);
+    }
+    private GenericStateMachineEngine.ActionResult Delete()
+    {
+      try
+      {
+        Workload _wkl = Element.GetAtIndex<Workload>(m_DataContext.DataContext.Workload, m_GridView.SelectedDataKey.Value.ToString());
+        m_GridView.SelectedIndex = -1;
+        m_DataContext.DataContext.Workload.RecycleOnSubmit(_wkl);
+        m_DataContext.DataContext.SubmitChanges();
+      }
+      catch (Exception _ex)
+      {
+        return GenericStateMachineEngine.ActionResult.Exception(_ex, "Delete");
+      }
+      return GenericStateMachineEngine.ActionResult.Success;
+    }
+    private void SetEnabled(GenericStateMachineEngine.ControlsSet _set)
+    {
+      m_WorkloadMinutesDropDown.Enabled = (_set & GenericStateMachineEngine.ControlsSet.EditModeOn) != 0;
+      m_WorkloadHoursTextBox.Enabled = (_set & GenericStateMachineEngine.ControlsSet.EditModeOn) != 0;
+      m_WorkloadDescriptionTextBox.Enabled = (_set & GenericStateMachineEngine.ControlsSet.EditModeOn) != 0;
+      m_ProjectDropDown.Enabled = (_set & GenericStateMachineEngine.ControlsSet.EditModeOn) != 0;
+      m_TaskDropDown.Enabled = (_set & GenericStateMachineEngine.ControlsSet.EditModeOn) != 0;
+      m_GridView.Enabled = (_set & GenericStateMachineEngine.ControlsSet.EditModeOn) == 0;
+      m_Calendar.Enabled = (_set & GenericStateMachineEngine.ControlsSet.EditModeOn) == 0;
+      //Buttons
+      m_ButtonSave.Enabled = (_set & GenericStateMachineEngine.ControlsSet.SaveOn) != 0;
+      m_ButtonDelete.Enabled = (_set & GenericStateMachineEngine.ControlsSet.DeleteOn) != 0;
+      m_ButtonCancel.Enabled = (_set & GenericStateMachineEngine.ControlsSet.CancelOn) != 0;
+      m_ButtonEdit.Enabled = ((_set & GenericStateMachineEngine.ControlsSet.EditOn) != 0);
+      m_ButtonAddNew.Enabled = (_set & GenericStateMachineEngine.ControlsSet.NewOn) != 0;
+    }
+    private GenericStateMachineEngine.ActionResult Show()
+    {
+      try
+      {
+        this.FillupWorkflowGridView();
+      }
+      catch (Exception _ex)
+      {
+        return GenericStateMachineEngine.ActionResult.Exception(_ex, "GenericStateMachineEngine.ActionResult");
+      };
+      return GenericStateMachineEngine.ActionResult.Success;
+    }
+    private GenericStateMachineEngine.ActionResult Update()
+    {
+      double _hours = TextBoxToHours();
+      try
+      {
+        Workload _wkl = Element.GetAtIndex<Workload>(m_DataContext.DataContext.Workload, m_GridView.SelectedDataKey.Value.ToString());
+        Tasks _task = Element.GetAtIndex<Tasks>(m_DataContext.DataContext.Task, m_TaskDropDown.SelectedValue);
+        _wkl.Hours = _hours;
+        _wkl.Tytuł = m_WorkloadDescriptionTextBox.Text;
+        _wkl.WorkloadDate = m_Calendar.SelectedDate.Date;
+        _wkl.Workload2TaskTitle = _task;
+        m_DataContext.DataContext.SubmitChanges();
+      }
+      catch (Exception _ex)
+      {
+        return GenericStateMachineEngine.ActionResult.Exception(_ex, "GenericStateMachineEngine.ActionResult");
+      }
+      return GenericStateMachineEngine.ActionResult.Success;
+    }
+    private void ClearUserInterface()
+    {
+      m_GridView.SelectedIndex = -1;
+      m_WorkloadDescriptionTextBox.Text = String.Empty;
+      m_WorkloadHoursTextBox.Text = String.Empty;
+    }
+    #endregion
+
+    #region helpers
+    private void ShouwUserInformation()
+    {
+      if (Me == null)
+      {
+        this.Controls.Add(new Literal() { Text = String.Format(CAS.SharePoint.Web.CommonDefinitions.ErrorMessageFormat, "User not recognized - you must be added to the Recourses") });
+      }
+      else
+        this.Controls.Add(new Literal() { Text = String.Format(CAS.SharePoint.Web.CommonDefinitions.ErrorMessageFormat, "Welcome: " + Me.EmployeeADAccount.Tytuł) });
+    }
+    private void FillupWorkflowGridView()
+    {
+      if (Me == null)
+        m_GridView.DataSource = null;
+      else
+      {
+        At = "m_GridView.DataSource";
+        m_GridView.DataSource = from _wlidx in Me.Workload
+                                where _wlidx.WorkloadDate.Value.Date == m_Calendar.SelectedDate.Date
+                                select new
+                                {
+                                  Hours = _wlidx.Hours.GetValueOrDefault(0),
+                                  Project = _wlidx.Workload2ProjectTitle == null ? m_SelectProjectDropDownEntry : _wlidx.Workload2ProjectTitle.Tytuł,
+                                  Task = _wlidx.Workload2TaskTitle == null ? m_SelectTaskDropDownEntry : _wlidx.Workload2TaskTitle.Tytuł,
+                                  ID = _wlidx.Identyfikator
+                                };
+      }
+      m_GridView.DataBind();
+      m_GridView.SelectedIndex = -1;
+    }
+    private void FillupTaskaDropDown()
+    {
+      m_TaskDropDown.Items.Clear();
+      if (m_ProjectDropDown.SelectedIndex <= 0)
+        m_TaskDropDown.Items.Add(new ListItem(m_SelectProjectDropDownEntry, String.Empty) { Selected = true });
+      else
+      {
+        m_TaskDropDown.Items.Clear();
+        m_TaskDropDown.Items.Add(new ListItem(m_SelectTaskDropDownEntry, String.Empty) { Selected = true });
+        Projects _cp = Element.GetAtIndex<Projects>(m_DataContext.DataContext.Projects, m_ProjectDropDown.SelectedValue);
+        foreach (Tasks _taskIdx in from _tidx in _cp.Tasks select _tidx)
+          m_TaskDropDown.Items.Add(new ListItem(_taskIdx.Tytuł, _taskIdx.Identyfikator.ToString()));
+        //TODO liczba godzin w projekcie planowane i wykorzystane 
+      }
+    }
+    private void FillupProjectDropDown()
+    {
+      //TODO [AWT-3488] Change the ProjectYear column in the Projects
+      m_ProjectDropDown.Items.Clear();
+      m_ProjectDropDown.Items.Add(new ListItem(m_SelectProjectDropDownEntry, String.Empty) { Selected = true });
+      foreach (var _row2 in from _pidx in m_DataContext.DataContext.Projects select _pidx)
+        m_ProjectDropDown.Items.Add(new ListItem(_row2.Tytuł, _row2.Identyfikator.ToString()));
+    }
+    private string At { get; set; }
+    #endregion
+
+    #region event handlers
+    private void m_ProjectDropDown_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      FillupTaskaDropDown();
+    }
+    protected void m_GridView_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      try
+      {
+        if (m_GridView.SelectedIndex < 0)
+          return;
+        string _selection = m_GridView.SelectedDataKey.Value.ToString();
+        Workload _workload = Element.GetAtIndex<Workload>(m_DataContext.DataContext.Workload, _selection);
+        m_WorkloadDescriptionTextBox.Text = _workload.Tytuł;
+        m_WorkloadHoursTextBox.Text = _workload.Hours.GetValueOrDefault(0).ToString();
+        m_ProjectDropDown.Select(_workload.Workload2ProjectTitle != null ? _workload.Workload2ProjectTitle.Identyfikator.Value : 0);
+        FillupTaskaDropDown();
+        m_TaskDropDown.Select(_workload.Workload2TaskTitle != null ? _workload.Workload2TaskTitle.Identyfikator.Value : 0);
+      }
+      catch (Exception _ex)
+      {
+        ShowActionResult(GenericStateMachineEngine.ActionResult.Exception(_ex, "m_GridView_SelectedIndexChanged"));
+      }
+    }
+    /// <summary>
+    /// Calendar Selection Changed method
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void m_Calendar_SelectionChanged(object sender, EventArgs e)
+    {
+      //double _hoursADay = (from _widx in _entt.Workload where _widx.WorkloadDate == m_Calendar.SelectedDate select _widx.Hours.Value ).ToList<double>().AsQueryable().Sum<double>();
+      m_ButtonAddNew.Enabled = true;
+      m_WorkloadHoursTextBox.Text = String.Empty;
+      m_WorkloadDescriptionTextBox.Text = String.Empty;
+      FillupWorkflowGridView();
+      //this.f
+      //if (m_GridView.SelectedRow == null)
+      //{
+      //CurrentYear = m_Calendar.SelectedDate.Year;
+      //main.projektyTableadapter.Fill(main.godzinySchema.PROJEKTY, Convert.ToDecimal(CurrentYear));
+      //PopulateProjectList_SelectedState_Or_Date_HasBeenChanged();
+      //}
+
+    }
+    #endregion
+
+    #region vars
+    private const string m_SelectProjectDropDownEntry = "  -- select project -- ";
+    private const string m_SelectTaskDropDownEntry = "  -- select task -- ";
+    private const string m_keyCurrentYear = "CurrentYear";
+    private DataContextManagement<Entities> m_DataContext = null;
+    private ControlState m_ControlState = new ControlState(null);
     private CAS.AgileWorkloadTracker.Linq.Resources p_me = null;
     private CAS.AgileWorkloadTracker.Linq.Resources Me
     {
