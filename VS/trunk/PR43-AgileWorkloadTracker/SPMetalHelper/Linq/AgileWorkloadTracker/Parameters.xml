@@ -30,7 +30,7 @@
   <List Name="User Information List" />
   <!--<List Name="Web Part Gallery" />-->
   <List Name="Workload" />
-  <ExcludeOtherLists/>
+  <!--<ExcludeOtherLists/>-->
   <ContentType Name="Element" Class="Element">
     <!--<Column Name="ContentType" Member="ContentType" />-->
     <Column Name="Title" Member="Title" />
@@ -135,4 +135,5 @@
     <Column Name="Title" Member="Title" />
     <Column Name="Milestone2StageTitle" Member="Milestone2StageTitle" />
   </ContentType>
+  <!--<ExcludeOtherContentTypes/>-->
 </Web>
