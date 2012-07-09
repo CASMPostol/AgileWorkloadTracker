@@ -74,16 +74,6 @@ namespace CAS.AgileWorkloadTracker.Linq {
 		}
 		
 		/// <summary>
-		/// Use the master page gallery to store master pages. The master pages in this gallery are available to this site and any sites underneath it.
-		/// </summary>
-		[Microsoft.SharePoint.Linq.ListAttribute(Name="Master Page Gallery")]
-		public Microsoft.SharePoint.Linq.EntityList<MasterPageGalleryStronaWzorcowa> MasterPageGallery {
-			get {
-				return this.GetList<MasterPageGalleryStronaWzorcowa>("Master Page Gallery");
-			}
-		}
-		
-		/// <summary>
 		/// Milestone List Instance
 		/// </summary>
 		[Microsoft.SharePoint.Linq.ListAttribute(Name="Milestone")]
@@ -294,7 +284,6 @@ namespace CAS.AgileWorkloadTracker.Linq {
 	[Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type=typeof(Contracts))]
 	[Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type=typeof(Estimation))]
 	[Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type=typeof(Łącze))]
-	[Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type=typeof(Dokument))]
 	[Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type=typeof(Milestone))]
 	[Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type=typeof(Partners))]
 	[Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type=typeof(Priority))]
@@ -302,6 +291,7 @@ namespace CAS.AgileWorkloadTracker.Linq {
 	[Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type=typeof(Projects))]
 	[Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type=typeof(Resolution))]
 	[Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type=typeof(Resources))]
+	[Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type=typeof(Dokument))]
 	[Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type=typeof(Stage))]
 	[Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type=typeof(Status))]
 	[Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type=typeof(Tasks))]
@@ -837,7 +827,6 @@ namespace CAS.AgileWorkloadTracker.Linq {
 	/// Utwórz nowy dokument.
 	/// </summary>
 	[Microsoft.SharePoint.Linq.ContentTypeAttribute(Name="Dokument", Id="0x0101")]
-	[Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type=typeof(StronaWzorcowa))]
 	[Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type=typeof(StronaTypuWiki))]
 	internal partial class Dokument : Element {
 		
@@ -1613,56 +1602,6 @@ namespace CAS.AgileWorkloadTracker.Linq {
 					this.OnPropertyChanging("AdresSIP", this._adresSIP);
 					this._adresSIP = value;
 					this.OnPropertyChanged("AdresSIP");
-				}
-			}
-		}
-	}
-	
-	/// <summary>
-	/// Utwórz nową stronę wzorcową.
-	/// </summary>
-	[Microsoft.SharePoint.Linq.ContentTypeAttribute(Name="Strona wzorcowa", Id="0x010105")]
-	[Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type=typeof(MasterPageGalleryStronaWzorcowa))]
-	internal partial class StronaWzorcowa : Dokument {
-		
-		protected string _description;
-		
-		private System.Nullable<UIVersion> _uIVersion;
-		
-		#region Extensibility Method Definitions
-		partial void OnLoaded();
-		partial void OnValidate();
-		partial void OnCreated();
-		#endregion
-		
-		public StronaWzorcowa() {
-			this.OnCreated();
-		}
-		
-		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="Comments", Storage="_description", FieldType="Note")]
-		public virtual string Description {
-			get {
-				return this._description;
-			}
-			set {
-				if ((value != this._description)) {
-					this.OnPropertyChanging("Description", this._description);
-					this._description = value;
-					this.OnPropertyChanged("Description");
-				}
-			}
-		}
-		
-		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="UIVersion", Storage="_uIVersion", FieldType="MultiChoice")]
-		public System.Nullable<UIVersion> UIVersion {
-			get {
-				return this._uIVersion;
-			}
-			set {
-				if ((value != this._uIVersion)) {
-					this.OnPropertyChanging("UIVersion", this._uIVersion);
-					this._uIVersion = value;
-					this.OnPropertyChanged("UIVersion");
 				}
 			}
 		}
@@ -4511,48 +4450,6 @@ namespace CAS.AgileWorkloadTracker.Linq {
 	}
 	
 	/// <summary>
-	/// Utwórz nową stronę wzorcową.
-	/// </summary>
-	[Microsoft.SharePoint.Linq.ContentTypeAttribute(Name="Strona wzorcowa", Id="0x010105", List="Master Page Gallery")]
-	internal partial class MasterPageGalleryStronaWzorcowa : StronaWzorcowa {
-		
-		#region Extensibility Method Definitions
-		partial void OnLoaded();
-		partial void OnValidate();
-		partial void OnCreated();
-		#endregion
-		
-		public MasterPageGalleryStronaWzorcowa() {
-			this.OnCreated();
-		}
-		
-		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="MasterPageDescription", Storage="_description", FieldType="Note")]
-		public override string Description {
-			get {
-				return this._description;
-			}
-			set {
-				if ((value != this._description)) {
-					this.OnPropertyChanging("Description", this._description);
-					this._description = value;
-					this.OnPropertyChanged("Description");
-				}
-			}
-		}
-		
-		[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
-		[Microsoft.SharePoint.Linq.RemovedColumnAttribute()]
-		public override string Title {
-			get {
-				throw new System.InvalidOperationException("Pole Title zostało usunięte z typu zawartości Strona wzorcowa.");
-			}
-			set {
-				throw new System.InvalidOperationException("Pole Title zostało usunięte z typu zawartości Strona wzorcowa.");
-			}
-		}
-	}
-	
-	/// <summary>
 	/// Grupuj i opisuj zadania pokrewne, które masz wykonać lub które ma wykonać zespół.
 	/// </summary>
 	[Microsoft.SharePoint.Linq.ContentTypeAttribute(Name="Zadanie sumaryczne", Id="0x012004", List="Tasks")]
@@ -4676,20 +4573,6 @@ namespace CAS.AgileWorkloadTracker.Linq {
 		
 		[Microsoft.SharePoint.Linq.ChoiceAttribute(Value="Waiting on someone else")]
 		WaitingOnSomeoneElse = 32,
-	}
-	
-	[System.FlagsAttribute()]
-	internal enum UIVersion : int {
-		
-		None = 0,
-		
-		Invalid = 1,
-		
-		[Microsoft.SharePoint.Linq.ChoiceAttribute(Value="3")]
-		_3 = 2,
-		
-		[Microsoft.SharePoint.Linq.ChoiceAttribute(Value="4")]
-		_4 = 4,
 	}
 	
 	internal enum Currency : int {
