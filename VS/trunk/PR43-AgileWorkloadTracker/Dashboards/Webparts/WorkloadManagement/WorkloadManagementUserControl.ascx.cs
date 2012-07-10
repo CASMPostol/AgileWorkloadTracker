@@ -236,10 +236,6 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
       }
       return GenericStateMachineEngine.ActionResult.Success;
     }
-    private double TextBoxToHours()
-    {
-      return Convert.ToDouble(m_WorkloadHoursTextBox.Text);
-    }
     private GenericStateMachineEngine.ActionResult Delete()
     {
       try
@@ -292,9 +288,11 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
         int _indx = m_GridView.SelectedIndex;
         Workload _wkl = Element.GetAtIndex<Workload>(m_DataContext.DataContext.Workload, m_GridView.SelectedDataKey.Value.ToString());
         Tasks _task = Element.GetAtIndex<Tasks>(m_DataContext.DataContext.Task, m_TaskDropDown.SelectedValue);
+        Projects _project = Element.GetAtIndex<Projects>(m_DataContext.DataContext.Projects, m_ProjectDropDown.SelectedValue);
         _wkl.Hours = _hours;
         _wkl.Title = m_WorkloadDescriptionTextBox.Text;
         _wkl.WorkloadDate = m_Calendar.SelectedDate.Date;
+        _wkl.Workload2ProjectTitle = _project;
         _wkl.Workload2TaskTitle = _task;
         m_DataContext.DataContext.SubmitChanges();
         FillupWorkflowGridView();
@@ -316,6 +314,10 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     #endregion
 
     #region helpers
+    private double TextBoxToHours()
+    {
+      return Convert.ToDouble(m_WorkloadHoursTextBox.Text);
+    }
     private void ShouwUserInformation()
     {
       if (Me == null)
@@ -366,8 +368,8 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
       //TODO [AWT-3488] Change the ProjectYear column in the Projects
       m_ProjectDropDown.Items.Clear();
       m_ProjectDropDown.Items.Add(new ListItem(m_SelectProjectDropDownEntry, String.Empty) { Selected = true });
-      foreach (var _row2 in from _pidx in m_DataContext.DataContext.Projects select _pidx)
-        m_ProjectDropDown.Items.Add(new ListItem(_row2.Title, _row2.Identyfikator.ToString()));
+      foreach (var _row2 in Me.ProjectResources)
+        m_ProjectDropDown.Items.Add(new ListItem(_row2.ProjectResources2ProjectTitle.Title, _row2.ProjectResources2ProjectTitle.Identyfikator.ToString()));
     }
     private void UpdateWorkload()
     {
