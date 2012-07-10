@@ -13,7 +13,7 @@
 <asp:Panel ID="m_PanelAddEdit" runat="server" BorderColor="ActiveCaptionText" GroupingText="Add/Edit workload">
   <asp:Table ID="m_Table" runat="server" CssClass="Table">
     <asp:TableRow>
-      <asp:TableCell>
+      <asp:TableCell VerticalAlign="Top">
         <asp:Panel ID="Panel1" runat="server" BorderColor="ActiveCaptionText" GroupingText="Select day">
           <asp:Calendar ID="m_Calendar" runat="server" SelectionMode="Day" BackColor="White" BorderColor="#91cdf2"
             CellPadding="4" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt" ForeColor="Black"
@@ -29,7 +29,7 @@
           </asp:Calendar>
         </asp:Panel>
       </asp:TableCell>
-      <asp:TableCell>
+      <asp:TableCell VerticalAlign="Top">
         <asp:Panel runat="server" BorderColor="ActiveCaptionText" GroupingText="Workload">
           <asp:Table ID="m_TableWorkloadData" runat="server" CssClass="TableInside">
             <asp:TableRow>
@@ -78,21 +78,43 @@
           </asp:Table>
         </asp:Panel>
       </asp:TableCell>
-      <asp:TableCell>
+      <asp:TableCell VerticalAlign="Top">
         <asp:Panel runat="server" BorderColor="ActiveCaptionText" GroupingText="Actions" Enabled="true">
-          <asp:Button runat="server" ID="m_ButtonAddNew" Text="Add new" CssClass="Button" /><br />
-          <asp:Button runat="server" ID="m_ButtonEdit" Text="Edit" CssClass="Button" /><br />
-          <asp:Button runat="server" ID="m_ButtonSave" Text="Save" CssClass="Button" /><br />
-          <asp:Button runat="server" ID="m_ButtonDelete" Text="Delete" CssClass="Button" OnClientClick="return confirm('Na pewno zmodyfikować?');" /><br />
-          <asp:Button runat="server" ID="m_ButtonCancel" Text="Cancel" CssClass="Button" /><br />
+            <asp:Table ID="m_Actions" runat="server" CssClass="Table">
+                <asp:TableRow>
+                    <asp:TableCell>
+                        <asp:Button runat="server" ID="m_ButtonAddNew" Text="Add new" CssClass="Button" />
+                    </asp:TableCell>
+                </asp:TableRow>
+                <asp:TableRow>
+                    <asp:TableCell>
+                        <asp:Button runat="server" ID="m_ButtonEdit" Text="Edit" CssClass="Button" />
+                    </asp:TableCell>
+                </asp:TableRow>
+                <asp:TableRow>
+                    <asp:TableCell>
+                        <asp:Button runat="server" ID="m_ButtonSave" Text="Save" CssClass="Button" />
+                    </asp:TableCell>
+                </asp:TableRow>
+                <asp:TableRow>
+                    <asp:TableCell>
+                        <asp:Button runat="server" ID="m_ButtonDelete" Text="Delete" CssClass="Button" OnClientClick="return confirm('Na pewno zmodyfikować?');" />
+                    </asp:TableCell>
+                </asp:TableRow>
+                <asp:TableRow>
+                    <asp:TableCell>
+                        <asp:Button runat="server" ID="m_ButtonCancel" Text="Cancel" CssClass="Button" />
+                    </asp:TableCell>
+                </asp:TableRow>
+            </asp:Table>
         </asp:Panel>
       </asp:TableCell>
     </asp:TableRow>
   </asp:Table>
 </asp:Panel>
 <asp:Panel ID="m_PanelSelect" runat="server" BorderColor="ActiveCaptionText" GroupingText="Current workload">
-  <asp:GridView ID="m_GridView" runat="server" AutoGenerateColumns="False" BackColor="White"
-    BorderColor="#FFFFFF" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="ID"
+  <asp:GridView ID="m_GridView" runat="server" AutoGenerateColumns="False" BackColor="#91cdf2"
+    BorderColor="#91cdf2" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="ID"
     ForeColor="Black" GridLines="Vertical" OnSelectedIndexChanged="m_GridView_SelectedIndexChanged" AutoGenerateSelectButton=true>
     <%--              <Columns>
                 <asp:CommandField ButtonType="Button" SelectText="Zaznacz" ShowCancelButton="False"
@@ -118,11 +140,11 @@
                 </asp:TemplateField>
               </Columns>
     --%>
-    <FooterStyle BackColor="#CCCC99" />
-    <RowStyle BackColor="#F7F7DE" />
-    <SelectedRowStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
+    <FooterStyle BackColor="#91cdf2" />
+    <RowStyle BackColor="#FFFFFF" BorderColor="#91cdf2" />
+    <SelectedRowStyle BackColor="#d5edfb" Font-Bold="True" ForeColor="#000000" />
     <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Right" />
-    <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
-    <AlternatingRowStyle BackColor="White" />
+    <HeaderStyle BackColor="#91cdf2" Font-Bold="True" ForeColor="#000000" />
+    <AlternatingRowStyle BackColor="#FFFFFF" />
   </asp:GridView>
 </asp:Panel>
