@@ -367,19 +367,20 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
       var _myActiveProjects = from _association in Me.ProjectResources let _pidx = _association.ProjectResources2ProjectTitle where _pidx.Active.GetValueOrDefault(true) select _pidx;
       foreach (var _row2 in _myActiveProjects)
         m_ProjectDropDown.Items.Add(new ListItem(_row2.Title, _row2.Identyfikator.ToString()));
-      var _myActiveWorkloads = from _widx in Me.Workload where _widx.Workload2ProjectTitle.Active.GetValueOrDefault(true) select _widx;
-      double _myHoursInProjects = _myActiveWorkloads.Sum(_wld => _wld.Hours.GetValueOrDefault(0));
-      var _myActiveEstimate = from _estimate in Me.Estimation where _estimate.Estimation2ProjectTitle.Active.GetValueOrDefault(true) select _estimate;
-      double _myEstimate = _myActiveEstimate.Sum(_est => _est.EstimatedWorkload.GetValueOrDefault(0));
-      string _rprt = "You have reported {0} and planned {1} working hours";
-      ShowActionResult(GenericStateMachineEngine.ActionResult.NotValidated(String.Format(_rprt, _myHoursInProjects, _myEstimate)));
-      _rprt = "There are working hours in projects {0}, allocated {1} and reported {2}";
+      string _rprt = "All  working hours in projects available={0}; allocated={1}; reported {2};";
       double _allHoursInProjects = _myActiveProjects.Sum(_idx => _idx.ProjectHours.GetValueOrDefault(0));
       var _allEstmations = from _pix in _myActiveProjects let _eent = _pix.Estimation from _eix in _eent select _eix;
       double _allocatedInProjects = _allEstmations.Sum(_x => _x.EstimatedWorkload.GetValueOrDefault(0));
       var _allWorkloads = from _pix in _myActiveProjects let _wkEnt = _pix.Workload from _widx in _wkEnt select _widx;
       double _reportedInProjects = _allWorkloads.Sum(_x => _x.Hours.GetValueOrDefault(0));
       ShowActionResult(GenericStateMachineEngine.ActionResult.NotValidated(String.Format(_rprt, _allHoursInProjects, _allocatedInProjects, _reportedInProjects)));
+      double _myAvailableHours = _allHoursInProjects - Math.Max(_allocatedInProjects, _reportedInProjects);
+      var _myActiveWorkloads = from _widx in Me.Workload where _widx.Workload2ProjectTitle.Active.GetValueOrDefault(true) select _widx;
+      double _myReportedHours = _myActiveWorkloads.Sum(_wld => _wld.Hours.GetValueOrDefault(0));
+      var _myActiveEstimate = from _estimate in Me.Estimation where _estimate.Estimation2ProjectTitle.Active.GetValueOrDefault(true) select _estimate;
+      double _myAllocated = _myActiveEstimate.Sum(_est => _est.EstimatedWorkload.GetValueOrDefault(0));
+      _rprt = "Your working hours in projects available={0}; allocated={1}; reported {2};";
+      ShowActionResult(GenericStateMachineEngine.ActionResult.NotValidated(String.Format(_rprt, _myAvailableHours, _myAllocated, _myReportedHours)));
     }
     private void UpdateWorkload()
     {
@@ -401,16 +402,16 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
       FillupTaskaDropDown();
       if (SelectedProject == null)
         return;
-      string _rprt = "There are working hours in the selected project available={0}; allocated for all={1}; reported by all={2}";
+      string _rprt = "All working hours in the selected project available={0}; allocated={1}; reported={2}";
       double _estimatedForAll = SelectedProject.Estimation.Sum(_x => _x.EstimatedWorkload.GetValueOrDefault(0));
       double _reportedByAll = SelectedProject.Workload.Sum(_x => _x.Hours.GetValueOrDefault(0));
-      double _availableForMe = SelectedProject.ProjectHours.GetValueOrDefault(0) - _estimatedForAll - _reportedByAll;
+      double _availableForMe = SelectedProject.ProjectHours.GetValueOrDefault(0) - Math.Max(_estimatedForAll, _reportedByAll);
       ShowActionResult(GenericStateMachineEngine.ActionResult.NotValidated(String.Format(_rprt, SelectedProject.ProjectHours.GetValueOrDefault(0), _estimatedForAll, _reportedByAll)));
       var _myEstimates = from _eidx in SelectedProject.Estimation where _eidx.Estimation2ResourcesTitle == Me select _eidx;
       double _EstimatedForMe = _myEstimates.Sum(_x => _x.EstimatedWorkload.GetValueOrDefault(0));
       var _myWokloads = from _widx in SelectedProject.Workload where _widx.Workload2ResourcesTitle == Me select _widx;
       double _reportedByMe = _myWokloads.Sum(_x => _x.Hours.GetValueOrDefault(0));
-      _rprt = "There are working hours in the selected project available={0}; allocated for you={1}; reported by you ={2}";
+      _rprt = "Your working hours in the selected project: available={0}; allocated={1}; reported={2}";
       ShowActionResult(GenericStateMachineEngine.ActionResult.NotValidated(String.Format(_rprt, _availableForMe, _EstimatedForMe, _reportedByMe)));
     }
     protected void m_GridView_SelectedIndexChanged(object sender, EventArgs e)
@@ -431,7 +432,11 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     /// <param name="e"></param>
     protected void m_Calendar_SelectionChanged(object sender, EventArgs e)
     {
-      //double _hoursADay = (from _widx in _entt.Workload where _widx.WorkloadDate == m_Calendar.SelectedDate select _widx.Hours.Value ).ToList<double>().AsQueryable().Sum<double>();
+      double _hoursADay = (from _widx in Me.Workload
+                           where _widx.WorkloadDate.Value.Date == m_Calendar.SelectedDate.Date
+                           select _widx).Sum(_x => _x.Hours.GetValueOrDefault());
+      string _rprtTemplate = "You have reported {0} working hours for the selected day {1:D}";
+      m_HoursADayLabel.Text = String.Format(_rprtTemplate, _hoursADay, m_Calendar.SelectedDate.Date);
       m_WorkloadHoursTextBox.Text = String.Empty;
       m_WorkloadDescriptionTextBox.Text = String.Empty;
       FillupWorkflowGridView();
