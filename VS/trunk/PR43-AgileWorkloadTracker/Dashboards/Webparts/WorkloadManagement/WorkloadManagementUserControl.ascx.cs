@@ -209,15 +209,14 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
       try
       {
         double _hours = TextBoxToHours();
-        Projects _project = Element.GetAtIndex<Projects>(m_DataContext.DataContext.Projects, m_ProjectDropDown.SelectedValue);
         Tasks _task = Element.GetAtIndex<Tasks>(m_DataContext.DataContext.Task, m_TaskDropDown.SelectedValue);
         at = "newOne";
         Workload _newOne = new Workload()
         {
           Hours = _hours,
           Title = m_WorkloadDescriptionTextBox.Text,
-          Workload2ProjectTitle = _project,
-          Workload2StageTitle = _project.Project2StageTitle,
+          Workload2ProjectTitle = SelectedProject,
+          Workload2StageTitle = SelectedProject == null ? null : SelectedProject.Project2StageTitle,
           Workload2TaskTitle = _task,
           WorkloadDate = m_Calendar.SelectedDate.Date
         };
@@ -257,7 +256,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
       m_WorkloadMinutesDropDown.Enabled = (_set & GenericStateMachineEngine.ControlsSet.EditModeOn) != 0;
       m_WorkloadHoursTextBox.Enabled = (_set & GenericStateMachineEngine.ControlsSet.EditModeOn) != 0;
       m_WorkloadDescriptionTextBox.Enabled = (_set & GenericStateMachineEngine.ControlsSet.EditModeOn) != 0;
-      m_ProjectDropDown.Enabled = (_set & GenericStateMachineEngine.ControlsSet.EditModeOn) != 0;
+      //m_ProjectDropDown.Enabled = (_set & GenericStateMachineEngine.ControlsSet.EditModeOn) != 0;
       m_TaskDropDown.Enabled = (_set & GenericStateMachineEngine.ControlsSet.EditModeOn) != 0;
       m_GridView.Enabled = (_set & GenericStateMachineEngine.ControlsSet.EditModeOn) == 0;
       m_Calendar.Enabled = (_set & GenericStateMachineEngine.ControlsSet.EditModeOn) == 0;
@@ -288,11 +287,11 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
         int _indx = m_GridView.SelectedIndex;
         Workload _wkl = Element.GetAtIndex<Workload>(m_DataContext.DataContext.Workload, m_GridView.SelectedDataKey.Value.ToString());
         Tasks _task = Element.GetAtIndex<Tasks>(m_DataContext.DataContext.Task, m_TaskDropDown.SelectedValue);
-        Projects _project = Element.GetAtIndex<Projects>(m_DataContext.DataContext.Projects, m_ProjectDropDown.SelectedValue);
         _wkl.Hours = _hours;
         _wkl.Title = m_WorkloadDescriptionTextBox.Text;
         _wkl.WorkloadDate = m_Calendar.SelectedDate.Date;
-        _wkl.Workload2ProjectTitle = _project;
+        _wkl.Workload2ProjectTitle = SelectedProject;
+        _wkl.Workload2StageTitle = SelectedProject == null ? null : SelectedProject.Project2StageTitle;
         _wkl.Workload2TaskTitle = _task;
         m_DataContext.DataContext.SubmitChanges();
         FillupWorkflowGridView();
@@ -351,25 +350,36 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     private void FillupTaskaDropDown()
     {
       m_TaskDropDown.Items.Clear();
-      if (m_ProjectDropDown.SelectedIndex <= 0)
+      if (SelectedProject == null)
         m_TaskDropDown.Items.Add(new ListItem(m_SelectProjectDropDownEntry, String.Empty) { Selected = true });
       else
       {
         m_TaskDropDown.Items.Clear();
         m_TaskDropDown.Items.Add(new ListItem(m_SelectTaskDropDownEntry, String.Empty) { Selected = true });
-        Projects _cp = Element.GetAtIndex<Projects>(m_DataContext.DataContext.Projects, m_ProjectDropDown.SelectedValue);
-        foreach (Tasks _taskIdx in from _tidx in _cp.Tasks select _tidx)
+        foreach (Tasks _taskIdx in from _tidx in SelectedProject.Tasks select _tidx)
           m_TaskDropDown.Items.Add(new ListItem(_taskIdx.Title, _taskIdx.Identyfikator.ToString()));
-        //TODO liczba godzin w projekcie planowane i wykorzystane 
       }
     }
     private void FillupProjectDropDown()
     {
-      //TODO [AWT-3488] Change the ProjectYear column in the Projects
       m_ProjectDropDown.Items.Clear();
       m_ProjectDropDown.Items.Add(new ListItem(m_SelectProjectDropDownEntry, String.Empty) { Selected = true });
-      foreach (var _row2 in Me.ProjectResources)
-        m_ProjectDropDown.Items.Add(new ListItem(_row2.ProjectResources2ProjectTitle.Title, _row2.ProjectResources2ProjectTitle.Identyfikator.ToString()));
+      var _myActiveProjects = from _association in Me.ProjectResources let _pidx = _association.ProjectResources2ProjectTitle where _pidx.Active.GetValueOrDefault(true) select _pidx;
+      foreach (var _row2 in _myActiveProjects)
+        m_ProjectDropDown.Items.Add(new ListItem(_row2.Title, _row2.Identyfikator.ToString()));
+      var _myActiveWorkloads = from _widx in Me.Workload where _widx.Workload2ProjectTitle.Active.GetValueOrDefault(true) select _widx;
+      double _myHoursInProjects = _myActiveWorkloads.Sum(_wld => _wld.Hours.GetValueOrDefault(0));
+      var _myActiveEstimate = from _estimate in Me.Estimation where _estimate.Estimation2ProjectTitle.Active.GetValueOrDefault(true) select _estimate;
+      double _myEstimate = _myActiveEstimate.Sum(_est => _est.EstimatedWorkload.GetValueOrDefault(0));
+      string _rprt = "You have reported {0} and planned {1} working hours";
+      ShowActionResult(GenericStateMachineEngine.ActionResult.NotValidated(String.Format(_rprt, _myHoursInProjects, _myEstimate)));
+      _rprt = "There are working hours in projects {0}, allocated {1} and reported {2}";
+      double _allHoursInProjects = _myActiveProjects.Sum(_idx => _idx.ProjectHours.GetValueOrDefault(0));
+      var _allEstmations = from _pix in _myActiveProjects let _eent = _pix.Estimation from _eix in _eent select _eix;
+      double _allocatedInProjects = _allEstmations.Sum(_x => _x.EstimatedWorkload.GetValueOrDefault(0));
+      var _allWorkloads = from _pix in _myActiveProjects let _wkEnt = _pix.Workload from _widx in _wkEnt select _widx;
+      double _reportedInProjects = _allWorkloads.Sum(_x => _x.Hours.GetValueOrDefault(0));
+      ShowActionResult(GenericStateMachineEngine.ActionResult.NotValidated(String.Format(_rprt, _allHoursInProjects, _allocatedInProjects, _reportedInProjects)));
     }
     private void UpdateWorkload()
     {
@@ -389,6 +399,19 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     private void m_ProjectDropDown_SelectedIndexChanged(object sender, EventArgs e)
     {
       FillupTaskaDropDown();
+      if (SelectedProject == null)
+        return;
+      string _rprt = "There are working hours in the selected project available={0}; allocated for all={1}; reported by all={2}";
+      double _estimatedForAll = SelectedProject.Estimation.Sum(_x => _x.EstimatedWorkload.GetValueOrDefault(0));
+      double _reportedByAll = SelectedProject.Workload.Sum(_x => _x.Hours.GetValueOrDefault(0));
+      double _availableForMe = SelectedProject.ProjectHours.GetValueOrDefault(0) - _estimatedForAll - _reportedByAll;
+      ShowActionResult(GenericStateMachineEngine.ActionResult.NotValidated(String.Format(_rprt, SelectedProject.ProjectHours.GetValueOrDefault(0), _estimatedForAll, _reportedByAll)));
+      var _myEstimates = from _eidx in SelectedProject.Estimation where _eidx.Estimation2ResourcesTitle == Me select _eidx;
+      double _EstimatedForMe = _myEstimates.Sum(_x => _x.EstimatedWorkload.GetValueOrDefault(0));
+      var _myWokloads = from _widx in SelectedProject.Workload where _widx.Workload2ResourcesTitle == Me select _widx;
+      double _reportedByMe = _myWokloads.Sum(_x => _x.Hours.GetValueOrDefault(0));
+      _rprt = "There are working hours in the selected project available={0}; allocated for you={1}; reported by you ={2}";
+      ShowActionResult(GenericStateMachineEngine.ActionResult.NotValidated(String.Format(_rprt, _availableForMe, _EstimatedForMe, _reportedByMe)));
     }
     protected void m_GridView_SelectedIndexChanged(object sender, EventArgs e)
     {
@@ -412,14 +435,6 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
       m_WorkloadHoursTextBox.Text = String.Empty;
       m_WorkloadDescriptionTextBox.Text = String.Empty;
       FillupWorkflowGridView();
-      //this.f
-      //if (m_GridView.SelectedRow == null)
-      //{
-      //CurrentYear = m_Calendar.SelectedDate.Year;
-      //main.projektyTableadapter.Fill(main.godzinySchema.PROJEKTY, Convert.ToDecimal(CurrentYear));
-      //PopulateProjectList_SelectedState_Or_Date_HasBeenChanged();
-      //}
-
     }
     #endregion
 
@@ -438,6 +453,16 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
         if (p_me == null)
           p_me = CAS.AgileWorkloadTracker.Linq.Resources.FindForUser(m_DataContext.DataContext, SPContext.Current.Web.CurrentUser);
         return p_me;
+      }
+    }
+    private Projects p_Projects = null;
+    private Projects SelectedProject
+    {
+      get
+      {
+        if (p_Projects == null && m_ProjectDropDown.SelectedIndex > 0)
+          p_Projects = Element.GetAtIndex<Projects>(m_DataContext.DataContext.Projects, m_ProjectDropDown.SelectedValue);
+        return p_Projects;
       }
     }
     #endregion
@@ -463,41 +488,5 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     }
     #endregion
 
-    //private int CurrentYear
-    //{
-    //  get
-    //  {
-    //    //TODO ???
-    //    //if (Session[m_keyCurrentYear] != null && Session[m_keyCurrentYear] is int)
-    //    //  return ((int)Session[m_keyCurrentYear]);
-    //    if (m_Calendar.SelectedDate.Year > 2000)
-    //      return m_Calendar.SelectedDate.Year;
-    //    return DateTime.Now.Year;
-    //  }
-    //  set
-    //  {
-    //    //Session[m_keyCurrentYear] = value;
-    //  }
-    //}
-    //protected void DropDownList_Project_SelectedIndexChanged(object sender, EventArgs e)
-    //{
-    //  if (DropDownList_Project.SelectedIndex == DropDownList_Project.Items.Count - 1)
-    //  {
-    //    DropDownList_Load();
-    //    Label14.Visible = false;
-    //    Label15.Visible = false;
-    //  }
-    //  else
-    //  {
-    //    PlanDataSource.SelectParameters[0].DefaultValue = main.projekty(DropDownList_Project.SelectedValue, Convert.ToDecimal(CurrentYear)).ID.ToString();
-    //    Label12.Text = String.Format("Aktualnie masz {0} godzin w tym projekcie", main.suma(main.projekty(DropDownList_Project.SelectedValue, Convert.ToDecimal(CurrentYear)).ID, UserName));
-    //    Label14.Text = String.Format("Aktualnie masz zaplanowane {0} godzin w kategorii {1}", main.plankatsum(UserName, main.projekty(DropDownList_Project.SelectedValue, Convert.ToDecimal(CurrentYear)).ID_KATEGORII, Convert.ToDecimal(CurrentYear)), main.kategorie(main.projekty(DropDownList_Project.SelectedValue, Convert.ToDecimal(CurrentYear)).ID_KATEGORII).NAZWA);
-    //    Label14.BackColor = Color.White;
-    //    Label15.Text = String.Format("Aktualnie masz przepracowane {0} godzin w kategorii {1}", main.godzinykatsum(UserName, main.projekty(DropDownList_Project.SelectedValue, Convert.ToDecimal(CurrentYear)).ID_KATEGORII, Convert.ToDecimal(CurrentYear)), main.kategorie(main.projekty(DropDownList_Project.SelectedValue, Convert.ToDecimal(CurrentYear)).ID_KATEGORII).NAZWA);
-    //    Label15.BackColor = Color.White;
-    //    Label16.Text = String.Format("Aktualnie masz wpisanych {0} godzin", main.sumadaily(UserName, Calendar1.SelectedDate.Date.ToString()));
-    //  }
-    //  Label8.Text = string.Empty;
-    //}
   }
 }
