@@ -61,6 +61,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
           m_GridView.Columns.Add(new BoundField() { DataField = "Hours", HeaderText = "Workload [h]" });
           m_GridView.Columns.Add(new BoundField() { DataField = "Project", HeaderText = "Project" });
           m_GridView.Columns.Add(new BoundField() { DataField = "Task", HeaderText = "Task" });
+          m_GridView.Columns.Add(new BoundField() { DataField = "Description", HeaderText = "Description", Visible = true });
           m_GridView.Columns.Add(new BoundField() { DataField = "ID", HeaderText = "ID", Visible = false });
           m_GridView.DataKeyNames = new String[] { "ID" };
           //Calendar setup
@@ -202,10 +203,9 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     }
     private GenericStateMachineEngine.ActionResult CreateNewWokload()
     {
-       string at = "starting";
+      string at = "starting";
       if (!Page.IsValid)
         return GenericStateMachineEngine.ActionResult.NotValidated("Required information must be provided.");
-
       try
       {
         double _hours = TextBoxToHours();
@@ -228,6 +228,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
         _newOne.Workload2ResourcesTitle = Me;
         at = "SubmitChanges #2";
         m_DataContext.DataContext.SubmitChanges();
+        FillupWorkflowGridView();
       }
       catch (Exception _ex)
       {
@@ -247,6 +248,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
         m_GridView.SelectedIndex = -1;
         m_DataContext.DataContext.Workload.RecycleOnSubmit(_wkl);
         m_DataContext.DataContext.SubmitChanges();
+        FillupWorkflowGridView();
       }
       catch (Exception _ex)
       {
@@ -274,7 +276,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     {
       try
       {
-        this.FillupWorkflowGridView();
+        UpdateWorkload();
       }
       catch (Exception _ex)
       {
@@ -287,6 +289,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
       double _hours = TextBoxToHours();
       try
       {
+        int _indx = m_GridView.SelectedIndex;
         Workload _wkl = Element.GetAtIndex<Workload>(m_DataContext.DataContext.Workload, m_GridView.SelectedDataKey.Value.ToString());
         Tasks _task = Element.GetAtIndex<Tasks>(m_DataContext.DataContext.Task, m_TaskDropDown.SelectedValue);
         _wkl.Hours = _hours;
@@ -294,6 +297,9 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
         _wkl.WorkloadDate = m_Calendar.SelectedDate.Date;
         _wkl.Workload2TaskTitle = _task;
         m_DataContext.DataContext.SubmitChanges();
+        FillupWorkflowGridView();
+        m_GridView.SelectedIndex = _indx;
+        UpdateWorkload();
       }
       catch (Exception _ex)
       {
@@ -333,11 +339,12 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
                                   Hours = _wlidx.Hours.GetValueOrDefault(0),
                                   Project = _wlidx.Workload2ProjectTitle == null ? m_SelectProjectDropDownEntry : _wlidx.Workload2ProjectTitle.Title,
                                   Task = _wlidx.Workload2TaskTitle == null ? m_SelectTaskDropDownEntry : _wlidx.Workload2TaskTitle.Title,
+                                  Description = _wlidx.Title,
                                   ID = _wlidx.Identyfikator
                                 };
       }
       m_GridView.DataBind();
-      m_GridView.SelectedIndex = -1;
+      ClearUserInterface();
     }
     private void FillupTaskaDropDown()
     {
@@ -362,7 +369,18 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
       foreach (var _row2 in from _pidx in m_DataContext.DataContext.Projects select _pidx)
         m_ProjectDropDown.Items.Add(new ListItem(_row2.Title, _row2.Identyfikator.ToString()));
     }
-    private string At { get; set; }
+    private void UpdateWorkload()
+    {
+      if (m_GridView.SelectedIndex < 0)
+        return;
+      string _selection = m_GridView.SelectedDataKey.Value.ToString();
+      Workload _workload = Element.GetAtIndex<Workload>(m_DataContext.DataContext.Workload, _selection);
+      m_WorkloadDescriptionTextBox.Text = _workload.Title;
+      m_WorkloadHoursTextBox.Text = _workload.Hours.GetValueOrDefault(0).ToString();
+      m_ProjectDropDown.Select(_workload.Workload2ProjectTitle != null ? _workload.Workload2ProjectTitle.Identyfikator.Value : 0);
+      FillupTaskaDropDown();
+      m_TaskDropDown.Select(_workload.Workload2TaskTitle != null ? _workload.Workload2TaskTitle.Identyfikator.Value : 0);
+    }
     #endregion
 
     #region event handlers
@@ -374,15 +392,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     {
       try
       {
-        if (m_GridView.SelectedIndex < 0)
-          return;
-        string _selection = m_GridView.SelectedDataKey.Value.ToString();
-        Workload _workload = Element.GetAtIndex<Workload>(m_DataContext.DataContext.Workload, _selection);
-        m_WorkloadDescriptionTextBox.Text = _workload.Title;
-        m_WorkloadHoursTextBox.Text = _workload.Hours.GetValueOrDefault(0).ToString();
-        m_ProjectDropDown.Select(_workload.Workload2ProjectTitle != null ? _workload.Workload2ProjectTitle.Identyfikator.Value : 0);
-        FillupTaskaDropDown();
-        m_TaskDropDown.Select(_workload.Workload2TaskTitle != null ? _workload.Workload2TaskTitle.Identyfikator.Value : 0);
+        UpdateWorkload();
       }
       catch (Exception _ex)
       {
@@ -397,7 +407,6 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     protected void m_Calendar_SelectionChanged(object sender, EventArgs e)
     {
       //double _hoursADay = (from _widx in _entt.Workload where _widx.WorkloadDate == m_Calendar.SelectedDate select _widx.Hours.Value ).ToList<double>().AsQueryable().Sum<double>();
-      m_ButtonAddNew.Enabled = true;
       m_WorkloadHoursTextBox.Text = String.Empty;
       m_WorkloadDescriptionTextBox.Text = String.Empty;
       FillupWorkflowGridView();
@@ -413,6 +422,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     #endregion
 
     #region vars
+    private string At { get; set; }
     private const string m_SelectProjectDropDownEntry = "  -- select project -- ";
     private const string m_SelectTaskDropDownEntry = "  -- select task -- ";
     private const string m_keyCurrentYear = "CurrentYear";
