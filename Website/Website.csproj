@@ -219,7 +219,9 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="ContentTypes\Resolution\Elements.xml" />
-    <Content Include="ContentTypes\Resources\Elements.xml" />
+    <Content Include="ContentTypes\Resources\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="ContentTypes\Stage\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
