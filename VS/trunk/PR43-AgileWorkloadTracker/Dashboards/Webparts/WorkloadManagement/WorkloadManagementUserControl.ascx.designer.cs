@@ -283,15 +283,6 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement {
         protected global::System.Web.UI.WebControls.GridView m_GridViewProjectSummary;
         
         /// <summary>
-        /// ScriptLink1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Microsoft.SharePoint.WebControls.ScriptLink ScriptLink1;
-        
-        /// <summary>
         /// m_HoursADayLabel control.
         /// </summary>
         /// <remarks>
