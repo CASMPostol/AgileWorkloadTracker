@@ -113,7 +113,7 @@
     </asp:TableRow>
   </asp:Table>
 </asp:Panel>
-<asp:Panel ID="m_PanelSelect" runat="server" BorderColor="ActiveCaptionText" GroupingText="Current workload">
+<asp:Panel ID="m_PanelSelect" runat="server" BorderColor="ActiveCaptionText" GroupingText="Workload - today's summary">
   <asp:GridView ID="m_GridView" runat="server" AutoGenerateColumns="False" BackColor="#91cdf2"
     BorderColor="#91cdf2" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="ID"
     ForeColor="Black" GridLines="Vertical" OnSelectedIndexChanged="m_GridView_SelectedIndexChanged"
@@ -150,4 +150,17 @@
     <AlternatingRowStyle BackColor="#FFFFFF" />
   </asp:GridView>
 </asp:Panel>
+<asp:Panel ID="m_PanelProjectummary" runat="server" BorderColor="ActiveCaptionText" GroupingText="Workload - project's summary">
+    <asp:GridView ID="m_GridViewProjectSummary" runat="server" AutoGenerateColumns="False" BackColor="#91cdf2"
+    BorderColor="#91cdf2" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="ID"
+    ForeColor="Black" GridLines="Vertical" OnSelectedIndexChanged="m_GridView_SelectedIndexChanged"
+    AutoGenerateSelectButton="false">
+    <FooterStyle BackColor="#91cdf2" />
+    <RowStyle BackColor="#FFFFFF" BorderColor="#91cdf2" />
+    <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Right" />
+    <HeaderStyle BackColor="#91cdf2" Font-Bold="True" ForeColor="#000000" />
+    <AlternatingRowStyle BackColor="#FFFFFF" />
+  </asp:GridView>
+</asp:Panel>
+
 <asp:Label runat="server" ID="m_HoursADayLabel"></asp:Label>
