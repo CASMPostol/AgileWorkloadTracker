@@ -170,10 +170,6 @@
     <AlternatingRowStyle BackColor="#FFFFFF" />
   </asp:GridView>
 </asp:Panel>
-<SharePoint:ScriptLink ID="ScriptLink1"  runat="server">
-</SharePoint:ScriptLink>
-
-
 
 
 <asp:Label runat="server" ID="m_HoursADayLabel"></asp:Label>
