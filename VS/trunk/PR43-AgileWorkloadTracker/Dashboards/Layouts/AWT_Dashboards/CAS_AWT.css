@@ -69,4 +69,20 @@
     font-size:10pt;
     width:150px;
 }
+a.ms-addnew{
+    font-weight:normal;
+    font-family:verdana;
+    font-size:8pt;
+    color:#003399;
+    text-decoration:none;
+}
+a.ms-addnew:Hover{
+    color:#000000;
+    text-decoration:underline;
+}
+a.ms-addnew:Visited
+{
+    color:#003399;
+    text-decoration:none;
+}
     
