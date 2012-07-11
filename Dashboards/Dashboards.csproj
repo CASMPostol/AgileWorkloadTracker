@@ -109,7 +109,9 @@
     <Content Include="WebPartPages\AddEditWorkloadTemplate.aspx" />
     <Content Include="WebPartPages\Elements.xml" />
     <Content Include="Webparts\WorkloadManagement\Elements.xml" />
-    <Content Include="Webparts\WorkloadManagement\WorkloadManagementUserControl.ascx" />
+    <Content Include="Webparts\WorkloadManagement\WorkloadManagementUserControl.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\SharePointTools\Microsoft.VisualStudio.SharePoint.targets" />

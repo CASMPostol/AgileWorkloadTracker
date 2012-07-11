@@ -10,7 +10,6 @@
   <List Name="Milestone" />
   <List Name="Partners" />
   <List Name="Priority" />
-  <List Name="Project resources" />
   <List Name="Projects" />
   <List Name="Resolution" />
   <List Name="Resources" />
@@ -55,10 +54,6 @@
     <Column Name="Estimation2ResourcesTitle" Member="Estimation2ResourcesTitle" />
     <Column Name="Estimation2ProjectTitle" Member="Estimation2ProjectTitle" />
     <Column Name="EstimatedWorkload" Member="EstimatedWorkload" />
-  </ContentType>
-  <ContentType Name="ProjectResources" Class="ProjectResources">
-    <Column Name="ProjectResources2ProjectTitle" Member="ProjectResources2ProjectTitle" />
-    <Column Name="ProjectResources2ResourcesTitle" Member="ProjectResources2ResourcesTitle" />
   </ContentType>
   <ContentType Name="Type" Class="Type">
     <Column Name="Title" Member="Title" />

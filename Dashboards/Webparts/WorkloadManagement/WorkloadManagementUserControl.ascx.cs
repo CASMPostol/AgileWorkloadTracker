@@ -375,7 +375,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
       m_ProjectDropDown.Items.Add( new ListItem( m_SelectProjectDropDownEntry, String.Empty ) { Selected = true } );
       if ( Me == null )
         return;
-      var _myActiveProjects = from _association in Me.ProjectResources let _pidx = _association.ProjectResources2ProjectTitle where _pidx.Active.GetValueOrDefault( true ) select _pidx;
+      var _myActiveProjects = from _association in Me.Estimation let _pidx = _association.Estimation2ProjectTitle where _pidx.Active.GetValueOrDefault( true ) select _pidx;
       foreach ( var _row2 in _myActiveProjects )
         m_ProjectDropDown.Items.Add( new ListItem( _row2.Title, _row2.Identyfikator.ToString() ) );
       string _rprt = "All  working hours in projects available={0}; allocated={1}; reported {2};";

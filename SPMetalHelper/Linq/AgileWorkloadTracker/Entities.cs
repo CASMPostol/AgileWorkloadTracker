@@ -104,16 +104,6 @@ namespace CAS.AgileWorkloadTracker.Linq {
 		}
 		
 		/// <summary>
-		/// Project Resources List Instance
-		/// </summary>
-		[Microsoft.SharePoint.Linq.ListAttribute(Name="Project resources")]
-		public Microsoft.SharePoint.Linq.EntityList<ProjectResources> ProjectResources {
-			get {
-				return this.GetList<ProjectResources>("Project resources");
-			}
-		}
-		
-		/// <summary>
 		/// Project List Instance
 		/// </summary>
 		[Microsoft.SharePoint.Linq.ListAttribute(Name="Projects")]
@@ -246,7 +236,6 @@ namespace CAS.AgileWorkloadTracker.Linq {
 	[Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type=typeof(Milestone))]
 	[Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type=typeof(Partners))]
 	[Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type=typeof(Priority))]
-	[Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type=typeof(ProjectResources))]
 	[Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type=typeof(Projects))]
 	[Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type=typeof(Resolution))]
 	[Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type=typeof(Resources))]
@@ -1430,100 +1419,6 @@ namespace CAS.AgileWorkloadTracker.Linq {
 	}
 	
 	/// <summary>
-	/// Project Resources Content Type
-	/// </summary>
-	[Microsoft.SharePoint.Linq.ContentTypeAttribute(Name="ProjectResources", Id="0x010024CBE050404F4A828D35E2F33E991219")]
-	internal partial class ProjectResources : Element {
-		
-		private Microsoft.SharePoint.Linq.EntityRef<Projects> _projectResources2ProjectTitle;
-		
-		private Microsoft.SharePoint.Linq.EntityRef<Resources> _projectResources2ResourcesTitle;
-		
-		#region Extensibility Method Definitions
-		partial void OnLoaded();
-		partial void OnValidate();
-		partial void OnCreated();
-		#endregion
-		
-		public ProjectResources() {
-			this._projectResources2ProjectTitle = new Microsoft.SharePoint.Linq.EntityRef<Projects>();
-			this._projectResources2ProjectTitle.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Projects>>(this.OnProjectResources2ProjectTitleSync);
-			this._projectResources2ProjectTitle.OnChanged += new System.EventHandler(this.OnProjectResources2ProjectTitleChanged);
-			this._projectResources2ProjectTitle.OnChanging += new System.EventHandler(this.OnProjectResources2ProjectTitleChanging);
-			this._projectResources2ResourcesTitle = new Microsoft.SharePoint.Linq.EntityRef<Resources>();
-			this._projectResources2ResourcesTitle.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Resources>>(this.OnProjectResources2ResourcesTitleSync);
-			this._projectResources2ResourcesTitle.OnChanged += new System.EventHandler(this.OnProjectResources2ResourcesTitleChanged);
-			this._projectResources2ResourcesTitle.OnChanging += new System.EventHandler(this.OnProjectResources2ResourcesTitleChanging);
-			this.OnCreated();
-		}
-		
-		[System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
-		[Microsoft.SharePoint.Linq.RemovedColumnAttribute()]
-		public override string Title {
-			get {
-				throw new System.InvalidOperationException("Pole Title zostało usunięte z typu zawartości ProjectResources.");
-			}
-			set {
-				throw new System.InvalidOperationException("Pole Title zostało usunięte z typu zawartości ProjectResources.");
-			}
-		}
-		
-		[Microsoft.SharePoint.Linq.AssociationAttribute(Name="ProjectResources2ProjectTitle", Storage="_projectResources2ProjectTitle", MultivalueType=Microsoft.SharePoint.Linq.AssociationType.Single, List="Projects")]
-		public Projects ProjectResources2ProjectTitle {
-			get {
-				return this._projectResources2ProjectTitle.GetEntity();
-			}
-			set {
-				this._projectResources2ProjectTitle.SetEntity(value);
-			}
-		}
-		
-		[Microsoft.SharePoint.Linq.AssociationAttribute(Name="ProjectResources2ResourcesTitle", Storage="_projectResources2ResourcesTitle", MultivalueType=Microsoft.SharePoint.Linq.AssociationType.Single, List="Resources")]
-		public Resources ProjectResources2ResourcesTitle {
-			get {
-				return this._projectResources2ResourcesTitle.GetEntity();
-			}
-			set {
-				this._projectResources2ResourcesTitle.SetEntity(value);
-			}
-		}
-		
-		private void OnProjectResources2ProjectTitleChanging(object sender, System.EventArgs e) {
-			this.OnPropertyChanging("ProjectResources2ProjectTitle", this._projectResources2ProjectTitle.Clone());
-		}
-		
-		private void OnProjectResources2ProjectTitleChanged(object sender, System.EventArgs e) {
-			this.OnPropertyChanged("ProjectResources2ProjectTitle");
-		}
-		
-		private void OnProjectResources2ProjectTitleSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Projects> e) {
-			if ((Microsoft.SharePoint.Linq.AssociationChangedState.Added == e.State)) {
-				e.Item.ProjectResources.Add(this);
-			}
-			else {
-				e.Item.ProjectResources.Remove(this);
-			}
-		}
-		
-		private void OnProjectResources2ResourcesTitleChanging(object sender, System.EventArgs e) {
-			this.OnPropertyChanging("ProjectResources2ResourcesTitle", this._projectResources2ResourcesTitle.Clone());
-		}
-		
-		private void OnProjectResources2ResourcesTitleChanged(object sender, System.EventArgs e) {
-			this.OnPropertyChanged("ProjectResources2ResourcesTitle");
-		}
-		
-		private void OnProjectResources2ResourcesTitleSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Resources> e) {
-			if ((Microsoft.SharePoint.Linq.AssociationChangedState.Added == e.State)) {
-				e.Item.ProjectResources.Add(this);
-			}
-			else {
-				e.Item.ProjectResources.Remove(this);
-			}
-		}
-	}
-	
-	/// <summary>
 	/// Projects Content Type
 	/// </summary>
 	[Microsoft.SharePoint.Linq.ContentTypeAttribute(Name="Projects", Id="0x01000C2CCABBA2E1473BA2623EFDA04E749E")]
@@ -1551,8 +1446,6 @@ namespace CAS.AgileWorkloadTracker.Linq {
 		
 		private Microsoft.SharePoint.Linq.EntitySet<Estimation> _estimation;
 		
-		private Microsoft.SharePoint.Linq.EntitySet<ProjectResources> _projectResources;
-		
 		private Microsoft.SharePoint.Linq.EntityRef<Resources> _project2ResourcesTitle;
 		
 		private Microsoft.SharePoint.Linq.EntityRef<Contracts> _project2ContractTitle;
@@ -1574,10 +1467,6 @@ namespace CAS.AgileWorkloadTracker.Linq {
 			this._estimation.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Estimation>>(this.OnEstimationSync);
 			this._estimation.OnChanged += new System.EventHandler(this.OnEstimationChanged);
 			this._estimation.OnChanging += new System.EventHandler(this.OnEstimationChanging);
-			this._projectResources = new Microsoft.SharePoint.Linq.EntitySet<ProjectResources>();
-			this._projectResources.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<ProjectResources>>(this.OnProjectResourcesSync);
-			this._projectResources.OnChanged += new System.EventHandler(this.OnProjectResourcesChanged);
-			this._projectResources.OnChanging += new System.EventHandler(this.OnProjectResourcesChanging);
 			this._project2ResourcesTitle = new Microsoft.SharePoint.Linq.EntityRef<Resources>();
 			this._project2ResourcesTitle.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Resources>>(this.OnProject2ResourcesTitleSync);
 			this._project2ResourcesTitle.OnChanged += new System.EventHandler(this.OnProject2ResourcesTitleChanged);
@@ -1751,16 +1640,6 @@ namespace CAS.AgileWorkloadTracker.Linq {
 			}
 		}
 		
-		[Microsoft.SharePoint.Linq.AssociationAttribute(Name="ProjectResources2ProjectTitle", Storage="_projectResources", ReadOnly=true, MultivalueType=Microsoft.SharePoint.Linq.AssociationType.Backward, List="Project resources")]
-		public Microsoft.SharePoint.Linq.EntitySet<ProjectResources> ProjectResources {
-			get {
-				return this._projectResources;
-			}
-			set {
-				this._projectResources.Assign(value);
-			}
-		}
-		
 		[Microsoft.SharePoint.Linq.AssociationAttribute(Name="Project2ResourcesTitle", Storage="_project2ResourcesTitle", MultivalueType=Microsoft.SharePoint.Linq.AssociationType.Single, List="Resources")]
 		public Resources Project2ResourcesTitle {
 			get {
@@ -1825,23 +1704,6 @@ namespace CAS.AgileWorkloadTracker.Linq {
 			}
 			else {
 				e.Item.Estimation2ProjectTitle = null;
-			}
-		}
-		
-		private void OnProjectResourcesChanging(object sender, System.EventArgs e) {
-			this.OnPropertyChanging("ProjectResources", this._projectResources.Clone());
-		}
-		
-		private void OnProjectResourcesChanged(object sender, System.EventArgs e) {
-			this.OnPropertyChanged("ProjectResources");
-		}
-		
-		private void OnProjectResourcesSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<ProjectResources> e) {
-			if ((Microsoft.SharePoint.Linq.AssociationChangedState.Added == e.State)) {
-				e.Item.ProjectResources2ProjectTitle = this;
-			}
-			else {
-				e.Item.ProjectResources2ProjectTitle = null;
 			}
 		}
 		
@@ -1993,8 +1855,6 @@ namespace CAS.AgileWorkloadTracker.Linq {
 		
 		private Microsoft.SharePoint.Linq.EntitySet<Estimation> _estimation;
 		
-		private Microsoft.SharePoint.Linq.EntitySet<ProjectResources> _projectResources;
-		
 		private Microsoft.SharePoint.Linq.EntitySet<Projects> _projects;
 		
 		private System.Nullable<int> _employeeADAccountIdentyfikator;
@@ -2016,10 +1876,6 @@ namespace CAS.AgileWorkloadTracker.Linq {
 			this._estimation.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Estimation>>(this.OnEstimationSync);
 			this._estimation.OnChanged += new System.EventHandler(this.OnEstimationChanged);
 			this._estimation.OnChanging += new System.EventHandler(this.OnEstimationChanging);
-			this._projectResources = new Microsoft.SharePoint.Linq.EntitySet<ProjectResources>();
-			this._projectResources.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<ProjectResources>>(this.OnProjectResourcesSync);
-			this._projectResources.OnChanged += new System.EventHandler(this.OnProjectResourcesChanged);
-			this._projectResources.OnChanging += new System.EventHandler(this.OnProjectResourcesChanging);
 			this._projects = new Microsoft.SharePoint.Linq.EntitySet<Projects>();
 			this._projects.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Projects>>(this.OnProjectsSync);
 			this._projects.OnChanged += new System.EventHandler(this.OnProjectsChanged);
@@ -2070,16 +1926,6 @@ namespace CAS.AgileWorkloadTracker.Linq {
 			}
 			set {
 				this._estimation.Assign(value);
-			}
-		}
-		
-		[Microsoft.SharePoint.Linq.AssociationAttribute(Name="ProjectResources2ResourcesTitle", Storage="_projectResources", ReadOnly=true, MultivalueType=Microsoft.SharePoint.Linq.AssociationType.Backward, List="Project resources")]
-		public Microsoft.SharePoint.Linq.EntitySet<ProjectResources> ProjectResources {
-			get {
-				return this._projectResources;
-			}
-			set {
-				this._projectResources.Assign(value);
 			}
 		}
 		
@@ -2155,23 +2001,6 @@ namespace CAS.AgileWorkloadTracker.Linq {
 			}
 			else {
 				e.Item.Estimation2ResourcesTitle = null;
-			}
-		}
-		
-		private void OnProjectResourcesChanging(object sender, System.EventArgs e) {
-			this.OnPropertyChanging("ProjectResources", this._projectResources.Clone());
-		}
-		
-		private void OnProjectResourcesChanged(object sender, System.EventArgs e) {
-			this.OnPropertyChanged("ProjectResources");
-		}
-		
-		private void OnProjectResourcesSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<ProjectResources> e) {
-			if ((Microsoft.SharePoint.Linq.AssociationChangedState.Added == e.State)) {
-				e.Item.ProjectResources2ResourcesTitle = this;
-			}
-			else {
-				e.Item.ProjectResources2ResourcesTitle = null;
 			}
 		}
 		
