@@ -68,9 +68,6 @@
     <None Include="ContentTypes\Priority\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{6aaa080f-4779-4e2e-9d2b-f40826a2fb3e}</SharePointProjectItemId>
     </None>
-    <None Include="ContentTypes\ProjectResources\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{859d07ae-e946-4f3f-98e2-8dfa3907d230}</SharePointProjectItemId>
-    </None>
     <None Include="ContentTypes\Projects\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{6dd5c4bd-0c8e-45e6-831f-e2c706aa287c}</SharePointProjectItemId>
     </None>
@@ -137,12 +134,6 @@
     </None>
     <None Include="Lists\PriorityListTemplate\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{2ad2b32b-8989-492b-ae26-15afa09c3287}</SharePointProjectItemId>
-    </None>
-    <None Include="Lists\ProjectResourcesListTemplate\ProjectResourcesList\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{4b1e6ec3-7544-491e-801e-dad84bede00b}</SharePointProjectItemId>
-    </None>
-    <None Include="Lists\ProjectResourcesListTemplate\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{8c680648-19d7-4950-8ecc-45d38c255413}</SharePointProjectItemId>
     </None>
     <None Include="Lists\ProjectsListTemplate\ProjectsList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{6b72d405-7c5e-4032-bba5-9dc74d459217}</SharePointProjectItemId>
@@ -214,7 +205,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="ContentTypes\Priority\Elements.xml" />
-    <Content Include="ContentTypes\ProjectResources\Elements.xml" />
     <Content Include="ContentTypes\Projects\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -264,9 +254,6 @@
     <Content Include="Lists\PriorityListTemplate\Elements.xml" />
     <Content Include="Lists\PriorityListTemplate\PriorityList\Elements.xml" />
     <Content Include="Lists\PriorityListTemplate\Schema.xml" />
-    <Content Include="Lists\ProjectResourcesListTemplate\Elements.xml" />
-    <Content Include="Lists\ProjectResourcesListTemplate\ProjectResourcesList\Elements.xml" />
-    <Content Include="Lists\ProjectResourcesListTemplate\Schema.xml" />
     <Content Include="Lists\ProjectsListTemplate\Elements.xml">
       <SubType>Designer</SubType>
     </Content>

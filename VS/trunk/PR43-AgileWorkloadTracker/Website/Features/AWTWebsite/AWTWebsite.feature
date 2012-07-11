@@ -27,9 +27,6 @@
     <projectItemReference itemId="76916b7e-8491-4809-819e-994a3c2708f8" />
     <projectItemReference itemId="69da074e-d7f4-4c84-b0ba-4b37e6990375" />
     <projectItemReference itemId="da73a843-0083-4a96-a2a6-fb3f30e64719" />
-    <projectItemReference itemId="859d07ae-e946-4f3f-98e2-8dfa3907d230" />
-    <projectItemReference itemId="4b1e6ec3-7544-491e-801e-dad84bede00b" />
-    <projectItemReference itemId="8c680648-19d7-4950-8ecc-45d38c255413" />
     <projectItemReference itemId="0aa9c80e-4d00-4cd3-ba3e-a28038a2cdd8" />
     <projectItemReference itemId="49f5b4ef-f0bb-41a3-a0ec-7a8420b57e47" />
     <projectItemReference itemId="8a51afd8-f1be-48eb-9516-6f97015f3132" />
