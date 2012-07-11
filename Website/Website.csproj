@@ -229,7 +229,9 @@
     <Content Include="ContentTypes\TaskComments\Elements.xml" />
     <Content Include="ContentTypes\Tasks\Elements.xml" />
     <Content Include="ContentTypes\Type\Elements.xml" />
-    <Content Include="ContentTypes\Workload\Elements.xml" />
+    <Content Include="ContentTypes\Workload\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Features\AWTWebsite\AWTWebsite.Template.xml">
       <DependentUpon>AWTWebsite.feature</DependentUpon>
     </Content>
