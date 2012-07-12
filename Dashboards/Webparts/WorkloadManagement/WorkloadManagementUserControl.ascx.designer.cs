@@ -265,6 +265,15 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement {
         protected global::System.Web.UI.WebControls.GridView m_GridView;
         
         /// <summary>
+        /// m_HoursADayLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label m_HoursADayLabel;
+        
+        /// <summary>
         /// m_PanelProjectummary control.
         /// </summary>
         /// <remarks>
@@ -281,14 +290,5 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView m_GridViewProjectSummary;
-        
-        /// <summary>
-        /// m_HoursADayLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label m_HoursADayLabel;
     }
 }

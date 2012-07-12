@@ -6,6 +6,7 @@ using CAS.AgileWorkloadTracker.Linq;
 using CAS.SharePoint.Linq;
 using CAS.SharePoint.Web;
 using Microsoft.SharePoint;
+using CAS.AgileWorkloadTracker.Dashboards.Linq;
 
 namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
 {
@@ -61,7 +62,9 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
           m_GridView.Columns.Add( new BoundField() { DataField = "Hours", HeaderText = "Workload [h]" } );
           m_GridView.Columns.Add( new BoundField() { DataField = "Project", HeaderText = "Project" } );
           m_GridView.Columns.Add( new BoundField() { DataField = "Task", HeaderText = "Task" } );
-          m_GridView.Columns.Add( new BoundField() { DataField = "Description", HeaderText = "Description", Visible = true } );
+          //m_GridView.Columns.Add( new BoundField() { DataField = "Description", HeaderText = "Description", Visible = true } );
+          string _urlFormat = @"http://casmp/sites/a04/Lists/WorkloadList/DispForm.aspx?ID={0}";
+          m_GridView.Columns.Add( new HyperLinkField() { DataTextField = "Description", HeaderText = "Workload", DataNavigateUrlFields = new string[] { "ID" }, DataNavigateUrlFormatString = _urlFormat, Visible = true } );
           m_GridView.Columns.Add( new BoundField() { DataField = "ID", HeaderText = "ID", Visible = false } );
           m_GridView.DataKeyNames = new String[] { "ID" };
           //Calendar setup
@@ -74,6 +77,9 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
           At = "FindForUser";
           FillupWorkflowGridView();
           ShouwUserInformation();
+          m_GridViewProjectSummary.AutoGenerateColumns = true;
+          m_GridViewProjectSummary.DataKeyNames = new String[] { "Scope" };
+          FillupGridViewProjectSummary();
         }
         m_ProjectDropDown.SelectedIndexChanged += new EventHandler( m_ProjectDropDown_SelectedIndexChanged );
         m_ButtonSave.Click += new EventHandler( m_StateMachineEngine.SaveButton_Click );
@@ -90,12 +96,12 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     /// <summary>
     /// Loads the state of the control.
     /// </summary>
-    /// <param name="state">The state.</param>
-    protected override void LoadControlState( object state )
+    /// <param name="savedState">The state.</param>
+    protected override void LoadControlState( object savedState )
     {
-      if ( state != null )
+      if ( savedState != null )
       {
-        m_ControlState = (ControlState)state;
+        m_ControlState = (ControlState)savedState;
         m_StateMachineEngine.InitMahine( m_ControlState.InterfaceState );
       }
       else
@@ -208,8 +214,8 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
         return GenericStateMachineEngine.ActionResult.NotValidated( "Required information must be provided." );
       try
       {
-        double _hours = TextBoxToHours(m_WorkloadHoursTextBox, m_WorkloadHoursLabel.Text);
-        if (m_TaskDropDown.SelectedValue.IsNullOrEmpty())
+        double _hours = TextBoxToHours( m_WorkloadHoursTextBox, m_WorkloadHoursLabel.Text );
+        if ( m_TaskDropDown.SelectedValue.IsNullOrEmpty() )
           return GenericStateMachineEngine.ActionResult.NotValidated( "You must select a task to create new workload" );
         Tasks _task = Element.GetAtIndex<Tasks>( m_DataContext.DataContext.Task, m_TaskDropDown.SelectedValue );
         at = "newOne";
@@ -230,6 +236,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
         at = "SubmitChanges #2";
         m_DataContext.DataContext.SubmitChanges();
         FillupWorkflowGridView();
+        FillupGridViewProjectSummary();
       }
       catch ( Exception _ex )
       {
@@ -283,7 +290,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     }
     private GenericStateMachineEngine.ActionResult Update()
     {
-      double _hours = TextBoxToHours(m_WorkloadHoursTextBox, m_WorkloadHoursLabel.Text);
+      double _hours = TextBoxToHours( m_WorkloadHoursTextBox, m_WorkloadHoursLabel.Text );
       try
       {
         int _indx = m_GridView.SelectedIndex;
@@ -299,6 +306,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
         FillupWorkflowGridView();
         m_GridView.SelectedIndex = _indx;
         UpdateWorkload();
+        FillupGridViewProjectSummary();
       }
       catch ( Exception _ex )
       {
@@ -315,7 +323,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     #endregion
 
     #region helpers
-    private double TextBoxToHours(TextBox _textBox, string _label)
+    private double TextBoxToHours( TextBox _textBox, string _label )
     {
       try
       {
@@ -323,7 +331,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
       }
       catch ( Exception )
       {
-        throw new ApplicationException(String.Format("{0} texbox has wrong number", _label));
+        throw new ApplicationException( String.Format( "{0} texbox has wrong number", _label ) );
       }
     }
     private void ShouwUserInformation()
@@ -373,25 +381,15 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     {
       m_ProjectDropDown.Items.Clear();
       m_ProjectDropDown.Items.Add( new ListItem( m_SelectProjectDropDownEntry, String.Empty ) { Selected = true } );
-      if ( Me == null )
+      if ( Me == null || MyProjects == null)
         return;
-      var _myActiveProjects = from _association in Me.Estimation let _pidx = _association.Estimation2ProjectTitle where _pidx.Active.GetValueOrDefault( true ) select _pidx;
-      foreach ( var _row2 in _myActiveProjects )
+      foreach ( var _row2 in MyProjects )
         m_ProjectDropDown.Items.Add( new ListItem( _row2.Title, _row2.Identyfikator.ToString() ) );
-      string _rprt = "All  working hours in projects available={0}; allocated={1}; reported {2};";
-      double _allHoursInProjects = _myActiveProjects.Sum( _idx => _idx.ProjectHours.GetValueOrDefault( 0 ) );
-      var _allEstmations = from _pix in _myActiveProjects let _eent = _pix.Estimation from _eix in _eent select _eix;
-      double _allocatedInProjects = _allEstmations.Sum( _x => _x.EstimatedWorkload.GetValueOrDefault( 0 ) );
-      var _allWorkloads = from _pix in _myActiveProjects let _wkEnt = _pix.Workload from _widx in _wkEnt select _widx;
-      double _reportedInProjects = _allWorkloads.Sum( _x => _x.Hours.GetValueOrDefault( 0 ) );
-      ShowActionResult( GenericStateMachineEngine.ActionResult.NotValidated( String.Format( _rprt, _allHoursInProjects, _allocatedInProjects, _reportedInProjects ) ) );
-      double _myAvailableHours = _allHoursInProjects - Math.Max( _allocatedInProjects, _reportedInProjects );
-      var _myActiveWorkloads = from _widx in Me.Workload where _widx.Workload2ProjectTitle.Active.GetValueOrDefault( true ) select _widx;
-      double _myReportedHours = _myActiveWorkloads.Sum( _wld => _wld.Hours.GetValueOrDefault( 0 ) );
-      var _myActiveEstimate = from _estimate in Me.Estimation where _estimate.Estimation2ProjectTitle.Active.GetValueOrDefault( true ) select _estimate;
-      double _myAllocated = _myActiveEstimate.Sum( _est => _est.EstimatedWorkload.GetValueOrDefault( 0 ) );
-      _rprt = "Your working hours in projects available={0}; allocated={1}; reported {2};";
-      ShowActionResult( GenericStateMachineEngine.ActionResult.NotValidated( String.Format( _rprt, _myAvailableHours, _myAllocated, _myReportedHours ) ) );
+    }
+    private void FillupGridViewProjectSummary()
+    {
+      m_GridViewProjectSummary.DataSource = WorkloadSummary.WorkloadSummaryList( MyProjects, Me );
+      m_GridViewProjectSummary.DataBind();
     }
     private void UpdateWorkload()
     {
@@ -415,17 +413,6 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
         if ( SelectedProject == null || Me == null )
           return;
         FillupTaskaDropDown();
-        string _rprt = "All working hours in the selected project available={0}; allocated={1}; reported={2}";
-        double _estimatedForAll = SelectedProject.Estimation.Sum( _x => _x.EstimatedWorkload.GetValueOrDefault( 0 ) );
-        double _reportedByAll = SelectedProject.Workload.Sum( _x => _x.Hours.GetValueOrDefault( 0 ) );
-        double _availableForMe = SelectedProject.ProjectHours.GetValueOrDefault( 0 ) - Math.Max( _estimatedForAll, _reportedByAll );
-        ShowActionResult( GenericStateMachineEngine.ActionResult.NotValidated( String.Format( _rprt, SelectedProject.ProjectHours.GetValueOrDefault( 0 ), _estimatedForAll, _reportedByAll ) ) );
-        var _myEstimates = from _eidx in SelectedProject.Estimation where _eidx.Estimation2ResourcesTitle == Me select _eidx;
-        double _EstimatedForMe = _myEstimates.Sum( _x => _x.EstimatedWorkload.GetValueOrDefault( 0 ) );
-        var _myWokloads = from _widx in SelectedProject.Workload where _widx.Workload2ResourcesTitle == Me select _widx;
-        double _reportedByMe = _myWokloads.Sum( _x => _x.Hours.GetValueOrDefault( 0 ) );
-        _rprt = "Your working hours in the selected project: available={0}; allocated={1}; reported={2}";
-        ShowActionResult( GenericStateMachineEngine.ActionResult.NotValidated( String.Format( _rprt, _availableForMe, _EstimatedForMe, _reportedByMe ) ) );
       }
       catch ( Exception _ex )
       {
@@ -462,7 +449,6 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
         string _rprtTemplate = "You have reported {0} working hours for the selected day {1:D}";
         m_HoursADayLabel.Text = String.Format( _rprtTemplate, _hoursADay, m_Calendar.SelectedDate.Date );
         FillupWorkflowGridView();
-
       }
       catch ( Exception _ex )
       {
@@ -496,6 +482,16 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
         if ( p_Projects == null && m_ProjectDropDown.SelectedIndex > 0 )
           p_Projects = Element.GetAtIndex<Projects>( m_DataContext.DataContext.Projects, m_ProjectDropDown.SelectedValue );
         return p_Projects;
+      }
+    }
+    private IQueryable<Projects> p_MyProjects = null;
+    private IQueryable<Projects> MyProjects
+    {
+      get
+      {
+        if ( Me != null && p_MyProjects == null )
+          p_MyProjects = from _association in Me.Estimation let _pidx = _association.Estimation2ProjectTitle where _pidx.Active.GetValueOrDefault( true ) select _pidx;
+        return p_MyProjects;
       }
     }
     #endregion
