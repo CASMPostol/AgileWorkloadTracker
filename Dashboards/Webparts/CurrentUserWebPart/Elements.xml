@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/" >
+  <Module Name="CurrentUserWebPart" List="113" Url="_catalogs/wp">
+    <File Path="CurrentUserWebPart\CurrentUserWebPart.webpart"
+          Url="$SharePoint.Project.FileNameWithoutExtension$_CurrentUserWebPart.webpart"
+          Type="GhostableInLibrary">
+      <Property Name="Group" Value="CAS Agile Workload Tracker" />
+    </File>
+  </Module>
+</Elements>

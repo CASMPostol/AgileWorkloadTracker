@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ProjectItem Type="Microsoft.VisualStudio.SharePoint.VisualWebPart" DefaultFile="CurrentUserWebPartUserControl.ascx" SupportedTrustLevels="FullTrust" SupportedDeploymentScopes="Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
+  <Files>
+    <ProjectItemFile Source="Elements.xml" Target="CurrentUserWebPart\" Type="ElementManifest" />
+    <ProjectItemFile Source="CurrentUserWebPartUserControl.ascx" Target="CONTROLTEMPLATES\CAS.AgileWorkloadTracker.Dashboards\CurrentUserWebPart\" Type="TemplateFile" />
+    <ProjectItemFile Source="CurrentUserWebPart.webpart" Target="CurrentUserWebPart\" Type="ElementFile" />
+  </Files>
+  <SafeControls>
+    <SafeControl Name="SafeControlEntry1" Assembly="$SharePoint.Project.AssemblyFullName$" Namespace="CAS.AgileWorkloadTracker.Dashboards.CurrentUserWebPart" TypeName="*" IsSafe="true" IsSafeAgainstScript="false" />
+  </SafeControls>
+</ProjectItem>

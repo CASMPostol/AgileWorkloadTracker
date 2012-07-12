@@ -46,6 +46,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
@@ -61,6 +62,18 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Linq\WorkloadSummary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Webparts\CurrentUserWebPart\CurrentUserWebPart.cs" />
+    <Compile Include="Webparts\CurrentUserWebPart\CurrentUserWebPartUserControl.ascx.cs">
+      <DependentUpon>CurrentUserWebPartUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Webparts\CurrentUserWebPart\CurrentUserWebPartUserControl.ascx.designer.cs">
+      <DependentUpon>CurrentUserWebPartUserControl.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Webparts\CurrentUserWebPart\IUserDescriptor.cs" />
+    <Compile Include="Webparts\CurrentUserWebPart\UserDescriptor.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Webparts\WorkloadManagement\StateMachine.cs" />
     <Compile Include="Webparts\WorkloadManagement\WorkloadManagement.cs" />
     <Compile Include="Webparts\WorkloadManagement\WorkloadManagementUserControl.ascx.cs">
@@ -92,6 +105,10 @@
     <None Include="WebPartPages\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{b12ffa68-4e15-4ec7-b7cf-290c320b096d}</SharePointProjectItemId>
     </None>
+    <None Include="Webparts\CurrentUserWebPart\CurrentUserWebPart.webpart" />
+    <None Include="Webparts\CurrentUserWebPart\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{4123749d-8cce-4448-ac6f-42b1d90fac0f}</SharePointProjectItemId>
+    </None>
     <None Include="Webparts\WorkloadManagement\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{100a3882-20bf-46bc-9633-0d96d3701271}</SharePointProjectItemId>
     </None>
@@ -111,6 +128,10 @@
     <Content Include="Layouts\AWT_Dashboards\CAS_AWT.css" />
     <Content Include="WebPartPages\AddEditWorkloadTemplate.aspx" />
     <Content Include="WebPartPages\Elements.xml" />
+    <Content Include="Webparts\CurrentUserWebPart\CurrentUserWebPartUserControl.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="Webparts\CurrentUserWebPart\Elements.xml" />
     <Content Include="Webparts\WorkloadManagement\Elements.xml" />
     <Content Include="Webparts\WorkloadManagement\WorkloadManagementUserControl.ascx">
       <SubType>ASPXCodeBehind</SubType>
