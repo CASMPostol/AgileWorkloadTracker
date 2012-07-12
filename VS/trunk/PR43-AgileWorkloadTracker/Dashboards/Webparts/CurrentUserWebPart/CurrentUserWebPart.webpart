@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<webParts>
+  <webPart xmlns="http://schemas.microsoft.com/WebPart/v3">
+    <metaData>
+      <type name="CAS.AgileWorkloadTracker.Dashboards.CurrentUserWebPart.CurrentUserWebPart, $SharePoint.Project.AssemblyFullName$" />
+      <importErrorMessage>$Resources:core,ImportErrorMessage;</importErrorMessage>
+    </metaData>
+    <data>
+      <properties>
+        <property name="Title" type="string">Current User</property>
+        <property name="Description" type="string">Provides information about current user and his affiliation.</property>
+        <property name="AllowZoneChange" type="bool">True</property>
+        <property name="AllowConnect" type="bool">True</property>
+        <property name="ID" type="string">CurrentUserWebPart</property>
+      </properties>
+    </data>
+  </webPart>
+</webParts>
