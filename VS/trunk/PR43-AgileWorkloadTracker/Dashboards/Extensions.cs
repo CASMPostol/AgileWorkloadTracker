@@ -11,19 +11,19 @@ namespace CAS.AgileWorkloadTracker.Dashboards
     /// <returns>
     ///   true if the value parameter is null or an empty string (""); otherwise, false.</c>.
     /// </returns>
-    public static bool IsNullOrEmpty(this string _val)
+    public static bool IsNullOrEmpty( this string value )
     {
-      return String.IsNullOrEmpty(_val);
+      return String.IsNullOrEmpty( value );
     }
     /// <summary>
     /// String2s the int.
     /// </summary>
-    /// <param name="_val">The _val.</param>
+    /// <param name="value">The _val.</param>
     /// <returns></returns>
-    public static int? String2Int(this string _val)
+    public static int? String2Int( this string value )
     {
       int _ret;
-      if (int.TryParse(_val, out _ret))
+      if ( int.TryParse( value, out _ret ) )
       {
         return _ret;
       }
