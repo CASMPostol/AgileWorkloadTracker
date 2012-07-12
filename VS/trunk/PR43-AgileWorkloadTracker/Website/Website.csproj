@@ -295,7 +295,9 @@
     <Content Include="Lists\WorkloadListTemplate\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Lists\WorkloadListTemplate\Schema.xml" />
+    <Content Include="Lists\WorkloadListTemplate\Schema.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Lists\WorkloadListTemplate\WorkloadList\Elements.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
