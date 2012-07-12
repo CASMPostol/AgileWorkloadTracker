@@ -41,14 +41,19 @@
     <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.SharePoint.Linq, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SPMetalHelper\Linq\AgileWorkloadTracker\Entities.cs">
+      <Link>SharePoint\Entities.cs</Link>
+    </Compile>
     <Compile Include="Bugnet\Import2SharePoint.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -73,6 +78,13 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="SharePoint\Entities.partial.cs" />
+    <Compile Include="SharePoint\Importer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SharePoint\Importer.Designer.cs">
+      <DependentUpon>Importer.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -94,13 +106,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Bugnet\DatabaseContentDataSet.resx">
+      <DependentUpon>DatabaseContentDataSet.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Bugnet\Import2SharePoint.resx">
       <DependentUpon>Import2SharePoint.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="SharePoint\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

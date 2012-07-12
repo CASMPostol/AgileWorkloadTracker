@@ -32,5 +32,14 @@ namespace CAS.ITRDataAccess.Properties {
                 return ((string)(this["itrserverConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://casmp/sites/a04")]
+        public string RequestUrl {
+            get {
+                return ((string)(this["RequestUrl"]));
+            }
+        }
     }
 }

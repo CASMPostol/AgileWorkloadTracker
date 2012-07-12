@@ -20,7 +20,7 @@ namespace CAS.ITRDataAccess.Bugnet {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("DatabaseContent")]
+    [global::System.Xml.Serialization.XmlRootAttribute("DatabaseContentDataSet")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
     public partial class DatabaseContentDataSet : global::System.Data.DataSet {
         
@@ -865,9 +865,9 @@ namespace CAS.ITRDataAccess.Bugnet {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitClass() {
-            this.DataSetName = "DatabaseContent";
+            this.DataSetName = "DatabaseContentDataSet";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/DatabaseContent.xsd";
+            this.Namespace = "http://www.cas.eu/AgileWorkloadTracker/ITRDataAccess/DatabaseContent.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
             this.tableBug = new BugDataTable();
@@ -13115,7 +13115,7 @@ namespace CAS.ITRDataAccess.Bugnet {
         }
     }
 }
-namespace CAS.ITRDataAccess.Bugnet.DatabaseContentTableAdapters {
+namespace CAS.ITRDataAccess.Bugnet.DatabaseContentDataSetTableAdapters {
     
     
     /// <summary>
