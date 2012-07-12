@@ -1,0 +1,57 @@
+﻿// This file is used by Code Analysis to maintain SuppressMessage 
+// attributes that are applied to this project.
+// Project-level suppressions either have no target or are given 
+// a specific target and scoped to a namespace, type, member, etc.
+//
+// To add a suppression to this file, right-click the message in the 
+// Error List, point to "Suppress Message(s)", and click 
+// "In Project Suppression File".
+// You do not need to add suppressions to this file manually.
+
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContent+BugAttachmentDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContent+BugCommentDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContent+BugDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContent+BugHistoryDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContent+BugNotificationDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContent+BugTimeEntryDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContent+ComponentDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContent+HostSettingsDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "CAS", Scope = "namespace", Target = "CAS.ITRDataAccess" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "ITR", Scope = "namespace", Target = "CAS.ITRDataAccess" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "CAS", Scope = "namespace", Target = "CAS.ITRDataAccess.Bugnet" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "ITR", Scope = "namespace", Target = "CAS.ITRDataAccess.Bugnet" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Bugnet", Scope = "namespace", Target = "CAS.ITRDataAccess.Bugnet" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "CAS", Scope = "namespace", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContentTableAdapters" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "ITR", Scope = "namespace", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContentTableAdapters" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Bugnet", Scope = "namespace", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContentTableAdapters" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContentDataSet+BugAttachmentDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContentDataSet+BugCommentDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContentDataSet+BugDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContentDataSet+BugHistoryDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContentDataSet+BugNotificationDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContentDataSet+BugTimeEntryDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContentDataSet+ComponentDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContentDataSet+HostSettingsDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContentDataSet+LogDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContentDataSet+PermissionDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContentDataSet+PriorityDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContentDataSet+ProjectCustomFieldsDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContentDataSet+ProjectCustomFieldSelectionDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContentDataSet+ProjectCustomFieldTypeDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContentDataSet+ProjectCustomFieldValuesDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContentDataSet+ProjectDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "MailBox", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContentDataSet+ProjectMailBoxDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContentDataSet+ProjectMailBoxDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "MailBox", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContentDataSet+ProjectMailBoxRow" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContentDataSet+RelatedBugDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContentDataSet+ResolutionDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContentDataSet+RolePermissionDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContentDataSet+RolesDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContentDataSet+StatusDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContentDataSet+UserProjectsDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContentDataSet+UserRolesDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContentDataSet+VersionDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContentDataSet+TypeDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "MailBox", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContentTableAdapters.ProjectMailBoxTableAdapter" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "CAS" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "ITR" )]

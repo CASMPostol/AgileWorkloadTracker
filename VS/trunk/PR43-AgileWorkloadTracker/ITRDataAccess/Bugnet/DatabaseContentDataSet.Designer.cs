@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace ITRDataAccess {
+namespace CAS.ITRDataAccess.Bugnet {
     
     
     /// <summary>
@@ -22,7 +22,7 @@ namespace ITRDataAccess {
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
     [global::System.Xml.Serialization.XmlRootAttribute("DatabaseContent")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class DatabaseContent : global::System.Data.DataSet {
+    public partial class DatabaseContentDataSet : global::System.Data.DataSet {
         
         private BugDataTable tableBug;
         
@@ -124,7 +124,7 @@ namespace ITRDataAccess {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public DatabaseContent() {
+        public DatabaseContentDataSet() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -135,7 +135,7 @@ namespace ITRDataAccess {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected DatabaseContent(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        protected DatabaseContentDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -546,7 +546,7 @@ namespace ITRDataAccess {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public override global::System.Data.DataSet Clone() {
-            DatabaseContent cln = ((DatabaseContent)(base.Clone()));
+            DatabaseContentDataSet cln = ((DatabaseContentDataSet)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
@@ -1179,7 +1179,7 @@ namespace ITRDataAccess {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            DatabaseContent ds = new DatabaseContent();
+            DatabaseContentDataSet ds = new DatabaseContentDataSet();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -1810,7 +1810,7 @@ namespace ITRDataAccess {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DatabaseContent ds = new DatabaseContent();
+                DatabaseContentDataSet ds = new DatabaseContentDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -2121,7 +2121,7 @@ namespace ITRDataAccess {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DatabaseContent ds = new DatabaseContent();
+                DatabaseContentDataSet ds = new DatabaseContentDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -2494,7 +2494,7 @@ namespace ITRDataAccess {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DatabaseContent ds = new DatabaseContent();
+                DatabaseContentDataSet ds = new DatabaseContentDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -2820,7 +2820,7 @@ namespace ITRDataAccess {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DatabaseContent ds = new DatabaseContent();
+                DatabaseContentDataSet ds = new DatabaseContentDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -3178,7 +3178,7 @@ namespace ITRDataAccess {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DatabaseContent ds = new DatabaseContent();
+                DatabaseContentDataSet ds = new DatabaseContentDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -3473,7 +3473,7 @@ namespace ITRDataAccess {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DatabaseContent ds = new DatabaseContent();
+                DatabaseContentDataSet ds = new DatabaseContentDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -3813,7 +3813,7 @@ namespace ITRDataAccess {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DatabaseContent ds = new DatabaseContent();
+                DatabaseContentDataSet ds = new DatabaseContentDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -4120,7 +4120,7 @@ namespace ITRDataAccess {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DatabaseContent ds = new DatabaseContent();
+                DatabaseContentDataSet ds = new DatabaseContentDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -4394,7 +4394,7 @@ namespace ITRDataAccess {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DatabaseContent ds = new DatabaseContent();
+                DatabaseContentDataSet ds = new DatabaseContentDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -4756,7 +4756,7 @@ namespace ITRDataAccess {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DatabaseContent ds = new DatabaseContent();
+                DatabaseContentDataSet ds = new DatabaseContentDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -5046,7 +5046,7 @@ namespace ITRDataAccess {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DatabaseContent ds = new DatabaseContent();
+                DatabaseContentDataSet ds = new DatabaseContentDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -5339,7 +5339,7 @@ namespace ITRDataAccess {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DatabaseContent ds = new DatabaseContent();
+                DatabaseContentDataSet ds = new DatabaseContentDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -5754,7 +5754,7 @@ namespace ITRDataAccess {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DatabaseContent ds = new DatabaseContent();
+                DatabaseContentDataSet ds = new DatabaseContentDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -6098,7 +6098,7 @@ namespace ITRDataAccess {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DatabaseContent ds = new DatabaseContent();
+                DatabaseContentDataSet ds = new DatabaseContentDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -6425,7 +6425,7 @@ namespace ITRDataAccess {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DatabaseContent ds = new DatabaseContent();
+                DatabaseContentDataSet ds = new DatabaseContentDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -6703,7 +6703,7 @@ namespace ITRDataAccess {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DatabaseContent ds = new DatabaseContent();
+                DatabaseContentDataSet ds = new DatabaseContentDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -7014,7 +7014,7 @@ namespace ITRDataAccess {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DatabaseContent ds = new DatabaseContent();
+                DatabaseContentDataSet ds = new DatabaseContentDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -7338,7 +7338,7 @@ namespace ITRDataAccess {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DatabaseContent ds = new DatabaseContent();
+                DatabaseContentDataSet ds = new DatabaseContentDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -7633,7 +7633,7 @@ namespace ITRDataAccess {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DatabaseContent ds = new DatabaseContent();
+                DatabaseContentDataSet ds = new DatabaseContentDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -7911,7 +7911,7 @@ namespace ITRDataAccess {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DatabaseContent ds = new DatabaseContent();
+                DatabaseContentDataSet ds = new DatabaseContentDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -8209,7 +8209,7 @@ namespace ITRDataAccess {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DatabaseContent ds = new DatabaseContent();
+                DatabaseContentDataSet ds = new DatabaseContentDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -8535,7 +8535,7 @@ namespace ITRDataAccess {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DatabaseContent ds = new DatabaseContent();
+                DatabaseContentDataSet ds = new DatabaseContentDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -8813,7 +8813,7 @@ namespace ITRDataAccess {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DatabaseContent ds = new DatabaseContent();
+                DatabaseContentDataSet ds = new DatabaseContentDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -9106,7 +9106,7 @@ namespace ITRDataAccess {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DatabaseContent ds = new DatabaseContent();
+                DatabaseContentDataSet ds = new DatabaseContentDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -9414,7 +9414,7 @@ namespace ITRDataAccess {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DatabaseContent ds = new DatabaseContent();
+                DatabaseContentDataSet ds = new DatabaseContentDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -9691,7 +9691,7 @@ namespace ITRDataAccess {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DatabaseContent ds = new DatabaseContent();
+                DatabaseContentDataSet ds = new DatabaseContentDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -13115,7 +13115,7 @@ namespace ITRDataAccess {
         }
     }
 }
-namespace ITRDataAccess.DatabaseContentTableAdapters {
+namespace CAS.ITRDataAccess.Bugnet.DatabaseContentTableAdapters {
     
     
     /// <summary>
@@ -13376,7 +13376,7 @@ SELECT BugID, Summary, Description, ReportedDate, StatusID, PriorityID, TypeID, 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
+            this._connection.ConnectionString = global::CAS.ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -13396,7 +13396,7 @@ SELECT BugID, Summary, Description, ReportedDate, StatusID, PriorityID, TypeID, 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DatabaseContent.BugDataTable dataTable) {
+        public virtual int Fill(DatabaseContentDataSet.BugDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -13409,9 +13409,9 @@ SELECT BugID, Summary, Description, ReportedDate, StatusID, PriorityID, TypeID, 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DatabaseContent.BugDataTable GetData() {
+        public virtual DatabaseContentDataSet.BugDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DatabaseContent.BugDataTable dataTable = new DatabaseContent.BugDataTable();
+            DatabaseContentDataSet.BugDataTable dataTable = new DatabaseContentDataSet.BugDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -13419,14 +13419,14 @@ SELECT BugID, Summary, Description, ReportedDate, StatusID, PriorityID, TypeID, 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent.BugDataTable dataTable) {
+        public virtual int Update(DatabaseContentDataSet.BugDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent dataSet) {
+        public virtual int Update(DatabaseContentDataSet dataSet) {
             return this.Adapter.Update(dataSet, "Bug");
         }
         
@@ -13941,7 +13941,7 @@ SELECT VersionID, ProjectID, Name, SortOrder FROM Version WHERE (VersionID = @Ve
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
+            this._connection.ConnectionString = global::CAS.ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -13958,7 +13958,7 @@ SELECT VersionID, ProjectID, Name, SortOrder FROM Version WHERE (VersionID = @Ve
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DatabaseContent.VersionDataTable dataTable) {
+        public virtual int Fill(DatabaseContentDataSet.VersionDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -13971,9 +13971,9 @@ SELECT VersionID, ProjectID, Name, SortOrder FROM Version WHERE (VersionID = @Ve
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DatabaseContent.VersionDataTable GetData() {
+        public virtual DatabaseContentDataSet.VersionDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DatabaseContent.VersionDataTable dataTable = new DatabaseContent.VersionDataTable();
+            DatabaseContentDataSet.VersionDataTable dataTable = new DatabaseContentDataSet.VersionDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -13981,14 +13981,14 @@ SELECT VersionID, ProjectID, Name, SortOrder FROM Version WHERE (VersionID = @Ve
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent.VersionDataTable dataTable) {
+        public virtual int Update(DatabaseContentDataSet.VersionDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent dataSet) {
+        public virtual int Update(DatabaseContentDataSet dataSet) {
             return this.Adapter.Update(dataSet, "Version");
         }
         
@@ -14295,7 +14295,7 @@ SELECT BugAttachmentID, BugID, FileName, Description, FileSize, Type, UploadedDa
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
+            this._connection.ConnectionString = global::CAS.ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -14313,7 +14313,7 @@ SELECT BugAttachmentID, BugID, FileName, Description, FileSize, Type, UploadedDa
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DatabaseContent.BugAttachmentDataTable dataTable) {
+        public virtual int Fill(DatabaseContentDataSet.BugAttachmentDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -14326,9 +14326,9 @@ SELECT BugAttachmentID, BugID, FileName, Description, FileSize, Type, UploadedDa
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DatabaseContent.BugAttachmentDataTable GetData() {
+        public virtual DatabaseContentDataSet.BugAttachmentDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DatabaseContent.BugAttachmentDataTable dataTable = new DatabaseContent.BugAttachmentDataTable();
+            DatabaseContentDataSet.BugAttachmentDataTable dataTable = new DatabaseContentDataSet.BugAttachmentDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -14336,14 +14336,14 @@ SELECT BugAttachmentID, BugID, FileName, Description, FileSize, Type, UploadedDa
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent.BugAttachmentDataTable dataTable) {
+        public virtual int Update(DatabaseContentDataSet.BugAttachmentDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent dataSet) {
+        public virtual int Update(DatabaseContentDataSet dataSet) {
             return this.Adapter.Update(dataSet, "BugAttachment");
         }
         
@@ -14707,7 +14707,7 @@ SELECT BugCommentID, BugID, CreatedDate, Comment, CreatedUserId FROM BugComment 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
+            this._connection.ConnectionString = global::CAS.ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -14725,7 +14725,7 @@ SELECT BugCommentID, BugID, CreatedDate, Comment, CreatedUserId FROM BugComment 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DatabaseContent.BugCommentDataTable dataTable) {
+        public virtual int Fill(DatabaseContentDataSet.BugCommentDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -14738,9 +14738,9 @@ SELECT BugCommentID, BugID, CreatedDate, Comment, CreatedUserId FROM BugComment 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DatabaseContent.BugCommentDataTable GetData() {
+        public virtual DatabaseContentDataSet.BugCommentDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DatabaseContent.BugCommentDataTable dataTable = new DatabaseContent.BugCommentDataTable();
+            DatabaseContentDataSet.BugCommentDataTable dataTable = new DatabaseContentDataSet.BugCommentDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -14748,14 +14748,14 @@ SELECT BugCommentID, BugID, CreatedDate, Comment, CreatedUserId FROM BugComment 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent.BugCommentDataTable dataTable) {
+        public virtual int Update(DatabaseContentDataSet.BugCommentDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent dataSet) {
+        public virtual int Update(DatabaseContentDataSet dataSet) {
             return this.Adapter.Update(dataSet, "BugComment");
         }
         
@@ -15049,7 +15049,7 @@ SELECT BugHistoryID, BugID, FieldChanged, OldValue, NewValue, CreatedDate, Creat
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
+            this._connection.ConnectionString = global::CAS.ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -15067,7 +15067,7 @@ SELECT BugHistoryID, BugID, FieldChanged, OldValue, NewValue, CreatedDate, Creat
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DatabaseContent.BugHistoryDataTable dataTable) {
+        public virtual int Fill(DatabaseContentDataSet.BugHistoryDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -15080,9 +15080,9 @@ SELECT BugHistoryID, BugID, FieldChanged, OldValue, NewValue, CreatedDate, Creat
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DatabaseContent.BugHistoryDataTable GetData() {
+        public virtual DatabaseContentDataSet.BugHistoryDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DatabaseContent.BugHistoryDataTable dataTable = new DatabaseContent.BugHistoryDataTable();
+            DatabaseContentDataSet.BugHistoryDataTable dataTable = new DatabaseContentDataSet.BugHistoryDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -15090,14 +15090,14 @@ SELECT BugHistoryID, BugID, FieldChanged, OldValue, NewValue, CreatedDate, Creat
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent.BugHistoryDataTable dataTable) {
+        public virtual int Update(DatabaseContentDataSet.BugHistoryDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent dataSet) {
+        public virtual int Update(DatabaseContentDataSet dataSet) {
             return this.Adapter.Update(dataSet, "BugHistory");
         }
         
@@ -15434,7 +15434,7 @@ SELECT BugNotificationID, BugID, CreatedUserId FROM BugNotification WHERE (BugNo
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
+            this._connection.ConnectionString = global::CAS.ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -15451,7 +15451,7 @@ SELECT BugNotificationID, BugID, CreatedUserId FROM BugNotification WHERE (BugNo
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DatabaseContent.BugNotificationDataTable dataTable) {
+        public virtual int Fill(DatabaseContentDataSet.BugNotificationDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -15464,9 +15464,9 @@ SELECT BugNotificationID, BugID, CreatedUserId FROM BugNotification WHERE (BugNo
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DatabaseContent.BugNotificationDataTable GetData() {
+        public virtual DatabaseContentDataSet.BugNotificationDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DatabaseContent.BugNotificationDataTable dataTable = new DatabaseContent.BugNotificationDataTable();
+            DatabaseContentDataSet.BugNotificationDataTable dataTable = new DatabaseContentDataSet.BugNotificationDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -15474,14 +15474,14 @@ SELECT BugNotificationID, BugID, CreatedUserId FROM BugNotification WHERE (BugNo
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent.BugNotificationDataTable dataTable) {
+        public virtual int Update(DatabaseContentDataSet.BugNotificationDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent dataSet) {
+        public virtual int Update(DatabaseContentDataSet dataSet) {
             return this.Adapter.Update(dataSet, "BugNotification");
         }
         
@@ -15754,7 +15754,7 @@ SELECT BugTimeEntryId, BugId, WorkDate, Duration, BugCommentId, CreatedUserId FR
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
+            this._connection.ConnectionString = global::CAS.ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -15772,7 +15772,7 @@ SELECT BugTimeEntryId, BugId, WorkDate, Duration, BugCommentId, CreatedUserId FR
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DatabaseContent.BugTimeEntryDataTable dataTable) {
+        public virtual int Fill(DatabaseContentDataSet.BugTimeEntryDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -15785,9 +15785,9 @@ SELECT BugTimeEntryId, BugId, WorkDate, Duration, BugCommentId, CreatedUserId FR
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DatabaseContent.BugTimeEntryDataTable GetData() {
+        public virtual DatabaseContentDataSet.BugTimeEntryDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DatabaseContent.BugTimeEntryDataTable dataTable = new DatabaseContent.BugTimeEntryDataTable();
+            DatabaseContentDataSet.BugTimeEntryDataTable dataTable = new DatabaseContentDataSet.BugTimeEntryDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -15795,14 +15795,14 @@ SELECT BugTimeEntryId, BugId, WorkDate, Duration, BugCommentId, CreatedUserId FR
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent.BugTimeEntryDataTable dataTable) {
+        public virtual int Update(DatabaseContentDataSet.BugTimeEntryDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent dataSet) {
+        public virtual int Update(DatabaseContentDataSet dataSet) {
             return this.Adapter.Update(dataSet, "BugTimeEntry");
         }
         
@@ -16080,7 +16080,7 @@ SELECT ComponentID, ProjectID, Name, ParentComponentID FROM Component WHERE (Com
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
+            this._connection.ConnectionString = global::CAS.ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -16097,7 +16097,7 @@ SELECT ComponentID, ProjectID, Name, ParentComponentID FROM Component WHERE (Com
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DatabaseContent.ComponentDataTable dataTable) {
+        public virtual int Fill(DatabaseContentDataSet.ComponentDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -16110,9 +16110,9 @@ SELECT ComponentID, ProjectID, Name, ParentComponentID FROM Component WHERE (Com
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DatabaseContent.ComponentDataTable GetData() {
+        public virtual DatabaseContentDataSet.ComponentDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DatabaseContent.ComponentDataTable dataTable = new DatabaseContent.ComponentDataTable();
+            DatabaseContentDataSet.ComponentDataTable dataTable = new DatabaseContentDataSet.ComponentDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -16120,14 +16120,14 @@ SELECT ComponentID, ProjectID, Name, ParentComponentID FROM Component WHERE (Com
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent.ComponentDataTable dataTable) {
+        public virtual int Update(DatabaseContentDataSet.ComponentDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent dataSet) {
+        public virtual int Update(DatabaseContentDataSet dataSet) {
             return this.Adapter.Update(dataSet, "Component");
         }
         
@@ -16434,7 +16434,7 @@ SELECT SettingName, SettingValue FROM HostSettings WHERE (SettingName = @Setting
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
+            this._connection.ConnectionString = global::CAS.ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -16451,7 +16451,7 @@ SELECT SettingName, SettingValue FROM HostSettings WHERE (SettingName = @Setting
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DatabaseContent.HostSettingsDataTable dataTable) {
+        public virtual int Fill(DatabaseContentDataSet.HostSettingsDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -16464,9 +16464,9 @@ SELECT SettingName, SettingValue FROM HostSettings WHERE (SettingName = @Setting
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DatabaseContent.HostSettingsDataTable GetData() {
+        public virtual DatabaseContentDataSet.HostSettingsDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DatabaseContent.HostSettingsDataTable dataTable = new DatabaseContent.HostSettingsDataTable();
+            DatabaseContentDataSet.HostSettingsDataTable dataTable = new DatabaseContentDataSet.HostSettingsDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -16474,14 +16474,14 @@ SELECT SettingName, SettingValue FROM HostSettings WHERE (SettingName = @Setting
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent.HostSettingsDataTable dataTable) {
+        public virtual int Update(DatabaseContentDataSet.HostSettingsDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent dataSet) {
+        public virtual int Update(DatabaseContentDataSet dataSet) {
             return this.Adapter.Update(dataSet, "HostSettings");
         }
         
@@ -16773,7 +16773,7 @@ SELECT SettingName, SettingValue FROM HostSettings WHERE (SettingName = @Setting
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
+            this._connection.ConnectionString = global::CAS.ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -16791,7 +16791,7 @@ SELECT SettingName, SettingValue FROM HostSettings WHERE (SettingName = @Setting
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DatabaseContent.LogDataTable dataTable) {
+        public virtual int Fill(DatabaseContentDataSet.LogDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -16804,9 +16804,9 @@ SELECT SettingName, SettingValue FROM HostSettings WHERE (SettingName = @Setting
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DatabaseContent.LogDataTable GetData() {
+        public virtual DatabaseContentDataSet.LogDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DatabaseContent.LogDataTable dataTable = new DatabaseContent.LogDataTable();
+            DatabaseContentDataSet.LogDataTable dataTable = new DatabaseContentDataSet.LogDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -16814,14 +16814,14 @@ SELECT SettingName, SettingValue FROM HostSettings WHERE (SettingName = @Setting
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent.LogDataTable dataTable) {
+        public virtual int Update(DatabaseContentDataSet.LogDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent dataSet) {
+        public virtual int Update(DatabaseContentDataSet dataSet) {
             return this.Adapter.Update(dataSet, "Log");
         }
         
@@ -17058,7 +17058,7 @@ SELECT PermissionId, PermissionKey, Name FROM Permission WHERE (PermissionId = @
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
+            this._connection.ConnectionString = global::CAS.ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -17075,7 +17075,7 @@ SELECT PermissionId, PermissionKey, Name FROM Permission WHERE (PermissionId = @
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DatabaseContent.PermissionDataTable dataTable) {
+        public virtual int Fill(DatabaseContentDataSet.PermissionDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -17088,9 +17088,9 @@ SELECT PermissionId, PermissionKey, Name FROM Permission WHERE (PermissionId = @
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DatabaseContent.PermissionDataTable GetData() {
+        public virtual DatabaseContentDataSet.PermissionDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DatabaseContent.PermissionDataTable dataTable = new DatabaseContent.PermissionDataTable();
+            DatabaseContentDataSet.PermissionDataTable dataTable = new DatabaseContentDataSet.PermissionDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -17098,14 +17098,14 @@ SELECT PermissionId, PermissionKey, Name FROM Permission WHERE (PermissionId = @
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent.PermissionDataTable dataTable) {
+        public virtual int Update(DatabaseContentDataSet.PermissionDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent dataSet) {
+        public virtual int Update(DatabaseContentDataSet dataSet) {
             return this.Adapter.Update(dataSet, "Permission");
         }
         
@@ -17409,7 +17409,7 @@ SELECT PriorityID, Name, ImageUrl FROM Priority WHERE (PriorityID = @PriorityID)
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
+            this._connection.ConnectionString = global::CAS.ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -17426,7 +17426,7 @@ SELECT PriorityID, Name, ImageUrl FROM Priority WHERE (PriorityID = @PriorityID)
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DatabaseContent.PriorityDataTable dataTable) {
+        public virtual int Fill(DatabaseContentDataSet.PriorityDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -17439,9 +17439,9 @@ SELECT PriorityID, Name, ImageUrl FROM Priority WHERE (PriorityID = @PriorityID)
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DatabaseContent.PriorityDataTable GetData() {
+        public virtual DatabaseContentDataSet.PriorityDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DatabaseContent.PriorityDataTable dataTable = new DatabaseContent.PriorityDataTable();
+            DatabaseContentDataSet.PriorityDataTable dataTable = new DatabaseContentDataSet.PriorityDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -17449,14 +17449,14 @@ SELECT PriorityID, Name, ImageUrl FROM Priority WHERE (PriorityID = @PriorityID)
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent.PriorityDataTable dataTable) {
+        public virtual int Update(DatabaseContentDataSet.PriorityDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent dataSet) {
+        public virtual int Update(DatabaseContentDataSet dataSet) {
             return this.Adapter.Update(dataSet, "Priority");
         }
         
@@ -17800,7 +17800,7 @@ SELECT ProjectID, Name, Code, Description, UploadPath, CreateDate, Active, Acces
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
+            this._connection.ConnectionString = global::CAS.ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -17818,7 +17818,7 @@ SELECT ProjectID, Name, Code, Description, UploadPath, CreateDate, Active, Acces
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DatabaseContent.ProjectDataTable dataTable) {
+        public virtual int Fill(DatabaseContentDataSet.ProjectDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -17831,9 +17831,9 @@ SELECT ProjectID, Name, Code, Description, UploadPath, CreateDate, Active, Acces
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DatabaseContent.ProjectDataTable GetData() {
+        public virtual DatabaseContentDataSet.ProjectDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DatabaseContent.ProjectDataTable dataTable = new DatabaseContent.ProjectDataTable();
+            DatabaseContentDataSet.ProjectDataTable dataTable = new DatabaseContentDataSet.ProjectDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -17841,14 +17841,14 @@ SELECT ProjectID, Name, Code, Description, UploadPath, CreateDate, Active, Acces
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent.ProjectDataTable dataTable) {
+        public virtual int Update(DatabaseContentDataSet.ProjectDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent dataSet) {
+        public virtual int Update(DatabaseContentDataSet dataSet) {
             return this.Adapter.Update(dataSet, "Project");
         }
         
@@ -18280,7 +18280,7 @@ SELECT CustomFieldId, ProjectId, CustomFieldName, CustomFieldRequired, CustomFie
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
+            this._connection.ConnectionString = global::CAS.ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -18298,7 +18298,7 @@ SELECT CustomFieldId, ProjectId, CustomFieldName, CustomFieldRequired, CustomFie
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DatabaseContent.ProjectCustomFieldsDataTable dataTable) {
+        public virtual int Fill(DatabaseContentDataSet.ProjectCustomFieldsDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -18311,9 +18311,9 @@ SELECT CustomFieldId, ProjectId, CustomFieldName, CustomFieldRequired, CustomFie
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DatabaseContent.ProjectCustomFieldsDataTable GetData() {
+        public virtual DatabaseContentDataSet.ProjectCustomFieldsDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DatabaseContent.ProjectCustomFieldsDataTable dataTable = new DatabaseContent.ProjectCustomFieldsDataTable();
+            DatabaseContentDataSet.ProjectCustomFieldsDataTable dataTable = new DatabaseContentDataSet.ProjectCustomFieldsDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -18321,14 +18321,14 @@ SELECT CustomFieldId, ProjectId, CustomFieldName, CustomFieldRequired, CustomFie
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent.ProjectCustomFieldsDataTable dataTable) {
+        public virtual int Update(DatabaseContentDataSet.ProjectCustomFieldsDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent dataSet) {
+        public virtual int Update(DatabaseContentDataSet dataSet) {
             return this.Adapter.Update(dataSet, "ProjectCustomFields");
         }
         
@@ -18628,7 +18628,7 @@ SELECT CustomFieldSelectionId, CustomFieldId, CustomFieldSelectionValue, CustomF
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
+            this._connection.ConnectionString = global::CAS.ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -18647,7 +18647,7 @@ SELECT CustomFieldSelectionId, CustomFieldId, CustomFieldSelectionValue, CustomF
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DatabaseContent.ProjectCustomFieldSelectionDataTable dataTable) {
+        public virtual int Fill(DatabaseContentDataSet.ProjectCustomFieldSelectionDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -18660,9 +18660,9 @@ SELECT CustomFieldSelectionId, CustomFieldId, CustomFieldSelectionValue, CustomF
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DatabaseContent.ProjectCustomFieldSelectionDataTable GetData() {
+        public virtual DatabaseContentDataSet.ProjectCustomFieldSelectionDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DatabaseContent.ProjectCustomFieldSelectionDataTable dataTable = new DatabaseContent.ProjectCustomFieldSelectionDataTable();
+            DatabaseContentDataSet.ProjectCustomFieldSelectionDataTable dataTable = new DatabaseContentDataSet.ProjectCustomFieldSelectionDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -18670,14 +18670,14 @@ SELECT CustomFieldSelectionId, CustomFieldId, CustomFieldSelectionValue, CustomF
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent.ProjectCustomFieldSelectionDataTable dataTable) {
+        public virtual int Update(DatabaseContentDataSet.ProjectCustomFieldSelectionDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent dataSet) {
+        public virtual int Update(DatabaseContentDataSet dataSet) {
             return this.Adapter.Update(dataSet, "ProjectCustomFieldSelection");
         }
         
@@ -18981,7 +18981,7 @@ SELECT CustomFieldTypeId, CustomFieldTypeName FROM ProjectCustomFieldType WHERE 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
+            this._connection.ConnectionString = global::CAS.ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -18998,7 +18998,7 @@ SELECT CustomFieldTypeId, CustomFieldTypeName FROM ProjectCustomFieldType WHERE 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DatabaseContent.ProjectCustomFieldTypeDataTable dataTable) {
+        public virtual int Fill(DatabaseContentDataSet.ProjectCustomFieldTypeDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -19011,9 +19011,9 @@ SELECT CustomFieldTypeId, CustomFieldTypeName FROM ProjectCustomFieldType WHERE 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DatabaseContent.ProjectCustomFieldTypeDataTable GetData() {
+        public virtual DatabaseContentDataSet.ProjectCustomFieldTypeDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DatabaseContent.ProjectCustomFieldTypeDataTable dataTable = new DatabaseContent.ProjectCustomFieldTypeDataTable();
+            DatabaseContentDataSet.ProjectCustomFieldTypeDataTable dataTable = new DatabaseContentDataSet.ProjectCustomFieldTypeDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -19021,14 +19021,14 @@ SELECT CustomFieldTypeId, CustomFieldTypeName FROM ProjectCustomFieldType WHERE 
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent.ProjectCustomFieldTypeDataTable dataTable) {
+        public virtual int Update(DatabaseContentDataSet.ProjectCustomFieldTypeDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent dataSet) {
+        public virtual int Update(DatabaseContentDataSet dataSet) {
             return this.Adapter.Update(dataSet, "ProjectCustomFieldType");
         }
         
@@ -19307,7 +19307,7 @@ SELECT CustomFieldValueId, BugId, CustomFieldId, CustomFieldValue FROM ProjectCu
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
+            this._connection.ConnectionString = global::CAS.ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -19325,7 +19325,7 @@ SELECT CustomFieldValueId, BugId, CustomFieldId, CustomFieldValue FROM ProjectCu
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DatabaseContent.ProjectCustomFieldValuesDataTable dataTable) {
+        public virtual int Fill(DatabaseContentDataSet.ProjectCustomFieldValuesDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -19338,9 +19338,9 @@ SELECT CustomFieldValueId, BugId, CustomFieldId, CustomFieldValue FROM ProjectCu
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DatabaseContent.ProjectCustomFieldValuesDataTable GetData() {
+        public virtual DatabaseContentDataSet.ProjectCustomFieldValuesDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DatabaseContent.ProjectCustomFieldValuesDataTable dataTable = new DatabaseContent.ProjectCustomFieldValuesDataTable();
+            DatabaseContentDataSet.ProjectCustomFieldValuesDataTable dataTable = new DatabaseContentDataSet.ProjectCustomFieldValuesDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -19348,14 +19348,14 @@ SELECT CustomFieldValueId, BugId, CustomFieldId, CustomFieldValue FROM ProjectCu
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent.ProjectCustomFieldValuesDataTable dataTable) {
+        public virtual int Update(DatabaseContentDataSet.ProjectCustomFieldValuesDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent dataSet) {
+        public virtual int Update(DatabaseContentDataSet dataSet) {
             return this.Adapter.Update(dataSet, "ProjectCustomFieldValues");
         }
         
@@ -19639,7 +19639,7 @@ SELECT ProjectMailboxId, MailBox, ProjectId, AssignToUserId, IssueTypeId FROM Pr
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
+            this._connection.ConnectionString = global::CAS.ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -19657,7 +19657,7 @@ SELECT ProjectMailboxId, MailBox, ProjectId, AssignToUserId, IssueTypeId FROM Pr
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DatabaseContent.ProjectMailBoxDataTable dataTable) {
+        public virtual int Fill(DatabaseContentDataSet.ProjectMailBoxDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -19670,9 +19670,9 @@ SELECT ProjectMailboxId, MailBox, ProjectId, AssignToUserId, IssueTypeId FROM Pr
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DatabaseContent.ProjectMailBoxDataTable GetData() {
+        public virtual DatabaseContentDataSet.ProjectMailBoxDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DatabaseContent.ProjectMailBoxDataTable dataTable = new DatabaseContent.ProjectMailBoxDataTable();
+            DatabaseContentDataSet.ProjectMailBoxDataTable dataTable = new DatabaseContentDataSet.ProjectMailBoxDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -19680,14 +19680,14 @@ SELECT ProjectMailboxId, MailBox, ProjectId, AssignToUserId, IssueTypeId FROM Pr
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent.ProjectMailBoxDataTable dataTable) {
+        public virtual int Update(DatabaseContentDataSet.ProjectMailBoxDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent dataSet) {
+        public virtual int Update(DatabaseContentDataSet dataSet) {
             return this.Adapter.Update(dataSet, "ProjectMailBox");
         }
         
@@ -20023,7 +20023,7 @@ SELECT RelatedBugID, BugID, LinkedBugID FROM RelatedBug WHERE (RelatedBugID = @R
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
+            this._connection.ConnectionString = global::CAS.ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -20040,7 +20040,7 @@ SELECT RelatedBugID, BugID, LinkedBugID FROM RelatedBug WHERE (RelatedBugID = @R
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DatabaseContent.RelatedBugDataTable dataTable) {
+        public virtual int Fill(DatabaseContentDataSet.RelatedBugDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -20053,9 +20053,9 @@ SELECT RelatedBugID, BugID, LinkedBugID FROM RelatedBug WHERE (RelatedBugID = @R
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DatabaseContent.RelatedBugDataTable GetData() {
+        public virtual DatabaseContentDataSet.RelatedBugDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DatabaseContent.RelatedBugDataTable dataTable = new DatabaseContent.RelatedBugDataTable();
+            DatabaseContentDataSet.RelatedBugDataTable dataTable = new DatabaseContentDataSet.RelatedBugDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -20063,14 +20063,14 @@ SELECT RelatedBugID, BugID, LinkedBugID FROM RelatedBug WHERE (RelatedBugID = @R
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent.RelatedBugDataTable dataTable) {
+        public virtual int Update(DatabaseContentDataSet.RelatedBugDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent dataSet) {
+        public virtual int Update(DatabaseContentDataSet dataSet) {
             return this.Adapter.Update(dataSet, "RelatedBug");
         }
         
@@ -20325,7 +20325,7 @@ SELECT RelatedBugID, BugID, LinkedBugID FROM RelatedBug WHERE (RelatedBugID = @R
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
+            this._connection.ConnectionString = global::CAS.ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -20342,7 +20342,7 @@ SELECT RelatedBugID, BugID, LinkedBugID FROM RelatedBug WHERE (RelatedBugID = @R
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DatabaseContent.ResolutionDataTable dataTable) {
+        public virtual int Fill(DatabaseContentDataSet.ResolutionDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -20355,9 +20355,9 @@ SELECT RelatedBugID, BugID, LinkedBugID FROM RelatedBug WHERE (RelatedBugID = @R
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DatabaseContent.ResolutionDataTable GetData() {
+        public virtual DatabaseContentDataSet.ResolutionDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DatabaseContent.ResolutionDataTable dataTable = new DatabaseContent.ResolutionDataTable();
+            DatabaseContentDataSet.ResolutionDataTable dataTable = new DatabaseContentDataSet.ResolutionDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -20365,14 +20365,14 @@ SELECT RelatedBugID, BugID, LinkedBugID FROM RelatedBug WHERE (RelatedBugID = @R
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent.ResolutionDataTable dataTable) {
+        public virtual int Update(DatabaseContentDataSet.ResolutionDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent dataSet) {
+        public virtual int Update(DatabaseContentDataSet dataSet) {
             return this.Adapter.Update(dataSet, "Resolution");
         }
         
@@ -20649,7 +20649,7 @@ SELECT RolePermissionId, RoleId, PermissionId FROM RolePermission WHERE (RolePer
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
+            this._connection.ConnectionString = global::CAS.ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -20666,7 +20666,7 @@ SELECT RolePermissionId, RoleId, PermissionId FROM RolePermission WHERE (RolePer
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DatabaseContent.RolePermissionDataTable dataTable) {
+        public virtual int Fill(DatabaseContentDataSet.RolePermissionDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -20679,9 +20679,9 @@ SELECT RolePermissionId, RoleId, PermissionId FROM RolePermission WHERE (RolePer
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DatabaseContent.RolePermissionDataTable GetData() {
+        public virtual DatabaseContentDataSet.RolePermissionDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DatabaseContent.RolePermissionDataTable dataTable = new DatabaseContent.RolePermissionDataTable();
+            DatabaseContentDataSet.RolePermissionDataTable dataTable = new DatabaseContentDataSet.RolePermissionDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -20689,14 +20689,14 @@ SELECT RolePermissionId, RoleId, PermissionId FROM RolePermission WHERE (RolePer
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent.RolePermissionDataTable dataTable) {
+        public virtual int Update(DatabaseContentDataSet.RolePermissionDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent dataSet) {
+        public virtual int Update(DatabaseContentDataSet dataSet) {
             return this.Adapter.Update(dataSet, "RolePermission");
         }
         
@@ -20968,7 +20968,7 @@ SELECT RoleId, ProjectId, RoleName, Description, AutoAssign FROM Roles WHERE (Ro
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
+            this._connection.ConnectionString = global::CAS.ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -20985,7 +20985,7 @@ SELECT RoleId, ProjectId, RoleName, Description, AutoAssign FROM Roles WHERE (Ro
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DatabaseContent.RolesDataTable dataTable) {
+        public virtual int Fill(DatabaseContentDataSet.RolesDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -20998,9 +20998,9 @@ SELECT RoleId, ProjectId, RoleName, Description, AutoAssign FROM Roles WHERE (Ro
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DatabaseContent.RolesDataTable GetData() {
+        public virtual DatabaseContentDataSet.RolesDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DatabaseContent.RolesDataTable dataTable = new DatabaseContent.RolesDataTable();
+            DatabaseContentDataSet.RolesDataTable dataTable = new DatabaseContentDataSet.RolesDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -21008,14 +21008,14 @@ SELECT RoleId, ProjectId, RoleName, Description, AutoAssign FROM Roles WHERE (Ro
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent.RolesDataTable dataTable) {
+        public virtual int Update(DatabaseContentDataSet.RolesDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent dataSet) {
+        public virtual int Update(DatabaseContentDataSet dataSet) {
             return this.Adapter.Update(dataSet, "Roles");
         }
         
@@ -21342,7 +21342,7 @@ SELECT RoleId, ProjectId, RoleName, Description, AutoAssign FROM Roles WHERE (Ro
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
+            this._connection.ConnectionString = global::CAS.ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -21359,7 +21359,7 @@ SELECT RoleId, ProjectId, RoleName, Description, AutoAssign FROM Roles WHERE (Ro
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DatabaseContent.StatusDataTable dataTable) {
+        public virtual int Fill(DatabaseContentDataSet.StatusDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -21372,9 +21372,9 @@ SELECT RoleId, ProjectId, RoleName, Description, AutoAssign FROM Roles WHERE (Ro
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DatabaseContent.StatusDataTable GetData() {
+        public virtual DatabaseContentDataSet.StatusDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DatabaseContent.StatusDataTable dataTable = new DatabaseContent.StatusDataTable();
+            DatabaseContentDataSet.StatusDataTable dataTable = new DatabaseContentDataSet.StatusDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -21382,14 +21382,14 @@ SELECT RoleId, ProjectId, RoleName, Description, AutoAssign FROM Roles WHERE (Ro
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent.StatusDataTable dataTable) {
+        public virtual int Update(DatabaseContentDataSet.StatusDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent dataSet) {
+        public virtual int Update(DatabaseContentDataSet dataSet) {
             return this.Adapter.Update(dataSet, "Status");
         }
         
@@ -21667,7 +21667,7 @@ SELECT TypeID, Name, ImageUrl FROM Type WHERE (TypeID = @TypeID)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
+            this._connection.ConnectionString = global::CAS.ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -21684,7 +21684,7 @@ SELECT TypeID, Name, ImageUrl FROM Type WHERE (TypeID = @TypeID)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DatabaseContent.TypeDataTable dataTable) {
+        public virtual int Fill(DatabaseContentDataSet.TypeDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -21697,9 +21697,9 @@ SELECT TypeID, Name, ImageUrl FROM Type WHERE (TypeID = @TypeID)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DatabaseContent.TypeDataTable GetData() {
+        public virtual DatabaseContentDataSet.TypeDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DatabaseContent.TypeDataTable dataTable = new DatabaseContent.TypeDataTable();
+            DatabaseContentDataSet.TypeDataTable dataTable = new DatabaseContentDataSet.TypeDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -21707,14 +21707,14 @@ SELECT TypeID, Name, ImageUrl FROM Type WHERE (TypeID = @TypeID)";
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent.TypeDataTable dataTable) {
+        public virtual int Update(DatabaseContentDataSet.TypeDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent dataSet) {
+        public virtual int Update(DatabaseContentDataSet dataSet) {
             return this.Adapter.Update(dataSet, "Type");
         }
         
@@ -22024,7 +22024,7 @@ SELECT UserId, ProjectId, UserProjectId, CreatedDate FROM UserProjects WHERE (Pr
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
+            this._connection.ConnectionString = global::CAS.ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -22041,7 +22041,7 @@ SELECT UserId, ProjectId, UserProjectId, CreatedDate FROM UserProjects WHERE (Pr
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DatabaseContent.UserProjectsDataTable dataTable) {
+        public virtual int Fill(DatabaseContentDataSet.UserProjectsDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -22054,9 +22054,9 @@ SELECT UserId, ProjectId, UserProjectId, CreatedDate FROM UserProjects WHERE (Pr
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DatabaseContent.UserProjectsDataTable GetData() {
+        public virtual DatabaseContentDataSet.UserProjectsDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DatabaseContent.UserProjectsDataTable dataTable = new DatabaseContent.UserProjectsDataTable();
+            DatabaseContentDataSet.UserProjectsDataTable dataTable = new DatabaseContentDataSet.UserProjectsDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -22064,14 +22064,14 @@ SELECT UserId, ProjectId, UserProjectId, CreatedDate FROM UserProjects WHERE (Pr
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent.UserProjectsDataTable dataTable) {
+        public virtual int Update(DatabaseContentDataSet.UserProjectsDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent dataSet) {
+        public virtual int Update(DatabaseContentDataSet dataSet) {
             return this.Adapter.Update(dataSet, "UserProjects");
         }
         
@@ -22331,7 +22331,7 @@ SELECT UserId, ProjectId, UserProjectId, CreatedDate FROM UserProjects WHERE (Pr
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
+            this._connection.ConnectionString = global::CAS.ITRDataAccess.Properties.Settings.Default.itrserverConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -22348,7 +22348,7 @@ SELECT UserId, ProjectId, UserProjectId, CreatedDate FROM UserProjects WHERE (Pr
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DatabaseContent.UserRolesDataTable dataTable) {
+        public virtual int Fill(DatabaseContentDataSet.UserRolesDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -22361,9 +22361,9 @@ SELECT UserId, ProjectId, UserProjectId, CreatedDate FROM UserProjects WHERE (Pr
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DatabaseContent.UserRolesDataTable GetData() {
+        public virtual DatabaseContentDataSet.UserRolesDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DatabaseContent.UserRolesDataTable dataTable = new DatabaseContent.UserRolesDataTable();
+            DatabaseContentDataSet.UserRolesDataTable dataTable = new DatabaseContentDataSet.UserRolesDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -22371,14 +22371,14 @@ SELECT UserId, ProjectId, UserProjectId, CreatedDate FROM UserProjects WHERE (Pr
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent.UserRolesDataTable dataTable) {
+        public virtual int Update(DatabaseContentDataSet.UserRolesDataTable dataTable) {
             return this.Adapter.Update(dataTable);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(DatabaseContent dataSet) {
+        public virtual int Update(DatabaseContentDataSet dataSet) {
             return this.Adapter.Update(dataSet, "UserRoles");
         }
         
@@ -23143,7 +23143,7 @@ SELECT UserId, ProjectId, UserProjectId, CreatedDate FROM UserProjects WHERE (Pr
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateUpdatedRows(DatabaseContent dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateUpdatedRows(DatabaseContentDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             if ((this._projectCustomFieldTypeTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.ProjectCustomFieldType.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
@@ -23387,7 +23387,7 @@ SELECT UserId, ProjectId, UserProjectId, CreatedDate FROM UserProjects WHERE (Pr
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateInsertedRows(DatabaseContent dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateInsertedRows(DatabaseContentDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             if ((this._projectCustomFieldTypeTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.ProjectCustomFieldType.Select(null, null, global::System.Data.DataViewRowState.Added);
@@ -23605,7 +23605,7 @@ SELECT UserId, ProjectId, UserProjectId, CreatedDate FROM UserProjects WHERE (Pr
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateDeletedRows(DatabaseContent dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
+        private int UpdateDeletedRows(DatabaseContentDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
             if ((this._bugNotificationTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.BugNotification.Select(null, null, global::System.Data.DataViewRowState.Deleted);
@@ -23847,7 +23847,7 @@ SELECT UserId, ProjectId, UserProjectId, CreatedDate FROM UserProjects WHERE (Pr
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public virtual int UpdateAll(DatabaseContent dataSet) {
+        public virtual int UpdateAll(DatabaseContentDataSet dataSet) {
             if ((dataSet == null)) {
                 throw new global::System.ArgumentNullException("dataSet");
             }
