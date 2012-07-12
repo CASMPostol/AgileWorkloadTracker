@@ -3,10 +3,13 @@
   <MetaData>
     <ContentTypes>
       <ContentType ID="0x0100eb00a9f1b21f48a699409a797c893b5a" Name="Milestone" Group="CAS Agile Workload Tracker" Description="Milestone Content Type" Inherits="FALSE" Overwrite="TRUE">
-        <Folder TargetName="_cts/Stage" />
+        <Folder TargetName="_cts/Milestone" />
         <FieldRefs>
           <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" DisplayName="Milestone" />
           <FieldRef ID="{6BD75CAC-1416-413C-A758-12EF7ED9050A}" Name="Milestone2StageTitle" />
+          <FieldRef ID="{8C07C9A1-A76C-45DA-A1E1-CBF923F8BD46}" Name="Milestone2ProjectTitle" />
+          <FieldRef ID="{50EDDF56-D28E-44C6-B6CB-109FBCDE886F}" Name="Active" />
+          <FieldRef ID="{BCBAD9EE-E764-4E79-A158-7F551B05ECE3}" Name="MilestoneHours" />
         </FieldRefs>
       </ContentType>
     </ContentTypes>
@@ -43,6 +46,9 @@
           <FieldRef Name="LinkTitle">
           </FieldRef>
           <FieldRef ID="{6BD75CAC-1416-413C-A758-12EF7ED9050A}" Name="Milestone2StageTitle" />
+          <FieldRef ID="{8C07C9A1-A76C-45DA-A1E1-CBF923F8BD46}" Name="Milestone2ProjectTitle" />
+          <FieldRef ID="{50EDDF56-D28E-44C6-B6CB-109FBCDE886F}" Name="Active" />
+          <FieldRef ID="{BCBAD9EE-E764-4E79-A158-7F551B05ECE3}" Name="MilestoneHours" />
         </ViewFields>
         <Query>
           <OrderBy>
