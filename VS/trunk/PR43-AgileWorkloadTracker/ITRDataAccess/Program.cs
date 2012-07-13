@@ -12,7 +12,7 @@ namespace CAS.ITRDataAccess
     {
       using ( Bugnet.Import2SharePoint _BugNET2SharePoint = new Bugnet.Import2SharePoint() )
       {
-        //_BugNET2SharePoint.GetDataFromDatabase();
+        _BugNET2SharePoint.GetDataFromDatabase();
       }
       using (TimeTracking.ImportFromTimeTracking _importFromTimeTracking = new TimeTracking.ImportFromTimeTracking())
       {

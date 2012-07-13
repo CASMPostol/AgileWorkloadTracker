@@ -60,7 +60,6 @@ namespace CAS.ITRDataAccess.SharePoint
     {
       foreach (var _row in projectDataTable)
       {
-
         Projects _new = Create<Projects>(_entt.Projects, m_ProjectsDictionary, _row.Name, _row.ProjectID);
         _new.Active = _row.Active > 0;
         _new.Body = _row.IsDescriptionNull() ? String.Empty : _row.Description;
@@ -83,6 +82,8 @@ namespace CAS.ITRDataAccess.SharePoint
         Milestone _new = Create<Milestone>(_entt.Milestone, m_MilestoneDictionary, _row.Name, _row.VersionID);
         if (m_ProjectsDictionary.ContainsKey(_row.ProjectID))
           _new.Milestone2StageTitle = m_ProjectsDictionary[_row.ProjectID].Project2StageTitle;
+        _new.Active = true;
+        _new.MilestoneHours = 0;
         //TODO error handling mechnism
         //TODOD [AWT-3502] Add lookup from Milestones to Project  http://itrserver/Bugs/BugDetail.aspx?bid=3502
       }
