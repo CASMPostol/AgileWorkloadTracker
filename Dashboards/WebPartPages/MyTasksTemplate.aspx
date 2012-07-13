@@ -42,6 +42,14 @@
                         FrameType="TitleBarOnly" />
             </td>
         </tr>
+        <tr>
+            <td valign="top">
+                        <WebPartPages:WebpartZone
+                        ID="CurrentUser" runat="server"
+                        Title="Current User Web Part Zone"
+                        FrameType="TitleBarOnly" />
+            </td>
+        </tr>
     </table>
   </div>
 
