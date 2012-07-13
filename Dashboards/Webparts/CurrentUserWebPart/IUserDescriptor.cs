@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.SharePoint;
-namespace CAS.AgileWorkloadTracker.Dashboards.CurrentUserWebPart
+namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.CurrentUserWebPart
 {
   interface IUserDescriptor
   {

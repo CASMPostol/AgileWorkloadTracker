@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CAS.AgileWorkloadTracker.Dashboards.CurrentUserWebPart {
+namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.CurrentUserWebPart {
     
     
     public partial class CurrentUserWebPartUserControl {

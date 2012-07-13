@@ -5,7 +5,7 @@ using System.Web.UI.WebControls.WebParts;
 using CAS.AgileWorkloadTracker.Linq;
 using Microsoft.SharePoint;
 
-namespace CAS.AgileWorkloadTracker.Dashboards.CurrentUserWebPart
+namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.CurrentUserWebPart
 {
   public class UserDescriptor : DataTable, IWebPartRow, IUserDescriptor
   {

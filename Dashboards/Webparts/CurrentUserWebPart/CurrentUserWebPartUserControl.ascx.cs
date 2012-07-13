@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.UI;
 
-namespace CAS.AgileWorkloadTracker.Dashboards.CurrentUserWebPart
+namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.CurrentUserWebPart
 {
   public partial class CurrentUserWebPartUserControl : UserControl
   {

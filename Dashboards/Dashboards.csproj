@@ -112,7 +112,9 @@
     <None Include="WebPartPages\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{b12ffa68-4e15-4ec7-b7cf-290c320b096d}</SharePointProjectItemId>
     </None>
-    <None Include="Webparts\CurrentUserWebPart\CurrentUserWebPart.webpart" />
+    <None Include="Webparts\CurrentUserWebPart\CurrentUserWebPart.webpart">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Webparts\CurrentUserWebPart\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{a25d4b1a-f815-4f20-83da-71adce4da804}</SharePointProjectItemId>
     </None>
