@@ -41,6 +41,7 @@
     <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.SharePoint.Linq, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -60,7 +61,6 @@
     <Compile Include="Bugnet\Import2SharePoint.Designer.cs">
       <DependentUpon>Import2SharePoint.cs</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
     <Compile Include="Bugnet\DatabaseContentDataSet.cs">
       <DependentUpon>DatabaseContentDataSet.xsd</DependentUpon>
       <SubType>Component</SubType>
@@ -70,6 +70,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DatabaseContentDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Extensions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
