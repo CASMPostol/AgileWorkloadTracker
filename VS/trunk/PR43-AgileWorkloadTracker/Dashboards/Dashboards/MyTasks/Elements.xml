@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="MyTasks">
+    <File Path="WebPartPages\MyTasksTemplate.aspx" Url="WebPartPages/MyTasks.aspx">
+      <View List="Lists/TaskList" BaseViewID="2" WebPartZoneID="Active" WebPartOrder="0">
+        <![CDATA[
+ <webParts>
+ <webPart xmlns="http://schemas.microsoft.com/WebPart/v3">
+ <metaData>
+ <type name="Microsoft.SharePoint.WebPartPages.XsltListViewWebPart,Microsoft.SharePoint,Version=14.0.0.0,Culture=neutral,PublicKeyToken=71e9bce111e9429c" />
+ <importErrorMessage>Cannot import this Web Part.</importErrorMessage>
+ </metaData>
+ <data>
+ <properties>
+ <property name="Title" type="string">My active tasks</property>
+ <property name="TitleUrl" type="string">MyTasks.aspx</property>
+ <property name="AllowConnect" type="bool">True</property>
+ </properties>
+ </data>
+ </webPart>
+ </webParts>
+ ]]>
+      </View>
+      <View List="Lists/TaskList" BaseViewID="3" WebPartZoneID="Resolved" WebPartOrder="0">
+        <![CDATA[
+ <webParts>
+ <webPart xmlns="http://schemas.microsoft.com/WebPart/v3">
+ <metaData>
+ <type name="Microsoft.SharePoint.WebPartPages.XsltListViewWebPart,Microsoft.SharePoint,Version=14.0.0.0,Culture=neutral,PublicKeyToken=71e9bce111e9429c" />
+ <importErrorMessage>Cannot import this Web Part.</importErrorMessage>
+ </metaData>
+ <data>
+ <properties>
+ <property name="Title" type="string">My resolved tasks</property>
+ <property name="TitleUrl" type="string">MyTasks.aspx</property>
+ <property name="AllowConnect" type="bool">True</property>
+ </properties>
+ </data>
+ </webPart>
+ </webParts>
+ ]]>
+      </View>
+      <View List="Lists/TaskList" BaseViewID="4" WebPartZoneID="Closed" WebPartOrder="0">
+        <![CDATA[
+ <webParts>
+ <webPart xmlns="http://schemas.microsoft.com/WebPart/v3">
+ <metaData>
+ <type name="Microsoft.SharePoint.WebPartPages.XsltListViewWebPart,Microsoft.SharePoint,Version=14.0.0.0,Culture=neutral,PublicKeyToken=71e9bce111e9429c" />
+ <importErrorMessage>Cannot import this Web Part.</importErrorMessage>
+ </metaData>
+ <data>
+ <properties>
+ <property name="Title" type="string">My closed tasks</property>
+ <property name="TitleUrl" type="string">MyTasks.aspx</property>
+ <property name="AllowConnect" type="bool">True</property>
+ </properties>
+ </data>
+ </webPart>
+ </webParts>
+ ]]>
+      </View>
+    </File>
+  </Module>
+</Elements>
