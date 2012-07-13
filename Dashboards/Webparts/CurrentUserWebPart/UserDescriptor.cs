@@ -4,6 +4,7 @@ using System.Data;
 using System.Web.UI.WebControls.WebParts;
 using CAS.SmartFactory.Shepherd.Entities;
 using Microsoft.SharePoint;
+using CAS.AgileWorkloadTracker.Linq;
 
 namespace CAS.AgileWorkloadTracker.Dashboards.CurrentUserWebPart
 {

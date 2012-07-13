@@ -41,5 +41,15 @@ namespace CAS.ITRDataAccess.Properties {
                 return ((string)(this["RequestUrl"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=CAS_06\\SQLEXPRESS;Initial Catalog=godziny;Integrated Security=True")]
+        public string godzinyConnectionString {
+            get {
+                return ((string)(this["godzinyConnectionString"]));
+            }
+        }
     }
 }
