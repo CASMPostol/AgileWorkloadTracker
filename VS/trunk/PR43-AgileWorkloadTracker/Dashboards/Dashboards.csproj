@@ -59,6 +59,9 @@
       <Link>Linq\Entities.cs</Link>
     </Compile>
     <Compile Include="Extensions.cs" />
+    <Compile Include="Features\AWTDashboards\AWTDashboards.EventReceiver.cs">
+      <DependentUpon>AWTDashboards.feature</DependentUpon>
+    </Compile>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Linq\WorkloadSummary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
