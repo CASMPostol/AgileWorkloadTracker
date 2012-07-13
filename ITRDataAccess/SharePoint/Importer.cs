@@ -87,12 +87,12 @@ namespace CAS.ITRDataAccess.SharePoint
       foreach ( var _row in versionDataTable )
       {
         Milestone _new = Create<Milestone>( _entt.Milestone, m_MilestoneDictionary, _row.Name, _row.VersionID );
-        if ( m_ProjectsDictionary.ContainsKey( _row.ProjectID ) )
-          _new.Milestone2StageTitle = m_ProjectsDictionary[ _row.ProjectID ].Project2StageTitle;
+        //TODOD [AWT-3502] Add lookup from Milestones to Project  http://itrserver/Bugs/BugDetail.aspx?bid=3502
+        //if ( m_ProjectsDictionary.ContainsKey( _row.ProjectID ) )
+        //  _new.Milestone2StageTitle = m_ProjectsDictionary[ _row.ProjectID ].Project2StageTitle;
         _new.Active = true;
         _new.MilestoneHours = 0;
         //TODO error handling mechnism
-        //TODOD [AWT-3502] Add lookup from Milestones to Project  http://itrserver/Bugs/BugDetail.aspx?bid=3502
       }
     }
     private void Import( Bugnet.DatabaseContentDataSet.ResolutionDataTable resutionDataTable, Entities _entt )
