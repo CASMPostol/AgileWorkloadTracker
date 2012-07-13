@@ -241,7 +241,9 @@
     </Content>
     <Content Include="Lists\MilestoneListTemplate\Elements.xml" />
     <Content Include="Lists\MilestoneListTemplate\MilestoneList\Elements.xml" />
-    <Content Include="Lists\MilestoneListTemplate\Schema.xml" />
+    <Content Include="Lists\MilestoneListTemplate\Schema.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Lists\PartnersListTemplate\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
