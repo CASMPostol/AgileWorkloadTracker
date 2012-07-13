@@ -134,6 +134,9 @@
     <EmbeddedResource Include="Bugnet\Import2SharePoint.resx">
       <DependentUpon>Import2SharePoint.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SharePoint\Importer.resx">
+      <DependentUpon>Importer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TimeTracking\ImportFromTimeTracking.resx">
       <DependentUpon>ImportFromTimeTracking.cs</DependentUpon>
     </EmbeddedResource>

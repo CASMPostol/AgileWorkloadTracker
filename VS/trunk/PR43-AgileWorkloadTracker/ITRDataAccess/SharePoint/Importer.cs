@@ -17,44 +17,41 @@ namespace CAS.ITRDataAccess.SharePoint
     public Importer()
     {
       InitializeComponent();
+      m_Entities = new Entities();
     }
     public Importer(IContainer container)
+      : this()
     {
       container.Add(this);
-      InitializeComponent();
     }
     #endregion
 
     #region public
     internal void Import(Bugnet.DatabaseContentDataSet m_BugNETDataSet)
     {
-      using (Entities _entt = new Entities())
-      {
-        Stage _newStage = new Stage() { Title = "Imported" };
-        _entt.Stage.InsertOnSubmit(_newStage);
-        Import(m_BugNETDataSet.Project, _newStage, _entt);
-        Console.WriteLine("Project");
-        Import(m_BugNETDataSet.Version, _entt);
-        Console.WriteLine("Version");
-        Import(m_BugNETDataSet.Status, _entt);
-        Console.WriteLine("Status");
-        Import(m_BugNETDataSet.Priority, _entt);
-        Console.WriteLine("Priority");
-        Import(m_BugNETDataSet.Resolution, _entt);
-        Console.WriteLine("Resolution");
-        Import(m_BugNETDataSet.Type, _entt);
-        Console.WriteLine("Type");
-        Import(m_BugNETDataSet.Bug, _entt);
-        Console.WriteLine("Bug");
-        Import(m_BugNETDataSet.BugComment, _entt);
-        Console.WriteLine("Starting SubmitChanges");
-        _entt.SubmitChanges();
-      }
-
+      Stage _newStage = new Stage() { Title = "Imported" };
+      m_Entities.Stage.InsertOnSubmit(_newStage);
+      Import(m_BugNETDataSet.Project, _newStage, m_Entities);
+      Console.WriteLine("Project");
+      Import(m_BugNETDataSet.Version, m_Entities);
+      Console.WriteLine("Version");
+      Import(m_BugNETDataSet.Status, m_Entities);
+      Console.WriteLine("Status");
+      Import(m_BugNETDataSet.Priority, m_Entities);
+      Console.WriteLine("Priority");
+      Import(m_BugNETDataSet.Resolution, m_Entities);
+      Console.WriteLine("Resolution");
+      Import(m_BugNETDataSet.Type, m_Entities);
+      Console.WriteLine("Type");
+      Import(m_BugNETDataSet.Bug, m_Entities);
+      Console.WriteLine("Bug");
+      Import(m_BugNETDataSet.BugComment, m_Entities);
+      Console.WriteLine("Starting SubmitChanges");
+      m_Entities.SubmitChanges();
     }
     internal void Import(TimeTracking.TimeTrackingDataSet m_timeTrackingDataSet)
     {
-      throw new NotImplementedException();
+
     }
     #endregion
 
@@ -151,7 +148,7 @@ namespace CAS.ITRDataAccess.SharePoint
       }
     }
     #endregion
-    
+
     #region TimeTracking import
     #endregion
 
@@ -216,5 +213,23 @@ namespace CAS.ITRDataAccess.SharePoint
     private Dictionary<Guid, Resources> m_ResourcesDictionary = new Dictionary<Guid, Resources>();
     #endregion
 
+    private Entities m_Entities { get; set; }
+    /// <summary> 
+    /// Clean up any resources being used.
+    /// </summary>
+    /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+    protected override void Dispose(bool disposing)
+    {
+      if (disposing && (components != null))
+      {
+        components.Dispose();
+      }
+      if (m_Entities != null)
+      {
+        m_Entities.Dispose();
+        m_Entities = null;
+      }
+      base.Dispose(disposing);
+    }
   }
 }
