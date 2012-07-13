@@ -14,6 +14,10 @@ namespace CAS.ITRDataAccess
       {
         _BugNET2SharePoint.GetDataFromDatabase();
       }
+      using (TimeTracking.ImportFromTimeTracking _importFromTimeTracking = new TimeTracking.ImportFromTimeTracking())
+      {
+        _importFromTimeTracking.GetDataFromDatabase();
+      }
     }
   }
 }

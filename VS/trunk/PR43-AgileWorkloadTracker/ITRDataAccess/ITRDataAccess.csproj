@@ -85,6 +85,12 @@
     <Compile Include="SharePoint\Importer.Designer.cs">
       <DependentUpon>Importer.cs</DependentUpon>
     </Compile>
+    <Compile Include="TimeTracking\ImportFromTimeTracking.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TimeTracking\ImportFromTimeTracking.Designer.cs">
+      <DependentUpon>ImportFromTimeTracking.cs</DependentUpon>
+    </Compile>
     <Compile Include="TimeTracking\TimeTrackingDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -127,6 +133,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Bugnet\Import2SharePoint.resx">
       <DependentUpon>Import2SharePoint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TimeTracking\ImportFromTimeTracking.resx">
+      <DependentUpon>ImportFromTimeTracking.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
