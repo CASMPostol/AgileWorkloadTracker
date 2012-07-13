@@ -8,6 +8,7 @@ using CAS.AgileWorkloadTracker.Dashboards.CurrentUserWebPart;
 namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.CurrentUserWebPart
 {
   [ToolboxItemAttribute(false)]
+  [CLSCompliant(false)]
   public class CurrentUserWebPart : WebPart
   {
 

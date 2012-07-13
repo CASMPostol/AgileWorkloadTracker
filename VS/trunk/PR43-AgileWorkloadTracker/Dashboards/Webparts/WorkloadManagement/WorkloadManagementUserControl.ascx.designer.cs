@@ -7,6 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
 namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement {
     
     
@@ -19,6 +20,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
+        [CLSCompliant(false)]
         protected global::Microsoft.SharePoint.WebControls.CssRegistration cssreg;
         
         /// <summary>

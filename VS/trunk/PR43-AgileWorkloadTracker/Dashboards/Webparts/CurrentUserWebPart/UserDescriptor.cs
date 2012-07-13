@@ -2,9 +2,8 @@
 using System.ComponentModel;
 using System.Data;
 using System.Web.UI.WebControls.WebParts;
-using CAS.SmartFactory.Shepherd.Entities;
-using Microsoft.SharePoint;
 using CAS.AgileWorkloadTracker.Linq;
+using Microsoft.SharePoint;
 
 namespace CAS.AgileWorkloadTracker.Dashboards.CurrentUserWebPart
 {
@@ -27,13 +26,13 @@ namespace CAS.AgileWorkloadTracker.Dashboards.CurrentUserWebPart
       row[_IDColumnName] = _user.ID;
       row[_LoginNameColumnName] = _user.LoginName;
       row[_NameColumnName] = this.User = _user.Name;
-      using (EntitiesDataContext edc = new EntitiesDataContext(SPContext.Current.Web.Url))
+      using (Entities edc = new Entities(SPContext.Current.Web.Url))
       {
-        Partner _Partner = Partner.FindForUser(edc, _user);
+        Resources _Partner = Resources.FindForUser(edc, _user);
         if (_Partner != null)
         {
           row[_CompanyIDColumnName] = _Partner.Identyfikator.ToString();
-          row[_CompanyTitleColumnName] = Company = _Partner.Tytuł;
+          row[_CompanyTitleColumnName] = Company = _Partner.Title;
         }
         else
         {
