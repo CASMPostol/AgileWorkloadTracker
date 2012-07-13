@@ -1064,7 +1064,15 @@ namespace CAS.AgileWorkloadTracker.Linq {
 	[Microsoft.SharePoint.Linq.ContentTypeAttribute(Name="Milestone", Id="0x0100EB00A9F1B21F48A699409A797C893B5A")]
 	internal partial class Milestone : Element {
 		
+		private System.Nullable<bool> _active;
+		
+		private System.Nullable<double> _milestoneHours;
+		
 		private Microsoft.SharePoint.Linq.EntityRef<Stage> _milestone2StageTitle;
+		
+		private System.Nullable<int> _milestone2ProjectTitleIdentyfikator;
+		
+		private string _milestone2ProjectTitleTitle;
 		
 		private Microsoft.SharePoint.Linq.EntitySet<Tasks> _tasks;
 		
@@ -1092,6 +1100,34 @@ namespace CAS.AgileWorkloadTracker.Linq {
 			this.OnCreated();
 		}
 		
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="Active", Storage="_active", FieldType="Boolean")]
+		public System.Nullable<bool> Active {
+			get {
+				return this._active;
+			}
+			set {
+				if ((value != this._active)) {
+					this.OnPropertyChanging("Active", this._active);
+					this._active = value;
+					this.OnPropertyChanged("Active");
+				}
+			}
+		}
+		
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="MilestoneHours", Storage="_milestoneHours", FieldType="Number")]
+		public System.Nullable<double> MilestoneHours {
+			get {
+				return this._milestoneHours;
+			}
+			set {
+				if ((value != this._milestoneHours)) {
+					this.OnPropertyChanging("MilestoneHours", this._milestoneHours);
+					this._milestoneHours = value;
+					this.OnPropertyChanged("MilestoneHours");
+				}
+			}
+		}
+		
 		[Microsoft.SharePoint.Linq.AssociationAttribute(Name="Milestone2StageTitle", Storage="_milestone2StageTitle", MultivalueType=Microsoft.SharePoint.Linq.AssociationType.Single, List="Stage")]
 		public Stage Milestone2StageTitle {
 			get {
@@ -1099,6 +1135,34 @@ namespace CAS.AgileWorkloadTracker.Linq {
 			}
 			set {
 				this._milestone2StageTitle.SetEntity(value);
+			}
+		}
+		
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="Milestone2ProjectTitle", Storage="_milestone2ProjectTitleIdentyfikator", FieldType="Lookup", IsLookupId=true)]
+		public System.Nullable<int> Milestone2ProjectTitleIdentyfikator {
+			get {
+				return this._milestone2ProjectTitleIdentyfikator;
+			}
+			set {
+				if ((value != this._milestone2ProjectTitleIdentyfikator)) {
+					this.OnPropertyChanging("Milestone2ProjectTitleIdentyfikator", this._milestone2ProjectTitleIdentyfikator);
+					this._milestone2ProjectTitleIdentyfikator = value;
+					this.OnPropertyChanged("Milestone2ProjectTitleIdentyfikator");
+				}
+			}
+		}
+		
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="Milestone2ProjectTitle", Storage="_milestone2ProjectTitleTitle", ReadOnly=true, FieldType="Lookup", IsLookupValue=true)]
+		public string Milestone2ProjectTitleTitle {
+			get {
+				return this._milestone2ProjectTitleTitle;
+			}
+			set {
+				if ((value != this._milestone2ProjectTitleTitle)) {
+					this.OnPropertyChanging("Milestone2ProjectTitleTitle", this._milestone2ProjectTitleTitle);
+					this._milestone2ProjectTitleTitle = value;
+					this.OnPropertyChanged("Milestone2ProjectTitleTitle");
+				}
 			}
 		}
 		
