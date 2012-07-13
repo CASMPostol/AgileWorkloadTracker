@@ -62,20 +62,12 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Linq\WorkloadSummary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Webparts\CurrentUserWebPart\CurrentUserWebPart.cs" />
-    <Compile Include="Webparts\CurrentUserWebPart\CurrentUserWebPartUserControl.ascx.cs">
-      <DependentUpon>CurrentUserWebPartUserControl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
+    <Compile Include="Webparts\WorkloadManagement\StateMachine.cs">
+      <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Webparts\CurrentUserWebPart\CurrentUserWebPartUserControl.ascx.designer.cs">
-      <DependentUpon>CurrentUserWebPartUserControl.ascx.cs</DependentUpon>
+    <Compile Include="Webparts\WorkloadManagement\WorkloadManagement.cs">
+      <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Webparts\CurrentUserWebPart\IUserDescriptor.cs" />
-    <Compile Include="Webparts\CurrentUserWebPart\UserDescriptor.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Webparts\WorkloadManagement\StateMachine.cs" />
-    <Compile Include="Webparts\WorkloadManagement\WorkloadManagement.cs" />
     <Compile Include="Webparts\WorkloadManagement\WorkloadManagementUserControl.ascx.cs">
       <DependentUpon>WorkloadManagementUserControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -87,6 +79,9 @@
   <ItemGroup>
     <None Include="Dashboards\AddEditWorkload\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{d8ba6986-a3c7-4140-82ab-5aa83c1626a9}</SharePointProjectItemId>
+    </None>
+    <None Include="Dashboards\MyTasks\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{3df58ed9-5ca7-4751-bdad-20e09a974a01}</SharePointProjectItemId>
     </None>
     <None Include="Features\AWTDashboards\AWTDashboards.feature">
       <FeatureId>{5760eced-aec8-4231-b2ae-e10fe7973f91}</FeatureId>
@@ -105,12 +100,8 @@
     <None Include="WebPartPages\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{b12ffa68-4e15-4ec7-b7cf-290c320b096d}</SharePointProjectItemId>
     </None>
-    <None Include="Webparts\CurrentUserWebPart\CurrentUserWebPart.webpart" />
-    <None Include="Webparts\CurrentUserWebPart\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{4123749d-8cce-4448-ac6f-42b1d90fac0f}</SharePointProjectItemId>
-    </None>
     <None Include="Webparts\WorkloadManagement\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{100a3882-20bf-46bc-9633-0d96d3701271}</SharePointProjectItemId>
+      <SharePointProjectItemId>{0909ab33-01b7-410f-b845-046eb264f2f8}</SharePointProjectItemId>
     </None>
     <None Include="Webparts\WorkloadManagement\WorkloadManagement.webpart" />
   </ItemGroup>
@@ -121,22 +112,25 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Dashboards\AddEditWorkload\Elements.xml" />
+    <Content Include="Dashboards\AddEditWorkload\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Dashboards\MyTasks\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Features\AWTDashboards\AWTDashboards.Template.xml">
       <DependentUpon>AWTDashboards.feature</DependentUpon>
     </Content>
     <Content Include="Layouts\AWT_Dashboards\CAS_AWT.css" />
     <Content Include="WebPartPages\AddEditWorkloadTemplate.aspx" />
     <Content Include="WebPartPages\Elements.xml" />
-    <Content Include="Webparts\CurrentUserWebPart\CurrentUserWebPartUserControl.ascx">
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
-    <Content Include="Webparts\CurrentUserWebPart\Elements.xml" />
+    <Content Include="WebPartPages\MyTasksTemplate.aspx" />
     <Content Include="Webparts\WorkloadManagement\Elements.xml" />
     <Content Include="Webparts\WorkloadManagement\WorkloadManagementUserControl.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\SharePointTools\Microsoft.VisualStudio.SharePoint.targets" />
 </Project>
