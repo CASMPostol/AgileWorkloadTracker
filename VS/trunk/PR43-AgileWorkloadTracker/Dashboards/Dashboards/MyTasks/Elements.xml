@@ -59,6 +59,27 @@
  </webParts>
  ]]>
       </View>
+      <AllUsersWebPart WebPartZoneID="CurrentUser" WebPartOrder="0">
+        <![CDATA[<webParts>
+  <webPart xmlns="http://schemas.microsoft.com/WebPart/v3">
+    <metaData>
+      <type name="CAS.AgileWorkloadTracker.Dashboards.Webparts.CurrentUserWebPart.CurrentUserWebPart, $SharePoint.Project.AssemblyFullName$" />
+      <importErrorMessage>$Resources:core,ImportErrorMessage;</importErrorMessage>
+    </metaData>
+    <data>
+      <properties>
+        <property name="Title" type="string">Current User</property>
+        <property name="Description" type="string">Provides information about current user and his affiliation.</property>
+        <property name="AllowZoneChange" type="bool">True</property>
+        <property name="AllowConnect" type="bool">True</property>
+        <property name="ID" type="string">CurrentUserWebPart</property>
+        <property name="Hidden" type="bool">True</property>
+        <property name="AllowHide" type="bool">True</property>
+      </properties>
+    </data>
+  </webPart>
+</webParts>]]>
+      </AllUsersWebPart>
     </File>
   </Module>
 </Elements>
