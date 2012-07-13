@@ -129,6 +129,9 @@
   <ContentType Name="Milestone" Class="Milestone">
     <Column Name="Title" Member="Title" />
     <Column Name="Milestone2StageTitle" Member="Milestone2StageTitle" />
+    <Column Name="Milestone2ProjectTitle" Member="Milestone2ProjectTitle" />
+    <Column Name="Active" Member="Active" />
+    <Column Name="MilestoneHours" Member="MilestoneHours" />
   </ContentType>
   <!--<ExcludeOtherContentTypes/>-->
 </Web>

@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="URL" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">http://casmp/sites/a04</Value>
+      <Value Profile="(Default)">http://casmp/sites/a05</Value>
     </Setting>
     <Setting Name="FileName" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Parameters.xml</Value>

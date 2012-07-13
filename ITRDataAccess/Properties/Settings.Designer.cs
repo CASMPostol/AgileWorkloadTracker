@@ -35,7 +35,7 @@ namespace CAS.ITRDataAccess.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://casmp/sites/a04")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://casmp/sites/a05")]
         public string RequestUrl {
             get {
                 return ((string)(this["RequestUrl"]));
