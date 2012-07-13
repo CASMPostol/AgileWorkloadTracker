@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Web.UI;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.WebPartPages;
+using CAS.AgileWorkloadTracker.Dashboards.CurrentUserWebPart;
 
 namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.CurrentUserWebPart
 {

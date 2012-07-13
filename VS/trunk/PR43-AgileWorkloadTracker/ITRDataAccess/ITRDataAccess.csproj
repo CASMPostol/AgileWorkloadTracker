@@ -85,6 +85,11 @@
     <Compile Include="SharePoint\Importer.Designer.cs">
       <DependentUpon>Importer.cs</DependentUpon>
     </Compile>
+    <Compile Include="TimeTracking\TimeTrackingDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TimeTrackingDataSet.xsd</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -103,6 +108,17 @@
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="TimeTracking\TimeTrackingDataSet.xsc">
+      <DependentUpon>TimeTrackingDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="TimeTracking\TimeTrackingDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TimeTrackingDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="TimeTracking\TimeTrackingDataSet.xss">
+      <DependentUpon>TimeTrackingDataSet.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
