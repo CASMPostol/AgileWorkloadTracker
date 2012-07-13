@@ -34,7 +34,7 @@ namespace CAS.ITRDataAccess.SharePoint
       Import( m_BugNETDataSet.Project, _newStage, m_Entities );
       m_Entities.SubmitChanges();
       Console.WriteLine( "Project" );
-      Import( m_BugNETDataSet.Version, m_Entities );
+      Import( m_BugNETDataSet.Version, m_Entities, _newStage );
       m_Entities.SubmitChanges();
       Console.WriteLine( "Version" );
       Import( m_BugNETDataSet.Status, m_Entities );
@@ -82,16 +82,26 @@ namespace CAS.ITRDataAccess.SharePoint
         _new.ProjectWarrantyDate = _row.CreateDate + TimeSpan.FromDays( 364 );
       }
     }
-    private void Import( Bugnet.DatabaseContentDataSet.VersionDataTable versionDataTable, Entities _entt )
+    private void Import( Bugnet.DatabaseContentDataSet.VersionDataTable versionDataTable, Entities _entt, Stage projectStage )
     {
       foreach ( var _row in versionDataTable )
       {
-        Milestone _new = Create<Milestone>( _entt.Milestone, m_MilestoneDictionary, _row.Name, _row.VersionID );
-        //TODOD [AWT-3502] Add lookup from Milestones to Project  http://itrserver/Bugs/BugDetail.aspx?bid=3502
-        //if ( m_ProjectsDictionary.ContainsKey( _row.ProjectID ) )
-        //  _new.Milestone2StageTitle = m_ProjectsDictionary[ _row.ProjectID ].Project2StageTitle;
-        _new.Active = true;
-        _new.MilestoneHours = 0;
+        try
+        {
+          Milestone _new = Create<Milestone>(_entt.Milestone, m_MilestoneDictionary, _row.Name, _row.VersionID);
+          //TODOD [AWT-3502] Add lookup from Milestones to Project  http://itrserver/Bugs/BugDetail.aspx?bid=3502
+          //if ( m_ProjectsDictionary.ContainsKey( _row.ProjectID ) )
+          //  _new.Milestone2StageTitle = m_ProjectsDictionary[ _row.ProjectID ].Project2StageTitle;
+          _new.Milestone2StageTitle = projectStage;
+          _new.Active = true;
+          _new.MilestoneHours = 0;
+          _entt.SubmitChanges();
+
+        }
+        catch (Exception _ex)
+        {
+          Console.WriteLine(String.Format("Error importing Version of Name: {0}, because of {1}", _row.Name, _ex.Message));
+        }        
         //TODO error handling mechnism
       }
     }
