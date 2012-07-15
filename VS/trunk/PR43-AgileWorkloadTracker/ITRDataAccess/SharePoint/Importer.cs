@@ -18,6 +18,12 @@ namespace CAS.ITRDataAccess.SharePoint
     {
       InitializeComponent();
       m_Entities = new Entities();
+      DefaultStage = ( from _sidx in m_Entities.Stage where _sidx.Title.Contains( DefaultStageTitle ) select _sidx ).FirstOrDefault();
+      if ( DefaultStage == null )
+      {
+        DefaultStage = new Stage() { Title = DefaultStageTitle };
+        m_Entities.Stage.InsertOnSubmit( DefaultStage );
+      }
     }
     public Importer( IContainer container )
       : this()
@@ -25,16 +31,16 @@ namespace CAS.ITRDataAccess.SharePoint
       container.Add( this );
     }
     #endregion
+    private const string DefaultStageTitle = "Imported";
+    private Stage DefaultStage = null;
 
     #region public
     internal void Import( Bugnet.DatabaseContentDataSet m_BugNETDataSet )
     {
-      Stage _newStage = new Stage() { Title = "Imported" };
-      m_Entities.Stage.InsertOnSubmit( _newStage );
-      Import( m_BugNETDataSet.Project, _newStage, m_Entities );
+      Import( m_BugNETDataSet.Project, DefaultStage, m_Entities );
       m_Entities.SubmitChanges();
       Console.WriteLine( "Project" );
-      Import( m_BugNETDataSet.Version, m_Entities, _newStage );
+      Import( m_BugNETDataSet.Version, m_Entities, DefaultStage );
       m_Entities.SubmitChanges();
       Console.WriteLine( "Version" );
       Import( m_BugNETDataSet.Status, m_Entities );
@@ -58,8 +64,19 @@ namespace CAS.ITRDataAccess.SharePoint
     }
     internal void Import( TimeTracking.TimeTrackingDataSet m_timeTrackingDataSet )
     {
-
+      //Import( m_timeTrackingDataSet.RODZAJPRACY, m_Entities );
+      //Import( m_timeTrackingDataSet.STATUSY, m_Entities ); alwazs Closed
+      //Import( m_timeTrackingDataSet.KATEGORIE, m_Entities ); using onlz PODKATEGORIE
+      Import( m_timeTrackingDataSet.PRACOWNICY, m_Entities );
+      Import( m_timeTrackingDataSet.KONTRAHENCI, m_Entities );
+      Import( m_timeTrackingDataSet.UMOWY, m_Entities );
+      //Import( m_timeTrackingDataSet.PLATNOSCI, m_Entities );
+      //Import( m_timeTrackingDataSet.POLISY, m_Entities );
+      Import( m_timeTrackingDataSet.PROJEKTY, m_Entities );
+      Import( m_timeTrackingDataSet.GODZINY, m_Entities );
+      Import( m_timeTrackingDataSet.PLAN, m_Entities );
     }
+
     #endregion
 
     #region Bugnet import
@@ -88,7 +105,7 @@ namespace CAS.ITRDataAccess.SharePoint
       {
         try
         {
-          Milestone _new = Create<Milestone>(_entt.Milestone, m_MilestoneDictionary, _row.Name, _row.VersionID);
+          Milestone _new = Create<Milestone>( _entt.Milestone, m_MilestoneDictionary, _row.Name, _row.VersionID );
           //TODOD [AWT-3502] Add lookup from Milestones to Project  http://itrserver/Bugs/BugDetail.aspx?bid=3502
           //if ( m_ProjectsDictionary.ContainsKey( _row.ProjectID ) )
           //  _new.Milestone2StageTitle = m_ProjectsDictionary[ _row.ProjectID ].Project2StageTitle;
@@ -98,10 +115,10 @@ namespace CAS.ITRDataAccess.SharePoint
           _entt.SubmitChanges();
 
         }
-        catch (Exception _ex)
+        catch ( Exception _ex )
         {
-          Console.WriteLine(String.Format("Error importing Version of Name: {0}, because of {1}", _row.Name, _ex.Message));
-        }        
+          Console.WriteLine( String.Format( "Error importing Version of Name: {0}, because of {1}", _row.Name, _ex.Message ) );
+        }
         //TODO error handling mechnism
       }
     }
@@ -168,6 +185,140 @@ namespace CAS.ITRDataAccess.SharePoint
     #endregion
 
     #region TimeTracking import
+    private void Import( TimeTracking.TimeTrackingDataSet.PLANDataTable pLANDataTable, Entities m_Entities )
+    {
+      foreach ( var _row in pLANDataTable )
+      {
+        Estimation _new = Create<Estimation>( m_Entities.Estimation, m_EstimationDictionary, _row.OPIS, _row.ID );
+        _new.EstimatedWorkload = _row.GODZINY;
+        _new.Estimation2ProjectTitle = m_ProjectsDictionary[ _row.ID_PROJEKTU ];
+        _new.Estimation2ResourcesTitle = GetResourcesFromTimeTrackerId( _row.ID_PRACOWNIKA );
+      }
+    }
+    private void Import( TimeTracking.TimeTrackingDataSet.GODZINYDataTable gODZINYDataTable, Entities m_Entities )
+    {
+      foreach ( var _row in gODZINYDataTable )
+      {
+        Workload _new = Create<Workload>( m_Entities.Workload, m_WorkloadDictionary, _row.OPIS, _row.ID );
+        _new.Hours = _row.IsLICZBA_GODZINNull() ? 0 : _row.LICZBA_GODZIN;
+        _new.Workload2ProjectTitle = GetProjectFromTimeTrackerId( _row.IsID_PROJEKTUNull() ? -1 : _row.ID_PROJEKTU );
+        _new.Workload2ResourcesTitle = GetResourcesFromTimeTrackerId( _row.IsID_PRACOWNIKANull() ? -1 : _row.ID_PRACOWNIKA );
+        _new.Workload2StageTitle = _new.Workload2ProjectTitle != null ? _new.Workload2ProjectTitle.Project2StageTitle : null;
+        _new.Workload2TaskTitle = CreateTask( _row.RODZAJPRACYRow, _new.Workload2ProjectTitle, _new.Workload2ResourcesTitle );
+        _new.WorkloadDate = _row.IsDATANull() ? new Nullable<DateTime>() : _row.DATA;
+      }
+    }
+    private Tasks CreateTask( TimeTracking.TimeTrackingDataSet.RODZAJPRACYRow rODZAJPRACYRow, Projects projects, Resources resources )
+    {
+      Tasks _newTask = new Tasks()
+      {
+        Task2MilestoneDefinedInTitle = null, // [AWT-3502] Add lookup from Milestones to Project http://itrserver/Bugs/BugDetail.aspx?bid=3502
+        Task2MilestoneResolvedInTitle = null, // see above
+        Task2ProjectTitle = projects,
+        Task2ResourcesTitle = resources,
+        Task2SPriorityTitle = null,
+        Task2SResolutionTitle = null,
+        Task2StatusTitle = null,
+        Task2TypeTitle = null,
+        Title = rODZAJPRACYRow.NAZWAPRACY
+      };
+      TaskComments _newTaskComment = new TaskComments()
+      {
+        Body = rODZAJPRACYRow.OPIS.SPValidSubstring(),
+        TaskComments2TaskTitle = _newTask
+      };
+      return _newTask;
+    }
+    Dictionary<int, int> m_ProjectsMapppingDictionary = new Dictionary<int, int>() { };
+    private Projects GetProjectFromTimeTrackerId( int projectId )
+    {
+      if ( !m_PriorityDictionary.ContainsKey( projectId ) )
+        return m_ProjectsDictionary[ -projectId ];
+      return m_ProjectsDictionary[ m_ProjectsMapppingDictionary[ projectId ] ];
+    }
+    private void Import( TimeTracking.TimeTrackingDataSet.PROJEKTYDataTable pROJEKTYDataTable, Entities m_Entities )
+    {
+      foreach ( var _row in pROJEKTYDataTable )
+      {
+        if ( !m_PriorityDictionary.ContainsKey( _row.ID ) )
+          continue;
+        Projects _newProject = Create<Projects>( m_Entities.Projects, m_ProjectsDictionary, _row.NAZWA_KROTKA, -_row.ID );
+        _newProject.Active = false;
+        _newProject.Body = _row.IsNAZWANull() ? "N/A" : _row.NAZWA.SPValidSubstring();
+        _newProject.Currency = Currency.PLN;
+        _newProject.Project2ContractTitle = GetOrAdd<Contracts>( m_Entities.Contracts, m_ContractDictionary, -_row.ID_UMOWY );
+        _newProject.Project2ResourcesTitle = GetResourcesFromTimeTrackerId( _row.IsID_MANAGERANull() ? -1 : _row.ID_MANAGERA );
+        _newProject.Project2StageTitle = DefaultStage;
+        _newProject.ProjectBudget = _row.IsBUDZETNull() ? 0 : Convert.ToDouble( _row.BUDZET);
+        _newProject.ProjectEndDate = _row.IsDATA_KONIECNull() ? DateTime.Today : _row.DATA_KONIEC;
+        _newProject.ProjectHours = _row.IsLICZBA_GODZINNull() ? 0 : _row.LICZBA_GODZIN;
+        _newProject.ProjectNumber = _row.IsNUMERNull() ? "N/A" : _row.NUMER;
+        _newProject.ProjectStartDate = _row.IsDATA_STARTNull() ? DateTime.Today : _row.DATA_START;
+        _newProject.ProjectType = _row.PODKATEGORIERow == null ? ProjectType.None : this.m_ProjectTypeMapping[ _row.PODKATEGORIERow.ID ];
+        _newProject.ProjectWarrantyDate = _row.IsDATA_GWARANCJANull() ? DateTime.Today : _row.DATA_GWARANCJA;
+      }
+    }
+    private void Import( TimeTracking.TimeTrackingDataSet.UMOWYDataTable uMOWYDataTable, Entities m_Entities )
+    {
+      foreach ( var _row in uMOWYDataTable )
+      {
+        Contracts _newContract = Create<Contracts>( m_Entities.Contracts, m_ContractDictionary, _row.NAZWA_KROTKA, -_row.ID );
+        _newContract.Body = _row.IsPRZEDMIOTNull() ? "N/A" : _row.PRZEDMIOT.SPValidSubstring();
+        _newContract.Body = _row.IsPRZEDMIOTNull() ? "N/A/" : _row.PRZEDMIOT.SPValidSubstring();
+        _newContract.ContractDate = _row.IsDATA_UMOWYNull() ? DateTime.Today : _row.DATA_UMOWY;
+        _newContract.ContractEndDate = _row.IsKONIECNull() ? DateTime.Today : _row.KONIEC;
+        _newContract.ContractNumber = _row.IsNUMERNull() ? "N/A" : _row.NUMER; 
+        _newContract.ContractOffer = _row.IsOFERTANull() ? "N/A" : _row.OFERTA;
+        _newContract.Contracts2PartnersTitle = _row.IsID_KLIENTANull() ? null : GetPartnerFromTimeTrackerId( _row.ID_KLIENTA );
+        _newContract.ContractSubject = _row.IsNAZWA_KROTKANull() ? "N/A" : _row.NAZWA_KROTKA;
+        _newContract.ContractValue = _row.IsKONTRAKTNull() ? 0 : Convert.ToDouble( _row.KONTRAKT );
+        _newContract.ContractWarrantyDate = _row.IsGWARANCJANull() ? DateTime.Today : _row.GWARANCJA;
+        _newContract.Currency = _row.IsWALUTANull() ? Currency.Invalid : GetCurrency(_row.WALUTA);
+      }
+    }
+
+    private Currency GetCurrency( string p )
+    {
+      throw new NotImplementedException();
+    }
+
+
+    private Partners GetPartnerFromTimeTrackerId( int p )
+    {
+      throw new NotImplementedException();
+    }
+
+    private void Import( TimeTracking.TimeTrackingDataSet.KONTRAHENCIDataTable kONTRAHENCIDataTable, Entities m_Entities )
+    {
+      foreach ( var _row in kONTRAHENCIDataTable )
+      {
+      }
+    }
+
+    private void Import( TimeTracking.TimeTrackingDataSet.PRACOWNICYDataTable pRACOWNICYDataTable, Entities m_Entities )
+    {
+      foreach ( var _row in pRACOWNICYDataTable )
+      {
+      }
+    }
+
+    #region mapping
+    private Dictionary<int, ProjectType> m_ProjectTypeMapping = new Dictionary<int, ProjectType>() 
+    { 
+      { 1, ProjectType.ProjectCommercial },
+      { 2, ProjectType.ProjectInternal},
+      { 3, ProjectType.Marketing},
+      { 5, ProjectType.Office},
+      { 8, ProjectType.AfterSalesServices},
+      { 9, ProjectType.ProjectCommercial},
+      {10, ProjectType.ProjectConception}
+    };
+    private Resources GetResourcesFromTimeTrackerId( int p )
+    {
+      throw new NotImplementedException();
+    }
+    #endregion
+
     #endregion
 
     #region data management
@@ -229,6 +380,9 @@ namespace CAS.ITRDataAccess.SharePoint
     private Dictionary<int, Priority> m_PriorityDictionary = new Dictionary<int, Priority>();
     private Dictionary<int, TaskComments> m_TaskCommentsDictionary = new Dictionary<int, TaskComments>();
     private Dictionary<Guid, Resources> m_ResourcesDictionary = new Dictionary<Guid, Resources>();
+    private Dictionary<int, Estimation> m_EstimationDictionary = new Dictionary<int, Estimation>();
+    private Dictionary<int, Workload> m_WorkloadDictionary = new Dictionary<int, Workload>();
+    private Dictionary<int, Contracts> m_ContractDictionary = new Dictionary<int, Contracts>();
     #endregion
 
     private Entities m_Entities { get; set; }
