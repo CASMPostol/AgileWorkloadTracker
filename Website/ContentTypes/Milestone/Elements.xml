@@ -13,6 +13,7 @@
       <FieldRef ID="{8C07C9A1-A76C-45DA-A1E1-CBF923F8BD46}" Name="Milestone2ProjectTitle" />
       <FieldRef ID="{50EDDF56-D28E-44C6-B6CB-109FBCDE886F}" Name="Active" />
       <FieldRef ID="{BCBAD9EE-E764-4E79-A158-7F551B05ECE3}" Name="MilestoneHours" />
+      <FieldRef ID="{90B24966-D42C-4752-BE4A-B316F777FCEC}" Name="SortOrder" />
     </FieldRefs>
   </ContentType>
 </Elements>
