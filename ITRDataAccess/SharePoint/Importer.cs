@@ -64,6 +64,7 @@ namespace CAS.ITRDataAccess.SharePoint
     }
     internal void Import( TimeTracking.TimeTrackingDataSet m_timeTrackingDataSet )
     {
+      throw new NotImplementedException();
       //Import( m_timeTrackingDataSet.RODZAJPRACY, m_Entities );
       //Import( m_timeTrackingDataSet.STATUSY, m_Entities ); alwazs Closed
       //Import( m_timeTrackingDataSet.KATEGORIE, m_Entities ); using onlz PODKATEGORIE
@@ -106,20 +107,17 @@ namespace CAS.ITRDataAccess.SharePoint
         try
         {
           Milestone _new = Create<Milestone>( _entt.Milestone, m_MilestoneDictionary, _row.Name, _row.VersionID );
-          //TODOD [AWT-3502] Add lookup from Milestones to Project  http://itrserver/Bugs/BugDetail.aspx?bid=3502
-          //if ( m_ProjectsDictionary.ContainsKey( _row.ProjectID ) )
-          //  _new.Milestone2StageTitle = m_ProjectsDictionary[ _row.ProjectID ].Project2StageTitle;
+          _new.Milestone2ProjectTitle = GetOrAdd<Projects>( _entt.Projects, m_ProjectsDictionary, _row.ProjectID );
+          _new.Order = _row.SortOrder;
           _new.Milestone2StageTitle = projectStage;
           _new.Active = true;
           _new.MilestoneHours = 0;
           _entt.SubmitChanges();
-
         }
         catch ( Exception _ex )
         {
           Console.WriteLine( String.Format( "Error importing Version of Name: {0}, because of {1}", _row.Name, _ex.Message ) );
         }
-        //TODO error handling mechnism
       }
     }
     private void Import( Bugnet.DatabaseContentDataSet.ResolutionDataTable resutionDataTable, Entities _entt )
@@ -249,7 +247,7 @@ namespace CAS.ITRDataAccess.SharePoint
         _newProject.Project2ContractTitle = GetOrAdd<Contracts>( m_Entities.Contracts, m_ContractDictionary, -_row.ID_UMOWY );
         _newProject.Project2ResourcesTitle = GetResourcesFromTimeTrackerId( _row.IsID_MANAGERANull() ? -1 : _row.ID_MANAGERA );
         _newProject.Project2StageTitle = DefaultStage;
-        _newProject.ProjectBudget = _row.IsBUDZETNull() ? 0 : Convert.ToDouble( _row.BUDZET);
+        _newProject.ProjectBudget = _row.IsBUDZETNull() ? 0 : Convert.ToDouble( _row.BUDZET );
         _newProject.ProjectEndDate = _row.IsDATA_KONIECNull() ? DateTime.Today : _row.DATA_KONIEC;
         _newProject.ProjectHours = _row.IsLICZBA_GODZINNull() ? 0 : _row.LICZBA_GODZIN;
         _newProject.ProjectNumber = _row.IsNUMERNull() ? "N/A" : _row.NUMER;
@@ -267,13 +265,13 @@ namespace CAS.ITRDataAccess.SharePoint
         _newContract.Body = _row.IsPRZEDMIOTNull() ? "N/A/" : _row.PRZEDMIOT.SPValidSubstring();
         _newContract.ContractDate = _row.IsDATA_UMOWYNull() ? DateTime.Today : _row.DATA_UMOWY;
         _newContract.ContractEndDate = _row.IsKONIECNull() ? DateTime.Today : _row.KONIEC;
-        _newContract.ContractNumber = _row.IsNUMERNull() ? "N/A" : _row.NUMER; 
+        _newContract.ContractNumber = _row.IsNUMERNull() ? "N/A" : _row.NUMER;
         _newContract.ContractOffer = _row.IsOFERTANull() ? "N/A" : _row.OFERTA;
         _newContract.Contracts2PartnersTitle = _row.IsID_KLIENTANull() ? null : GetPartnerFromTimeTrackerId( _row.ID_KLIENTA );
         _newContract.ContractSubject = _row.IsNAZWA_KROTKANull() ? "N/A" : _row.NAZWA_KROTKA;
         _newContract.ContractValue = _row.IsKONTRAKTNull() ? 0 : Convert.ToDouble( _row.KONTRAKT );
         _newContract.ContractWarrantyDate = _row.IsGWARANCJANull() ? DateTime.Today : _row.GWARANCJA;
-        _newContract.Currency = _row.IsWALUTANull() ? Currency.Invalid : GetCurrency(_row.WALUTA);
+        _newContract.Currency = _row.IsWALUTANull() ? Currency.Invalid : GetCurrency( _row.WALUTA );
       }
     }
 

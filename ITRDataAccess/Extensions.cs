@@ -19,7 +19,7 @@ namespace CAS.ITRDataAccess
         _gdl = _normalizedString.Length;
       } while ( true );
       int SPStringMAxLength = 250;
-      if ( _gdl >= SPStringMAxLength )
+      if ( _gdl > SPStringMAxLength )
         _normalizedString = _normalizedString.Remove( SPStringMAxLength );
       return _normalizedString;
     }

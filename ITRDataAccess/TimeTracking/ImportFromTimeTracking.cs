@@ -23,7 +23,7 @@ namespace CAS.ITRDataAccess.TimeTracking
     internal void GetDataFromDatabase()
     {
       GetData();
-      m_SharePointImporter.Import(m_timeTrackingDataSet);
+      //m_SharePointImporter.Import(m_timeTrackingDataSet);
       Console.WriteLine("Data read from Godziny databaze");
     }
     private void GetData()
