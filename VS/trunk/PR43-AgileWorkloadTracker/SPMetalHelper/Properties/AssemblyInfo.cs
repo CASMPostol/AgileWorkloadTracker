@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("CAS.AgileWorkloadTrackerSPMetalHelper")]
-[assembly: AssemblyDescription("Creates entities for sharepoint lists and content types.")]
+[assembly: AssemblyDescription( "Contains common data model for all SharePoint solutions." )]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("CAS")]
 [assembly: AssemblyProduct("AgileWorkloadTracker")]
