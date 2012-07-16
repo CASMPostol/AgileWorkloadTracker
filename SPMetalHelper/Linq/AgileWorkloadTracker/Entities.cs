@@ -1068,11 +1068,11 @@ namespace CAS.AgileWorkloadTracker.Linq {
 		
 		private System.Nullable<double> _milestoneHours;
 		
+		private System.Nullable<double> _order;
+		
 		private Microsoft.SharePoint.Linq.EntityRef<Stage> _milestone2StageTitle;
 		
-		private System.Nullable<int> _milestone2ProjectTitleIdentyfikator;
-		
-		private string _milestone2ProjectTitleTitle;
+		private Microsoft.SharePoint.Linq.EntityRef<Projects> _milestone2ProjectTitle;
 		
 		private Microsoft.SharePoint.Linq.EntitySet<Tasks> _tasks;
 		
@@ -1089,6 +1089,10 @@ namespace CAS.AgileWorkloadTracker.Linq {
 			this._milestone2StageTitle.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Stage>>(this.OnMilestone2StageTitleSync);
 			this._milestone2StageTitle.OnChanged += new System.EventHandler(this.OnMilestone2StageTitleChanged);
 			this._milestone2StageTitle.OnChanging += new System.EventHandler(this.OnMilestone2StageTitleChanging);
+			this._milestone2ProjectTitle = new Microsoft.SharePoint.Linq.EntityRef<Projects>();
+			this._milestone2ProjectTitle.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Projects>>(this.OnMilestone2ProjectTitleSync);
+			this._milestone2ProjectTitle.OnChanged += new System.EventHandler(this.OnMilestone2ProjectTitleChanged);
+			this._milestone2ProjectTitle.OnChanging += new System.EventHandler(this.OnMilestone2ProjectTitleChanging);
 			this._tasks = new Microsoft.SharePoint.Linq.EntitySet<Tasks>();
 			this._tasks.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Tasks>>(this.OnTasksSync);
 			this._tasks.OnChanged += new System.EventHandler(this.OnTasksChanged);
@@ -1128,6 +1132,20 @@ namespace CAS.AgileWorkloadTracker.Linq {
 			}
 		}
 		
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="SortOrder", Storage="_order", FieldType="Number")]
+		public System.Nullable<double> Order {
+			get {
+				return this._order;
+			}
+			set {
+				if ((value != this._order)) {
+					this.OnPropertyChanging("Order", this._order);
+					this._order = value;
+					this.OnPropertyChanged("Order");
+				}
+			}
+		}
+		
 		[Microsoft.SharePoint.Linq.AssociationAttribute(Name="Milestone2StageTitle", Storage="_milestone2StageTitle", MultivalueType=Microsoft.SharePoint.Linq.AssociationType.Single, List="Stage")]
 		public Stage Milestone2StageTitle {
 			get {
@@ -1138,31 +1156,13 @@ namespace CAS.AgileWorkloadTracker.Linq {
 			}
 		}
 		
-		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="Milestone2ProjectTitle", Storage="_milestone2ProjectTitleIdentyfikator", FieldType="Lookup", IsLookupId=true)]
-		public System.Nullable<int> Milestone2ProjectTitleIdentyfikator {
+		[Microsoft.SharePoint.Linq.AssociationAttribute(Name="Milestone2ProjectTitle", Storage="_milestone2ProjectTitle", MultivalueType=Microsoft.SharePoint.Linq.AssociationType.Single, List="Projects")]
+		public Projects Milestone2ProjectTitle {
 			get {
-				return this._milestone2ProjectTitleIdentyfikator;
+				return this._milestone2ProjectTitle.GetEntity();
 			}
 			set {
-				if ((value != this._milestone2ProjectTitleIdentyfikator)) {
-					this.OnPropertyChanging("Milestone2ProjectTitleIdentyfikator", this._milestone2ProjectTitleIdentyfikator);
-					this._milestone2ProjectTitleIdentyfikator = value;
-					this.OnPropertyChanged("Milestone2ProjectTitleIdentyfikator");
-				}
-			}
-		}
-		
-		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="Milestone2ProjectTitle", Storage="_milestone2ProjectTitleTitle", ReadOnly=true, FieldType="Lookup", IsLookupValue=true)]
-		public string Milestone2ProjectTitleTitle {
-			get {
-				return this._milestone2ProjectTitleTitle;
-			}
-			set {
-				if ((value != this._milestone2ProjectTitleTitle)) {
-					this.OnPropertyChanging("Milestone2ProjectTitleTitle", this._milestone2ProjectTitleTitle);
-					this._milestone2ProjectTitleTitle = value;
-					this.OnPropertyChanged("Milestone2ProjectTitleTitle");
-				}
+				this._milestone2ProjectTitle.SetEntity(value);
 			}
 		}
 		
@@ -1195,6 +1195,23 @@ namespace CAS.AgileWorkloadTracker.Linq {
 		}
 		
 		private void OnMilestone2StageTitleSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Stage> e) {
+			if ((Microsoft.SharePoint.Linq.AssociationChangedState.Added == e.State)) {
+				e.Item.Milestone.Add(this);
+			}
+			else {
+				e.Item.Milestone.Remove(this);
+			}
+		}
+		
+		private void OnMilestone2ProjectTitleChanging(object sender, System.EventArgs e) {
+			this.OnPropertyChanging("Milestone2ProjectTitle", this._milestone2ProjectTitle.Clone());
+		}
+		
+		private void OnMilestone2ProjectTitleChanged(object sender, System.EventArgs e) {
+			this.OnPropertyChanged("Milestone2ProjectTitle");
+		}
+		
+		private void OnMilestone2ProjectTitleSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Projects> e) {
 			if ((Microsoft.SharePoint.Linq.AssociationChangedState.Added == e.State)) {
 				e.Item.Milestone.Add(this);
 			}
@@ -1510,6 +1527,8 @@ namespace CAS.AgileWorkloadTracker.Linq {
 		
 		private Microsoft.SharePoint.Linq.EntitySet<Estimation> _estimation;
 		
+		private Microsoft.SharePoint.Linq.EntitySet<Milestone> _milestone;
+		
 		private Microsoft.SharePoint.Linq.EntityRef<Resources> _project2ResourcesTitle;
 		
 		private Microsoft.SharePoint.Linq.EntityRef<Contracts> _project2ContractTitle;
@@ -1531,6 +1550,10 @@ namespace CAS.AgileWorkloadTracker.Linq {
 			this._estimation.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Estimation>>(this.OnEstimationSync);
 			this._estimation.OnChanged += new System.EventHandler(this.OnEstimationChanged);
 			this._estimation.OnChanging += new System.EventHandler(this.OnEstimationChanging);
+			this._milestone = new Microsoft.SharePoint.Linq.EntitySet<Milestone>();
+			this._milestone.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Milestone>>(this.OnMilestoneSync);
+			this._milestone.OnChanged += new System.EventHandler(this.OnMilestoneChanged);
+			this._milestone.OnChanging += new System.EventHandler(this.OnMilestoneChanging);
 			this._project2ResourcesTitle = new Microsoft.SharePoint.Linq.EntityRef<Resources>();
 			this._project2ResourcesTitle.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Resources>>(this.OnProject2ResourcesTitleSync);
 			this._project2ResourcesTitle.OnChanged += new System.EventHandler(this.OnProject2ResourcesTitleChanged);
@@ -1704,6 +1727,16 @@ namespace CAS.AgileWorkloadTracker.Linq {
 			}
 		}
 		
+		[Microsoft.SharePoint.Linq.AssociationAttribute(Name="Milestone2ProjectTitle", Storage="_milestone", ReadOnly=true, MultivalueType=Microsoft.SharePoint.Linq.AssociationType.Backward, List="Milestone")]
+		public Microsoft.SharePoint.Linq.EntitySet<Milestone> Milestone {
+			get {
+				return this._milestone;
+			}
+			set {
+				this._milestone.Assign(value);
+			}
+		}
+		
 		[Microsoft.SharePoint.Linq.AssociationAttribute(Name="Project2ResourcesTitle", Storage="_project2ResourcesTitle", MultivalueType=Microsoft.SharePoint.Linq.AssociationType.Single, List="Resources")]
 		public Resources Project2ResourcesTitle {
 			get {
@@ -1768,6 +1801,23 @@ namespace CAS.AgileWorkloadTracker.Linq {
 			}
 			else {
 				e.Item.Estimation2ProjectTitle = null;
+			}
+		}
+		
+		private void OnMilestoneChanging(object sender, System.EventArgs e) {
+			this.OnPropertyChanging("Milestone", this._milestone.Clone());
+		}
+		
+		private void OnMilestoneChanged(object sender, System.EventArgs e) {
+			this.OnPropertyChanged("Milestone");
+		}
+		
+		private void OnMilestoneSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Milestone> e) {
+			if ((Microsoft.SharePoint.Linq.AssociationChangedState.Added == e.State)) {
+				e.Item.Milestone2ProjectTitle = this;
+			}
+			else {
+				e.Item.Milestone2ProjectTitle = null;
 			}
 		}
 		
