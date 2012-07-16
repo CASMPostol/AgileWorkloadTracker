@@ -344,7 +344,7 @@
     Name="Milestone2ProjectTitle"
     ID="{8C07C9A1-A76C-45DA-A1E1-CBF923F8BD46}"
     Type="Lookup"
-    List="Lists/ProjectList"
+    List="Lists/ProjectsList"
     ShowField="Title"
     UnlimitedLengthInDocumentLibrary="False"
     Indexed="True"
