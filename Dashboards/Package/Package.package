@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="92f33941-32f8-4ccd-a47e-35ce3cc13bcd" solutionId="92f33941-32f8-4ccd-a47e-35ce3cc13bcd" resetWebServer="true" name="Agile Workload Tracker Dashboards" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
   <assemblies>
-    <projectOutputAssembly location="CAS.SharePoint.dll" deploymentTarget="GlobalAssemblyCache" projectPath="..\SharePoint\SharePoint.csproj" />
+    <projectOutputAssembly location="CAS.SharePoint.dll" deploymentTarget="GlobalAssemblyCache" projectPath="..\..\PR44-SharePoint\SharePoint\SharePoint.csproj" />
   </assemblies>
   <features>
     <featureReference itemId="5760eced-aec8-4231-b2ae-e10fe7973f91" />
