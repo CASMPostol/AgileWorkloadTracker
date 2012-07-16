@@ -1,6 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
   <Field
+    Name="SortOrder"
+    ID="{90B24966-D42C-4752-BE4A-B316F777FCEC}"
+    Type="Number"
+    DisplayName="Order"
+    Group="CAS Agile Workload Tracker"
+    />
+  <Field
     Name="MilestoneHours"
     ID="{BCBAD9EE-E764-4E79-A158-7F551B05ECE3}"
     Type="Number"
