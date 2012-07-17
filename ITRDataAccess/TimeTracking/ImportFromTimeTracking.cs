@@ -20,13 +20,7 @@ namespace CAS.ITRDataAccess.TimeTracking
       container.Add(this);
       InitializeComponent();
     }
-    internal void GetDataFromDatabase()
-    {
-      GetData();
-      //m_SharePointImporter.Import(m_timeTrackingDataSet);
-      Console.WriteLine("Data read from Godziny databaze");
-    }
-    private void GetData()
+    internal TimeTrackingDataSet GetDataFromDatabase()
     {
       m_rodzajpracyTableAdapter.Fill( m_timeTrackingDataSet.RODZAJPRACY );
       m_statusyTableAdapter.Fill( m_timeTrackingDataSet.STATUSY );
@@ -40,6 +34,8 @@ namespace CAS.ITRDataAccess.TimeTracking
       m_projektyTableAdapter.Fill( m_timeTrackingDataSet.PROJEKTY );
       m_godzinyTableAdapter.Fill( m_timeTrackingDataSet.GODZINY );
       m_planTableAdapter.Fill( m_timeTrackingDataSet.PLAN );
+      Console.WriteLine( "Data read from Godziny databaze" );
+      return m_timeTrackingDataSet;
     }
   }
 }

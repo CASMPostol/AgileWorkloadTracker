@@ -17,13 +17,6 @@ namespace CAS.ITRDataAccess.SharePoint
     public Importer()
     {
       InitializeComponent();
-      m_Entities = new Entities();
-      DefaultStage = ( from _sidx in m_Entities.Stage where _sidx.Title.Contains( DefaultStageTitle ) select _sidx ).FirstOrDefault();
-      if ( DefaultStage == null )
-      {
-        DefaultStage = new Stage() { Title = DefaultStageTitle };
-        m_Entities.Stage.InsertOnSubmit( DefaultStage );
-      }
     }
     public Importer( IContainer container )
       : this()
@@ -31,36 +24,39 @@ namespace CAS.ITRDataAccess.SharePoint
       container.Add( this );
     }
     #endregion
-    private const string DefaultStageTitle = "Imported";
-    private Stage DefaultStage = null;
 
     #region public
+    internal void ImportData()
+    {
+      Bugnet.DatabaseContentDataSet m_BugNETDataSet = m_importFromBugNet.GetDataFromDatabase();
+      Import( m_BugNETDataSet );
+      TimeTracking.TimeTrackingDataSet m_timeTrackingDataSet = m_importFromTimeTracking.GetDataFromDatabase();
+      Import( m_timeTrackingDataSet );
+    }
     internal void Import( Bugnet.DatabaseContentDataSet m_BugNETDataSet )
     {
-      Import( m_BugNETDataSet.Project, DefaultStage, m_Entities );
-      m_Entities.SubmitChanges();
+      Import( m_BugNETDataSet.Project, p_DefaultStage, p_Entities );
+      p_Entities.SubmitChanges();
       Console.WriteLine( "Project" );
-      Import( m_BugNETDataSet.Version, m_Entities, DefaultStage );
-      m_Entities.SubmitChanges();
+      Import( m_BugNETDataSet.Version, p_Entities, p_DefaultStage );
+      p_Entities.SubmitChanges();
       Console.WriteLine( "Version" );
-      Import( m_BugNETDataSet.Status, m_Entities );
-      m_Entities.SubmitChanges();
+      Import( m_BugNETDataSet.Status, p_Entities );
+      p_Entities.SubmitChanges();
       Console.WriteLine( "Status" );
-      Import( m_BugNETDataSet.Priority, m_Entities );
-      m_Entities.SubmitChanges();
+      Import( m_BugNETDataSet.Priority, p_Entities );
+      p_Entities.SubmitChanges();
       Console.WriteLine( "Priority" );
-      Import( m_BugNETDataSet.Resolution, m_Entities );
-      m_Entities.SubmitChanges();
+      Import( m_BugNETDataSet.Resolution, p_Entities );
+      p_Entities.SubmitChanges();
       Console.WriteLine( "Resolution" );
-      Import( m_BugNETDataSet.Type, m_Entities );
-      m_Entities.SubmitChanges();
+      Import( m_BugNETDataSet.Type, p_Entities );
+      p_Entities.SubmitChanges();
       Console.WriteLine( "Type" );
-      Import( m_BugNETDataSet.Bug, m_Entities );
-      m_Entities.SubmitChanges();
+      Import( m_BugNETDataSet.Bug, p_Entities );
+      p_Entities.SubmitChanges();
       Console.WriteLine( "Bug" );
-      Import( m_BugNETDataSet.BugComment, m_Entities );
-      m_Entities.SubmitChanges();
-      Console.WriteLine( "Starting SubmitChanges" );
+      Import( m_BugNETDataSet.BugComment, p_Entities );
     }
     internal void Import( TimeTracking.TimeTrackingDataSet m_timeTrackingDataSet )
     {
@@ -68,16 +64,15 @@ namespace CAS.ITRDataAccess.SharePoint
       //Import( m_timeTrackingDataSet.RODZAJPRACY, m_Entities );
       //Import( m_timeTrackingDataSet.STATUSY, m_Entities ); alwazs Closed
       //Import( m_timeTrackingDataSet.KATEGORIE, m_Entities ); using onlz PODKATEGORIE
-      Import( m_timeTrackingDataSet.PRACOWNICY, m_Entities );
-      Import( m_timeTrackingDataSet.KONTRAHENCI, m_Entities );
-      Import( m_timeTrackingDataSet.UMOWY, m_Entities );
+      Import( m_timeTrackingDataSet.PRACOWNICY, p_Entities );
+      Import( m_timeTrackingDataSet.KONTRAHENCI, p_Entities );
+      Import( m_timeTrackingDataSet.UMOWY, p_Entities );
       //Import( m_timeTrackingDataSet.PLATNOSCI, m_Entities );
       //Import( m_timeTrackingDataSet.POLISY, m_Entities );
-      Import( m_timeTrackingDataSet.PROJEKTY, m_Entities );
-      Import( m_timeTrackingDataSet.GODZINY, m_Entities );
-      Import( m_timeTrackingDataSet.PLAN, m_Entities );
+      Import( m_timeTrackingDataSet.PROJEKTY, p_Entities );
+      Import( m_timeTrackingDataSet.GODZINY, p_Entities );
+      Import( m_timeTrackingDataSet.PLAN, p_Entities );
     }
-
     #endregion
 
     #region Bugnet import
@@ -168,16 +163,28 @@ namespace CAS.ITRDataAccess.SharePoint
     }
     private void Import( Bugnet.DatabaseContentDataSet.BugCommentDataTable bugCommentDataTable, Entities _entt )
     {
-      foreach ( var _row in bugCommentDataTable )
+      int _bugId = 0;
+      int _iteration = 0;
+      try
       {
-        // Create<TaskComments>( _entt.TaskComments, m_TaskCommentsDictionary, String.Empty, _row.BugCommentID );
-        TaskComments _new = new TaskComments()
+        foreach ( var _row in bugCommentDataTable )
         {
-          Body = _row.Comment.SPValidSubstring(),
-          TaskComments2TaskTitle = GetOrAdd<Tasks>( _entt.Task, m_TasksDictionary, _row.BugID )
-        };
-        _entt.TaskComments.InsertOnSubmit( _new );
-        //m_TaskCommentsDictionary.Add( _row.BugCommentID, _new );
+          _bugId = _row.BugCommentID;
+          TaskComments _new = new TaskComments()
+          {
+            Body = _row.Comment, //SPValidSubstring(),
+            TaskComments2TaskTitle = GetOrAdd<Tasks>( _entt.Task, m_TasksDictionary, _row.BugID )
+          };
+          _entt.TaskComments.InsertOnSubmit( _new );
+          Console.Write( "\r" );
+          Console.Write( _iteration++ );
+          //m_TaskCommentsDictionary.Add( _row.BugCommentID, _new );
+          _entt.SubmitChanges();
+        }
+      }
+      catch ( Exception _ex )
+      {
+        Console.WriteLine( String.Format( "Error importing BugCommentDataTable of Name: {0}, because of {1}", _bugId, _ex.Message ) );
       }
     }
     #endregion
@@ -246,7 +253,7 @@ namespace CAS.ITRDataAccess.SharePoint
         _newProject.Currency = Currency.PLN;
         _newProject.Project2ContractTitle = GetOrAdd<Contracts>( m_Entities.Contracts, m_ContractDictionary, -_row.ID_UMOWY );
         _newProject.Project2ResourcesTitle = GetResourcesFromTimeTrackerId( _row.IsID_MANAGERANull() ? -1 : _row.ID_MANAGERA );
-        _newProject.Project2StageTitle = DefaultStage;
+        _newProject.Project2StageTitle = p_DefaultStage;
         _newProject.ProjectBudget = _row.IsBUDZETNull() ? 0 : Convert.ToDouble( _row.BUDZET );
         _newProject.ProjectEndDate = _row.IsDATA_KONIECNull() ? DateTime.Today : _row.DATA_KONIEC;
         _newProject.ProjectHours = _row.IsLICZBA_GODZINNull() ? 0 : _row.LICZBA_GODZIN;
@@ -383,8 +390,37 @@ namespace CAS.ITRDataAccess.SharePoint
     private Dictionary<int, Contracts> m_ContractDictionary = new Dictionary<int, Contracts>();
     #endregion
 
-    private Entities m_Entities { get; set; }
-    /// <summary> 
+    #region private
+    private const string DefaultStageTitle = "Imported";
+    private Stage p_DefaultStage = null;
+    private Stage DefaultStage
+    {
+      get
+      {
+        if ( p_DefaultStage == null )
+          p_DefaultStage = ( from _sidx in p_Entities.Stage where _sidx.Title.Contains( DefaultStageTitle ) select _sidx ).FirstOrDefault();
+        if ( p_DefaultStage == null )
+        {
+          p_DefaultStage = new Stage() { Title = DefaultStageTitle };
+          p_Entities.Stage.InsertOnSubmit( p_DefaultStage );
+        }
+        return p_DefaultStage;
+      }
+    }
+    private Entities p_Entities = null;
+    private Entities m_Entities
+    {
+      get
+      {
+        if ( p_Entities == null )
+          p_Entities = Entities.GetEntitity();
+        return p_Entities;
+      }
+    }
+    #endregion
+
+    #region dispose
+    /// <summary>
     /// Clean up any resources being used.
     /// </summary>
     /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -394,12 +430,14 @@ namespace CAS.ITRDataAccess.SharePoint
       {
         components.Dispose();
       }
-      if ( m_Entities != null )
+      if ( p_Entities != null )
       {
-        m_Entities.Dispose();
-        m_Entities = null;
+        p_Entities.Dispose();
+        p_Entities = null;
       }
       base.Dispose( disposing );
     }
+    #endregion
+
   }
 }

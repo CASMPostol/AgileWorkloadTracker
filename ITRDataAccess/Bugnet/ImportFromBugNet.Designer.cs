@@ -1,6 +1,6 @@
 ﻿namespace CAS.ITRDataAccess.Bugnet
 {
-  internal partial class Import2SharePoint
+  internal partial class ImportFromBugNet
   {
     /// <summary>
     /// Required designer variable.
@@ -47,6 +47,7 @@
       this.m_bugTimeEntryTableAdapter = new CAS.ITRDataAccess.Bugnet.DatabaseContentDataSetTableAdapters.BugTimeEntryTableAdapter();
       this.m_projectCustomFieldValuesTableAdapter = new CAS.ITRDataAccess.Bugnet.DatabaseContentDataSetTableAdapters.ProjectCustomFieldValuesTableAdapter();
       this.m_relatedBugTableAdapter = new CAS.ITRDataAccess.Bugnet.DatabaseContentDataSetTableAdapters.RelatedBugTableAdapter();
+      this.m_aspnet_UsersTableAdapter = new CAS.ITRDataAccess.Bugnet.DatabaseContentDataSetTableAdapters.aspnet_UsersTableAdapter();
       ((System.ComponentModel.ISupportInitialize)(this.m_BugNETDataSet)).BeginInit();
       // 
       // m_BugNETDataSet
@@ -126,13 +127,16 @@
       // m_relatedBugTableAdapter
       // 
       this.m_relatedBugTableAdapter.ClearBeforeFill = true;
+      // 
+      // m_aspnet_UsersTableAdapter
+      // 
+      this.m_aspnet_UsersTableAdapter.ClearBeforeFill = true;
       ((System.ComponentModel.ISupportInitialize)(this.m_BugNETDataSet)).EndInit();
 
     }
 
     #endregion
 
-    private DatabaseContentDataSet m_BugNETDataSet;
     private DatabaseContentDataSetTableAdapters.BugTableAdapter m_BugTableAdapter;
     private DatabaseContentDataSetTableAdapters.PriorityTableAdapter m_priorityTableAdapter;
     private DatabaseContentDataSetTableAdapters.ProjectTableAdapter m_projectTableAdapter;
@@ -151,5 +155,7 @@
     private DatabaseContentDataSetTableAdapters.BugTimeEntryTableAdapter m_bugTimeEntryTableAdapter;
     private DatabaseContentDataSetTableAdapters.ProjectCustomFieldValuesTableAdapter m_projectCustomFieldValuesTableAdapter;
     private DatabaseContentDataSetTableAdapters.RelatedBugTableAdapter m_relatedBugTableAdapter;
+    private DatabaseContentDataSet m_BugNETDataSet;
+    private DatabaseContentDataSetTableAdapters.aspnet_UsersTableAdapter m_aspnet_UsersTableAdapter;
   }
 }

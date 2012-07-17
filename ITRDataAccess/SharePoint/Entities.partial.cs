@@ -11,11 +11,9 @@ namespace CAS.AgileWorkloadTracker.Linq
 {
   internal partial class Entities
   {
-    public Entities()
-      : base( Settings.Default.RequestUrl )
+    internal static Entities GetEntitity()
     {
-
+      return new Entities( Settings.Default.RequestUrl );
     }
-
   }
 }

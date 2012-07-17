@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using CAS.ITRDataAccess.SharePoint;
 
 namespace CAS.ITRDataAccess
 {
@@ -10,14 +11,8 @@ namespace CAS.ITRDataAccess
     [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "args" )]
     static void Main( string[] args )
     {
-      using ( Bugnet.Import2SharePoint _BugNET2SharePoint = new Bugnet.Import2SharePoint() )
-      {
-        _BugNET2SharePoint.GetDataFromDatabase();
-      }
-      using (TimeTracking.ImportFromTimeTracking _importFromTimeTracking = new TimeTracking.ImportFromTimeTracking())
-      {
-        _importFromTimeTracking.GetDataFromDatabase();
-      }
+      using ( Importer _Importer = new Importer() )
+        _Importer.ImportData();
     }
   }
 }

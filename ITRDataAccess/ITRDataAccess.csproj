@@ -55,12 +55,6 @@
     <Compile Include="..\SPMetalHelper\Linq\AgileWorkloadTracker\Entities.cs">
       <Link>SharePoint\Entities.cs</Link>
     </Compile>
-    <Compile Include="Bugnet\Import2SharePoint.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Bugnet\Import2SharePoint.Designer.cs">
-      <DependentUpon>Import2SharePoint.cs</DependentUpon>
-    </Compile>
     <Compile Include="Bugnet\DatabaseContentDataSet.cs">
       <DependentUpon>DatabaseContentDataSet.xsd</DependentUpon>
       <SubType>Component</SubType>
@@ -69,6 +63,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DatabaseContentDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Bugnet\ImportFromBugNet.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Bugnet\ImportFromBugNet.Designer.cs">
+      <DependentUpon>ImportFromBugNet.cs</DependentUpon>
     </Compile>
     <Compile Include="Extensions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
@@ -132,8 +132,8 @@
     <EmbeddedResource Include="Bugnet\DatabaseContentDataSet.resx">
       <DependentUpon>DatabaseContentDataSet.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Bugnet\Import2SharePoint.resx">
-      <DependentUpon>Import2SharePoint.cs</DependentUpon>
+    <EmbeddedResource Include="Bugnet\ImportFromBugNet.resx">
+      <DependentUpon>ImportFromBugNet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SharePoint\Importer.resx">
       <DependentUpon>Importer.cs</DependentUpon>
