@@ -1,21 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
 
 namespace CAS.ITRDataAccess.Bugnet
 {
-  internal partial class Import2SharePoint: Component
+  internal partial class ImportFromBugNet: Component
   {
-    public Import2SharePoint()
+    #region creators
+    public ImportFromBugNet()
     {
       InitializeComponent();
     }
-    internal void GetDataFromDatabase()
+    [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode" )]
+    public ImportFromBugNet( IContainer container )
+      : this()
     {
-      
+      if ( container == null )
+        throw new ArgumentException( "The container parameter cant be nul" );
+      container.Add( this );
+    }
+    #endregion
+
+    #region public
+    internal DatabaseContentDataSet GetDataFromDatabase()
+    {
+      m_aspnet_UsersTableAdapter.Fill( m_BugNETDataSet.aspnet_Users );
       m_projectTableAdapter.Fill( m_BugNETDataSet.Project );
       m_priorityTableAdapter.Fill( m_BugNETDataSet.Priority );
       m_versionTableAdapter.Fill( m_BugNETDataSet.Version );
@@ -34,15 +42,8 @@ namespace CAS.ITRDataAccess.Bugnet
       m_bugNotificationTableAdapter.Fill( m_BugNETDataSet.BugNotification );
       m_bugTimeEntryTableAdapter.Fill( m_BugNETDataSet.BugTimeEntry );
       m_projectCustomFieldValuesTableAdapter.Fill( m_BugNETDataSet.ProjectCustomFieldValues );
-      m_SharePointImporter.Import( m_BugNETDataSet );
+      return m_BugNETDataSet;
     }
-    [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode" )]
-    public Import2SharePoint( IContainer container )
-      : this()
-    {
-      if ( container == null )
-        throw new ArgumentException( "The container parameter cant be nul" );
-      container.Add( this );
-    }
+    #endregion
   }
 }

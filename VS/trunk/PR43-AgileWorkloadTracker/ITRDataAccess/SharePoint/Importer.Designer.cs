@@ -16,10 +16,16 @@
     /// </summary>
     private void InitializeComponent()
     {
+      this.components = new System.ComponentModel.Container();
+      this.m_importFromTimeTracking = new CAS.ITRDataAccess.TimeTracking.ImportFromTimeTracking(this.components);
+      this.m_importFromBugNet = new CAS.ITRDataAccess.Bugnet.ImportFromBugNet(this.components);
 
     }
 
     #endregion
+
+    private TimeTracking.ImportFromTimeTracking m_importFromTimeTracking;
+    private Bugnet.ImportFromBugNet m_importFromBugNet;
 
   }
 }

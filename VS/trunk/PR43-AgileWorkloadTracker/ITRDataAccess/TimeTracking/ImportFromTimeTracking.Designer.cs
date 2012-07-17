@@ -28,9 +28,7 @@
     /// </summary>
     private void InitializeComponent()
     {
-      this.components = new System.ComponentModel.Container();
       this.m_timeTrackingDataSet = new CAS.ITRDataAccess.TimeTracking.TimeTrackingDataSet();
-      this.m_SharePointImporter = new CAS.ITRDataAccess.SharePoint.Importer(this.components);
       this.m_godzinyTableAdapter = new CAS.ITRDataAccess.TimeTracking.TimeTrackingDataSetTableAdapters.GODZINYTableAdapter();
       this.m_kategorieTableAdapter = new CAS.ITRDataAccess.TimeTracking.TimeTrackingDataSetTableAdapters.KATEGORIETableAdapter();
       this.m_kontrahenciTableAdapter = new CAS.ITRDataAccess.TimeTracking.TimeTrackingDataSetTableAdapters.KONTRAHENCITableAdapter();
@@ -104,7 +102,6 @@
     #endregion
 
     private TimeTrackingDataSet m_timeTrackingDataSet;
-    private SharePoint.Importer m_SharePointImporter;
     private TimeTrackingDataSetTableAdapters.GODZINYTableAdapter m_godzinyTableAdapter;
     private TimeTrackingDataSetTableAdapters.KATEGORIETableAdapter m_kategorieTableAdapter;
     private TimeTrackingDataSetTableAdapters.KONTRAHENCITableAdapter m_kontrahenciTableAdapter;

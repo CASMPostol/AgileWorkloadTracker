@@ -138,7 +138,9 @@
     </Content>
     <Content Include="Layouts\AWT_Dashboards\CAS_AWT.css" />
     <Content Include="WebPartPages\AddEditWorkloadTemplate.aspx" />
-    <Content Include="WebPartPages\Elements.xml" />
+    <Content Include="WebPartPages\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="WebPartPages\MyTasksTemplate.aspx" />
     <Content Include="Webparts\CurrentUserWebPart\CurrentUserWebPartUserControl.ascx">
       <SubType>ASPXCodeBehind</SubType>
