@@ -83,8 +83,14 @@ namespace CAS.ITRDataAccess.SharePoint
     {
       foreach ( var _row in usersDataTable )
       {
-        Resources _new = GetOrAdd<Resources>( m_Entities.Resources, m_ResourcesDictionary, _row.LoweredUserName );
-        m_ResourcesDictionaryMapping.Add( _row.UserId, _new );
+        Resources _new = null;
+        if ( m_ResourcesDictionaryMapping.ContainsKey( _row.LoweredUserName ) )
+        {
+          _new = m_ResourcesDictionaryTimeTracking[ m_ResourcesDictionaryMapping[ _row.LoweredUserName ] ];
+          m_ResourcesDictionaryBugNet.Add( _row.UserId, _new );
+        }
+        else
+          _new = GetOrAdd<Resources>( m_Entities.Resources, m_ResourcesDictionaryBugNet, _row.UserId );
       }
     }
     private void Import( Bugnet.DatabaseContentDataSet.ProjectDataTable projectDataTable, Stage stage, Entities _entt )
@@ -96,7 +102,7 @@ namespace CAS.ITRDataAccess.SharePoint
         _new.Body = _row.IsDescriptionNull() ? String.Empty : _row.Description;
         _new.Currency = Currency.PLN;
         _new.Project2ContractTitle = null;
-        _new.Project2ResourcesTitle = null;
+        _new.Project2ResourcesTitle = GetOrAdd<Resources>( _entt.Resources, m_ResourcesDictionaryBugNet, _row.ManagerUserID );
         _new.Project2StageTitle = stage;
         _new.ProjectBudget = 0;
         _new.ProjectHours = 0;
@@ -129,30 +135,22 @@ namespace CAS.ITRDataAccess.SharePoint
     private void Import( Bugnet.DatabaseContentDataSet.ResolutionDataTable resutionDataTable, Entities _entt )
     {
       foreach ( var _row in resutionDataTable )
-      {
-        Resolution _new = Create<Resolution>( _entt.Resolution, m_ResolutionDictionary, _row.Name, _row.ResolutionID );
-      }
+        Create<Resolution>( _entt.Resolution, m_ResolutionDictionary, _row.Name, _row.ResolutionID );
     }
     private void Import( Bugnet.DatabaseContentDataSet.StatusDataTable statusDataTable, Entities _entt )
     {
       foreach ( var _row in statusDataTable )
-      {
-        Status _new = Create<Status>( _entt.Status, m_StatusDictionary, _row.Name, _row.StatusID );
-      }
+        Create<Status>( _entt.Status, m_StatusDictionary, _row.Name, _row.StatusID );
     }
     private void Import( Bugnet.DatabaseContentDataSet.TypeDataTable typeDataTable, Entities _entt )
     {
       foreach ( var _row in typeDataTable )
-      {
-        TaskType _new = Create<TaskType>( _entt.Type, m_TaskTypeDictionary, _row.Name, _row.TypeID );
-      }
+        Create<TaskType>( _entt.Type, m_TaskTypeDictionary, _row.Name, _row.TypeID );
     }
     private void Import( Bugnet.DatabaseContentDataSet.PriorityDataTable priorityDataTable, Entities _entt )
     {
       foreach ( var _row in priorityDataTable )
-      {
-        Priority _new = Create<Priority>( _entt.Priority, m_PriorityDictionary, _row.Name, _row.PriorityID );
-      }
+        Create<Priority>( _entt.Priority, m_PriorityDictionary, _row.Name, _row.PriorityID );
     }
     private void Import( Bugnet.DatabaseContentDataSet.BugDataTable bugDataTable, Entities _entt )
     {
@@ -165,7 +163,7 @@ namespace CAS.ITRDataAccess.SharePoint
         _newTasks.Task2MilestoneResolvedInTitle = GetOrAdd<Milestone>( _entt.Milestone, m_MilestoneDictionary, item.FixedInVersionId );
         _newTasks.Task2ProjectTitle = GetOrAdd<Projects>( _entt.Projects, m_ProjectsDictionary, item.ProjectID );
         if ( !item.IsAssignedToUserIdNull() )
-          _newTasks.Task2ResourcesTitle = GetOrAdd<Resources>( _entt.Resources, m_ResourcesDictionaryMapping, item.AssignedToUserId );
+          _newTasks.Task2ResourcesTitle = GetOrAdd<Resources>( _entt.Resources, m_ResourcesDictionaryBugNet, item.AssignedToUserId );
         else
           _newTasks.Task2ResourcesTitle = null;
         _newTasks.Task2SPriorityTitle = GetOrAdd<Priority>( _entt.Priority, m_PriorityDictionary, item.PriorityID );
@@ -209,8 +207,9 @@ namespace CAS.ITRDataAccess.SharePoint
       {
         Estimation _new = Create<Estimation>( m_Entities.Estimation, m_EstimationDictionary, _row.OPIS, _row.ID );
         _new.EstimatedWorkload = _row.GODZINY;
-        _new.Estimation2ProjectTitle = m_ProjectsDictionary[ _row.ID_PROJEKTU ];
-        _new.Estimation2ResourcesTitle = GetResourcesFromTimeTrackerId( _row.ID_PRACOWNIKA );
+        _new.Estimation2ProjectTitle = GetProjectFromTimeTrackerId( _row.ID_PROJEKTU );
+        if ( !_row.IsID_PRACOWNIKANull() )
+          _new.Estimation2ResourcesTitle = GetOrAdd<Resources>( m_Entities.Resources, m_ResourcesDictionaryTimeTracking, _row.ID_PRACOWNIKA );
       }
     }
     private void Import( TimeTracking.TimeTrackingDataSet.GODZINYDataTable gODZINYDataTable, Entities m_Entities )
@@ -220,7 +219,8 @@ namespace CAS.ITRDataAccess.SharePoint
         Workload _new = Create<Workload>( m_Entities.Workload, m_WorkloadDictionary, _row.OPIS, _row.ID );
         _new.Hours = _row.IsLICZBA_GODZINNull() ? 0 : _row.LICZBA_GODZIN;
         _new.Workload2ProjectTitle = GetProjectFromTimeTrackerId( _row.IsID_PROJEKTUNull() ? -1 : _row.ID_PROJEKTU );
-        _new.Workload2ResourcesTitle = GetResourcesFromTimeTrackerId( _row.IsID_PRACOWNIKANull() ? -1 : _row.ID_PRACOWNIKA );
+        if ( !_row.IsID_PRACOWNIKANull() )
+          _new.Workload2ResourcesTitle = GetOrAdd<Resources>( m_Entities.Resources, m_ResourcesDictionaryTimeTracking, _row.ID_PRACOWNIKA );
         _new.Workload2StageTitle = _new.Workload2ProjectTitle != null ? _new.Workload2ProjectTitle.Project2StageTitle : null;
         _new.Workload2TaskTitle = CreateTask( _row.RODZAJPRACYRow, _new.Workload2ProjectTitle, _new.Workload2ResourcesTitle );
         _new.WorkloadDate = _row.IsDATANull() ? new Nullable<DateTime>() : _row.DATA;
@@ -230,8 +230,8 @@ namespace CAS.ITRDataAccess.SharePoint
     {
       Tasks _newTask = new Tasks()
       {
-        Task2MilestoneDefinedInTitle = null, // [AWT-3502] Add lookup from Milestones to Project http://itrserver/Bugs/BugDetail.aspx?bid=3502
-        Task2MilestoneResolvedInTitle = null, // see above
+        Task2MilestoneDefinedInTitle = projects.Milestone.FirstOrDefault(),
+        Task2MilestoneResolvedInTitle = projects.Milestone.LastOrDefault(),
         Task2ProjectTitle = projects,
         Task2ResourcesTitle = resources,
         Task2SPriorityTitle = null,
@@ -264,7 +264,8 @@ namespace CAS.ITRDataAccess.SharePoint
         _newProject.Body = _row.IsNAZWANull() ? "N/A" : _row.NAZWA.SPValidSubstring();
         _newProject.Currency = Currency.PLN;
         _newProject.Project2ContractTitle = GetOrAdd<Contracts>( m_Entities.Contracts, m_ContractDictionary, -_row.ID_UMOWY );
-        _newProject.Project2ResourcesTitle = GetResourcesFromTimeTrackerId( _row.IsID_MANAGERANull() ? -1 : _row.ID_MANAGERA );
+        if ( !_row.IsID_MANAGERANull() )
+          _newProject.Project2ResourcesTitle = GetOrAdd<Resources>( m_Entities.Resources, m_ResourcesDictionaryTimeTracking, _row.ID_MANAGERA );
         _newProject.Project2StageTitle = p_DefaultStage;
         _newProject.ProjectBudget = _row.IsBUDZETNull() ? 0 : Convert.ToDouble( _row.BUDZET );
         _newProject.ProjectEndDate = _row.IsDATA_KONIECNull() ? DateTime.Today : _row.DATA_KONIEC;
@@ -311,10 +312,11 @@ namespace CAS.ITRDataAccess.SharePoint
     {
       foreach ( var _row in pRACOWNICYDataTable )
       {
-        Resources _new = Create<Resources>( m_Entities.Resources, m_ResourcesDictionary, _row.NAZWISKO_IMIE, _row.LOGIN );
+        Resources _new = Create<Resources>( m_Entities.Resources, m_ResourcesDictionaryTimeTracking, _row.NAZWISKO_IMIE, _row.ID );
         _new.EMail = "N/A";
         _new.JobTitle = _row.STANOWISKO;
         m_Entities.Resources.InsertOnSubmit( _new );
+        m_ResourcesDictionaryMapping.Add( _row.LOGIN.ToLower(), _row.ID );
       }
       m_Entities.SubmitChanges();
     }
@@ -331,11 +333,7 @@ namespace CAS.ITRDataAccess.SharePoint
       { 9, ProjectType.ProjectCommercial},
       {10, ProjectType.ProjectConception}
     };
-    private Resources GetResourcesFromTimeTrackerId( int p )
-    {
-      throw new NotImplementedException();
-    }
-    private Dictionary<Guid, Resources> m_ResourcesDictionaryMapping = new Dictionary<Guid, Resources>();
+    private Dictionary<string, int> m_ResourcesDictionaryMapping = new Dictionary<string, int>();
 
     #endregion
 
@@ -416,10 +414,11 @@ namespace CAS.ITRDataAccess.SharePoint
     private Dictionary<int, Status> m_StatusDictionary = new Dictionary<int, Status>();
     private Dictionary<int, Priority> m_PriorityDictionary = new Dictionary<int, Priority>();
     private Dictionary<int, TaskComments> m_TaskCommentsDictionary = new Dictionary<int, TaskComments>();
-    private Dictionary<string, Resources> m_ResourcesDictionary = new Dictionary<string, Resources>();
     private Dictionary<int, Estimation> m_EstimationDictionary = new Dictionary<int, Estimation>();
     private Dictionary<int, Workload> m_WorkloadDictionary = new Dictionary<int, Workload>();
     private Dictionary<int, Contracts> m_ContractDictionary = new Dictionary<int, Contracts>();
+    private Dictionary<int, Resources> m_ResourcesDictionaryTimeTracking = new Dictionary<int, Resources>();
+    private Dictionary<Guid, Resources> m_ResourcesDictionaryBugNet = new Dictionary<Guid, Resources>();
     #endregion
 
     #region private
