@@ -11,6 +11,9 @@ using TaskType = CAS.AgileWorkloadTracker.Linq.Type;
 
 namespace CAS.ITRDataAccess.SharePoint
 {
+  /// <summary>
+  /// Importer
+  /// </summary>
   public partial class Importer: Component
   {
     #region ctor
@@ -29,8 +32,10 @@ namespace CAS.ITRDataAccess.SharePoint
     internal void ImportData()
     {
       Bugnet.DatabaseContentDataSet m_BugNETDataSet = m_importFromBugNet.GetDataFromDatabase();
-      Import( m_BugNETDataSet );
       TimeTracking.TimeTrackingDataSet m_timeTrackingDataSet = m_importFromTimeTracking.GetDataFromDatabase();
+      Import( m_timeTrackingDataSet.PRACOWNICY, m_Entities );
+      Import( m_BugNETDataSet.aspnet_Users, m_Entities );
+      Import( m_BugNETDataSet );
       Import( m_timeTrackingDataSet );
     }
     internal void Import( Bugnet.DatabaseContentDataSet m_BugNETDataSet )
@@ -60,11 +65,9 @@ namespace CAS.ITRDataAccess.SharePoint
     }
     internal void Import( TimeTracking.TimeTrackingDataSet m_timeTrackingDataSet )
     {
-      throw new NotImplementedException();
       //Import( m_timeTrackingDataSet.RODZAJPRACY, m_Entities );
       //Import( m_timeTrackingDataSet.STATUSY, m_Entities ); alwazs Closed
       //Import( m_timeTrackingDataSet.KATEGORIE, m_Entities ); using onlz PODKATEGORIE
-      Import( m_timeTrackingDataSet.PRACOWNICY, p_Entities );
       Import( m_timeTrackingDataSet.KONTRAHENCI, p_Entities );
       Import( m_timeTrackingDataSet.UMOWY, p_Entities );
       //Import( m_timeTrackingDataSet.PLATNOSCI, m_Entities );
@@ -76,6 +79,14 @@ namespace CAS.ITRDataAccess.SharePoint
     #endregion
 
     #region Bugnet import
+    private void Import( Bugnet.DatabaseContentDataSet.aspnet_UsersDataTable usersDataTable, Entities m_Entities )
+    {
+      foreach ( var _row in usersDataTable )
+      {
+        Resources _new = GetOrAdd<Resources>( m_Entities.Resources, m_ResourcesDictionary, _row.LoweredUserName );
+        m_ResourcesDictionaryMapping.Add( _row.UserId, _new );
+      }
+    }
     private void Import( Bugnet.DatabaseContentDataSet.ProjectDataTable projectDataTable, Stage stage, Entities _entt )
     {
       foreach ( var _row in projectDataTable )
@@ -147,12 +158,14 @@ namespace CAS.ITRDataAccess.SharePoint
     {
       foreach ( var item in bugDataTable )
       {
-        Tasks _newTasks = Create<Tasks>( _entt.Task, m_TasksDictionary, item.Description, item.BugID );
+        Tasks _newTasks = Create<Tasks>( _entt.Task, m_TasksDictionary, item.Summary.SPValidSubstring(), item.BugID );
+        //TODO  [AWT-3519] Task title contains HTML tags. http://itrserver/Bugs/BugDetail.aspx?bid=3519
+        //_newTasks.Description = item.Description;
         _newTasks.Task2MilestoneDefinedInTitle = GetOrAdd<Milestone>( _entt.Milestone, m_MilestoneDictionary, item.VersionID );
         _newTasks.Task2MilestoneResolvedInTitle = GetOrAdd<Milestone>( _entt.Milestone, m_MilestoneDictionary, item.FixedInVersionId );
         _newTasks.Task2ProjectTitle = GetOrAdd<Projects>( _entt.Projects, m_ProjectsDictionary, item.ProjectID );
         if ( !item.IsAssignedToUserIdNull() )
-          _newTasks.Task2ResourcesTitle = GetOrAdd<Resources>( _entt.Resources, m_ResourcesDictionary, item.AssignedToUserId );
+          _newTasks.Task2ResourcesTitle = GetOrAdd<Resources>( _entt.Resources, m_ResourcesDictionaryMapping, item.AssignedToUserId );
         else
           _newTasks.Task2ResourcesTitle = null;
         _newTasks.Task2SPriorityTitle = GetOrAdd<Priority>( _entt.Priority, m_PriorityDictionary, item.PriorityID );
@@ -234,7 +247,6 @@ namespace CAS.ITRDataAccess.SharePoint
       };
       return _newTask;
     }
-    Dictionary<int, int> m_ProjectsMapppingDictionary = new Dictionary<int, int>() { };
     private Projects GetProjectFromTimeTrackerId( int projectId )
     {
       if ( !m_PriorityDictionary.ContainsKey( projectId ) )
@@ -281,33 +293,34 @@ namespace CAS.ITRDataAccess.SharePoint
         _newContract.Currency = _row.IsWALUTANull() ? Currency.Invalid : GetCurrency( _row.WALUTA );
       }
     }
-
     private Currency GetCurrency( string p )
     {
       throw new NotImplementedException();
     }
-
-
     private Partners GetPartnerFromTimeTrackerId( int p )
     {
       throw new NotImplementedException();
     }
-
     private void Import( TimeTracking.TimeTrackingDataSet.KONTRAHENCIDataTable kONTRAHENCIDataTable, Entities m_Entities )
     {
       foreach ( var _row in kONTRAHENCIDataTable )
       {
       }
     }
-
     private void Import( TimeTracking.TimeTrackingDataSet.PRACOWNICYDataTable pRACOWNICYDataTable, Entities m_Entities )
     {
       foreach ( var _row in pRACOWNICYDataTable )
       {
+        Resources _new = Create<Resources>( m_Entities.Resources, m_ResourcesDictionary, _row.NAZWISKO_IMIE, _row.LOGIN );
+        _new.EMail = "N/A";
+        _new.JobTitle = _row.STANOWISKO;
+        m_Entities.Resources.InsertOnSubmit( _new );
       }
+      m_Entities.SubmitChanges();
     }
 
     #region mapping
+    Dictionary<int, int> m_ProjectsMapppingDictionary = new Dictionary<int, int>() { };
     private Dictionary<int, ProjectType> m_ProjectTypeMapping = new Dictionary<int, ProjectType>() 
     { 
       { 1, ProjectType.ProjectCommercial },
@@ -322,6 +335,8 @@ namespace CAS.ITRDataAccess.SharePoint
     {
       throw new NotImplementedException();
     }
+    private Dictionary<Guid, Resources> m_ResourcesDictionaryMapping = new Dictionary<Guid, Resources>();
+
     #endregion
 
     #endregion
@@ -351,6 +366,25 @@ namespace CAS.ITRDataAccess.SharePoint
       list.InsertOnSubmit( _elmnt );
       return _elmnt;
     }
+    private type Create<type>( EntityList<type> list, Dictionary<string, type> _dictionary, string title, string _key )
+      where type: Element, new()
+    {
+      type _elmnt = new type();
+      if ( !String.IsNullOrEmpty( title ) )
+        _elmnt.Title = title;
+      if ( _dictionary.Keys.Contains( _key ) )
+        _key = Guid.NewGuid().ToString();
+      _dictionary.Add( _key, _elmnt );
+      list.InsertOnSubmit( _elmnt );
+      return _elmnt;
+    }
+    private type GetOrAdd<type>( EntityList<type> _EDC, Dictionary<Guid, type> _dictionary, Guid _key )
+          where type: Element, new()
+    {
+      if ( _dictionary.ContainsKey( _key ) )
+        return _dictionary[ _key ];
+      return Create<type>( _EDC, _dictionary, _key.ToString(), _key );
+    }
     private type GetOrAdd<type>( EntityList<type> _EDC, Dictionary<int, type> _dictionary, int? _key )
       where type: Element, new()
     {
@@ -360,14 +394,12 @@ namespace CAS.ITRDataAccess.SharePoint
         return _dictionary[ _key.Value ];
       return Create<type>( _EDC, _dictionary, EmptyKey( _key.Value ), _key.Value );
     }
-    private type GetOrAdd<type>( EntityList<type> _EDC, Dictionary<Guid, type> _dictionary, Guid? _key )
+    private type GetOrAdd<type>( EntityList<type> _EDC, Dictionary<string, type> _dictionary, string _key )
       where type: Element, new()
     {
-      if ( !_key.HasValue )
-        _key = Guid.NewGuid();
-      else if ( _dictionary.ContainsKey( _key.Value ) )
-        return _dictionary[ _key.Value ];
-      return Create<type>( _EDC, _dictionary, EmptyKey( _key.Value ), _key.Value );
+      if ( _dictionary.ContainsKey( _key ) )
+        return _dictionary[ _key ];
+      return Create<type>( _EDC, _dictionary, _key, _key );
     }
     private short m_EmptyKeyIdx = 0;
     private int UniqueKey() { return m_EmptyKeyIdx--; }
@@ -384,7 +416,7 @@ namespace CAS.ITRDataAccess.SharePoint
     private Dictionary<int, Status> m_StatusDictionary = new Dictionary<int, Status>();
     private Dictionary<int, Priority> m_PriorityDictionary = new Dictionary<int, Priority>();
     private Dictionary<int, TaskComments> m_TaskCommentsDictionary = new Dictionary<int, TaskComments>();
-    private Dictionary<Guid, Resources> m_ResourcesDictionary = new Dictionary<Guid, Resources>();
+    private Dictionary<string, Resources> m_ResourcesDictionary = new Dictionary<string, Resources>();
     private Dictionary<int, Estimation> m_EstimationDictionary = new Dictionary<int, Estimation>();
     private Dictionary<int, Workload> m_WorkloadDictionary = new Dictionary<int, Workload>();
     private Dictionary<int, Contracts> m_ContractDictionary = new Dictionary<int, Contracts>();
