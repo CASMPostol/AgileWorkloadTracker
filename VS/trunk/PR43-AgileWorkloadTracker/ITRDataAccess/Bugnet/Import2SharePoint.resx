@@ -118,66 +118,63 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <metadata name="m_BugNETDataSet.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 98</value>
-  </metadata>
-  <metadata name="m_SharePointImporter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1035, 341</value>
+    <value>17, 95</value>
   </metadata>
   <metadata name="m_BugTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>954, 422</value>
+    <value>523, 95</value>
   </metadata>
   <metadata name="m_priorityTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1263, 422</value>
+    <value>343, 95</value>
   </metadata>
   <metadata name="m_projectTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1100, 422</value>
+    <value>535, 134</value>
   </metadata>
   <metadata name="m_versionTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>790, 422</value>
+    <value>714, 134</value>
   </metadata>
   <metadata name="m_projectCustomFieldTypeTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>533, 422</value>
+    <value>269, 173</value>
   </metadata>
   <metadata name="m_projectCustomFieldsTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>297, 422</value>
+    <value>17, 173</value>
   </metadata>
   <metadata name="m_projectCustomFieldSelectionTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 422</value>
+    <value>239, 134</value>
   </metadata>
   <metadata name="m_projectMailBoxTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1372, 341</value>
+    <value>17, 134</value>
   </metadata>
   <metadata name="m_resolutionTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1193, 341</value>
+    <value>685, 95</value>
   </metadata>
   <metadata name="m_statusTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>878, 341</value>
+    <value>170, 95</value>
   </metadata>
   <metadata name="m_typeTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 179</value>
+    <value>715, 17</value>
   </metadata>
   <metadata name="m_bugAttachmentTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 260</value>
+    <value>243, 56</value>
   </metadata>
   <metadata name="m_bugCommentTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>678, 341</value>
+    <value>670, 56</value>
   </metadata>
   <metadata name="m_bugHistoryTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>493, 341</value>
+    <value>469, 56</value>
   </metadata>
   <metadata name="m_bugNotificationTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>283, 341</value>
+    <value>17, 56</value>
   </metadata>
   <metadata name="m_bugTimeEntryTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1380, 260</value>
+    <value>17, 17</value>
   </metadata>
   <metadata name="m_projectCustomFieldValuesTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 341</value>
+    <value>433, 17</value>
   </metadata>
   <metadata name="m_relatedBugTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1427, 422</value>
+    <value>233, 17</value>
   </metadata>
   <metadata name="$this.TrayLargeIcon" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
+    <value>False</value>
   </metadata>
 </root>

@@ -15,6 +15,7 @@ namespace CAS.ITRDataAccess.Bugnet
     }
     internal void GetDataFromDatabase()
     {
+      
       m_projectTableAdapter.Fill( m_BugNETDataSet.Project );
       m_priorityTableAdapter.Fill( m_BugNETDataSet.Priority );
       m_versionTableAdapter.Fill( m_BugNETDataSet.Version );
