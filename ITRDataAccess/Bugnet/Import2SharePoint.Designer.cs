@@ -28,9 +28,7 @@
     /// </summary>
     private void InitializeComponent()
     {
-      this.components = new System.ComponentModel.Container();
       this.m_BugNETDataSet = new CAS.ITRDataAccess.Bugnet.DatabaseContentDataSet();
-      this.m_SharePointImporter = new CAS.ITRDataAccess.SharePoint.Importer(this.components);
       this.m_BugTableAdapter = new CAS.ITRDataAccess.Bugnet.DatabaseContentDataSetTableAdapters.BugTableAdapter();
       this.m_priorityTableAdapter = new CAS.ITRDataAccess.Bugnet.DatabaseContentDataSetTableAdapters.PriorityTableAdapter();
       this.m_projectTableAdapter = new CAS.ITRDataAccess.Bugnet.DatabaseContentDataSetTableAdapters.ProjectTableAdapter();
@@ -135,7 +133,6 @@
     #endregion
 
     private DatabaseContentDataSet m_BugNETDataSet;
-    private SharePoint.Importer m_SharePointImporter;
     private DatabaseContentDataSetTableAdapters.BugTableAdapter m_BugTableAdapter;
     private DatabaseContentDataSetTableAdapters.PriorityTableAdapter m_priorityTableAdapter;
     private DatabaseContentDataSetTableAdapters.ProjectTableAdapter m_projectTableAdapter;
