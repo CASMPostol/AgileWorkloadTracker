@@ -56,3 +56,6 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "CAS" )]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "ITR" )]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "MailBox", Scope = "type", Target = "CAS.ITRDataAccess.Bugnet.DatabaseContentDataSetTableAdapters.ProjectMailBoxTableAdapter" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.TimeTracking.TimeTrackingDataSet+GODZINYDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.TimeTracking.TimeTrackingDataSet+KATEGORIEDataTable" )]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Scope = "type", Target = "CAS.ITRDataAccess.TimeTracking.TimeTrackingDataSet+KONTRAHENCIDataTable" )]
