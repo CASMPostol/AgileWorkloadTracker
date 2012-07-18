@@ -287,25 +287,27 @@ namespace CAS.ITRDataAccess.SharePoint
         _newContract.ContractEndDate = _row.IsKONIECNull() ? DateTime.Today : _row.KONIEC;
         _newContract.ContractNumber = _row.IsNUMERNull() ? "N/A" : _row.NUMER;
         _newContract.ContractOffer = _row.IsOFERTANull() ? "N/A" : _row.OFERTA;
-        _newContract.Contracts2PartnersTitle = _row.IsID_KLIENTANull() ? null : GetPartnerFromTimeTrackerId( _row.ID_KLIENTA );
+        _newContract.Contracts2PartnersTitle = _row.IsID_INWESTORANull() ? null : GetOrAdd<Partners>( m_Entities.Partners, m_PartnersDictionary, _row.ID_INWESTORA );
         _newContract.ContractSubject = _row.IsNAZWA_KROTKANull() ? "N/A" : _row.NAZWA_KROTKA;
         _newContract.ContractValue = _row.IsKONTRAKTNull() ? 0 : Convert.ToDouble( _row.KONTRAKT );
         _newContract.ContractWarrantyDate = _row.IsGWARANCJANull() ? DateTime.Today : _row.GWARANCJA;
         _newContract.Currency = _row.IsWALUTANull() ? Currency.Invalid : GetCurrency( _row.WALUTA );
       }
     }
-    private Currency GetCurrency( string p )
-    {
-      throw new NotImplementedException();
-    }
-    private Partners GetPartnerFromTimeTrackerId( int p )
-    {
-      throw new NotImplementedException();
-    }
     private void Import( TimeTracking.TimeTrackingDataSet.KONTRAHENCIDataTable kONTRAHENCIDataTable, Entities m_Entities )
     {
       foreach ( var _row in kONTRAHENCIDataTable )
       {
+        Partners _new = Create<Partners>( m_Entities.Partners, m_PartnersDictionary, _row.NAZWA_KROTKA, _row.ID );
+        _new.Body = _row.NAZWA;
+        _new.CellPhone = "N/A";
+        _new.EMail = _row.IsEMAILNull() ? "N/A" : _row.EMAIL;
+        _new.WorkAddress = _row.ULICA_NUMER;
+        _new.WorkCity = _row.MIASTO;
+        _new.WorkCountry = _row.KRAJ;
+        _new.WorkFax = _row.FAX;
+        _new.WorkPhone = _row.TELEFON;
+        _new.WorkZip = _row.KOD;
       }
     }
     private void Import( TimeTracking.TimeTrackingDataSet.PRACOWNICYDataTable pRACOWNICYDataTable, Entities m_Entities )
@@ -322,6 +324,10 @@ namespace CAS.ITRDataAccess.SharePoint
     }
 
     #region mapping
+    private Currency GetCurrency( string currency )
+    {
+      return Currency.PLN;
+    }
     Dictionary<int, int> m_ProjectsMapppingDictionary = new Dictionary<int, int>() { };
     private Dictionary<int, ProjectType> m_ProjectTypeMapping = new Dictionary<int, ProjectType>() 
     { 
@@ -419,6 +425,7 @@ namespace CAS.ITRDataAccess.SharePoint
     private Dictionary<int, Contracts> m_ContractDictionary = new Dictionary<int, Contracts>();
     private Dictionary<int, Resources> m_ResourcesDictionaryTimeTracking = new Dictionary<int, Resources>();
     private Dictionary<Guid, Resources> m_ResourcesDictionaryBugNet = new Dictionary<Guid, Resources>();
+    private Dictionary<int, Partners> m_PartnersDictionary = new Dictionary<int, Partners>();
     #endregion
 
     #region private
