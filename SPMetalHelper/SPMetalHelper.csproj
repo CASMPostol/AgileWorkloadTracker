@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Linq\AgileWorkloadTracker\Entities.cs" />
+    <Compile Include="Linq\AgileWorkloadTracker\Entities.partial.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
