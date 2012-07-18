@@ -96,8 +96,13 @@ namespace CAS.ITRDataAccess.SharePoint
         try
         {
           Milestone _new = Create<Milestone>( _entt.Milestone, m_MilestoneDictionary, _row.Name, _row.VersionID );
+          _new.Default = false;
           _new.Milestone2ProjectTitle = GetOrAdd<Projects>( _entt.Projects, m_ProjectsDictionaryBugNet, _row.ProjectID );
-          _new.Order = _row.SortOrder;
+          _new.SortOrder = _row.SortOrder;
+          _new.BaselineEnd = new Nullable<DateTime>();
+          _new.BaselineStart = new Nullable<DateTime>();
+          _new.MilestoneStart = new Nullable<DateTime>();
+          _new.MilestoneEnd = new Nullable<DateTime>();
           _new.Milestone2StageTitle = projectStage;
           _new.Active = true;
           _new.MilestoneHours = 0;
@@ -151,6 +156,10 @@ namespace CAS.ITRDataAccess.SharePoint
           Tasks _newTasks = Create<Tasks>( _entt.Task, m_TasksDictionary, item.Summary.SPValidSubstring(), item.BugID );
           //TODO  [AWT-3519] Task title contains HTML tags. http://itrserver/Bugs/BugDetail.aspx?bid=3519
           //_newTasks.Description = item.Description;
+          _newTasks.BaselineEnd = new Nullable<DateTime>();
+          _newTasks.BaselineStart = new Nullable<DateTime>();
+          _newTasks.TaskStart = new Nullable<DateTime>();
+          _newTasks.TaskEnd = new Nullable<DateTime>();
           _newTasks.Task2MilestoneDefinedInTitle = GetOrAdd<Milestone>( _entt.Milestone, m_MilestoneDictionary, item.VersionID );
           _newTasks.Task2MilestoneResolvedInTitle = GetOrAdd<Milestone>( _entt.Milestone, m_MilestoneDictionary, item.FixedInVersionId );
           _newTasks.Task2ProjectTitle = GetOrAdd<Projects>( _entt.Projects, m_ProjectsDictionaryBugNet, item.ProjectID );
