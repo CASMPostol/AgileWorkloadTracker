@@ -14,30 +14,27 @@ namespace CAS.AgileWorkloadTracker.Linq
   {
     internal void Adjust( DateTime dateTime )
     {
-      if ( !Start.HasValue || Start > dateTime )
+      if ( !TaskStart.HasValue || TaskStart > dateTime )
       {
-        Start = dateTime;
+        TaskStart = dateTime;
         if ( this.Task2MilestoneDefinedInTitle != null )
           this.Task2MilestoneDefinedInTitle.Adjust( dateTime );
       }
-      if ( !Finish.HasValue || Finish < dateTime )
+      if ( !TaskEnd.HasValue || TaskEnd < dateTime )
       {
-        Finish = dateTime;
+        TaskEnd = dateTime;
         if ( this.Task2MilestoneResolvedInTitle != null )
           this.Task2MilestoneResolvedInTitle.Adjust( dateTime );
       }
     }
-    //TODO  [AWT-3523] Add columns to the Milestone and Task 
-    public DateTime? Start { get; set; }
-    public DateTime? Finish { get; set; }
   }
   internal partial class Milestone
   {
     internal void Adjust( DateTime dateTime )
     {
-      if ( !MilestoneStart.HasValue || Start > dateTime )
+      if ( !MilestoneStart.HasValue || MilestoneStart > dateTime )
       {
-        MilestoneStart  = dateTime;
+        MilestoneStart = dateTime;
         if ( this.Milestone2ProjectTitle == null )
           this.Milestone2ProjectTitle.Adjust( dateTime );
       }
