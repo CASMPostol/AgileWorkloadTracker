@@ -1,6 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
   <Field
+    Name="ReadOnly"
+    ID="{1D1AE8A0-9CD0-49B1-8F30-5CAFA5976CC0}"
+    Type="Boolean"
+    DisplayName="Read only"
+    Group="CAS Agile Workload Tracker"
+    />
+  <Field
+    Name="Year"
+    ID="{26791A03-DE90-4D0A-94BD-8C4A84F7445A}"
+    Type="Integer"
+    DisplayName="Year"
+    Group="CAS Agile Workload Tracker"
+    />
+  <Field
+    Name="WeekNumber"
+    ID="{ABF84DC1-F369-43EA-8A52-B71BAFA7FBFA}"
+    Type="Integer"
+    DisplayName="Week number"
+    Group="CAS Agile Workload Tracker"
+    />
+  <Field
     Name="Default"
     ID="{85338B8B-4B38-4810-B55E-55AFF4C4EF02}"
     Type="Boolean"
