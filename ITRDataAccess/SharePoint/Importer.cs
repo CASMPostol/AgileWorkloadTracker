@@ -99,8 +99,8 @@ namespace CAS.ITRDataAccess.SharePoint
           _new.Default = false;
           _new.Milestone2ProjectTitle = GetOrAdd<Projects>( _entt.Projects, m_ProjectsDictionaryBugNet, _row.ProjectID );
           _new.SortOrder = _row.SortOrder;
-          _new.BaselineEnd = new Nullable<DateTime>();
-          _new.BaselineStart = new Nullable<DateTime>();
+          _new.BaselineEnd = _new.Milestone2ProjectTitle.ProjectEndDate;
+          _new.BaselineStart = _new.Milestone2ProjectTitle.ProjectStartDate;
           _new.MilestoneStart = new Nullable<DateTime>();
           _new.MilestoneEnd = new Nullable<DateTime>();
           _new.Milestone2StageTitle = projectStage;
@@ -156,13 +156,13 @@ namespace CAS.ITRDataAccess.SharePoint
           Tasks _newTasks = Create<Tasks>( _entt.Task, m_TasksDictionary, item.Summary.SPValidSubstring(), item.BugID );
           //TODO  [AWT-3519] Task title contains HTML tags. http://itrserver/Bugs/BugDetail.aspx?bid=3519
           //_newTasks.Description = item.Description;
-          _newTasks.BaselineEnd = new Nullable<DateTime>();
-          _newTasks.BaselineStart = new Nullable<DateTime>();
-          _newTasks.TaskStart = new Nullable<DateTime>();
-          _newTasks.TaskEnd = new Nullable<DateTime>();
           _newTasks.Task2MilestoneDefinedInTitle = GetOrAdd<Milestone>( _entt.Milestone, m_MilestoneDictionary, item.VersionID );
           _newTasks.Task2MilestoneResolvedInTitle = GetOrAdd<Milestone>( _entt.Milestone, m_MilestoneDictionary, item.FixedInVersionId );
           _newTasks.Task2ProjectTitle = GetOrAdd<Projects>( _entt.Projects, m_ProjectsDictionaryBugNet, item.ProjectID );
+          _newTasks.BaselineEnd = _newTasks.Task2MilestoneResolvedInTitle.BaselineEnd;
+          _newTasks.BaselineStart = _newTasks.Task2MilestoneResolvedInTitle.BaselineStart;
+          _newTasks.TaskStart = new Nullable<DateTime>();
+          _newTasks.TaskEnd = new Nullable<DateTime>();
           if ( !item.IsAssignedToUserIdNull() )
             _newTasks.Task2ResourcesTitle = GetOrAdd<Resources>( _entt.Resources, m_ResourcesDictionaryBugNet, item.AssignedToUserId );
           else
