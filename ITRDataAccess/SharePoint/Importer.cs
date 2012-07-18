@@ -35,6 +35,7 @@ namespace CAS.ITRDataAccess.SharePoint
       TimeTracking.TimeTrackingDataSet m_timeTrackingDataSet = m_importFromTimeTracking.GetDataFromDatabase();
       Import( m_timeTrackingDataSet.PRACOWNICY, m_Entities );
       Import( m_BugNETDataSet.aspnet_Users, m_Entities );
+      throw new NotImplementedException();
       Import( m_BugNETDataSet );
       Import( m_timeTrackingDataSet );
     }
@@ -83,15 +84,16 @@ namespace CAS.ITRDataAccess.SharePoint
     {
       foreach ( var _row in usersDataTable )
       {
-        Resources _new = null;
         if ( m_ResourcesDictionaryMapping.ContainsKey( _row.LoweredUserName ) )
         {
+          Resources _new = null;
           _new = m_ResourcesDictionaryTimeTracking[ m_ResourcesDictionaryMapping[ _row.LoweredUserName ] ];
           m_ResourcesDictionaryBugNet.Add( _row.UserId, _new );
         }
         else
-          _new = GetOrAdd<Resources>( m_Entities.Resources, m_ResourcesDictionaryBugNet, _row.UserId );
+          Create<Resources>( m_Entities.Resources, m_ResourcesDictionaryBugNet, _row.UserName, _row.UserId );
       }
+      m_Entities.SubmitChanges();
     }
     private void Import( Bugnet.DatabaseContentDataSet.ProjectDataTable projectDataTable, Stage stage, Entities _entt )
     {
