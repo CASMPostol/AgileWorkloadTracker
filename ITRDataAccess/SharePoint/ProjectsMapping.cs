@@ -16,7 +16,7 @@ namespace CAS.ITRDataAccess.SharePoint
       { 5, ProjectType.Office},
       { 8, ProjectType.AfterSalesServices},
       { 9, ProjectType.ProjectCommercial},
-      {10, ProjectType.ProjectConception}
+      {11, ProjectType.ProjectConception}
     };
     internal static Dictionary<int, int> MappingTable = new Dictionary<int, int>()
     {
