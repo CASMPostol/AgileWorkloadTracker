@@ -43,8 +43,8 @@ namespace CAS.ITRDataAccess.SharePoint
     #region Bugnet import
     private void Import( Bugnet.DatabaseContentDataSet m_BugNETDataSet )
     {
-      Import( m_BugNETDataSet.Project, p_DefaultStage, p_Entities );
-      Import( m_BugNETDataSet.Version, p_Entities, p_DefaultStage );
+      Import( m_BugNETDataSet.Project, DefaultStage, p_Entities );
+      Import( m_BugNETDataSet.Version, p_Entities, DefaultStage );
       Import( m_BugNETDataSet.Status, p_Entities );
       Import( m_BugNETDataSet.Priority, p_Entities );
       Import( m_BugNETDataSet.Resolution, p_Entities );
@@ -102,7 +102,7 @@ namespace CAS.ITRDataAccess.SharePoint
           _new.Active = true;
           _new.MilestoneHours = 0;
           _entt.SubmitChanges();
-          p_Entities.SubmitChanges();
+          _entt.SubmitChanges();
         }
         catch ( Exception _ex )
         {
@@ -115,14 +115,14 @@ namespace CAS.ITRDataAccess.SharePoint
       Console.WriteLine( "BugNet ResolutionDataTable starting" );
       foreach ( var _row in resutionDataTable )
         Create<Resolution>( _entt.Resolution, m_ResolutionDictionary, _row.Name, _row.ResolutionID );
-      p_Entities.SubmitChanges();
+      _entt.SubmitChanges();
     }
     private void Import( Bugnet.DatabaseContentDataSet.StatusDataTable statusDataTable, Entities _entt )
     {
       Console.WriteLine( "BugNet StatusDataTable starting" );
       foreach ( var _row in statusDataTable )
         Create<Status>( _entt.Status, m_StatusDictionary, _row.Name, _row.StatusID );
-      p_Entities.SubmitChanges();
+      _entt.SubmitChanges();
     }
     private void Import( Bugnet.DatabaseContentDataSet.TypeDataTable typeDataTable, Entities _entt )
     {
@@ -286,7 +286,7 @@ namespace CAS.ITRDataAccess.SharePoint
         if ( _newProject.Project2ResourcesTitle == null && !_row.IsID_MANAGERANull() )
           _newProject.Project2ResourcesTitle = GetOrAdd<Resources>( m_Entities.Resources, m_ResourcesDictionaryTimeTracking, _row.ID_MANAGERA );
         if ( _newProject.Project2StageTitle == null )
-          _newProject.Project2StageTitle = p_DefaultStage;
+          _newProject.Project2StageTitle = DefaultStage;
         _newProject.ProjectBudget += _row.IsBUDZETNull() ? 0 : Convert.ToDouble( _row.BUDZET );
         if ( !_row.IsDATA_KONIECNull() )
           _newProject.Adjust( _row.DATA_KONIEC );
@@ -495,7 +495,7 @@ namespace CAS.ITRDataAccess.SharePoint
     {
       get
       {
-        if ( p_DefaultStage == null )
+        if ( DefaultStage == null )
           p_DefaultStage = ( from _sidx in p_Entities.Stage where _sidx.Title.Contains( DefaultStageTitle ) select _sidx ).FirstOrDefault();
         if ( p_DefaultStage == null )
         {
