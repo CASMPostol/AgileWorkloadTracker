@@ -2,8 +2,13 @@
 <List xmlns:ows="Microsoft SharePoint" Title="StageListTemplate" FolderCreation="FALSE" Direction="$Resources:Direction;" Url="Lists/Website-StageListTemplate" BaseType="0" xmlns="http://schemas.microsoft.com/sharepoint/">
   <MetaData>
     <ContentTypes>
-      <ContentType ID="0x010085603184410f43e88bc6cce5be613389" Name="Stage" Group="CAS Agile Workload Tracker" Description="Stage Content Type" Inherits="FALSE" Overwrite="TRUE">
-        <Folder TargetName="_cts/Stag" />
+      <ContentType ID="0x010085603184410f43e88bc6cce5be613389"
+               Name="Stage"
+               Group="CAS Agile Workload Tracker"
+               Description="Stage Content Type"
+               Inherits="FALSE"
+               Overwrite="TRUE">
+        <Folder TargetName="_cts/Stage" />
         <FieldRefs>
           <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" DisplayName="Stage" />
         </FieldRefs>
