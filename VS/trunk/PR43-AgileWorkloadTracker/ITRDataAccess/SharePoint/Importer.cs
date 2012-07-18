@@ -189,6 +189,7 @@ namespace CAS.ITRDataAccess.SharePoint
             TaskComments2TaskTitle = GetOrAdd<Tasks>( _entt.Task, m_TasksDictionary, _row.BugID )
           };
           _entt.TaskComments.InsertOnSubmit( _new );
+          _new.TaskComments2TaskTitle.Adjust( _row.CreatedDate );
           Console.Write( "\r" );
           Console.Write( _iteration++ );
           //m_TaskCommentsDictionary.Add( _row.BugCommentID, _new );
@@ -228,14 +229,14 @@ namespace CAS.ITRDataAccess.SharePoint
         _new.WorkloadDate = _row.IsDATANull() ? new Nullable<DateTime>() : _row.DATA;
       }
     }
-    private Tasks CreateTask( TimeTracking.TimeTrackingDataSet.RODZAJPRACYRow rODZAJPRACYRow, Projects projects, Resources resources )
+    private Tasks CreateTask( TimeTracking.TimeTrackingDataSet.RODZAJPRACYRow rODZAJPRACYRow, Projects project, Resources resource )
     {
       Tasks _newTask = new Tasks()
       {
-        Task2MilestoneDefinedInTitle = projects.Milestone.FirstOrDefault(),
-        Task2MilestoneResolvedInTitle = projects.Milestone.LastOrDefault(),
-        Task2ProjectTitle = projects,
-        Task2ResourcesTitle = resources,
+        Task2MilestoneDefinedInTitle = project.Milestone.FirstOrDefault(),
+        Task2MilestoneResolvedInTitle = project.Milestone.LastOrDefault(),
+        Task2ProjectTitle = project,
+        Task2ResourcesTitle = resource,
         Task2SPriorityTitle = null,
         Task2SResolutionTitle = null,
         Task2StatusTitle = null,
