@@ -266,6 +266,8 @@ namespace CAS.ITRDataAccess.SharePoint
           _new.ReadOnly = true;
           _new.WeekNumber = _new.WorkloadDate.Value.DayOfYear / 7;
           _new.Year = _new.WorkloadDate.Value.Year;
+          if ( _new.WorkloadDate.HasValue )
+            _new.Workload2TaskTitle.Adjust( _new.WorkloadDate.Value );
           Console.Write( "\r" );
           Console.Write( _iteration++ );
           p_Entities.SubmitChanges();
