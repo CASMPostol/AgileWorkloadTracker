@@ -263,7 +263,10 @@ namespace CAS.ITRDataAccess.SharePoint
             _new.Workload2ResourcesTitle = GetOrAdd<Resources>( m_Entities.Resources, m_ResourcesDictionaryTimeTracking, _row.ID_PRACOWNIKA );
           _new.Workload2StageTitle = _new.Workload2ProjectTitle != null ? _new.Workload2ProjectTitle.Project2StageTitle : null;
           _new.Workload2TaskTitle = CreateTask( m_Entities, _row.RODZAJPRACYRow, _new.Workload2ProjectTitle, _new.Workload2ResourcesTitle );
-          _new.WorkloadDate = _row.IsDATANull() ? new Nullable<DateTime>() : _row.DATA;
+          _new.WorkloadDate = _row.IsDATANull() ? _new.Workload2TaskTitle.TaskStart : _row.DATA;
+          _new.ReadOnly = true;
+          _new.WeekNumber = _new.WorkloadDate.Value.DayOfYear / 7;
+          _new.Year = _new.WorkloadDate.Value.Year;
           Console.Write( "\r" );
           Console.Write( _iteration++ );
           p_Entities.SubmitChanges();
