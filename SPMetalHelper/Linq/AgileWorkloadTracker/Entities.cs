@@ -1068,7 +1068,17 @@ namespace CAS.AgileWorkloadTracker.Linq {
 		
 		private System.Nullable<double> _milestoneHours;
 		
-		private System.Nullable<double> _order;
+		private System.Nullable<double> _sortOrder;
+		
+		private System.Nullable<System.DateTime> _milestoneStart;
+		
+		private System.Nullable<System.DateTime> _milestoneEnd;
+		
+		private System.Nullable<System.DateTime> _baselineStart;
+		
+		private System.Nullable<System.DateTime> _baselineEnd;
+		
+		private System.Nullable<bool> _default;
 		
 		private Microsoft.SharePoint.Linq.EntityRef<Stage> _milestone2StageTitle;
 		
@@ -1132,16 +1142,86 @@ namespace CAS.AgileWorkloadTracker.Linq {
 			}
 		}
 		
-		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="SortOrder", Storage="_order", FieldType="Number")]
-		public System.Nullable<double> Order {
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="SortOrder", Storage="_sortOrder", FieldType="Number")]
+		public System.Nullable<double> SortOrder {
 			get {
-				return this._order;
+				return this._sortOrder;
 			}
 			set {
-				if ((value != this._order)) {
-					this.OnPropertyChanging("Order", this._order);
-					this._order = value;
-					this.OnPropertyChanged("Order");
+				if ((value != this._sortOrder)) {
+					this.OnPropertyChanging("SortOrder", this._sortOrder);
+					this._sortOrder = value;
+					this.OnPropertyChanged("SortOrder");
+				}
+			}
+		}
+		
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="MilestoneStart", Storage="_milestoneStart", FieldType="DateTime")]
+		public System.Nullable<System.DateTime> MilestoneStart {
+			get {
+				return this._milestoneStart;
+			}
+			set {
+				if ((value != this._milestoneStart)) {
+					this.OnPropertyChanging("MilestoneStart", this._milestoneStart);
+					this._milestoneStart = value;
+					this.OnPropertyChanged("MilestoneStart");
+				}
+			}
+		}
+		
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="MilestoneEnd", Storage="_milestoneEnd", FieldType="DateTime")]
+		public System.Nullable<System.DateTime> MilestoneEnd {
+			get {
+				return this._milestoneEnd;
+			}
+			set {
+				if ((value != this._milestoneEnd)) {
+					this.OnPropertyChanging("MilestoneEnd", this._milestoneEnd);
+					this._milestoneEnd = value;
+					this.OnPropertyChanged("MilestoneEnd");
+				}
+			}
+		}
+		
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="BaselineStart", Storage="_baselineStart", FieldType="DateTime")]
+		public System.Nullable<System.DateTime> BaselineStart {
+			get {
+				return this._baselineStart;
+			}
+			set {
+				if ((value != this._baselineStart)) {
+					this.OnPropertyChanging("BaselineStart", this._baselineStart);
+					this._baselineStart = value;
+					this.OnPropertyChanged("BaselineStart");
+				}
+			}
+		}
+		
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="BaselineEnd", Storage="_baselineEnd", FieldType="DateTime")]
+		public System.Nullable<System.DateTime> BaselineEnd {
+			get {
+				return this._baselineEnd;
+			}
+			set {
+				if ((value != this._baselineEnd)) {
+					this.OnPropertyChanging("BaselineEnd", this._baselineEnd);
+					this._baselineEnd = value;
+					this.OnPropertyChanged("BaselineEnd");
+				}
+			}
+		}
+		
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="Default", Storage="_default", FieldType="Boolean")]
+		public System.Nullable<bool> Default {
+			get {
+				return this._default;
+			}
+			set {
+				if ((value != this._default)) {
+					this.OnPropertyChanging("Default", this._default);
+					this._default = value;
+					this.OnPropertyChanged("Default");
 				}
 			}
 		}
@@ -2342,6 +2422,16 @@ namespace CAS.AgileWorkloadTracker.Linq {
 	[Microsoft.SharePoint.Linq.ContentTypeAttribute(Name="Tasks", Id="0x01005D39260836CE498D8E0D443AD5CAD3AC")]
 	internal partial class Tasks : Element {
 		
+		private string _body;
+		
+		private System.Nullable<System.DateTime> _taskStart;
+		
+		private System.Nullable<System.DateTime> _taskEnd;
+		
+		private System.Nullable<System.DateTime> _baselineStart;
+		
+		private System.Nullable<System.DateTime> _baselineEnd;
+		
 		private Microsoft.SharePoint.Linq.EntityRef<Projects> _task2ProjectTitle;
 		
 		private Microsoft.SharePoint.Linq.EntityRef<Resources> _task2ResourcesTitle;
@@ -2410,6 +2500,76 @@ namespace CAS.AgileWorkloadTracker.Linq {
 			this._workload.OnChanged += new System.EventHandler(this.OnWorkloadChanged);
 			this._workload.OnChanging += new System.EventHandler(this.OnWorkloadChanging);
 			this.OnCreated();
+		}
+		
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="Body", Storage="_body", FieldType="Note")]
+		public string Body {
+			get {
+				return this._body;
+			}
+			set {
+				if ((value != this._body)) {
+					this.OnPropertyChanging("Body", this._body);
+					this._body = value;
+					this.OnPropertyChanged("Body");
+				}
+			}
+		}
+		
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="TaskStart", Storage="_taskStart", FieldType="DateTime")]
+		public System.Nullable<System.DateTime> TaskStart {
+			get {
+				return this._taskStart;
+			}
+			set {
+				if ((value != this._taskStart)) {
+					this.OnPropertyChanging("TaskStart", this._taskStart);
+					this._taskStart = value;
+					this.OnPropertyChanged("TaskStart");
+				}
+			}
+		}
+		
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="TaskEnd", Storage="_taskEnd", FieldType="DateTime")]
+		public System.Nullable<System.DateTime> TaskEnd {
+			get {
+				return this._taskEnd;
+			}
+			set {
+				if ((value != this._taskEnd)) {
+					this.OnPropertyChanging("TaskEnd", this._taskEnd);
+					this._taskEnd = value;
+					this.OnPropertyChanged("TaskEnd");
+				}
+			}
+		}
+		
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="BaselineStart", Storage="_baselineStart", FieldType="DateTime")]
+		public System.Nullable<System.DateTime> BaselineStart {
+			get {
+				return this._baselineStart;
+			}
+			set {
+				if ((value != this._baselineStart)) {
+					this.OnPropertyChanging("BaselineStart", this._baselineStart);
+					this._baselineStart = value;
+					this.OnPropertyChanged("BaselineStart");
+				}
+			}
+		}
+		
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="BaselineEnd", Storage="_baselineEnd", FieldType="DateTime")]
+		public System.Nullable<System.DateTime> BaselineEnd {
+			get {
+				return this._baselineEnd;
+			}
+			set {
+				if ((value != this._baselineEnd)) {
+					this.OnPropertyChanging("BaselineEnd", this._baselineEnd);
+					this._baselineEnd = value;
+					this.OnPropertyChanged("BaselineEnd");
+				}
+			}
 		}
 		
 		[Microsoft.SharePoint.Linq.AssociationAttribute(Name="Task2ProjectTitle", Storage="_task2ProjectTitle", MultivalueType=Microsoft.SharePoint.Linq.AssociationType.Single, List="Projects")]
@@ -2822,6 +2982,12 @@ namespace CAS.AgileWorkloadTracker.Linq {
 		
 		private System.Nullable<double> _minutes;
 		
+		private System.Nullable<int> _weekNumber;
+		
+		private System.Nullable<int> _year;
+		
+		private System.Nullable<bool> _readOnly;
+		
 		private Microsoft.SharePoint.Linq.EntityRef<Projects> _workload2ProjectTitle;
 		
 		private Microsoft.SharePoint.Linq.EntityRef<Tasks> _workload2TaskTitle;
@@ -2894,6 +3060,48 @@ namespace CAS.AgileWorkloadTracker.Linq {
 					this.OnPropertyChanging("Minutes", this._minutes);
 					this._minutes = value;
 					this.OnPropertyChanged("Minutes");
+				}
+			}
+		}
+		
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="WeekNumber", Storage="_weekNumber", FieldType="Integer")]
+		public System.Nullable<int> WeekNumber {
+			get {
+				return this._weekNumber;
+			}
+			set {
+				if ((value != this._weekNumber)) {
+					this.OnPropertyChanging("WeekNumber", this._weekNumber);
+					this._weekNumber = value;
+					this.OnPropertyChanged("WeekNumber");
+				}
+			}
+		}
+		
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="Year", Storage="_year", FieldType="Integer")]
+		public System.Nullable<int> Year {
+			get {
+				return this._year;
+			}
+			set {
+				if ((value != this._year)) {
+					this.OnPropertyChanging("Year", this._year);
+					this._year = value;
+					this.OnPropertyChanged("Year");
+				}
+			}
+		}
+		
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="ReadOnly", Storage="_readOnly", FieldType="Boolean")]
+		public System.Nullable<bool> ReadOnly {
+			get {
+				return this._readOnly;
+			}
+			set {
+				if ((value != this._readOnly)) {
+					this.OnPropertyChanging("ReadOnly", this._readOnly);
+					this._readOnly = value;
+					this.OnPropertyChanged("ReadOnly");
 				}
 			}
 		}
