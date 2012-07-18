@@ -154,8 +154,7 @@ namespace CAS.ITRDataAccess.SharePoint
         {
           _bugId = item.BugID;
           Tasks _newTasks = Create<Tasks>( _entt.Task, m_TasksDictionary, item.Summary.SPValidSubstring(), item.BugID );
-          //TODO  [AWT-3519] Task title contains HTML tags. http://itrserver/Bugs/BugDetail.aspx?bid=3519
-          //_newTasks.Description = item.Description;
+          _newTasks.Body = item.Description;
           _newTasks.Task2MilestoneDefinedInTitle = GetOrAdd<Milestone>( _entt.Milestone, m_MilestoneDictionary, item.VersionID );
           _newTasks.Task2MilestoneResolvedInTitle = GetOrAdd<Milestone>( _entt.Milestone, m_MilestoneDictionary, item.FixedInVersionId );
           _newTasks.Task2ProjectTitle = GetOrAdd<Projects>( _entt.Projects, m_ProjectsDictionaryBugNet, item.ProjectID );
