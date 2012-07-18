@@ -68,6 +68,11 @@
     <Column Name="Task2SPriorityTitle" Member="Task2SPriorityTitle" />
     <Column Name="Task2SResolutionTitle" Member="Task2SResolutionTitle" />
     <Column Name="Task2TypeTitle" Member="Task2TypeTitle" />
+    <Column Name="Body" Member="Body" />
+    <Column Name="TaskStart" Member="TaskStart" />
+    <Column Name="TaskEnd" Member="TaskEnd" />
+    <Column Name="BaselineStart" Member="BaselineStart" />
+    <Column Name="BaselineEnd" Member="BaselineEnd" />
   </ContentType>
   <ContentType Name="Status" Class="Status">
     <Column Name="Title" Member="Title" />
@@ -96,6 +101,9 @@
     <Column Name="WorkloadDate" Member="WorkloadDate" />
     <Column Name="Hours" Member="Hours" />
     <Column Name="Minutes" Member="Minutes" />
+    <Column Name="WeekNumber" Member="WeekNumber" />
+    <Column Name="Year" Member="Year" />
+    <Column Name="ReadOnly" Member="ReadOnly" />
   </ContentType>
   <ContentType Name="Contracts" Class="Contracts">
     <Column Name="Title" Member="Title" />
@@ -132,6 +140,12 @@
     <Column Name="Milestone2ProjectTitle" Member="Milestone2ProjectTitle" />
     <Column Name="Active" Member="Active" />
     <Column Name="MilestoneHours" Member="MilestoneHours" />
+    <Column Name="SortOrder" Member="SortOrder" />
+    <Column Name="MilestoneStart" Member="MilestoneStart" />
+    <Column Name="MilestoneEnd" Member="MilestoneEnd" />
+    <Column Name="BaselineStart" Member="BaselineStart" />
+    <Column Name="BaselineEnd" Member="BaselineEnd" />
+    <Column Name="Default" Member="Default" />
   </ContentType>
   <!--<ExcludeOtherContentTypes/>-->
 </Web>
