@@ -39,7 +39,7 @@ namespace CAS.ITRDataAccess.SharePoint
       Import( m_BugNETDataSet );
       Import( m_timeTrackingDataSet );
     }
-    internal void Import( Bugnet.DatabaseContentDataSet m_BugNETDataSet )
+    private void Import( Bugnet.DatabaseContentDataSet m_BugNETDataSet )
     {
       Import( m_BugNETDataSet.Project, p_DefaultStage, p_Entities );
       p_Entities.SubmitChanges();
@@ -64,7 +64,7 @@ namespace CAS.ITRDataAccess.SharePoint
       Console.WriteLine( "Bug" );
       Import( m_BugNETDataSet.BugComment, p_Entities );
     }
-    internal void Import( TimeTracking.TimeTrackingDataSet m_timeTrackingDataSet )
+    private void Import( TimeTracking.TimeTrackingDataSet m_timeTrackingDataSet )
     {
       //Import( m_timeTrackingDataSet.RODZAJPRACY, m_Entities );
       //Import( m_timeTrackingDataSet.STATUSY, m_Entities ); alwazs Closed
@@ -86,8 +86,7 @@ namespace CAS.ITRDataAccess.SharePoint
       {
         if ( m_ResourcesDictionaryMapping.ContainsKey( _row.LoweredUserName ) )
         {
-          Resources _new = null;
-          _new = m_ResourcesDictionaryTimeTracking[ m_ResourcesDictionaryMapping[ _row.LoweredUserName ] ];
+          Resources _new = m_ResourcesDictionaryTimeTracking[ m_ResourcesDictionaryMapping[ _row.LoweredUserName ] ];
           m_ResourcesDictionaryBugNet.Add( _row.UserId, _new );
         }
         else
@@ -99,7 +98,7 @@ namespace CAS.ITRDataAccess.SharePoint
     {
       foreach ( var _row in projectDataTable )
       {
-        Projects _new = Create<Projects>( _entt.Projects, m_ProjectsDictionary, _row.Name, _row.ProjectID );
+        Projects _new = Create<Projects>( _entt.Projects, m_ProjectsDictionaryBugNet, _row.Name, _row.ProjectID );
         _new.Active = _row.Active > 0;
         _new.Body = _row.IsDescriptionNull() ? String.Empty : _row.Description;
         _new.Currency = Currency.PLN;
@@ -121,7 +120,7 @@ namespace CAS.ITRDataAccess.SharePoint
         try
         {
           Milestone _new = Create<Milestone>( _entt.Milestone, m_MilestoneDictionary, _row.Name, _row.VersionID );
-          _new.Milestone2ProjectTitle = GetOrAdd<Projects>( _entt.Projects, m_ProjectsDictionary, _row.ProjectID );
+          _new.Milestone2ProjectTitle = GetOrAdd<Projects>( _entt.Projects, m_ProjectsDictionaryBugNet, _row.ProjectID );
           _new.Order = _row.SortOrder;
           _new.Milestone2StageTitle = projectStage;
           _new.Active = true;
@@ -163,7 +162,7 @@ namespace CAS.ITRDataAccess.SharePoint
         //_newTasks.Description = item.Description;
         _newTasks.Task2MilestoneDefinedInTitle = GetOrAdd<Milestone>( _entt.Milestone, m_MilestoneDictionary, item.VersionID );
         _newTasks.Task2MilestoneResolvedInTitle = GetOrAdd<Milestone>( _entt.Milestone, m_MilestoneDictionary, item.FixedInVersionId );
-        _newTasks.Task2ProjectTitle = GetOrAdd<Projects>( _entt.Projects, m_ProjectsDictionary, item.ProjectID );
+        _newTasks.Task2ProjectTitle = GetOrAdd<Projects>( _entt.Projects, m_ProjectsDictionaryBugNet, item.ProjectID );
         if ( !item.IsAssignedToUserIdNull() )
           _newTasks.Task2ResourcesTitle = GetOrAdd<Resources>( _entt.Resources, m_ResourcesDictionaryBugNet, item.AssignedToUserId );
         else
@@ -208,11 +207,11 @@ namespace CAS.ITRDataAccess.SharePoint
     {
       foreach ( var _row in pLANDataTable )
       {
-        Estimation _new = Create<Estimation>( m_Entities.Estimation, m_EstimationDictionary, _row.OPIS, _row.ID );
+        if ( _row.IsID_PRACOWNIKANull() || _row.IsID_PRACOWNIKANull() )
+          return;
+        Estimation _new = CheckAddEstimation(
+          GetOrAdd<Resources>( m_Entities.Resources, m_ResourcesDictionaryTimeTracking, _row.ID_PRACOWNIKA ), GetOrAdd<Projects>( m_Entities.Projects, m_ProjectsDictionaryTimeTracking, _row.ID_PROJEKTU ) );
         _new.EstimatedWorkload = _row.GODZINY;
-        _new.Estimation2ProjectTitle = GetProjectFromTimeTrackerId( _row.ID_PROJEKTU );
-        if ( !_row.IsID_PRACOWNIKANull() )
-          _new.Estimation2ResourcesTitle = GetOrAdd<Resources>( m_Entities.Resources, m_ResourcesDictionaryTimeTracking, _row.ID_PRACOWNIKA );
       }
     }
     private void Import( TimeTracking.TimeTrackingDataSet.GODZINYDataTable gODZINYDataTable, Entities m_Entities )
@@ -221,7 +220,7 @@ namespace CAS.ITRDataAccess.SharePoint
       {
         Workload _new = Create<Workload>( m_Entities.Workload, m_WorkloadDictionary, _row.OPIS, _row.ID );
         _new.Hours = _row.IsLICZBA_GODZINNull() ? 0 : _row.LICZBA_GODZIN;
-        _new.Workload2ProjectTitle = GetProjectFromTimeTrackerId( _row.IsID_PROJEKTUNull() ? -1 : _row.ID_PROJEKTU );
+        _new.Workload2ProjectTitle = GetOrAdd<Projects>( m_Entities.Projects, m_ProjectsDictionaryTimeTracking, _row.ID_PROJEKTU );
         if ( !_row.IsID_PRACOWNIKANull() )
           _new.Workload2ResourcesTitle = GetOrAdd<Resources>( m_Entities.Resources, m_ResourcesDictionaryTimeTracking, _row.ID_PRACOWNIKA );
         _new.Workload2StageTitle = _new.Workload2ProjectTitle != null ? _new.Workload2ProjectTitle.Project2StageTitle : null;
@@ -229,54 +228,38 @@ namespace CAS.ITRDataAccess.SharePoint
         _new.WorkloadDate = _row.IsDATANull() ? new Nullable<DateTime>() : _row.DATA;
       }
     }
-    private Tasks CreateTask( TimeTracking.TimeTrackingDataSet.RODZAJPRACYRow rODZAJPRACYRow, Projects project, Resources resource )
-    {
-      Tasks _newTask = new Tasks()
-      {
-        Task2MilestoneDefinedInTitle = project.Milestone.FirstOrDefault(),
-        Task2MilestoneResolvedInTitle = project.Milestone.LastOrDefault(),
-        Task2ProjectTitle = project,
-        Task2ResourcesTitle = resource,
-        Task2SPriorityTitle = null,
-        Task2SResolutionTitle = null,
-        Task2StatusTitle = null,
-        Task2TypeTitle = null,
-        Title = rODZAJPRACYRow.NAZWAPRACY
-      };
-      TaskComments _newTaskComment = new TaskComments()
-      {
-        Body = rODZAJPRACYRow.OPIS.SPValidSubstring(),
-        TaskComments2TaskTitle = _newTask
-      };
-      return _newTask;
-    }
-    private Projects GetProjectFromTimeTrackerId( int projectId )
-    {
-      if ( !m_PriorityDictionary.ContainsKey( projectId ) )
-        return m_ProjectsDictionary[ -projectId ];
-      return m_ProjectsDictionary[ m_ProjectsMapppingDictionary[ projectId ] ];
-    }
     private void Import( TimeTracking.TimeTrackingDataSet.PROJEKTYDataTable pROJEKTYDataTable, Entities m_Entities )
     {
       foreach ( var _row in pROJEKTYDataTable )
       {
-        if ( !m_PriorityDictionary.ContainsKey( _row.ID ) )
-          continue;
-        Projects _newProject = Create<Projects>( m_Entities.Projects, m_ProjectsDictionary, _row.NAZWA_KROTKA, -_row.ID );
+        Projects _newProject = null;
+        if ( ProjectsMapping.MappingTable.ContainsKey( _row.ID ) )
+        {
+          _newProject = GetOrAdd<Projects>( m_Entities.Projects, m_ProjectsDictionaryBugNet, ProjectsMapping.MappingTable[ _row.ID ] );
+          m_ProjectsDictionaryTimeTracking.Add( _row.ID, _newProject );
+        }
+        else
+          _newProject = Create<Projects>( m_Entities.Projects, m_ProjectsDictionaryTimeTracking, _row.NAZWA_KROTKA, _row.ID );
         _newProject.Active = false;
-        _newProject.Body = _row.IsNAZWANull() ? "N/A" : _row.NAZWA.SPValidSubstring();
-        _newProject.Currency = Currency.PLN;
-        _newProject.Project2ContractTitle = GetOrAdd<Contracts>( m_Entities.Contracts, m_ContractDictionary, -_row.ID_UMOWY );
-        if ( !_row.IsID_MANAGERANull() )
+        _newProject.Body += String.Format( "<\br> mapped with {0}", _row.IsNAZWANull() ? "N/A" : _row.NAZWA );
+        _newProject.Currency = GetCurrency( "PLN" );
+        if ( _newProject.Project2ContractTitle == null )
+          _newProject.Project2ContractTitle = GetOrAdd<Contracts>( m_Entities.Contracts, m_ContractDictionary, -_row.ID_UMOWY );
+        if ( _newProject.Project2ResourcesTitle == null && !_row.IsID_MANAGERANull() )
           _newProject.Project2ResourcesTitle = GetOrAdd<Resources>( m_Entities.Resources, m_ResourcesDictionaryTimeTracking, _row.ID_MANAGERA );
-        _newProject.Project2StageTitle = p_DefaultStage;
-        _newProject.ProjectBudget = _row.IsBUDZETNull() ? 0 : Convert.ToDouble( _row.BUDZET );
-        _newProject.ProjectEndDate = _row.IsDATA_KONIECNull() ? DateTime.Today : _row.DATA_KONIEC;
-        _newProject.ProjectHours = _row.IsLICZBA_GODZINNull() ? 0 : _row.LICZBA_GODZIN;
-        _newProject.ProjectNumber = _row.IsNUMERNull() ? "N/A" : _row.NUMER;
-        _newProject.ProjectStartDate = _row.IsDATA_STARTNull() ? DateTime.Today : _row.DATA_START;
-        _newProject.ProjectType = _row.PODKATEGORIERow == null ? ProjectType.None : this.m_ProjectTypeMapping[ _row.PODKATEGORIERow.ID ];
-        _newProject.ProjectWarrantyDate = _row.IsDATA_GWARANCJANull() ? DateTime.Today : _row.DATA_GWARANCJA;
+        if ( _newProject.Project2StageTitle == null )
+          _newProject.Project2StageTitle = p_DefaultStage;
+        _newProject.ProjectBudget += _row.IsBUDZETNull() ? 0 : Convert.ToDouble( _row.BUDZET );
+        if ( !_row.IsDATA_KONIECNull() )
+          _newProject.Adjust( _row.DATA_KONIEC );
+        _newProject.ProjectHours += _row.IsLICZBA_GODZINNull() ? 0 : _row.LICZBA_GODZIN;
+        _newProject.ProjectNumber += String.Format( " mapped with {0}", _row.IsNUMERNull() ? "N/A" : _row.NUMER );
+        if ( !_row.IsDATA_STARTNull() )
+          _newProject.Adjust( _row.DATA_START );
+        if ( !_newProject.ProjectType.HasValue )
+          _newProject.ProjectType = _row.PODKATEGORIERow == null ? ProjectType.None : ProjectsMapping.m_ProjectTypeMapping[ _row.PODKATEGORIERow.ID ];
+        if ( !_newProject.ProjectWarrantyDate.HasValue )
+          _newProject.ProjectWarrantyDate = _row.IsDATA_GWARANCJANull() ? DateTime.Today : _row.DATA_GWARANCJA;
       }
     }
     private void Import( TimeTracking.TimeTrackingDataSet.UMOWYDataTable uMOWYDataTable, Entities m_Entities )
@@ -325,30 +308,50 @@ namespace CAS.ITRDataAccess.SharePoint
       }
       m_Entities.SubmitChanges();
     }
+    #endregion
 
     #region mapping
+    private Tasks CreateTask( TimeTracking.TimeTrackingDataSet.RODZAJPRACYRow rODZAJPRACYRow, Projects project, Resources resource )
+    {
+      Tasks _newTask = new Tasks()
+      {
+        Task2MilestoneDefinedInTitle = project.Milestone.FirstOrDefault(),
+        Task2MilestoneResolvedInTitle = project.Milestone.LastOrDefault(),
+        Task2ProjectTitle = project,
+        Task2ResourcesTitle = resource,
+        Task2SPriorityTitle = null,
+        Task2SResolutionTitle = null,
+        Task2StatusTitle = null,
+        Task2TypeTitle = null,
+        Title = rODZAJPRACYRow.NAZWAPRACY
+      };
+      TaskComments _newTaskComment = new TaskComments()
+      {
+        Body = rODZAJPRACYRow.OPIS.SPValidSubstring(),
+        TaskComments2TaskTitle = _newTask
+      };
+      return _newTask;
+    }
     private Currency GetCurrency( string currency )
     {
       return Currency.PLN;
     }
-    Dictionary<int, int> m_ProjectsMapppingDictionary = new Dictionary<int, int>() { };
-    private Dictionary<int, ProjectType> m_ProjectTypeMapping = new Dictionary<int, ProjectType>() 
-    { 
-      { 1, ProjectType.ProjectCommercial },
-      { 2, ProjectType.ProjectInternal},
-      { 3, ProjectType.Marketing},
-      { 5, ProjectType.Office},
-      { 8, ProjectType.AfterSalesServices},
-      { 9, ProjectType.ProjectCommercial},
-      {10, ProjectType.ProjectConception}
-    };
     private Dictionary<string, int> m_ResourcesDictionaryMapping = new Dictionary<string, int>();
-
-    #endregion
-
     #endregion
 
     #region data management
+    private Estimation CheckAddEstimation( Resources resources, Projects project )
+    {
+      Estimation _estimation = ( from _eidx in project.Estimation let _ridx = _eidx.Estimation2ResourcesTitle where _eidx.Identyfikator == _ridx.Identyfikator select _eidx ).FirstOrDefault();
+      if ( _estimation == null )
+        _estimation = new Estimation()
+        {
+          EstimatedWorkload = 0,
+          Estimation2ProjectTitle = project,
+          Estimation2ResourcesTitle = resources
+        };
+      return _estimation;
+    }
     private type Create<type>( EntityList<type> list, Dictionary<int, type> _dictionary, string title, int _key )
       where type: Element, new()
     {
@@ -416,7 +419,8 @@ namespace CAS.ITRDataAccess.SharePoint
 
     #region Dictionaries
     private Dictionary<int, Tasks> m_TasksDictionary = new Dictionary<int, Tasks>();
-    private Dictionary<int, Projects> m_ProjectsDictionary = new Dictionary<int, Projects>();
+    private Dictionary<int, Projects> m_ProjectsDictionaryTimeTracking = new Dictionary<int, Projects>();
+    private Dictionary<int, Projects> m_ProjectsDictionaryBugNet = new Dictionary<int, Projects>();
     private Dictionary<int, Milestone> m_MilestoneDictionary = new Dictionary<int, Milestone>();
     private Dictionary<int, Resolution> m_ResolutionDictionary = new Dictionary<int, Resolution>();
     private Dictionary<int, TaskType> m_TaskTypeDictionary = new Dictionary<int, TaskType>();
