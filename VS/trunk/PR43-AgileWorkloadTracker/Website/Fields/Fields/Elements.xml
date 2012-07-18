@@ -1,6 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
   <Field
+    Name="Default"
+    ID="{85338B8B-4B38-4810-B55E-55AFF4C4EF02}"
+    Type="Boolean"
+    DisplayName="Default"
+    Group="CAS Agile Workload Tracker"
+    />
+  <Field
    ID="{5E2C251E-21F8-4877-B127-29E36D40EC15}"
    Name="MilestoneEnd"
    Group="CAS Agile Workload Tracker"
