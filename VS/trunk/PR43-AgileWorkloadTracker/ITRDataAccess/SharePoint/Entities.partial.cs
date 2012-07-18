@@ -14,38 +14,41 @@ namespace CAS.AgileWorkloadTracker.Linq
   {
     internal void Adjust( DateTime dateTime )
     {
-
-      if ( Start > dateTime )
+      if ( !Start.HasValue || Start > dateTime )
       {
         Start = dateTime;
-        this.Task2MilestoneDefinedInTitle.Adjust( dateTime );
+        if ( this.Task2MilestoneDefinedInTitle != null )
+          this.Task2MilestoneDefinedInTitle.Adjust( dateTime );
       }
-      if ( Finish < dateTime )
+      if ( !Finish.HasValue || Finish < dateTime )
       {
         Finish = dateTime;
-        this.Task2MilestoneResolvedInTitle.Adjust( dateTime );
+        if ( this.Task2MilestoneResolvedInTitle != null )
+          this.Task2MilestoneResolvedInTitle.Adjust( dateTime );
       }
     }
     //TODO  [AWT-3523] Add columns to the Milestone and Task 
-    public DateTime Start { get; set; }
-    public DateTime Finish { get; set; }
+    public DateTime? Start { get; set; }
+    public DateTime? Finish { get; set; }
   }
   internal partial class Milestone
   {
     //TODO  [AWT-3523] Add columns to the Milestone and Task 
-    public DateTime Start { get; set; }
-    public DateTime Finish { get; set; }
+    public DateTime? Start { get; set; }
+    public DateTime? Finish { get; set; }
     internal void Adjust( DateTime dateTime )
     {
-      if ( Start > dateTime )
+      if ( !Start.HasValue || Start > dateTime )
       {
         Start = dateTime;
-        this.Milestone2ProjectTitle.Adjust( dateTime );
+        if ( this.Milestone2ProjectTitle == null )
+          this.Milestone2ProjectTitle.Adjust( dateTime );
       }
-      if ( Finish < dateTime )
+      if ( !Finish.HasValue || Finish < dateTime )
       {
         Finish = dateTime;
-        this.Milestone2ProjectTitle.Adjust( dateTime );
+        if ( this.Milestone2ProjectTitle != null )
+          this.Milestone2ProjectTitle.Adjust( dateTime );
       }
     }
   }
@@ -53,9 +56,9 @@ namespace CAS.AgileWorkloadTracker.Linq
   {
     internal void Adjust( DateTime dateTime )
     {
-      if ( ProjectStartDate > dateTime )
+      if ( !ProjectStartDate.HasValue || ProjectStartDate.Value > dateTime )
         ProjectStartDate = dateTime;
-      if ( ProjectEndDate < dateTime )
+      if ( !ProjectEndDate.HasValue || ProjectEndDate.Value < dateTime )
         ProjectEndDate = dateTime;
     }
   }

@@ -35,53 +35,26 @@ namespace CAS.ITRDataAccess.SharePoint
       TimeTracking.TimeTrackingDataSet m_timeTrackingDataSet = m_importFromTimeTracking.GetDataFromDatabase();
       Import( m_timeTrackingDataSet.PRACOWNICY, m_Entities );
       Import( m_BugNETDataSet.aspnet_Users, m_Entities );
-      throw new NotImplementedException();
       Import( m_BugNETDataSet );
       Import( m_timeTrackingDataSet );
-    }
-    private void Import( Bugnet.DatabaseContentDataSet m_BugNETDataSet )
-    {
-      Import( m_BugNETDataSet.Project, p_DefaultStage, p_Entities );
-      p_Entities.SubmitChanges();
-      Console.WriteLine( "Project" );
-      Import( m_BugNETDataSet.Version, p_Entities, p_DefaultStage );
-      p_Entities.SubmitChanges();
-      Console.WriteLine( "Version" );
-      Import( m_BugNETDataSet.Status, p_Entities );
-      p_Entities.SubmitChanges();
-      Console.WriteLine( "Status" );
-      Import( m_BugNETDataSet.Priority, p_Entities );
-      p_Entities.SubmitChanges();
-      Console.WriteLine( "Priority" );
-      Import( m_BugNETDataSet.Resolution, p_Entities );
-      p_Entities.SubmitChanges();
-      Console.WriteLine( "Resolution" );
-      Import( m_BugNETDataSet.Type, p_Entities );
-      p_Entities.SubmitChanges();
-      Console.WriteLine( "Type" );
-      Import( m_BugNETDataSet.Bug, p_Entities );
-      p_Entities.SubmitChanges();
-      Console.WriteLine( "Bug" );
-      Import( m_BugNETDataSet.BugComment, p_Entities );
-    }
-    private void Import( TimeTracking.TimeTrackingDataSet m_timeTrackingDataSet )
-    {
-      //Import( m_timeTrackingDataSet.RODZAJPRACY, m_Entities );
-      //Import( m_timeTrackingDataSet.STATUSY, m_Entities ); alwazs Closed
-      //Import( m_timeTrackingDataSet.KATEGORIE, m_Entities ); using onlz PODKATEGORIE
-      Import( m_timeTrackingDataSet.KONTRAHENCI, p_Entities );
-      Import( m_timeTrackingDataSet.UMOWY, p_Entities );
-      //Import( m_timeTrackingDataSet.PLATNOSCI, m_Entities );
-      //Import( m_timeTrackingDataSet.POLISY, m_Entities );
-      Import( m_timeTrackingDataSet.PROJEKTY, p_Entities );
-      Import( m_timeTrackingDataSet.GODZINY, p_Entities );
-      Import( m_timeTrackingDataSet.PLAN, p_Entities );
     }
     #endregion
 
     #region Bugnet import
+    private void Import( Bugnet.DatabaseContentDataSet m_BugNETDataSet )
+    {
+      Import( m_BugNETDataSet.Project, p_DefaultStage, p_Entities );
+      Import( m_BugNETDataSet.Version, p_Entities, p_DefaultStage );
+      Import( m_BugNETDataSet.Status, p_Entities );
+      Import( m_BugNETDataSet.Priority, p_Entities );
+      Import( m_BugNETDataSet.Resolution, p_Entities );
+      Import( m_BugNETDataSet.Type, p_Entities );
+      Import( m_BugNETDataSet.Bug, p_Entities );
+      Import( m_BugNETDataSet.BugComment, p_Entities );
+    }
     private void Import( Bugnet.DatabaseContentDataSet.aspnet_UsersDataTable usersDataTable, Entities m_Entities )
     {
+      Console.WriteLine( "BugNet aspnet_UsersDataTable starting" );
       foreach ( var _row in usersDataTable )
       {
         if ( m_ResourcesDictionaryMapping.ContainsKey( _row.LoweredUserName ) )
@@ -96,6 +69,7 @@ namespace CAS.ITRDataAccess.SharePoint
     }
     private void Import( Bugnet.DatabaseContentDataSet.ProjectDataTable projectDataTable, Stage stage, Entities _entt )
     {
+      Console.WriteLine( "BugNet ProjectDataTable starting" );
       foreach ( var _row in projectDataTable )
       {
         Projects _new = Create<Projects>( _entt.Projects, m_ProjectsDictionaryBugNet, _row.Name, _row.ProjectID );
@@ -112,9 +86,11 @@ namespace CAS.ITRDataAccess.SharePoint
         _new.ProjectType = ProjectType.ProjectInternal;
         _new.ProjectWarrantyDate = _row.CreateDate + TimeSpan.FromDays( 364 );
       }
+      p_Entities.SubmitChanges();
     }
     private void Import( Bugnet.DatabaseContentDataSet.VersionDataTable versionDataTable, Entities _entt, Stage projectStage )
     {
+      Console.WriteLine( "BugNet VersionDataTable starting" );
       foreach ( var _row in versionDataTable )
       {
         try
@@ -126,6 +102,7 @@ namespace CAS.ITRDataAccess.SharePoint
           _new.Active = true;
           _new.MilestoneHours = 0;
           _entt.SubmitChanges();
+          p_Entities.SubmitChanges();
         }
         catch ( Exception _ex )
         {
@@ -135,51 +112,77 @@ namespace CAS.ITRDataAccess.SharePoint
     }
     private void Import( Bugnet.DatabaseContentDataSet.ResolutionDataTable resutionDataTable, Entities _entt )
     {
+      Console.WriteLine( "BugNet ResolutionDataTable starting" );
       foreach ( var _row in resutionDataTable )
         Create<Resolution>( _entt.Resolution, m_ResolutionDictionary, _row.Name, _row.ResolutionID );
+      p_Entities.SubmitChanges();
     }
     private void Import( Bugnet.DatabaseContentDataSet.StatusDataTable statusDataTable, Entities _entt )
     {
+      Console.WriteLine( "BugNet StatusDataTable starting" );
       foreach ( var _row in statusDataTable )
         Create<Status>( _entt.Status, m_StatusDictionary, _row.Name, _row.StatusID );
+      p_Entities.SubmitChanges();
     }
     private void Import( Bugnet.DatabaseContentDataSet.TypeDataTable typeDataTable, Entities _entt )
     {
+      Console.WriteLine( "BugNet TypeDataTable starting" );
       foreach ( var _row in typeDataTable )
         Create<TaskType>( _entt.Type, m_TaskTypeDictionary, _row.Name, _row.TypeID );
+      p_Entities.SubmitChanges();
     }
     private void Import( Bugnet.DatabaseContentDataSet.PriorityDataTable priorityDataTable, Entities _entt )
     {
+      Console.WriteLine( "BugNet PriorityDataTable starting" );
       foreach ( var _row in priorityDataTable )
         Create<Priority>( _entt.Priority, m_PriorityDictionary, _row.Name, _row.PriorityID );
+      p_Entities.SubmitChanges();
     }
     private void Import( Bugnet.DatabaseContentDataSet.BugDataTable bugDataTable, Entities _entt )
     {
+      Console.WriteLine( "BugNet BugDataTable starting" );
+      int _iteration = 0;
+      int _bugId = 0;
       foreach ( var item in bugDataTable )
       {
-        Tasks _newTasks = Create<Tasks>( _entt.Task, m_TasksDictionary, item.Summary.SPValidSubstring(), item.BugID );
-        //TODO  [AWT-3519] Task title contains HTML tags. http://itrserver/Bugs/BugDetail.aspx?bid=3519
-        //_newTasks.Description = item.Description;
-        _newTasks.Task2MilestoneDefinedInTitle = GetOrAdd<Milestone>( _entt.Milestone, m_MilestoneDictionary, item.VersionID );
-        _newTasks.Task2MilestoneResolvedInTitle = GetOrAdd<Milestone>( _entt.Milestone, m_MilestoneDictionary, item.FixedInVersionId );
-        _newTasks.Task2ProjectTitle = GetOrAdd<Projects>( _entt.Projects, m_ProjectsDictionaryBugNet, item.ProjectID );
-        if ( !item.IsAssignedToUserIdNull() )
-          _newTasks.Task2ResourcesTitle = GetOrAdd<Resources>( _entt.Resources, m_ResourcesDictionaryBugNet, item.AssignedToUserId );
-        else
-          _newTasks.Task2ResourcesTitle = null;
-        _newTasks.Task2SPriorityTitle = GetOrAdd<Priority>( _entt.Priority, m_PriorityDictionary, item.PriorityID );
-        _newTasks.Task2SResolutionTitle = GetOrAdd<Resolution>( _entt.Resolution, m_ResolutionDictionary, item.ResolutionID );
-        _newTasks.Task2StatusTitle = GetOrAdd<Status>( _entt.Status, m_StatusDictionary, item.StatusID );
-        _newTasks.Task2TypeTitle = GetOrAdd<TaskType>( _entt.Type, m_TaskTypeDictionary, item.TypeID );
+        try
+        {
+          _bugId = item.BugID;
+          Tasks _newTasks = Create<Tasks>( _entt.Task, m_TasksDictionary, item.Summary.SPValidSubstring(), item.BugID );
+          //TODO  [AWT-3519] Task title contains HTML tags. http://itrserver/Bugs/BugDetail.aspx?bid=3519
+          //_newTasks.Description = item.Description;
+          _newTasks.Task2MilestoneDefinedInTitle = GetOrAdd<Milestone>( _entt.Milestone, m_MilestoneDictionary, item.VersionID );
+          _newTasks.Task2MilestoneResolvedInTitle = GetOrAdd<Milestone>( _entt.Milestone, m_MilestoneDictionary, item.FixedInVersionId );
+          _newTasks.Task2ProjectTitle = GetOrAdd<Projects>( _entt.Projects, m_ProjectsDictionaryBugNet, item.ProjectID );
+          if ( !item.IsAssignedToUserIdNull() )
+            _newTasks.Task2ResourcesTitle = GetOrAdd<Resources>( _entt.Resources, m_ResourcesDictionaryBugNet, item.AssignedToUserId );
+          else
+            _newTasks.Task2ResourcesTitle = null;
+          _newTasks.Task2SPriorityTitle = GetOrAdd<Priority>( _entt.Priority, m_PriorityDictionary, item.PriorityID );
+          _newTasks.Task2SResolutionTitle = GetOrAdd<Resolution>( _entt.Resolution, m_ResolutionDictionary, item.ResolutionID );
+          _newTasks.Task2StatusTitle = GetOrAdd<Status>( _entt.Status, m_StatusDictionary, item.StatusID );
+          _newTasks.Task2TypeTitle = GetOrAdd<TaskType>( _entt.Type, m_TaskTypeDictionary, item.TypeID );
+          GetOrAddEstimation( _entt.Estimation, _newTasks.Task2ResourcesTitle, _newTasks.Task2ProjectTitle );
+          Console.Write( "\r" );
+          Console.Write( _iteration++ );
+          p_Entities.SubmitChanges();
+        }
+        catch ( Exception ex )
+        {
+          Console.WriteLine( String.Format( "Error importing GODZINYDataTable of BugID: {0}, because of {1}", _bugId, ex.Message ) );
+        }
       }
     }
     private void Import( Bugnet.DatabaseContentDataSet.BugCommentDataTable bugCommentDataTable, Entities _entt )
     {
-      int _bugId = 0;
+      Console.WriteLine( "BugNet BugCommentDataTable starting" );
+      return;
+      Console.WriteLine();
       int _iteration = 0;
-      try
+      int _bugId = 0;
+      foreach ( var _row in bugCommentDataTable )
       {
-        foreach ( var _row in bugCommentDataTable )
+        try
         {
           _bugId = _row.BugCommentID;
           TaskComments _new = new TaskComments()
@@ -191,45 +194,80 @@ namespace CAS.ITRDataAccess.SharePoint
           _new.TaskComments2TaskTitle.Adjust( _row.CreatedDate );
           Console.Write( "\r" );
           Console.Write( _iteration++ );
-          //m_TaskCommentsDictionary.Add( _row.BugCommentID, _new );
+          Resources _author = GetOrAdd<Resources>( _entt.Resources, m_ResourcesDictionaryBugNet, _row.CreatedUserId );
+          GetOrAddEstimation( _entt.Estimation, _author, _new.TaskComments2TaskTitle.Task2ProjectTitle );
           _entt.SubmitChanges();
         }
-      }
-      catch ( Exception _ex )
-      {
-        Console.WriteLine( String.Format( "Error importing BugCommentDataTable of Name: {0}, because of {1}", _bugId, _ex.Message ) );
+        catch ( Exception _ex )
+        {
+          Console.WriteLine( String.Format( "Error importing BugCommentDataTable of Name: {0}, because of {1}", _bugId, _ex.Message ) );
+        };
       }
     }
     #endregion
 
     #region TimeTracking import
+    private void Import( TimeTracking.TimeTrackingDataSet m_timeTrackingDataSet )
+    {
+      //Import( m_timeTrackingDataSet.RODZAJPRACY, m_Entities );
+      //Import( m_timeTrackingDataSet.STATUSY, m_Entities ); alwazs Closed
+      //Import( m_timeTrackingDataSet.KATEGORIE, m_Entities ); using onlz PODKATEGORIE
+      Import( m_timeTrackingDataSet.KONTRAHENCI, p_Entities );
+      Import( m_timeTrackingDataSet.UMOWY, p_Entities );
+      //Import( m_timeTrackingDataSet.PLATNOSCI, m_Entities );
+      //Import( m_timeTrackingDataSet.POLISY, m_Entities );
+      Import( m_timeTrackingDataSet.PROJEKTY, p_Entities );
+      Import( m_timeTrackingDataSet.GODZINY, p_Entities );
+      Import( m_timeTrackingDataSet.PLAN, p_Entities );
+    }
     private void Import( TimeTracking.TimeTrackingDataSet.PLANDataTable pLANDataTable, Entities m_Entities )
     {
+      Console.WriteLine( "TimeTracking PLANDataTable starting" );
       foreach ( var _row in pLANDataTable )
       {
         if ( _row.IsID_PRACOWNIKANull() || _row.IsID_PRACOWNIKANull() )
           return;
-        Estimation _new = CheckAddEstimation(
-          GetOrAdd<Resources>( m_Entities.Resources, m_ResourcesDictionaryTimeTracking, _row.ID_PRACOWNIKA ), GetOrAdd<Projects>( m_Entities.Projects, m_ProjectsDictionaryTimeTracking, _row.ID_PROJEKTU ) );
+        Estimation _new = GetOrAddEstimation
+          (
+            m_Entities.Estimation,
+            GetOrAdd<Resources>( m_Entities.Resources, m_ResourcesDictionaryTimeTracking, _row.ID_PRACOWNIKA ),
+            GetOrAdd<Projects>( m_Entities.Projects, m_ProjectsDictionaryTimeTracking, _row.ID_PROJEKTU )
+          );
         _new.EstimatedWorkload = _row.GODZINY;
       }
+      p_Entities.SubmitChanges();
     }
     private void Import( TimeTracking.TimeTrackingDataSet.GODZINYDataTable gODZINYDataTable, Entities m_Entities )
     {
+      Console.WriteLine( "TimeTracking GODZINYDataTable starting" );
+      int _iteration = 0;
+      int _bugId = 0;
       foreach ( var _row in gODZINYDataTable )
       {
-        Workload _new = Create<Workload>( m_Entities.Workload, m_WorkloadDictionary, _row.OPIS, _row.ID );
-        _new.Hours = _row.IsLICZBA_GODZINNull() ? 0 : _row.LICZBA_GODZIN;
-        _new.Workload2ProjectTitle = GetOrAdd<Projects>( m_Entities.Projects, m_ProjectsDictionaryTimeTracking, _row.ID_PROJEKTU );
-        if ( !_row.IsID_PRACOWNIKANull() )
-          _new.Workload2ResourcesTitle = GetOrAdd<Resources>( m_Entities.Resources, m_ResourcesDictionaryTimeTracking, _row.ID_PRACOWNIKA );
-        _new.Workload2StageTitle = _new.Workload2ProjectTitle != null ? _new.Workload2ProjectTitle.Project2StageTitle : null;
-        _new.Workload2TaskTitle = CreateTask( _row.RODZAJPRACYRow, _new.Workload2ProjectTitle, _new.Workload2ResourcesTitle );
-        _new.WorkloadDate = _row.IsDATANull() ? new Nullable<DateTime>() : _row.DATA;
+        try
+        {
+          _bugId = _row.ID;
+          Workload _new = Create<Workload>( m_Entities.Workload, m_WorkloadDictionary, _row.OPIS, _row.ID );
+          _new.Hours = _row.IsLICZBA_GODZINNull() ? 0 : _row.LICZBA_GODZIN;
+          _new.Workload2ProjectTitle = GetOrAdd<Projects>( m_Entities.Projects, m_ProjectsDictionaryTimeTracking, _row.ID_PROJEKTU );
+          if ( !_row.IsID_PRACOWNIKANull() )
+            _new.Workload2ResourcesTitle = GetOrAdd<Resources>( m_Entities.Resources, m_ResourcesDictionaryTimeTracking, _row.ID_PRACOWNIKA );
+          _new.Workload2StageTitle = _new.Workload2ProjectTitle != null ? _new.Workload2ProjectTitle.Project2StageTitle : null;
+          _new.Workload2TaskTitle = CreateTask( m_Entities, _row.RODZAJPRACYRow, _new.Workload2ProjectTitle, _new.Workload2ResourcesTitle );
+          _new.WorkloadDate = _row.IsDATANull() ? new Nullable<DateTime>() : _row.DATA;
+          Console.Write( "\r" );
+          Console.Write( _iteration++ );
+          p_Entities.SubmitChanges();
+        }
+        catch ( Exception ex )
+        {
+          Console.WriteLine( String.Format( "Error importing GODZINYDataTable of ID: {0}, because of {1}", _bugId, ex.Message ) );
+        }
       }
     }
     private void Import( TimeTracking.TimeTrackingDataSet.PROJEKTYDataTable pROJEKTYDataTable, Entities m_Entities )
     {
+      Console.WriteLine( "TimeTracking PROJEKTYDataTable starting" );
       foreach ( var _row in pROJEKTYDataTable )
       {
         Projects _newProject = null;
@@ -243,8 +281,8 @@ namespace CAS.ITRDataAccess.SharePoint
         _newProject.Active = false;
         _newProject.Body += String.Format( "<\br> mapped with {0}", _row.IsNAZWANull() ? "N/A" : _row.NAZWA );
         _newProject.Currency = GetCurrency( "PLN" );
-        if ( _newProject.Project2ContractTitle == null )
-          _newProject.Project2ContractTitle = GetOrAdd<Contracts>( m_Entities.Contracts, m_ContractDictionary, -_row.ID_UMOWY );
+        if ( !_row.IsID_UMOWYNull() && _newProject.Project2ContractTitle == null )
+          _newProject.Project2ContractTitle = GetOrAdd<Contracts>( m_Entities.Contracts, m_ContractDictionary, _row.ID_UMOWY );
         if ( _newProject.Project2ResourcesTitle == null && !_row.IsID_MANAGERANull() )
           _newProject.Project2ResourcesTitle = GetOrAdd<Resources>( m_Entities.Resources, m_ResourcesDictionaryTimeTracking, _row.ID_MANAGERA );
         if ( _newProject.Project2StageTitle == null )
@@ -261,12 +299,14 @@ namespace CAS.ITRDataAccess.SharePoint
         if ( !_newProject.ProjectWarrantyDate.HasValue )
           _newProject.ProjectWarrantyDate = _row.IsDATA_GWARANCJANull() ? DateTime.Today : _row.DATA_GWARANCJA;
       }
+      p_Entities.SubmitChanges();
     }
     private void Import( TimeTracking.TimeTrackingDataSet.UMOWYDataTable uMOWYDataTable, Entities m_Entities )
     {
+      Console.WriteLine( "TimeTracking UMOWYDataTable starting" );
       foreach ( var _row in uMOWYDataTable )
       {
-        Contracts _newContract = Create<Contracts>( m_Entities.Contracts, m_ContractDictionary, _row.NAZWA_KROTKA, -_row.ID );
+        Contracts _newContract = Create<Contracts>( m_Entities.Contracts, m_ContractDictionary, _row.IsNAZWA_KROTKANull() ? "N/A" : _row.NAZWA_KROTKA, _row.ID );
         _newContract.Body = _row.IsPRZEDMIOTNull() ? "N/A" : _row.PRZEDMIOT.SPValidSubstring();
         _newContract.Body = _row.IsPRZEDMIOTNull() ? "N/A/" : _row.PRZEDMIOT.SPValidSubstring();
         _newContract.ContractDate = _row.IsDATA_UMOWYNull() ? DateTime.Today : _row.DATA_UMOWY;
@@ -279,9 +319,11 @@ namespace CAS.ITRDataAccess.SharePoint
         _newContract.ContractWarrantyDate = _row.IsGWARANCJANull() ? DateTime.Today : _row.GWARANCJA;
         _newContract.Currency = _row.IsWALUTANull() ? Currency.Invalid : GetCurrency( _row.WALUTA );
       }
+      p_Entities.SubmitChanges();
     }
     private void Import( TimeTracking.TimeTrackingDataSet.KONTRAHENCIDataTable kONTRAHENCIDataTable, Entities m_Entities )
     {
+      Console.WriteLine( "TimeTracking KONTRAHENCIDataTable starting" );
       foreach ( var _row in kONTRAHENCIDataTable )
       {
         Partners _new = Create<Partners>( m_Entities.Partners, m_PartnersDictionary, _row.NAZWA_KROTKA, _row.ID );
@@ -295,9 +337,11 @@ namespace CAS.ITRDataAccess.SharePoint
         _new.WorkPhone = _row.TELEFON;
         _new.WorkZip = _row.KOD;
       }
+      p_Entities.SubmitChanges();
     }
     private void Import( TimeTracking.TimeTrackingDataSet.PRACOWNICYDataTable pRACOWNICYDataTable, Entities m_Entities )
     {
+      Console.WriteLine( "TimeTracking PRACOWNICYDataTable starting" );
       foreach ( var _row in pRACOWNICYDataTable )
       {
         Resources _new = Create<Resources>( m_Entities.Resources, m_ResourcesDictionaryTimeTracking, _row.NAZWISKO_IMIE, _row.ID );
@@ -311,7 +355,7 @@ namespace CAS.ITRDataAccess.SharePoint
     #endregion
 
     #region mapping
-    private Tasks CreateTask( TimeTracking.TimeTrackingDataSet.RODZAJPRACYRow rODZAJPRACYRow, Projects project, Resources resource )
+    private Tasks CreateTask( Entities entities, TimeTracking.TimeTrackingDataSet.RODZAJPRACYRow rODZAJPRACYRow, Projects project, Resources resource )
     {
       Tasks _newTask = new Tasks()
       {
@@ -323,13 +367,17 @@ namespace CAS.ITRDataAccess.SharePoint
         Task2SResolutionTitle = null,
         Task2StatusTitle = null,
         Task2TypeTitle = null,
-        Title = rODZAJPRACYRow.NAZWAPRACY
+        Title = rODZAJPRACYRow == null ? "N/A" : rODZAJPRACYRow.NAZWAPRACY
       };
-      TaskComments _newTaskComment = new TaskComments()
+      if ( rODZAJPRACYRow != null )
       {
-        Body = rODZAJPRACYRow.OPIS.SPValidSubstring(),
-        TaskComments2TaskTitle = _newTask
-      };
+        TaskComments _newTaskComment = new TaskComments()
+          {
+            Body = rODZAJPRACYRow.OPIS,
+            TaskComments2TaskTitle = _newTask
+          };
+        entities.TaskComments.InsertOnSubmit( _newTaskComment );
+      }
       return _newTask;
     }
     private Currency GetCurrency( string currency )
@@ -340,16 +388,21 @@ namespace CAS.ITRDataAccess.SharePoint
     #endregion
 
     #region data management
-    private Estimation CheckAddEstimation( Resources resources, Projects project )
+    private Estimation GetOrAddEstimation( EntityList<Estimation> esimationList, Resources resources, Projects project )
     {
+      if ( resources == null || project == null )
+        return null;
       Estimation _estimation = ( from _eidx in project.Estimation let _ridx = _eidx.Estimation2ResourcesTitle where _eidx.Identyfikator == _ridx.Identyfikator select _eidx ).FirstOrDefault();
       if ( _estimation == null )
+      {
         _estimation = new Estimation()
         {
           EstimatedWorkload = 0,
           Estimation2ProjectTitle = project,
           Estimation2ResourcesTitle = resources
         };
+        esimationList.InsertOnSubmit( _estimation );
+      }
       return _estimation;
     }
     private type Create<type>( EntityList<type> list, Dictionary<int, type> _dictionary, string title, int _key )
