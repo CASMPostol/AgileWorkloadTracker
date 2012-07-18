@@ -30,7 +30,7 @@ namespace CAS.AgileWorkloadTracker.Linq
     public DateTime Start { get; set; }
     public DateTime Finish { get; set; }
   }
-  internal partial class Milestone: Element
+  internal partial class Milestone
   {
     //TODO  [AWT-3523] Add columns to the Milestone and Task 
     public DateTime Start { get; set; }
@@ -38,9 +38,25 @@ namespace CAS.AgileWorkloadTracker.Linq
     internal void Adjust( DateTime dateTime )
     {
       if ( Start > dateTime )
+      {
         Start = dateTime;
+        this.Milestone2ProjectTitle.Adjust( dateTime );
+      }
       if ( Finish < dateTime )
+      {
         Finish = dateTime;
+        this.Milestone2ProjectTitle.Adjust( dateTime );
+      }
+    }
+  }
+  internal partial class Projects
+  {
+    internal void Adjust( DateTime dateTime )
+    {
+      if ( ProjectStartDate > dateTime )
+        ProjectStartDate = dateTime;
+      if ( ProjectEndDate < dateTime )
+        ProjectEndDate = dateTime;
     }
   }
 }

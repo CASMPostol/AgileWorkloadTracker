@@ -86,6 +86,7 @@
     <Compile Include="SharePoint\Importer.Designer.cs">
       <DependentUpon>Importer.cs</DependentUpon>
     </Compile>
+    <Compile Include="SharePoint\ProjectsMapping.cs" />
     <Compile Include="TimeTracking\ImportFromTimeTracking.cs">
       <SubType>Component</SubType>
     </Compile>
