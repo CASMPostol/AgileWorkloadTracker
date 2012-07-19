@@ -8,6 +8,8 @@ using CAS.AgileWorkloadTracker.Linq;
 using Microsoft.SharePoint.Linq;
 using System.Globalization;
 using TaskType = CAS.AgileWorkloadTracker.Linq.Type;
+using SPExtensions = CAS.SharePoint.Extensions;
+using CAS.SharePoint;
 
 namespace CAS.ITRDataAccess.SharePoint
 {
@@ -31,26 +33,33 @@ namespace CAS.ITRDataAccess.SharePoint
     #region public
     internal void ImportData()
     {
-      Bugnet.DatabaseContentDataSet m_BugNETDataSet = m_importFromBugNet.GetDataFromDatabase();
-      TimeTracking.TimeTrackingDataSet m_timeTrackingDataSet = m_importFromTimeTracking.GetDataFromDatabase();
-      Import( m_timeTrackingDataSet.PRACOWNICY, m_Entities );
-      Import( m_BugNETDataSet.aspnet_Users, m_Entities );
-      Import( m_BugNETDataSet );
-      Import( m_timeTrackingDataSet );
+      Console.WriteLine( "Starting uploding data at: " + Properties.Settings.Default.RequestUrl );
+      Bugnet.DatabaseContentDataSet m_BugNETDataSet = null;
+      TimeTracking.TimeTrackingDataSet m_timeTrackingDataSet = null;
+      using ( Entities _ent = Entities.GetEntitity() )
+      {
+        m_BugNETDataSet = m_importFromBugNet.GetDataFromDatabase();
+        m_timeTrackingDataSet = m_importFromTimeTracking.GetDataFromDatabase();
+        Import( m_timeTrackingDataSet.PRACOWNICY, _ent );
+        Import( m_BugNETDataSet.aspnet_Users, _ent );
+        Import( m_BugNETDataSet, _ent );
+        Import( m_timeTrackingDataSet, _ent );
+      }
     }
+
     #endregion
 
     #region Bugnet import
-    private void Import( Bugnet.DatabaseContentDataSet m_BugNETDataSet )
+    private void Import( Bugnet.DatabaseContentDataSet m_BugNETDataSet, Entities _ent )
     {
-      Import( m_BugNETDataSet.Project, DefaultStage, p_Entities );
-      Import( m_BugNETDataSet.Version, p_Entities, DefaultStage );
-      Import( m_BugNETDataSet.Status, p_Entities );
-      Import( m_BugNETDataSet.Priority, p_Entities );
-      Import( m_BugNETDataSet.Resolution, p_Entities );
-      Import( m_BugNETDataSet.Type, p_Entities );
-      Import( m_BugNETDataSet.Bug, p_Entities );
-      Import( m_BugNETDataSet.BugComment, p_Entities );
+      Import( m_BugNETDataSet.Project, GetDefaultStage( _ent ), _ent );
+      Import( m_BugNETDataSet.Version, _ent, GetDefaultStage( _ent ) );
+      Import( m_BugNETDataSet.Status, _ent );
+      Import( m_BugNETDataSet.Priority, _ent );
+      Import( m_BugNETDataSet.Resolution, _ent );
+      Import( m_BugNETDataSet.Type, _ent );
+      //Import( m_BugNETDataSet.Bug, _ent );
+      //Import( m_BugNETDataSet.BugComment, _ent );
     }
     private void Import( Bugnet.DatabaseContentDataSet.aspnet_UsersDataTable usersDataTable, Entities m_Entities )
     {
@@ -74,19 +83,14 @@ namespace CAS.ITRDataAccess.SharePoint
       {
         Projects _new = Create<Projects>( _entt.Projects, m_ProjectsDictionaryBugNet, _row.Name, _row.ProjectID );
         _new.Active = _row.Active > 0;
-        _new.Body = _row.IsDescriptionNull() ? String.Empty : _row.Description;
-        _new.Currency = Currency.PLN;
-        _new.Project2ContractTitle = null;
+        _new.Body = _row.IsDescriptionNull() ? "N/A" : _row.Description;
         _new.Project2ResourcesTitle = GetOrAdd<Resources>( _entt.Resources, m_ResourcesDictionaryBugNet, _row.ManagerUserID );
         _new.Project2StageTitle = stage;
-        _new.ProjectBudget = 0;
-        _new.ProjectHours = 0;
         _new.ProjectNumber = _row.Code;
         _new.ProjectStartDate = _row.CreateDate;
         _new.ProjectType = ProjectType.ProjectInternal;
-        _new.ProjectWarrantyDate = _row.CreateDate + TimeSpan.FromDays( 364 );
       }
-      p_Entities.SubmitChanges();
+      _entt.SubmitChanges();
     }
     private void Import( Bugnet.DatabaseContentDataSet.VersionDataTable versionDataTable, Entities _entt, Stage projectStage )
     {
@@ -99,12 +103,12 @@ namespace CAS.ITRDataAccess.SharePoint
           _new.Default = false;
           _new.Milestone2ProjectTitle = GetOrAdd<Projects>( _entt.Projects, m_ProjectsDictionaryBugNet, _row.ProjectID );
           _new.SortOrder = _row.SortOrder;
-          _new.BaselineEnd = _new.Milestone2ProjectTitle.ProjectEndDate;
-          _new.BaselineStart = _new.Milestone2ProjectTitle.ProjectStartDate;
-          _new.MilestoneStart = new Nullable<DateTime>();
-          _new.MilestoneEnd = new Nullable<DateTime>();
+          _new.BaselineEnd = _new.Milestone2ProjectTitle.ProjectEndDate.GetValueOrNull();
+          _new.BaselineStart = _new.Milestone2ProjectTitle.ProjectStartDate.GetValueOrDefault();
+          _new.MilestoneStart = SPExtensions.DateTimeNull;
+          _new.MilestoneEnd = SPExtensions.DateTimeNull;
           _new.Milestone2StageTitle = projectStage;
-          _new.Active = true;
+          _new.Active = false;
           _new.MilestoneHours = 0;
           _entt.SubmitChanges();
           _entt.SubmitChanges();
@@ -134,14 +138,14 @@ namespace CAS.ITRDataAccess.SharePoint
       Console.WriteLine( "BugNet TypeDataTable starting" );
       foreach ( var _row in typeDataTable )
         Create<TaskType>( _entt.Type, m_TaskTypeDictionary, _row.Name, _row.TypeID );
-      p_Entities.SubmitChanges();
+      _entt.SubmitChanges();
     }
     private void Import( Bugnet.DatabaseContentDataSet.PriorityDataTable priorityDataTable, Entities _entt )
     {
       Console.WriteLine( "BugNet PriorityDataTable starting" );
       foreach ( var _row in priorityDataTable )
         Create<Priority>( _entt.Priority, m_PriorityDictionary, _row.Name, _row.PriorityID );
-      p_Entities.SubmitChanges();
+      _entt.SubmitChanges();
     }
     private void Import( Bugnet.DatabaseContentDataSet.BugDataTable bugDataTable, Entities _entt )
     {
@@ -158,33 +162,36 @@ namespace CAS.ITRDataAccess.SharePoint
           _newTasks.Task2MilestoneDefinedInTitle = GetOrAdd<Milestone>( _entt.Milestone, m_MilestoneDictionary, item.VersionID );
           _newTasks.Task2MilestoneResolvedInTitle = GetOrAdd<Milestone>( _entt.Milestone, m_MilestoneDictionary, item.FixedInVersionId );
           _newTasks.Task2ProjectTitle = GetOrAdd<Projects>( _entt.Projects, m_ProjectsDictionaryBugNet, item.ProjectID );
-          _newTasks.BaselineEnd = _newTasks.Task2MilestoneResolvedInTitle.BaselineEnd;
-          _newTasks.BaselineStart = _newTasks.Task2MilestoneResolvedInTitle.BaselineStart;
-          _newTasks.TaskStart = new Nullable<DateTime>();
-          _newTasks.TaskEnd = new Nullable<DateTime>();
+          _newTasks.BaselineEnd = _newTasks.Task2MilestoneResolvedInTitle.BaselineEnd.GetValueOrNull();
+          _newTasks.BaselineStart = _newTasks.Task2MilestoneResolvedInTitle.BaselineStart.GetValueOrNull();
+          _newTasks.TaskStart = SPExtensions.DateTimeNull;
+          _newTasks.TaskEnd = SPExtensions.DateTimeNull;
           if ( !item.IsAssignedToUserIdNull() )
             _newTasks.Task2ResourcesTitle = GetOrAdd<Resources>( _entt.Resources, m_ResourcesDictionaryBugNet, item.AssignedToUserId );
           else
             _newTasks.Task2ResourcesTitle = null;
           _newTasks.Task2SPriorityTitle = GetOrAdd<Priority>( _entt.Priority, m_PriorityDictionary, item.PriorityID );
           _newTasks.Task2SResolutionTitle = GetOrAdd<Resolution>( _entt.Resolution, m_ResolutionDictionary, item.ResolutionID );
+          if ( !_newTasks.Task2SResolutionTitle.Title.ToLower().Contains( "closed" ) )
+            _newTasks.Task2MilestoneResolvedInTitle.Active = true;
           _newTasks.Task2StatusTitle = GetOrAdd<Status>( _entt.Status, m_StatusDictionary, item.StatusID );
           _newTasks.Task2TypeTitle = GetOrAdd<TaskType>( _entt.Type, m_TaskTypeDictionary, item.TypeID );
           GetOrAddEstimation( _entt.Estimation, _newTasks.Task2ResourcesTitle, _newTasks.Task2ProjectTitle );
           Console.Write( "\r" );
           Console.Write( _iteration++ );
-          p_Entities.SubmitChanges();
+          if ( _iteration % 100 == 0 )
+            _entt.SubmitChanges();
         }
         catch ( Exception ex )
         {
           Console.WriteLine( String.Format( "Error importing GODZINYDataTable of BugID: {0}, because of {1}", _bugId, ex.Message ) );
         }
       }
+      _entt.SubmitChanges();
     }
     private void Import( Bugnet.DatabaseContentDataSet.BugCommentDataTable bugCommentDataTable, Entities _entt )
     {
       Console.WriteLine( "BugNet BugCommentDataTable starting" );
-      return;
       Console.WriteLine();
       int _iteration = 0;
       int _bugId = 0;
@@ -215,18 +222,15 @@ namespace CAS.ITRDataAccess.SharePoint
     #endregion
 
     #region TimeTracking import
-    private void Import( TimeTracking.TimeTrackingDataSet m_timeTrackingDataSet )
+    private void Import( TimeTracking.TimeTrackingDataSet m_timeTrackingDataSet, Entities _ent )
     {
-      //Import( m_timeTrackingDataSet.RODZAJPRACY, m_Entities );
-      //Import( m_timeTrackingDataSet.STATUSY, m_Entities ); alwazs Closed
-      //Import( m_timeTrackingDataSet.KATEGORIE, m_Entities ); using onlz PODKATEGORIE
-      Import( m_timeTrackingDataSet.KONTRAHENCI, p_Entities );
-      Import( m_timeTrackingDataSet.UMOWY, p_Entities );
+      Import( m_timeTrackingDataSet.KONTRAHENCI, _ent );
+      Import( m_timeTrackingDataSet.UMOWY, _ent );
       //Import( m_timeTrackingDataSet.PLATNOSCI, m_Entities );
       //Import( m_timeTrackingDataSet.POLISY, m_Entities );
-      Import( m_timeTrackingDataSet.PROJEKTY, p_Entities );
-      Import( m_timeTrackingDataSet.GODZINY, p_Entities );
-      Import( m_timeTrackingDataSet.PLAN, p_Entities );
+      Import( m_timeTrackingDataSet.PROJEKTY, _ent );
+      Import( m_timeTrackingDataSet.PLAN, _ent );
+      Import( m_timeTrackingDataSet.GODZINY, _ent );
     }
     private void Import( TimeTracking.TimeTrackingDataSet.PLANDataTable pLANDataTable, Entities m_Entities )
     {
@@ -243,7 +247,7 @@ namespace CAS.ITRDataAccess.SharePoint
           );
         _new.EstimatedWorkload = _row.GODZINY;
       }
-      p_Entities.SubmitChanges();
+      m_Entities.SubmitChanges();
     }
     private void Import( TimeTracking.TimeTrackingDataSet.GODZINYDataTable gODZINYDataTable, Entities m_Entities )
     {
@@ -260,9 +264,9 @@ namespace CAS.ITRDataAccess.SharePoint
           _new.Workload2ProjectTitle = GetOrAdd<Projects>( m_Entities.Projects, m_ProjectsDictionaryTimeTracking, _row.ID_PROJEKTU );
           if ( !_row.IsID_PRACOWNIKANull() )
             _new.Workload2ResourcesTitle = GetOrAdd<Resources>( m_Entities.Resources, m_ResourcesDictionaryTimeTracking, _row.ID_PRACOWNIKA );
-          _new.Workload2StageTitle = _new.Workload2ProjectTitle != null ? _new.Workload2ProjectTitle.Project2StageTitle : null;
-          _new.Workload2TaskTitle = CreateTask( m_Entities, _row.RODZAJPRACYRow, _new.Workload2ProjectTitle, _new.Workload2ResourcesTitle );
-          _new.WorkloadDate = _row.IsDATANull() ? _new.Workload2TaskTitle.TaskStart : _row.DATA;
+          _new.Workload2StageTitle = _new.Workload2ProjectTitle.Project2StageTitle;
+          _new.WorkloadDate = _row.IsDATANull() ? SPExtensions.DateTimeNull : _row.DATA;
+          _new.Workload2TaskTitle = CreateTask( m_Entities, _row.RODZAJPRACYRow, _new.Workload2ProjectTitle, _new.Workload2ResourcesTitle, _new.WorkloadDate.Value );
           _new.ReadOnly = true;
           _new.WeekNumber = _new.WorkloadDate.Value.DayOfYear / 7;
           _new.Year = _new.WorkloadDate.Value.Year;
@@ -270,14 +274,18 @@ namespace CAS.ITRDataAccess.SharePoint
             _new.Workload2TaskTitle.Adjust( _new.WorkloadDate.Value );
           Console.Write( "\r" );
           Console.Write( _iteration++ );
-          p_Entities.SubmitChanges();
+          if ( _iteration % 100 == 0 )
+            m_Entities.SubmitChanges();
         }
         catch ( Exception ex )
         {
           Console.WriteLine( String.Format( "Error importing GODZINYDataTable of ID: {0}, because of {1}", _bugId, ex.Message ) );
         }
       }
+      m_Entities.SubmitChanges();
     }
+
+
     private void Import( TimeTracking.TimeTrackingDataSet.PROJEKTYDataTable pROJEKTYDataTable, Entities m_Entities )
     {
       Console.WriteLine( "TimeTracking PROJEKTYDataTable starting" );
@@ -290,16 +298,18 @@ namespace CAS.ITRDataAccess.SharePoint
           m_ProjectsDictionaryTimeTracking.Add( _row.ID, _newProject );
         }
         else
+        {
           _newProject = Create<Projects>( m_Entities.Projects, m_ProjectsDictionaryTimeTracking, _row.NAZWA_KROTKA, _row.ID );
-        _newProject.Active = false;
-        _newProject.Body += String.Format( "<\br> mapped with {0}", _row.IsNAZWANull() ? "N/A" : _row.NAZWA );
+          _newProject.Active = false;
+        }
+        _newProject.Body += String.Format( "<br/> <b> mapped with {0} <b/>", _row.IsNAZWANull() ? "N/A" : _row.NAZWA );
         _newProject.Currency = GetCurrency( "PLN" );
         if ( !_row.IsID_UMOWYNull() && _newProject.Project2ContractTitle == null )
           _newProject.Project2ContractTitle = GetOrAdd<Contracts>( m_Entities.Contracts, m_ContractDictionary, _row.ID_UMOWY );
         if ( _newProject.Project2ResourcesTitle == null && !_row.IsID_MANAGERANull() )
           _newProject.Project2ResourcesTitle = GetOrAdd<Resources>( m_Entities.Resources, m_ResourcesDictionaryTimeTracking, _row.ID_MANAGERA );
         if ( _newProject.Project2StageTitle == null )
-          _newProject.Project2StageTitle = DefaultStage;
+          _newProject.Project2StageTitle = GetDefaultStage( m_Entities );
         _newProject.ProjectBudget += _row.IsBUDZETNull() ? 0 : Convert.ToDouble( _row.BUDZET );
         if ( !_row.IsDATA_KONIECNull() )
           _newProject.Adjust( _row.DATA_KONIEC );
@@ -310,9 +320,9 @@ namespace CAS.ITRDataAccess.SharePoint
         if ( !_newProject.ProjectType.HasValue )
           _newProject.ProjectType = _row.PODKATEGORIERow == null ? ProjectType.None : ProjectsMapping.m_ProjectTypeMapping[ _row.PODKATEGORIERow.ID ];
         if ( !_newProject.ProjectWarrantyDate.HasValue )
-          _newProject.ProjectWarrantyDate = _row.IsDATA_GWARANCJANull() ? DateTime.Today : _row.DATA_GWARANCJA;
+          _newProject.ProjectWarrantyDate = _row.IsDATA_GWARANCJANull() ? SPExtensions.DateTimeNull : _row.DATA_GWARANCJA;
       }
-      p_Entities.SubmitChanges();
+      m_Entities.SubmitChanges();
     }
     private void Import( TimeTracking.TimeTrackingDataSet.UMOWYDataTable uMOWYDataTable, Entities m_Entities )
     {
@@ -322,17 +332,17 @@ namespace CAS.ITRDataAccess.SharePoint
         Contracts _newContract = Create<Contracts>( m_Entities.Contracts, m_ContractDictionary, _row.IsNAZWA_KROTKANull() ? "N/A" : _row.NAZWA_KROTKA, _row.ID );
         _newContract.Body = _row.IsPRZEDMIOTNull() ? "N/A" : _row.PRZEDMIOT.SPValidSubstring();
         _newContract.Body = _row.IsPRZEDMIOTNull() ? "N/A/" : _row.PRZEDMIOT.SPValidSubstring();
-        _newContract.ContractDate = _row.IsDATA_UMOWYNull() ? DateTime.Today : _row.DATA_UMOWY;
-        _newContract.ContractEndDate = _row.IsKONIECNull() ? DateTime.Today : _row.KONIEC;
+        _newContract.ContractDate = _row.IsDATA_UMOWYNull() ? SPExtensions.DateTimeNull : _row.DATA_UMOWY;
+        _newContract.ContractEndDate = _row.IsKONIECNull() ? SPExtensions.DateTimeNull : _row.KONIEC;
         _newContract.ContractNumber = _row.IsNUMERNull() ? "N/A" : _row.NUMER;
         _newContract.ContractOffer = _row.IsOFERTANull() ? "N/A" : _row.OFERTA;
         _newContract.Contracts2PartnersTitle = _row.IsID_INWESTORANull() ? null : GetOrAdd<Partners>( m_Entities.Partners, m_PartnersDictionary, _row.ID_INWESTORA );
         _newContract.ContractSubject = _row.IsNAZWA_KROTKANull() ? "N/A" : _row.NAZWA_KROTKA;
         _newContract.ContractValue = _row.IsKONTRAKTNull() ? 0 : Convert.ToDouble( _row.KONTRAKT );
-        _newContract.ContractWarrantyDate = _row.IsGWARANCJANull() ? DateTime.Today : _row.GWARANCJA;
+        _newContract.ContractWarrantyDate = _row.IsGWARANCJANull() ? SPExtensions.DateTimeNull : _row.GWARANCJA;
         _newContract.Currency = _row.IsWALUTANull() ? Currency.Invalid : GetCurrency( _row.WALUTA );
       }
-      p_Entities.SubmitChanges();
+      m_Entities.SubmitChanges();
     }
     private void Import( TimeTracking.TimeTrackingDataSet.KONTRAHENCIDataTable kONTRAHENCIDataTable, Entities m_Entities )
     {
@@ -350,7 +360,7 @@ namespace CAS.ITRDataAccess.SharePoint
         _new.WorkPhone = _row.TELEFON;
         _new.WorkZip = _row.KOD;
       }
-      p_Entities.SubmitChanges();
+      m_Entities.SubmitChanges();
     }
     private void Import( TimeTracking.TimeTrackingDataSet.PRACOWNICYDataTable pRACOWNICYDataTable, Entities m_Entities )
     {
@@ -368,7 +378,7 @@ namespace CAS.ITRDataAccess.SharePoint
     #endregion
 
     #region mapping
-    private Tasks CreateTask( Entities entities, TimeTracking.TimeTrackingDataSet.RODZAJPRACYRow rODZAJPRACYRow, Projects project, Resources resource )
+    private Tasks CreateTask( Entities entities, TimeTracking.TimeTrackingDataSet.RODZAJPRACYRow rODZAJPRACYRow, Projects project, Resources resource, DateTime workloadDate )
     {
       Tasks _newTask = new Tasks()
       {
@@ -380,17 +390,23 @@ namespace CAS.ITRDataAccess.SharePoint
         Task2SResolutionTitle = null,
         Task2StatusTitle = null,
         Task2TypeTitle = null,
-        Title = rODZAJPRACYRow == null ? "N/A" : rODZAJPRACYRow.NAZWAPRACY
+        Title = rODZAJPRACYRow == null ? "N/A" : rODZAJPRACYRow.NAZWAPRACY,
+        BaselineEnd = workloadDate,
+        BaselineStart = workloadDate,
+        Body = rODZAJPRACYRow == null ? "N/A" : rODZAJPRACYRow.OPIS,
+        TaskEnd = workloadDate,
+        TaskStart = workloadDate
       };
-      if ( rODZAJPRACYRow != null )
-      {
-        TaskComments _newTaskComment = new TaskComments()
-          {
-            Body = rODZAJPRACYRow.OPIS,
-            TaskComments2TaskTitle = _newTask
-          };
-        entities.TaskComments.InsertOnSubmit( _newTaskComment );
-      }
+      entities.Task.InsertOnSubmit( _newTask );
+      //if ( rODZAJPRACYRow != null )
+      //{
+      //  TaskComments _newTaskComment = new TaskComments()
+      //    {
+      //      Body = rODZAJPRACYRow.OPIS,
+      //      TaskComments2TaskTitle = _newTask
+      //    };
+      //  entities.TaskComments.InsertOnSubmit( _newTaskComment );
+      //}
       return _newTask;
     }
     private Currency GetCurrency( string currency )
@@ -504,30 +520,27 @@ namespace CAS.ITRDataAccess.SharePoint
     #region private
     private const string DefaultStageTitle = "Imported";
     private Stage p_DefaultStage = null;
-    private Stage DefaultStage
+    private Stage GetDefaultStage( Entities entities )
     {
-      get
+      if ( p_DefaultStage == null )
+        p_DefaultStage = ( from _sidx in entities.Stage where _sidx.Title.Contains( DefaultStageTitle ) select _sidx ).FirstOrDefault();
+      if ( p_DefaultStage == null )
       {
-        if ( DefaultStage == null )
-          p_DefaultStage = ( from _sidx in p_Entities.Stage where _sidx.Title.Contains( DefaultStageTitle ) select _sidx ).FirstOrDefault();
-        if ( p_DefaultStage == null )
-        {
-          p_DefaultStage = new Stage() { Title = DefaultStageTitle };
-          p_Entities.Stage.InsertOnSubmit( p_DefaultStage );
-        }
-        return p_DefaultStage;
+        p_DefaultStage = new Stage() { Title = DefaultStageTitle };
+        entities.Stage.InsertOnSubmit( p_DefaultStage );
       }
+      return p_DefaultStage;
     }
-    private Entities p_Entities = null;
-    private Entities m_Entities
-    {
-      get
-      {
-        if ( p_Entities == null )
-          p_Entities = Entities.GetEntitity();
-        return p_Entities;
-      }
-    }
+    //private Entities p_Entities = null;
+    //private Entities m_Entities
+    //{
+    //  get
+    //  {
+    //    if ( p_Entities == null )
+    //      p_Entities = Entities.GetEntitity();
+    //    return p_Entities;
+    //  }
+    //}
     #endregion
 
     #region dispose
@@ -541,11 +554,11 @@ namespace CAS.ITRDataAccess.SharePoint
       {
         components.Dispose();
       }
-      if ( p_Entities != null )
-      {
-        p_Entities.Dispose();
-        p_Entities = null;
-      }
+      //if ( p_Entities != null )
+      //{
+      //p_Entities.Dispose();
+      //p_Entities = null;
+      //}
       base.Dispose( disposing );
     }
     #endregion
