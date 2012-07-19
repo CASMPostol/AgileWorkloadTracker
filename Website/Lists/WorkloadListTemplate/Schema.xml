@@ -118,7 +118,7 @@
         </ViewFields>
         <Query>
           <OrderBy>
-            <FieldRef Name="Created" Ascending="TRUE">
+            <FieldRef Name="Created" Ascending="FALSE">
             </FieldRef>
           </OrderBy>
         </Query>
