@@ -98,6 +98,9 @@
     <None Include="Dashboards\MyTasks\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{3df58ed9-5ca7-4751-bdad-20e09a974a01}</SharePointProjectItemId>
     </None>
+    <None Include="Dashboards\WorkloadSummary\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{2e90f3d6-461f-4fa3-a8bc-8484ba6d86fc}</SharePointProjectItemId>
+    </None>
     <None Include="Features\AWTDashboards\AWTDashboards.feature">
       <FeatureId>{5760eced-aec8-4231-b2ae-e10fe7973f91}</FeatureId>
     </None>
@@ -114,6 +117,7 @@
     </None>
     <None Include="WebPartPages\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{b12ffa68-4e15-4ec7-b7cf-290c320b096d}</SharePointProjectItemId>
+      <SubType>Designer</SubType>
     </None>
     <None Include="Webparts\CurrentUserWebPart\CurrentUserWebPart.webpart">
       <SubType>Designer</SubType>
@@ -133,6 +137,7 @@
     <Content Include="Dashboards\MyTasks\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Dashboards\WorkloadSummary\Elements.xml" />
     <Content Include="Features\AWTDashboards\AWTDashboards.Template.xml">
       <DependentUpon>AWTDashboards.feature</DependentUpon>
     </Content>
@@ -142,6 +147,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="WebPartPages\MyTasksTemplate.aspx" />
+    <Content Include="WebPartPages\WorkloadSummaryTemplate.aspx" />
     <Content Include="Webparts\CurrentUserWebPart\CurrentUserWebPartUserControl.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>

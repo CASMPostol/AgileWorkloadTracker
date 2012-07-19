@@ -4,5 +4,6 @@
     <ProjectItemFile Source="Elements.xml" Target="WebPartPages\" Type="ElementManifest" />
     <ProjectItemFile Source="AddEditWorkloadTemplate.aspx" Target="WebPartPages\" Type="ElementFile" />
     <ProjectItemFile Source="MyTasksTemplate.aspx" Target="WebPartPages\" Type="ElementFile" />
+    <ProjectItemFile Source="WorkloadSummaryTemplate.aspx" Target="WebPartPages\" Type="ElementFile" />
   </Files>
 </ProjectItem>
