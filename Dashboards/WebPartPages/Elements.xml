@@ -2,6 +2,7 @@
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
   <Module Name="WebPartPages">
     <File Path="WebPartPages\AddEditWorkloadTemplate.aspx" Url="WebPartPages/AddEditWorkloadTemplate.aspx" />
-  <File Path="WebPartPages\MyTasksTemplate.aspx" Url="WebPartPages/MyTasksTemplate.aspx" />
+<File Path="WebPartPages\MyTasksTemplate.aspx" Url="WebPartPages/MyTasksTemplate.aspx" />
+<File Path="WebPartPages\WorkloadSummaryTemplate.aspx" Url="WebPartPages/WorkloadSummaryTemplate.aspx" />
 </Module>
 </Elements>
