@@ -7,6 +7,7 @@ using CAS.SharePoint.Linq;
 using CAS.SharePoint.Web;
 using Microsoft.SharePoint;
 using CAS.AgileWorkloadTracker.Dashboards.Linq;
+using CAS.SharePoint;
 
 namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
 {
@@ -15,6 +16,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     public WorkloadManagementUserControl()
     {
       m_StateMachineEngine = new LocalStateMachine( this );
+      m_DataContext = new DataContextManagement<Entities>( this );
     }
 
     #region UserControl override
@@ -42,7 +44,6 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     protected override void OnInit( EventArgs e )
     {
       Page.RegisterRequiresControlState( this );
-      m_DataContext = new DataContextManagement<Entities>( this );
       base.OnInit( e );
     }
     /// <summary>
@@ -226,7 +227,10 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
           Workload2ProjectTitle = SelectedProject,
           Workload2StageTitle = SelectedProject == null ? null : SelectedProject.Project2StageTitle,
           Workload2TaskTitle = _task,
-          WorkloadDate = m_Calendar.SelectedDate.Date
+          WorkloadDate = m_Calendar.SelectedDate.Date,
+          ReadOnly = false,
+          WeekNumber = m_Calendar.SelectedDate.Date.WeekNumber(),
+          Year = m_Calendar.SelectedDate.Date.Year
         };
         at = "InsertOnSubmit";
         m_DataContext.DataContext.Workload.InsertOnSubmit( _newOne );
@@ -381,7 +385,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     {
       m_ProjectDropDown.Items.Clear();
       m_ProjectDropDown.Items.Add( new ListItem( m_SelectProjectDropDownEntry, String.Empty ) { Selected = true } );
-      if ( Me == null || MyProjects == null)
+      if ( Me == null || MyProjects == null )
         return;
       foreach ( var _row2 in MyProjects )
         m_ProjectDropDown.Items.Add( new ListItem( _row2.Title, _row2.Identyfikator.ToString() ) );
@@ -445,7 +449,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
           return;
         double _hoursADay = ( from _widx in Me.Workload
                               where _widx.WorkloadDate.Value.Date == m_Calendar.SelectedDate.Date
-                              select _widx ).Sum( _x => _x.Hours.GetValueOrDefault() );
+                              select _widx ).Sum( _x => _x.Hours.GetValueOrDefault( 0 ) );
         string _rprtTemplate = "You have reported {0} working hours for the selected day {1:D}";
         m_HoursADayLabel.Text = String.Format( _rprtTemplate, _hoursADay, m_Calendar.SelectedDate.Date );
         FillupWorkflowGridView();
