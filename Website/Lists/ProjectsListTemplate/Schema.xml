@@ -125,6 +125,12 @@
           <FieldRef ID="{DBEF0351-9BA4-407F-8F2F-4D5ECF70F0D4}" Name="Project2ResourcesTitle" />
         </ViewFields>
         <Query>
+          <Where>
+            <Eq>
+              <FieldRef Name="Active" />
+              <Value Type="Boolean">YES</Value>
+            </Eq>
+          </Where>
           <OrderBy>
             <FieldRef Name="ID">
             </FieldRef>
