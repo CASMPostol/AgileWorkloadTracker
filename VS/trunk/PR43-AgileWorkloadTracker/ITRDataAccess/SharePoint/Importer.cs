@@ -282,7 +282,15 @@ namespace CAS.ITRDataAccess.SharePoint
           Console.WriteLine( String.Format( "Error importing GODZINYDataTable of ID: {0}, because of {1}", _bugId, ex.Message ) );
         }
       }
-      m_Entities.SubmitChanges();
+      try
+      {
+        m_Entities.SubmitChanges();
+
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(String.Format("Error importing GODZINYDataTable of ID: {0}, because of {1}", _bugId, ex.Message));
+      }
     }
 
 
