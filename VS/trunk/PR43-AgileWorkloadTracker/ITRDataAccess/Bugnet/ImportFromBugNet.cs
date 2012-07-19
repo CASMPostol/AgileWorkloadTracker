@@ -42,6 +42,7 @@ namespace CAS.ITRDataAccess.Bugnet
       m_bugNotificationTableAdapter.Fill( m_BugNETDataSet.BugNotification );
       m_bugTimeEntryTableAdapter.Fill( m_BugNETDataSet.BugTimeEntry );
       m_projectCustomFieldValuesTableAdapter.Fill( m_BugNETDataSet.ProjectCustomFieldValues );
+      Console.WriteLine( "Data has been read from BugNet database" );
       return m_BugNETDataSet;
     }
     #endregion

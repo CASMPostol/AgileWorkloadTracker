@@ -34,7 +34,7 @@ namespace CAS.ITRDataAccess.TimeTracking
       m_projektyTableAdapter.Fill( m_timeTrackingDataSet.PROJEKTY );
       m_godzinyTableAdapter.Fill( m_timeTrackingDataSet.GODZINY );
       m_planTableAdapter.Fill( m_timeTrackingDataSet.PLAN );
-      Console.WriteLine( "Data read from Godziny databaze" );
+      Console.WriteLine( "Data has been read from Godziny databaze" );
       return m_timeTrackingDataSet;
     }
   }
