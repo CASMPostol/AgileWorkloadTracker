@@ -14,12 +14,9 @@
     <asp:TableRow>
         <asp:TableCell>
             <asp:Label ID="m_TaskLabel" runat="server" CssClass="Label" Text="Summary" />
-        </asp:TableCell>
-        <asp:TableCell>
+        </asp:TableCell><asp:TableCell>
             <asp:TextBox ID="m_TaskTextBox" runat="server" CssClass="TextBoxLong" />
-        </asp:TableCell>
-    </asp:TableRow>
-    <asp:TableRow>
+        </asp:TableCell></asp:TableRow><asp:TableRow>
         <asp:TableCell>
             <asp:Table ID="m_TableVersion" runat="server">
                 <asp:TableRow>
@@ -31,8 +28,7 @@
                     </asp:TableCell>
                 </asp:TableRow>
             </asp:Table>
-        </asp:TableCell>
-        <asp:TableCell>
+        </asp:TableCell><asp:TableCell>
             <asp:Table ID="m_TableCategory" runat="server">
                 <asp:TableRow>
                     <asp:TableCell>
@@ -43,9 +39,7 @@
                     </asp:TableCell>
                 </asp:TableRow>
             </asp:Table>
-        </asp:TableCell>
-    </asp:TableRow>
-    <asp:TableRow>
+        </asp:TableCell></asp:TableRow><asp:TableRow>
         <asp:TableCell>
             <asp:Table ID="m_TableType" runat="server">
                 <asp:TableRow>
@@ -57,8 +51,7 @@
                     </asp:TableCell>
                 </asp:TableRow>
             </asp:Table>
-        </asp:TableCell>
-        <asp:TableCell>
+        </asp:TableCell><asp:TableCell>
             <asp:Table ID="m_TableMilestone" runat="server">
                 <asp:TableRow>
                     <asp:TableCell>
@@ -69,9 +62,7 @@
                     </asp:TableCell>
                 </asp:TableRow>
             </asp:Table>
-        </asp:TableCell>
-    </asp:TableRow>
-    <asp:TableRow>
+        </asp:TableCell></asp:TableRow><asp:TableRow>
         <asp:TableCell>
             <asp:Table ID="m_TablePriority" runat="server">
                 <asp:TableRow>
@@ -83,8 +74,7 @@
                     </asp:TableCell>
                 </asp:TableRow>
             </asp:Table>
-        </asp:TableCell>
-        <asp:TableCell>
+        </asp:TableCell><asp:TableCell>
             <asp:Table ID="m_TableAsignedTo" runat="server">
                 <asp:TableRow>
                     <asp:TableCell>
@@ -95,9 +85,7 @@
                     </asp:TableCell>
                 </asp:TableRow>
             </asp:Table>
-        </asp:TableCell>
-    </asp:TableRow>
-    <asp:TableRow>
+        </asp:TableCell></asp:TableRow><asp:TableRow>
         <asp:TableCell>
             <asp:Table ID="m_TableStatus" runat="server">
                 <asp:TableRow>
@@ -109,8 +97,7 @@
                     </asp:TableCell>
                 </asp:TableRow>
             </asp:Table>
-        </asp:TableCell>
-        <asp:TableCell>
+        </asp:TableCell><asp:TableCell>
             <asp:Table ID="m_TableResolution" runat="server">
                 <asp:TableRow>
                     <asp:TableCell>
@@ -121,9 +108,7 @@
                     </asp:TableCell>
                 </asp:TableRow>
             </asp:Table>
-        </asp:TableCell>
-    </asp:TableRow>
-    <asp:TableRow>
+        </asp:TableCell></asp:TableRow><asp:TableRow>
         <asp:TableCell>
             <asp:Table ID="m_TableEstimation" runat="server">
                 <asp:TableRow>
@@ -135,8 +120,7 @@
                     </asp:TableCell>
                 </asp:TableRow>
             </asp:Table>
-        </asp:TableCell>
-        <asp:TableCell>
+        </asp:TableCell><asp:TableCell>
             <asp:Table ID="m_TableDueDate" runat="server">
                 <asp:TableRow>
                     <asp:TableCell>
@@ -147,35 +131,20 @@
                     </asp:TableCell>
                 </asp:TableRow>
             </asp:Table>
-        </asp:TableCell>
-    </asp:TableRow>
-    <asp:TableRow>
+        </asp:TableCell></asp:TableRow><asp:TableRow>
         <asp:TableCell ColumnSpan="2">
-            <asp:TextBox ID="m_CommentsTextBox" runat="server" TextMode="Multiline" Height="60" CssClass="TextBox"></asp:TextBox>
-        </asp:TableCell>
-    </asp:TableRow>
-    <asp:TableRow>
-        <asp:TableCell ColumnSpan="2"
-            <asp:Table ID="m_Actions" runat="server" CssClass="Table">
-                <asp:TableRow>
+            <asp:TextBox ID="m_CommentsTextBox" runat="server" TextMode="Multiline" Height="60" Width="600" CssClass="TextBox"></asp:TextBox>
+        </asp:TableCell></asp:TableRow><asp:TableRow>
+        <asp:TableCell ColumnSpan="2">
+            <asp:Table ID="m_Actions" runat="server" CssClass="Table"><asp:TableRow>
                                         <asp:TableCell>
                                             <asp:Button runat="server" ID="m_ButtonAddNew" Text="Add new" CssClass="Button" />
-                                        </asp:TableCell>
-                                        <asp:TableCell>
+                                        </asp:TableCell><asp:TableCell>
                                             <asp:Button runat="server" ID="m_ButtonEdit" Text="Edit" CssClass="Button" />
-                                        </asp:TableCell>
-                                        <asp:TableCell>
+                                        </asp:TableCell><asp:TableCell>
                                             <asp:Button runat="server" ID="m_ButtonSave" Text="Save" CssClass="Button" />
-                                        </asp:TableCell>
-                                        <asp:TableCell>
+                                        </asp:TableCell><asp:TableCell>
                                             <asp:Button runat="server" ID="m_ButtonDelete" Text="Delete" CssClass="Button" OnClientClick="return confirm('Na pewno zmodyfikować?');" />
-                                        </asp:TableCell>
-                                        <asp:TableCell>
+                                        </asp:TableCell><asp:TableCell>
                                             <asp:Button runat="server" ID="m_ButtonCancel" Text="Cancel" CssClass="Button" />
-                                        </asp:TableCell>
-                 </asp:TableRow>
-              </asp:Table>                         
-        </asp:TableCell>
-    </asp:TableRow>
-</asp:Table>
-</asp:Panel>
+                                        </asp:TableCell></asp:TableRow></asp:Table></asp:TableCell></asp:TableRow></asp:Table></asp:Panel>

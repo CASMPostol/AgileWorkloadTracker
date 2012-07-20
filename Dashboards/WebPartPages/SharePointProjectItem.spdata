@@ -2,8 +2,9 @@
 <ProjectItem Type="Microsoft.VisualStudio.SharePoint.Module" DefaultFile="Elements.xml" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
   <Files>
     <ProjectItemFile Source="Elements.xml" Target="WebPartPages\" Type="ElementManifest" />
-    <ProjectItemFile Source="AddEditWorkloadTemplate.aspx" Target="WebPartPages\" Type="ElementFile" />
     <ProjectItemFile Source="MyTasksTemplate.aspx" Target="WebPartPages\" Type="ElementFile" />
     <ProjectItemFile Source="WorkloadSummaryTemplate.aspx" Target="WebPartPages\" Type="ElementFile" />
+    <ProjectItemFile Source="AddEditTasksTemplate.aspx" Target="WebPartPages\" Type="ElementFile" />
+    <ProjectItemFile Source="AddEditWorkloadTemplate.aspx" Target="WebPartPages\" Type="ElementFile" />
   </Files>
 </ProjectItem>

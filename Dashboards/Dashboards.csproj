@@ -77,6 +77,14 @@
     <Compile Include="Webparts\CurrentUserWebPart\UserDescriptor.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Webparts\TaskManagement\TaskManagement.cs" />
+    <Compile Include="Webparts\TaskManagement\TaskManagementUserControl.ascx.cs">
+      <DependentUpon>TaskManagementUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Webparts\TaskManagement\TaskManagementUserControl.ascx.designer.cs">
+      <DependentUpon>TaskManagementUserControl.ascx.cs</DependentUpon>
+    </Compile>
     <Compile Include="Webparts\WorkloadManagement\StateMachine.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -92,6 +100,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Dashboards\AddEditTasks\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{7604bec5-1d5d-4c91-90bc-36afd9c26302}</SharePointProjectItemId>
+    </None>
     <None Include="Dashboards\AddEditWorkload\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{d8ba6986-a3c7-4140-82ab-5aa83c1626a9}</SharePointProjectItemId>
     </None>
@@ -125,12 +136,17 @@
     <None Include="Webparts\CurrentUserWebPart\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{a25d4b1a-f815-4f20-83da-71adce4da804}</SharePointProjectItemId>
     </None>
+    <None Include="Webparts\TaskManagement\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{58221e33-42c7-4550-adbc-8194236b7803}</SharePointProjectItemId>
+    </None>
+    <None Include="Webparts\TaskManagement\TaskManagement.webpart" />
     <None Include="Webparts\WorkloadManagement\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{0909ab33-01b7-410f-b845-046eb264f2f8}</SharePointProjectItemId>
     </None>
     <None Include="Webparts\WorkloadManagement\WorkloadManagement.webpart" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Dashboards\AddEditTasks\Elements.xml" />
     <Content Include="Dashboards\AddEditWorkload\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -142,6 +158,7 @@
       <DependentUpon>AWTDashboards.feature</DependentUpon>
     </Content>
     <Content Include="Layouts\AWT_Dashboards\CAS_AWT.css" />
+    <Content Include="WebPartPages\AddEditTasksTemplate.aspx" />
     <Content Include="WebPartPages\AddEditWorkloadTemplate.aspx" />
     <Content Include="WebPartPages\Elements.xml">
       <SubType>Designer</SubType>
@@ -152,6 +169,10 @@
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="Webparts\CurrentUserWebPart\Elements.xml" />
+    <Content Include="Webparts\TaskManagement\Elements.xml" />
+    <Content Include="Webparts\TaskManagement\TaskManagementUserControl.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="Webparts\WorkloadManagement\Elements.xml" />
     <Content Include="Webparts\WorkloadManagement\WorkloadManagementUserControl.ascx">
       <SubType>ASPXCodeBehind</SubType>
