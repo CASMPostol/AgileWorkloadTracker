@@ -133,12 +133,14 @@ namespace CAS.AgileWorkloadTracker.Linq
   {
     internal static Resources FindForUser(Entities edc, SPUser _user)
     {
-      EntityList<CAS.AgileWorkloadTracker.Linq.Resources> _res = edc.Resources;
+      if ( edc == null )
+        throw new ArgumentNullException( "FindForUser requres the edc parameter to be assigned" ); 
+      EntityList<Resources> _res = edc.Resources;
       if (_res == null || _res.Count() == 0)
         return null;
       return (
                 from idx in _res
-                let _account = idx._employeeADAccountTitle
+                let _account = idx.EmployeeADAccountTitle
                 where _account.Contains(_user.Name)
                 select idx
               ).FirstOrDefault();

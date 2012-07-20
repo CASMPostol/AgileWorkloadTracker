@@ -46,7 +46,6 @@ namespace CAS.ITRDataAccess.SharePoint
         Import( m_timeTrackingDataSet, _ent );
       }
     }
-
     #endregion
 
     #region Bugnet import
