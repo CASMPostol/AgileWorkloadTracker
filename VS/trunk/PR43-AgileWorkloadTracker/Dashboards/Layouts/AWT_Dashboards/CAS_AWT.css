@@ -16,6 +16,15 @@
     font-size:10pt;
     width:150px;
 }
+.TextBoxLong 
+{
+    border-width:1px 1px 1px 1px;
+    border-color:#91cdf2;
+    border-style:solid;
+    font-family:Verdana;
+    font-size:10pt;
+    width:700px;
+}
 .Button
 {
     border-width:1px 1px 1px 12px;
