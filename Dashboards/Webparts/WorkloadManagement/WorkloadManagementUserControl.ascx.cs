@@ -81,17 +81,23 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
           //Calendar setup
           m_Calendar.SelectedDate = DateTime.Now.Date;
           m_Calendar.VisibleDate = DateTime.Now.Date;
-          //DropDownList'c setup 
-          At = "FillupProjectDropDown";
-          FillupProjectDropDown();
-          At = "FillupTaskaDropDown";
-          FillupTaskaDropDown();
-          At = "FindForUser";
-          FillupWorkflowGridView();
-          ShouwUserInformation();
           m_GridViewProjectSummary.AutoGenerateColumns = true;
           m_GridViewProjectSummary.DataKeyNames = new String[] { "Scope" };
-          FillupGridViewProjectSummary();
+          //DropDownList'c setup 
+          At = "ShouwUserInformation";
+          if ( ShouwUserInformation() )
+          {
+            At = "FillupProjectDropDown";
+            FillupProjectDropDown();
+            At = "FillupTaskaDropDown";
+            FillupTaskaDropDown();
+            At = "FindForUser";
+            FillupWorkflowGridView();
+            At = "FillupGridViewProjectSummary";
+            FillupGridViewProjectSummary();
+          }
+          else
+            m_PanelAddEdit.Enabled = false;
         }
         m_ProjectDropDown.SelectedIndexChanged += new EventHandler( m_ProjectDropDown_SelectedIndexChanged );
         m_ButtonSave.Click += new EventHandler( m_StateMachineEngine.SaveButton_Click );
@@ -360,14 +366,18 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
         throw new ApplicationException( String.Format( "{0} texbox has wrong number", _label ) );
       }
     }
-    private void ShouwUserInformation()
+    private bool ShouwUserInformation()
     {
       if ( Me == null )
       {
         this.Controls.Add( new Literal() { Text = String.Format( CAS.SharePoint.Web.CommonDefinitions.ErrorMessageFormat, "User not recognized - you must be added to the Recourses" ) } );
+        return false;
       }
       else
+      {
         this.Controls.Add( new Literal() { Text = String.Format( CAS.SharePoint.Web.CommonDefinitions.ErrorMessageFormat, "Welcome: " + Me.EmployeeADAccountTitle ) } );
+        return true;
+      }
     }
     private void FillupWorkflowGridView()
     {
@@ -504,7 +514,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
         }
         catch ( Exception xe )
         {
-          throw new ApplicationError("Me", "", xe.Message, xe);
+          throw new ApplicationError( "Me", "", xe.Message, xe );
         }
       }
     }
