@@ -2,12 +2,12 @@
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using CAS.AgileWorkloadTracker.Dashboards.Linq;
 using CAS.AgileWorkloadTracker.Linq;
+using CAS.SharePoint;
 using CAS.SharePoint.Linq;
 using CAS.SharePoint.Web;
 using Microsoft.SharePoint;
-using CAS.AgileWorkloadTracker.Dashboards.Linq;
-using CAS.SharePoint;
 
 namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
 {
@@ -15,8 +15,17 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
   {
     public WorkloadManagementUserControl()
     {
-      m_StateMachineEngine = new LocalStateMachine( this );
-      m_DataContext = new DataContextManagement<Entities>( this );
+      try
+      {
+        At = "LocalStateMachine";
+        m_StateMachineEngine = new LocalStateMachine( this );
+        At = "DataContextManagement";
+        m_DataContext = new DataContextManagement<Entities>( this );
+      }
+      catch ( Exception _ex )
+      {
+        ShowActionResult( GenericStateMachineEngine.ActionResult.Exception( _ex, "WorkloadManagementUserControl" ) );
+      }
     }
 
     #region UserControl override
@@ -57,6 +66,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
       {
         if ( !this.IsPostBack )
         {
+          At = "InitMahine";
           m_StateMachineEngine.InitMahine();
           //Grid setup
           m_GridView.EmptyDataText = "No workload defined";
@@ -72,6 +82,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
           m_Calendar.SelectedDate = DateTime.Now.Date;
           m_Calendar.VisibleDate = DateTime.Now.Date;
           //DropDownList'c setup 
+          At = "FillupProjectDropDown";
           FillupProjectDropDown();
           At = "FillupTaskaDropDown";
           FillupTaskaDropDown();
@@ -88,6 +99,10 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
         m_ButtonCancel.Click += new EventHandler( m_StateMachineEngine.CancelButton_Click );
         m_ButtonEdit.Click += new EventHandler( m_StateMachineEngine.EditButton_Click );
         m_ButtonDelete.Click += new EventHandler( m_StateMachineEngine.DeleteButton_Click );
+      }
+      catch ( ApplicationError _ax )
+      {
+        this.Controls.Add( _ax.CreateMessage( At, true ) );
       }
       catch ( Exception _ex )
       {
@@ -210,7 +225,6 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     }
     private GenericStateMachineEngine.ActionResult CreateNewWokload()
     {
-      string at = "starting";
       if ( !Page.IsValid )
         return GenericStateMachineEngine.ActionResult.NotValidated( "Required information must be provided." );
       try
@@ -219,7 +233,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
         if ( m_TaskDropDown.SelectedValue.IsNullOrEmpty() )
           return GenericStateMachineEngine.ActionResult.NotValidated( "You must select a task to create new workload" );
         Tasks _task = Element.GetAtIndex<Tasks>( m_DataContext.DataContext.Task, m_TaskDropDown.SelectedValue );
-        at = "newOne";
+        At = "newOne";
         Workload _newOne = new Workload()
         {
           Hours = _hours,
@@ -232,15 +246,19 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
           WeekNumber = m_Calendar.SelectedDate.Date.WeekNumber(),
           Year = m_Calendar.SelectedDate.Date.Year
         };
-        at = "InsertOnSubmit";
+        At = "InsertOnSubmit";
         m_DataContext.DataContext.Workload.InsertOnSubmit( _newOne );
-        at = "SubmitChanges #1";
+        At = "SubmitChanges #1";
         m_DataContext.DataContext.SubmitChanges();
         _newOne.Workload2ResourcesTitle = Me;
-        at = "SubmitChanges #2";
+        At = "SubmitChanges #2";
         m_DataContext.DataContext.SubmitChanges();
         FillupWorkflowGridView();
         FillupGridViewProjectSummary();
+      }
+      catch ( ApplicationError _ax )
+      {
+        return GenericStateMachineEngine.ActionResult.Exception( _ax, "CreateNewWokload at: " + at );
       }
       catch ( Exception _ex )
       {
@@ -311,6 +329,10 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
         m_GridView.SelectedIndex = _indx;
         UpdateWorkload();
         FillupGridViewProjectSummary();
+      }
+      catch ( ApplicationError _ae )
+      {
+        return GenericStateMachineEngine.ActionResult.Exception( _ae, "GenericStateMachineEngine.ActionResult" );
       }
       catch ( Exception _ex )
       {
@@ -493,7 +515,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     {
       get
       {
-        if ( Me != null && p_MyProjects == null )
+        if ( p_MyProjects == null )
           p_MyProjects = from _association in Me.Estimation let _pidx = _association.Estimation2ProjectTitle where _pidx.Active.GetValueOrDefault( true ) select _pidx;
         return p_MyProjects;
       }
@@ -508,14 +530,14 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
       if ( _rslt.LastActionResult == GenericStateMachineEngine.ActionResult.Result.Exception )
       {
 #if DEBUG
-        string _format = String.Format( CAS.SharePoint.Web.CommonDefinitions.ErrorMessageFormat, "Exception at: {0} of : {1}." );
-        this.Controls.Add( new Literal() { Text = String.Format( _format, _rslt.ActionException.Source + At, _rslt.ActionException.Message ) } );
+        string _format = CommonDefinitions.Convert2ErrorMessageFormat( "Exception at: {0}/{1} of : {2}." );
+        this.Controls.Add( new Literal() { Text = String.Format( _format, _rslt.ActionException.Source, At, _rslt.ActionException.Message ) } );
 #endif
         Anons.WriteEntry( _rslt.ActionException.Source, _rslt.ActionException.Message );
       }
       else
       {
-        string _format = String.Format( CAS.SharePoint.Web.CommonDefinitions.ErrorMessageFormat, "Validation error at: {0} of : {1}." );
+        string _format = CommonDefinitions.Convert2ErrorMessageFormat( "Validation error at: {0}/{1} of : {2}." );
         this.Controls.Add( new Literal() { Text = String.Format( _format, At, _rslt.ActionException.Message ) } );
       }
     }

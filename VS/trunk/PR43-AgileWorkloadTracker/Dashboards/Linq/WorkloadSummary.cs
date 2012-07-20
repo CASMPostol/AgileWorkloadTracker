@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.SharePoint.Linq;
 using CAS.AgileWorkloadTracker.Linq;
+using CAS.SharePoint;
 
 namespace CAS.AgileWorkloadTracker.Dashboards.Linq
 {
@@ -48,29 +49,36 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Linq
     /// <returns></returns>
     public static List<WorkloadSummary> WorkloadSummaryList( IQueryable<Projects> projects, Resources me )
     {
-      List<WorkloadSummary> _ret = new List<WorkloadSummary>();
-      WorkloadSummary _AllInAllProjects = null;
-      if ( projects != null )
+      try
       {
-        _AllInAllProjects = AllInAllProjects( projects );
-        _ret.Add( _AllInAllProjects );
-      }
-      if ( me != null )
-      {
-        double _myAvailableHours = _AllInAllProjects == null ? 0 : _AllInAllProjects.Available - Math.Max( _AllInAllProjects.Allocated, _AllInAllProjects.Reported );
-        _ret.Add( UserInAllProjets( me, _myAvailableHours ) );
-      }
-      foreach ( var _selectedProject in projects )
-      {
-        WorkloadSummary _AllInSelectedProject = AllInSelectedProject( _selectedProject );
-        _ret.Add( _AllInSelectedProject );
+        List<WorkloadSummary> _ret = new List<WorkloadSummary>();
+        WorkloadSummary _AllInAllProjects = null;
+        if ( projects != null )
+        {
+          _AllInAllProjects = AllInAllProjects( projects );
+          _ret.Add( _AllInAllProjects );
+        }
         if ( me != null )
         {
-          double _availableForMe = _selectedProject.ProjectHours.GetValueOrDefault( 0 ) - Math.Max( _AllInSelectedProject.Allocated, _AllInSelectedProject.Reported );
-          _ret.Add( UserInSelectedProject( me, _selectedProject, _availableForMe ) );
+          double _myAvailableHours = _AllInAllProjects == null ? 0 : _AllInAllProjects.Available - Math.Max( _AllInAllProjects.Allocated, _AllInAllProjects.Reported );
+          _ret.Add( UserInAllProjets( me, _myAvailableHours ) );
         }
+        foreach ( var _selectedProject in projects )
+        {
+          WorkloadSummary _AllInSelectedProject = AllInSelectedProject( _selectedProject );
+          _ret.Add( _AllInSelectedProject );
+          if ( me != null )
+          {
+            double _availableForMe = _selectedProject.ProjectHours.GetValueOrDefault( 0 ) - Math.Max( _AllInSelectedProject.Allocated, _AllInSelectedProject.Reported );
+            _ret.Add( UserInSelectedProject( me, _selectedProject, _availableForMe ) );
+          }
+        }
+        return _ret;
       }
-      return _ret;
+      catch ( Exception _ex)
+      {
+        throw new ApplicationError("WorkloadSummaryList", "N/A", _ex.Message, _ex);
+      }
     }
     #endregion
 
