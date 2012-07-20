@@ -258,11 +258,11 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
       }
       catch ( ApplicationError _ax )
       {
-        return GenericStateMachineEngine.ActionResult.Exception( _ax, "CreateNewWokload at: " + at );
+        return GenericStateMachineEngine.ActionResult.Exception( _ax, "CreateNewWokload at: " + At );
       }
       catch ( Exception _ex )
       {
-        return GenericStateMachineEngine.ActionResult.Exception( _ex, "CreateNewWokload at: " + at );
+        return GenericStateMachineEngine.ActionResult.Exception( _ex, "CreateNewWokload at: " + At );
       }
       return GenericStateMachineEngine.ActionResult.Success;
     }
@@ -495,9 +495,17 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     {
       get
       {
-        if ( p_me == null )
-          p_me = CAS.AgileWorkloadTracker.Linq.Resources.FindForUser( m_DataContext.DataContext, SPContext.Current.Web.CurrentUser );
-        return p_me;
+        try
+        {
+          if ( p_me == null )
+            p_me = Resources.FindForUser( m_DataContext.DataContext, SPContext.Current.Web.CurrentUser );
+          return p_me;
+
+        }
+        catch ( Exception xe )
+        {
+          throw new ApplicationError("Me", "", xe.Message, xe);
+        }
       }
     }
     private Projects p_Projects = null;
