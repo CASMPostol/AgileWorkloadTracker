@@ -35,7 +35,7 @@ namespace CAS.ITRDataAccess.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://cas_sp:11225/sites/awt")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://casmp/sites/a07")]
         public string RequestUrl {
             get {
                 return ((string)(this["RequestUrl"]));
@@ -49,6 +49,15 @@ namespace CAS.ITRDataAccess.Properties {
         public string godzinyConnectionString {
             get {
                 return ((string)(this["godzinyConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2011-07-01")]
+        public global::System.DateTime WorkloadStartDate {
+            get {
+                return ((global::System.DateTime)(this["WorkloadStartDate"]));
             }
         }
     }
