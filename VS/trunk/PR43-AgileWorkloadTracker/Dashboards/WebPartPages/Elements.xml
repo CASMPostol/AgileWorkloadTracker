@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
   <Module Name="WebPartPages">
-    <File Path="WebPartPages\AddEditWorkloadTemplate.aspx" Url="WebPartPages/AddEditWorkloadTemplate.aspx" />
 <File Path="WebPartPages\MyTasksTemplate.aspx" Url="WebPartPages/MyTasksTemplate.aspx" />
 <File Path="WebPartPages\WorkloadSummaryTemplate.aspx" Url="WebPartPages/WorkloadSummaryTemplate.aspx" />
+<File Path="WebPartPages\AddEditTasksTemplate.aspx" Url="WebPartPages/AddEditTasksTemplate.aspx" />
+<File Path="WebPartPages\AddEditWorkloadTemplate.aspx" Url="WebPartPages/AddEditWorkloadTemplate.aspx" />
 </Module>
 </Elements>
