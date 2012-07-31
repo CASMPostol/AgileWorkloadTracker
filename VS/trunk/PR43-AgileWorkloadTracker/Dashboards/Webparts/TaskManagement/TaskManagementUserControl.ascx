@@ -95,7 +95,7 @@
 <asp:Table ID="m_TableMain3" runat="server" CssClass="Table">
     <asp:TableRow>
         <asp:TableCell>
-            <asp:TextBox ID="m_CommentsTextBox" runat="server" TextMode="Multiline" Height="60" Width="600" CssClass="TextBox"></asp:TextBox>
+            <asp:TextBox ID="m_CommentsTextBox" runat="server" TextMode="Multiline" Height="100" Width="750" CssClass="TextBox"></asp:TextBox>
         </asp:TableCell>
     </asp:TableRow>
     <asp:TableRow>
