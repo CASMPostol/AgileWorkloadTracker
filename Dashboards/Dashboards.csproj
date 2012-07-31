@@ -119,6 +119,7 @@
     <Compile Include="Linq\Entities.partial.cs" />
     <None Include="Layouts\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{efec32db-6b6f-4943-8e35-f36de2a5221c}</SharePointProjectItemId>
+      <SubType>Designer</SubType>
     </None>
     <None Include="Package\Package.package">
       <PackageId>{92f33941-32f8-4ccd-a47e-35ce3cc13bcd}</PackageId>
