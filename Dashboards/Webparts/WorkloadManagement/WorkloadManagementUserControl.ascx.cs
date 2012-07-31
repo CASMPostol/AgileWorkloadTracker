@@ -192,10 +192,6 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
       {
         m_Parent.m_ControlState.SetEnabled = _buttons;
       }
-      protected override GenericStateMachineEngine.ActionResult Show()
-      {
-        return m_Parent.Show();
-      }
       protected override void ShowActionResult( GenericStateMachineEngine.ActionResult _rslt )
       {
         m_Parent.ShowActionResult( _rslt );
