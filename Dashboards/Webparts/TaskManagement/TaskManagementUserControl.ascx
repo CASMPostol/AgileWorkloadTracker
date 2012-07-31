@@ -14,137 +14,112 @@
     <asp:TableRow>
         <asp:TableCell>
             <asp:Label ID="m_TaskLabel" runat="server" CssClass="Label" Text="Summary" />
-        </asp:TableCell><asp:TableCell>
+        </asp:TableCell>
+        <asp:TableCell>
             <asp:TextBox ID="m_TaskTextBox" runat="server" CssClass="TextBoxLong" />
-        </asp:TableCell></asp:TableRow><asp:TableRow>
+        </asp:TableCell>
+    </asp:TableRow>
+</asp:Table>
+<asp:Table ID="m_TableMain2" runat="server" CssClass="Table">
+    <asp:TableRow>
         <asp:TableCell>
-            <asp:Table ID="m_TableVersion" runat="server">
-                <asp:TableRow>
-                    <asp:TableCell>
-                        <asp:Label ID="m_VersionLabel" runat="server" CssClass="Label" Text="Label" />
-                    </asp:TableCell>
-                    <asp:TableCell>
-                        <asp:DropDownList ID="m_VersionDropDown" runat="server" CssClass="DropDownShort"></asp:DropDownList>
-                    </asp:TableCell>
-                </asp:TableRow>
-            </asp:Table>
-        </asp:TableCell><asp:TableCell>
-            <asp:Table ID="m_TableCategory" runat="server">
-                <asp:TableRow>
-                    <asp:TableCell>
-                        <asp:Label ID="m_CategoryLabel" runat="server" CssClass="Label" Text="Category" />
-                    </asp:TableCell>
-                    <asp:TableCell>
-                        <asp:DropDownList ID="m_CategoryDropDown" runat="server" CssClass="DropDownShort"></asp:DropDownList>
-                    </asp:TableCell>
-                </asp:TableRow>
-            </asp:Table>
-        </asp:TableCell></asp:TableRow><asp:TableRow>
+            <asp:Label ID="m_VersionLabel" runat="server" CssClass="Label" Text="Label" />
+        </asp:TableCell>
         <asp:TableCell>
-            <asp:Table ID="m_TableType" runat="server">
-                <asp:TableRow>
-                    <asp:TableCell>
-                        <asp:Label ID="m_TypeLabel" runat="server" CssClass="Label" Text="Type" />
-                    </asp:TableCell>
-                    <asp:TableCell>
-                        <asp:DropDownList ID="m_TypeDropDown" runat="server" CssClass="DropDownShort"></asp:DropDownList>
-                    </asp:TableCell>
-                </asp:TableRow>
-            </asp:Table>
-        </asp:TableCell><asp:TableCell>
-            <asp:Table ID="m_TableMilestone" runat="server">
-                <asp:TableRow>
-                    <asp:TableCell>
-                        <asp:Label ID="m_MilestoneLabel" runat="server" CssClass="Label" Text="Milestone" />
-                    </asp:TableCell>
-                    <asp:TableCell>
-                        <asp:DropDownList ID="m_MilestoneDropDown" runat="server" CssClass="DropDownShort"></asp:DropDownList>
-                    </asp:TableCell>
-                </asp:TableRow>
-            </asp:Table>
-        </asp:TableCell></asp:TableRow><asp:TableRow>
+            <asp:DropDownList ID="m_VersionDropDown" runat="server" CssClass="DropDownShort"></asp:DropDownList>
+        </asp:TableCell>
         <asp:TableCell>
-            <asp:Table ID="m_TablePriority" runat="server">
-                <asp:TableRow>
-                    <asp:TableCell>
-                        <asp:Label ID="m_PriorityLabel" runat="server" CssClass="Label" Text="Priority" />
-                    </asp:TableCell>
-                    <asp:TableCell>
-                        <asp:DropDownList ID="m_PriorityDropDown" runat="server" CssClass="DropDownShort"></asp:DropDownList>
-                    </asp:TableCell>
-                </asp:TableRow>
-            </asp:Table>
-        </asp:TableCell><asp:TableCell>
-            <asp:Table ID="m_TableAsignedTo" runat="server">
-                <asp:TableRow>
-                    <asp:TableCell>
-                        <asp:Label ID="m_AsinegdToLabel" runat="server" CssClass="Label" Text="Asigned to" />
-                    </asp:TableCell>
-                    <asp:TableCell>
-                        <asp:DropDownList ID="m_AsignedToDropDown" runat="server" CssClass="DropDownShort"></asp:DropDownList>
-                    </asp:TableCell>
-                </asp:TableRow>
-            </asp:Table>
-        </asp:TableCell></asp:TableRow><asp:TableRow>
+            <asp:Label ID="m_CategoryLabel" runat="server" CssClass="Label" Text="Category" />
+        </asp:TableCell>
         <asp:TableCell>
-            <asp:Table ID="m_TableStatus" runat="server">
-                <asp:TableRow>
-                    <asp:TableCell>
-                        <asp:Label ID="m_StatusLabel" runat="server" CssClass="Label" Text="Status" />
-                    </asp:TableCell>
-                    <asp:TableCell>
-                        <asp:DropDownList ID="m_StatusDropDown" runat="server" CssClass="DropDownShort"></asp:DropDownList>
-                    </asp:TableCell>
-                </asp:TableRow>
-            </asp:Table>
-        </asp:TableCell><asp:TableCell>
-            <asp:Table ID="m_TableResolution" runat="server">
-                <asp:TableRow>
-                    <asp:TableCell>
-                        <asp:Label ID="m_ResolutionLabel" runat="server" CssClass="Label" Text="Resolution" />
-                    </asp:TableCell>
-                    <asp:TableCell>
-                        <asp:DropDownList ID="m_ResolutionDropDown" runat="server" CssClass="DropDownShort"></asp:DropDownList>
-                    </asp:TableCell>
-                </asp:TableRow>
-            </asp:Table>
-        </asp:TableCell></asp:TableRow><asp:TableRow>
+            <asp:DropDownList ID="m_CategoryDropDown" runat="server" CssClass="DropDownShort"></asp:DropDownList>
+        </asp:TableCell>
+    </asp:TableRow>
+    <asp:TableRow>
         <asp:TableCell>
-            <asp:Table ID="m_TableEstimation" runat="server">
-                <asp:TableRow>
-                    <asp:TableCell>
-                        <asp:Label ID="m_EstimationLabel" runat="server" CssClass="Label" Text="Estimation" />
-                    </asp:TableCell>
-                    <asp:TableCell>
-                        <asp:DropDownList ID="m_EstimationDropDown" runat="server" CssClass="DropDownShort"></asp:DropDownList>
-                    </asp:TableCell>
-                </asp:TableRow>
-            </asp:Table>
-        </asp:TableCell><asp:TableCell>
-            <asp:Table ID="m_TableDueDate" runat="server">
-                <asp:TableRow>
-                    <asp:TableCell>
-                        <asp:Label ID="m_DueDateLabel" runat="server" CssClass="Label" Text="DueDate" />
-                    </asp:TableCell>
-                    <asp:TableCell>
-                        <SharePoint:DateTimeControl ID="m_DueDateDateTimeControl" runat="server" />
-                    </asp:TableCell>
-                </asp:TableRow>
-            </asp:Table>
-        </asp:TableCell></asp:TableRow><asp:TableRow>
-        <asp:TableCell ColumnSpan="2">
+            <asp:Label ID="m_TypeLabel" runat="server" CssClass="Label" Text="Type" />
+        </asp:TableCell>
+        <asp:TableCell>
+            <asp:DropDownList ID="m_TypeDropDown" runat="server" CssClass="DropDownShort"></asp:DropDownList>
+        </asp:TableCell>
+        <asp:TableCell>
+            <asp:Label ID="m_MilestoneLabel" runat="server" CssClass="Label" Text="Milestone" />
+        </asp:TableCell>
+        <asp:TableCell>
+            <asp:DropDownList ID="m_MilestoneDropDown" runat="server" CssClass="DropDownShort"></asp:DropDownList>
+        </asp:TableCell>
+    </asp:TableRow>
+    <asp:TableRow>
+        <asp:TableCell>
+            <asp:Label ID="m_PriorityLabel" runat="server" CssClass="Label" Text="Priority" />
+        </asp:TableCell>
+        <asp:TableCell>
+            <asp:DropDownList ID="m_PriorityDropDown" runat="server" CssClass="DropDownShort"></asp:DropDownList>
+        </asp:TableCell>
+        <asp:TableCell>
+            <asp:Label ID="m_AsinegdToLabel" runat="server" CssClass="Label" Text="Asigned to" />
+        </asp:TableCell>
+        <asp:TableCell>
+            <asp:DropDownList ID="m_AsignedToDropDown" runat="server" CssClass="DropDownShort"></asp:DropDownList>
+        </asp:TableCell>
+    </asp:TableRow>
+    <asp:TableRow>
+        <asp:TableCell>
+            <asp:Label ID="m_StatusLabel" runat="server" CssClass="Label" Text="Status" />
+        </asp:TableCell>
+        <asp:TableCell>
+            <asp:DropDownList ID="m_StatusDropDown" runat="server" CssClass="DropDownShort"></asp:DropDownList>
+        </asp:TableCell>
+        <asp:TableCell>
+            <asp:Label ID="m_ResolutionLabel" runat="server" CssClass="Label" Text="Resolution" />
+        </asp:TableCell>
+        <asp:TableCell>
+            <asp:DropDownList ID="m_ResolutionDropDown" runat="server" CssClass="DropDownShort"></asp:DropDownList>
+        </asp:TableCell>
+    </asp:TableRow>
+    <asp:TableRow>
+        <asp:TableCell>
+            <asp:Label ID="m_EstimationLabel" runat="server" CssClass="Label" Text="Estimation" />
+        </asp:TableCell>
+        <asp:TableCell>
+            <asp:DropDownList ID="m_EstimationDropDown" runat="server" CssClass="DropDownShort"></asp:DropDownList>
+        </asp:TableCell>
+        <asp:TableCell>
+            <asp:Label ID="m_DueDateLabel" runat="server" CssClass="Label" Text="DueDate" />
+        </asp:TableCell>
+        <asp:TableCell>
+            <SharePoint:DateTimeControl ID="m_DueDateDateTimeControl" runat="server" />
+        </asp:TableCell>
+    </asp:TableRow>
+</asp:Table>
+<asp:Table ID="m_TableMain3" runat="server" CssClass="Table">
+    <asp:TableRow>
+        <asp:TableCell>
             <asp:TextBox ID="m_CommentsTextBox" runat="server" TextMode="Multiline" Height="60" Width="600" CssClass="TextBox"></asp:TextBox>
-        </asp:TableCell></asp:TableRow><asp:TableRow>
-        <asp:TableCell ColumnSpan="2">
-            <asp:Table ID="m_Actions" runat="server" CssClass="Table"><asp:TableRow>
-                                        <asp:TableCell>
-                                            <asp:Button runat="server" ID="m_ButtonAddNew" Text="Add new" CssClass="Button" />
-                                        </asp:TableCell><asp:TableCell>
-                                            <asp:Button runat="server" ID="m_ButtonEdit" Text="Edit" CssClass="Button" />
-                                        </asp:TableCell><asp:TableCell>
-                                            <asp:Button runat="server" ID="m_ButtonSave" Text="Save" CssClass="Button" />
-                                        </asp:TableCell><asp:TableCell>
-                                            <asp:Button runat="server" ID="m_ButtonDelete" Text="Delete" CssClass="Button" OnClientClick="return confirm('Na pewno zmodyfikować?');" />
-                                        </asp:TableCell><asp:TableCell>
-                                            <asp:Button runat="server" ID="m_ButtonCancel" Text="Cancel" CssClass="Button" />
-                                        </asp:TableCell></asp:TableRow></asp:Table></asp:TableCell></asp:TableRow></asp:Table></asp:Panel>
+        </asp:TableCell>
+    </asp:TableRow>
+    <asp:TableRow>
+        <asp:TableCell>
+            <asp:Table ID="m_Actions" runat="server" CssClass="Table">
+                <asp:TableRow>
+                    <asp:TableCell>
+                        <asp:Button runat="server" ID="m_ButtonAddNew" Text="Add new" CssClass="Button" />
+                    </asp:TableCell>
+                    <asp:TableCell>
+                        <asp:Button runat="server" ID="m_ButtonEdit" Text="Edit" CssClass="Button" />
+                    </asp:TableCell>
+                    <asp:TableCell>
+                        <asp:Button runat="server" ID="m_ButtonSave" Text="Save" CssClass="Button" />
+                    </asp:TableCell>
+                    <asp:TableCell>
+                        <asp:Button runat="server" ID="m_ButtonDelete" Text="Delete" CssClass="Button" OnClientClick="return confirm('Na pewno zmodyfikować?');" />
+                    </asp:TableCell>
+                    <asp:TableCell>
+                        <asp:Button runat="server" ID="m_ButtonCancel" Text="Cancel" CssClass="Button" />
+                    </asp:TableCell>
+                </asp:TableRow>
+            </asp:Table>
+        </asp:TableCell>
+    </asp:TableRow>
+</asp:Table>
+</asp:Panel>
