@@ -1,6 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
   <Field
+    Name="RequirementsType"
+    ID="{3A0E382C-AEC2-4CD2-9964-2E68AEEFCCA7}"
+    Type="Choice"
+    DisplayName="Type"
+    Group="CAS Agile Workload Tracker" >
+    <Default>Functional</Default>
+    <CHOICES>
+      <CHOICE>Functional</CHOICE>
+      <CHOICE>Non-Functional</CHOICE>
+    </CHOICES>
+  </Field>
+  <Field
     Name="ReadOnly"
     ID="{1D1AE8A0-9CD0-49B1-8F30-5CAFA5976CC0}"
     Type="Boolean"

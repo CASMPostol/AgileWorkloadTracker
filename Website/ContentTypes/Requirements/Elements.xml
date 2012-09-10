@@ -9,6 +9,7 @@
     <Folder TargetName="_cts/Requirements" />
     <FieldRefs>
       <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" DisplayName="Requirement" />
+      <FieldRef ID="{3A0E382C-AEC2-4CD2-9964-2E68AEEFCCA7}" Name="RequirementsType" />
       <FieldRef ID="{3F44DBFA-1B29-4E79-8929-051D138FBF49}" Name="Requirements2ProjectsTitle" />
       <FieldRef ID="{3AA591F4-6EE6-4938-8626-C9CA0BBBA3EC}" Name="Requirements2MilestoneTitle" />
     </FieldRefs>
