@@ -12,6 +12,7 @@
         <FieldRefs>
           <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" DisplayName="Task" />
           <FieldRef ID="{77D4EF86-BA42-4604-9C33-BEF60CAFBF51}" Name="Task2ProjectTitle" />
+          <FieldRef ID="{23B9AC4B-8670-4407-934C-698BD8591876}" Name="Task2CategoryTitle" />
           <FieldRef ID="{10DE0472-6E78-472E-B9DF-E883DA6F35D8}" Name="Task2ResourcesTitle" />
           <FieldRef ID="{3CDE96BD-665B-45B6-9EFB-368262C8140D}" Name="Task2MilestoneDefinedInTitle" />
           <FieldRef ID="{689D6173-44B0-4953-839F-4AFBBCB51138}" Name="Task2MilestoneResolvedInTitle" />
@@ -60,6 +61,7 @@
           <FieldRef Name="LinkTitle">
           </FieldRef>
           <FieldRef ID="{77D4EF86-BA42-4604-9C33-BEF60CAFBF51}" Name="Task2ProjectTitle" />
+          <FieldRef ID="{23B9AC4B-8670-4407-934C-698BD8591876}" Name="Task2CategoryTitle" />
           <FieldRef ID="{10DE0472-6E78-472E-B9DF-E883DA6F35D8}" Name="Task2ResourcesTitle" />
           <FieldRef ID="{3CDE96BD-665B-45B6-9EFB-368262C8140D}" Name="Task2MilestoneDefinedInTitle" />
           <FieldRef ID="{689D6173-44B0-4953-839F-4AFBBCB51138}" Name="Task2MilestoneResolvedInTitle" />
