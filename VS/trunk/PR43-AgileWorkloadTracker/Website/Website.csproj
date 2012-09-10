@@ -74,6 +74,9 @@
     <None Include="ContentTypes\Projects\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{6dd5c4bd-0c8e-45e6-831f-e2c706aa287c}</SharePointProjectItemId>
     </None>
+    <None Include="ContentTypes\Requirements\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{787b87cd-8232-4279-80e9-38697c7fc7dc}</SharePointProjectItemId>
+    </None>
     <None Include="ContentTypes\Resolution\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{3e297c61-b340-4e14-9135-961e6b176d19}</SharePointProjectItemId>
     </None>
@@ -150,6 +153,12 @@
     <None Include="Lists\ProjectsListTemplate\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{eedccfa6-b04f-47b7-8156-8e70404b0c16}</SharePointProjectItemId>
     </None>
+    <None Include="Lists\RequirementsListTemplate\RequirementsList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{1b929ea2-e2d4-4b56-af8c-49336fcd34d4}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\RequirementsListTemplate\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{b88d50dd-ec50-4030-97f5-7d83ace88895}</SharePointProjectItemId>
+    </None>
     <None Include="Lists\ResolutionListTemplate\ResolutionList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{266da799-5cea-4c8b-bdf5-f625e09331e2}</SharePointProjectItemId>
     </None>
@@ -218,6 +227,7 @@
     <Content Include="ContentTypes\Projects\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="ContentTypes\Requirements\Elements.xml" />
     <Content Include="ContentTypes\Resolution\Elements.xml" />
     <Content Include="ContentTypes\Resources\Elements.xml">
       <SubType>Designer</SubType>
@@ -278,6 +288,9 @@
     <Content Include="Lists\ProjectsListTemplate\Schema.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Lists\RequirementsListTemplate\Elements.xml" />
+    <Content Include="Lists\RequirementsListTemplate\RequirementsList\Elements.xml" />
+    <Content Include="Lists\RequirementsListTemplate\Schema.xml" />
     <Content Include="Lists\ResolutionListTemplate\Elements.xml" />
     <Content Include="Lists\ResolutionListTemplate\ResolutionList\Elements.xml" />
     <Content Include="Lists\ResolutionListTemplate\Schema.xml" />

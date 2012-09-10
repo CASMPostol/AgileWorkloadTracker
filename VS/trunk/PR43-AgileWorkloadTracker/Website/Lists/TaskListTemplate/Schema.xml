@@ -16,6 +16,7 @@
           <FieldRef ID="{10DE0472-6E78-472E-B9DF-E883DA6F35D8}" Name="Task2ResourcesTitle" />
           <FieldRef ID="{3CDE96BD-665B-45B6-9EFB-368262C8140D}" Name="Task2MilestoneDefinedInTitle" />
           <FieldRef ID="{689D6173-44B0-4953-839F-4AFBBCB51138}" Name="Task2MilestoneResolvedInTitle" />
+          <FieldRef ID="{25CF1009-2486-4500-BD14-F22F92F60E16}" Name="Task2RequirementsTitle" />
           <FieldRef ID="{51684BCE-00ED-49FA-9E37-CEFC7DBAB2D6}" Name="Task2StatusTitle" />
           <FieldRef ID="{0EE32675-C015-41AD-B9FD-2D2A72B2B662}" Name="Task2SPriorityTitle" />
           <FieldRef ID="{AF244E9A-DE86-43B9-BA90-0904FE6BCBB8}" Name="Task2SResolutionTitle" />
@@ -65,6 +66,7 @@
           <FieldRef ID="{10DE0472-6E78-472E-B9DF-E883DA6F35D8}" Name="Task2ResourcesTitle" />
           <FieldRef ID="{3CDE96BD-665B-45B6-9EFB-368262C8140D}" Name="Task2MilestoneDefinedInTitle" />
           <FieldRef ID="{689D6173-44B0-4953-839F-4AFBBCB51138}" Name="Task2MilestoneResolvedInTitle" />
+          <FieldRef ID="{25CF1009-2486-4500-BD14-F22F92F60E16}" Name="Task2RequirementsTitle" />
           <FieldRef ID="{51684BCE-00ED-49FA-9E37-CEFC7DBAB2D6}" Name="Task2StatusTitle" />
           <FieldRef ID="{0EE32675-C015-41AD-B9FD-2D2A72B2B662}" Name="Task2SPriorityTitle" />
           <FieldRef ID="{AF244E9A-DE86-43B9-BA90-0904FE6BCBB8}" Name="Task2SResolutionTitle" />
