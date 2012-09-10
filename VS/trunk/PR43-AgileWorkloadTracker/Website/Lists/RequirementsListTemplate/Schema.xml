@@ -6,14 +6,13 @@
         <Folder TargetName="_cts/Requirements" />
         <FieldRefs>
           <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" DisplayName="Requirement" />
+          <FieldRef ID="{3A0E382C-AEC2-4CD2-9964-2E68AEEFCCA7}" Name="RequirementsType" />
           <FieldRef ID="{3F44DBFA-1B29-4E79-8929-051D138FBF49}" Name="Requirements2ProjectsTitle" />
           <FieldRef ID="{3AA591F4-6EE6-4938-8626-C9CA0BBBA3EC}" Name="Requirements2MilestoneTitle" />
         </FieldRefs>
       </ContentType>
     </ContentTypes>
     <Fields>
-      <Field Name="Requirements2MilestoneTitle" ID="{3aa591f4-6ee6-4938-8626-c9ca0bbba3ec}" Type="Lookup" List="Lists/MilestoneList" ShowField="Title" UnlimitedLengthInDocumentLibrary="False" Indexed="True" RelationshipDeleteBehavior="None" DisplayName="Milestone" Group="CAS Agile Workload Tracker" Required="False" Hidden="False" DisplaceOnUpgrade="True" EnforceUniqueValues="False" ReadOnly="False" />
-      <Field Name="Requirements2ProjectsTitle" ID="{3f44dbfa-1b29-4e79-8929-051d138fbf49}" Type="Lookup" List="Lists/ProjectsList" ShowField="Title" UnlimitedLengthInDocumentLibrary="False" Indexed="True" RelationshipDeleteBehavior="None" DisplayName="Project" Group="CAS Agile Workload Tracker" Required="False" Hidden="False" DisplaceOnUpgrade="True" EnforceUniqueValues="False" ReadOnly="False" />
     </Fields>
     <Views>
       <View BaseViewID="0" Type="HTML" MobileView="TRUE" TabularView="FALSE">
@@ -45,6 +44,7 @@
           </FieldRef>
           <FieldRef Name="LinkTitle">
           </FieldRef>
+          <FieldRef ID="{3A0E382C-AEC2-4CD2-9964-2E68AEEFCCA7}" Name="RequirementsType" />
           <FieldRef ID="{3F44DBFA-1B29-4E79-8929-051D138FBF49}" Name="Requirements2ProjectsTitle" />
           <FieldRef ID="{3AA591F4-6EE6-4938-8626-C9CA0BBBA3EC}" Name="Requirements2MilestoneTitle" />
         </ViewFields>

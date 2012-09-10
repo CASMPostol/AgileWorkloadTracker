@@ -11,7 +11,6 @@
       </ContentType>
     </ContentTypes>
     <Fields>
-      <Field Name="Category2ProjectsTitle" ID="{38fed175-dee3-4523-8902-a1c65d94afc9}" Type="Lookup" List="Lists/ProjectsList" ShowField="Title" UnlimitedLengthInDocumentLibrary="False" Indexed="True" RelationshipDeleteBehavior="None" DisplayName="Project" Group="CAS Agile Workload Tracker" Required="False" Hidden="False" DisplaceOnUpgrade="True" EnforceUniqueValues="False" ReadOnly="False" />
     </Fields>
     <Views>
       <View BaseViewID="0" Type="HTML" MobileView="TRUE" TabularView="FALSE">
