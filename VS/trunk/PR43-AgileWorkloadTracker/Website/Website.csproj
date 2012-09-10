@@ -53,6 +53,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ContentTypes\Category\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{b0d0c424-9e43-4d04-9609-5f64ced186d1}</SharePointProjectItemId>
+    </None>
     <None Include="ContentTypes\Contracts\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{d3246fce-ca51-4ce2-bf92-ae165a517a93}</SharePointProjectItemId>
     </None>
@@ -105,6 +108,12 @@
       <SharePointProjectItemId>{9e78353d-face-4f57-95be-8a6a980bf355}</SharePointProjectItemId>
     </None>
     <None Include="key.snk" />
+    <None Include="Lists\CategoryListTemplate\CategoryList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{493b8e02-ecdf-4156-a616-0a1f2320fe4c}</SharePointProjectItemId>
+    </None>
+    <None Include="Lists\CategoryListTemplate\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{2828a182-453f-4d1f-ab35-690a16460911}</SharePointProjectItemId>
+    </None>
     <None Include="Lists\ContractsListTemplate\ContractsList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{b9eb610d-f391-4262-b091-7e8993bdb306}</SharePointProjectItemId>
     </None>
@@ -198,6 +207,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="ContentTypes\Category\Elements.xml" />
     <Content Include="ContentTypes\Contracts\Elements.xml" />
     <Content Include="ContentTypes\Estimation\Elements.xml" />
     <Content Include="ContentTypes\Milestone\Elements.xml" />
@@ -231,6 +241,9 @@
     <Content Include="Fields\LookupFields\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Lists\CategoryListTemplate\Elements.xml" />
+    <Content Include="Lists\CategoryListTemplate\CategoryList\Elements.xml" />
+    <Content Include="Lists\CategoryListTemplate\Schema.xml" />
     <Content Include="Lists\ContractsListTemplate\Elements.xml" />
     <Content Include="Lists\ContractsListTemplate\ContractsList\Elements.xml" />
     <Content Include="Lists\ContractsListTemplate\Schema.xml" />

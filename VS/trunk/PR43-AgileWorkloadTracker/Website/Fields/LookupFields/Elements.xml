@@ -1,6 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
   <Field
+   Name="Task2CategoryTitle"
+   ID="{23B9AC4B-8670-4407-934C-698BD8591876}"
+   Type="Lookup"
+   List="Lists/CategoryList"
+   ShowField="Title"
+   UnlimitedLengthInDocumentLibrary="False"
+   Indexed="True"
+   RelationshipDeleteBehavior="None"
+   DisplayName="Category"
+   Group="CAS Agile Workload Tracker"
+   Required="False"
+   Hidden="False"
+   DisplaceOnUpgrade="True"
+   EnforceUniqueValues="False"
+   ReadOnly="False"
+    />
+  <Field
+   Name="Category2ProjectsTitle"
+   ID="{38FED175-DEE3-4523-8902-A1C65D94AFC9}"
+   Type="Lookup"
+   List="Lists/ProjectsList"
+   ShowField="Title"
+   UnlimitedLengthInDocumentLibrary="False"
+   Indexed="True"
+   RelationshipDeleteBehavior="None"
+   DisplayName="Project"
+   Group="CAS Agile Workload Tracker"
+   Required="False"
+   Hidden="False"
+   DisplaceOnUpgrade="True"
+   EnforceUniqueValues="False"
+   ReadOnly="False"
+    />
+  <Field
    Name="Contracts2PartnersTitle"
    ID="{26E16F7C-156E-4DF0-BC32-FA8A1EC94345}"
    Type="Lookup"

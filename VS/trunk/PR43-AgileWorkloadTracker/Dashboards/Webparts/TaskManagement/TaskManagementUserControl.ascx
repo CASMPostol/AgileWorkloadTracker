@@ -6,9 +6,7 @@
 <%@ Import Namespace="Microsoft.SharePoint" %> 
 <%@ Register Tagprefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="TaskManagementUserControl.ascx.cs" Inherits="CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement.TaskManagementUserControl" %>
-
 <SharePoint:CssRegistration runat="server" ID="cssreg" Name="/_layouts/AWT_Dashboards/CAS_AWT.css" />
-
 <asp:Panel ID="m_PanelAddEdit" runat="server" BorderColor="ActiveCaptionText" GroupingText="Add/Edit task">
 <asp:Table ID="m_TableMain" runat="server" CssClass="Table">
     <asp:TableRow>
