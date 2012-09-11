@@ -286,7 +286,6 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     }
     private void SetEnabled( GenericStateMachineEngine.ControlsSet _set )
     {
-      m_WorkloadMinutesDropDown.Enabled = ( _set & GenericStateMachineEngine.ControlsSet.EditModeOn ) != 0;
       m_WorkloadHoursTextBox.Enabled = ( _set & GenericStateMachineEngine.ControlsSet.EditModeOn ) != 0;
       m_WorkloadDescriptionTextBox.Enabled = ( _set & GenericStateMachineEngine.ControlsSet.EditModeOn ) != 0;
       //m_ProjectDropDown.Enabled = (_set & GenericStateMachineEngine.ControlsSet.EditModeOn) != 0;

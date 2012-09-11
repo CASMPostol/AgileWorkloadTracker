@@ -227,7 +227,9 @@
     <Content Include="ContentTypes\Projects\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="ContentTypes\Requirements\Elements.xml" />
+    <Content Include="ContentTypes\Requirements\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="ContentTypes\Resolution\Elements.xml" />
     <Content Include="ContentTypes\Resources\Elements.xml">
       <SubType>Designer</SubType>
@@ -253,7 +255,9 @@
     </Content>
     <Content Include="Lists\CategoryListTemplate\Elements.xml" />
     <Content Include="Lists\CategoryListTemplate\CategoryList\Elements.xml" />
-    <Content Include="Lists\CategoryListTemplate\Schema.xml" />
+    <Content Include="Lists\CategoryListTemplate\Schema.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Lists\ContractsListTemplate\Elements.xml" />
     <Content Include="Lists\ContractsListTemplate\ContractsList\Elements.xml" />
     <Content Include="Lists\ContractsListTemplate\Schema.xml" />
