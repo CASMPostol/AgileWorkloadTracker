@@ -7,7 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
 namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement {
     
     
@@ -20,7 +19,6 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        [CLSCompliant(false)]
         protected global::Microsoft.SharePoint.WebControls.CssRegistration cssreg;
         
         /// <summary>
@@ -166,24 +164,6 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox m_WorkloadHoursTextBox;
-        
-        /// <summary>
-        /// m_WorkloadMinutesLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label m_WorkloadMinutesLabel;
-        
-        /// <summary>
-        /// m_WorkloadMinutesDropDown control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList m_WorkloadMinutesDropDown;
         
         /// <summary>
         /// Panel3 control.
