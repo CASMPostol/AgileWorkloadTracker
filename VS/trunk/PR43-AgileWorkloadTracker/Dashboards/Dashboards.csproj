@@ -171,9 +171,7 @@
     </Content>
     <Content Include="Webparts\CurrentUserWebPart\Elements.xml" />
     <Content Include="Webparts\TaskManagement\Elements.xml" />
-    <Content Include="Webparts\TaskManagement\TaskManagementUserControl.ascx">
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
+    <Content Include="Webparts\TaskManagement\TaskManagementUserControl.ascx" />
     <Content Include="Webparts\WorkloadManagement\Elements.xml" />
     <Content Include="Webparts\WorkloadManagement\WorkloadManagementUserControl.ascx">
       <SubType>ASPXCodeBehind</SubType>

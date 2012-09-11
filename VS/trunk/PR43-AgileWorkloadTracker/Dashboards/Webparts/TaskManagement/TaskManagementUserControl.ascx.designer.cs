@@ -58,15 +58,6 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement {
         protected global::System.Web.UI.WebControls.TextBox m_TaskTextBox;
         
         /// <summary>
-        /// m_TableMain2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Table m_TableMain2;
-        
-        /// <summary>
         /// m_VersionLabel control.
         /// </summary>
         /// <remarks>
@@ -245,15 +236,6 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Microsoft.SharePoint.WebControls.DateTimeControl m_DueDateDateTimeControl;
-        
-        /// <summary>
-        /// m_TableMain3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Table m_TableMain3;
         
         /// <summary>
         /// m_CommentsTextBox control.
