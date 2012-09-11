@@ -21,7 +21,7 @@
 <asp:Table ID="m_TableMain2" runat="server" CssClass="Table">
     <asp:TableRow>
         <asp:TableCell>
-            <asp:Label ID="m_VersionLabel" runat="server" CssClass="Label" Text="Label" />
+            <asp:Label ID="m_VersionLabel" runat="server" CssClass="Label" Text="Version" />
         </asp:TableCell>
         <asp:TableCell>
             <asp:DropDownList ID="m_VersionDropDown" runat="server" CssClass="DropDownShort"></asp:DropDownList>

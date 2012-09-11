@@ -282,12 +282,6 @@
    Group="CAS Agile Workload Tracker"
     />
   <Field
-    Name="Minutes"
-    ID="{25F24E14-A1D1-4DBA-AB5F-793C7E8D2252}"
-    Type="Number"
-    DisplayName="Minutes"
-    Group="CAS Agile Workload Tracker" />
-  <Field
     Type="User"
     DisplayName="User"
     List="UserInfo"

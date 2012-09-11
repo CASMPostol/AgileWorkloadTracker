@@ -80,15 +80,6 @@
                                             <asp:TextBox runat="server" ID="m_WorkloadHoursTextBox" CssClass="TextBoxShort"></asp:TextBox>
                                         </asp:TableCell>
                                     </asp:TableRow>
-                                    <asp:TableRow>
-                                        <asp:TableCell>
-                                            <asp:Label runat="server" ID="m_WorkloadMinutesLabel" Text="Minutes" CssClass="Label"></asp:Label>
-                                        </asp:TableCell>
-                                        <asp:TableCell>
-                                            <asp:DropDownList runat="server" ID="m_WorkloadMinutesDropDown" CssClass="DropDownShort">
-                                            </asp:DropDownList>
-                                        </asp:TableCell>
-                                    </asp:TableRow>
                                 </asp:Table>
                             </asp:Panel>
                         </asp:TableCell>
