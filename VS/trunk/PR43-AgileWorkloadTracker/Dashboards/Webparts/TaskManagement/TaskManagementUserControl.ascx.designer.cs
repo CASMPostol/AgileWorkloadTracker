@@ -40,6 +40,15 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement {
         protected global::System.Web.UI.WebControls.Table m_TableMain;
         
         /// <summary>
+        /// m_TableLeft control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table m_TableLeft;
+        
+        /// <summary>
         /// m_ProjectLabel control.
         /// </summary>
         /// <remarks>
@@ -76,6 +85,33 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement {
         protected global::System.Web.UI.WebControls.TextBox m_TaskTextBox;
         
         /// <summary>
+        /// m_CommentsLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label m_CommentsLabel;
+        
+        /// <summary>
+        /// m_CommentsTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox m_CommentsTextBox;
+        
+        /// <summary>
+        /// m_TableRight control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table m_TableRight;
+        
+        /// <summary>
         /// m_RequirementLabel control.
         /// </summary>
         /// <remarks>
@@ -94,24 +130,6 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement {
         protected global::System.Web.UI.WebControls.DropDownList m_RequirementDropDown;
         
         /// <summary>
-        /// m_VersionLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label m_VersionLabel;
-        
-        /// <summary>
-        /// m_VersionDropDown control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList m_VersionDropDown;
-        
-        /// <summary>
         /// m_CategoryLabel control.
         /// </summary>
         /// <remarks>
@@ -128,6 +146,24 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList m_CategoryDropDown;
+        
+        /// <summary>
+        /// m_VersionLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label m_VersionLabel;
+        
+        /// <summary>
+        /// m_VersionDropDown control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList m_VersionDropDown;
         
         /// <summary>
         /// m_TypeLabel control.
@@ -164,6 +200,24 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList m_MilestoneDropDown;
+        
+        /// <summary>
+        /// m_ShowAllMilestonesLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label m_ShowAllMilestonesLabel;
+        
+        /// <summary>
+        /// m_ShowAllMilestonesCheckBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox m_ShowAllMilestonesCheckBox;
         
         /// <summary>
         /// m_PriorityLabel control.
@@ -272,15 +326,6 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Microsoft.SharePoint.WebControls.DateTimeControl m_DueDateDateTimeControl;
-        
-        /// <summary>
-        /// m_CommentsTextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox m_CommentsTextBox;
         
         /// <summary>
         /// m_Actions control.
