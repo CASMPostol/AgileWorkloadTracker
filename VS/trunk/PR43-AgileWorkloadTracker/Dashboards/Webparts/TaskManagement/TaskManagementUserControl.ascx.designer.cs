@@ -40,6 +40,24 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement {
         protected global::System.Web.UI.WebControls.Table m_TableMain;
         
         /// <summary>
+        /// m_ProjectLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label m_ProjectLabel;
+        
+        /// <summary>
+        /// m_DisplaySelectedProject control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label m_DisplaySelectedProject;
+        
+        /// <summary>
         /// m_TaskLabel control.
         /// </summary>
         /// <remarks>
