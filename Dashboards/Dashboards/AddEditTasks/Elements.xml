@@ -57,6 +57,25 @@
         </webParts>
         ]]>
       </AllUsersWebPart>
+      <View List="Lists/TaskCommentsList" BaseViewID="2" WebPartZoneID="TaskComments" WebPartOrder="0">
+        <![CDATA[
+         <webParts>
+         <webPart xmlns="http://schemas.microsoft.com/WebPart/v3">
+         <metaData>
+         <type name="Microsoft.SharePoint.WebPartPages.XsltListViewWebPart,Microsoft.SharePoint,Version=14.0.0.0,Culture=neutral,PublicKeyToken=71e9bce111e9429c" />
+         <importErrorMessage>Cannot import this Web Part.</importErrorMessage>
+         </metaData>
+         <data>
+         <properties>
+         <property name="Title" type="string">Task comments</property>
+         <property name="TitleUrl" type="string">AddEditTasks.aspx</property>
+         <property name="AllowConnect" type="bool">True</property>
+         </properties>
+         </data>
+         </webPart>
+         </webParts>
+         ]]>
+      </View>
     </File>
   </Module>
 </Elements>
