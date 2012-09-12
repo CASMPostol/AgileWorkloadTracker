@@ -14,6 +14,14 @@
     <asp:Table ID="m_TableMain" runat="server" CssClass="Table">
         <asp:TableRow>
             <asp:TableCell>
+                <asp:Label ID="m_ProjectLabel" runat="server" CssClass="Label" Text="Project:" />
+            </asp:TableCell>
+            <asp:TableCell ColumnSpan="3">
+                <asp:Label ID="m_DisplaySelectedProject" runat="server" CssClass="Label" Text="" />
+            </asp:TableCell>
+        </asp:TableRow>
+        <asp:TableRow>
+            <asp:TableCell>
                 <asp:Label ID="m_TaskLabel" runat="server" CssClass="Label" Text="Summary" />
             </asp:TableCell>
             <asp:TableCell ColumnSpan="3">
