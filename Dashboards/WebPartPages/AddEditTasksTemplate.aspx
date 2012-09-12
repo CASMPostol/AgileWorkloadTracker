@@ -18,11 +18,35 @@
 
   <div id="Body" >
     <table border="0" width="1100px">
+    <tr>
+            <td valign="top">
+                        <WebPartPages:WebpartZone
+                        ID="Projects" runat="server"
+                        Title="Projects Web Part Zone"
+                        FrameType="TitleBarOnly" />
+            </td>
+        </tr>
         <tr>
             <td valign="top">
                         <WebPartPages:WebpartZone
-                        ID="Main" runat="server"
-                        Title="Main Web Part Zone"
+                        ID="Tasks" runat="server"
+                        Title="Tasks Web Part Zone"
+                        FrameType="TitleBarOnly" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top">
+                        <WebPartPages:WebpartZone
+                        ID="TaskManagement" runat="server"
+                        Title="Task Management Web Part Zone"
+                        FrameType="TitleBarOnly" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top">
+                        <WebPartPages:WebpartZone
+                        ID="TaskComments" runat="server"
+                        Title="Task Comments Web Part Zone"
                         FrameType="TitleBarOnly" />
             </td>
         </tr>
