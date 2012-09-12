@@ -77,6 +77,7 @@
     <Compile Include="Webparts\CurrentUserWebPart\UserDescriptor.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Webparts\InterconnectionData.cs" />
     <Compile Include="Webparts\TaskManagement\TaskManagement.cs" />
     <Compile Include="Webparts\TaskManagement\TaskManagementUserControl.ascx.cs">
       <DependentUpon>TaskManagementUserControl.ascx</DependentUpon>
