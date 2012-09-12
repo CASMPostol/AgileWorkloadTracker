@@ -141,6 +141,33 @@
           <ParameterBinding Name="NoAnnouncementsHowTo" Location="Resource(wss,noXinviewofY_DEFAULT)" />
         </ParameterBindings>
       </View>
+      <View BaseViewID="4" Type="HTML" WebPartZoneID="Main" DisplayName="Tasks Management" DefaultView="FALSE" MobileView="TRUE" MobileDefaultView="FALSE" SetupPath="pages\viewpage.aspx" ImageUrl="/_layouts/images/generic.png" Url="TasksManagement.aspx">
+        <Toolbar Type="None" />
+        <XslLink Default="TRUE">main.xsl</XslLink>
+        <RowLimit Paged="TRUE">30</RowLimit>
+        <ViewFields>
+          <FieldRef Name="LinkTitle">
+          </FieldRef>
+          <FieldRef ID="{FC7FD148-7FA4-4581-AA48-12D0717EA6A1}" Name="ProjectNumber" />
+          <FieldRef ID="{DBEF0351-9BA4-407F-8F2F-4D5ECF70F0D4}" Name="Project2ResourcesTitle" />
+        </ViewFields>
+        <Query>
+          <Where>
+            <Eq>
+              <FieldRef Name="Active" />
+              <Value Type="Boolean">YES</Value>
+            </Eq>
+          </Where>
+          <OrderBy>
+            <FieldRef Name="ID">
+            </FieldRef>
+          </OrderBy>
+        </Query>
+        <ParameterBindings>
+          <ParameterBinding Name="NoAnnouncements" Location="Resource(wss,noXinviewofY_LIST)" />
+          <ParameterBinding Name="NoAnnouncementsHowTo" Location="Resource(wss,noXinviewofY_DEFAULT)" />
+        </ParameterBindings>
+      </View>
     </Views>
     <Forms>
       <Form Type="DisplayForm" Url="DispForm.aspx" SetupPath="pages\form.aspx" WebPartZoneID="Main" />
