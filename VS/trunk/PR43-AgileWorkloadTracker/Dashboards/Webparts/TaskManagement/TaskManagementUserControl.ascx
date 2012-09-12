@@ -22,16 +22,28 @@
         </asp:TableRow>
         <asp:TableRow>
             <asp:TableCell>
+                <asp:Label ID="m_RequirementLabel" runat="server" CssClass="Label" Text="Requirement"></asp:Label>
+            </asp:TableCell>
+            <asp:TableCell ColumnSpan="3">
+                <asp:DropDownList ID="m_RequirementDropDown" runat="server" CssClass="DropDownShort"></asp:DropDownList>
+            </asp:TableCell>
+        </asp:TableRow>
+        <asp:TableRow>
+            <asp:TableCell>
                 <asp:Label ID="m_VersionLabel" runat="server" CssClass="Label" Text="Version" />
-            </asp:TableCell><asp:TableCell>
+            </asp:TableCell>
+            <asp:TableCell>
                 <asp:DropDownList ID="m_VersionDropDown" runat="server" CssClass="DropDownShort">
                 </asp:DropDownList>
-            </asp:TableCell><asp:TableCell>
+            </asp:TableCell>
+            <asp:TableCell>
                 <asp:Label ID="m_CategoryLabel" runat="server" CssClass="Label" Text="Category" />
-            </asp:TableCell><asp:TableCell>
+            </asp:TableCell>
+            <asp:TableCell>
                 <asp:DropDownList ID="m_CategoryDropDown" runat="server" CssClass="DropDownShort">
                 </asp:DropDownList>
-            </asp:TableCell></asp:TableRow>
+            </asp:TableCell>
+        </asp:TableRow>
         <asp:TableRow>
             <asp:TableCell>
                 <asp:Label ID="m_TypeLabel" runat="server" CssClass="Label" Text="Type" />
@@ -39,52 +51,68 @@
             <asp:TableCell>
                 <asp:DropDownList ID="m_TypeDropDown" runat="server" CssClass="DropDownShort">
                 </asp:DropDownList>
-            </asp:TableCell><asp:TableCell>
+            </asp:TableCell>
+            <asp:TableCell>
                 <asp:Label ID="m_MilestoneLabel" runat="server" CssClass="Label" Text="Milestone" />
-            </asp:TableCell><asp:TableCell>
+            </asp:TableCell>
+            <asp:TableCell>
                 <asp:DropDownList ID="m_MilestoneDropDown" runat="server" CssClass="DropDownShort">
                 </asp:DropDownList>
-            </asp:TableCell></asp:TableRow>
+            </asp:TableCell>
+        </asp:TableRow>
         <asp:TableRow>
             <asp:TableCell>
                 <asp:Label ID="m_PriorityLabel" runat="server" CssClass="Label" Text="Priority" />
-            </asp:TableCell><asp:TableCell>
+            </asp:TableCell>
+            <asp:TableCell>
                 <asp:DropDownList ID="m_PriorityDropDown" runat="server" CssClass="DropDownShort">
                 </asp:DropDownList>
-            </asp:TableCell><asp:TableCell>
+            </asp:TableCell>
+            <asp:TableCell>
                 <asp:Label ID="m_AsinegdToLabel" runat="server" CssClass="Label" Text="Asigned to" />
-            </asp:TableCell><asp:TableCell>
+            </asp:TableCell>
+            <asp:TableCell>
                 <asp:DropDownList ID="m_AsignedToDropDown" runat="server" CssClass="DropDownShort">
                 </asp:DropDownList>
-            </asp:TableCell></asp:TableRow>
+            </asp:TableCell>
+        </asp:TableRow>
         <asp:TableRow>
             <asp:TableCell>
                 <asp:Label ID="m_StatusLabel" runat="server" CssClass="Label" Text="Status" />
-            </asp:TableCell><asp:TableCell>
+            </asp:TableCell>
+            <asp:TableCell>
                 <asp:DropDownList ID="m_StatusDropDown" runat="server" CssClass="DropDownShort">
                 </asp:DropDownList>
-            </asp:TableCell><asp:TableCell>
+            </asp:TableCell>
+            <asp:TableCell>
                 <asp:Label ID="m_ResolutionLabel" runat="server" CssClass="Label" Text="Resolution" />
-            </asp:TableCell><asp:TableCell>
+            </asp:TableCell>
+            <asp:TableCell>
                 <asp:DropDownList ID="m_ResolutionDropDown" runat="server" CssClass="DropDownShort">
                 </asp:DropDownList>
-            </asp:TableCell></asp:TableRow>
+            </asp:TableCell>
+        </asp:TableRow>
         <asp:TableRow>
             <asp:TableCell>
                 <asp:Label ID="m_EstimationLabel" runat="server" CssClass="Label" Text="Estimation" />
-            </asp:TableCell><asp:TableCell>
+            </asp:TableCell>
+            <asp:TableCell>
                 <asp:DropDownList ID="m_EstimationDropDown" runat="server" CssClass="DropDownShort">
                 </asp:DropDownList>
-            </asp:TableCell><asp:TableCell>
+            </asp:TableCell>
+            <asp:TableCell>
                 <asp:Label ID="m_DueDateLabel" runat="server" CssClass="Label" Text="DueDate" />
-            </asp:TableCell><asp:TableCell>
+            </asp:TableCell>
+            <asp:TableCell>
                 <SharePoint:DateTimeControl ID="m_DueDateDateTimeControl" runat="server" />
-            </asp:TableCell></asp:TableRow>
+            </asp:TableCell>
+        </asp:TableRow>
         <asp:TableRow>
             <asp:TableCell ColumnSpan="4">
                 <asp:TextBox ID="m_CommentsTextBox" runat="server" TextMode="Multiline" Height="100"
                     Width="750" CssClass="TextBox"></asp:TextBox>
-            </asp:TableCell></asp:TableRow>
+            </asp:TableCell>
+        </asp:TableRow>
         <asp:TableRow>
             <asp:TableCell ColumnSpan="4">
                 <asp:Table ID="m_Actions" runat="server" CssClass="Table">
