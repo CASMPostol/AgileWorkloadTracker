@@ -2,15 +2,17 @@
 <Web xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Class="Entities" AccessModifier="Internal" xmlns="http://schemas.microsoft.com/SharePoint/2009/spmetal">
   <List Name="Announcements" />
   <List Name="Calendar" />
+  <List Name="Category" />
   <List Name="Contracts" />
   <List Name="Estimation" />
   <List Name="Links" />
   <!--<List Name="List Template Gallery" />-->
-  <!--<List Name="Master Page Gallery" />-->
+  <List Name="Master Page Gallery" />
   <List Name="Milestone" />
   <List Name="Partners" />
   <List Name="Priority" />
   <List Name="Projects" />
+  <List Name="Requirements" />
   <List Name="Resolution" />
   <List Name="Resources" />
   <List Name="Shared Documents" />
@@ -55,15 +57,21 @@
     <Column Name="Estimation2ProjectTitle" Member="Estimation2ProjectTitle" />
     <Column Name="EstimatedWorkload" Member="EstimatedWorkload" />
   </ContentType>
+  <ContentType Name="Category" Class="Category">
+    <Column Name="Title" Member="Title" />
+    <Column Name="Category2ProjectsTitle" Member="Category2ProjectsTitle" />
+  </ContentType>
   <ContentType Name="Type" Class="Type">
     <Column Name="Title" Member="Title" />
   </ContentType>
   <ContentType Name="Tasks" Class="Tasks">
     <Column Name="Title" Member="Title" />
     <Column Name="Task2ProjectTitle" Member="Task2ProjectTitle" />
+    <Column Name="Task2CategoryTitle" Member="Task2CategoryTitle" />
     <Column Name="Task2ResourcesTitle" Member="Task2ResourcesTitle" />
     <Column Name="Task2MilestoneDefinedInTitle" Member="Task2MilestoneDefinedInTitle" />
     <Column Name="Task2MilestoneResolvedInTitle" Member="Task2MilestoneResolvedInTitle" />
+    <Column Name="Task2RequirementsTitle" Member="Task2RequirementsTitle" />
     <Column Name="Task2StatusTitle" Member="Task2StatusTitle" />
     <Column Name="Task2SPriorityTitle" Member="Task2SPriorityTitle" />
     <Column Name="Task2SResolutionTitle" Member="Task2SResolutionTitle" />
@@ -86,6 +94,12 @@
   <ContentType Name="Priority" Class="Priority">
     <Column Name="Title" Member="Title" />
   </ContentType>
+  <ContentType Name="Requirements" Class="Requirements">
+    <Column Name="Title" Member="Title" />
+    <Column Name="RequirementsType" Member="RequirementsType" />
+    <Column Name="Requirements2ProjectsTitle" Member="Requirements2ProjectsTitle" />
+    <Column Name="Requirements2MilestoneTitle" Member="Requirements2MilestoneTitle" />
+  </ContentType>
   <ContentType Name="Resources" Class="Resources">
     <Column Name="Title" Member="Title" />
     <Column Name="EmployeeADAccount" Member="EmployeeADAccount" />
@@ -100,7 +114,6 @@
     <Column Name="Title" Member="Title" />
     <Column Name="WorkloadDate" Member="WorkloadDate" />
     <Column Name="Hours" Member="Hours" />
-    <Column Name="Minutes" Member="Minutes" />
     <Column Name="WeekNumber" Member="WeekNumber" />
     <Column Name="Year" Member="Year" />
     <Column Name="ReadOnly" Member="ReadOnly" />
