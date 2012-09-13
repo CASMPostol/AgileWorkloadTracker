@@ -126,10 +126,10 @@
         </ViewFields>
         <Query>
           <Where>
-            <Eq>
+            <Neq>
               <FieldRef Name="Active" />
-              <Value Type="Boolean">YES</Value>
-            </Eq>
+              <Value Type="Boolean">NO</Value>
+            </Neq>
           </Where>
           <OrderBy>
             <FieldRef Name="ID">
@@ -153,10 +153,10 @@
         </ViewFields>
         <Query>
           <Where>
-            <Eq>
+            <Neq>
               <FieldRef Name="Active" />
-              <Value Type="Boolean">YES</Value>
-            </Eq>
+              <Value Type="Boolean">NO</Value>
+            </Neq>
           </Where>
           <OrderBy>
             <FieldRef Name="ID">
