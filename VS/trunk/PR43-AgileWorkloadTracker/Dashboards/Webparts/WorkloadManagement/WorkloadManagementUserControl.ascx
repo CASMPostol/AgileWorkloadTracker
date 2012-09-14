@@ -60,8 +60,7 @@
                                         </asp:TableCell>
                                         <asp:TableCell>
                                             <asp:Label ID="m_NewTaskLabel2" runat="server" CssClass="Label" Text="You can't find the task on the list above ?" />
-                                            <a class="ms-addnew" href="../Lists/TaskList/NewForm.aspx" onclick="javascript:NewItem2(event, &quot;../Lists/TaskList/NewForm.aspx&quot;);javascript:return false;"
-                                                target="_self">Add new task</a>
+                                            <a class="ms-addnew" href="../WebPartPages/AddEditTasks.aspx" target="_self">Add new task</a>
                                         </asp:TableCell>
                                     </asp:TableRow>
                                     <asp:TableRow>
