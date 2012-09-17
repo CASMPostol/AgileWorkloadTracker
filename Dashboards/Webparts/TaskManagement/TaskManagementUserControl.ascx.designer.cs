@@ -76,31 +76,40 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement {
         protected global::System.Web.UI.WebControls.Label m_TaskLabel;
         
         /// <summary>
-        /// m_TaskTextBox control.
+        /// m_TaskTitleTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox m_TaskTextBox;
+        protected global::System.Web.UI.WebControls.TextBox m_TaskTitleTextBox;
         
         /// <summary>
-        /// m_CommentsLabel control.
+        /// m_TaskCommentsLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label m_CommentsLabel;
+        protected global::System.Web.UI.WebControls.Label m_TaskCommentsLabel;
         
         /// <summary>
-        /// m_CommentsTextBox control.
+        /// m_TaskCommentsTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox m_CommentsTextBox;
+        protected global::System.Web.UI.WebControls.TextBox m_TaskCommentsTextBox;
+        
+        /// <summary>
+        /// m_DropDownPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel m_DropDownPanel;
         
         /// <summary>
         /// m_TableRight control.

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -8,6 +9,7 @@ using CAS.SharePoint;
 using CAS.SharePoint.Linq;
 using CAS.SharePoint.Web;
 using Microsoft.SharePoint;
+using TaskType = CAS.AgileWorkloadTracker.Linq.Type;
 
 namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
 {
@@ -22,6 +24,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
         m_StateMachineEngine = new LocalStateMachine( this );
         At = "DataContextManagement";
         m_DataContext = new DataContextManagement<Entities>( this );
+        m_ControlState = new ControlState( new EventHandler<EventArgs>( m_ControlState_TaskRefresh ) );
       }
       catch ( Exception _ex )
       {
@@ -31,45 +34,35 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
     #endregion
 
     #region public
-    internal void SetInterconnectionData( System.Collections.Generic.Dictionary<ConnectionSelector, IWebPartRow> m_ProvidersDictionary )
+    internal void SetInterconnectionData( Dictionary<ConnectionSelector, IWebPartRow> m_ProvidersDictionary )
     {
       foreach ( var _item in m_ProvidersDictionary )
       {
-        switch ( _item.Key )
+        try
         {
-          case ConnectionSelector.ProjectInterconnection:
-            new ProjectInterconnectionData().SetRowData( _item.Value, m_StateMachineEngine.NewDataEventHandler );
-            break;
-          case ConnectionSelector.TaskInterconnection:
-            new TaskInterconnectionData().SetRowData( _item.Value, m_StateMachineEngine.NewDataEventHandler );
-            break;
-          default:
-            break;
+          switch ( _item.Key )
+          {
+            case ConnectionSelector.ProjectInterconnection:
+              new ProjectInterconnectionData().SetRowData( _item.Value, m_StateMachineEngine.NewDataEventHandler );
+              break;
+            case ConnectionSelector.TaskInterconnection:
+              new TaskInterconnectionData().SetRowData( _item.Value, m_StateMachineEngine.NewDataEventHandler );
+              break;
+            default:
+              break;
+          }
+
+        }
+        catch ( Exception _ex )
+        {
+          At = _item.Key.ToString();
+          ShowActionResult( GenericStateMachineEngine.ActionResult.Exception( _ex, "SetInterconnectionData" ) );
         }
       }
     }
     #endregion
 
     #region UserControl override
-    [Serializable]
-    private class ControlState
-    {
-      #region state fields
-      internal GenericStateMachineEngine.ControlsSet SetEnabled = 0;
-      public GenericStateMachineEngine.InterfaceState InterfaceState = GenericStateMachineEngine.InterfaceState.ViewState;
-      public string ProjectID = String.Empty;
-      public string TaskID = String.Empty;
-      #endregion
-
-      #region public
-      public ControlState( ControlState _old )
-      {
-        if ( _old == null )
-          return;
-        InterfaceState = _old.InterfaceState;
-      }
-      #endregion
-    }
     /// <summary>
     /// Raises the <see cref="E:System.Web.UI.Control.Init"/> event.
     /// </summary>
@@ -92,38 +85,18 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
         {
           At = "InitMahine";
           m_StateMachineEngine.InitMahine();
-          //Grid setup
-          //m_GridView.EmptyDataText = "No workload defined";
-          //m_GridView.Columns.Add( new BoundField() { DataField = "Hours", HeaderText = "Workload [h]" } );
-          //m_GridView.Columns.Add( new BoundField() { DataField = "Project", HeaderText = "Project" } );
-          //m_GridView.Columns.Add( new BoundField() { DataField = "Task", HeaderText = "Task" } );
-          //m_GridView.Columns.Add( new BoundField() { DataField = "Description", HeaderText = "Description", Visible = true } );
-          //string _urlFormat = @"Lists/WorkloadList/DispForm.aspx?ID={0}";
-          //m_GridView.Columns.Add( new HyperLinkField() { DataTextField = "Description", HeaderText = "Workload", DataNavigateUrlFields = new string[] { "ID" }, DataNavigateUrlFormatString = _urlFormat, Visible = true } );
-          //m_GridView.Columns.Add( new BoundField() { DataField = "ID", HeaderText = "ID", Visible = false } );
-          //m_GridView.DataKeyNames = new String[] { "ID" };
-          //Calendar setup
-          //m_Calendar.SelectedDate = DateTime.Now.Date;
-          //m_Calendar.VisibleDate = DateTime.Now.Date;
-          //m_GridViewProjectSummary.AutoGenerateColumns = true;
-          //m_GridViewProjectSummary.DataKeyNames = new String[] { "Scope" };
-          //DropDownList'c setup 
-          //At = "ShouwUserInformation";
-          //if ( ShouwUserInformation() )
-          //{
-          //  At = "FillupProjectDropDown";
-          //  FillupProjectDropDown();
-          //  At = "FillupTaskaDropDown";
-          //  FillupTaskaDropDown();
-          //  At = "FindForUser";
-          //  FillupWorkflowGridView();
-          //  At = "FillupGridViewProjectSummary";
-          //  FillupGridViewProjectSummary();
-          //}
-          //else
-          //  m_PanelAddEdit.Enabled = false;
+          Entities _ent = m_DataContext.DataContext;
+          At = "m_TypeDropDown";
+          m_TypeDropDown.EntityListDataSource<TaskType>( _ent.Type );
+          At = "m_ResolutionDropDown";
+          m_ResolutionDropDown.EntityListDataSource<Resolution>( _ent.Resolution );
+          At = "m_PriorityDropDown";
+          m_PriorityDropDown.EntityListDataSource<Priority>( _ent.Priority );
+          At = "m_StatusDropDown";
+          m_StatusDropDown.EntityListDataSource<Status>( _ent.Status );
+          m_ControlState.PageLoade = true;
         }
-        //m_ProjectDropDown.SelectedIndexChanged += new EventHandler( m_ProjectDropDown_SelectedIndexChanged );
+        At = "Events handlers";
         m_ButtonSave.Click += new EventHandler( m_StateMachineEngine.SaveButton_Click );
         m_ButtonAddNew.Click += new EventHandler( m_StateMachineEngine.NewButton_Click );
         m_ButtonCancel.Click += new EventHandler( m_StateMachineEngine.CancelButton_Click );
@@ -148,6 +121,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
       if ( savedState != null )
       {
         m_ControlState = (ControlState)savedState;
+        m_ControlState.TaskRefresh += new EventHandler<EventArgs>( m_ControlState_TaskRefresh );
         m_StateMachineEngine.InitMahine( m_ControlState.InterfaceState );
       }
       else
@@ -170,14 +144,35 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
     protected override void OnPreRender( EventArgs e )
     {
       SetEnabled( m_ControlState.SetEnabled );
-      //if ( m_GridView.SelectedIndex == -1 )
-      //{
-      //  m_ButtonDelete.Enabled = false;
-      //  m_ButtonEdit.Enabled = false;
-      //}
+      if ( m_ControlState.ProjectID.IsNullOrEmpty() )
+      {
+        m_ButtonAddNew.Enabled = false;
+      }
+      if ( m_ControlState.TaskID.IsNullOrEmpty() )
+      {
+        m_ButtonDelete.Enabled = false;
+        m_ButtonEdit.Enabled = false;
+      }
       base.OnPreRender( e );
     }
     #endregion
+
+    #region SetInterconnectionData
+    internal void SetInterconnectionData( ProjectInterconnectionData e )
+    {
+      if ( e.ID.IsNullOrEmpty() || m_ControlState.ProjectID.Contains( e.ID ) )
+        return;
+      m_ControlState.ProjectID = e.ID;
+      Projects _prjct = Element.GetAtIndex<Projects>( m_DataContext.DataContext.Projects, m_ControlState.ProjectID );
+      ProjectChanged( _prjct );
+    }
+    internal void SetInterconnectionData( TaskInterconnectionData e )
+    {
+      m_ControlState.TaskID = e.ID;
+    }
+    #endregion
+
+    #region private
 
     #region State machine
     private LocalStateMachine m_StateMachineEngine;
@@ -204,11 +199,11 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
       {
         switch ( CurrentMachineState )
         {
-          case InterfaceState.EditState:
-          case InterfaceState.NewState:
+          case InterfaceState.ViewState:
             m_Parent.SetInterconnectionData( e );
             break;
-          case InterfaceState.ViewState:
+          case InterfaceState.EditState:
+          case InterfaceState.NewState:
           default:
             break;
         }
@@ -241,9 +236,9 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
       {
         return m_Parent.Delete();
       }
-      protected override void SetEnabled( GenericStateMachineEngine.ControlsSet _buttons )
+      protected override void SetEnabled( GenericStateMachineEngine.ControlsSet buttons )
       {
-        m_Parent.m_ControlState.SetEnabled = _buttons;
+        m_Parent.m_ControlState.SetEnabled = buttons;
       }
       protected override void ShowActionResult( GenericStateMachineEngine.ActionResult _rslt )
       {
@@ -271,6 +266,22 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
           EnterState();
         }
       }
+      protected override void EnterState()
+      {
+        base.EnterState();
+        switch ( CurrentMachineState )
+        {
+          case InterfaceState.ViewState:
+            m_Parent.m_ControlState_TaskRefresh( this, new EventArgs() );
+            break;
+          case InterfaceState.EditState:
+            m_Parent.ClearTaskComments();
+            break;
+          case InterfaceState.NewState:
+            break;
+        }
+
+      }
       #endregion
 
       #region private
@@ -284,32 +295,53 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
         return GenericStateMachineEngine.ActionResult.NotValidated( "Required information must be provided." );
       try
       {
-        //double _hours = TextBoxToHours( m_WorkloadHoursTextBox, m_WorkloadHoursLabel.Text );
-        //if ( m_TaskDropDown.SelectedValue.IsNullOrEmpty() )
-        //  return GenericStateMachineEngine.ActionResult.NotValidated( "You must select a task to create new workload" );
-        //Tasks _task = Element.GetAtIndex<Tasks>( m_DataContext.DataContext.Task, m_TaskDropDown.SelectedValue );
-        //At = "newOne";
-        //Workload _newOne = new Workload()
-        //{
-        //  Hours = _hours,
-        //  Title = m_WorkloadDescriptionTextBox.Text,
-        //  Workload2ProjectTitle = SelectedProject,
-        //  Workload2StageTitle = SelectedProject == null ? null : SelectedProject.Project2StageTitle,
-        //  Workload2TaskTitle = _task,
-        //  WorkloadDate = m_Calendar.SelectedDate.Date,
-        //  ReadOnly = false,
-        //  WeekNumber = m_Calendar.SelectedDate.Date.WeekNumber(),
-        //  Year = m_Calendar.SelectedDate.Date.Year
-        //};
-        //At = "InsertOnSubmit";
-        //m_DataContext.DataContext.Workload.InsertOnSubmit( _newOne );
-        //At = "SubmitChanges #1";
-        //m_DataContext.DataContext.SubmitChanges();
-        //_newOne.Workload2ResourcesTitle = Me;
-        //At = "SubmitChanges #2";
-        //m_DataContext.DataContext.SubmitChanges();
-        //FillupWorkflowGridView();
-        //FillupGridViewProjectSummary();
+        if ( m_ControlState.ProjectID.IsNullOrEmpty() )
+          return GenericStateMachineEngine.ActionResult.NotValidated( "Project is not selected." );
+        if ( m_TaskTitleTextBox.Text.Length <= 5 )
+          return GenericStateMachineEngine.ActionResult.NotValidated( "The Title length must be 5 characters at least.." );
+        if ( m_TaskCommentsTextBox.Text.Length <= 5 )
+          return GenericStateMachineEngine.ActionResult.NotValidated( "The task comment length must be 5 characters at least" );
+        Entities _ent = m_DataContext.DataContext;
+        TaskType _taskType = m_TypeDropDown.GetSelected<TaskType>( _ent.Type );
+        Resolution _resolution = m_ResolutionDropDown.GetSelected<Resolution>( _ent.Resolution );
+        Priority _priority = m_PriorityDropDown.GetSelected<Priority>( _ent.Priority );
+        Status _status = m_StatusDropDown.GetSelected<Status>( _ent.Status );
+        Resources _resource = m_AsignedToDropDown.GetSelected<Resources>( _ent.Resources );
+        Category _category = m_CategoryDropDown.GetSelected<Category>( _ent.Category );
+        Requirements _requirements = m_RequirementDropDown.GetSelected<Requirements>( _ent.Requirements );
+        Milestone _version = m_VersionDropDown.GetSelected<Milestone>( _ent.Milestone );
+        Milestone _milestone = m_MilestoneDropDown.GetSelected<Milestone>( _ent.Milestone );
+        Projects _project = Element.GetAtIndex<Projects>( _ent.Projects, m_ControlState.ProjectID );
+        At = "newOne";
+        Tasks _newTask = new Tasks()
+        {
+          BaselineStart = DateTime.Now.Date,
+          Body = m_TaskCommentsTextBox.Text,
+          Task2CategoryTitle = _category,
+          Task2MilestoneDefinedInTitle = _version,
+          Task2MilestoneResolvedInTitle = _milestone,
+          Task2ProjectTitle = _project,
+          Task2RequirementsTitle = _requirements,
+          Task2ResourcesTitle = _resource,
+          Task2SPriorityTitle = _priority,
+          Task2SResolutionTitle = _resolution,
+          Task2StatusTitle = _status,
+          Task2TypeTitle = _taskType,
+          TaskEnd = DateTime.Today.Date,
+          TaskStart = DateTime.Today.Date,
+          Title = m_TaskTitleTextBox.Text
+        };
+        UpdateDueData( _newTask );
+        At = "InsertOnSubmit";
+        _ent.Task.InsertOnSubmit( _newTask );
+        if ( _milestone != null )
+          _milestone.MilestoneEnd = _newTask.TaskEnd;
+        At = "SubmitChanges #1";
+        _ent.SubmitChanges();
+      }
+      catch ( GenericStateMachineEngine.ActionResult _ar )
+      {
+        return _ar;
       }
       catch ( ApplicationError _ax )
       {
@@ -339,19 +371,15 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
     }
     private void SetEnabled( GenericStateMachineEngine.ControlsSet _set )
     {
-      //m_WorkloadMinutesDropDown.Enabled = ( _set & GenericStateMachineEngine.ControlsSet.EditModeOn ) != 0;
-      //m_WorkloadHoursTextBox.Enabled = ( _set & GenericStateMachineEngine.ControlsSet.EditModeOn ) != 0;
-      //m_WorkloadDescriptionTextBox.Enabled = ( _set & GenericStateMachineEngine.ControlsSet.EditModeOn ) != 0;
-      ////m_ProjectDropDown.Enabled = (_set & GenericStateMachineEngine.ControlsSet.EditModeOn) != 0;
-      //m_TaskDropDown.Enabled = ( _set & GenericStateMachineEngine.ControlsSet.EditModeOn ) != 0;
-      //m_GridView.Enabled = ( _set & GenericStateMachineEngine.ControlsSet.EditModeOn ) == 0;
-      //m_Calendar.Enabled = ( _set & GenericStateMachineEngine.ControlsSet.EditModeOn ) == 0;
       //Buttons
       m_ButtonSave.Enabled = ( _set & GenericStateMachineEngine.ControlsSet.SaveOn ) != 0;
       m_ButtonDelete.Enabled = ( _set & GenericStateMachineEngine.ControlsSet.DeleteOn ) != 0;
       m_ButtonCancel.Enabled = ( _set & GenericStateMachineEngine.ControlsSet.CancelOn ) != 0;
-      m_ButtonEdit.Enabled = ( ( _set & GenericStateMachineEngine.ControlsSet.EditOn ) != 0 );
+      m_ButtonEdit.Enabled = ( _set & GenericStateMachineEngine.ControlsSet.EditOn ) != 0;
       m_ButtonAddNew.Enabled = ( _set & GenericStateMachineEngine.ControlsSet.NewOn ) != 0;
+      m_DropDownPanel.Enabled = ( _set & GenericStateMachineEngine.ControlsSet.EditModeOn ) != 0;
+      m_TaskTitleTextBox.Enabled = ( _set & GenericStateMachineEngine.ControlsSet.NewModeOn ) != 0;
+      m_TaskCommentsTextBox.Enabled = ( _set & GenericStateMachineEngine.ControlsSet.EditModeOn ) != 0;
     }
     private GenericStateMachineEngine.ActionResult Show()
     {
@@ -367,23 +395,44 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
     }
     private GenericStateMachineEngine.ActionResult Update()
     {
-      //double _hours = TextBoxToHours( m_WorkloadHoursTextBox, m_WorkloadHoursLabel.Text );
       try
       {
-        //int _indx = m_GridView.SelectedIndex;
-        //Workload _wkl = Element.GetAtIndex<Workload>( m_DataContext.DataContext.Workload, m_GridView.SelectedDataKey.Value.ToString() );
-        //Tasks _task = Element.GetAtIndex<Tasks>( m_DataContext.DataContext.Task, m_TaskDropDown.SelectedValue );
-        //_wkl.Hours = _hours;
-        //_wkl.Title = m_WorkloadDescriptionTextBox.Text;
-        //_wkl.WorkloadDate = m_Calendar.SelectedDate.Date;
-        //_wkl.Workload2ProjectTitle = SelectedProject;
-        //_wkl.Workload2StageTitle = SelectedProject == null ? null : SelectedProject.Project2StageTitle;
-        //_wkl.Workload2TaskTitle = _task;
-        //m_DataContext.DataContext.SubmitChanges();
-        //FillupWorkflowGridView();
-        //m_GridView.SelectedIndex = _indx;
-        //UpdateWorkload();
-        //FillupGridViewProjectSummary();
+        if ( m_TaskCommentsTextBox.Text.Length <= 5 )
+          return GenericStateMachineEngine.ActionResult.NotValidated( "The task comment length must be 5 characters at least" );
+        CurrentTask.TaskEnd = DateTime.Now;
+        Entities _ent = m_DataContext.DataContext;
+        if ( CurrentTask.Task2CategoryTitle == null || CurrentTask.Task2CategoryTitle.Identyfikator != m_CategoryDropDown.SelectedValue.String2Int() )
+          CurrentTask.Task2CategoryTitle = m_CategoryDropDown.GetSelected<Category>( _ent.Category );
+        if ( CurrentTask.Task2MilestoneDefinedInTitle == null || CurrentTask.Task2MilestoneDefinedInTitle.Identyfikator != m_VersionDropDown.SelectedValue.String2Int() )
+          CurrentTask.Task2MilestoneDefinedInTitle = m_VersionDropDown.GetSelected<Milestone>( _ent.Milestone );
+        if ( CurrentTask.Task2MilestoneResolvedInTitle == null || CurrentTask.Task2MilestoneResolvedInTitle.Identyfikator != m_MilestoneDropDown.SelectedValue.String2Int() )
+          CurrentTask.Task2MilestoneResolvedInTitle = m_MilestoneDropDown.GetSelected<Milestone>( _ent.Milestone );
+        if ( CurrentTask.Task2RequirementsTitle == null || CurrentTask.Task2RequirementsTitle.Identyfikator != m_RequirementDropDown.SelectedValue.String2Int() )
+          CurrentTask.Task2RequirementsTitle = m_RequirementDropDown.GetSelected<Requirements>( _ent.Requirements );
+        if ( CurrentTask.Task2ResourcesTitle == null || CurrentTask.Task2ResourcesTitle.Identyfikator != m_AsignedToDropDown.SelectedValue.String2Int() )
+          CurrentTask.Task2ResourcesTitle = m_AsignedToDropDown.GetSelected<Resources>( _ent.Resources );
+        if ( CurrentTask.Task2SPriorityTitle == null || CurrentTask.Task2SPriorityTitle.Identyfikator != m_PriorityDropDown.SelectedValue.String2Int() )
+          CurrentTask.Task2SPriorityTitle = m_PriorityDropDown.GetSelected<Priority>( _ent.Priority );
+        if ( CurrentTask.Task2SResolutionTitle == null || CurrentTask.Task2SResolutionTitle.Identyfikator != m_ResolutionDropDown.SelectedValue.String2Int() )
+          CurrentTask.Task2SResolutionTitle = m_ResolutionDropDown.GetSelected<Resolution>( _ent.Resolution );
+        if ( CurrentTask.Task2StatusTitle == null || CurrentTask.Task2StatusTitle.Identyfikator != m_StatusDropDown.SelectedValue.String2Int() )
+          CurrentTask.Task2StatusTitle = m_StatusDropDown.GetSelected<Status>( _ent.Status );
+        if ( CurrentTask.Task2TypeTitle == null || CurrentTask.Task2TypeTitle.Identyfikator != m_TypeDropDown.SelectedValue.String2Int() )
+          CurrentTask.Task2TypeTitle = m_TypeDropDown.GetSelected<TaskType>( _ent.Type );
+        if ( CurrentTask.Task2MilestoneResolvedInTitle != null )
+          CurrentTask.Task2MilestoneResolvedInTitle.MilestoneEnd = CurrentTask.TaskEnd;
+        TaskComments _newComment = new TaskComments()
+        {
+          Body = m_TaskCommentsTextBox.Text,
+          TaskComments2TaskTitle = CurrentTask,
+        };
+        _ent.TaskComments.InsertOnSubmit( _newComment );
+        UpdateDueData( CurrentTask );
+        _ent.SubmitChanges();
+      }
+      catch ( GenericStateMachineEngine.ActionResult _ar )
+      {
+        return _ar;
       }
       catch ( ApplicationError _ae )
       {
@@ -395,102 +444,110 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
       }
       return GenericStateMachineEngine.ActionResult.Success;
     }
+    private void UpdateDueData( Tasks task )
+    {
+      if ( m_DueDateDateTimeControl.IsDateEmpty || ( task.BaselineEnd.HasValue && task.BaselineEnd == m_DueDateDateTimeControl.SelectedDate ) )
+        return;
+      Milestone _tmstn = task.Task2MilestoneResolvedInTitle;
+      if ( _tmstn != null )
+      {
+        if ( _tmstn.BaselineEnd.HasValue && _tmstn.BaselineEnd < m_DueDateDateTimeControl.SelectedDate.Date )
+        {
+          m_DueDateDateTimeControl.SelectedDate = _tmstn.BaselineEnd.Value;
+          throw GenericStateMachineEngine.ActionResult.NotValidated( "The DueData exceeds the deadline of the current milestone - change the milestone or adjust this time." );
+        }
+      }
+      task.BaselineEnd = m_DueDateDateTimeControl.SelectedDate.Date;
+    }
     private void ClearUserInterface()
     {
-      //m_GridView.SelectedIndex = -1;
-      //m_WorkloadDescriptionTextBox.Text = String.Empty;
-      //m_WorkloadHoursTextBox.Text = String.Empty;
-    }
-    #endregion
-
-    #region SetInterconnectionData
-    internal void SetInterconnectionData( ProjectInterconnectionData e )
-    {
-      throw new NotImplementedException();
-    }
-
-    internal void SetInterconnectionData( TaskInterconnectionData e )
-    {
-      throw new NotImplementedException();
-    }
-    #endregion
-
-    #region helpers
-    private double TextBoxToHours( TextBox _textBox, string _label )
-    {
-      try
-      {
-        return Convert.ToDouble( _textBox.Text );
-      }
-      catch ( Exception )
-      {
-        throw new ApplicationException( String.Format( "{0} texbox has wrong number", _label ) );
-      }
-    }
-    private bool ShouwUserInformation()
-    {
-      if ( Me == null )
-      {
-        this.Controls.Add( new Literal() { Text = String.Format( CAS.SharePoint.Web.CommonDefinitions.ErrorMessageFormat, "User not recognized - you must be added to the Recourses" ) } );
-        return false;
-      }
-      else
-      {
-        this.Controls.Add( new Literal() { Text = String.Format( CAS.SharePoint.Web.CommonDefinitions.ErrorMessageFormat, "Welcome: " + Me.EmployeeADAccountTitle ) } );
-        return true;
-      }
+      SetTargetForProject();
+      m_ShowAllMilestonesCheckBox.Checked = true;
+      m_TaskCommentsTextBox.Text = String.Empty;
+      m_TaskTitleTextBox.Text = String.Empty;
+      m_AsignedToDropDown.ClearSelection();
+      m_CategoryDropDown.ClearSelection();
+      m_DueDateDateTimeControl.ClearSelection();
+      m_PriorityDropDown.ClearSelection();
+      m_RequirementDropDown.ClearSelection();
+      m_ResolutionDropDown.ClearSelection();
+      m_StatusDropDown.ClearSelection();
+      m_TypeDropDown.ClearSelection();
+      m_VersionDropDown.ClearSelection();
     }
     #endregion
 
     #region vars
-    private string At { get; set; }
-    private const string m_SelectProjectDropDownEntry = "  -- select project -- ";
-    private const string m_SelectTaskDropDownEntry = "  -- select task -- ";
-    private const string m_keyCurrentYear = "CurrentYear";
-    private DataContextManagement<Entities> m_DataContext = null;
-    private ControlState m_ControlState = new ControlState( null );
-    private CAS.AgileWorkloadTracker.Linq.Resources p_me = null;
-    private CAS.AgileWorkloadTracker.Linq.Resources Me
+    [Serializable]
+    private class ControlState
     {
-      get
+      #region state fields
+      internal GenericStateMachineEngine.ControlsSet SetEnabled = 0;
+      public GenericStateMachineEngine.InterfaceState InterfaceState = GenericStateMachineEngine.InterfaceState.ViewState;
+      public string p_ProjectID = String.Empty;
+      public string p_TaskID = String.Empty;
+      [NonSerialized()]
+      internal bool PageLoade = false;
+      public string TaskID
       {
-        try
+        get { return p_TaskID; }
+        set
         {
-          if ( p_me == null )
-            p_me = Resources.FindForUser( m_DataContext.DataContext, SPContext.Current.Web.CurrentUser );
-          return p_me;
+          if ( ( p_ProjectIDChanged && !PageLoade ) )
+            return;
+          if ( p_TaskID.CompareTo( value ) == 0 )
+            return;
+          p_TaskID = value;
+          if ( TaskRefresh == null )
+            return;
+          TaskRefresh( this, new EventArgs() );
+        }
+      }
+      public string ProjectID
+      {
+        get { return p_ProjectID; }
+        set
+        {
+          p_ProjectID = value;
+          p_TaskID = String.Empty;
+          p_ProjectIDChanged = true;
+        }
+      }
+      #endregion
 
-        }
-        catch ( Exception xe )
-        {
-          throw new ApplicationError( "Me", "", xe.Message, xe );
-        }
+      #region public
+      [field: NonSerialized()]
+      internal event EventHandler<EventArgs> TaskRefresh;
+      public ControlState( EventHandler<EventArgs> taskRefresh )
+      {
+        TaskRefresh += taskRefresh;
       }
+      #endregion
+
+      #region private
+      [NonSerialized]
+      private bool p_ProjectIDChanged = false;
+      #endregion
     }
-    private Projects p_Projects = null;
-    private Projects SelectedProject
+    private string At { get; set; }
+    private DataContextManagement<Entities> m_DataContext = null;
+    private ControlState m_ControlState = null;
+    private Tasks p_ct = null;
+    private Tasks CurrentTask
     {
       get
       {
-        if ( p_Projects == null && !m_ControlState.ProjectID.IsNullOrEmpty() )
-          p_Projects = Element.GetAtIndex<Projects>( m_DataContext.DataContext.Projects, m_ControlState.ProjectID );
-        return p_Projects;
-      }
-    }
-    private IQueryable<Projects> p_MyProjects = null;
-    private IQueryable<Projects> MyProjects
-    {
-      get
-      {
-        if ( p_MyProjects == null )
-          p_MyProjects = from _association in Me.Estimation let _pidx = _association.Estimation2ProjectTitle where _pidx.Active.GetValueOrDefault( true ) select _pidx;
-        return p_MyProjects;
+        if ( m_ControlState.TaskID.IsNullOrEmpty() )
+          return null;
+        if ( p_ct == null )
+          p_ct = Element.GetAtIndex<Tasks>( m_DataContext.DataContext.Task, m_ControlState.TaskID );
+        return p_ct;
       }
     }
     #endregion
 
-    #region errors handling
-    internal void ShowActionResult( GenericStateMachineEngine.ActionResult _rslt )
+    #region events handling
+    private void ShowActionResult( GenericStateMachineEngine.ActionResult _rslt )
     {
       if ( _rslt.LastActionResult == GenericStateMachineEngine.ActionResult.Result.Success )
         return;
@@ -505,10 +562,112 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
       else
       {
         string _format = CommonDefinitions.Convert2ErrorMessageFormat( "Validation error at: {0}/{1} of : {2}." );
-        this.Controls.Add( new Literal() { Text = String.Format( _format, At, _rslt.ActionException.Message ) } );
+        this.Controls.Add( new Literal() { Text = String.Format( _format, _rslt.ActionException.Source, At, _rslt.ActionException.Message ) } );
       }
     }
     #endregion
 
+    private void m_ControlState_TaskRefresh( object sender, EventArgs e )
+    {
+      if ( CurrentTask == null )
+      {
+        m_TaskTitleTextBox.Text = String.Empty;
+        m_TaskCommentsTextBox.Text = String.Empty;
+        return;
+      }
+      m_TaskTitleTextBox.Text = CurrentTask.Title;
+      m_TaskCommentsTextBox.Text = CurrentTask.Body;
+      if ( CurrentTask.BaselineEnd.HasValue )
+        m_DueDateDateTimeControl.SelectedDate = CurrentTask.BaselineEnd.Value;
+      else
+        m_DueDateDateTimeControl.ClearSelection();
+      SetTargetForProject();
+      m_CategoryDropDown.SelectItem4Element( CurrentTask.Task2CategoryTitle );
+      m_VersionDropDown.SelectItem4Element( CurrentTask.Task2MilestoneDefinedInTitle );
+      m_MilestoneDropDown.SelectItem4Element( CurrentTask.Task2MilestoneResolvedInTitle );
+      m_RequirementDropDown.SelectItem4Element( CurrentTask.Task2RequirementsTitle );
+      m_AsignedToDropDown.SelectItem4Element( CurrentTask.Task2ResourcesTitle );
+      m_ResolutionDropDown.SelectItem4Element( CurrentTask.Task2SResolutionTitle );
+      m_StatusDropDown.SelectItem4Element( CurrentTask.Task2StatusTitle );
+      m_TypeDropDown.SelectItem4Element( CurrentTask.Task2TypeTitle );
+      m_PriorityDropDown.SelectItem4Element( CurrentTask.Task2SPriorityTitle );
+    }
+    private void ClearTaskComments()
+    {
+      m_TaskCommentsTextBox.Text = String.Empty;
+    }
+    private void ProjectChanged( Projects _project )
+    {
+      m_TaskCommentsTextBox.Text = String.Empty;
+      m_TaskTitleTextBox.Text = String.Empty;
+      if ( _project == null )
+      {
+        ProjectNotSelected( m_AsignedToDropDown );
+        ProjectNotSelected( m_CategoryDropDown );
+        m_ProjectLabel.Text = String.Empty;
+      }
+      else
+      {
+        Entities _dcxt = this.m_DataContext.DataContext;
+        m_ProjectLabel.Text = _project.Title;
+        int _pId = _project.Identyfikator.Value;
+        m_AsignedToDropDown.EntityListDataSource( ( from _estimationx in _dcxt.Estimation
+                                                    where _estimationx.Estimation2ProjectTitle.Identyfikator == _pId
+                                                    select _estimationx.Estimation2ResourcesTitle ).OrderBy<Resources, string>( a => a.Title ) );
+        m_CategoryDropDown.EntityListDataSource( from _categoryx in _dcxt.Category
+                                                 where _categoryx.Category2ProjectsTitle.Identyfikator == _pId
+                                                 orderby _categoryx.Title ascending
+                                                 select _categoryx );
+      }
+    }
+
+    private void SetTargetForProject()
+    {
+      int? _pId = m_ControlState.ProjectID.String2Int();
+      if ( _pId.HasValue )
+      {
+        Entities _dcxt = this.m_DataContext.DataContext;
+        m_RequirementDropDown.EntityListDataSource( from _rsrcx in _dcxt.Requirements
+                                                    //let _acv = _rsrcx.Requirements2MilestoneTitle == null || _rsrcx.Requirements2MilestoneTitle.Active.GetValueOrDefault( true )
+                                                    where _rsrcx.Requirements2ProjectsTitle.Identyfikator == _pId
+                                                    select _rsrcx );
+        IQueryable<Milestone> _mlstns = from _mlstnsx in _dcxt.Milestone
+                                        where _mlstnsx.Milestone2ProjectTitle.Identyfikator == _pId && _mlstnsx.Active.HasValue && _mlstnsx.Active.Value
+                                        orderby _mlstnsx.SortOrder.HasValue ? _mlstnsx.SortOrder.Value : 0 ascending
+                                        select _mlstnsx;
+        m_VersionDropDown.EntityListDataSource( _mlstns );
+        IQueryable<Milestone> _activeMilestones = from _mlstnsx in _mlstns
+                                                  where _mlstnsx.Active.HasValue && _mlstnsx.Active.Value
+                                                  select _mlstnsx;
+        m_MilestoneDropDown.EntityListDataSource( _activeMilestones );
+        Milestone _milestoneDefault = ( from _mlstx in _mlstns where _mlstx.Default.HasValue && _mlstx.Default.Value select _mlstx ).FirstOrDefault<Milestone>();
+        if ( _milestoneDefault != null )
+        {
+          string _idx = _milestoneDefault.Identyfikator.IntToString();
+          m_VersionDropDown.SelectedValue = _idx;
+          m_MilestoneDropDown.SelectedValue = _idx;
+          if ( _milestoneDefault.MilestoneEnd.HasValue )
+            m_DueDateDateTimeControl.SelectedDate = _milestoneDefault.MilestoneEnd.Value;
+          else
+            m_DueDateDateTimeControl.ClearSelection();
+        }
+        //m_RequirementDropDown.EntityListDataSource( from _mlstnx in _activeMilestones
+        //                                            from _rsrcx in _mlstnx.Requirements
+        //                                            select _rsrcx );
+      }
+      else
+      {
+        ProjectNotSelected( m_RequirementDropDown );
+        ProjectNotSelected( m_VersionDropDown );
+        ProjectNotSelected( m_MilestoneDropDown );
+      }
+    }
+    private void ProjectNotSelected( DropDownList dropDownList )
+    {
+      dropDownList.Items.Clear();
+      dropDownList.Items.Add( new ListItem( "-- Project not selected --", "-1" ) );
+    }
+
+    #endregion
   }
 }
