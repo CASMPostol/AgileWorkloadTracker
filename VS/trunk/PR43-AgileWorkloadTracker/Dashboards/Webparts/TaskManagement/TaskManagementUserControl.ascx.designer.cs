@@ -121,42 +121,6 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement {
         protected global::System.Web.UI.WebControls.Table m_TableRight;
         
         /// <summary>
-        /// m_RequirementLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label m_RequirementLabel;
-        
-        /// <summary>
-        /// m_RequirementDropDown control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList m_RequirementDropDown;
-        
-        /// <summary>
-        /// m_CategoryLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label m_CategoryLabel;
-        
-        /// <summary>
-        /// m_CategoryDropDown control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList m_CategoryDropDown;
-        
-        /// <summary>
         /// m_VersionLabel control.
         /// </summary>
         /// <remarks>
@@ -175,22 +139,22 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement {
         protected global::System.Web.UI.WebControls.DropDownList m_VersionDropDown;
         
         /// <summary>
-        /// m_TypeLabel control.
+        /// m_RequirementLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label m_TypeLabel;
+        protected global::System.Web.UI.WebControls.Label m_RequirementLabel;
         
         /// <summary>
-        /// m_TypeDropDown control.
+        /// m_RequirementDropDown control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList m_TypeDropDown;
+        protected global::System.Web.UI.WebControls.DropDownList m_RequirementDropDown;
         
         /// <summary>
         /// m_MilestoneLabel control.
@@ -227,6 +191,42 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox m_ShowAllMilestonesCheckBox;
+        
+        /// <summary>
+        /// m_CategoryLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label m_CategoryLabel;
+        
+        /// <summary>
+        /// m_CategoryDropDown control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList m_CategoryDropDown;
+        
+        /// <summary>
+        /// m_TypeLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label m_TypeLabel;
+        
+        /// <summary>
+        /// m_TypeDropDown control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList m_TypeDropDown;
         
         /// <summary>
         /// m_PriorityLabel control.
