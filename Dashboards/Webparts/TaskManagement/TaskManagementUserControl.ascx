@@ -142,15 +142,6 @@
                         </asp:TableRow>
                         <asp:TableRow>
                             <asp:TableCell>
-                                <asp:Label ID="m_EstimationLabel" runat="server" CssClass="Label" Text="Estimation" />
-                            </asp:TableCell>
-                            <asp:TableCell>
-                                <asp:DropDownList ID="m_EstimationDropDown" runat="server" CssClass="DropDownShort">
-                                </asp:DropDownList>
-                            </asp:TableCell>
-                        </asp:TableRow>
-                        <asp:TableRow>
-                            <asp:TableCell>
                                 <asp:Label ID="m_DueDateLabel" runat="server" CssClass="Label" Text="DueDate" />
                             </asp:TableCell>
                             <asp:TableCell>
