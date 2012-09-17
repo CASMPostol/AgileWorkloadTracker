@@ -53,24 +53,6 @@
                     <asp:Table ID="m_TableRight" runat="server" CssClass="TableInside">
                         <asp:TableRow>
                             <asp:TableCell>
-                                <asp:Label ID="m_RequirementLabel" runat="server" CssClass="Label" Text="Requirement"></asp:Label>
-                            </asp:TableCell>
-                            <asp:TableCell>
-                                <asp:DropDownList ID="m_RequirementDropDown" runat="server" CssClass="DropDownShort">
-                                </asp:DropDownList>
-                            </asp:TableCell>
-                        </asp:TableRow>
-                        <asp:TableRow>
-                            <asp:TableCell>
-                                <asp:Label ID="m_CategoryLabel" runat="server" CssClass="Label" Text="Category" />
-                            </asp:TableCell>
-                            <asp:TableCell>
-                                <asp:DropDownList ID="m_CategoryDropDown" runat="server" CssClass="DropDownShort">
-                                </asp:DropDownList>
-                            </asp:TableCell>
-                        </asp:TableRow>
-                        <asp:TableRow>
-                            <asp:TableCell>
                                 <asp:Label ID="m_VersionLabel" runat="server" CssClass="Label" Text="Version" />
                             </asp:TableCell>
                             <asp:TableCell>
@@ -80,10 +62,10 @@
                         </asp:TableRow>
                         <asp:TableRow>
                             <asp:TableCell>
-                                <asp:Label ID="m_TypeLabel" runat="server" CssClass="Label" Text="Type" />
+                                <asp:Label ID="m_RequirementLabel" runat="server" CssClass="Label" Text="Requirement"></asp:Label>
                             </asp:TableCell>
                             <asp:TableCell>
-                                <asp:DropDownList ID="m_TypeDropDown" runat="server" CssClass="DropDownShort">
+                                <asp:DropDownList ID="m_RequirementDropDown" runat="server" CssClass="DropDownShort">
                                 </asp:DropDownList>
                             </asp:TableCell>
                         </asp:TableRow>
@@ -102,6 +84,24 @@
                             </asp:TableCell>
                             <asp:TableCell>
                                 <asp:CheckBox ID="m_ShowAllMilestonesCheckBox" runat="server" />
+                            </asp:TableCell>
+                        </asp:TableRow>
+                        <asp:TableRow>
+                            <asp:TableCell>
+                                <asp:Label ID="m_CategoryLabel" runat="server" CssClass="Label" Text="Category" />
+                            </asp:TableCell>
+                            <asp:TableCell>
+                                <asp:DropDownList ID="m_CategoryDropDown" runat="server" CssClass="DropDownShort">
+                                </asp:DropDownList>
+                            </asp:TableCell>
+                        </asp:TableRow>
+                        <asp:TableRow>
+                            <asp:TableCell>
+                                <asp:Label ID="m_TypeLabel" runat="server" CssClass="Label" Text="Type" />
+                            </asp:TableCell>
+                            <asp:TableCell>
+                                <asp:DropDownList ID="m_TypeDropDown" runat="server" CssClass="DropDownShort">
+                                </asp:DropDownList>
                             </asp:TableCell>
                         </asp:TableRow>
                         <asp:TableRow>
