@@ -40,7 +40,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
     /// Sets the InvoiceContentInterconnection provider.
     /// </summary>
     /// <param name="_provider">The provider interface.</param>
-    [ConnectionConsumer( "InvoiceContent list interconnection", "InvoiceContentInterconnection", AllowsMultipleConnections = false )]
+    [ConnectionConsumer( "Task list interconnection", "TaskInterconnection", AllowsMultipleConnections = false )]
     public void SetInvoiceContentProvider( IWebPartRow _provider )
     {
       m_ProvidersDictionary.Add( ConnectionSelector.TaskInterconnection, _provider );

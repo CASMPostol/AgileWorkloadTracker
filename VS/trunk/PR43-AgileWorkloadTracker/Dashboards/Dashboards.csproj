@@ -58,7 +58,6 @@
     <Compile Include="..\SPMetalHelper\Linq\AgileWorkloadTracker\Entities.cs">
       <Link>Linq\Entities.cs</Link>
     </Compile>
-    <Compile Include="Extensions.cs" />
     <Compile Include="Features\AWTDashboards\AWTDashboards.EventReceiver.cs">
       <DependentUpon>AWTDashboards.feature</DependentUpon>
     </Compile>
@@ -148,7 +147,9 @@
     <None Include="Webparts\WorkloadManagement\WorkloadManagement.webpart" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Dashboards\AddEditTasks\Elements.xml" />
+    <Content Include="Dashboards\AddEditTasks\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Dashboards\AddEditWorkload\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
