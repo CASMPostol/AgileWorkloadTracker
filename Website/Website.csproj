@@ -237,9 +237,13 @@
     <Content Include="ContentTypes\Stage\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="ContentTypes\Status\Elements.xml" />
+    <Content Include="ContentTypes\Status\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="ContentTypes\TaskComments\Elements.xml" />
-    <Content Include="ContentTypes\Tasks\Elements.xml" />
+    <Content Include="ContentTypes\Tasks\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="ContentTypes\Type\Elements.xml" />
     <Content Include="ContentTypes\Workload\Elements.xml">
       <SubType>Designer</SubType>
@@ -310,7 +314,9 @@
     <Content Include="Lists\StatusListTemplate\StatusList\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Lists\StatusListTemplate\Schema.xml" />
+    <Content Include="Lists\StatusListTemplate\Schema.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Lists\TaskCommentsListTemplate\Elements.xml" />
     <Content Include="Lists\TaskCommentsListTemplate\TaskCommentsList\Elements.xml" />
     <Content Include="Lists\TaskCommentsListTemplate\Schema.xml">

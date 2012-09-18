@@ -26,6 +26,7 @@
           <FieldRef ID="{E38C4128-D2B4-4DF1-987C-DD56881EB75E}" Name="TaskEnd" />
           <FieldRef ID="{0F5E1501-65E9-413E-BE58-3637B68349F6}" Name="BaselineStart" />
           <FieldRef ID="{C00DF562-CE82-4551-A325-7E08106E8600}" Name="BaselineEnd" />
+          <FieldRef ID="{50EDDF56-D28E-44C6-B6CB-109FBCDE886F}" Name="Active" />
         </FieldRefs>
       </ContentType>
     </ContentTypes>
@@ -76,6 +77,7 @@
           <FieldRef ID="{E38C4128-D2B4-4DF1-987C-DD56881EB75E}" Name="TaskEnd" />
           <FieldRef ID="{0F5E1501-65E9-413E-BE58-3637B68349F6}" Name="BaselineStart" />
           <FieldRef ID="{C00DF562-CE82-4551-A325-7E08106E8600}" Name="BaselineEnd" />
+          <FieldRef ID="{50EDDF56-D28E-44C6-B6CB-109FBCDE886F}" Name="Active" />
         </ViewFields>
         <Query>
           <OrderBy>

@@ -9,21 +9,27 @@
       <Rows>
         <Row>
           <Field Name="Title">Open</Field>
+          <Field Name="Active">TRUE</Field>
         </Row>
         <Row>
           <Field Name="Title">In Progress</Field>
+          <Field Name="Active">TRUE</Field>
         </Row>
         <Row>
           <Field Name="Title">Re-Opened</Field>
+          <Field Name="Active">TRUE</Field>
         </Row>
         <Row>
           <Field Name="Title">Resolved</Field>
+          <Field Name="Active">FALSE</Field>
         </Row>
         <Row>
           <Field Name="Title">Closed</Field>
+          <Field Name="Active">FALSE</Field>
         </Row>
         <Row>
           <Field Name="Title">In Waiting</Field>
+          <Field Name="Active">TRUE</Field>
         </Row>
       </Rows>
     </Data>
