@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<List xmlns:ows="Microsoft SharePoint" Title="TaskListTemplate" FolderCreation="FALSE" Direction="$Resources:Direction;" Url="Lists/Website-TaskListTemplate" BaseType="0" xmlns="http://schemas.microsoft.com/sharepoint/">
+<List VersioningEnabled="TRUE" xmlns:ows="Microsoft SharePoint" Title="TaskListTemplate" FolderCreation="FALSE" Direction="$Resources:Direction;" Url="Lists/Website-TaskListTemplate" BaseType="0" xmlns="http://schemas.microsoft.com/sharepoint/">
   <MetaData>
     <ContentTypes>
       <ContentType ID="0x01005d39260836ce498d8e0d443ad5cad3ac"
