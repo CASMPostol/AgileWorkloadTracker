@@ -9,6 +9,7 @@ using CAS.SharePoint;
 using CAS.SharePoint.Linq;
 using CAS.SharePoint.Web;
 using Microsoft.SharePoint;
+using Microsoft.SharePoint.WebControls;
 using TaskType = CAS.AgileWorkloadTracker.Linq.Type;
 
 namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement

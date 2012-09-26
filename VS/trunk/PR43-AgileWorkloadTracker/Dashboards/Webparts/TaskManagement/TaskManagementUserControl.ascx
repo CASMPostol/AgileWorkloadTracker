@@ -42,9 +42,10 @@
                     </asp:TableRow>
                     <asp:TableRow>
                         <asp:TableCell>
-                            <asp:TextBox ID="m_TaskCommentsTextBox" runat="server" TextMode="Multiline" Height="250"
+                            <SharePoint:InputFormTextBox ID="m_TaskCommentsTextBox" runat="server" RichText="true" RichTextMode="FullHtml" TextMode="MultiLine" Width="600" Rows="10"/>
+<%--                            <asp:TextBox ID="m_TaskCommentsTextBox" runat="server" TextMode="Multiline" Height="250"
                                 Width="600" CssClass="TextBox"></asp:TextBox>
-                        </asp:TableCell>
+--%>                        </asp:TableCell>
                     </asp:TableRow>
                 </asp:Table>
             </asp:TableCell>
