@@ -9,6 +9,16 @@ using CAS.SharePoint;
 
 namespace CAS.AgileWorkloadTracker.Linq
 {
+  internal partial class Entities
+  {
+    internal IQueryable<Requirements> ActiveRequirements( int projectID )
+    {
+      return from _rsrcx in this.Requirements
+             //let _acv = _rsrcx.Requirements2MilestoneTitle == null || _rsrcx.Requirements2MilestoneTitle.Active.GetValueOrDefault( true )
+             where _rsrcx.Requirements2ProjectsTitle.Identyfikator == projectID
+             select _rsrcx;
+    }
+  }
   /// <summary>
   /// Adds a message to the Event log list.
   /// </summary>
@@ -165,14 +175,24 @@ namespace CAS.AgileWorkloadTracker.Linq
       dropDown.DataBind();
       dropDown.ClearSelection();
     }
+    /// <summary>
+    /// Selects the item for the element. If item cannot be selected (is not on the list) selection of the <paramref name="dropDown"/> is cleared.
+    /// </summary>
+    /// <param name="dropDown">The drop down to be updated.</param>
+    /// <param name="element">The element pointing out the item to be selected.</param>
     public static void SelectItem4Element( this DropDownList dropDown, Element element )
     {
       dropDown.ClearSelection();
       if ( element == null )
-        return;
-      ListItem _item = dropDown.Items.FindByValue(element.Identyfikator.IntToString());
-      if (_item != null)
-        _item.Selected = true;
+        dropDown.ClearSelection();
+      else
+      {
+        ListItem _item = dropDown.Items.FindByValue( element.Identyfikator.IntToString() );
+        if ( _item != null )
+          _item.Selected = true;
+        else
+          dropDown.ClearSelection();
+      }
     }
   }
 }
