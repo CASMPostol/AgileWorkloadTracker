@@ -61,21 +61,21 @@
                                 </asp:DropDownList>
                             </asp:TableCell>
                         </asp:TableRow>
-                        <asp:TableRow>
-                            <asp:TableCell>
-                                <asp:Label ID="m_RequirementLabel" runat="server" CssClass="Label" Text="Requirement"></asp:Label>
-                            </asp:TableCell>
-                            <asp:TableCell>
-                                <asp:DropDownList ID="m_RequirementDropDown" runat="server" CssClass="DropDownShort">
-                                </asp:DropDownList>
-                            </asp:TableCell>
-                        </asp:TableRow>
-                        <asp:TableRow>
+                         <asp:TableRow>
                             <asp:TableCell>
                                 <asp:Label ID="m_MilestoneLabel" runat="server" CssClass="Label" Text="Milestone" />
                             </asp:TableCell>
                             <asp:TableCell>
-                                <asp:DropDownList ID="m_MilestoneDropDown" runat="server" CssClass="DropDownShort">
+                                <asp:DropDownList ID="m_MilestoneDropDown" runat="server" CssClass="DropDownShort" AutoPostBack="true">
+                                </asp:DropDownList>
+                            </asp:TableCell>
+                        </asp:TableRow>
+                       <asp:TableRow>
+                            <asp:TableCell>
+                                <asp:Label ID="m_RequirementLabel" runat="server" CssClass="Label" Text="Requirement"></asp:Label>
+                            </asp:TableCell>
+                            <asp:TableCell>
+                                <asp:DropDownList ID="m_RequirementDropDown" runat="server" CssClass="DropDownShort" AutoPostBack="true">
                                 </asp:DropDownList>
                             </asp:TableCell>
                         </asp:TableRow>

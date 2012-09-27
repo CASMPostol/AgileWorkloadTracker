@@ -8,8 +8,6 @@ using CAS.AgileWorkloadTracker.Linq;
 using CAS.SharePoint;
 using CAS.SharePoint.Linq;
 using CAS.SharePoint.Web;
-using Microsoft.SharePoint;
-using Microsoft.SharePoint.WebControls;
 using TaskType = CAS.AgileWorkloadTracker.Linq.Type;
 
 namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
@@ -103,6 +101,9 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
         m_ButtonCancel.Click += new EventHandler( m_StateMachineEngine.CancelButton_Click );
         m_ButtonEdit.Click += new EventHandler( m_StateMachineEngine.EditButton_Click );
         m_ButtonDelete.Click += new EventHandler( m_StateMachineEngine.DeleteButton_Click );
+        m_RequirementDropDown.SelectedIndexChanged += new EventHandler( m_RequirementDropDown_SelectedIndexChanged );
+        m_MilestoneDropDown.SelectedIndexChanged += new EventHandler( m_MilestoneDropDown_SelectedIndexChanged );
+        m_ShowAllMilestonesCheckBox.CheckedChanged += new EventHandler( m_ShowAllMilestonesCheckBox_CheckedChanged );
       }
       catch ( ApplicationError _ax )
       {
@@ -164,8 +165,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
       if ( e.ID.IsNullOrEmpty() || m_ControlState.ProjectID.Contains( e.ID ) )
         return;
       m_ControlState.ProjectID = e.ID;
-      Projects _prjct = Element.GetAtIndex<Projects>( m_DataContext.DataContext.Projects, m_ControlState.ProjectID );
-      ProjectChanged( _prjct );
+      ProjectChanged( CurrentProject );
     }
     internal void SetInterconnectionData( TaskInterconnectionData e )
     {
@@ -299,20 +299,22 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
         if ( m_ControlState.ProjectID.IsNullOrEmpty() )
           return GenericStateMachineEngine.ActionResult.NotValidated( "Project is not selected." );
         if ( m_TaskTitleTextBox.Text.Length <= 5 )
-          return GenericStateMachineEngine.ActionResult.NotValidated( "The Title length must be 5 characters at least.." );
+          return GenericStateMachineEngine.ActionResult.NotValidated( "The Title length must be at least 5 characters." );
         if ( m_TaskCommentsTextBox.Text.Length <= 5 )
-          return GenericStateMachineEngine.ActionResult.NotValidated( "The task comment length must be 5 characters at least" );
+          return GenericStateMachineEngine.ActionResult.NotValidated( "The task comment length must be at least 5 characters." );
         Entities _ent = m_DataContext.DataContext;
+        Milestone _milestone = m_MilestoneDropDown.GetSelected<Milestone>( _ent.Milestone );
+        Requirements _requirements = m_RequirementDropDown.GetSelected<Requirements>( _ent.Requirements );
+        if ( _requirements.Requirements2MilestoneTitle != _milestone )
+          return GenericStateMachineEngine.ActionResult.NotValidated( "Inconsistency validation violated: task and requirement must be coupled with the same milestone." );
+        Projects _project = Element.GetAtIndex<Projects>( _ent.Projects, m_ControlState.ProjectID );
         TaskType _taskType = m_TypeDropDown.GetSelected<TaskType>( _ent.Type );
         Resolution _resolution = m_ResolutionDropDown.GetSelected<Resolution>( _ent.Resolution );
         Priority _priority = m_PriorityDropDown.GetSelected<Priority>( _ent.Priority );
         Status _status = m_StatusDropDown.GetSelected<Status>( _ent.Status );
         Resources _resource = m_AsignedToDropDown.GetSelected<Resources>( _ent.Resources );
         Category _category = m_CategoryDropDown.GetSelected<Category>( _ent.Category );
-        Requirements _requirements = m_RequirementDropDown.GetSelected<Requirements>( _ent.Requirements );
         Milestone _version = m_VersionDropDown.GetSelected<Milestone>( _ent.Milestone );
-        Milestone _milestone = m_MilestoneDropDown.GetSelected<Milestone>( _ent.Milestone );
-        Projects _project = Element.GetAtIndex<Projects>( _ent.Projects, m_ControlState.ProjectID );
         At = "newOne";
         Tasks _newTask = new Tasks()
         {
@@ -545,6 +547,19 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
         return p_ct;
       }
     }
+    private Projects p_cp = null;
+
+    private Projects CurrentProject
+    {
+      get
+      {
+        if ( m_ControlState.ProjectID.IsNullOrEmpty() )
+          return null;
+        if ( p_cp == null )
+          p_cp = Element.GetAtIndex<Projects>( m_DataContext.DataContext.Projects, m_ControlState.TaskID );
+        return p_cp;
+      }
+    }
     #endregion
 
     #region events handling
@@ -564,6 +579,42 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
       {
         string _format = CommonDefinitions.Convert2ErrorMessageFormat( "Validation error at: {0}/{1} of : {2}." );
         this.Controls.Add( new Literal() { Text = String.Format( _format, _rslt.ActionException.Source, At, _rslt.ActionException.Message ) } );
+      }
+    }
+    private void m_MilestoneDropDown_SelectedIndexChanged( object sender, EventArgs e )
+    {
+      Milestone _cm = Element.GetAtIndex<Milestone>( m_DataContext.DataContext.Milestone, m_MilestoneDropDown.SelectedValue );
+      if ( m_ShowAllMilestonesCheckBox.Checked )
+      {
+        Requirements _firs = _cm.Requirements.FirstOrDefault<Requirements>();
+        m_RequirementDropDown.SelectItem4Element( _firs );
+      }
+      else
+        m_RequirementDropDown.EntityListDataSource( _cm.Requirements );
+    }
+    private void m_RequirementDropDown_SelectedIndexChanged( object sender, EventArgs e )
+    {
+      if ( !m_ShowAllMilestonesCheckBox.Checked )
+        return;
+      Requirements _cr = Element.GetAtIndex<Requirements>( m_DataContext.DataContext.Requirements, m_RequirementDropDown.SelectedValue );
+      m_MilestoneDropDown.SelectItem4Element( _cr.Requirements2MilestoneTitle );
+    }
+    private void m_ShowAllMilestonesCheckBox_CheckedChanged( object sender, EventArgs e )
+    {
+      int? _pId = m_ControlState.ProjectID.String2Int();
+      if ( !_pId.HasValue )
+        return;
+      Entities _dcxt = this.m_DataContext.DataContext;
+      Requirements _currentRequrenment = Element.GetAtIndex<Requirements>( m_DataContext.DataContext.Requirements, m_RequirementDropDown.SelectedValue );
+      if ( m_ShowAllMilestonesCheckBox.Checked )
+      {
+        m_RequirementDropDown.EntityListDataSource( _dcxt.ActiveRequirements( _pId.Value ) );
+        m_RequirementDropDown.SelectItem4Element( _currentRequrenment );
+      }
+      else
+      {
+        Milestone _cm = Element.GetAtIndex<Milestone>( _dcxt.Milestone, m_MilestoneDropDown.SelectedValue );
+        m_RequirementDropDown.SelectItem4Element( _currentRequrenment );
       }
     }
     #endregion
@@ -619,19 +670,6 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
                                                  where _categoryx.Category2ProjectsTitle.Identyfikator == _pId
                                                  orderby _categoryx.Title ascending
                                                  select _categoryx );
-      }
-    }
-
-    private void SetTargetForProject()
-    {
-      int? _pId = m_ControlState.ProjectID.String2Int();
-      if ( _pId.HasValue )
-      {
-        Entities _dcxt = this.m_DataContext.DataContext;
-        m_RequirementDropDown.EntityListDataSource( from _rsrcx in _dcxt.Requirements
-                                                    //let _acv = _rsrcx.Requirements2MilestoneTitle == null || _rsrcx.Requirements2MilestoneTitle.Active.GetValueOrDefault( true )
-                                                    where _rsrcx.Requirements2ProjectsTitle.Identyfikator == _pId
-                                                    select _rsrcx );
         IQueryable<Milestone> _mlstns = from _mlstnsx in _dcxt.Milestone
                                         where _mlstnsx.Milestone2ProjectTitle.Identyfikator == _pId && _mlstnsx.Active.HasValue && _mlstnsx.Active.Value
                                         orderby _mlstnsx.SortOrder.HasValue ? _mlstnsx.SortOrder.Value : 0 ascending
@@ -641,17 +679,28 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
                                                   where _mlstnsx.Active.HasValue && _mlstnsx.Active.Value
                                                   select _mlstnsx;
         m_MilestoneDropDown.EntityListDataSource( _activeMilestones );
-        Milestone _milestoneDefault = ( from _mlstx in _mlstns where _mlstx.Default.HasValue && _mlstx.Default.Value select _mlstx ).FirstOrDefault<Milestone>();
-        if ( _milestoneDefault != null )
-        {
-          string _idx = _milestoneDefault.Identyfikator.IntToString();
-          m_VersionDropDown.SelectedValue = _idx;
-          m_MilestoneDropDown.SelectedValue = _idx;
-          if ( _milestoneDefault.MilestoneEnd.HasValue )
-            m_DueDateDateTimeControl.SelectedDate = _milestoneDefault.MilestoneEnd.Value;
-          else
-            m_DueDateDateTimeControl.ClearSelection();
-        }
+      }
+    }
+
+    private void SetTargetForProject()
+    {
+      int? _pId = m_ControlState.ProjectID.String2Int();
+      if ( _pId.HasValue )
+      {
+        Entities _dcxt = this.m_DataContext.DataContext;
+        m_RequirementDropDown.EntityListDataSource( _dcxt.ActiveRequirements( _pId.Value ) );
+        //TODO handle default requirements.
+        //Milestone _milestoneDefault = ( from _mlstx in _mlstns where _mlstx.Default.HasValue && _mlstx.Default.Value select _mlstx ).FirstOrDefault<Milestone>();
+        //if ( _milestoneDefault != null )
+        //{
+        //  string _idx = _milestoneDefault.Identyfikator.IntToString();
+        //  m_VersionDropDown.SelectedValue = _idx;
+        //  m_MilestoneDropDown.SelectedValue = _idx;
+        //  if ( _milestoneDefault.MilestoneEnd.HasValue )
+        //    m_DueDateDateTimeControl.SelectedDate = _milestoneDefault.MilestoneEnd.Value;
+        //  else
+        //    m_DueDateDateTimeControl.ClearSelection();
+        //}
         //m_RequirementDropDown.EntityListDataSource( from _mlstnx in _activeMilestones
         //                                            from _rsrcx in _mlstnx.Requirements
         //                                            select _rsrcx );
