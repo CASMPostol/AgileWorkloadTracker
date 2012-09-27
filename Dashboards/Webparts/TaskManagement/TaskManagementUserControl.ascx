@@ -84,7 +84,7 @@
                                 <asp:Label ID="m_ShowAllMilestonesLabel" runat="server" CssClass="Label" Text="Show all milestones" />
                             </asp:TableCell>
                             <asp:TableCell>
-                                <asp:CheckBox ID="m_ShowAllMilestonesCheckBox" runat="server" />
+                                <asp:CheckBox ID="m_ShowAllMilestonesCheckBox" runat="server" AutoPostBack="true" />
                             </asp:TableCell>
                         </asp:TableRow>
                         <asp:TableRow>
