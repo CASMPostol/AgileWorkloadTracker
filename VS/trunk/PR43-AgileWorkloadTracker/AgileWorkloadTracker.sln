@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PR44-SharePoint", "PR44-SharePoint", "{D7623CBA-3272-4F38-ACF9-2AFF107DDAEA}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Website", "Website\Website.csproj", "{3C290EF1-A0FA-46BB-BC4A-F6B22C832E5A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dashboards", "Dashboards\Dashboards.csproj", "{ACEDFFBA-2F1C-42B6-AB0B-F3958397523B}"
@@ -13,8 +15,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITRDataAccess", "ITRDataAccess\ITRDataAccess.csproj", "{81EC216E-4BE8-406C-8DFE-D5919A08F4F5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharePoint", "..\PR44-SharePoint\SharePoint\SharePoint.csproj", "{B9D9FCCA-6132-4BF5-BC17-32EA752D6AD7}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PR44-SharePoint", "PR44-SharePoint", "{D7623CBA-3272-4F38-ACF9-2AFF107DDAEA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPMetalParametersCreator", "..\PR44-SharePoint\SPMetalParametersCreator\SPMetalParametersCreator.csproj", "{7589DF10-1129-4833-B5BA-321B2F44B747}"
 EndProject
