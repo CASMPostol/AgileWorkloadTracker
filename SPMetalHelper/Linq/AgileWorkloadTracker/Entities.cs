@@ -2258,6 +2258,8 @@ namespace CAS.AgileWorkloadTracker.Linq {
 	[Microsoft.SharePoint.Linq.ContentTypeAttribute(Name="Requirements", Id="0x01008B9076C2C55F47A298C387804D856FC8")]
 	internal partial class Requirements : Element {
 		
+		private string _body;
+		
 		private System.Nullable<RequirementsType> _requirementsType;
 		
 		private Microsoft.SharePoint.Linq.EntityRef<Projects> _requirements2ProjectsTitle;
@@ -2286,6 +2288,20 @@ namespace CAS.AgileWorkloadTracker.Linq {
 			this._tasks.OnChanged += new System.EventHandler(this.OnTasksChanged);
 			this._tasks.OnChanging += new System.EventHandler(this.OnTasksChanging);
 			this.OnCreated();
+		}
+		
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="Body", Storage="_body", FieldType="Note")]
+		public string Body {
+			get {
+				return this._body;
+			}
+			set {
+				if ((value != this._body)) {
+					this.OnPropertyChanging("Body", this._body);
+					this._body = value;
+					this.OnPropertyChanged("Body");
+				}
+			}
 		}
 		
 		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="RequirementsType", Storage="_requirementsType", FieldType="Choice")]
@@ -2769,6 +2785,8 @@ namespace CAS.AgileWorkloadTracker.Linq {
 	[Microsoft.SharePoint.Linq.ContentTypeAttribute(Name="Status", Id="0x0100798F904919E54652B0BBC121E7F6A818")]
 	internal partial class Status : Element {
 		
+		private System.Nullable<bool> _active;
+		
 		private Microsoft.SharePoint.Linq.EntitySet<Tasks> _tasks;
 		
 		#region Extensibility Method Definitions
@@ -2783,6 +2801,20 @@ namespace CAS.AgileWorkloadTracker.Linq {
 			this._tasks.OnChanged += new System.EventHandler(this.OnTasksChanged);
 			this._tasks.OnChanging += new System.EventHandler(this.OnTasksChanging);
 			this.OnCreated();
+		}
+		
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="Active", Storage="_active", FieldType="Boolean")]
+		public System.Nullable<bool> Active {
+			get {
+				return this._active;
+			}
+			set {
+				if ((value != this._active)) {
+					this.OnPropertyChanging("Active", this._active);
+					this._active = value;
+					this.OnPropertyChanged("Active");
+				}
+			}
 		}
 		
 		[Microsoft.SharePoint.Linq.AssociationAttribute(Name="Task2StatusTitle", Storage="_tasks", ReadOnly=true, MultivalueType=Microsoft.SharePoint.Linq.AssociationType.Backward, List="Task")]
@@ -2828,6 +2860,8 @@ namespace CAS.AgileWorkloadTracker.Linq {
 		private System.Nullable<System.DateTime> _baselineStart;
 		
 		private System.Nullable<System.DateTime> _baselineEnd;
+		
+		private System.Nullable<bool> _active;
 		
 		private Microsoft.SharePoint.Linq.EntityRef<Projects> _task2ProjectTitle;
 		
@@ -2977,6 +3011,20 @@ namespace CAS.AgileWorkloadTracker.Linq {
 					this.OnPropertyChanging("BaselineEnd", this._baselineEnd);
 					this._baselineEnd = value;
 					this.OnPropertyChanged("BaselineEnd");
+				}
+			}
+		}
+		
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="Active", Storage="_active", FieldType="Boolean")]
+		public System.Nullable<bool> Active {
+			get {
+				return this._active;
+			}
+			set {
+				if ((value != this._active)) {
+					this.OnPropertyChanging("Active", this._active);
+					this._active = value;
+					this.OnPropertyChanged("Active");
 				}
 			}
 		}
