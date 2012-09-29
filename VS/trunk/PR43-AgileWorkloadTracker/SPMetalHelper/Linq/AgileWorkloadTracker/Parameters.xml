@@ -81,9 +81,11 @@
     <Column Name="TaskEnd" Member="TaskEnd" />
     <Column Name="BaselineStart" Member="BaselineStart" />
     <Column Name="BaselineEnd" Member="BaselineEnd" />
+    <Column Name="Active" Member="Active" />
   </ContentType>
   <ContentType Name="Status" Class="Status">
     <Column Name="Title" Member="Title" />
+    <Column Name="Active" Member="Active" />
   </ContentType>
   <ContentType Name="Stage" Class="Stage">
     <Column Name="Title" Member="Title" />
@@ -96,6 +98,7 @@
   </ContentType>
   <ContentType Name="Requirements" Class="Requirements">
     <Column Name="Title" Member="Title" />
+    <Column Name="Body" Member="Body" />
     <Column Name="RequirementsType" Member="RequirementsType" />
     <Column Name="Requirements2ProjectsTitle" Member="Requirements2ProjectsTitle" />
     <Column Name="Requirements2MilestoneTitle" Member="Requirements2MilestoneTitle" />
