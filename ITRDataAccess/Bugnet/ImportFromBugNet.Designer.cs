@@ -48,6 +48,7 @@
       this.m_projectCustomFieldValuesTableAdapter = new CAS.ITRDataAccess.Bugnet.DatabaseContentDataSetTableAdapters.ProjectCustomFieldValuesTableAdapter();
       this.m_relatedBugTableAdapter = new CAS.ITRDataAccess.Bugnet.DatabaseContentDataSetTableAdapters.RelatedBugTableAdapter();
       this.m_aspnet_UsersTableAdapter = new CAS.ITRDataAccess.Bugnet.DatabaseContentDataSetTableAdapters.aspnet_UsersTableAdapter();
+      this.m_componentTableAdapter = new CAS.ITRDataAccess.Bugnet.DatabaseContentDataSetTableAdapters.ComponentTableAdapter();
       ((System.ComponentModel.ISupportInitialize)(this.m_BugNETDataSet)).BeginInit();
       // 
       // m_BugNETDataSet
@@ -131,6 +132,10 @@
       // m_aspnet_UsersTableAdapter
       // 
       this.m_aspnet_UsersTableAdapter.ClearBeforeFill = true;
+      // 
+      // m_componentTableAdapter
+      // 
+      this.m_componentTableAdapter.ClearBeforeFill = true;
       ((System.ComponentModel.ISupportInitialize)(this.m_BugNETDataSet)).EndInit();
 
     }
@@ -157,5 +162,6 @@
     private DatabaseContentDataSetTableAdapters.RelatedBugTableAdapter m_relatedBugTableAdapter;
     private DatabaseContentDataSet m_BugNETDataSet;
     private DatabaseContentDataSetTableAdapters.aspnet_UsersTableAdapter m_aspnet_UsersTableAdapter;
+    private DatabaseContentDataSetTableAdapters.ComponentTableAdapter m_componentTableAdapter;
   }
 }
