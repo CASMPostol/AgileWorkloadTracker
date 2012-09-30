@@ -32,6 +32,7 @@ namespace CAS.ITRDataAccess.Bugnet
       m_projectCustomFieldSelectionTableAdapter.Fill( m_BugNETDataSet.ProjectCustomFieldSelection );
       m_projectMailBoxTableAdapter.Fill( m_BugNETDataSet.ProjectMailBox );
       //TODO Roles if required.
+      m_componentTableAdapter.Fill( m_BugNETDataSet.Component );
       m_resolutionTableAdapter.Fill( m_BugNETDataSet.Resolution );
       m_statusTableAdapter.Fill( m_BugNETDataSet.Status );
       m_typeTableAdapter.Fill( m_BugNETDataSet.Type );

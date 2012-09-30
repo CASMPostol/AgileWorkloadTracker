@@ -53,11 +53,19 @@ namespace CAS.ITRDataAccess.SharePoint
     {
       Import( m_BugNETDataSet.Project, GetDefaultStage( _ent ), _ent );
       Import( m_BugNETDataSet.Version, _ent, GetDefaultStage( _ent ) );
+      Import( m_BugNETDataSet.Component, _ent );
       Import( m_BugNETDataSet.Status, _ent );
       Import( m_BugNETDataSet.Priority, _ent );
       Import( m_BugNETDataSet.Resolution, _ent );
       Import( m_BugNETDataSet.Type, _ent );
       Import( m_BugNETDataSet.Bug, _ent );
+    }
+    private void Import( Bugnet.DatabaseContentDataSet.ComponentDataTable componentDataTable, Entities _ent )
+    {
+      Console.WriteLine( "BugNet ComponentDataTable starting" );
+      foreach ( Bugnet.DatabaseContentDataSet.ComponentRow _row in componentDataTable )
+        Create<Category>( _ent.Category, m_CategoryDictionary, _row.Name, _row.ComponentID );
+      _ent.SubmitChanges();
     }
     private void Import( Bugnet.DatabaseContentDataSet.aspnet_UsersDataTable usersDataTable, Entities m_Entities )
     {
@@ -163,6 +171,7 @@ namespace CAS.ITRDataAccess.SharePoint
           _bugId = item.BugID;
           Tasks _newTask = Create<Tasks>( _entt.Task, null, item.Summary.SPValidSubstring(), item.BugID );
           _newTask.Body = item.Description;
+          _newTask.Task2CategoryTitle = GetOrAdd<Category>( _entt.Category, m_CategoryDictionary, item.ComponentID );
           _newTask.Task2MilestoneDefinedInTitle = GetOrAdd<Milestone>( _entt.Milestone, m_MilestoneDictionary, item.VersionID );
           _newTask.Task2MilestoneResolvedInTitle = GetOrAdd<Milestone>( _entt.Milestone, m_MilestoneDictionary, item.FixedInVersionId );
           _newTask.Task2ProjectTitle = GetOrAdd<Projects>( _entt.Projects, m_ProjectsDictionaryBugNet, item.ProjectID );
@@ -183,6 +192,14 @@ namespace CAS.ITRDataAccess.SharePoint
           GetOrAddEstimation( _entt.Estimation, _newTask.Task2ResourcesTitle, _newTask.Task2ProjectTitle );
           foreach ( Bugnet.DatabaseContentDataSet.BugCommentRow _comment in item.GetBugCommentRows() )
             Import( _newTask, _comment, _entt );
+          if ( _newTask.Task2TypeTitle.Title.ToLower().Contains( "New" ) )
+          {
+            Requirements _newRequirement = Create<Requirements>( _entt.Requirements, null, _newTask.Task2TypeTitle.Title, -1 );
+            _newRequirement.Body = _newTask.Body;
+            _newRequirement.Requirements2MilestoneTitle = _newTask.Task2MilestoneResolvedInTitle;
+            _newRequirement.Requirements2ProjectsTitle = _newTask.Task2ProjectTitle;
+            _newRequirement.RequirementsType = RequirementsType.Functional;
+          }
           Console.Write( "\r" );
           Console.Write( _iteration++ );
           if ( _iteration % 100 == 0 )
@@ -190,7 +207,7 @@ namespace CAS.ITRDataAccess.SharePoint
         }
         catch ( Exception ex )
         {
-          Console.WriteLine( String.Format( "Error importing GODZINYDataTable of BugID: {0}, because of {1}", _bugId, ex.Message ) );
+          Console.WriteLine( String.Format( "Error importing BugDataTable of BugID: {0}, because of {1}", _bugId, ex.Message ) );
         }
       }
       _entt.SubmitChanges();
@@ -505,6 +522,7 @@ namespace CAS.ITRDataAccess.SharePoint
     private Dictionary<int, Milestone> m_MilestoneDictionary = new Dictionary<int, Milestone>();
     private Dictionary<int, Resolution> m_ResolutionDictionary = new Dictionary<int, Resolution>();
     private Dictionary<int, TaskType> m_TaskTypeDictionary = new Dictionary<int, TaskType>();
+    private Dictionary<int, Category> m_CategoryDictionary = new Dictionary<int, Category>();
     private Dictionary<int, Status> m_StatusDictionary = new Dictionary<int, Status>();
     private Dictionary<int, Priority> m_PriorityDictionary = new Dictionary<int, Priority>();
     private Dictionary<int, Estimation> m_EstimationDictionary = new Dictionary<int, Estimation>();

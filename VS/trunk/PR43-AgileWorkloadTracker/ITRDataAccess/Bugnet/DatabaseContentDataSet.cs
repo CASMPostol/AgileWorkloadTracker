@@ -8,6 +8,9 @@ namespace CAS.ITRDataAccess.Bugnet
   public partial class DatabaseContentDataSet
   {
 
+    partial class ComponentDataTable
+    {
+    }
   }
 }
 
