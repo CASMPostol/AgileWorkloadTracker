@@ -39,7 +39,7 @@ namespace CAS.ITRDataAccess.Bugnet
       m_BugTableAdapter.Fill( m_BugNETDataSet.Bug );
       m_bugAttachmentTableAdapter.Fill( m_BugNETDataSet.BugAttachment );
       m_bugCommentTableAdapter.Fill( m_BugNETDataSet.BugComment );
-      m_bugHistoryTableAdapter.Fill( m_BugNETDataSet.BugHistory );
+      //m_bugHistoryTableAdapter.Fill( m_BugNETDataSet.BugHistory );
       m_bugNotificationTableAdapter.Fill( m_BugNETDataSet.BugNotification );
       m_bugTimeEntryTableAdapter.Fill( m_BugNETDataSet.BugTimeEntry );
       m_projectCustomFieldValuesTableAdapter.Fill( m_BugNETDataSet.ProjectCustomFieldValues );
