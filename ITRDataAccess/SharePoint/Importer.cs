@@ -192,7 +192,7 @@ namespace CAS.ITRDataAccess.SharePoint
           GetOrAddEstimation( _entt.Estimation, _newTask.Task2ResourcesTitle, _newTask.Task2ProjectTitle );
           foreach ( Bugnet.DatabaseContentDataSet.BugCommentRow _comment in item.GetBugCommentRows() )
             Import( _newTask, _comment, _entt );
-          if ( _newTask.Task2TypeTitle.Title.ToLower().Contains( "New" ) )
+          if ( _newTask.Task2TypeTitle.Title.ToLower().Contains( "new" ) )
           {
             Requirements _newRequirement = Create<Requirements>( _entt.Requirements, null, _newTask.Task2TypeTitle.Title, -1 );
             _newRequirement.Body = _newTask.Body;
