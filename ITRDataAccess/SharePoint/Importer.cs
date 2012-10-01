@@ -58,8 +58,9 @@ namespace CAS.ITRDataAccess.SharePoint
       Import( m_BugNETDataSet.Priority, _ent );
       Import( m_BugNETDataSet.Resolution, _ent );
       Import( m_BugNETDataSet.Type, _ent );
-      Import( m_BugNETDataSet.Bug, _ent );
+      Import( m_BugNETDataSet.Bug, m_BugNETDataSet.BugComment, _ent );
     }
+
     private void Import( Bugnet.DatabaseContentDataSet.ComponentDataTable componentDataTable, Entities _ent )
     {
       Console.WriteLine( "BugNet ComponentDataTable starting" );
@@ -157,7 +158,7 @@ namespace CAS.ITRDataAccess.SharePoint
         Create<Priority>( _entt.Priority, m_PriorityDictionary, _row.Name, _row.PriorityID );
       _entt.SubmitChanges();
     }
-    private void Import( Bugnet.DatabaseContentDataSet.BugDataTable bugDataTable, Entities _entt )
+    private void Import( Bugnet.DatabaseContentDataSet.BugDataTable bugDataTable, Bugnet.DatabaseContentDataSet.BugCommentDataTable comments, Entities entt )
     {
       Console.WriteLine( "BugNet BugDataTable starting" );
       int _iteration = 0;
@@ -169,32 +170,34 @@ namespace CAS.ITRDataAccess.SharePoint
           if ( item.LastUpdate < Properties.Settings.Default.WorkloadStartDate )
             continue;
           _bugId = item.BugID;
-          Tasks _newTask = Create<Tasks>( _entt.Task, null, item.Summary.SPValidSubstring(), item.BugID );
+          Tasks _newTask = Create<Tasks>( entt.Task, null, item.Summary.SPValidSubstring(), item.BugID );
           _newTask.Body = item.Description;
-          _newTask.Task2CategoryTitle = GetOrAdd<Category>( _entt.Category, m_CategoryDictionary, item.ComponentID );
-          _newTask.Task2MilestoneDefinedInTitle = GetOrAdd<Milestone>( _entt.Milestone, m_MilestoneDictionary, item.VersionID );
-          _newTask.Task2MilestoneResolvedInTitle = GetOrAdd<Milestone>( _entt.Milestone, m_MilestoneDictionary, item.FixedInVersionId );
-          _newTask.Task2ProjectTitle = GetOrAdd<Projects>( _entt.Projects, m_ProjectsDictionaryBugNet, item.ProjectID );
+          _newTask.Task2CategoryTitle = GetOrAdd<Category>( entt.Category, m_CategoryDictionary, item.ComponentID );
+          _newTask.Task2MilestoneDefinedInTitle = GetOrAdd<Milestone>( entt.Milestone, m_MilestoneDictionary, item.VersionID );
+          _newTask.Task2MilestoneResolvedInTitle = GetOrAdd<Milestone>( entt.Milestone, m_MilestoneDictionary, item.FixedInVersionId );
+          _newTask.Task2ProjectTitle = GetOrAdd<Projects>( entt.Projects, m_ProjectsDictionaryBugNet, item.ProjectID );
           _newTask.BaselineEnd = _newTask.Task2MilestoneResolvedInTitle.BaselineEnd.GetValueOrNull();
           _newTask.BaselineStart = _newTask.Task2MilestoneResolvedInTitle.BaselineStart.GetValueOrNull();
           _newTask.TaskStart = SPExtensions.DateTimeNull;
           _newTask.TaskEnd = SPExtensions.DateTimeNull;
           if ( !item.IsAssignedToUserIdNull() )
-            _newTask.Task2ResourcesTitle = GetOrAdd<Resources>( _entt.Resources, m_ResourcesDictionaryBugNet, item.AssignedToUserId );
+            _newTask.Task2ResourcesTitle = GetOrAdd<Resources>( entt.Resources, m_ResourcesDictionaryBugNet, item.AssignedToUserId );
           else
             _newTask.Task2ResourcesTitle = null;
-          _newTask.Task2SPriorityTitle = GetOrAdd<Priority>( _entt.Priority, m_PriorityDictionary, item.PriorityID );
-          _newTask.Task2SResolutionTitle = GetOrAdd<Resolution>( _entt.Resolution, m_ResolutionDictionary, item.ResolutionID );
+          _newTask.Task2SPriorityTitle = GetOrAdd<Priority>( entt.Priority, m_PriorityDictionary, item.PriorityID );
+          _newTask.Task2SResolutionTitle = GetOrAdd<Resolution>( entt.Resolution, m_ResolutionDictionary, item.ResolutionID );
           if ( !_newTask.Task2SResolutionTitle.Title.ToLower().Contains( "closed" ) )
             _newTask.Task2MilestoneResolvedInTitle.Active = true;
-          _newTask.Task2StatusTitle = GetOrAdd<Status>( _entt.Status, m_StatusDictionary, item.StatusID );
-          _newTask.Task2TypeTitle = GetOrAdd<TaskType>( _entt.Type, m_TaskTypeDictionary, item.TypeID );
-          GetOrAddEstimation( _entt.Estimation, _newTask.Task2ResourcesTitle, _newTask.Task2ProjectTitle );
+          _newTask.Task2StatusTitle = GetOrAdd<Status>( entt.Status, m_StatusDictionary, item.StatusID );
+          _newTask.Task2TypeTitle = GetOrAdd<TaskType>( entt.Type, m_TaskTypeDictionary, item.TypeID );
+          GetOrAddEstimation( entt.Estimation, _newTask.Task2ResourcesTitle, _newTask.Task2ProjectTitle );
           foreach ( Bugnet.DatabaseContentDataSet.BugCommentRow _comment in item.GetBugCommentRows() )
-            Import( _newTask, _comment, _entt );
+            Import( _newTask, _comment, entt );
+          foreach ( Bugnet.DatabaseContentDataSet.BugTimeEntryRow _te in item.GetBugTimeEntryRows() )
+            Import( _newTask, _te, comments, entt );
           if ( _newTask.Task2TypeTitle.Title.ToLower().Contains( "new" ) )
           {
-            Requirements _newRequirement = Create<Requirements>( _entt.Requirements, null, _newTask.Task2TypeTitle.Title, -1 );
+            Requirements _newRequirement = Create<Requirements>( entt.Requirements, null, _newTask.Task2TypeTitle.Title, -1 );
             _newRequirement.Body = _newTask.Body;
             _newRequirement.Requirements2MilestoneTitle = _newTask.Task2MilestoneResolvedInTitle;
             _newRequirement.Requirements2ProjectsTitle = _newTask.Task2ProjectTitle;
@@ -203,14 +206,42 @@ namespace CAS.ITRDataAccess.SharePoint
           Console.Write( "\r" );
           Console.Write( _iteration++ );
           if ( _iteration % 100 == 0 )
-            _entt.SubmitChanges();
+            entt.SubmitChanges();
         }
         catch ( Exception ex )
         {
           Console.WriteLine( String.Format( "Error importing BugDataTable of BugID: {0}, because of {1}", _bugId, ex.Message ) );
         }
       }
-      _entt.SubmitChanges();
+      entt.SubmitChanges();
+    }
+    private void Import( Tasks _newTask, Bugnet.DatabaseContentDataSet.BugTimeEntryRow _te, Bugnet.DatabaseContentDataSet.BugCommentDataTable _comments, Entities _entt )
+    {
+      int _bugId = 0;
+      try
+      {
+        _bugId = _te.BugTimeEntryId;
+        Resources _author = GetOrAdd<Resources>( _entt.Resources, m_ResourcesDictionaryBugNet, _te.CreatedUserId );
+        Workload _new = new Workload()
+        {
+          Hours = Convert.ToDouble( _te.Duration ),
+          ReadOnly = false,
+          Title = _newTask.Title,//_comments[ _te.BugCommentId ].Comment,
+          WeekNumber = WeekNumber( _te.WorkDate ),
+          Workload2ProjectTitle = _newTask.Task2ProjectTitle,
+          Workload2ResourcesTitle = _author,
+          Workload2StageTitle = _newTask.Task2ProjectTitle == null ? null : _newTask.Task2ProjectTitle.Project2StageTitle,
+          Workload2TaskTitle = _newTask,
+          WorkloadDate = _te.WorkDate,
+          Year = _te.WorkDate.Year
+        };
+        _entt.Workload.InsertOnSubmit( _new );
+        _entt.SubmitChanges();
+      }
+      catch ( Exception _ex )
+      {
+        Console.WriteLine( String.Format( "Error importing BugTimeEntryRow of id: {0}, because of {1}", _bugId, _ex.Message ) );
+      };
     }
     private void Import( Tasks task, Bugnet.DatabaseContentDataSet.BugCommentRow bugComment, Entities _entt )
     {
@@ -285,7 +316,7 @@ namespace CAS.ITRDataAccess.SharePoint
           _new.WorkloadDate = _row.IsDATANull() ? SPExtensions.DateTimeNull : _row.DATA;
           _new.Workload2TaskTitle = CreateTask( m_Entities, _row.RODZAJPRACYRow, _new.Workload2ProjectTitle, _new.Workload2ResourcesTitle, _new.WorkloadDate.Value );
           _new.ReadOnly = true;
-          _new.WeekNumber = _new.WorkloadDate.Value.DayOfYear / 7;
+          _new.WeekNumber = WeekNumber( _new.WorkloadDate.Value );
           _new.Year = _new.WorkloadDate.Value.Year;
           if ( _new.WorkloadDate.HasValue )
             _new.Workload2TaskTitle.Adjust( _new.WorkloadDate.Value );
@@ -302,12 +333,15 @@ namespace CAS.ITRDataAccess.SharePoint
       try
       {
         m_Entities.SubmitChanges();
-
       }
       catch ( Exception ex )
       {
         Console.WriteLine( String.Format( "Error importing GODZINYDataTable of ID: {0}, because of {1}", _bugId, ex.Message ) );
       }
+    }
+    private static int WeekNumber( DateTime date )
+    {
+      return date.DayOfYear / 7;
     }
     private void Import( TimeTracking.TimeTrackingDataSet.PROJEKTYDataTable pROJEKTYDataTable, Entities m_Entities )
     {
