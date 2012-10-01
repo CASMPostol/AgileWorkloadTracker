@@ -435,7 +435,7 @@ namespace CAS.ITRDataAccess.SharePoint
     {
       if ( resources == null || project == null )
         return null;
-      Estimation _estimation = ( from _eidx in project.Estimation let _ridx = _eidx.Estimation2ResourcesTitle where _eidx.Identyfikator == _ridx.Identyfikator select _eidx ).FirstOrDefault();
+      Estimation _estimation = ( from _eidx in project.Estimation let _ridx = _eidx.Estimation2ResourcesTitle where resources.Identyfikator == _ridx.Identyfikator select _eidx ).FirstOrDefault();
       if ( _estimation == null )
       {
         _estimation = new Estimation()
