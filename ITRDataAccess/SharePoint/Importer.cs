@@ -120,7 +120,6 @@ namespace CAS.ITRDataAccess.SharePoint
           _new.Active = false;
           _new.MilestoneHours = 0;
           _entt.SubmitChanges();
-          _entt.SubmitChanges();
         }
         catch ( Exception _ex )
         {
@@ -199,7 +198,7 @@ namespace CAS.ITRDataAccess.SharePoint
           _newTask.Task2StatusTitle = GetOrAdd<Status>( entt.Status, m_StatusDictionary, item.StatusID );
           _newTask.Active = _newTask.Task2StatusTitle.Active;
           if ( _newTask.Active.GetValueOrDefault( false ) )
-            _newTask.Task2StatusTitle.Active = true;
+            _newTask.Task2MilestoneResolvedInTitle.Active = true;
           _newTask.Task2TypeTitle = GetOrAdd<TaskType>( entt.Type, m_TaskTypeDictionary, item.TypeID );
           GetOrAddEstimation( entt.Estimation, _newTask.Task2ResourcesTitle, _newTask.Task2ProjectTitle );
           foreach ( Bugnet.DatabaseContentDataSet.BugCommentRow _comment in item.GetBugCommentRows() )
