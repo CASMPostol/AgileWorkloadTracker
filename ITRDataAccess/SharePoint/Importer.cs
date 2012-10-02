@@ -60,12 +60,14 @@ namespace CAS.ITRDataAccess.SharePoint
       Import( m_BugNETDataSet.Type, _ent );
       Import( m_BugNETDataSet.Bug, m_BugNETDataSet.BugComment, _ent );
     }
-
     private void Import( Bugnet.DatabaseContentDataSet.ComponentDataTable componentDataTable, Entities _ent )
     {
       Console.WriteLine( "BugNet ComponentDataTable starting" );
       foreach ( Bugnet.DatabaseContentDataSet.ComponentRow _row in componentDataTable )
-        Create<Category>( _ent.Category, m_CategoryDictionary, _row.Name, _row.ComponentID );
+      {
+        Category _newCategory = Create<Category>( _ent.Category, m_CategoryDictionary, _row.Name, _row.ComponentID );
+        _newCategory.Category2ProjectsTitle = GetOrAdd<Projects>( _ent.Projects, m_ProjectsDictionaryBugNet, _row.ProjectID );
+      }
       _ent.SubmitChanges();
     }
     private void Import( Bugnet.DatabaseContentDataSet.aspnet_UsersDataTable usersDataTable, Entities m_Entities )
