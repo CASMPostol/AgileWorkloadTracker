@@ -141,8 +141,14 @@ namespace CAS.ITRDataAccess.SharePoint
       foreach ( var _row in statusDataTable )
       {
         Status _cs = Create<Status>( _entt.Status, m_StatusDictionary, _row.Name, _row.StatusID );
+        _cs.Active = false;
         if ( _cs.Title.ToLower().Contains( "closed" ) )
+        {
           m_ClosedStatus = _cs;
+          _cs.Active = false;
+        }
+        else if ( _cs.Title.ToLower().Contains( "resolved" ) )
+          _cs.Active = false;
       }
       _entt.SubmitChanges();
     }
@@ -191,6 +197,9 @@ namespace CAS.ITRDataAccess.SharePoint
           if ( !_newTask.Task2SResolutionTitle.Title.ToLower().Contains( "closed" ) )
             _newTask.Task2MilestoneResolvedInTitle.Active = true;
           _newTask.Task2StatusTitle = GetOrAdd<Status>( entt.Status, m_StatusDictionary, item.StatusID );
+          _newTask.Active = _newTask.Task2StatusTitle.Active;
+          if ( _newTask.Active.GetValueOrDefault( false ) )
+            _newTask.Task2StatusTitle.Active = true;
           _newTask.Task2TypeTitle = GetOrAdd<TaskType>( entt.Type, m_TaskTypeDictionary, item.TypeID );
           GetOrAddEstimation( entt.Estimation, _newTask.Task2ResourcesTitle, _newTask.Task2ProjectTitle );
           foreach ( Bugnet.DatabaseContentDataSet.BugCommentRow _comment in item.GetBugCommentRows() )
@@ -435,10 +444,10 @@ namespace CAS.ITRDataAccess.SharePoint
     #region mapping
     private Tasks CreateTask( Entities entities, TimeTracking.TimeTrackingDataSet.RODZAJPRACYRow rODZAJPRACYRow, Projects project, Resources resource, DateTime workloadDate )
     {
-      Milestone _cmlstone = (from _mx in project.Milestone 
-                             where _mx.BaselineStart < workloadDate && workloadDate < _mx.BaselineEnd 
-                             orderby _mx.BaselineStart ascending 
-                             select _mx ).FirstOrDefault();
+      Milestone _cmlstone = ( from _mx in project.Milestone
+                              where _mx.BaselineStart < workloadDate && workloadDate < _mx.BaselineEnd
+                              orderby _mx.BaselineStart ascending
+                              select _mx ).FirstOrDefault();
       if ( _cmlstone == null )
         _cmlstone = project.Milestone.FirstOrDefault();
       Tasks _newTask = new Tasks()
