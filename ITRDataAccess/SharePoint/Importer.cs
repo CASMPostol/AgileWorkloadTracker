@@ -199,7 +199,7 @@ namespace CAS.ITRDataAccess.SharePoint
             Import( _newTask, _te, comments, entt );
           if ( _newTask.Task2TypeTitle.Title.ToLower().Contains( "new" ) )
           {
-            Requirements _newRequirement = Create<Requirements>( entt.Requirements, null, _newTask.Task2TypeTitle.Title, -1 );
+            Requirements _newRequirement = Create<Requirements>( entt.Requirements, null, _newTask.Title, -1 );
             _newRequirement.Body = _newTask.Body;
             _newRequirement.Requirements2MilestoneTitle = _newTask.Task2MilestoneResolvedInTitle;
             _newRequirement.Requirements2ProjectsTitle = _newTask.Task2ProjectTitle;
