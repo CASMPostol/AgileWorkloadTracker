@@ -94,4 +94,12 @@ a.ms-addnew:Visited
     color:#003399;
     text-decoration:none;
 }
+/*SharePoint:InputFormTextBox*/
+table.ms-rtetoolbarmenu{ 
+    width:100%;
+} 
+
+iframe.ms-rtelong{ 
+    width:100%;
+} 
     
