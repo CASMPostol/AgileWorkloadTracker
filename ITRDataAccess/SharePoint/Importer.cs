@@ -341,10 +341,6 @@ namespace CAS.ITRDataAccess.SharePoint
         Console.WriteLine( String.Format( "Error importing GODZINYDataTable of ID: {0}, because of {1}", _bugId, ex.Message ) );
       }
     }
-    private static int WeekNumber( DateTime date )
-    {
-      return date.DayOfYear / 7;
-    }
     private void Import( TimeTracking.TimeTrackingDataSet.PROJEKTYDataTable pROJEKTYDataTable, Entities m_Entities )
     {
       Console.WriteLine( "TimeTracking PROJEKTYDataTable starting" );
@@ -439,10 +435,16 @@ namespace CAS.ITRDataAccess.SharePoint
     #region mapping
     private Tasks CreateTask( Entities entities, TimeTracking.TimeTrackingDataSet.RODZAJPRACYRow rODZAJPRACYRow, Projects project, Resources resource, DateTime workloadDate )
     {
+      Milestone _cmlstone = (from _mx in project.Milestone 
+                             where _mx.BaselineStart < workloadDate && workloadDate < _mx.BaselineEnd 
+                             orderby _mx.BaselineStart ascending 
+                             select _mx ).FirstOrDefault();
+      if ( _cmlstone == null )
+        _cmlstone = project.Milestone.FirstOrDefault();
       Tasks _newTask = new Tasks()
       {
-        Task2MilestoneDefinedInTitle = project.Milestone.FirstOrDefault(),
-        Task2MilestoneResolvedInTitle = project.Milestone.LastOrDefault(),
+        Task2MilestoneDefinedInTitle = _cmlstone,
+        Task2MilestoneResolvedInTitle = _cmlstone,
         Task2ProjectTitle = project,
         Task2ResourcesTitle = resource,
         Task2SPriorityTitle = null,
@@ -569,6 +571,10 @@ namespace CAS.ITRDataAccess.SharePoint
     #endregion
 
     #region private
+    private static int WeekNumber( DateTime date )
+    {
+      return date.DayOfYear / 7;
+    }
     private Status m_ClosedStatus = null;
     private const string DefaultStageTitle = "Imported";
     private Stage p_DefaultStage = null;
