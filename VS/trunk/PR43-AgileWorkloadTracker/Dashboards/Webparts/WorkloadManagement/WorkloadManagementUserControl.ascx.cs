@@ -89,6 +89,8 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
           {
             At = "FillupProjectDropDown";
             FillupProjectDropDown();
+            At = "FillupMilestoneDropDown";
+            FillupMilestoneDropDown();
             At = "FillupTaskaDropDown";
             FillupTaskaDropDown();
             At = "FindForUser";
@@ -100,6 +102,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
             m_PanelAddEdit.Enabled = false;
         }
         m_ProjectDropDown.SelectedIndexChanged += new EventHandler( m_ProjectDropDown_SelectedIndexChanged );
+        m_MilestoneDropDown.SelectedIndexChanged += m_MilestoneDropDown_SelectedIndexChanged;
         m_ButtonSave.Click += new EventHandler( m_StateMachineEngine.SaveButton_Click );
         m_ButtonAddNew.Click += new EventHandler( m_StateMachineEngine.NewButton_Click );
         m_ButtonCancel.Click += new EventHandler( m_StateMachineEngine.CancelButton_Click );
@@ -288,10 +291,12 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     {
       m_WorkloadHoursTextBox.Enabled = ( _set & GenericStateMachineEngine.ControlsSet.EditModeOn ) != 0;
       m_WorkloadDescriptionTextBox.Enabled = ( _set & GenericStateMachineEngine.ControlsSet.EditModeOn ) != 0;
+      bool _viewMode = ( _set & GenericStateMachineEngine.ControlsSet.EditModeOn ) == 0;
       //m_ProjectDropDown.Enabled = (_set & GenericStateMachineEngine.ControlsSet.EditModeOn) != 0;
-      m_TaskDropDown.Enabled = ( _set & GenericStateMachineEngine.ControlsSet.EditModeOn ) != 0;
-      m_GridView.Enabled = ( _set & GenericStateMachineEngine.ControlsSet.EditModeOn ) == 0;
-      m_Calendar.Enabled = ( _set & GenericStateMachineEngine.ControlsSet.EditModeOn ) == 0;
+      m_TaskDropDown.Enabled = !_viewMode;
+      m_MilestoneDropDown.Enabled = !_viewMode;
+      m_GridView.Enabled = _viewMode;
+      m_Calendar.Enabled = _viewMode;
       //Buttons
       m_ButtonSave.Enabled = ( _set & GenericStateMachineEngine.ControlsSet.SaveOn ) != 0;
       m_ButtonDelete.Enabled = ( _set & GenericStateMachineEngine.ControlsSet.DeleteOn ) != 0;
@@ -402,10 +407,29 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
         m_TaskDropDown.Items.Add( new ListItem( m_SelectProjectDropDownEntry, String.Empty ) { Selected = true } );
       else
       {
-        m_TaskDropDown.Items.Clear();
-        m_TaskDropDown.Items.Add( new ListItem( m_SelectTaskDropDownEntry, String.Empty ) { Selected = true } );
-        foreach ( Tasks _taskIdx in from _tidx in SelectedProject.Tasks select _tidx )
-          m_TaskDropDown.Items.Add( new ListItem( _taskIdx.Title, _taskIdx.Identyfikator.ToString() ) );
+        IQueryable<Tasks> _tasks = from _tidx in SelectedProject.Tasks
+                                   where _tidx.Active.GetValueOrDefault(true) && _tidx.Task2ResourcesTitle == Me
+                                   orderby _tidx.Title descending
+                                   select _tidx;
+        m_TaskDropDown.EntityListDataSource( _tasks );
+      }
+    }
+    private void FillupMilestoneDropDown()
+    {
+      m_MilestoneDropDown.Items.Clear();
+      if ( SelectedProject == null )
+        m_MilestoneDropDown.Items.Add( new ListItem( m_SelectProjectDropDownEntry, String.Empty ) { Selected = true } );
+      else
+      {
+        IQueryable<Milestone> _mstns = from _tidx in SelectedProject.Milestone
+                                       where _tidx.Active.GetValueOrDefault( false )
+                                       orderby _tidx.SortOrder descending
+                                       select _tidx;
+        m_MilestoneDropDown.EntityListDataSource<Milestone>( _mstns );
+        Milestone _default = ( from _amx in _mstns
+                               where _amx.Default.GetValueOrDefault( false )
+                               select _amx ).FirstOrDefault();
+        m_MilestoneDropDown.SelectItem4Element( _default );
       }
     }
     private void FillupProjectDropDown()
@@ -430,9 +454,11 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
       Workload _workload = Element.GetAtIndex<Workload>( m_DataContext.DataContext.Workload, _selection );
       m_WorkloadDescriptionTextBox.Text = _workload.Title;
       m_WorkloadHoursTextBox.Text = _workload.Hours.GetValueOrDefault( 0 ).ToString();
-      m_ProjectDropDown.Select( _workload.Workload2ProjectTitle != null ? _workload.Workload2ProjectTitle.Identyfikator.Value : 0 );
+      m_ProjectDropDown.SelectItem4Element( _workload.Workload2ProjectTitle );
+      FillupMilestoneDropDown();
+      m_MilestoneDropDown.SelectItem4Element( _workload.Workload2TaskTitle != null ? _workload.Workload2TaskTitle.Task2MilestoneResolvedInTitle : null );
       FillupTaskaDropDown();
-      m_TaskDropDown.Select( _workload.Workload2TaskTitle != null ? _workload.Workload2TaskTitle.Identyfikator.Value : 0 );
+      m_TaskDropDown.SelectItem4Element( _workload.Workload2TaskTitle );
     }
     #endregion
 
@@ -443,11 +469,26 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
       {
         if ( SelectedProject == null || Me == null )
           return;
+        FillupMilestoneDropDown();
         FillupTaskaDropDown();
       }
       catch ( Exception _ex )
       {
         ShowActionResult( GenericStateMachineEngine.ActionResult.Exception( _ex, "m_ProjectDropDown_SelectedIndexChanged" ) );
+      }
+    }
+
+    private void m_MilestoneDropDown_SelectedIndexChanged( object sender, EventArgs e )
+    {
+      try
+      {
+        if ( SelectedProject == null || Me == null )
+          return;
+        FillupTaskaDropDown();
+      }
+      catch ( Exception _ex )
+      {
+        ShowActionResult( GenericStateMachineEngine.ActionResult.Exception( _ex, "m_MilestoneDropDown_SelectedIndexChanged" ) );
       }
     }
     protected void m_GridView_SelectedIndexChanged( object sender, EventArgs e )
