@@ -13,7 +13,7 @@
 <asp:Panel ID="m_PanelAddEdit" runat="server" BorderColor="ActiveCaptionText" GroupingText="Add/Edit task">
     <asp:Table ID="m_TableMain" runat="server" CssClass="Table">
         <asp:TableRow>
-            <asp:TableCell VerticalAlign="Top">
+            <asp:TableCell Width="600px" VerticalAlign="Top">
                 <asp:Table ID="m_TableLeft" runat="server" CssClass="TableInside">
                     <asp:TableRow>
                         <asp:TableCell>
