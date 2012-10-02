@@ -419,7 +419,10 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
         if ( CurrentTask.Task2SResolutionTitle == null || CurrentTask.Task2SResolutionTitle.Identyfikator != m_ResolutionDropDown.SelectedValue.String2Int() )
           CurrentTask.Task2SResolutionTitle = m_ResolutionDropDown.GetSelected<Resolution>( _ent.Resolution );
         if ( CurrentTask.Task2StatusTitle == null || CurrentTask.Task2StatusTitle.Identyfikator != m_StatusDropDown.SelectedValue.String2Int() )
+        {
           CurrentTask.Task2StatusTitle = m_StatusDropDown.GetSelected<Status>( _ent.Status );
+          CurrentTask.Active = CurrentTask.Task2StatusTitle == null ? true : CurrentTask.Task2StatusTitle.Active.GetValueOrDefault( true );
+        }
         if ( CurrentTask.Task2TypeTitle == null || CurrentTask.Task2TypeTitle.Identyfikator != m_TypeDropDown.SelectedValue.String2Int() )
           CurrentTask.Task2TypeTitle = m_TypeDropDown.GetSelected<TaskType>( _ent.Type );
         if ( CurrentTask.Task2MilestoneResolvedInTitle != null )
