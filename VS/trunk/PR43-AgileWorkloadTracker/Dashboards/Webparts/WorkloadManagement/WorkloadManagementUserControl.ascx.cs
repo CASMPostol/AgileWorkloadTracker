@@ -403,13 +403,14 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     private void FillupTaskaDropDown()
     {
       m_TaskDropDown.Items.Clear();
-      if ( SelectedProject == null )
-        m_TaskDropDown.Items.Add( new ListItem( m_SelectProjectDropDownEntry, String.Empty ) { Selected = true } );
+      if ( SelectedMilestone == null )
+        m_TaskDropDown.Items.Add( new ListItem( m_SelectMilestoneDropDownEntry, String.Empty ) { Selected = true } );
       else
       {
-        IQueryable<Tasks> _tasks = from _tidx in SelectedProject.Tasks
-                                   where _tidx.Active.GetValueOrDefault(true) && _tidx.Task2ResourcesTitle == Me
-                                   orderby _tidx.Title descending
+        IQueryable<Tasks> _tasks = from _tidx in SelectedMilestone.Tasks0
+                                   let _stts = _tidx.Task2StatusTitle
+                                   where _stts == null ? true : _stts.Active.GetValueOrDefault( true ) && _tidx.Task2ResourcesTitle == Me
+                                   orderby _tidx.Title ascending
                                    select _tidx;
         m_TaskDropDown.EntityListDataSource( _tasks );
       }
@@ -423,7 +424,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
       {
         IQueryable<Milestone> _mstns = from _tidx in SelectedProject.Milestone
                                        where _tidx.Active.GetValueOrDefault( false )
-                                       orderby _tidx.SortOrder descending
+                                       orderby _tidx.SortOrder ascending
                                        select _tidx;
         m_MilestoneDropDown.EntityListDataSource<Milestone>( _mstns );
         Milestone _default = ( from _amx in _mstns
@@ -532,6 +533,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     #region vars
     private string At { get; set; }
     private const string m_SelectProjectDropDownEntry = "  -- select project -- ";
+    private const string m_SelectMilestoneDropDownEntry = "  -- select milestone -- ";
     private const string m_SelectTaskDropDownEntry = "  -- select task -- ";
     private const string m_keyCurrentYear = "CurrentYear";
     private DataContextManagement<Entities> m_DataContext = null;
@@ -552,6 +554,16 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
         {
           throw new ApplicationError( "Me", "", xe.Message, xe );
         }
+      }
+    }
+    private Milestone p_Milestone = null;
+    private Milestone SelectedMilestone
+    {
+      get
+      {
+        if ( p_Milestone == null && m_ProjectDropDown.SelectedIndex > 0 )
+          p_Milestone = Element.GetAtIndex<Milestone>( m_DataContext.DataContext.Milestone, m_MilestoneDropDown.SelectedValue );
+        return p_Milestone;
       }
     }
     private Projects p_Projects = null;
