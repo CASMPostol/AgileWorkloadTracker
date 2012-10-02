@@ -47,6 +47,15 @@
                                     </asp:TableRow>
                                     <asp:TableRow>
                                         <asp:TableCell>
+                                            <asp:Label ID="m_MilestoneLabel" runat="server" CssClass="Label" Text="Milestone" />
+                                        </asp:TableCell>
+                                        <asp:TableCell>
+                                            <asp:DropDownList ID="m_MilestoneDropDown" runat="server" CssClass="DropDown" AutoPostBack="true">
+                                            </asp:DropDownList>
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow>
+                                        <asp:TableCell>
                                             <asp:Label runat="server" ID="m_TaskLabel" Text="Task" CssClass="Label"></asp:Label>
                                         </asp:TableCell>
                                         <asp:TableCell>
