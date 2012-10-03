@@ -212,6 +212,8 @@ namespace CAS.ITRDataAccess.SharePoint
             _newRequirement.Requirements2MilestoneTitle = _newTask.Task2MilestoneResolvedInTitle;
             _newRequirement.Requirements2ProjectsTitle = _newTask.Task2ProjectTitle;
             _newRequirement.RequirementsType = RequirementsType.Functional;
+            entt.SubmitChanges();
+            _newTask.Task2RequirementsTitle = _newRequirement;
           }
           Console.Write( "\r" );
           Console.Write( _iteration++ );
