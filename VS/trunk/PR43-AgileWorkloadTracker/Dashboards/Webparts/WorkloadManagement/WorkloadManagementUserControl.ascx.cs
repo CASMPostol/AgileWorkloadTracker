@@ -74,7 +74,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
           m_GridView.Columns.Add( new BoundField() { DataField = "Project", HeaderText = "Project" } );
           m_GridView.Columns.Add( new BoundField() { DataField = "Task", HeaderText = "Task" } );
           //m_GridView.Columns.Add( new BoundField() { DataField = "Description", HeaderText = "Description", Visible = true } );
-          string _urlFormat = @"Lists/WorkloadList/DispForm.aspx?ID={0}";
+          string _urlFormat = @"../Lists/WorkloadList/DispForm.aspx?ID={0}";
           m_GridView.Columns.Add( new HyperLinkField() { DataTextField = "Description", HeaderText = "Workload", DataNavigateUrlFields = new string[] { "ID" }, DataNavigateUrlFormatString = _urlFormat, Visible = true } );
           m_GridView.Columns.Add( new BoundField() { DataField = "ID", HeaderText = "ID", Visible = false } );
           m_GridView.DataKeyNames = new String[] { "ID" };
