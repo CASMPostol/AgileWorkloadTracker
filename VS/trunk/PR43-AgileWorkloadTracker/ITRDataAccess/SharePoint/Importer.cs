@@ -113,10 +113,10 @@ namespace CAS.ITRDataAccess.SharePoint
           _new.Default = false;
           _new.Milestone2ProjectTitle = GetOrAdd<Projects>( _entt.Projects, m_ProjectsDictionaryBugNet, _row.ProjectID );
           _new.SortOrder = _row.SortOrder;
-          _new.BaselineEnd = _new.Milestone2ProjectTitle.ProjectEndDate.GetValueOrNull();
-          _new.BaselineStart = _new.Milestone2ProjectTitle.ProjectStartDate.GetValueOrNull();
-          _new.MilestoneStart = _new.BaselineEnd;
-          _new.MilestoneEnd = _new.BaselineStart;
+          //_new.BaselineEnd = _new.Milestone2ProjectTitle.ProjectEndDate.GetValueOrNull();
+          //_new.BaselineStart = _new.Milestone2ProjectTitle.ProjectStartDate.GetValueOrNull();
+          //_new.MilestoneStart = _new.BaselineEnd;
+          //_new.MilestoneEnd = _new.BaselineStart;
           _new.Milestone2StageTitle = projectStage;
           _new.Active = false;
           _new.MilestoneHours = 0;
@@ -184,7 +184,7 @@ namespace CAS.ITRDataAccess.SharePoint
           _newTask.Task2MilestoneDefinedInTitle = GetOrAdd<Milestone>( entt.Milestone, m_MilestoneDictionary, item.VersionID );
           _newTask.Task2MilestoneResolvedInTitle = GetOrAdd<Milestone>( entt.Milestone, m_MilestoneDictionary, item.FixedInVersionId );
           _newTask.Task2ProjectTitle = GetOrAdd<Projects>( entt.Projects, m_ProjectsDictionaryBugNet, item.ProjectID );
-          _newTask.BaselineEnd = item.IsDueDateNull() ? SPExtensions.DateTimeNull : item.DueDate;
+          _newTask.BaselineEnd = item.IsDueDateNull() ? item.ReportedDate : item.DueDate;
           _newTask.BaselineStart = item.ReportedDate;
           _newTask.TaskStart = item.LastUpdate;
           _newTask.TaskEnd = item.LastUpdate;
