@@ -97,6 +97,7 @@ namespace CAS.ITRDataAccess.SharePoint
         _new.Project2StageTitle = stage;
         _new.ProjectNumber = _row.Code;
         _new.ProjectStartDate = _row.CreateDate;
+        _new.ProjectEndDate = _row.CreateDate;
         _new.ProjectType = ProjectType.ProjectInternal;
       }
       _entt.SubmitChanges();
@@ -113,9 +114,9 @@ namespace CAS.ITRDataAccess.SharePoint
           _new.Milestone2ProjectTitle = GetOrAdd<Projects>( _entt.Projects, m_ProjectsDictionaryBugNet, _row.ProjectID );
           _new.SortOrder = _row.SortOrder;
           _new.BaselineEnd = _new.Milestone2ProjectTitle.ProjectEndDate.GetValueOrNull();
-          _new.BaselineStart = _new.Milestone2ProjectTitle.ProjectStartDate.GetValueOrDefault();
-          _new.MilestoneStart = SPExtensions.DateTimeNull;
-          _new.MilestoneEnd = SPExtensions.DateTimeNull;
+          _new.BaselineStart = _new.Milestone2ProjectTitle.ProjectStartDate.GetValueOrNull();
+          _new.MilestoneStart = _new.BaselineEnd;
+          _new.MilestoneEnd = _new.BaselineStart;
           _new.Milestone2StageTitle = projectStage;
           _new.Active = false;
           _new.MilestoneHours = 0;
@@ -183,18 +184,17 @@ namespace CAS.ITRDataAccess.SharePoint
           _newTask.Task2MilestoneDefinedInTitle = GetOrAdd<Milestone>( entt.Milestone, m_MilestoneDictionary, item.VersionID );
           _newTask.Task2MilestoneResolvedInTitle = GetOrAdd<Milestone>( entt.Milestone, m_MilestoneDictionary, item.FixedInVersionId );
           _newTask.Task2ProjectTitle = GetOrAdd<Projects>( entt.Projects, m_ProjectsDictionaryBugNet, item.ProjectID );
-          _newTask.BaselineEnd = _newTask.Task2MilestoneResolvedInTitle.BaselineEnd.GetValueOrNull();
-          _newTask.BaselineStart = _newTask.Task2MilestoneResolvedInTitle.BaselineStart.GetValueOrNull();
-          _newTask.TaskStart = SPExtensions.DateTimeNull;
-          _newTask.TaskEnd = SPExtensions.DateTimeNull;
+          _newTask.BaselineEnd = item.IsDueDateNull() ? SPExtensions.DateTimeNull : item.DueDate;
+          _newTask.BaselineStart = item.ReportedDate;
+          _newTask.TaskStart = item.LastUpdate;
+          _newTask.TaskEnd = item.LastUpdate;
+          _newTask.Adjust();
           if ( !item.IsAssignedToUserIdNull() )
             _newTask.Task2ResourcesTitle = GetOrAdd<Resources>( entt.Resources, m_ResourcesDictionaryBugNet, item.AssignedToUserId );
           else
             _newTask.Task2ResourcesTitle = null;
           _newTask.Task2SPriorityTitle = GetOrAdd<Priority>( entt.Priority, m_PriorityDictionary, item.PriorityID );
           _newTask.Task2SResolutionTitle = GetOrAdd<Resolution>( entt.Resolution, m_ResolutionDictionary, item.ResolutionID );
-          if ( !_newTask.Task2SResolutionTitle.Title.ToLower().Contains( "closed" ) )
-            _newTask.Task2MilestoneResolvedInTitle.Active = true;
           _newTask.Task2StatusTitle = GetOrAdd<Status>( entt.Status, m_StatusDictionary, item.StatusID );
           _newTask.Active = _newTask.Task2StatusTitle.Active;
           if ( _newTask.Active.GetValueOrDefault( false ) )
@@ -466,6 +466,7 @@ namespace CAS.ITRDataAccess.SharePoint
         TaskEnd = workloadDate,
         TaskStart = workloadDate
       };
+      _newTask.Adjust();
       entities.Task.InsertOnSubmit( _newTask );
       return _newTask;
     }
