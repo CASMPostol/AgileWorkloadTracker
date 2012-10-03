@@ -12,38 +12,50 @@ namespace CAS.AgileWorkloadTracker.Linq
   }
   internal partial class Tasks
   {
+    internal void Adjust()
+    {
+      if ( Task2MilestoneResolvedInTitle == null )
+        return;
+      Task2MilestoneResolvedInTitle.Adjust( this );
+      Task2MilestoneDefinedInTitle.AdjustBaseline( this.BaselineStart.Value );
+    }
     internal void Adjust( DateTime dateTime )
     {
       if ( !TaskStart.HasValue || TaskStart > dateTime )
-      {
         TaskStart = dateTime;
-        if ( this.Task2MilestoneDefinedInTitle != null )
-          this.Task2MilestoneDefinedInTitle.Adjust( dateTime );
-      }
       if ( !TaskEnd.HasValue || TaskEnd < dateTime )
-      {
         TaskEnd = dateTime;
-        if ( this.Task2MilestoneResolvedInTitle != null )
-          this.Task2MilestoneResolvedInTitle.Adjust( dateTime );
-      }
+      Adjust();
     }
   }
   internal partial class Milestone
   {
-    internal void Adjust( DateTime dateTime )
+
+    internal void AdjustBaseline( DateTime dateTime )
     {
-      if ( !MilestoneStart.HasValue || MilestoneStart > dateTime )
+      if ( !this.BaselineStart.HasValue || this.BaselineStart.Value > dateTime )
+        this.BaselineStart = dateTime;
+      if ( !this.BaselineEnd.HasValue || this.BaselineEnd.Value > dateTime )
+        this.BaselineEnd = dateTime;
+    }
+    internal void Adjust( Tasks task )
+    {
+      if ( !MilestoneStart.HasValue || MilestoneStart.Value > task.TaskStart )
       {
-        MilestoneStart = dateTime;
-        if ( this.Milestone2ProjectTitle == null )
-          this.Milestone2ProjectTitle.Adjust( dateTime );
-      }
-      if ( !MilestoneEnd.HasValue || MilestoneEnd < dateTime )
-      {
-        MilestoneEnd = dateTime;
+        MilestoneStart = task.TaskStart;
         if ( this.Milestone2ProjectTitle != null )
-          this.Milestone2ProjectTitle.Adjust( dateTime );
+          this.Milestone2ProjectTitle.Adjust( task.TaskStart.Value );
       }
+      if ( !MilestoneEnd.HasValue || MilestoneEnd.Value < task.TaskEnd )
+      {
+        MilestoneEnd = task.TaskEnd;
+        if ( this.Milestone2ProjectTitle != null )
+          this.Milestone2ProjectTitle.Adjust( task.TaskEnd.Value );
+      }
+      if ( !this.BaselineStart.HasValue || this.BaselineStart.Value > task.BaselineStart )
+        this.BaselineStart = task.BaselineStart;
+      if ( !this.BaselineEnd.HasValue || this.BaselineEnd.Value > task.BaselineEnd )
+        this.BaselineEnd = task.BaselineEnd;
     }
   }
   internal partial class Projects
