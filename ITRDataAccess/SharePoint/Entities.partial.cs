@@ -54,7 +54,7 @@ namespace CAS.AgileWorkloadTracker.Linq
       }
       if ( !this.BaselineStart.HasValue || this.BaselineStart.Value > task.BaselineStart )
         this.BaselineStart = task.BaselineStart;
-      if ( !this.BaselineEnd.HasValue || this.BaselineEnd.Value > task.BaselineEnd )
+      if ( !this.BaselineEnd.HasValue || this.BaselineEnd.Value < task.BaselineEnd )
         this.BaselineEnd = task.BaselineEnd;
     }
   }
