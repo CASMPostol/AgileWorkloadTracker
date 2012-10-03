@@ -141,7 +141,7 @@ namespace CAS.ITRDataAccess.SharePoint
       foreach ( var _row in statusDataTable )
       {
         Status _cs = Create<Status>( _entt.Status, m_StatusDictionary, _row.Name, _row.StatusID );
-        _cs.Active = false;
+        _cs.Active = true;
         if ( _cs.Title.ToLower().Contains( "closed" ) )
         {
           m_ClosedStatus = _cs;
