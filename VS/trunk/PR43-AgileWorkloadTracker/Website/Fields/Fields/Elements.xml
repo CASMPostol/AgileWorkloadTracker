@@ -1,6 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
   <Field
+    Name="RequirementPriority"
+    ID="{D6E31BB7-143B-48A1-8B1F-0C3BD8299258}"
+    Type="Integer"
+    DisplayName="Priority"
+    Group="CAS Agile Workload Tracker"
+    />
+  <Field
     Name="RequirementsType"
     ID="{3A0E382C-AEC2-4CD2-9964-2E68AEEFCCA7}"
     Type="Choice"
