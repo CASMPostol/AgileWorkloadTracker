@@ -196,7 +196,7 @@
           <FieldRef Name="LinkTitle">
           </FieldRef>
           <FieldRef ID="{25CF1009-2486-4500-BD14-F22F92F60E16}" Name="Task2RequirementsTitle" />
-          <FieldRef ID="{3CDE96BD-665B-45B6-9EFB-368262C8140D}" Name="Task2MilestoneDefinedInTitle" />
+          <FieldRef ID="{23B9AC4B-8670-4407-934C-698BD8591876}" Name="Task2CategoryTitle" />
           <FieldRef ID="{689D6173-44B0-4953-839F-4AFBBCB51138}" Name="Task2MilestoneResolvedInTitle" />
           <FieldRef ID="{51684BCE-00ED-49FA-9E37-CEFC7DBAB2D6}" Name="Task2StatusTitle" />
           <FieldRef ID="{10DE0472-6E78-472E-B9DF-E883DA6F35D8}" Name="Task2ResourcesTitle" />
