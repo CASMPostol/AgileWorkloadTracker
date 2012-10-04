@@ -175,15 +175,6 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement {
         protected global::System.Web.UI.WebControls.DropDownList m_RequirementDropDown;
         
         /// <summary>
-        /// m_ShowAllMilestonesLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label m_ShowAllMilestonesLabel;
-        
-        /// <summary>
         /// m_ShowAllMilestonesCheckBox control.
         /// </summary>
         /// <remarks>
@@ -191,6 +182,15 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox m_ShowAllMilestonesCheckBox;
+        
+        /// <summary>
+        /// m_ShowAllMilestonesLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label m_ShowAllMilestonesLabel;
         
         /// <summary>
         /// m_CategoryLabel control.

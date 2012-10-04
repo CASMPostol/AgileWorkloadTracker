@@ -79,10 +79,11 @@
                         </asp:TableRow>
                         <asp:TableRow>
                             <asp:TableCell>
-                                <asp:Label ID="m_ShowAllMilestonesLabel" runat="server" CssClass="Label" Text="Show all milestones" />
+                                
                             </asp:TableCell>
                             <asp:TableCell>
                                 <asp:CheckBox ID="m_ShowAllMilestonesCheckBox" runat="server" AutoPostBack="true" />
+                                <asp:Label ID="m_ShowAllMilestonesLabel" runat="server" CssClass="Label" Text="Show all requirements" />
                             </asp:TableCell>
                         </asp:TableRow>
                         <asp:TableRow>
