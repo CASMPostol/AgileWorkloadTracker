@@ -349,7 +349,9 @@
     <Content Include="Lists\StatusListTemplate\Schema.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Lists\TaskCommentsListTemplate\Elements.xml" />
+    <Content Include="Lists\TaskCommentsListTemplate\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Lists\TaskCommentsListTemplate\TaskCommentsList\Elements.xml" />
     <Content Include="Lists\TaskCommentsListTemplate\Schema.xml">
       <SubType>Designer</SubType>

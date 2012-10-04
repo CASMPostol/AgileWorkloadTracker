@@ -4,6 +4,7 @@
     <Folder TargetName="_cts/Requirements" />
     <FieldRefs>
       <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" DisplayName="Requirement" />
+      <FieldRef ID="{D6E31BB7-143B-48A1-8B1F-0C3BD8299258}" Name="RequirementPriority" />
       <FieldRef ID="{7662cd2c-f069-4dba-9e35-082cf976e170}" Name="Body" DisplayName="Description" NumLines="20" Filterable="FALSE" ShowInDisplayForm="TRUE" ShowInEditForm="TRUE" ShowInNewForm="TRUE" />
       <FieldRef ID="{3A0E382C-AEC2-4CD2-9964-2E68AEEFCCA7}" Name="RequirementsType" />
       <FieldRef ID="{3F44DBFA-1B29-4E79-8929-051D138FBF49}" Name="Requirements2ProjectsTitle" />
