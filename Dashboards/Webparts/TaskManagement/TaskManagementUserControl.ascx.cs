@@ -318,7 +318,9 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
         At = "newOne";
         Tasks _newTask = new Tasks()
         {
+          Active = true,
           BaselineStart = DateTime.Now.Date,
+          BaselineEnd = DateTime.Now.Date,
           Body = m_TaskCommentsTextBox.Text,
           Task2CategoryTitle = _category,
           Task2MilestoneDefinedInTitle = _version,
