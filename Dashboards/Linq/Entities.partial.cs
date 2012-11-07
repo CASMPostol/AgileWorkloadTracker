@@ -169,7 +169,7 @@ namespace CAS.AgileWorkloadTracker.Linq
     public static void EntityListDataSource<TEntity>( this DropDownList dropDown, IQueryable<TEntity> entities )
       where TEntity: Element
     {
-      dropDown.DataSource = from _tpx in entities select new { ID = _tpx.Identyfikator, Title = _tpx.Title };
+      dropDown.DataSource = from _tpx in entities orderby _tpx.Title select new { ID = _tpx.Identyfikator, Title = _tpx.Title };
       dropDown.DataTextField = "Title";
       dropDown.DataValueField = "ID";
       dropDown.DataBind();

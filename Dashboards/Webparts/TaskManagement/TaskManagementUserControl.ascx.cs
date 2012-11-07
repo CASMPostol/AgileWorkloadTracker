@@ -685,19 +685,12 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
         Entities _dcxt = this.m_DataContext.DataContext;
         m_ProjectLabel.Text = _project.Title;
         int _pId = _project.Identyfikator.Value;
-        m_AsignedToDropDown.EntityListDataSource( ( from _estimationx in _dcxt.Estimation
-                                                    where _estimationx.Estimation2ProjectTitle.Identyfikator == _pId
-                                                    select _estimationx.Estimation2ResourcesTitle ).OrderBy<Resources, string>( a => a.Title ) );
-        m_CategoryDropDown.EntityListDataSource( from _categoryx in _dcxt.Category
-                                                 where _categoryx.Category2ProjectsTitle.Identyfikator == _pId
-                                                 orderby _categoryx.Title ascending
-                                                 select _categoryx );
-        IQueryable<Milestone> _mlstns = from _mlstnsx in _dcxt.Milestone
-                                        where _mlstnsx.Milestone2ProjectTitle.Identyfikator == _pId
-                                        orderby _mlstnsx.SortOrder.GetValueOrDefault( 0 ) ascending
-                                        select _mlstnsx;
-        m_VersionDropDown.EntityListDataSource( _mlstns );
-        IQueryable<Milestone> _activeMilestones = from _mlstnsx in _mlstns
+        m_AsignedToDropDown.EntityListDataSource( from _estimationx in _dcxt.Estimation
+                                                  where _estimationx.Estimation2ProjectTitle.Identyfikator == _pId
+                                                  select _estimationx.Estimation2ResourcesTitle );
+        m_CategoryDropDown.EntityListDataSource( _project.Category );
+        m_VersionDropDown.EntityListDataSource( _project.Milestone );
+        IQueryable<Milestone> _activeMilestones = from _mlstnsx in _project.Milestone
                                                   where _mlstnsx.Active.GetValueOrDefault( true )
                                                   select _mlstnsx;
         m_MilestoneDropDown.EntityListDataSource( _activeMilestones );
