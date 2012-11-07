@@ -473,7 +473,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
     private void ClearUserInterface()
     {
       SetTargetForProject();
-      m_ShowAllMilestonesCheckBox.Checked = true;
+      m_ShowAllMilestonesCheckBox.Checked = false;
       m_TaskCommentsTextBox.Text = String.Empty;
       m_TaskTitleTextBox.Text = String.Empty;
       m_AsignedToDropDown.ClearSelection();
