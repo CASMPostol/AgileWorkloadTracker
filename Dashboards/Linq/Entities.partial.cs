@@ -191,4 +191,34 @@ namespace CAS.AgileWorkloadTracker.Linq
       }
     }
   }
+  internal partial class Tasks
+  {
+    internal void CalculateWorkload()
+    {
+      if ( this.Task2RequirementsTitle == null )
+        return;
+      this.Task2RequirementsTitle.CalculateWorkload();
+    }
+    internal double Hours
+    {
+      get
+      {
+        return Workload.Sum<Workload>( a => a.Hours.GetValueOrDefault( 0 ) );
+      }
+    }
+  }
+  internal partial class Requirements
+  {
+    internal double Priority
+    {
+      get
+      {
+        return this.Tasks.Sum<Tasks>( a => a.Hours );
+      }
+    }
+    internal void CalculateWorkload()
+    {
+      this.
+    }
+  }
 }
