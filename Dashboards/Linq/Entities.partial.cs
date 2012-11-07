@@ -218,7 +218,16 @@ namespace CAS.AgileWorkloadTracker.Linq
     }
     internal void CalculateWorkload()
     {
-      this.
+      if ( Requirements2MilestoneTitle == null )
+        return;
+      Requirements2MilestoneTitle.CalculateWorkload();
+    }
+  }
+  internal partial class Milestone
+  {
+    internal void CalculateWorkload()
+    {
+      this.MilestoneHours = this.Requirements.Sum<Requirements>( a => a.Priority );
     }
   }
 }
