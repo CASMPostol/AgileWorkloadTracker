@@ -323,13 +323,14 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
       {
         int _indx = m_GridView.SelectedIndex;
         Workload _wkl = Element.GetAtIndex<Workload>( m_DataContext.DataContext.Workload, m_GridView.SelectedDataKey.Value.ToString() );
-        Tasks _task = Element.GetAtIndex<Tasks>( m_DataContext.DataContext.Task, m_TaskDropDown.SelectedValue );
+        Tasks _task = m_TaskDropDown.GetSelected<Tasks>( m_DataContext.DataContext.Task );
         _wkl.Hours = _hours;
         _wkl.Title = m_WorkloadDescriptionTextBox.Text;
         _wkl.WorkloadDate = m_Calendar.SelectedDate.Date;
         _wkl.Workload2ProjectTitle = SelectedProject;
         _wkl.Workload2StageTitle = SelectedProject == null ? null : SelectedProject.Project2StageTitle;
         _wkl.Workload2TaskTitle = _task;
+        _task.CalculateWorkload();
         m_DataContext.DataContext.SubmitChanges();
         FillupWorkflowGridView();
         m_GridView.SelectedIndex = _indx;
