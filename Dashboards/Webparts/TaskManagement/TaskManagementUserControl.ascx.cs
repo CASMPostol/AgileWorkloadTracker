@@ -294,6 +294,8 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
     {
       if ( !Page.IsValid )
         return GenericStateMachineEngine.ActionResult.NotValidated( "Required information must be provided." );
+      if ( m_TaskCommentsTextBox.Text.Length <= 5 )
+        return GenericStateMachineEngine.ActionResult.NotValidated( "The task comment length must be 5 characters at least" );
       try
       {
         if ( m_ControlState.ProjectID.IsNullOrEmpty() )
@@ -402,8 +404,6 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
     {
       try
       {
-        if ( m_TaskCommentsTextBox.Text.Length <= 5 )
-          return GenericStateMachineEngine.ActionResult.NotValidated( "The task comment length must be 5 characters at least" );
         CurrentTask.TaskEnd = DateTime.Now;
         Entities _ent = m_DataContext.DataContext;
         if ( CurrentTask.Task2CategoryTitle == null || CurrentTask.Task2CategoryTitle.Identyfikator != m_CategoryDropDown.SelectedValue.String2Int() )
@@ -429,12 +429,15 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
           CurrentTask.Task2TypeTitle = m_TypeDropDown.GetSelected<TaskType>( _ent.Type );
         if ( CurrentTask.Task2MilestoneResolvedInTitle != null )
           CurrentTask.Task2MilestoneResolvedInTitle.MilestoneEnd = CurrentTask.TaskEnd;
-        TaskComments _newComment = new TaskComments()
+        if ( m_TaskCommentsTextBox.Text.Length != 0 )
         {
-          Body = m_TaskCommentsTextBox.Text,
-          TaskComments2TaskTitle = CurrentTask,
-        };
-        _ent.TaskComments.InsertOnSubmit( _newComment );
+          TaskComments _newComment = new TaskComments()
+          {
+            Body = m_TaskCommentsTextBox.Text,
+            TaskComments2TaskTitle = CurrentTask,
+          };
+          _ent.TaskComments.InsertOnSubmit( _newComment );
+        }
         UpdateDueData( CurrentTask );
         _ent.SubmitChanges();
       }
