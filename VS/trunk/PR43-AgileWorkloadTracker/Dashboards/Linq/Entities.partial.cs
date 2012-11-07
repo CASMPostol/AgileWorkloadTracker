@@ -183,15 +183,11 @@ namespace CAS.AgileWorkloadTracker.Linq
     public static void SelectItem4Element( this DropDownList dropDown, Element element )
     {
       dropDown.ClearSelection();
-      if ( element == null )
-        dropDown.ClearSelection();
-      else
+      if ( element != null )
       {
         ListItem _item = dropDown.Items.FindByValue( element.Identyfikator.IntToString() );
         if ( _item != null )
           _item.Selected = true;
-        else
-          dropDown.ClearSelection();
       }
     }
   }

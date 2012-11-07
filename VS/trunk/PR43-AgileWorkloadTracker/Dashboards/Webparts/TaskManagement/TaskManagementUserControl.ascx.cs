@@ -410,10 +410,10 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
           CurrentTask.Task2CategoryTitle = m_CategoryDropDown.GetSelected<Category>( _ent.Category );
         if ( CurrentTask.Task2MilestoneDefinedInTitle == null || CurrentTask.Task2MilestoneDefinedInTitle.Identyfikator != m_VersionDropDown.SelectedValue.String2Int() )
           CurrentTask.Task2MilestoneDefinedInTitle = m_VersionDropDown.GetSelected<Milestone>( _ent.Milestone );
-        if ( CurrentTask.Task2MilestoneResolvedInTitle == null || CurrentTask.Task2MilestoneResolvedInTitle.Identyfikator != m_MilestoneDropDown.SelectedValue.String2Int() )
-          CurrentTask.Task2MilestoneResolvedInTitle = m_MilestoneDropDown.GetSelected<Milestone>( _ent.Milestone );
         if ( CurrentTask.Task2RequirementsTitle == null || CurrentTask.Task2RequirementsTitle.Identyfikator != m_RequirementDropDown.SelectedValue.String2Int() )
           CurrentTask.Task2RequirementsTitle = m_RequirementDropDown.GetSelected<Requirements>( _ent.Requirements );
+        if ( CurrentTask.Task2MilestoneResolvedInTitle == null || CurrentTask.Task2MilestoneResolvedInTitle != CurrentTask.Task2RequirementsTitle.Requirements2MilestoneTitle )
+          CurrentTask.Task2MilestoneResolvedInTitle = CurrentTask.Task2RequirementsTitle.Requirements2MilestoneTitle;
         if ( CurrentTask.Task2ResourcesTitle == null || CurrentTask.Task2ResourcesTitle.Identyfikator != m_AsignedToDropDown.SelectedValue.String2Int() )
           CurrentTask.Task2ResourcesTitle = m_AsignedToDropDown.GetSelected<Resources>( _ent.Resources );
         if ( CurrentTask.Task2SPriorityTitle == null || CurrentTask.Task2SPriorityTitle.Identyfikator != m_PriorityDropDown.SelectedValue.String2Int() )
@@ -590,10 +590,10 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
     }
     private void m_MilestoneDropDown_SelectedIndexChanged( object sender, EventArgs e )
     {
-      Milestone _cm = Element.FindAtIndex<Milestone>( m_DataContext.DataContext.Milestone, m_MilestoneDropDown.SelectedValue );
+      Milestone _cm = m_MilestoneDropDown.GetSelected<Milestone>( m_DataContext.DataContext.Milestone );
       if ( _cm == null )
         m_ShowAllMilestonesCheckBox.Checked = true;
-      Requirements _currentRequirement = Element.FindAtIndex<Requirements>( m_DataContext.DataContext.Requirements, m_RequirementDropDown.SelectedValue );
+      Requirements _currentRequirement = m_RequirementDropDown.GetSelected<Requirements>( m_DataContext.DataContext.Requirements );
       if ( m_ShowAllMilestonesCheckBox.Checked )
       {
         m_RequirementDropDown.EntityListDataSource( _cm.Milestone2ProjectTitle.Requirements );
@@ -610,9 +610,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
     }
     private void m_RequirementDropDown_SelectedIndexChanged( object sender, EventArgs e )
     {
-      if ( !m_ShowAllMilestonesCheckBox.Checked )
-        return;
-      Requirements _cr = Element.FindAtIndex<Requirements>( m_DataContext.DataContext.Requirements, m_RequirementDropDown.SelectedValue );
+      Requirements _cr = m_RequirementDropDown.GetSelected<Requirements>( m_DataContext.DataContext.Requirements );
       m_MilestoneDropDown.SelectItem4Element( _cr.Requirements2MilestoneTitle );
     }
     private void m_ShowAllMilestonesCheckBox_CheckedChanged( object sender, EventArgs e )
@@ -625,17 +623,17 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
         return;
       }
       Entities _dcxt = this.m_DataContext.DataContext;
-      Requirements _currentRequrenment = Element.FindAtIndex<Requirements>( _dcxt.Requirements, m_RequirementDropDown.SelectedValue );
+      Requirements _currentRequirement = m_RequirementDropDown.GetSelected<Requirements>( _dcxt.Requirements );
       if ( m_ShowAllMilestonesCheckBox.Checked )
       {
         m_RequirementDropDown.EntityListDataSource( _dcxt.ActiveRequirements( _pId.Value ) );
-        m_RequirementDropDown.SelectItem4Element( _currentRequrenment );
+        m_RequirementDropDown.SelectItem4Element( _currentRequirement );
       }
       else
       {
-        Milestone _cm = Element.FindAtIndex<Milestone>( m_DataContext.DataContext.Milestone, m_MilestoneDropDown.SelectedValue );
+        Milestone _cm = m_MilestoneDropDown.GetSelected<Milestone>( _dcxt.Milestone );
         m_RequirementDropDown.EntityListDataSource( _cm == null ? null : _cm.Requirements );
-        m_RequirementDropDown.SelectItem4Element( _currentRequrenment );
+        m_RequirementDropDown.SelectItem4Element( _currentRequirement );
       }
     }
     #endregion
@@ -656,7 +654,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
         m_DueDateDateTimeControl.ClearSelection();
       m_CategoryDropDown.SelectItem4Element( CurrentTask.Task2CategoryTitle );
       m_VersionDropDown.SelectItem4Element( CurrentTask.Task2MilestoneDefinedInTitle );
-      m_MilestoneDropDown.SelectItem4Element( CurrentTask.Task2MilestoneResolvedInTitle );
+      m_MilestoneDropDown.SelectItem4Element( CurrentTask.Task2RequirementsTitle == null ? CurrentTask.Task2MilestoneResolvedInTitle : CurrentTask.Task2RequirementsTitle.Requirements2MilestoneTitle );
       if ( !m_ShowAllMilestonesCheckBox.Checked && CurrentTask.Task2RequirementsTitle != null )
         m_RequirementDropDown.EntityListDataSource<Requirements>( CurrentTask.Task2RequirementsTitle.Requirements2MilestoneTitle.Requirements );
       m_RequirementDropDown.SelectItem4Element( CurrentTask.Task2RequirementsTitle );
