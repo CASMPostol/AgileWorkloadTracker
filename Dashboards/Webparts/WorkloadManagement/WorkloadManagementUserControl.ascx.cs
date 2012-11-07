@@ -352,10 +352,10 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
       m_GridView.SelectedIndex = -1;
       m_WorkloadDescriptionTextBox.Text = String.Empty;
       Workload _lastWorkload = ( from _wlx in Me.Workload where _wlx.WorkloadDate.GetValueOrDefault().Date == DateTime.Today.Date orderby _wlx.WorkloadDate descending select _wlx ).FirstOrDefault();
-      DateTime _lastActivityTime = DateTime.Today.Date + TimeSpan.FromHours(8);
+      DateTime _lastActivityTime = DateTime.Today.Date + TimeSpan.FromHours( 8 );
       if ( _lastWorkload != null && _lastActivityTime < _lastWorkload.WorkloadDate )
         _lastActivityTime = _lastWorkload.WorkloadDate.Value;
-      m_WorkloadHoursTextBox.Text = ((DateTime.Now - _lastActivityTime).Minutes / 60).ToString();
+      m_WorkloadHoursTextBox.Text = ( ( DateTime.Now - _lastActivityTime ).Minutes / 60 ).ToString();
     }
     #endregion
 
@@ -414,7 +414,8 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
       {
         IQueryable<Tasks> _tasks = from _tidx in SelectedMilestone.Tasks0
                                    let _stts = _tidx.Task2StatusTitle
-                                   where _stts == null ? true : _stts.Active.GetValueOrDefault( true ) && _tidx.Task2ResourcesTitle == Me
+                                   where ( _stts == null ? true : _stts.Active.GetValueOrDefault( true ) ) &&
+                                         ( _tidx.Task2ResourcesTitle == null || _tidx.Task2ResourcesTitle == Me )
                                    orderby _tidx.Title ascending
                                    select _tidx;
         m_TaskDropDown.EntityListDataSource( _tasks );
