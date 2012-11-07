@@ -246,7 +246,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
           Workload2ProjectTitle = SelectedProject,
           Workload2StageTitle = SelectedProject == null ? null : SelectedProject.Project2StageTitle,
           Workload2TaskTitle = _task,
-          WorkloadDate = m_Calendar.SelectedDate.Date,
+          WorkloadDate = m_Calendar.SelectedDate.Date == DateTime.Today ? DateTime.Now : m_Calendar.SelectedDate.Date,
           ReadOnly = false,
           WeekNumber = m_Calendar.SelectedDate.Date.WeekNumber(),
           Year = m_Calendar.SelectedDate.Date.Year
@@ -351,7 +351,11 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     {
       m_GridView.SelectedIndex = -1;
       m_WorkloadDescriptionTextBox.Text = String.Empty;
-      m_WorkloadHoursTextBox.Text = String.Empty;
+      Workload _lastWorkload = ( from _wlx in Me.Workload where _wlx.WorkloadDate.GetValueOrDefault().Date == DateTime.Today.Date orderby _wlx.WorkloadDate descending select _wlx ).FirstOrDefault();
+      DateTime _lastActivityTime = DateTime.Today.Date + TimeSpan.FromHours(8);
+      if ( _lastWorkload != null && _lastActivityTime < _lastWorkload.WorkloadDate )
+        _lastActivityTime = _lastWorkload.WorkloadDate.Value;
+      m_WorkloadHoursTextBox.Text = ((DateTime.Now - _lastActivityTime).Minutes / 60).ToString();
     }
     #endregion
 
