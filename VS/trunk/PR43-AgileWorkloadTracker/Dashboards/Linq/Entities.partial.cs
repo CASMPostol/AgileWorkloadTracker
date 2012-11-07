@@ -218,6 +218,7 @@ namespace CAS.AgileWorkloadTracker.Linq
     }
     internal void CalculateWorkload()
     {
+      RequirementPriority = Convert.ToInt32( Priority );
       if ( Requirements2MilestoneTitle == null )
         return;
       Requirements2MilestoneTitle.CalculateWorkload();
