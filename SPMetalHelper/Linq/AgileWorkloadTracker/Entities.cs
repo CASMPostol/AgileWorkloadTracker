@@ -2258,6 +2258,8 @@ namespace CAS.AgileWorkloadTracker.Linq {
 	[Microsoft.SharePoint.Linq.ContentTypeAttribute(Name="Requirements", Id="0x01008B9076C2C55F47A298C387804D856FC8")]
 	internal partial class Requirements : Element {
 		
+		private System.Nullable<int> _requirementPriority;
+		
 		private string _body;
 		
 		private System.Nullable<RequirementsType> _requirementsType;
@@ -2288,6 +2290,20 @@ namespace CAS.AgileWorkloadTracker.Linq {
 			this._tasks.OnChanged += new System.EventHandler(this.OnTasksChanged);
 			this._tasks.OnChanging += new System.EventHandler(this.OnTasksChanging);
 			this.OnCreated();
+		}
+		
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="RequirementPriority", Storage="_requirementPriority", FieldType="Integer")]
+		public System.Nullable<int> RequirementPriority {
+			get {
+				return this._requirementPriority;
+			}
+			set {
+				if ((value != this._requirementPriority)) {
+					this.OnPropertyChanging("RequirementPriority", this._requirementPriority);
+					this._requirementPriority = value;
+					this.OnPropertyChanged("RequirementPriority");
+				}
+			}
 		}
 		
 		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="Body", Storage="_body", FieldType="Note")]
