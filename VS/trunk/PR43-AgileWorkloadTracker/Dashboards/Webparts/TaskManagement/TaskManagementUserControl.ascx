@@ -115,7 +115,7 @@
                         </asp:TableRow>
                         <asp:TableRow>
                             <asp:TableCell>
-                                <asp:Label ID="m_AsinegdToLabel" runat="server" CssClass="Label" Text="Asigned to" />
+                                <asp:Label ID="m_AsinegdToLabel" runat="server" CssClass="Label" Text="Assigned to" />
                             </asp:TableCell>
                             <asp:TableCell>
                                 <asp:DropDownList ID="m_AsignedToDropDown" runat="server" CssClass="DropDownShort">
