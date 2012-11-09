@@ -474,6 +474,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
     {
       SetTargetForProject();
       m_ShowAllMilestonesCheckBox.Checked = false;
+      FillupRequirementDropDown4Milestone( m_DataContext.DataContext );
       m_TaskCommentsTextBox.Text = String.Empty;
       m_TaskTitleTextBox.Text = String.Empty;
       m_DueDateDateTimeControl.ClearSelection();
@@ -619,14 +620,16 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
       if ( m_ShowAllMilestonesCheckBox.Checked )
         m_RequirementDropDown.EntityListDataSource( _dcxt.ActiveRequirements( _pId.Value ) );
       else
-      {
-        Milestone _cm = m_MilestoneDropDown.GetSelected<Milestone>( _dcxt.Milestone );
-        m_RequirementDropDown.EntityListDataSource( _cm == null ? null : _cm.Requirements );
-      }
+        FillupRequirementDropDown4Milestone( _dcxt );
       m_RequirementDropDown.SelectItem4Element( _currentRequirement );
     }
     #endregion
 
+    private void FillupRequirementDropDown4Milestone( Entities _dcxt )
+    {
+      Milestone _cm = m_MilestoneDropDown.GetSelected<Milestone>( _dcxt.Milestone );
+      m_RequirementDropDown.EntityListDataSource( _cm == null ? null : _cm.Requirements );
+    }
     private void m_ControlState_TaskRefresh( object sender, EventArgs e )
     {
       if ( CurrentTask == null )
