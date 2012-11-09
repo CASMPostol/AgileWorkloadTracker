@@ -429,7 +429,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
           CurrentTask.Task2TypeTitle = m_TypeDropDown.GetSelected<TaskType>( _ent.Type );
         if ( CurrentTask.Task2MilestoneResolvedInTitle != null )
           CurrentTask.Task2MilestoneResolvedInTitle.MilestoneEnd = CurrentTask.TaskEnd;
-        if ( m_TaskCommentsTextBox.Text.Length != 0 )
+        if ( m_TaskCommentsTextBox.Text.Length > 0 )
         {
           TaskComments _newComment = new TaskComments()
           {
