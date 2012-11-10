@@ -12,6 +12,7 @@ using TaskType = CAS.AgileWorkloadTracker.Linq.Type;
 
 namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
 {
+  [CLSCompliant(false)]
   public partial class TaskManagementUserControl: UserControl
   {
     #region creator

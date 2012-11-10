@@ -63,6 +63,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.SharePoint.Linq, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SharePoint.WorkflowActions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -70,6 +71,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Workflow.Activities" />
+    <Reference Include="System.Workflow.ComponentModel" />
+    <Reference Include="System.Workflow.Runtime" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.SharePoint" />
@@ -119,6 +123,12 @@
     <Compile Include="Webparts\WorkloadManagement\WorkloadManagementUserControl.ascx.designer.cs">
       <DependentUpon>WorkloadManagementUserControl.ascx.cs</DependentUpon>
     </Compile>
+    <Compile Include="Workflows\Milestone\Update\Update.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Workflows\Milestone\Update\Update.Designer.cs">
+      <DependentUpon>Update.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Dashboards\AddEditTasks\SharePointProjectItem.spdata">
@@ -166,6 +176,9 @@
       <SharePointProjectItemId>{0909ab33-01b7-410f-b845-046eb264f2f8}</SharePointProjectItemId>
     </None>
     <None Include="Webparts\WorkloadManagement\WorkloadManagement.webpart" />
+    <None Include="Workflows\Milestone\Update\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{9487a12f-e7b6-4ff1-a2dc-6e864b9d1055}</SharePointProjectItemId>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Dashboards\AddEditTasks\Elements.xml">
@@ -201,6 +214,7 @@
     <Content Include="Webparts\WorkloadManagement\WorkloadManagementUserControl.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
+    <Content Include="Workflows\Milestone\Update\Elements.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\PR44-SharePoint\SharePoint\SharePoint.csproj">
