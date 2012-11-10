@@ -9,16 +9,6 @@ using CAS.SharePoint;
 
 namespace CAS.AgileWorkloadTracker.Linq
 {
-  internal partial class Entities
-  {
-    internal IQueryable<Requirements> ActiveRequirements( int projectID )
-    {
-      return from _rsrcx in this.Requirements
-             //let _acv = _rsrcx.Requirements2MilestoneTitle == null || _rsrcx.Requirements2MilestoneTitle.Active.GetValueOrDefault( true )
-             where _rsrcx.Requirements2ProjectsTitle.Identyfikator == projectID
-             select _rsrcx;
-    }
-  }
   /// <summary>
   /// Adds a message to the Event log list.
   /// </summary>
@@ -64,6 +54,13 @@ namespace CAS.AgileWorkloadTracker.Linq
   internal partial class Entities
   {
     public Entities() : base( SPContext.Current.Web.Url ) { }
+    internal IQueryable<Requirements> ActiveRequirements( int projectID )
+    {
+      return from _rsrcx in this.Requirements
+             //let _acv = _rsrcx.Requirements2MilestoneTitle == null || _rsrcx.Requirements2MilestoneTitle.Active.GetValueOrDefault( true )
+             where _rsrcx.Requirements2ProjectsTitle.Identyfikator == projectID
+             select _rsrcx;
+    }
   }
   /// <summary>
   /// Partial classes for the Linq entities.
@@ -203,22 +200,29 @@ namespace CAS.AgileWorkloadTracker.Linq
     {
       get
       {
+        if ( this.Task2MilestoneResolvedInTitle == null || this.Task2MilestoneResolvedInTitle != this.Task2RequirementsTitle.Requirements2MilestoneTitle )
+          this.Task2MilestoneResolvedInTitle = this.Task2RequirementsTitle.Requirements2MilestoneTitle;
+        if ( this.Task2ProjectTitle == null || this.Task2ProjectTitle != this.Task2RequirementsTitle.Requirements2ProjectsTitle )
+          this.Task2ProjectTitle = this.Task2RequirementsTitle.Requirements2ProjectsTitle;
         return Workload.Sum<Workload>( a => a.Hours.GetValueOrDefault( 0 ) );
       }
     }
   }
   internal partial class Requirements
   {
-    internal double Priority
+    internal double Hours
     {
       get
       {
-        return this.Tasks.Sum<Tasks>( a => a.Hours );
+        if ( this.Requirements2ProjectsTitle == null || this.Requirements2ProjectsTitle != this.Requirements2MilestoneTitle.Milestone2ProjectTitle )
+          this.Requirements2ProjectsTitle = this.Requirements2MilestoneTitle.Milestone2ProjectTitle;
+        double _hours = this.Tasks.Sum<Tasks>( a => a.Hours );
+        RequirementPriority = Convert.ToInt32( Math.Round( Hours ) );
+        return _hours;
       }
     }
     internal void CalculateWorkload()
     {
-      RequirementPriority = Convert.ToInt32( Priority );
       if ( Requirements2MilestoneTitle == null )
         return;
       Requirements2MilestoneTitle.CalculateWorkload();
@@ -228,7 +232,7 @@ namespace CAS.AgileWorkloadTracker.Linq
   {
     internal void CalculateWorkload()
     {
-      this.MilestoneHours = this.Requirements.Sum<Requirements>( a => a.Priority );
+      this.MilestoneHours = this.Requirements.Sum<Requirements>( a => a.Hours );
     }
   }
 }

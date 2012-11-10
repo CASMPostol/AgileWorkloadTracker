@@ -11,6 +11,7 @@ using Microsoft.SharePoint;
 
 namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
 {
+  [CLSCompliant( false )]
   public partial class WorkloadManagementUserControl: UserControl
   {
     public WorkloadManagementUserControl()
@@ -355,7 +356,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
       DateTime _lastActivityTime = DateTime.Today.Date + TimeSpan.FromHours( 8 );
       if ( _lastWorkload != null && _lastActivityTime < _lastWorkload.WorkloadDate )
         _lastActivityTime = _lastWorkload.WorkloadDate.Value;
-      m_WorkloadHoursTextBox.Text = ( ( DateTime.Now - _lastActivityTime ).TotalMinutes/ 60.0 ).ToString();
+      m_WorkloadHoursTextBox.Text = ( ( DateTime.Now - _lastActivityTime ).TotalMinutes / 60.0 ).ToString();
     }
     #endregion
 
