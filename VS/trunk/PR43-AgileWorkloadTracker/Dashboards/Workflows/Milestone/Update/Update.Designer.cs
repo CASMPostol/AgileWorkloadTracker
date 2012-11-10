@@ -29,9 +29,10 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Workflows.Milestone.Update
       System.Workflow.ComponentModel.ActivityBind activitybind1 = new System.Workflow.ComponentModel.ActivityBind();
       System.Workflow.ComponentModel.ActivityBind activitybind2 = new System.Workflow.ComponentModel.ActivityBind();
       System.Workflow.ComponentModel.ActivityBind activitybind3 = new System.Workflow.ComponentModel.ActivityBind();
-      System.Workflow.ComponentModel.ActivityBind activitybind5 = new System.Workflow.ComponentModel.ActivityBind();
-      System.Workflow.Runtime.CorrelationToken correlationtoken1 = new System.Workflow.Runtime.CorrelationToken();
       System.Workflow.ComponentModel.ActivityBind activitybind4 = new System.Workflow.ComponentModel.ActivityBind();
+      System.Workflow.ComponentModel.ActivityBind activitybind6 = new System.Workflow.ComponentModel.ActivityBind();
+      System.Workflow.Runtime.CorrelationToken correlationtoken1 = new System.Workflow.Runtime.CorrelationToken();
+      System.Workflow.ComponentModel.ActivityBind activitybind5 = new System.Workflow.ComponentModel.ActivityBind();
       this.FinishLgToHistoryListActivity = new Microsoft.SharePoint.WorkflowActions.LogToHistoryListActivity();
       this.UpdateMilestoneCodeActivity = new System.Workflow.Activities.CodeActivity();
       this.m_StartLogToHistoryListActivity = new Microsoft.SharePoint.WorkflowActions.LogToHistoryListActivity();
@@ -41,7 +42,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Workflows.Milestone.Update
       // 
       this.FinishLgToHistoryListActivity.Description = "Logs message to the history log.";
       this.FinishLgToHistoryListActivity.Duration = System.TimeSpan.Parse( "-10675199.02:48:05.4775808" );
-      this.FinishLgToHistoryListActivity.EventId = Microsoft.SharePoint.Workflow.SPWorkflowHistoryEventType.WorkflowComment;
+      this.FinishLgToHistoryListActivity.EventId = Microsoft.SharePoint.Workflow.SPWorkflowHistoryEventType.WorkflowCompleted;
       activitybind1.Name = "Update";
       activitybind1.Path = "FinishLgToHistoryListActivity_HistoryDescription";
       activitybind2.Name = "Update";
@@ -64,14 +65,16 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Workflows.Milestone.Update
       // m_StartLogToHistoryListActivity
       // 
       this.m_StartLogToHistoryListActivity.Duration = System.TimeSpan.Parse( "-10675199.02:48:05.4775808" );
-      this.m_StartLogToHistoryListActivity.EventId = Microsoft.SharePoint.Workflow.SPWorkflowHistoryEventType.WorkflowComment;
+      this.m_StartLogToHistoryListActivity.EventId = Microsoft.SharePoint.Workflow.SPWorkflowHistoryEventType.WorkflowStarted;
       this.m_StartLogToHistoryListActivity.HistoryDescription = "Start updating the Milestone";
       this.m_StartLogToHistoryListActivity.HistoryOutcome = "Starting";
       this.m_StartLogToHistoryListActivity.Name = "m_StartLogToHistoryListActivity";
       this.m_StartLogToHistoryListActivity.OtherData = "";
-      this.m_StartLogToHistoryListActivity.UserId = -1;
-      activitybind5.Name = "Update";
-      activitybind5.Path = "workflowId";
+      activitybind4.Name = "Update";
+      activitybind4.Path = "workflowProperties.OriginatorUser.ID";
+      this.m_StartLogToHistoryListActivity.SetBinding( Microsoft.SharePoint.WorkflowActions.LogToHistoryListActivity.UserIdProperty, ( (System.Workflow.ComponentModel.ActivityBind)( activitybind4 ) ) );
+      activitybind6.Name = "Update";
+      activitybind6.Path = "workflowId";
       // 
       // m_OnWorkflowActivated
       // 
@@ -81,11 +84,11 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Workflows.Milestone.Update
       this.m_OnWorkflowActivated.Description = "Update the list.";
       this.m_OnWorkflowActivated.EventName = "OnWorkflowActivated";
       this.m_OnWorkflowActivated.Name = "m_OnWorkflowActivated";
-      activitybind4.Name = "Update";
-      activitybind4.Path = "workflowProperties";
+      activitybind5.Name = "Update";
+      activitybind5.Path = "workflowProperties";
       this.m_OnWorkflowActivated.Invoked += new System.EventHandler<System.Workflow.Activities.ExternalDataEventArgs>( this.m_OnWorkflowActivated_Invoked );
-      this.m_OnWorkflowActivated.SetBinding( Microsoft.SharePoint.WorkflowActions.OnWorkflowActivated.WorkflowIdProperty, ( (System.Workflow.ComponentModel.ActivityBind)( activitybind5 ) ) );
-      this.m_OnWorkflowActivated.SetBinding( Microsoft.SharePoint.WorkflowActions.OnWorkflowActivated.WorkflowPropertiesProperty, ( (System.Workflow.ComponentModel.ActivityBind)( activitybind4 ) ) );
+      this.m_OnWorkflowActivated.SetBinding( Microsoft.SharePoint.WorkflowActions.OnWorkflowActivated.WorkflowIdProperty, ( (System.Workflow.ComponentModel.ActivityBind)( activitybind6 ) ) );
+      this.m_OnWorkflowActivated.SetBinding( Microsoft.SharePoint.WorkflowActions.OnWorkflowActivated.WorkflowPropertiesProperty, ( (System.Workflow.ComponentModel.ActivityBind)( activitybind5 ) ) );
       // 
       // Update
       // 
@@ -107,6 +110,8 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Workflows.Milestone.Update
     private Microsoft.SharePoint.WorkflowActions.LogToHistoryListActivity m_StartLogToHistoryListActivity;
 
     private Microsoft.SharePoint.WorkflowActions.OnWorkflowActivated m_OnWorkflowActivated;
+
+
 
 
 

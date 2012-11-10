@@ -54,14 +54,14 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Workflows.Milestone.Update
     }
     private double _hours = default( double );
     private int _tasks = default( int );
-    private int _actoveTasks = default(int);
-    public String FinishLgToHistoryListActivity_HistoryDescription = default(string);
+    private int _actoveTasks = default( int );
+    public String FinishLgToHistoryListActivity_HistoryDescription = default( string );
     public String FinishLgToHistoryListActivity_HistoryOutcome = "Update Finished";
 
     private void FinishLgToHistoryListActivity_MethodInvoking( object sender, EventArgs e )
     {
       string _dscr = "The milestone has reported {0} hours and {1} tasks ({2} are active).";
-      FinishLgToHistoryListActivity_HistoryDescription = String.Format(_dscr, _hours, _tasks, _actoveTasks);
+      FinishLgToHistoryListActivity_HistoryDescription = String.Format( _dscr, _hours, _tasks, _actoveTasks );
     }
   }
 }
