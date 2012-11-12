@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <ListInstance Title="Workflows History"
+                OnQuickLaunch="TRUE"
+                TemplateType="140"
+                FeatureId="00BFEA71-4EA5-48D4-A4AD-305CF7030140"
+                Url="Lists/WorkflowsHistory"
+                Description="Workflows History List Instance">
+  </ListInstance>
+</Elements>

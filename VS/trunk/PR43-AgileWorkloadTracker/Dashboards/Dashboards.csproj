@@ -179,6 +179,12 @@
     <None Include="Workflows\Milestone\Update\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{9487a12f-e7b6-4ff1-a2dc-6e864b9d1055}</SharePointProjectItemId>
     </None>
+    <None Include="Workflows\WorkflowsLists\Workflows History\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{962fd927-ed86-4b34-99a3-c8e311fccc2b}</SharePointProjectItemId>
+    </None>
+    <None Include="Workflows\WorkflowsLists\Workflows Tasks\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{56b2dd42-dcc7-4fd1-8523-ecceca97e1b1}</SharePointProjectItemId>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Dashboards\AddEditTasks\Elements.xml">
@@ -215,6 +221,8 @@
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="Workflows\Milestone\Update\Elements.xml" />
+    <Content Include="Workflows\WorkflowsLists\Workflows History\Elements.xml" />
+    <Content Include="Workflows\WorkflowsLists\Workflows Tasks\Elements.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\PR44-SharePoint\SharePoint\SharePoint.csproj">
