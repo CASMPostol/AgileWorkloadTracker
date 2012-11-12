@@ -196,7 +196,9 @@
     <Content Include="Dashboards\MyTasks\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Dashboards\WorkloadSummary\Elements.xml" />
+    <Content Include="Dashboards\WorkloadSummary\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Features\AWTDashboards\AWTDashboards.Template.xml">
       <DependentUpon>AWTDashboards.feature</DependentUpon>
     </Content>
