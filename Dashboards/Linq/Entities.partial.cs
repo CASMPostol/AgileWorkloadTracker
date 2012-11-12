@@ -217,7 +217,7 @@ namespace CAS.AgileWorkloadTracker.Linq
         if ( this.Requirements2ProjectsTitle == null || this.Requirements2ProjectsTitle != this.Requirements2MilestoneTitle.Milestone2ProjectTitle )
           this.Requirements2ProjectsTitle = this.Requirements2MilestoneTitle.Milestone2ProjectTitle;
         double _hours = this.Tasks.Sum<Tasks>( a => a.Hours );
-        RequirementPriority = Convert.ToInt32( Math.Round( Hours ) );
+        RequirementPriority = Convert.ToInt32( Math.Round( _hours ) );
         return _hours;
       }
     }

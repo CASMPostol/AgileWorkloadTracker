@@ -35,7 +35,7 @@ namespace CAS.ITRDataAccess.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://casmp/sites/a11")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://cas_sp:11225/sites/awt")]
         public string RequestUrl {
             get {
                 return ((string)(this["RequestUrl"]));
@@ -54,7 +54,7 @@ namespace CAS.ITRDataAccess.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2011-07-01")]
+        [global::System.Configuration.DefaultSettingValueAttribute("2011-01-01")]
         public global::System.DateTime WorkloadStartDate {
             get {
                 return ((global::System.DateTime)(this["WorkloadStartDate"]));
