@@ -6,14 +6,14 @@ using System.Security;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Website")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("CAS")]
-[assembly: AssemblyProduct("Website")]
-[assembly: AssemblyCopyright("Copyright © CAS 2013")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
+[assembly: AssemblyTitle( "CAS Agile Workload Tracker Website Rel 01.10" )]
+[assembly: AssemblyDescription( "AWT functionality" )]
+[assembly: AssemblyConfiguration( "" )]
+[assembly: AssemblyCompany( "CAS" )]
+[assembly: AssemblyProduct( "CAS Agile Workload Tracker" )]
+[assembly: AssemblyCopyright( "Copyright © CAS 2013" )]
+[assembly: AssemblyTrademark( "CAS Agile Workload Tracker" )]
+[assembly: AssemblyCulture( "" )]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
@@ -21,7 +21,7 @@ using System.Security;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("3c290ef1-a0fa-46bb-bc4a-f6b22c832e5a")]
+[assembly: Guid("b0cc62aa-8258-4f89-9f94-22cb33e3e38d")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -33,6 +33,5 @@ using System.Security;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: AllowPartiallyTrustedCallers()]
+[assembly: AssemblyVersion("1.10.0.*")]
+[assembly: AssemblyFileVersion( "1.10.0.0" )]
