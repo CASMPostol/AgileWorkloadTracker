@@ -14,4 +14,18 @@
     DisplayName="Estimated hours"
     Group="CAS Agile Workload Tracker"
     />
+  <Field
+    Name="ApprovedHours"
+    ID="{34E8484D-BAF9-4DCE-9D95-257302109182}"
+    Type="Number"
+    DisplayName="Approved hours"
+    Group="CAS Agile Workload Tracker"
+    />
+  <Field
+    Name="MilestoneDesription"
+    ID="{18ABAADB-DFF3-423D-A82A-C9BCF76D6137}"
+    Type="Text"
+    DisplayName="Description"
+    Group="CAS Agile Workload Tracker"
+    />
 </Elements>
