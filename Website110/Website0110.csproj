@@ -57,6 +57,9 @@
     <None Include="Features\AWTWebsiteUpgrade0110\AWTWebsiteUpgrade0110.feature">
       <FeatureId>{18ec15ab-c1db-4a29-b00a-fd1a45812d99}</FeatureId>
     </None>
+    <None Include="Fields\Fields\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{bf9e4566-627c-4991-bd7b-ac177baec1e3}</SharePointProjectItemId>
+    </None>
     <None Include="key.snk" />
     <None Include="Package\Package.package">
       <PackageId>{0800d978-43cd-4042-9107-ffd781075069}</PackageId>
@@ -69,6 +72,7 @@
     <Content Include="Features\AWTWebsiteUpgrade0110\AWTWebsiteUpgrade0110.Template.xml">
       <DependentUpon>AWTWebsiteUpgrade0110.feature</DependentUpon>
     </Content>
+    <Content Include="Fields\Fields\Elements.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
