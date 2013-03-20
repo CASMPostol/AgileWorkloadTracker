@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Field
+    Name="RequirementPriority1"
+    ID="{6a19227f-dd6d-4d0e-8199-e4ece75c0fd8}"
+    Type="Number"
+    DisplayName="Requirement priority"
+    Group="CAS Agile Workload Tracker"
+    />
+  <Field
+    Name="EstimatedHours"
+    ID="{bda38e83-cf1d-4b7b-87ea-bd1df3c6d995}"
+    Type="Number"
+    DisplayName="Estimated hours"
+    Group="CAS Agile Workload Tracker"
+    />
+</Elements>
