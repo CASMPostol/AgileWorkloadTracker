@@ -1,4 +1,19 @@
-﻿using System;
+﻿//<summary>
+//  Title   : Update milestone workflow 
+//  System  : Microsoft Visual C# .NET 2012
+//  $LastChangedDate:$
+//  $Rev:$
+//  $LastChangedBy:$
+//  $URL:$
+//  $Id:$
+//
+//  Copyright (C) 2013, CAS LODZ POLAND.
+//  TEL: +48 (42) 686 25 47
+//  mailto://techsupp@cas.eu
+//  http://www.cas.eu
+//</summary>
+
+using System;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Collections;
@@ -18,28 +33,32 @@ using CAS.AgileWorkloadTracker.Linq;
 
 namespace CAS.AgileWorkloadTracker.Dashboards.Workflows.Milestone.Update
 {
-  public sealed partial class Update : SequentialWorkflowActivity
+  /// <summary>
+  /// Update milestone workflow
+  /// </summary>
+  public sealed partial class Update: SequentialWorkflowActivity
   {
     public Update()
     {
       InitializeComponent();
     }
 
-    public Guid workflowId = default(System.Guid);
-    [CLSCompliantAttribute(false)]
+    public Guid workflowId = default( System.Guid );
+    [CLSCompliantAttribute( false )]
     public SPWorkflowActivationProperties workflowProperties = new SPWorkflowActivationProperties();
 
-    private void m_OnWorkflowActivated_Invoked(object sender, ExternalDataEventArgs e) { }
-    private void UpdateMilestoneCodeActivity_ExecuteCode(object sender, EventArgs e)
+    private void m_OnWorkflowActivated_Invoked( object sender, ExternalDataEventArgs e ) { }
+    private void UpdateMilestoneCodeActivity_ExecuteCode( object sender, EventArgs e )
     {
-      using (Entities _edc = new Entities(this.workflowProperties.Web.Url))
+      using ( Entities _edc = new Entities( this.workflowProperties.Web.Url ) )
       {
-        CAS.AgileWorkloadTracker.Linq.Milestone _mlstne = Element.GetAtIndex<CAS.AgileWorkloadTracker.Linq.Milestone>(_edc.Milestone, workflowProperties.ItemId);
-        _mlstne.MilestoneHours = _mlstne.Requirements.Sum<Requirements>(a => a.Hours);
+        CAS.AgileWorkloadTracker.Linq.Milestone _mlstne = Element.GetAtIndex<CAS.AgileWorkloadTracker.Linq.Milestone>( _edc.Milestone, workflowProperties.ItemId );
+        _mlstne.Adjust( _edc );
+        _mlstne.MilestoneHours = _mlstne.Requirements.Sum<Requirements>( a => a.Hours );
         _hours = _mlstne.MilestoneHours.Value;
         _tasks = _mlstne.Tasks0.Count;
         _edc.SubmitChanges();
-        _actoveTasks = _mlstne.Tasks0.Where<Tasks>(tsk => tsk.Active.GetValueOrDefault(false)).Count<Tasks>();
+        _activeTasks = _mlstne.Tasks0.Where<Tasks>( tsk => tsk.Active.GetValueOrDefault( false ) ).Count<Tasks>();
       }
     }
     //private void ReportException(Entities edc, string _source, Exception ex)
@@ -52,16 +71,16 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Workflows.Milestone.Update
     //  }
     //  catch (Exception) { }
     //}
-    private double _hours = default(double);
-    private int _tasks = default(int);
-    private int _actoveTasks = default(int);
-    public String FinishLgToHistoryListActivity_HistoryDescription = default(string);
+    private double _hours = default( double );
+    private int _tasks = default( int );
+    private int _activeTasks = default( int );
+    public String FinishLgToHistoryListActivity_HistoryDescription = default( string );
     public String FinishLgToHistoryListActivity_HistoryOutcome = "Update Finished";
 
-    private void FinishLgToHistoryListActivity_MethodInvoking(object sender, EventArgs e)
+    private void FinishLgToHistoryListActivity_MethodInvoking( object sender, EventArgs e )
     {
       string _dscr = "The milestone has reported {0} hours and {1} tasks ({2} are active).";
-      FinishLgToHistoryListActivity_HistoryDescription = String.Format(_dscr, _hours, _tasks, _actoveTasks);
+      FinishLgToHistoryListActivity_HistoryDescription = String.Format( _dscr, _hours, _tasks, _activeTasks );
     }
   }
 }
