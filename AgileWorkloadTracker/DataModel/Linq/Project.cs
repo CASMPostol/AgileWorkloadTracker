@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace CAS.AgileWorkloadTracker.Dashboards.Linq
+namespace CAS.AgileWorkloadTracker.DataModel.Linq
 {
   partial class Projects
   {
-    internal void Adjust( Entities edc )
+    public void Adjust( Entities edc )
     {
       List<Tasks> _danglingTasks = ( from _tix in this.Tasks where _tix.Task2MilestoneResolvedInTitle == null select _tix ).ToList<Tasks>();
       if ( _danglingTasks.Count > 0 )

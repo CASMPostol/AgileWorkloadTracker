@@ -7,8 +7,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("<#=AssemblyProduct#> DataModel")]
-[assembly: AssemblyDescription("Entities and helper functions")]
+[assembly: AssemblyTitle("<#=AssemblyProduct#> Workflows")]
+[assembly: AssemblyDescription("Workflows collection")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("<#=AssemblyCompany#>")]
 [assembly: AssemblyProduct("<#=AssemblyProduct#>")]
