@@ -1,0 +1,8 @@
+<#+
+string IPRAssemblyVersion = "1.10.00.*";
+string IPRAssemblyFileVersion = "1.10.00";
+string AssemblyTrademark = "Smart Factory";
+string AssemblyCopyright = "Copyright (c) CAS 2013";
+string AssemblyProduct = "Agile Workload Tracker";
+string AssemblyCompany = "CAS";
+#>
