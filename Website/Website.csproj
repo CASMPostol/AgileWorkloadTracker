@@ -128,6 +128,9 @@
     <None Include="Fields\Fields\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{80eea8e7-44ab-4436-af6d-acad27b75246}</SharePointProjectItemId>
     </None>
+    <None Include="Fields\Fields_0110\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{dc366331-8caf-4632-95ed-4e37b23fc82f}</SharePointProjectItemId>
+    </None>
     <None Include="Fields\LookupFields\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{9e78353d-face-4f57-95be-8a6a980bf355}</SharePointProjectItemId>
     </None>
@@ -286,6 +289,7 @@
     <Content Include="Fields\Fields\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Fields\Fields_0110\Elements.xml" />
     <Content Include="Fields\LookupFields\Elements.xml">
       <SubType>Designer</SubType>
     </Content>

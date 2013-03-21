@@ -12,7 +12,7 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BB1F664B-9266-4fd6-B973-E1E44974B511};{14822709-B5A1-4724-98CA-57A101D1B079};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <SandboxedSolution>False</SandboxedSolution>
+    <SandboxedSolution>True</SandboxedSolution>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -48,16 +48,13 @@
     <Reference Include="Microsoft.SharePoint" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\AWTWebsiteUpgrade0110\AWTWebsiteUpgrade0110.EventReceiver.cs">
-      <DependentUpon>AWTWebsiteUpgrade0110.feature</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Features\AWTWebsiteUpgrade0110\AWTWebsiteUpgrade0110.feature">
-      <FeatureId>{18ec15ab-c1db-4a29-b00a-fd1a45812d99}</FeatureId>
+      <FeatureId>{0c6733d5-1c46-43ae-b699-13e6e50552fc}</FeatureId>
     </None>
-    <None Include="Fields\Fields\SharePointProjectItem.spdata">
+    <None Include="FieldsV0110\FieldsV0110\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{bf9e4566-627c-4991-bd7b-ac177baec1e3}</SharePointProjectItemId>
     </None>
     <None Include="key.snk" />
@@ -71,8 +68,9 @@
   <ItemGroup>
     <Content Include="Features\AWTWebsiteUpgrade0110\AWTWebsiteUpgrade0110.Template.xml">
       <DependentUpon>AWTWebsiteUpgrade0110.feature</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
-    <Content Include="Fields\Fields\Elements.xml" />
+    <Content Include="FieldsV0110\FieldsV0110\Elements.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<feature xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="51f7f5db-3a99-4049-9555-c95267e05e61" description="Cplumns andd lists of the website" featureId="51f7f5db-3a99-4049-9555-c95267e05e61" imageUrl="" scope="Site" solutionId="00000000-0000-0000-0000-000000000000" title="AgileWorkloadTracker Website Data Model" version="AAEAAAD/////AQAAAAAAAAAEAQAAAA5TeXN0ZW0uVmVyc2lvbgQAAAAGX01ham9yBl9NaW5vcgZfQnVpbGQJX1JldmlzaW9uAAAAAAgICAgBAAAAAAAAAAEAAAD/////Cw==" deploymentPath="$SharePoint.Project.FileNameWithoutExtension$_$SharePoint.Feature.FileNameWithoutExtension$" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/FeatureModel">
+<feature xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="51f7f5db-3a99-4049-9555-c95267e05e61" description="Cplumns andd lists of the website" featureId="51f7f5db-3a99-4049-9555-c95267e05e61" imageUrl="" scope="Site" solutionId="00000000-0000-0000-0000-000000000000" title="AgileWorkloadTracker Website Data Model" version="AAEAAAD/////AQAAAAAAAAAEAQAAAA5TeXN0ZW0uVmVyc2lvbgQAAAAGX01ham9yBl9NaW5vcgZfQnVpbGQJX1JldmlzaW9uAAAAAAgICAgBAAAAAQAAAAAAAAAAAAAACw==" deploymentPath="$SharePoint.Project.FileNameWithoutExtension$_$SharePoint.Feature.FileNameWithoutExtension$" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/FeatureModel">
   <projectItems>
     <projectItemReference itemId="6dd5c4bd-0c8e-45e6-831f-e2c706aa287c" />
     <projectItemReference itemId="80eea8e7-44ab-4436-af6d-acad27b75246" />
@@ -51,5 +51,6 @@
     <projectItemReference itemId="787b87cd-8232-4279-80e9-38697c7fc7dc" />
     <projectItemReference itemId="1b929ea2-e2d4-4b56-af8c-49336fcd34d4" />
     <projectItemReference itemId="b88d50dd-ec50-4030-97f5-7d83ace88895" />
+    <projectItemReference itemId="dc366331-8caf-4632-95ed-4e37b23fc82f" />
   </projectItems>
 </feature>
