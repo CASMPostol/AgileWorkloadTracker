@@ -1,5 +1,6 @@
 ﻿<#@ template debug="false" hostspecific="false" language="C#" #>
 <#@ output extension=".cs" #>
+using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -7,8 +8,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CAS SharePoint")]
-[assembly: AssemblyDescription("SharePoint helpper functions")]
+[assembly: AssemblyTitle("CAS Agile Workload Tracker Dashboards")]
+[assembly: AssemblyDescription("AWT daschboards")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("<#=AssemblyCompany#>")]
 [assembly: AssemblyProduct("<#=AssemblyProduct#>")]
@@ -36,5 +37,6 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("<#=IPRAssemblyVersion#>")]
 [assembly: AssemblyFileVersion("<#=IPRAssemblyFileVersion#>")]
+[assembly: CLSCompliant(true)]
 
 <#@ include file = "..\..\AgileWorkloadTracker\Model.T4" #>

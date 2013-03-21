@@ -1,4 +1,18 @@
-﻿using System;
+﻿//<summary>
+//  Title   : Task Management User Control
+//  System  : Microsoft Visual C# .NET 2012
+//  $LastChangedDate:$
+//  $Rev:$
+//  $LastChangedBy:$
+//  $URL:$
+//  $Id:$
+//
+//  Copyright (C) 2013, CAS LODZ POLAND.
+//  TEL: +48 (42) 686 25 47
+//  mailto://techsupp@cas.eu
+//  http://www.cas.eu
+//</summary>
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
@@ -12,6 +26,9 @@ using TaskType = CAS.AgileWorkloadTracker.Linq.Type;
 
 namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
 {
+  /// <summary>
+  /// Task Management User Control
+  /// </summary>
   [CLSCompliant(false)]
   public partial class TaskManagementUserControl: UserControl
   {
@@ -700,33 +717,33 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.TaskManagement
     private void SetTargetForProject()
     {
       return;
-      int? _pId = m_ControlState.ProjectID.String2Int();
-      if ( _pId.HasValue )
-      {
-        Entities _dcxt = this.m_DataContext.DataContext;
-        m_RequirementDropDown.EntityListDataSource( _dcxt.ActiveRequirements( _pId.Value ) );
-        //TODO handle default requirements.
-        //Milestone _milestoneDefault = ( from _mlstx in _mlstns where _mlstx.Default.HasValue && _mlstx.Default.Value select _mlstx ).FirstOrDefault<Milestone>();
-        //if ( _milestoneDefault != null )
-        //{
-        //  string _idx = _milestoneDefault.Identyfikator.IntToString();
-        //  m_VersionDropDown.SelectedValue = _idx;
-        //  m_MilestoneDropDown.SelectedValue = _idx;
-        //  if ( _milestoneDefault.MilestoneEnd.HasValue )
-        //    m_DueDateDateTimeControl.SelectedDate = _milestoneDefault.MilestoneEnd.Value;
-        //  else
-        //    m_DueDateDateTimeControl.ClearSelection();
-        //}
-        //m_RequirementDropDown.EntityListDataSource( from _mlstnx in _activeMilestones
-        //                                            from _rsrcx in _mlstnx.Requirements
-        //                                            select _rsrcx );
-      }
-      else
-      {
-        ProjectNotSelected( m_RequirementDropDown );
-        ProjectNotSelected( m_VersionDropDown );
-        ProjectNotSelected( m_MilestoneDropDown );
-      }
+      //int? _pId = m_ControlState.ProjectID.String2Int();
+      //if ( _pId.HasValue )
+      //{
+      //  Entities _dcxt = this.m_DataContext.DataContext;
+      //  m_RequirementDropDown.EntityListDataSource( _dcxt.ActiveRequirements( _pId.Value ) );
+      //  //TODO handle default requirements.
+      //  //Milestone _milestoneDefault = ( from _mlstx in _mlstns where _mlstx.Default.HasValue && _mlstx.Default.Value select _mlstx ).FirstOrDefault<Milestone>();
+      //  //if ( _milestoneDefault != null )
+      //  //{
+      //  //  string _idx = _milestoneDefault.Identyfikator.IntToString();
+      //  //  m_VersionDropDown.SelectedValue = _idx;
+      //  //  m_MilestoneDropDown.SelectedValue = _idx;
+      //  //  if ( _milestoneDefault.MilestoneEnd.HasValue )
+      //  //    m_DueDateDateTimeControl.SelectedDate = _milestoneDefault.MilestoneEnd.Value;
+      //  //  else
+      //  //    m_DueDateDateTimeControl.ClearSelection();
+      //  //}
+      //  //m_RequirementDropDown.EntityListDataSource( from _mlstnx in _activeMilestones
+      //  //                                            from _rsrcx in _mlstnx.Requirements
+      //  //                                            select _rsrcx );
+      //}
+      //else
+      //{
+      //  ProjectNotSelected( m_RequirementDropDown );
+      //  ProjectNotSelected( m_VersionDropDown );
+      //  ProjectNotSelected( m_MilestoneDropDown );
+      //}
     }
     private void ProjectNotSelected( DropDownList dropDownList )
     {
