@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CAS.AgileWorkloadTracker.Dashboards.Linq {
+namespace CAS.AgileWorkloadTracker.DataModel.Linq {
 	using System;
 	
 	
-	internal partial class Entities : Microsoft.SharePoint.Linq.DataContext {
+	public partial class Entities : Microsoft.SharePoint.Linq.DataContext {
 		
 		#region Extensibility Method Definitions
 		partial void OnCreated();
@@ -225,7 +225,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Linq {
 	[Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type=typeof(TaskComments))]
 	[Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type=typeof(Type))]
 	[Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type=typeof(Workload))]
-	internal partial class Element : Microsoft.SharePoint.Linq.ITrackEntityState, Microsoft.SharePoint.Linq.ITrackOriginalValues, System.ComponentModel.INotifyPropertyChanged, System.ComponentModel.INotifyPropertyChanging {
+	public partial class Element : Microsoft.SharePoint.Linq.ITrackEntityState, Microsoft.SharePoint.Linq.ITrackOriginalValues, System.ComponentModel.INotifyPropertyChanged, System.ComponentModel.INotifyPropertyChanging {
 		
 		private System.Nullable<int> _identyfikator;
 		
@@ -353,7 +353,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Linq {
 	/// </summary>
 	[Microsoft.SharePoint.Linq.ContentTypeAttribute(Name="Dokument", Id="0x0101")]
 	[Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type=typeof(StronaWzorcowa))]
-	internal partial class Dokument : Element {
+	public partial class Dokument : Element {
 		
 		private string _nazwa;
 		
@@ -419,7 +419,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Linq {
 	/// </summary>
 	[Microsoft.SharePoint.Linq.ContentTypeAttribute(Name="Strona wzorcowa", Id="0x010105")]
 	[Microsoft.SharePoint.Linq.DerivedEntityClassAttribute(Type=typeof(MasterPageGalleryStronaWzorcowa))]
-	internal partial class StronaWzorcowa : Dokument {
+	public partial class StronaWzorcowa : Dokument {
 		
 		protected string _description;
 		
@@ -468,7 +468,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Linq {
 	/// Category Content Type
 	/// </summary>
 	[Microsoft.SharePoint.Linq.ContentTypeAttribute(Name="Category", Id="0x01001C15F2EAC7924A828FD6A599CABD5746")]
-	internal partial class Category : Element {
+	public partial class Category : Element {
 		
 		private Microsoft.SharePoint.Linq.EntityRef<Projects> _category2ProjectsTitle;
 		
@@ -551,7 +551,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Linq {
 	/// Contracts Content Type
 	/// </summary>
 	[Microsoft.SharePoint.Linq.ContentTypeAttribute(Name="Contracts", Id="0x0100DABE2F02363F46BCB5699B2E6DDA8A82")]
-	internal partial class Contracts : Element {
+	public partial class Contracts : Element {
 		
 		private string _contractNumber;
 		
@@ -778,7 +778,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Linq {
 	/// Estimation Content Type
 	/// </summary>
 	[Microsoft.SharePoint.Linq.ContentTypeAttribute(Name="Estimation", Id="0x01001AF97106D9F1498B82C9980861B39EA1")]
-	internal partial class Estimation : Element {
+	public partial class Estimation : Element {
 		
 		private System.Nullable<double> _estimatedWorkload;
 		
@@ -888,7 +888,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Linq {
 	/// Milestone Content Type
 	/// </summary>
 	[Microsoft.SharePoint.Linq.ContentTypeAttribute(Name="Milestone", Id="0x0100EB00A9F1B21F48A699409A797C893B5A")]
-	internal partial class Milestone : Element {
+	public partial class Milestone : Element {
 		
 		private System.Nullable<bool> _active;
 		
@@ -1198,7 +1198,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Linq {
 	/// Partners Content Type
 	/// </summary>
 	[Microsoft.SharePoint.Linq.ContentTypeAttribute(Name="Partners", Id="0x0100E64D1186D14D472EB1984F194359BB20")]
-	internal partial class Partners : Element {
+	public partial class Partners : Element {
 		
 		private string _workCountry;
 		
@@ -1392,7 +1392,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Linq {
 	/// Priority Content Type
 	/// </summary>
 	[Microsoft.SharePoint.Linq.ContentTypeAttribute(Name="Priority", Id="0x01008A82AC63B9A949DA95DAA3E970754393")]
-	internal partial class Priority : Element {
+	public partial class Priority : Element {
 		
 		private Microsoft.SharePoint.Linq.EntitySet<Tasks> _tasks;
 		
@@ -1442,7 +1442,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Linq {
 	/// Projects Content Type
 	/// </summary>
 	[Microsoft.SharePoint.Linq.ContentTypeAttribute(Name="Projects", Id="0x01000C2CCABBA2E1473BA2623EFDA04E749E")]
-	internal partial class Projects : Element {
+	public partial class Projects : Element {
 		
 		private string _projectNumber;
 		
@@ -1916,7 +1916,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Linq {
 	/// Requirements Content Type
 	/// </summary>
 	[Microsoft.SharePoint.Linq.ContentTypeAttribute(Name="Requirements", Id="0x01008B9076C2C55F47A298C387804D856FC8")]
-	internal partial class Requirements : Element {
+	public partial class Requirements : Element {
 		
 		private System.Nullable<int> _requirementPriority;
 		
@@ -2080,7 +2080,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Linq {
 	/// Resolution Content Type
 	/// </summary>
 	[Microsoft.SharePoint.Linq.ContentTypeAttribute(Name="Resolution", Id="0x010088405BE8A9C847F89E13957FBA7E2D59")]
-	internal partial class Resolution : Element {
+	public partial class Resolution : Element {
 		
 		private Microsoft.SharePoint.Linq.EntitySet<Tasks> _tasks;
 		
@@ -2130,7 +2130,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Linq {
 	/// Resources Content Type
 	/// </summary>
 	[Microsoft.SharePoint.Linq.ContentTypeAttribute(Name="Resources", Id="0x010091A504EC7E3342BDB25EFEB93B60A5FA")]
-	internal partial class Resources : Element {
+	public partial class Resources : Element {
 		
 		private string _jobTitle;
 		
@@ -2343,7 +2343,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Linq {
 	/// Stage Content Type
 	/// </summary>
 	[Microsoft.SharePoint.Linq.ContentTypeAttribute(Name="Stage", Id="0x010085603184410F43E88BC6CCE5BE613389")]
-	internal partial class Stage : Element {
+	public partial class Stage : Element {
 		
 		private Microsoft.SharePoint.Linq.EntitySet<Milestone> _milestone;
 		
@@ -2459,7 +2459,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Linq {
 	/// Status Content Type
 	/// </summary>
 	[Microsoft.SharePoint.Linq.ContentTypeAttribute(Name="Status", Id="0x0100798F904919E54652B0BBC121E7F6A818")]
-	internal partial class Status : Element {
+	public partial class Status : Element {
 		
 		private System.Nullable<bool> _active;
 		
@@ -2525,7 +2525,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Linq {
 	/// Tasks Content Type
 	/// </summary>
 	[Microsoft.SharePoint.Linq.ContentTypeAttribute(Name="Tasks", Id="0x01005D39260836CE498D8E0D443AD5CAD3AC")]
-	internal partial class Tasks : Element {
+	public partial class Tasks : Element {
 		
 		private string _body;
 		
@@ -3034,7 +3034,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Linq {
 	/// Task Comments Content Type
 	/// </summary>
 	[Microsoft.SharePoint.Linq.ContentTypeAttribute(Name="TaskComments", Id="0x0100E615647B0FDE44E6AE8B778DFC56438D")]
-	internal partial class TaskComments : Element {
+	public partial class TaskComments : Element {
 		
 		private string _body;
 		
@@ -3111,7 +3111,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Linq {
 	/// Type Content Type
 	/// </summary>
 	[Microsoft.SharePoint.Linq.ContentTypeAttribute(Name="Type", Id="0x01004D5362E631BA41C39E9A3D2364D55EFB")]
-	internal partial class Type : Element {
+	public partial class Type : Element {
 		
 		private Microsoft.SharePoint.Linq.EntitySet<Tasks> _tasks;
 		
@@ -3161,7 +3161,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Linq {
 	/// Workload Content Type
 	/// </summary>
 	[Microsoft.SharePoint.Linq.ContentTypeAttribute(Name="Workload", Id="0x0100CE075A94AA894CDAA771E6A734832A77")]
-	internal partial class Workload : Element {
+	public partial class Workload : Element {
 		
 		private System.Nullable<System.DateTime> _workloadDate;
 		
@@ -3390,7 +3390,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Linq {
 	/// Utwórz nową stronę wzorcową.
 	/// </summary>
 	[Microsoft.SharePoint.Linq.ContentTypeAttribute(Name="Strona wzorcowa", Id="0x010105", List="Master Page Gallery")]
-	internal partial class MasterPageGalleryStronaWzorcowa : StronaWzorcowa {
+	public partial class MasterPageGalleryStronaWzorcowa : StronaWzorcowa {
 		
 		#region Extensibility Method Definitions
 		partial void OnLoaded();
@@ -3429,7 +3429,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Linq {
 	}
 	
 	[System.FlagsAttribute()]
-	internal enum UIVersion : int {
+	public enum UIVersion : int {
 		
 		None = 0,
 		
@@ -3442,7 +3442,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Linq {
 		_4 = 4,
 	}
 	
-	internal enum Currency : int {
+	public enum Currency : int {
 		
 		None = 0,
 		
@@ -3458,7 +3458,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Linq {
 		EUR = 8,
 	}
 	
-	internal enum ProjectType : int {
+	public enum ProjectType : int {
 		
 		None = 0,
 		
@@ -3483,7 +3483,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Linq {
 		AfterSalesServices = 64,
 	}
 	
-	internal enum RequirementsType : int {
+	public enum RequirementsType : int {
 		
 		None = 0,
 		

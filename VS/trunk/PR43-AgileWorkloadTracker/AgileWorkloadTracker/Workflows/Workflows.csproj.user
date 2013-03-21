@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <SharePointSiteUrl>http://casmp/sites/a01/</SharePointSiteUrl>
+    <ProjectView>ProjectFiles</ProjectView>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{BB1F664B-9266-4fd6-B973-E1E44974B511}">
+        <ProjectItemStore Id="{70507aa9-bb4e-4608-a020-153df9c8a0bf}">
+          <DisplayName>Calculate Project</DisplayName>
+          <HistoryList>Workflows History</HistoryList>
+          <HistoryListGuid>{d8a6f7e6-96a8-4094-b2a8-c5d33312eef1}</HistoryListGuid>
+          <TaskList>Workflows Tasks</TaskList>
+          <TaskListGuid>{c5d0f121-3967-4bcd-a913-17c12e0ab170}</TaskListGuid>
+          <AutoAssociate>true</AutoAssociate>
+          <ManualStart>true</ManualStart>
+          <ListURL>http://casmp/sites/a01/Lists/ProjectsList/AllItems.aspx</ListURL>
+          <TargetList>Projects</TargetList>
+          <TargetListGuid>{6d0825e6-e19e-4356-9b23-4ad5d6dc53ae}</TargetListGuid>
+          <StartOnCreate>false</StartOnCreate>
+          <StartOnChange>false</StartOnChange>
+        </ProjectItemStore>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

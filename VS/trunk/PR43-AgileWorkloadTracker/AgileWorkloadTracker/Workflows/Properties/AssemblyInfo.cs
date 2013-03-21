@@ -1,19 +1,17 @@
-﻿<#@ template debug="false" hostspecific="false" language="C#" #>
-<#@ output extension=".cs" #>
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("<#=AssemblyProduct#> DataModel")]
-[assembly: AssemblyDescription("Entities and helper functions")]
+[assembly: AssemblyTitle("CAS Agile Workload Tracker Workflows")]
+[assembly: AssemblyDescription("Workflows collection")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("<#=AssemblyCompany#>")]
-[assembly: AssemblyProduct("<#=AssemblyProduct#>")]
-[assembly: AssemblyCopyright("<#=AssemblyCopyright#>")]
-[assembly: AssemblyTrademark("<#=AssemblyTrademark#>")]
+[assembly: AssemblyCompany("CAS")]
+[assembly: AssemblyProduct("CAS Agile Workload Tracker")]
+[assembly: AssemblyCopyright("Copyright (c) CAS 2013")]
+[assembly: AssemblyTrademark("Smart Factory")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
@@ -34,7 +32,6 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("<#=IPRAssemblyVersion#>")]
-[assembly: AssemblyFileVersion("<#=IPRAssemblyFileVersion#>")]
+[assembly: AssemblyVersion("1.10.00.*")]
+[assembly: AssemblyFileVersion("1.10.00")]
 
-<#@ include file = "..\..\Model.T4" #>

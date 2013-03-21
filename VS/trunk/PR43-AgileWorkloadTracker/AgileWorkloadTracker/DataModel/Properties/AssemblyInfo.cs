@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CAS SharePoint")]
-[assembly: AssemblyDescription("SharePoint helpper functions")]
+[assembly: AssemblyTitle("CAS Agile Workload Tracker DataModel")]
+[assembly: AssemblyDescription("Entities and helper functions")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("CAS")]
-[assembly: AssemblyProduct("Agile Workload Tracker")]
+[assembly: AssemblyProduct("CAS Agile Workload Tracker")]
 [assembly: AssemblyCopyright("Copyright (c) CAS 2013")]
 [assembly: AssemblyTrademark("Smart Factory")]
 [assembly: AssemblyCulture("")]
