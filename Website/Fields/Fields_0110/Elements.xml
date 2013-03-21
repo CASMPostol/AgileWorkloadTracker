@@ -21,4 +21,11 @@
     DisplayName="Description"
     Group="CAS Agile Workload Tracker"
     />
+  <Field
+    Name="PONumber"
+    ID="{65B029E6-ADCE-47CA-B668-DFFCA6D9E0C6}"
+    Type="Text"
+    DisplayName="PO number"
+    Group="CAS Agile Workload Tracker"
+    />
 </Elements>

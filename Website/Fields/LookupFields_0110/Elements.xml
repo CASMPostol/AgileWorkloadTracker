@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Field
+   Name="Project2PartnersTitle"
+   ID="{F62057C4-51AC-4D33-8AF7-83939DBF4B1D}"
+   Type="Lookup"
+   List="Lists/PartnersList"
+   ShowField="Title"
+   UnlimitedLengthInDocumentLibrary="False"
+   Indexed="True"
+   RelationshipDeleteBehavior="None"
+   DisplayName="Partner"
+   Group="CAS Agile Workload Tracker"
+   Required="False"
+   Hidden="False"
+   DisplaceOnUpgrade="True"
+   EnforceUniqueValues="False"
+   ReadOnly="False"
+    />
+</Elements>
