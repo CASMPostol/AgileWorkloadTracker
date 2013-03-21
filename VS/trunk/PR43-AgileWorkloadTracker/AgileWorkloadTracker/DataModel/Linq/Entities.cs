@@ -906,6 +906,12 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq {
 		
 		private System.Nullable<bool> _default;
 		
+		private System.Nullable<double> _acceptedHours;
+		
+		private System.Nullable<double> _estimatedHours;
+		
+		private string _milestoneDescription;
+		
 		private Microsoft.SharePoint.Linq.EntityRef<Stage> _milestone2StageTitle;
 		
 		private Microsoft.SharePoint.Linq.EntityRef<Projects> _milestone2ProjectTitle;
@@ -1054,6 +1060,48 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq {
 					this.OnPropertyChanging("Default", this._default);
 					this._default = value;
 					this.OnPropertyChanged("Default");
+				}
+			}
+		}
+		
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="AcceptedHours", Storage="_acceptedHours", FieldType="Number")]
+		public System.Nullable<double> AcceptedHours {
+			get {
+				return this._acceptedHours;
+			}
+			set {
+				if ((value != this._acceptedHours)) {
+					this.OnPropertyChanging("AcceptedHours", this._acceptedHours);
+					this._acceptedHours = value;
+					this.OnPropertyChanged("AcceptedHours");
+				}
+			}
+		}
+		
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="EstimatedHours", Storage="_estimatedHours", FieldType="Number")]
+		public System.Nullable<double> EstimatedHours {
+			get {
+				return this._estimatedHours;
+			}
+			set {
+				if ((value != this._estimatedHours)) {
+					this.OnPropertyChanging("EstimatedHours", this._estimatedHours);
+					this._estimatedHours = value;
+					this.OnPropertyChanged("EstimatedHours");
+				}
+			}
+		}
+		
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="MilestoneDescription", Storage="_milestoneDescription", FieldType="Text")]
+		public string MilestoneDescription {
+			get {
+				return this._milestoneDescription;
+			}
+			set {
+				if ((value != this._milestoneDescription)) {
+					this.OnPropertyChanging("MilestoneDescription", this._milestoneDescription);
+					this._milestoneDescription = value;
+					this.OnPropertyChanged("MilestoneDescription");
 				}
 			}
 		}
@@ -1220,6 +1268,8 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq {
 		
 		private Microsoft.SharePoint.Linq.EntitySet<Contracts> _contracts;
 		
+		private Microsoft.SharePoint.Linq.EntitySet<Projects> _projects;
+		
 		#region Extensibility Method Definitions
 		partial void OnLoaded();
 		partial void OnValidate();
@@ -1231,6 +1281,10 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq {
 			this._contracts.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Contracts>>(this.OnContractsSync);
 			this._contracts.OnChanged += new System.EventHandler(this.OnContractsChanged);
 			this._contracts.OnChanging += new System.EventHandler(this.OnContractsChanging);
+			this._projects = new Microsoft.SharePoint.Linq.EntitySet<Projects>();
+			this._projects.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Projects>>(this.OnProjectsSync);
+			this._projects.OnChanged += new System.EventHandler(this.OnProjectsChanged);
+			this._projects.OnChanging += new System.EventHandler(this.OnProjectsChanging);
 			this.OnCreated();
 		}
 		
@@ -1370,6 +1424,16 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq {
 			}
 		}
 		
+		[Microsoft.SharePoint.Linq.AssociationAttribute(Name="Project2PartnersTitle", Storage="_projects", ReadOnly=true, MultivalueType=Microsoft.SharePoint.Linq.AssociationType.Backward, List="Projects")]
+		public Microsoft.SharePoint.Linq.EntitySet<Projects> Projects {
+			get {
+				return this._projects;
+			}
+			set {
+				this._projects.Assign(value);
+			}
+		}
+		
 		private void OnContractsChanging(object sender, System.EventArgs e) {
 			this.OnPropertyChanging("Contracts", this._contracts.Clone());
 		}
@@ -1384,6 +1448,23 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq {
 			}
 			else {
 				e.Item.Contracts2PartnersTitle = null;
+			}
+		}
+		
+		private void OnProjectsChanging(object sender, System.EventArgs e) {
+			this.OnPropertyChanging("Projects", this._projects.Clone());
+		}
+		
+		private void OnProjectsChanged(object sender, System.EventArgs e) {
+			this.OnPropertyChanged("Projects");
+		}
+		
+		private void OnProjectsSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Projects> e) {
+			if ((Microsoft.SharePoint.Linq.AssociationChangedState.Added == e.State)) {
+				e.Item.Project2PartnersTitle = this;
+			}
+			else {
+				e.Item.Project2PartnersTitle = null;
 			}
 		}
 	}
@@ -1460,6 +1541,18 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq {
 		
 		private string _body;
 		
+		private System.Nullable<double> _estimatedHours;
+		
+		private System.Nullable<double> _acceptedHours;
+		
+		private System.Nullable<double> _milestoneHours;
+		
+		private System.Nullable<System.DateTime> _baselineStart;
+		
+		private System.Nullable<System.DateTime> _baselineEnd;
+		
+		private string _pONumber;
+		
 		private System.Nullable<ProjectType> _projectType;
 		
 		private System.Nullable<Currency> _currency;
@@ -1475,6 +1568,8 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq {
 		private Microsoft.SharePoint.Linq.EntityRef<Contracts> _project2ContractTitle;
 		
 		private Microsoft.SharePoint.Linq.EntityRef<Stage> _project2StageTitle;
+		
+		private Microsoft.SharePoint.Linq.EntityRef<Partners> _project2PartnersTitle;
 		
 		private Microsoft.SharePoint.Linq.EntitySet<Requirements> _requirements;
 		
@@ -1513,6 +1608,10 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq {
 			this._project2StageTitle.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Stage>>(this.OnProject2StageTitleSync);
 			this._project2StageTitle.OnChanged += new System.EventHandler(this.OnProject2StageTitleChanged);
 			this._project2StageTitle.OnChanging += new System.EventHandler(this.OnProject2StageTitleChanging);
+			this._project2PartnersTitle = new Microsoft.SharePoint.Linq.EntityRef<Partners>();
+			this._project2PartnersTitle.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Partners>>(this.OnProject2PartnersTitleSync);
+			this._project2PartnersTitle.OnChanged += new System.EventHandler(this.OnProject2PartnersTitleChanged);
+			this._project2PartnersTitle.OnChanging += new System.EventHandler(this.OnProject2PartnersTitleChanging);
 			this._requirements = new Microsoft.SharePoint.Linq.EntitySet<Requirements>();
 			this._requirements.OnSync += new System.EventHandler<Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Requirements>>(this.OnRequirementsSync);
 			this._requirements.OnChanged += new System.EventHandler(this.OnRequirementsChanged);
@@ -1640,6 +1739,90 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq {
 			}
 		}
 		
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="EstimatedHours", Storage="_estimatedHours", FieldType="Number")]
+		public System.Nullable<double> EstimatedHours {
+			get {
+				return this._estimatedHours;
+			}
+			set {
+				if ((value != this._estimatedHours)) {
+					this.OnPropertyChanging("EstimatedHours", this._estimatedHours);
+					this._estimatedHours = value;
+					this.OnPropertyChanged("EstimatedHours");
+				}
+			}
+		}
+		
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="AcceptedHours", Storage="_acceptedHours", FieldType="Number")]
+		public System.Nullable<double> AcceptedHours {
+			get {
+				return this._acceptedHours;
+			}
+			set {
+				if ((value != this._acceptedHours)) {
+					this.OnPropertyChanging("AcceptedHours", this._acceptedHours);
+					this._acceptedHours = value;
+					this.OnPropertyChanged("AcceptedHours");
+				}
+			}
+		}
+		
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="MilestoneHours", Storage="_milestoneHours", FieldType="Number")]
+		public System.Nullable<double> MilestoneHours {
+			get {
+				return this._milestoneHours;
+			}
+			set {
+				if ((value != this._milestoneHours)) {
+					this.OnPropertyChanging("MilestoneHours", this._milestoneHours);
+					this._milestoneHours = value;
+					this.OnPropertyChanged("MilestoneHours");
+				}
+			}
+		}
+		
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="BaselineStart", Storage="_baselineStart", FieldType="DateTime")]
+		public System.Nullable<System.DateTime> BaselineStart {
+			get {
+				return this._baselineStart;
+			}
+			set {
+				if ((value != this._baselineStart)) {
+					this.OnPropertyChanging("BaselineStart", this._baselineStart);
+					this._baselineStart = value;
+					this.OnPropertyChanged("BaselineStart");
+				}
+			}
+		}
+		
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="BaselineEnd", Storage="_baselineEnd", FieldType="DateTime")]
+		public System.Nullable<System.DateTime> BaselineEnd {
+			get {
+				return this._baselineEnd;
+			}
+			set {
+				if ((value != this._baselineEnd)) {
+					this.OnPropertyChanging("BaselineEnd", this._baselineEnd);
+					this._baselineEnd = value;
+					this.OnPropertyChanged("BaselineEnd");
+				}
+			}
+		}
+		
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="PONumber", Storage="_pONumber", FieldType="Text")]
+		public string PONumber {
+			get {
+				return this._pONumber;
+			}
+			set {
+				if ((value != this._pONumber)) {
+					this.OnPropertyChanging("PONumber", this._pONumber);
+					this._pONumber = value;
+					this.OnPropertyChanged("PONumber");
+				}
+			}
+		}
+		
 		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="ProjectType", Storage="_projectType", FieldType="Choice")]
 		public System.Nullable<ProjectType> ProjectType {
 			get {
@@ -1725,6 +1908,16 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq {
 			}
 			set {
 				this._project2StageTitle.SetEntity(value);
+			}
+		}
+		
+		[Microsoft.SharePoint.Linq.AssociationAttribute(Name="Project2PartnersTitle", Storage="_project2PartnersTitle", MultivalueType=Microsoft.SharePoint.Linq.AssociationType.Single, List="Partners")]
+		public Partners Project2PartnersTitle {
+			get {
+				return this._project2PartnersTitle.GetEntity();
+			}
+			set {
+				this._project2PartnersTitle.SetEntity(value);
 			}
 		}
 		
@@ -1860,6 +2053,23 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq {
 			}
 		}
 		
+		private void OnProject2PartnersTitleChanging(object sender, System.EventArgs e) {
+			this.OnPropertyChanging("Project2PartnersTitle", this._project2PartnersTitle.Clone());
+		}
+		
+		private void OnProject2PartnersTitleChanged(object sender, System.EventArgs e) {
+			this.OnPropertyChanged("Project2PartnersTitle");
+		}
+		
+		private void OnProject2PartnersTitleSync(object sender, Microsoft.SharePoint.Linq.AssociationChangedEventArgs<Partners> e) {
+			if ((Microsoft.SharePoint.Linq.AssociationChangedState.Added == e.State)) {
+				e.Item.Projects.Add(this);
+			}
+			else {
+				e.Item.Projects.Remove(this);
+			}
+		}
+		
 		private void OnRequirementsChanging(object sender, System.EventArgs e) {
 			this.OnPropertyChanging("Requirements", this._requirements.Clone());
 		}
@@ -1922,6 +2132,10 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq {
 		
 		private string _body;
 		
+		private System.Nullable<double> _estimatedHours;
+		
+		private System.Nullable<double> _hours;
+		
 		private System.Nullable<RequirementsType> _requirementsType;
 		
 		private Microsoft.SharePoint.Linq.EntityRef<Projects> _requirements2ProjectsTitle;
@@ -1976,6 +2190,34 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq {
 					this.OnPropertyChanging("Body", this._body);
 					this._body = value;
 					this.OnPropertyChanged("Body");
+				}
+			}
+		}
+		
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="EstimatedHours", Storage="_estimatedHours", FieldType="Number")]
+		public System.Nullable<double> EstimatedHours {
+			get {
+				return this._estimatedHours;
+			}
+			set {
+				if ((value != this._estimatedHours)) {
+					this.OnPropertyChanging("EstimatedHours", this._estimatedHours);
+					this._estimatedHours = value;
+					this.OnPropertyChanged("EstimatedHours");
+				}
+			}
+		}
+		
+		[Microsoft.SharePoint.Linq.ColumnAttribute(Name="Hours", Storage="_hours", FieldType="Number")]
+		public System.Nullable<double> Hours {
+			get {
+				return this._hours;
+			}
+			set {
+				if ((value != this._hours)) {
+					this.OnPropertyChanging("Hours", this._hours);
+					this._hours = value;
+					this.OnPropertyChanged("Hours");
 				}
 			}
 		}
