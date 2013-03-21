@@ -1,4 +1,19 @@
-﻿using System;
+﻿//<summary>
+//  Title   : Workload Management User Control
+//  System  : Microsoft Visual C# .NET 2012
+//  $LastChangedDate:$
+//  $Rev:$
+//  $LastChangedBy:$
+//  $URL:$
+//  $Id:$
+//
+//  Copyright (C) 2013, CAS LODZ POLAND.
+//  TEL: +48 (42) 686 25 47
+//  mailto://techsupp@cas.eu
+//  http://www.cas.eu
+//</summary>
+
+using System;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -11,6 +26,9 @@ using Microsoft.SharePoint;
 
 namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
 {
+  /// <summary>
+  /// Workload Management User Control
+  /// </summary>
   [CLSCompliant( false )]
   public partial class WorkloadManagementUserControl: UserControl
   {

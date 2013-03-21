@@ -1,15 +1,16 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CAS SharePoint")]
-[assembly: AssemblyDescription("SharePoint helpper functions")]
+[assembly: AssemblyTitle("CAS Agile Workload Tracker Dashboards")]
+[assembly: AssemblyDescription("AWT daschboards")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("CAS")]
-[assembly: AssemblyProduct("Agile Workload Tracker")]
+[assembly: AssemblyProduct("CAS Agile Workload Tracker")]
 [assembly: AssemblyCopyright("Copyright (c) CAS 2013")]
 [assembly: AssemblyTrademark("Smart Factory")]
 [assembly: AssemblyCulture("")]
@@ -34,4 +35,5 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.10.00.*")]
 [assembly: AssemblyFileVersion("1.10.00")]
+[assembly: CLSCompliant(true)]
 

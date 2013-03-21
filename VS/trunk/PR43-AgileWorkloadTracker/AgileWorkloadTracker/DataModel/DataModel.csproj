@@ -71,7 +71,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Linq\Entities.cs" />
+    <Compile Include="Linq\Milestone.cs" />
     <Compile Include="Linq\Project.cs" />
+    <Compile Include="Linq\Requirements.cs" />
+    <Compile Include="Linq\Tasks.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

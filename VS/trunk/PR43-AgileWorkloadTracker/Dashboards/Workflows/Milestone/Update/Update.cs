@@ -43,8 +43,14 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Workflows.Milestone.Update
       InitializeComponent();
     }
 
+    /// <summary>
+    /// The workflow id
+    /// </summary>
     public Guid workflowId = default( System.Guid );
-    [CLSCompliantAttribute( false )]
+    /// <summary>
+    /// The workflow properties
+    /// </summary>
+    [CLSCompliant( false )]
     public SPWorkflowActivationProperties workflowProperties = new SPWorkflowActivationProperties();
 
     private void m_OnWorkflowActivated_Invoked( object sender, ExternalDataEventArgs e ) { }
@@ -53,7 +59,6 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Workflows.Milestone.Update
       using ( Entities _edc = new Entities( this.workflowProperties.Web.Url ) )
       {
         CAS.AgileWorkloadTracker.Linq.Milestone _mlstne = Element.GetAtIndex<CAS.AgileWorkloadTracker.Linq.Milestone>( _edc.Milestone, workflowProperties.ItemId );
-        _mlstne.Adjust( _edc );
         _mlstne.MilestoneHours = _mlstne.Requirements.Sum<Requirements>( a => a.Hours );
         _hours = _mlstne.MilestoneHours.Value;
         _tasks = _mlstne.Tasks0.Count;

@@ -222,11 +222,6 @@ namespace CAS.AgileWorkloadTracker.Linq
         return Workload.Sum<Workload>( a => a.Hours.GetValueOrDefault( 0 ) );
       }
     }
-    internal void Adjust( Entities edc )
-    {
-      foreach ( Workload _wix in from _ix in this.Workload where _ix.Workload2ProjectTitle.Identyfikator != this.Task2ProjectTitle.Identyfikator select _ix )
-        _wix.Workload2ProjectTitle = this.Task2ProjectTitle;
-    }
   }
   internal partial class Requirements
   {
@@ -247,86 +242,12 @@ namespace CAS.AgileWorkloadTracker.Linq
         return;
       Requirements2MilestoneTitle.CalculateWorkload();
     }
-    internal void Adjust( Entities edc )
-    {
-      foreach ( Tasks _tix in this.Tasks )
-      {
-        if ( _tix.Task2MilestoneResolvedInTitle != this.Requirements2MilestoneTitle )
-          _tix.Task2MilestoneResolvedInTitle = this.Requirements2MilestoneTitle;
-        if ( _tix.Task2ProjectTitle != this.Requirements2ProjectsTitle )
-          _tix.Task2ProjectTitle = this.Requirements2ProjectsTitle;
-        _tix.Adjust( edc );
-      };
-    }
   }
   internal partial class Milestone
   {
     internal void CalculateWorkload()
     {
       this.MilestoneHours = this.Requirements.Sum<Requirements>( a => a.Hours );
-    }
-    internal void Adjust( Entities edc )
-    {
-      List<Tasks> _danglingTasks = ( from _tix in this.Tasks0 where _tix.Task2RequirementsTitle == null select _tix ).ToList<Tasks>();
-      if ( _danglingTasks.Count > 0 )
-      {
-        string _defMilestoneTitle = "DanglingTasks";
-        Requirements _defR = ( from _ix in this.Requirements where _ix.Title.Contains( _defMilestoneTitle ) select _ix ).FirstOrDefault<Requirements>();
-        if ( _defR == null )
-        {
-          _defR = new Requirements()
-          {
-            Body = _defMilestoneTitle,
-            Requirements2MilestoneTitle = this,
-            Requirements2ProjectsTitle = this.Milestone2ProjectTitle,
-            RequirementsType = RequirementsType.Invalid,
-            Title = _defMilestoneTitle,
-          };
-          edc.Requirements.InsertOnSubmit( _defR );
-        }
-        foreach ( Tasks _task in _danglingTasks )
-          _task.Task2RequirementsTitle = _defR;
-        edc.SubmitChanges();
-      }
-      foreach ( var _rix in this.Requirements )
-      {
-        if ( _rix.Requirements2ProjectsTitle != this.Milestone2ProjectTitle )
-          _rix.Requirements2ProjectsTitle = this.Milestone2ProjectTitle;
-        _rix.Adjust( edc );
-      }
-    }
-  }
-  internal partial class Projects
-  {
-    internal void Adjust( Entities edc )
-    {
-      List<Tasks> _danglingTasks = ( from _tix in this.Tasks where _tix.Task2MilestoneResolvedInTitle == null select _tix ).ToList<Tasks>();
-      if ( _danglingTasks.Count > 0 )
-      {
-        string _defMilestoneTitle = "DanglingTasks";
-        Milestone _defM = ( from _ix in this.Milestone where _ix.Title.Contains( _defMilestoneTitle ) select _ix ).FirstOrDefault<Milestone>();
-        if ( _defM == null )
-        {
-          _defM = new Milestone()
-          {
-            Active = true,
-            BaselineEnd = DateTime.Today,
-            BaselineStart = DateTime.Today,
-            Default = false,
-            Milestone2ProjectTitle = this,
-            MilestoneEnd = DateTime.Today,
-            MilestoneHours = 0,
-            MilestoneStart = DateTime.Today,
-            Title = _defMilestoneTitle,
-          };
-          edc.Milestone.InsertOnSubmit( _defM );
-        }
-        foreach ( Tasks _task in _danglingTasks )
-          _task.Task2MilestoneResolvedInTitle = _defM;
-      }
-      edc.SubmitChanges();
-      foreach ( Milestone _mix in this.Milestone )
-        _mix.Adjust( edc );
     }
   }
 }

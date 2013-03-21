@@ -4,6 +4,7 @@ using System.Web.UI;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.WebPartPages;
 using CAS.AgileWorkloadTracker.Dashboards.Webparts.CurrentUserWebPart;
+using System.Globalization;
 
 namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.CurrentUserWebPart
 {
@@ -15,6 +16,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.CurrentUserWebPart
     #region private
     // Visual Studio might automatically update this path when you change the Visual Web Part project item.
     private const string _ascxPath = @"~/_CONTROLTEMPLATES/CAS.AgileWorkloadTracker.Dashboards/CurrentUserWebPart/CurrentUserWebPartUserControl.ascx";
+    [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes" )]
     protected override void CreateChildControls()
     {
       string _phase = "Starting";
@@ -31,9 +33,14 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.CurrentUserWebPart
       catch (Exception ex)
       {
         string _frmt = "Cannot lod the user control at: {0} because : {1}";
-        Controls.Add(new LiteralControl(String.Format(_frmt, _phase, ex.Message)));
+        Controls.Add(new LiteralControl(String.Format(CultureInfo.InvariantCulture, _frmt, _phase, ex.Message)));
       }
     }
+    /// <summary>
+    /// The event handler for the System.Web.UI.Control.PreRender event that occurs immediately before the Web Part is rendered to the Web Part Page it is contained on.
+    /// </summary>
+    /// <param name="e">A System.EventArgs that contains the event data.</param>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes" )]
     protected override void OnPreRender(EventArgs e)
     {
       //if (m_UserDescriptor == null)
@@ -44,12 +51,12 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.CurrentUserWebPart
       catch (Exception ex)
       {
         string _frmt = "Cannot execute OnPreRender because: {0}";
-        Controls.Add(new LiteralControl(String.Format(_frmt, ex.Message)));
+        Controls.Add( new LiteralControl( String.Format( CultureInfo.InvariantCulture, _frmt, ex.Message ) ) );
       } 
       base.OnLoad(e);
     }
     private CurrentUserWebPartUserControl m_Control;
-    private UserDescriptor GetUserDescriptor()
+    private static UserDescriptor GetUserDescriptor()
     {
       //!!!the using does not work in this context.
       //using (SPWeb _sw = SPContext.Current.Web)
