@@ -8,7 +8,7 @@ using System.Globalization;
 
 namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.CurrentUserWebPart
 {
-  [ToolboxItemAttribute(false)]
+  [System.Diagnostics.CodeAnalysis.SuppressMessage( "Microsoft.Naming", "CA1724:TypeNamesShouldNotMatchNamespaces" ), ToolboxItemAttribute( false )]
   [CLSCompliant(false)]
   public class CurrentUserWebPart : WebPart
   {
