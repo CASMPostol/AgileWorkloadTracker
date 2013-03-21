@@ -43,6 +43,13 @@
     <Column Name="Project2ResourcesTitle" Member="Project2ResourcesTitle" />
     <Column Name="Project2ContractTitle" Member="Project2ContractTitle" />
     <Column Name="Project2StageTitle" Member="Project2StageTitle" />
+    <Column Name="EstimatedHours" Member="EstimatedHours" />
+    <Column Name="AcceptedHours" Member="AcceptedHours" />
+    <Column Name="MilestoneHours" Member="MilestoneHours" />
+    <Column Name="Project2PartnersTitle" Member="Project2PartnersTitle" />
+    <Column Name="BaselineStart" Member="BaselineStart" />
+    <Column Name="BaselineEnd" Member="BaselineEnd" />
+    <Column Name="PONumber" Member="PONumber" />
   </ContentType>
   <ContentType Name="Estimation" Class="Estimation">
     <Column Name="Estimation2ResourcesTitle" Member="Estimation2ResourcesTitle" />
@@ -95,6 +102,8 @@
     <Column Name="RequirementsType" Member="RequirementsType" />
     <Column Name="Requirements2ProjectsTitle" Member="Requirements2ProjectsTitle" />
     <Column Name="Requirements2MilestoneTitle" Member="Requirements2MilestoneTitle" />
+    <Column Name="EstimatedHours" Member="EstimatedHours" />
+    <Column Name="Hours" Member="Hours" />
   </ContentType>
   <ContentType Name="Resources" Class="Resources">
     <Column Name="Title" Member="Title" />
@@ -155,5 +164,8 @@
     <Column Name="BaselineStart" Member="BaselineStart" />
     <Column Name="BaselineEnd" Member="BaselineEnd" />
     <Column Name="Default" Member="Default" />
+    <Column Name="AcceptedHours" Member="AcceptedHours" />
+    <Column Name="EstimatedHours" Member="EstimatedHours" />
+    <Column Name="MilestoneDescription" Member="MilestoneDescription" />
   </ContentType>
 </Web>
