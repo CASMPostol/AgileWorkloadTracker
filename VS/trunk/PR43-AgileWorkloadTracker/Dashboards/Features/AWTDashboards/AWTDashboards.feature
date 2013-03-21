@@ -1,5 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <feature xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="fa0a8a2e-07f3-44c7-add4-20998dd10958" description="Contains application logic." featureId="fa0a8a2e-07f3-44c7-add4-20998dd10958" imageUrl="" receiverAssembly="$SharePoint.Project.AssemblyFullName$" receiverClass="$SharePoint.Type.fb0899c7-25b3-454c-b9b5-52ff02ad0245.FullName$" scope="Site" solutionId="00000000-0000-0000-0000-000000000000" title="AgileWorkloadTracker Dashboards" version="" deploymentPath="$SharePoint.Project.FileNameWithoutExtension$_$SharePoint.Feature.FileNameWithoutExtension$" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/FeatureModel">
+  <activationDependencies>
+    <referencedFeatureActivationDependency minimumVersion="" itemId="26be2f85-61c8-4212-b8f4-fa500cd71747" projectPath="..\Website\Website.csproj" />
+    <referencedFeatureActivationDependency minimumVersion="" itemId="75cc7c06-888d-4ad7-a780-477b93ea6de3" projectPath="..\AgileWorkloadTracker\DataModel\DataModel.csproj" />
+  </activationDependencies>
   <projectItems>
     <projectItemReference itemId="d8ba6986-a3c7-4140-82ab-5aa83c1626a9" />
     <projectItemReference itemId="b12ffa68-4e15-4ec7-b7cf-290c320b096d" />

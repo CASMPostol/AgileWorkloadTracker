@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("CAS Agile Workload Tracker Dashboards")]
-[assembly: AssemblyDescription("AWT daschboards")]
+[assembly: AssemblyDescription("AWT daschboards collection")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("CAS")]
 [assembly: AssemblyProduct("CAS Agile Workload Tracker")]
