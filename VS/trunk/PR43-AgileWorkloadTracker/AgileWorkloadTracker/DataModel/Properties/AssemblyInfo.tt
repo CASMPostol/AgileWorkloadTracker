@@ -1,4 +1,6 @@
-﻿using System.Reflection;
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ output extension=".cs" #>
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -8,10 +10,10 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("CAS SharePoint")]
 [assembly: AssemblyDescription("SharePoint helpper functions")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("CAS")]
-[assembly: AssemblyProduct("Agile Workload Tracker")]
-[assembly: AssemblyCopyright("Copyright (c) CAS 2013")]
-[assembly: AssemblyTrademark("Smart Factory")]
+[assembly: AssemblyCompany("<#=AssemblyCompany#>")]
+[assembly: AssemblyProduct("<#=AssemblyProduct#>")]
+[assembly: AssemblyCopyright("<#=AssemblyCopyright#>")]
+[assembly: AssemblyTrademark("<#=AssemblyTrademark#>")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
@@ -32,6 +34,7 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.10.00.*")]
-[assembly: AssemblyFileVersion("1.10.00")]
+[assembly: AssemblyVersion("<#=IPRAssemblyVersion#>")]
+[assembly: AssemblyFileVersion("<#=IPRAssemblyFileVersion#>")]
 
+<#@ include file = "..\..\Model.T4" #>
