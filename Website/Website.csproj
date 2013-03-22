@@ -288,6 +288,7 @@
     </Content>
     <Content Include="Features\AWTWebsite\AWTWebsite.Template.xml">
       <DependentUpon>AWTWebsite.feature</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Fields\Fields\Elements.xml">
       <SubType>Designer</SubType>
@@ -296,7 +297,9 @@
     <Content Include="Fields\LookupFields\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Fields\LookupFields_0110\Elements.xml" />
+    <Content Include="Fields\LookupFields_0110\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Lists\CategoryListTemplate\Elements.xml" />
     <Content Include="Lists\CategoryListTemplate\CategoryList\Elements.xml" />
     <Content Include="Lists\CategoryListTemplate\Schema.xml">

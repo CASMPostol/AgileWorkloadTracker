@@ -45,6 +45,9 @@
       <AddContentTypeField ContentTypeId="0x01000c2ccabba2e1473ba2623efda04e749e"
                              FieldId="{65B029E6-ADCE-47CA-B668-DFFCA6D9E0C6}"
                              PushDown="True"/>
+    <AddContentTypeField ContentTypeId="0x01005d39260836ce498d8e0d443ad5cad3ac"
+                             FieldId="{2B9FEE87-CC98-4CA5-8BA7-C547D05AFCDD}"
+                             PushDown="True"/>
     </VersionRange>
   </UpgradeActions>
 </Feature>
