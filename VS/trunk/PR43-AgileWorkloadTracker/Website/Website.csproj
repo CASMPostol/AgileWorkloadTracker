@@ -278,7 +278,9 @@
     <Content Include="ContentTypes\Status\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="ContentTypes\TaskComments\Elements.xml" />
+    <Content Include="ContentTypes\TaskComments\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="ContentTypes\Tasks\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
