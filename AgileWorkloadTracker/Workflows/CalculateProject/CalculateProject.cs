@@ -51,6 +51,7 @@ namespace CAS.AgileWorkloadTracker.Workflows.CountProject
       {
         Projects _project = Element.GetAtIndex<Projects>( _edc.Projects, workflowProperties.ItemId );
         _project.Adjust( _edc );
+        _edc.SubmitChanges();
       }
     }
     public String StartCountingLogToHistoryList_HistoryDescription = "Start calculate the Project";
