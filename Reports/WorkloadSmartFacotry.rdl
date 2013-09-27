@@ -1,0 +1,1549 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:cl="http://schemas.microsoft.com/sqlserver/reporting/2010/01/componentdefinition" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="Workload">
+      <Transaction>true</Transaction>
+      <DataSourceReference>http://casas:11227/sites/awt/RS Data Connections/DataSources/Workload.rsds</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>879278cf-0ccd-47d8-ba29-42007b8bf374</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="Project">
+      <Query>
+        <DataSourceName>Workload</DataSourceName>
+        <CommandText>&lt;RSSharePointList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ListName&gt;Projects&lt;/ListName&gt;
+  &lt;ViewFields&gt;
+    &lt;FieldRef Name="Title" /&gt;
+    &lt;FieldRef Name="ProjectType" /&gt;
+    &lt;FieldRef Name="ProjectNumber" /&gt;
+    &lt;FieldRef Name="Active" /&gt;
+    &lt;FieldRef Name="ProjectHours" /&gt;
+    &lt;FieldRef Name="ProjectStartDate" /&gt;
+    &lt;FieldRef Name="ProjectEndDate" /&gt;
+    &lt;FieldRef Name="ProjectWarrantyDate" /&gt;
+    &lt;FieldRef Name="ProjectBudget" /&gt;
+    &lt;FieldRef Name="Currency" /&gt;
+    &lt;FieldRef Name="Body" /&gt;
+    &lt;FieldRef Name="Project2ResourcesTitle" /&gt;
+    &lt;FieldRef Name="Project2ContractTitle" /&gt;
+    &lt;FieldRef Name="Project2StageTitle" /&gt;
+    &lt;FieldRef Name="EstimatedHours" /&gt;
+    &lt;FieldRef Name="AcceptedHours" /&gt;
+    &lt;FieldRef Name="MilestoneHours" /&gt;
+    &lt;FieldRef Name="Project2PartnersTitle" /&gt;
+    &lt;FieldRef Name="BaselineStart" /&gt;
+    &lt;FieldRef Name="BaselineEnd" /&gt;
+    &lt;FieldRef Name="PONumber" /&gt;
+    &lt;FieldRef Name="Calculat" /&gt;
+    &lt;FieldRef Name="ID" /&gt;
+    &lt;FieldRef Name="ContentType" /&gt;
+    &lt;FieldRef Name="Modified" /&gt;
+    &lt;FieldRef Name="Created" /&gt;
+    &lt;FieldRef Name="Author" /&gt;
+    &lt;FieldRef Name="Editor" /&gt;
+    &lt;FieldRef Name="_UIVersionString" /&gt;
+    &lt;FieldRef Name="Attachments" /&gt;
+    &lt;FieldRef Name="Edit" /&gt;
+    &lt;FieldRef Name="LinkTitleNoMenu" /&gt;
+    &lt;FieldRef Name="LinkTitle" /&gt;
+    &lt;FieldRef Name="DocIcon" /&gt;
+    &lt;FieldRef Name="ItemChildCount" /&gt;
+    &lt;FieldRef Name="FolderChildCount" /&gt;
+  &lt;/ViewFields&gt;
+&lt;/RSSharePointList&gt;</CommandText>
+        <rd:DesignerState><QueryDefinition xmlns="http://schemas.microsoft.com/ReportingServices/QueryDefinition/Relational"><SelectedColumns><ColumnExpression ColumnOwner="Projects" ColumnName="Title" /><ColumnExpression ColumnOwner="Projects" ColumnName="ProjectType" /><ColumnExpression ColumnOwner="Projects" ColumnName="ProjectNumber" /><ColumnExpression ColumnOwner="Projects" ColumnName="Active" /><ColumnExpression ColumnOwner="Projects" ColumnName="ProjectHours" /><ColumnExpression ColumnOwner="Projects" ColumnName="ProjectStartDate" /><ColumnExpression ColumnOwner="Projects" ColumnName="ProjectEndDate" /><ColumnExpression ColumnOwner="Projects" ColumnName="ProjectWarrantyDate" /><ColumnExpression ColumnOwner="Projects" ColumnName="ProjectBudget" /><ColumnExpression ColumnOwner="Projects" ColumnName="Currency" /><ColumnExpression ColumnOwner="Projects" ColumnName="Body" /><ColumnExpression ColumnOwner="Projects" ColumnName="Project2ResourcesTitle" /><ColumnExpression ColumnOwner="Projects" ColumnName="Project2ContractTitle" /><ColumnExpression ColumnOwner="Projects" ColumnName="Project2StageTitle" /><ColumnExpression ColumnOwner="Projects" ColumnName="EstimatedHours" /><ColumnExpression ColumnOwner="Projects" ColumnName="AcceptedHours" /><ColumnExpression ColumnOwner="Projects" ColumnName="MilestoneHours" /><ColumnExpression ColumnOwner="Projects" ColumnName="Project2PartnersTitle" /><ColumnExpression ColumnOwner="Projects" ColumnName="BaselineStart" /><ColumnExpression ColumnOwner="Projects" ColumnName="BaselineEnd" /><ColumnExpression ColumnOwner="Projects" ColumnName="PONumber" /><ColumnExpression ColumnOwner="Projects" ColumnName="Calculat" /><ColumnExpression ColumnOwner="Projects" ColumnName="ID" /><ColumnExpression ColumnOwner="Projects" ColumnName="ContentType" /><ColumnExpression ColumnOwner="Projects" ColumnName="Modified" /><ColumnExpression ColumnOwner="Projects" ColumnName="Created" /><ColumnExpression ColumnOwner="Projects" ColumnName="Author" /><ColumnExpression ColumnOwner="Projects" ColumnName="Editor" /><ColumnExpression ColumnOwner="Projects" ColumnName="_UIVersionString" /><ColumnExpression ColumnOwner="Projects" ColumnName="Attachments" /><ColumnExpression ColumnOwner="Projects" ColumnName="Edit" /><ColumnExpression ColumnOwner="Projects" ColumnName="LinkTitleNoMenu" /><ColumnExpression ColumnOwner="Projects" ColumnName="LinkTitle" /><ColumnExpression ColumnOwner="Projects" ColumnName="DocIcon" /><ColumnExpression ColumnOwner="Projects" ColumnName="ItemChildCount" /><ColumnExpression ColumnOwner="Projects" ColumnName="FolderChildCount" /></SelectedColumns></QueryDefinition></rd:DesignerState>
+      </Query>
+      <Fields>
+        <Field Name="Title">
+          <DataField>Title</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Type">
+          <DataField>ProjectType</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Project_number">
+          <DataField>ProjectNumber</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Active">
+          <DataField>Active</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="Hours_limit">
+          <DataField>ProjectHours</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="Start_date">
+          <DataField>ProjectStartDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="End_date">
+          <DataField>ProjectEndDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Warranty_date">
+          <DataField>ProjectWarrantyDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Budget">
+          <DataField>ProjectBudget</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="Currency">
+          <DataField>Currency</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Body">
+          <DataField>Body</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Project_manager">
+          <DataField>Project2ResourcesTitle</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Contract">
+          <DataField>Project2ContractTitle</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Stage">
+          <DataField>Project2StageTitle</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Estimated_hours">
+          <DataField>EstimatedHours</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="Accepted_hours">
+          <DataField>AcceptedHours</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="Hours">
+          <DataField>MilestoneHours</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="Partner">
+          <DataField>Project2PartnersTitle</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Baseline_start">
+          <DataField>BaselineStart</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Baseline_end">
+          <DataField>BaselineEnd</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="PO_number">
+          <DataField>PONumber</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Calculate_Project">
+          <DataField>Calculat</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <Filters>
+        <Filter>
+          <FilterExpression>=Fields!Title.Value</FilterExpression>
+          <Operator>GreaterThanOrEqual</Operator>
+          <FilterValues>
+            <FilterValue>JTI</FilterValue>
+          </FilterValues>
+        </Filter>
+        <Filter>
+          <FilterExpression>=Fields!Title.Value</FilterExpression>
+          <Operator>LessThan</Operator>
+          <FilterValues>
+            <FilterValue>JTIX</FilterValue>
+          </FilterValues>
+        </Filter>
+      </Filters>
+    </DataSet>
+    <DataSet Name="Milestone">
+      <Query>
+        <DataSourceName>Workload</DataSourceName>
+        <CommandText>&lt;RSSharePointList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ListName&gt;Milestone&lt;/ListName&gt;
+  &lt;ViewFields&gt;
+    &lt;FieldRef Name="Title" /&gt;
+    &lt;FieldRef Name="Milestone2StageTitle" /&gt;
+    &lt;FieldRef Name="Milestone2ProjectTitle" /&gt;
+    &lt;FieldRef Name="Active" /&gt;
+    &lt;FieldRef Name="MilestoneHours" /&gt;
+    &lt;FieldRef Name="SortOrder" /&gt;
+    &lt;FieldRef Name="MilestoneStart" /&gt;
+    &lt;FieldRef Name="MilestoneEnd" /&gt;
+    &lt;FieldRef Name="BaselineStart" /&gt;
+    &lt;FieldRef Name="BaselineEnd" /&gt;
+    &lt;FieldRef Name="Default" /&gt;
+    &lt;FieldRef Name="AcceptedHours" /&gt;
+    &lt;FieldRef Name="EstimatedHours" /&gt;
+    &lt;FieldRef Name="MilestoneDescription" /&gt;
+    &lt;FieldRef Name="LinkTitleNoMenu" /&gt;
+    &lt;FieldRef Name="LinkTitle" /&gt;
+    &lt;FieldRef Name="Author" /&gt;
+    &lt;FieldRef Name="Editor" /&gt;
+    &lt;FieldRef Name="Modified" /&gt;
+    &lt;FieldRef Name="Created" /&gt;
+    &lt;FieldRef Name="field1" /&gt;
+    &lt;FieldRef Name="update" /&gt;
+    &lt;FieldRef Name="ID" /&gt;
+    &lt;FieldRef Name="ContentType" /&gt;
+    &lt;FieldRef Name="_UIVersionString" /&gt;
+    &lt;FieldRef Name="Attachments" /&gt;
+    &lt;FieldRef Name="Edit" /&gt;
+    &lt;FieldRef Name="DocIcon" /&gt;
+    &lt;FieldRef Name="ItemChildCount" /&gt;
+    &lt;FieldRef Name="FolderChildCount" /&gt;
+  &lt;/ViewFields&gt;
+&lt;/RSSharePointList&gt;</CommandText>
+        <rd:DesignerState><QueryDefinition xmlns="http://schemas.microsoft.com/ReportingServices/QueryDefinition/Relational"><SelectedColumns><ColumnExpression ColumnOwner="Milestone" ColumnName="Title" /><ColumnExpression ColumnOwner="Milestone" ColumnName="Milestone2StageTitle" /><ColumnExpression ColumnOwner="Milestone" ColumnName="Milestone2ProjectTitle" /><ColumnExpression ColumnOwner="Milestone" ColumnName="Active" /><ColumnExpression ColumnOwner="Milestone" ColumnName="MilestoneHours" /><ColumnExpression ColumnOwner="Milestone" ColumnName="SortOrder" /><ColumnExpression ColumnOwner="Milestone" ColumnName="MilestoneStart" /><ColumnExpression ColumnOwner="Milestone" ColumnName="MilestoneEnd" /><ColumnExpression ColumnOwner="Milestone" ColumnName="BaselineStart" /><ColumnExpression ColumnOwner="Milestone" ColumnName="BaselineEnd" /><ColumnExpression ColumnOwner="Milestone" ColumnName="Default" /><ColumnExpression ColumnOwner="Milestone" ColumnName="AcceptedHours" /><ColumnExpression ColumnOwner="Milestone" ColumnName="EstimatedHours" /><ColumnExpression ColumnOwner="Milestone" ColumnName="MilestoneDescription" /><ColumnExpression ColumnOwner="Milestone" ColumnName="LinkTitleNoMenu" /><ColumnExpression ColumnOwner="Milestone" ColumnName="LinkTitle" /><ColumnExpression ColumnOwner="Milestone" ColumnName="Author" /><ColumnExpression ColumnOwner="Milestone" ColumnName="Editor" /><ColumnExpression ColumnOwner="Milestone" ColumnName="Modified" /><ColumnExpression ColumnOwner="Milestone" ColumnName="Created" /><ColumnExpression ColumnOwner="Milestone" ColumnName="field1" /><ColumnExpression ColumnOwner="Milestone" ColumnName="update" /><ColumnExpression ColumnOwner="Milestone" ColumnName="ID" /><ColumnExpression ColumnOwner="Milestone" ColumnName="ContentType" /><ColumnExpression ColumnOwner="Milestone" ColumnName="_UIVersionString" /><ColumnExpression ColumnOwner="Milestone" ColumnName="Attachments" /><ColumnExpression ColumnOwner="Milestone" ColumnName="Edit" /><ColumnExpression ColumnOwner="Milestone" ColumnName="DocIcon" /><ColumnExpression ColumnOwner="Milestone" ColumnName="ItemChildCount" /><ColumnExpression ColumnOwner="Milestone" ColumnName="FolderChildCount" /></SelectedColumns></QueryDefinition></rd:DesignerState>
+      </Query>
+      <Fields>
+        <Field Name="Milestone">
+          <DataField>Title</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Stage">
+          <DataField>Milestone2StageTitle</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Project">
+          <DataField>Milestone2ProjectTitle</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Active">
+          <DataField>Active</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="Hours">
+          <DataField>MilestoneHours</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="Order">
+          <DataField>SortOrder</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="Start_date">
+          <DataField>MilestoneStart</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="End_date">
+          <DataField>MilestoneEnd</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Baseline_start">
+          <DataField>BaselineStart</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Baseline_end">
+          <DataField>BaselineEnd</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Default">
+          <DataField>Default</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="Accepted_hours">
+          <DataField>AcceptedHours</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="Estimated_hours">
+          <DataField>EstimatedHours</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="Description">
+          <DataField>MilestoneDescription</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <Filters>
+        <Filter>
+          <FilterExpression>=Fields!Project.Value</FilterExpression>
+          <Operator>Equal</Operator>
+          <FilterValues>
+            <FilterValue>=Parameters!Project.Value</FilterValue>
+          </FilterValues>
+        </Filter>
+      </Filters>
+    </DataSet>
+    <DataSet Name="Requirements">
+      <Query>
+        <DataSourceName>Workload</DataSourceName>
+        <CommandText>&lt;RSSharePointList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ListName&gt;Requirements&lt;/ListName&gt;
+  &lt;ViewFields&gt;
+    &lt;FieldRef Name="Title" /&gt;
+    &lt;FieldRef Name="_ModerationComments" /&gt;
+    &lt;FieldRef Name="RequirementPriority" /&gt;
+    &lt;FieldRef Name="Body" /&gt;
+    &lt;FieldRef Name="RequirementsType" /&gt;
+    &lt;FieldRef Name="Requirements2ProjectsTitle" /&gt;
+    &lt;FieldRef Name="Requirements2MilestoneTitle" /&gt;
+    &lt;FieldRef Name="_ModerationStatus" /&gt;
+    &lt;FieldRef Name="Hours" /&gt;
+    &lt;FieldRef Name="EstimatedHours" /&gt;
+    &lt;FieldRef Name="RequirementPriority0" /&gt;
+    &lt;FieldRef Name="LinkTitleNoMenu" /&gt;
+    &lt;FieldRef Name="LinkTitle" /&gt;
+    &lt;FieldRef Name="Author" /&gt;
+    &lt;FieldRef Name="Editor" /&gt;
+    &lt;FieldRef Name="Modified" /&gt;
+    &lt;FieldRef Name="Created" /&gt;
+    &lt;FieldRef Name="ID" /&gt;
+    &lt;FieldRef Name="ContentType" /&gt;
+    &lt;FieldRef Name="_UIVersionString" /&gt;
+    &lt;FieldRef Name="Attachments" /&gt;
+    &lt;FieldRef Name="Edit" /&gt;
+    &lt;FieldRef Name="DocIcon" /&gt;
+    &lt;FieldRef Name="ItemChildCount" /&gt;
+    &lt;FieldRef Name="FolderChildCount" /&gt;
+  &lt;/ViewFields&gt;
+&lt;/RSSharePointList&gt;</CommandText>
+        <rd:DesignerState><QueryDefinition xmlns="http://schemas.microsoft.com/ReportingServices/QueryDefinition/Relational"><SelectedColumns><ColumnExpression ColumnOwner="Requirements" ColumnName="Title" /><ColumnExpression ColumnOwner="Requirements" ColumnName="_ModerationComments" /><ColumnExpression ColumnOwner="Requirements" ColumnName="RequirementPriority" /><ColumnExpression ColumnOwner="Requirements" ColumnName="Body" /><ColumnExpression ColumnOwner="Requirements" ColumnName="RequirementsType" /><ColumnExpression ColumnOwner="Requirements" ColumnName="Requirements2ProjectsTitle" /><ColumnExpression ColumnOwner="Requirements" ColumnName="Requirements2MilestoneTitle" /><ColumnExpression ColumnOwner="Requirements" ColumnName="_ModerationStatus" /><ColumnExpression ColumnOwner="Requirements" ColumnName="Hours" /><ColumnExpression ColumnOwner="Requirements" ColumnName="EstimatedHours" /><ColumnExpression ColumnOwner="Requirements" ColumnName="RequirementPriority0" /><ColumnExpression ColumnOwner="Requirements" ColumnName="LinkTitleNoMenu" /><ColumnExpression ColumnOwner="Requirements" ColumnName="LinkTitle" /><ColumnExpression ColumnOwner="Requirements" ColumnName="Author" /><ColumnExpression ColumnOwner="Requirements" ColumnName="Editor" /><ColumnExpression ColumnOwner="Requirements" ColumnName="Modified" /><ColumnExpression ColumnOwner="Requirements" ColumnName="Created" /><ColumnExpression ColumnOwner="Requirements" ColumnName="ID" /><ColumnExpression ColumnOwner="Requirements" ColumnName="ContentType" /><ColumnExpression ColumnOwner="Requirements" ColumnName="_UIVersionString" /><ColumnExpression ColumnOwner="Requirements" ColumnName="Attachments" /><ColumnExpression ColumnOwner="Requirements" ColumnName="Edit" /><ColumnExpression ColumnOwner="Requirements" ColumnName="DocIcon" /><ColumnExpression ColumnOwner="Requirements" ColumnName="ItemChildCount" /><ColumnExpression ColumnOwner="Requirements" ColumnName="FolderChildCount" /></SelectedColumns></QueryDefinition></rd:DesignerState>
+      </Query>
+      <Fields>
+        <Field Name="Requirement">
+          <DataField>Title</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Approver_Comments">
+          <DataField>_ModerationComments</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Priority">
+          <DataField>RequirementPriority</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Description">
+          <DataField>Body</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Type">
+          <DataField>RequirementsType</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Project">
+          <DataField>Requirements2ProjectsTitle</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Milestone">
+          <DataField>Requirements2MilestoneTitle</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Approval_Status">
+          <DataField>_ModerationStatus</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Hours">
+          <DataField>Hours</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="Estimated_hours">
+          <DataField>EstimatedHours</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="Requirement_priority">
+          <DataField>RequirementPriority0</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="Requirement__linked_to_item_">
+          <DataField>LinkTitleNoMenu</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Requirement__linked_to_item_with_edit_menu_">
+          <DataField>LinkTitle</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <Filters>
+        <Filter>
+          <FilterExpression>=Fields!Milestone.Value</FilterExpression>
+          <Operator>Equal</Operator>
+          <FilterValues>
+            <FilterValue>=Parameters!Milestone.Value</FilterValue>
+          </FilterValues>
+        </Filter>
+      </Filters>
+    </DataSet>
+    <DataSet Name="Tasks">
+      <Query>
+        <DataSourceName>Workload</DataSourceName>
+        <CommandText>&lt;RSSharePointList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ListName&gt;Task&lt;/ListName&gt;
+  &lt;ViewFields&gt;
+    &lt;FieldRef Name="Title" /&gt;
+    &lt;FieldRef Name="Task2ProjectTitle" /&gt;
+    &lt;FieldRef Name="Task2CategoryTitle" /&gt;
+    &lt;FieldRef Name="Task2ResourcesTitle" /&gt;
+    &lt;FieldRef Name="Task2MilestoneDefinedInTitle" /&gt;
+    &lt;FieldRef Name="Task2MilestoneResolvedInTitle" /&gt;
+    &lt;FieldRef Name="Task2RequirementsTitle" /&gt;
+    &lt;FieldRef Name="Task2StatusTitle" /&gt;
+    &lt;FieldRef Name="Task2SPriorityTitle" /&gt;
+    &lt;FieldRef Name="Task2SResolutionTitle" /&gt;
+    &lt;FieldRef Name="Task2TypeTitle" /&gt;
+    &lt;FieldRef Name="Body" /&gt;
+    &lt;FieldRef Name="TaskStart" /&gt;
+    &lt;FieldRef Name="TaskEnd" /&gt;
+    &lt;FieldRef Name="BaselineStart" /&gt;
+    &lt;FieldRef Name="BaselineEnd" /&gt;
+    &lt;FieldRef Name="Active" /&gt;
+    &lt;FieldRef Name="MilestoneHours" /&gt;
+    &lt;FieldRef Name="ID" /&gt;
+    &lt;FieldRef Name="ContentType" /&gt;
+    &lt;FieldRef Name="Modified" /&gt;
+    &lt;FieldRef Name="Created" /&gt;
+    &lt;FieldRef Name="Author" /&gt;
+    &lt;FieldRef Name="Editor" /&gt;
+    &lt;FieldRef Name="_UIVersionString" /&gt;
+    &lt;FieldRef Name="Attachments" /&gt;
+    &lt;FieldRef Name="Edit" /&gt;
+    &lt;FieldRef Name="LinkTitleNoMenu" /&gt;
+    &lt;FieldRef Name="LinkTitle" /&gt;
+    &lt;FieldRef Name="DocIcon" /&gt;
+    &lt;FieldRef Name="ItemChildCount" /&gt;
+    &lt;FieldRef Name="FolderChildCount" /&gt;
+  &lt;/ViewFields&gt;
+&lt;/RSSharePointList&gt;</CommandText>
+        <rd:DesignerState><QueryDefinition xmlns="http://schemas.microsoft.com/ReportingServices/QueryDefinition/Relational"><SelectedColumns><ColumnExpression ColumnOwner="Task" ColumnName="Title" /><ColumnExpression ColumnOwner="Task" ColumnName="Task2ProjectTitle" /><ColumnExpression ColumnOwner="Task" ColumnName="Task2CategoryTitle" /><ColumnExpression ColumnOwner="Task" ColumnName="Task2ResourcesTitle" /><ColumnExpression ColumnOwner="Task" ColumnName="Task2MilestoneDefinedInTitle" /><ColumnExpression ColumnOwner="Task" ColumnName="Task2MilestoneResolvedInTitle" /><ColumnExpression ColumnOwner="Task" ColumnName="Task2RequirementsTitle" /><ColumnExpression ColumnOwner="Task" ColumnName="Task2StatusTitle" /><ColumnExpression ColumnOwner="Task" ColumnName="Task2SPriorityTitle" /><ColumnExpression ColumnOwner="Task" ColumnName="Task2SResolutionTitle" /><ColumnExpression ColumnOwner="Task" ColumnName="Task2TypeTitle" /><ColumnExpression ColumnOwner="Task" ColumnName="Body" /><ColumnExpression ColumnOwner="Task" ColumnName="TaskStart" /><ColumnExpression ColumnOwner="Task" ColumnName="TaskEnd" /><ColumnExpression ColumnOwner="Task" ColumnName="BaselineStart" /><ColumnExpression ColumnOwner="Task" ColumnName="BaselineEnd" /><ColumnExpression ColumnOwner="Task" ColumnName="Active" /><ColumnExpression ColumnOwner="Task" ColumnName="MilestoneHours" /><ColumnExpression ColumnOwner="Task" ColumnName="ID" /><ColumnExpression ColumnOwner="Task" ColumnName="ContentType" /><ColumnExpression ColumnOwner="Task" ColumnName="Modified" /><ColumnExpression ColumnOwner="Task" ColumnName="Created" /><ColumnExpression ColumnOwner="Task" ColumnName="Author" /><ColumnExpression ColumnOwner="Task" ColumnName="Editor" /><ColumnExpression ColumnOwner="Task" ColumnName="_UIVersionString" /><ColumnExpression ColumnOwner="Task" ColumnName="Attachments" /><ColumnExpression ColumnOwner="Task" ColumnName="Edit" /><ColumnExpression ColumnOwner="Task" ColumnName="LinkTitleNoMenu" /><ColumnExpression ColumnOwner="Task" ColumnName="LinkTitle" /><ColumnExpression ColumnOwner="Task" ColumnName="DocIcon" /><ColumnExpression ColumnOwner="Task" ColumnName="ItemChildCount" /><ColumnExpression ColumnOwner="Task" ColumnName="FolderChildCount" /></SelectedColumns></QueryDefinition></rd:DesignerState>
+      </Query>
+      <Fields>
+        <Field Name="Title">
+          <DataField>Title</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Project">
+          <DataField>Task2ProjectTitle</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Category">
+          <DataField>Task2CategoryTitle</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Assigned_To">
+          <DataField>Task2ResourcesTitle</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Version__Task2MilestoneDefinedInTitle_">
+          <DataField>Task2MilestoneDefinedInTitle</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Milestone">
+          <DataField>Task2MilestoneResolvedInTitle</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Requirements">
+          <DataField>Task2RequirementsTitle</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Status">
+          <DataField>Task2StatusTitle</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Priority">
+          <DataField>Task2SPriorityTitle</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Resolution">
+          <DataField>Task2SResolutionTitle</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Type">
+          <DataField>Task2TypeTitle</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Body">
+          <DataField>Body</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Start_date">
+          <DataField>TaskStart</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="End_date">
+          <DataField>TaskEnd</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Baseline_start">
+          <DataField>BaselineStart</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Baseline_end">
+          <DataField>BaselineEnd</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Active">
+          <DataField>Active</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="Hours">
+          <DataField>MilestoneHours</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="ID">
+          <DataField>ID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Content_Type">
+          <DataField>ContentType</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Version___UIVersionString_">
+          <DataField>_UIVersionString</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Modified">
+          <DataField>Modified</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Created">
+          <DataField>Created</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Created_By">
+          <DataField>Author</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Modified_By">
+          <DataField>Editor</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Attachments">
+          <DataField>Attachments</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="Edit__link_to_edit_item_">
+          <DataField>Edit</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Title__linked_to_item_">
+          <DataField>LinkTitleNoMenu</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Title__linked_to_item_with_edit_menu_">
+          <DataField>LinkTitle</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Type__icon_linked_to_document_">
+          <DataField>DocIcon</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Item_Child_Count">
+          <DataField>ItemChildCount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Folder_Child_Count">
+          <DataField>FolderChildCount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <Filters>
+        <Filter>
+          <FilterExpression>=Fields!Milestone.Value</FilterExpression>
+          <Operator>Equal</Operator>
+          <FilterValues>
+            <FilterValue>=Parameters!Milestone.Value</FilterValue>
+          </FilterValues>
+        </Filter>
+      </Filters>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Textbox Name="ReportTitle">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>SmartFactory - workload report </Value>
+                    <Style>
+                      <FontFamily>Verdana</FontFamily>
+                      <FontSize>20pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!Project.Value</Value>
+                    <Style>
+                      <FontFamily>Verdana</FontFamily>
+                      <FontSize>16pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>, </Value>
+                    <Style>
+                      <FontFamily>Verdana</FontFamily>
+                      <FontSize>16pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!Milestone.Value</Value>
+                    <Style>
+                      <FontFamily>Verdana</FontFamily>
+                      <FontSize>16pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:WatermarkTextbox>Title</rd:WatermarkTextbox>
+            <rd:DefaultName>ReportTitle</rd:DefaultName>
+            <Top>3.175mm</Top>
+            <Left>0.21875in</Left>
+            <Height>18.57728mm</Height>
+            <Width>224.74791mm</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Tablix Name="Tablix3">
+            <TablixCorner>
+              <TablixCornerRows>
+                <TablixCornerRow>
+                  <TablixCornerCell>
+                    <CellContents>
+                      <Textbox Name="Textbox29">
+                        <CanGrow>true</CanGrow>
+                        <KeepTogether>true</KeepTogether>
+                        <Paragraphs>
+                          <Paragraph>
+                            <TextRuns>
+                              <TextRun>
+                                <Value>Requirement</Value>
+                                <Style>
+                                  <Color>White</Color>
+                                </Style>
+                              </TextRun>
+                            </TextRuns>
+                            <Style />
+                          </Paragraph>
+                        </Paragraphs>
+                        <rd:DefaultName>Textbox29</rd:DefaultName>
+                        <Style>
+                          <Border>
+                            <Color>LightGrey</Color>
+                            <Style>Solid</Style>
+                          </Border>
+                          <BackgroundColor>CornflowerBlue</BackgroundColor>
+                          <PaddingLeft>2pt</PaddingLeft>
+                          <PaddingRight>2pt</PaddingRight>
+                          <PaddingTop>2pt</PaddingTop>
+                          <PaddingBottom>2pt</PaddingBottom>
+                        </Style>
+                      </Textbox>
+                    </CellContents>
+                  </TablixCornerCell>
+                </TablixCornerRow>
+              </TablixCornerRows>
+            </TablixCorner>
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>25mm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>29.375mm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>25mm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>87.03541mm</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>7.27604mm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox38">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Requirement_priority.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox38</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox40">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Estimated_hours.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox40</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox42">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Priority.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox42</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox48">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Description.Value</Value>
+                                  <MarkupType>HTML</MarkupType>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox48</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <TablixHeader>
+                    <Size>6.48229mm</Size>
+                    <CellContents>
+                      <Textbox Name="Textbox37">
+                        <CanGrow>true</CanGrow>
+                        <KeepTogether>true</KeepTogether>
+                        <Paragraphs>
+                          <Paragraph>
+                            <TextRuns>
+                              <TextRun>
+                                <Value>Priority</Value>
+                                <Style>
+                                  <Color>White</Color>
+                                </Style>
+                              </TextRun>
+                            </TextRuns>
+                            <Style />
+                          </Paragraph>
+                        </Paragraphs>
+                        <rd:DefaultName>Textbox37</rd:DefaultName>
+                        <Style>
+                          <Border>
+                            <Color>LightGrey</Color>
+                            <Style>Solid</Style>
+                          </Border>
+                          <BackgroundColor>CornflowerBlue</BackgroundColor>
+                          <PaddingLeft>2pt</PaddingLeft>
+                          <PaddingRight>2pt</PaddingRight>
+                          <PaddingTop>2pt</PaddingTop>
+                          <PaddingBottom>2pt</PaddingBottom>
+                        </Style>
+                      </Textbox>
+                    </CellContents>
+                  </TablixHeader>
+                </TablixMember>
+                <TablixMember>
+                  <TablixHeader>
+                    <Size>6.48229mm</Size>
+                    <CellContents>
+                      <Textbox Name="Textbox39">
+                        <CanGrow>true</CanGrow>
+                        <KeepTogether>true</KeepTogether>
+                        <Paragraphs>
+                          <Paragraph>
+                            <TextRuns>
+                              <TextRun>
+                                <Value>Estimated hours</Value>
+                                <Style>
+                                  <Color>White</Color>
+                                </Style>
+                              </TextRun>
+                            </TextRuns>
+                            <Style />
+                          </Paragraph>
+                        </Paragraphs>
+                        <rd:DefaultName>Textbox39</rd:DefaultName>
+                        <Style>
+                          <Border>
+                            <Color>LightGrey</Color>
+                            <Style>Solid</Style>
+                          </Border>
+                          <BackgroundColor>CornflowerBlue</BackgroundColor>
+                          <PaddingLeft>2pt</PaddingLeft>
+                          <PaddingRight>2pt</PaddingRight>
+                          <PaddingTop>2pt</PaddingTop>
+                          <PaddingBottom>2pt</PaddingBottom>
+                        </Style>
+                      </Textbox>
+                    </CellContents>
+                  </TablixHeader>
+                </TablixMember>
+                <TablixMember>
+                  <TablixHeader>
+                    <Size>6.48229mm</Size>
+                    <CellContents>
+                      <Textbox Name="Textbox41">
+                        <CanGrow>true</CanGrow>
+                        <KeepTogether>true</KeepTogether>
+                        <Paragraphs>
+                          <Paragraph>
+                            <TextRuns>
+                              <TextRun>
+                                <Value>Hours used</Value>
+                                <Style>
+                                  <Color>White</Color>
+                                </Style>
+                              </TextRun>
+                            </TextRuns>
+                            <Style />
+                          </Paragraph>
+                        </Paragraphs>
+                        <rd:DefaultName>Textbox41</rd:DefaultName>
+                        <Style>
+                          <Border>
+                            <Color>LightGrey</Color>
+                            <Style>Solid</Style>
+                          </Border>
+                          <BackgroundColor>CornflowerBlue</BackgroundColor>
+                          <PaddingLeft>2pt</PaddingLeft>
+                          <PaddingRight>2pt</PaddingRight>
+                          <PaddingTop>2pt</PaddingTop>
+                          <PaddingBottom>2pt</PaddingBottom>
+                        </Style>
+                      </Textbox>
+                    </CellContents>
+                  </TablixHeader>
+                </TablixMember>
+                <TablixMember>
+                  <TablixHeader>
+                    <Size>6.48229mm</Size>
+                    <CellContents>
+                      <Textbox Name="Textbox47">
+                        <CanGrow>true</CanGrow>
+                        <KeepTogether>true</KeepTogether>
+                        <Paragraphs>
+                          <Paragraph>
+                            <TextRuns>
+                              <TextRun>
+                                <Value>Description</Value>
+                                <Style>
+                                  <Color>White</Color>
+                                </Style>
+                              </TextRun>
+                            </TextRuns>
+                            <Style />
+                          </Paragraph>
+                        </Paragraphs>
+                        <rd:DefaultName>Textbox47</rd:DefaultName>
+                        <Style>
+                          <Border>
+                            <Color>LightGrey</Color>
+                            <Style>Solid</Style>
+                          </Border>
+                          <BackgroundColor>CornflowerBlue</BackgroundColor>
+                          <PaddingLeft>2pt</PaddingLeft>
+                          <PaddingRight>2pt</PaddingRight>
+                          <PaddingTop>2pt</PaddingTop>
+                          <PaddingBottom>2pt</PaddingBottom>
+                        </Style>
+                      </Textbox>
+                    </CellContents>
+                  </TablixHeader>
+                </TablixMember>
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <Group Name="Requirement">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!Requirement.Value</GroupExpression>
+                    </GroupExpressions>
+                  </Group>
+                  <SortExpressions>
+                    <SortExpression>
+                      <Value>=Fields!Requirement_priority.Value</Value>
+                      <Direction>Descending</Direction>
+                    </SortExpression>
+                  </SortExpressions>
+                  <TablixHeader>
+                    <Size>58.3375mm</Size>
+                    <CellContents>
+                      <Textbox Name="Requirement">
+                        <CanGrow>true</CanGrow>
+                        <KeepTogether>true</KeepTogether>
+                        <Paragraphs>
+                          <Paragraph>
+                            <TextRuns>
+                              <TextRun>
+                                <Value>=Fields!Requirement.Value</Value>
+                                <Style />
+                              </TextRun>
+                            </TextRuns>
+                            <Style />
+                          </Paragraph>
+                        </Paragraphs>
+                        <rd:DefaultName>Requirement</rd:DefaultName>
+                        <Style>
+                          <Border>
+                            <Color>LightGrey</Color>
+                            <Style>Solid</Style>
+                          </Border>
+                          <PaddingLeft>2pt</PaddingLeft>
+                          <PaddingRight>2pt</PaddingRight>
+                          <PaddingTop>2pt</PaddingTop>
+                          <PaddingBottom>2pt</PaddingBottom>
+                        </Style>
+                      </Textbox>
+                    </CellContents>
+                  </TablixHeader>
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <RepeatColumnHeaders>true</RepeatColumnHeaders>
+            <RepeatRowHeaders>true</RepeatRowHeaders>
+            <FixedColumnHeaders>true</FixedColumnHeaders>
+            <FixedRowHeaders>true</FixedRowHeaders>
+            <DataSetName>Requirements</DataSetName>
+            <Top>33.04117mm</Top>
+            <Left>5.55625mm</Left>
+            <Height>13.75833mm</Height>
+            <Width>224.74791mm</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
+          <Tablix Name="Tablix6">
+            <TablixCorner>
+              <TablixCornerRows>
+                <TablixCornerRow>
+                  <TablixCornerCell>
+                    <CellContents>
+                      <Textbox Name="Textbox73">
+                        <CanGrow>true</CanGrow>
+                        <KeepTogether>true</KeepTogether>
+                        <Paragraphs>
+                          <Paragraph>
+                            <TextRuns>
+                              <TextRun>
+                                <Value>Requirements</Value>
+                                <Style>
+                                  <Color>White</Color>
+                                </Style>
+                              </TextRun>
+                            </TextRuns>
+                            <Style />
+                          </Paragraph>
+                        </Paragraphs>
+                        <rd:DefaultName>Textbox73</rd:DefaultName>
+                        <Style>
+                          <Border>
+                            <Color>LightGrey</Color>
+                            <Style>Solid</Style>
+                          </Border>
+                          <BackgroundColor>CornflowerBlue</BackgroundColor>
+                          <PaddingLeft>2pt</PaddingLeft>
+                          <PaddingRight>2pt</PaddingRight>
+                          <PaddingTop>2pt</PaddingTop>
+                          <PaddingBottom>2pt</PaddingBottom>
+                        </Style>
+                      </Textbox>
+                    </CellContents>
+                  </TablixCornerCell>
+                  <TablixCornerCell>
+                    <CellContents>
+                      <Textbox Name="Textbox82">
+                        <CanGrow>true</CanGrow>
+                        <KeepTogether>true</KeepTogether>
+                        <Paragraphs>
+                          <Paragraph>
+                            <TextRuns>
+                              <TextRun>
+                                <Value>Task</Value>
+                                <Style>
+                                  <Color>White</Color>
+                                </Style>
+                              </TextRun>
+                            </TextRuns>
+                            <Style />
+                          </Paragraph>
+                        </Paragraphs>
+                        <rd:DefaultName>Textbox82</rd:DefaultName>
+                        <Style>
+                          <Border>
+                            <Color>LightGrey</Color>
+                            <Style>Solid</Style>
+                          </Border>
+                          <BackgroundColor>CornflowerBlue</BackgroundColor>
+                          <PaddingLeft>2pt</PaddingLeft>
+                          <PaddingRight>2pt</PaddingRight>
+                          <PaddingTop>2pt</PaddingTop>
+                          <PaddingBottom>2pt</PaddingBottom>
+                        </Style>
+                      </Textbox>
+                    </CellContents>
+                  </TablixCornerCell>
+                  <TablixCornerCell>
+                    <CellContents>
+                      <Textbox Name="Textbox84">
+                        <CanGrow>true</CanGrow>
+                        <KeepTogether>true</KeepTogether>
+                        <Paragraphs>
+                          <Paragraph>
+                            <TextRuns>
+                              <TextRun>
+                                <Value>Priority</Value>
+                                <Style>
+                                  <Color>White</Color>
+                                </Style>
+                              </TextRun>
+                            </TextRuns>
+                            <Style />
+                          </Paragraph>
+                        </Paragraphs>
+                        <rd:DefaultName>Textbox84</rd:DefaultName>
+                        <Style>
+                          <Border>
+                            <Color>LightGrey</Color>
+                            <Style>Solid</Style>
+                          </Border>
+                          <BackgroundColor>CornflowerBlue</BackgroundColor>
+                          <PaddingLeft>2pt</PaddingLeft>
+                          <PaddingRight>2pt</PaddingRight>
+                          <PaddingTop>2pt</PaddingTop>
+                          <PaddingBottom>2pt</PaddingBottom>
+                        </Style>
+                      </Textbox>
+                    </CellContents>
+                  </TablixCornerCell>
+                </TablixCornerRow>
+              </TablixCornerRows>
+            </TablixCorner>
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>46.09908mm</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>7.67292mm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox155">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Category.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox155</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <TablixHeader>
+                    <Size>6.61458mm</Size>
+                    <CellContents>
+                      <Textbox Name="Textbox90">
+                        <CanGrow>true</CanGrow>
+                        <KeepTogether>true</KeepTogether>
+                        <Paragraphs>
+                          <Paragraph>
+                            <TextRuns>
+                              <TextRun>
+                                <Value>Category</Value>
+                                <Style>
+                                  <Color>White</Color>
+                                </Style>
+                              </TextRun>
+                            </TextRuns>
+                            <Style />
+                          </Paragraph>
+                        </Paragraphs>
+                        <rd:DefaultName>Textbox90</rd:DefaultName>
+                        <Style>
+                          <Border>
+                            <Color>LightGrey</Color>
+                            <Style>Solid</Style>
+                          </Border>
+                          <BackgroundColor>CornflowerBlue</BackgroundColor>
+                          <PaddingLeft>2pt</PaddingLeft>
+                          <PaddingRight>2pt</PaddingRight>
+                          <PaddingTop>2pt</PaddingTop>
+                          <PaddingBottom>2pt</PaddingBottom>
+                        </Style>
+                      </Textbox>
+                    </CellContents>
+                  </TablixHeader>
+                  <TablixMembers>
+                    <TablixMember />
+                  </TablixMembers>
+                </TablixMember>
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <Group Name="Requirements1">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!Requirements.Value</GroupExpression>
+                    </GroupExpressions>
+                  </Group>
+                  <SortExpressions>
+                    <SortExpression>
+                      <Value>=Fields!Requirements.Value</Value>
+                    </SortExpression>
+                  </SortExpressions>
+                  <TablixHeader>
+                    <Size>66.21991mm</Size>
+                    <CellContents>
+                      <Textbox Name="Requirements">
+                        <CanGrow>true</CanGrow>
+                        <KeepTogether>true</KeepTogether>
+                        <Paragraphs>
+                          <Paragraph>
+                            <TextRuns>
+                              <TextRun>
+                                <Value>=Fields!Requirements.Value</Value>
+                                <Style />
+                              </TextRun>
+                            </TextRuns>
+                            <Style />
+                          </Paragraph>
+                        </Paragraphs>
+                        <rd:DefaultName>Requirements</rd:DefaultName>
+                        <Style>
+                          <Border>
+                            <Color>LightGrey</Color>
+                            <Style>Solid</Style>
+                          </Border>
+                          <PaddingLeft>2pt</PaddingLeft>
+                          <PaddingRight>2pt</PaddingRight>
+                          <PaddingTop>2pt</PaddingTop>
+                          <PaddingBottom>2pt</PaddingBottom>
+                        </Style>
+                      </Textbox>
+                    </CellContents>
+                  </TablixHeader>
+                  <TablixMembers>
+                    <TablixMember>
+                      <Group Name="Title">
+                        <GroupExpressions>
+                          <GroupExpression>=Fields!Title.Value</GroupExpression>
+                        </GroupExpressions>
+                      </Group>
+                      <SortExpressions>
+                        <SortExpression>
+                          <Value>=Fields!Title.Value</Value>
+                          <Direction>Descending</Direction>
+                        </SortExpression>
+                      </SortExpressions>
+                      <TablixHeader>
+                        <Size>80.772mm</Size>
+                        <CellContents>
+                          <Textbox Name="Textbox153">
+                            <CanGrow>true</CanGrow>
+                            <KeepTogether>true</KeepTogether>
+                            <Paragraphs>
+                              <Paragraph>
+                                <TextRuns>
+                                  <TextRun>
+                                    <Value>=Fields!Title.Value</Value>
+                                    <Style />
+                                  </TextRun>
+                                </TextRuns>
+                                <Style />
+                              </Paragraph>
+                            </Paragraphs>
+                            <rd:DefaultName>Textbox153</rd:DefaultName>
+                            <Style>
+                              <Border>
+                                <Color>LightGrey</Color>
+                                <Style>Solid</Style>
+                              </Border>
+                              <PaddingLeft>2pt</PaddingLeft>
+                              <PaddingRight>2pt</PaddingRight>
+                              <PaddingTop>2pt</PaddingTop>
+                              <PaddingBottom>2pt</PaddingBottom>
+                            </Style>
+                          </Textbox>
+                        </CellContents>
+                      </TablixHeader>
+                      <TablixMembers>
+                        <TablixMember>
+                          <TablixHeader>
+                            <Size>31.95325mm</Size>
+                            <CellContents>
+                              <Textbox Name="Textbox154">
+                                <CanGrow>true</CanGrow>
+                                <KeepTogether>true</KeepTogether>
+                                <Paragraphs>
+                                  <Paragraph>
+                                    <TextRuns>
+                                      <TextRun>
+                                        <Value>=Fields!Priority.Value</Value>
+                                        <Style />
+                                      </TextRun>
+                                    </TextRuns>
+                                    <Style />
+                                  </Paragraph>
+                                </Paragraphs>
+                                <rd:DefaultName>Textbox154</rd:DefaultName>
+                                <Style>
+                                  <Border>
+                                    <Color>LightGrey</Color>
+                                    <Style>Solid</Style>
+                                  </Border>
+                                  <PaddingLeft>2pt</PaddingLeft>
+                                  <PaddingRight>2pt</PaddingRight>
+                                  <PaddingTop>2pt</PaddingTop>
+                                  <PaddingBottom>2pt</PaddingBottom>
+                                </Style>
+                              </Textbox>
+                            </CellContents>
+                          </TablixHeader>
+                          <TablixMembers>
+                            <TablixMember />
+                          </TablixMembers>
+                        </TablixMember>
+                      </TablixMembers>
+                    </TablixMember>
+                  </TablixMembers>
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <RepeatColumnHeaders>true</RepeatColumnHeaders>
+            <RepeatRowHeaders>true</RepeatRowHeaders>
+            <FixedColumnHeaders>true</FixedColumnHeaders>
+            <FixedRowHeaders>true</FixedRowHeaders>
+            <DataSetName>Tasks</DataSetName>
+            <SortExpressions>
+              <SortExpression>
+                <Value>=Fields!Requirements.Value</Value>
+              </SortExpression>
+              <SortExpression>
+                <Value>=Fields!Title.Value</Value>
+              </SortExpression>
+            </SortExpressions>
+            <Top>56.44896mm</Top>
+            <Left>5.55625mm</Left>
+            <Height>14.2875mm</Height>
+            <Width>225.04424mm</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
+          <Textbox Name="Textbox100">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Requirements: ( total hours used: </Value>
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Sum(Fields!Priority.Value, "Requirements")</Value>
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> )</Value>
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox100</rd:DefaultName>
+            <Top>26.95575mm</Top>
+            <Left>5.55625mm</Left>
+            <Height>6.08542mm</Height>
+            <Width>225.04424mm</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox101">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Tasks:</Value>
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox100</rd:DefaultName>
+            <Top>50.09896mm</Top>
+            <Left>5.55625mm</Left>
+            <Height>6.35mm</Height>
+            <Width>225.04424mm</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <Height>210mm</Height>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Body>
+      <Width>235.20833mm</Width>
+      <Page>
+        <PageFooter>
+          <Height>11.43mm</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="ExecutionTime">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Globals!ExecutionTime</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>ExecutionTime</rd:DefaultName>
+              <Top>5.08mm</Top>
+              <Left>101.6mm</Left>
+              <Height>6.35mm</Height>
+              <Width>50.8mm</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageFooter>
+        <PageHeight>297.00001mm</PageHeight>
+        <PageWidth>210mm</PageWidth>
+        <LeftMargin>20mm</LeftMargin>
+        <RightMargin>20mm</RightMargin>
+        <TopMargin>20mm</TopMargin>
+        <BottomMargin>20mm</BottomMargin>
+        <ColumnSpacing>0.13cm</ColumnSpacing>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="Project">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <DataSetReference>
+          <DataSetName>Project</DataSetName>
+          <ValueField>Title</ValueField>
+        </DataSetReference>
+      </DefaultValue>
+      <Prompt>Project</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>Project</DataSetName>
+          <ValueField>Title</ValueField>
+          <LabelField>Title</LabelField>
+        </DataSetReference>
+      </ValidValues>
+    </ReportParameter>
+    <ReportParameter Name="Milestone">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <DataSetReference>
+          <DataSetName>Milestone</DataSetName>
+          <ValueField>Milestone</ValueField>
+        </DataSetReference>
+      </DefaultValue>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>Milestone</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>Milestone</DataSetName>
+          <ValueField>Milestone</ValueField>
+          <LabelField>Milestone</LabelField>
+        </DataSetReference>
+      </ValidValues>
+    </ReportParameter>
+  </ReportParameters>
+  <rd:ReportUnitType>Mm</rd:ReportUnitType>
+  <rd:ReportServerUrl>http://casas:11227/sites/awt</rd:ReportServerUrl>
+  <rd:ReportID>8451c683-cede-42da-996b-e5d639b0b5aa</rd:ReportID>
+</Report>

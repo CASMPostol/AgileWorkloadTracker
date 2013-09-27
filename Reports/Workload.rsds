@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DataSourceDefinition xmlns="http://schemas.microsoft.com/sqlserver/reporting/2006/03/reportdatasource">
+  <Extension>SHAREPOINTLIST</Extension>
+  <ConnectString>http://casas:11227/sites/awt</ConnectString>
+  <CredentialRetrieval>Integrated</CredentialRetrieval>
+  <Enabled>True</Enabled>
+</DataSourceDefinition>
