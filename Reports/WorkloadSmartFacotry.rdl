@@ -602,10 +602,9 @@
             </Paragraphs>
             <rd:WatermarkTextbox>Title</rd:WatermarkTextbox>
             <rd:DefaultName>ReportTitle</rd:DefaultName>
-            <Top>3.175mm</Top>
-            <Left>0.21875in</Left>
+            <Top>0mm</Top>
             <Height>18.57728mm</Height>
-            <Width>224.74791mm</Width>
+            <Width>190mm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -659,16 +658,16 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>25mm</Width>
+                  <Width>18.05042mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>29.375mm</Width>
+                  <Width>22.42542mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>25mm</Width>
+                  <Width>18.05042mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>87.03541mm</Width>
+                  <Width>80.08583mm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -965,7 +964,7 @@
                     </SortExpression>
                   </SortExpressions>
                   <TablixHeader>
-                    <Size>58.3375mm</Size>
+                    <Size>51.38792mm</Size>
                     <CellContents>
                       <Textbox Name="Requirement">
                         <CanGrow>true</CanGrow>
@@ -1003,10 +1002,10 @@
             <FixedColumnHeaders>true</FixedColumnHeaders>
             <FixedRowHeaders>true</FixedRowHeaders>
             <DataSetName>Requirements</DataSetName>
-            <Top>33.04117mm</Top>
-            <Left>5.55625mm</Left>
+            <Top>29.86617mm</Top>
+            <Left>0mm</Left>
             <Height>13.75833mm</Height>
-            <Width>224.74791mm</Width>
+            <Width>190mm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -1123,7 +1122,7 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>46.09908mm</Width>
+                  <Width>37.33802mm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -1221,7 +1220,7 @@
                     </SortExpression>
                   </SortExpressions>
                   <TablixHeader>
-                    <Size>66.21991mm</Size>
+                    <Size>57.45885mm</Size>
                     <CellContents>
                       <Textbox Name="Requirements">
                         <CanGrow>true</CanGrow>
@@ -1265,7 +1264,7 @@
                         </SortExpression>
                       </SortExpressions>
                       <TablixHeader>
-                        <Size>80.772mm</Size>
+                        <Size>72.01094mm</Size>
                         <CellContents>
                           <Textbox Name="Textbox153">
                             <CanGrow>true</CanGrow>
@@ -1298,7 +1297,7 @@
                       <TablixMembers>
                         <TablixMember>
                           <TablixHeader>
-                            <Size>31.95325mm</Size>
+                            <Size>23.19219mm</Size>
                             <CellContents>
                               <Textbox Name="Textbox154">
                                 <CanGrow>true</CanGrow>
@@ -1351,10 +1350,10 @@
                 <Value>=Fields!Title.Value</Value>
               </SortExpression>
             </SortExpressions>
-            <Top>56.44896mm</Top>
-            <Left>5.55625mm</Left>
+            <Top>53.27396mm</Top>
+            <Left>0mm</Left>
             <Height>14.2875mm</Height>
-            <Width>225.04424mm</Width>
+            <Width>190mm</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -1394,10 +1393,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox100</rd:DefaultName>
-            <Top>26.95575mm</Top>
-            <Left>5.55625mm</Left>
+            <Top>23.78075mm</Top>
+            <Left>0mm</Left>
             <Height>6.08542mm</Height>
-            <Width>225.04424mm</Width>
+            <Width>190mm</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -1427,10 +1426,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox100</rd:DefaultName>
-            <Top>50.09896mm</Top>
-            <Left>5.55625mm</Left>
+            <Top>46.92396mm</Top>
+            <Left>0mm</Left>
             <Height>6.35mm</Height>
-            <Width>225.04424mm</Width>
+            <Width>190mm</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
@@ -1443,14 +1442,14 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>210mm</Height>
+        <Height>297mm</Height>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Body>
-      <Width>235.20833mm</Width>
+      <Width>210mm</Width>
       <Page>
         <PageFooter>
           <Height>11.43mm</Height>
@@ -1497,10 +1496,12 @@
         </PageFooter>
         <PageHeight>297.00001mm</PageHeight>
         <PageWidth>210mm</PageWidth>
-        <LeftMargin>20mm</LeftMargin>
-        <RightMargin>20mm</RightMargin>
-        <TopMargin>20mm</TopMargin>
-        <BottomMargin>20mm</BottomMargin>
+        <InteractiveHeight>277mm</InteractiveHeight>
+        <InteractiveWidth>190mm</InteractiveWidth>
+        <LeftMargin>10mm</LeftMargin>
+        <RightMargin>10mm</RightMargin>
+        <TopMargin>10mm</TopMargin>
+        <BottomMargin>10mm</BottomMargin>
         <ColumnSpacing>0.13cm</ColumnSpacing>
         <Style />
       </Page>
