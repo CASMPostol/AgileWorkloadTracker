@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "AWTReports", "AWTReports\AWTReports.rptproj", "{7B07A97F-813F-484E-90F4-C599092BCDEB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		DebugLocal|Default = DebugLocal|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7B07A97F-813F-484E-90F4-C599092BCDEB}.Debug|Default.ActiveCfg = Debug
+		{7B07A97F-813F-484E-90F4-C599092BCDEB}.Debug|Default.Build.0 = DebugLocal
+		{7B07A97F-813F-484E-90F4-C599092BCDEB}.Debug|Default.Deploy.0 = DebugLocal
+		{7B07A97F-813F-484E-90F4-C599092BCDEB}.DebugLocal|Default.ActiveCfg = DebugLocal
+		{7B07A97F-813F-484E-90F4-C599092BCDEB}.DebugLocal|Default.Build.0 = DebugLocal
+		{7B07A97F-813F-484E-90F4-C599092BCDEB}.Release|Default.ActiveCfg = Release
+		{7B07A97F-813F-484E-90F4-C599092BCDEB}.Release|Default.Build.0 = Release
+		{7B07A97F-813F-484E-90F4-C599092BCDEB}.Release|Default.Deploy.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
