@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="SFAWTDataSource">
+  <ConnectionProperties>
+    <Extension>SHAREPOINTLIST</Extension>
+    <ConnectString>http://casas:11227/sites/awt</ConnectString>
+    <IntegratedSecurity>true</IntegratedSecurity>
+  </ConnectionProperties>
+  <DataSourceID>5a2850ef-7560-45fc-a7f7-417cafe871fe</DataSourceID>
+</RptDataSource>

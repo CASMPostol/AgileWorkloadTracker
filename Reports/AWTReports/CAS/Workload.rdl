@@ -3,16 +3,16 @@
   <AutoRefresh>0</AutoRefresh>
   <InitialPageName>Workload report</InitialPageName>
   <DataSources>
-    <DataSource Name="Workload">
-      <DataSourceReference>http://casas:11227/sites/awt/RS Data Connections/DataSources/Workload.rsds</DataSourceReference>
+    <DataSource Name="AWTDataSource">
+      <DataSourceReference>CASAWTDataSource</DataSourceReference>
       <rd:SecurityType>None</rd:SecurityType>
-      <rd:DataSourceID>879278cf-0ccd-47d8-ba29-42007b8bf374</rd:DataSourceID>
+      <rd:DataSourceID>a065f643-3fdb-437e-b454-4dd81e48c566</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
     <DataSet Name="WorkloadDataSet">
       <Query>
-        <DataSourceName>Workload</DataSourceName>
+        <DataSourceName>AWTDataSource</DataSourceName>
         <QueryParameters>
           <QueryParameter Name="Year">
             <Value>=Parameters!Year.Value</Value>
@@ -54,30 +54,7 @@
     &lt;/Where&gt;
   &lt;/Query&gt;
 &lt;/RSSharePointList&gt;</CommandText>
-        <rd:DesignerState><QueryDefinition xmlns="http://schemas.microsoft.com/ReportingServices/QueryDefinition/Relational">
-            <SelectedColumns>
-              <ColumnExpression ColumnOwner="Workload" ColumnName="Title" />
-              <ColumnExpression ColumnOwner="Workload" ColumnName="Workload2ProjectTitle" />
-              <ColumnExpression ColumnOwner="Workload" ColumnName="Workload2TaskTitle" />
-              <ColumnExpression ColumnOwner="Workload" ColumnName="Workload2StageTitle" />
-              <ColumnExpression ColumnOwner="Workload" ColumnName="Workload2ResourcesTitle" />
-              <ColumnExpression ColumnOwner="Workload" ColumnName="Hours" />
-              <ColumnExpression ColumnOwner="Workload" ColumnName="WorkloadDate" />
-              <ColumnExpression ColumnOwner="Workload" ColumnName="Year" />
-              <ColumnExpression ColumnOwner="Workload" ColumnName="WeekNumber" />
-              <ColumnExpression ColumnOwner="Workload" ColumnName="Task_x003a_ID" />
-            </SelectedColumns>
-            <Filters>
-              <Filter Operator="=" Param="True">
-                <ColumnExpression ColumnOwner="Workload" ColumnName="Year" />
-                <FilterValue>2013</FilterValue>
-              </Filter>
-              <Filter Operator="=" Param="True">
-                <ColumnExpression ColumnOwner="Workload" ColumnName="WeekNumber" />
-                <FilterValue>19</FilterValue>
-              </Filter>
-            </Filters>
-          </QueryDefinition></rd:DesignerState>
+        <rd:DesignerState><QueryDefinition xmlns="http://schemas.microsoft.com/ReportingServices/QueryDefinition/Relational"><SelectedColumns><ColumnExpression ColumnOwner="Workload" ColumnName="Title" /><ColumnExpression ColumnOwner="Workload" ColumnName="Workload2ProjectTitle" /><ColumnExpression ColumnOwner="Workload" ColumnName="Workload2TaskTitle" /><ColumnExpression ColumnOwner="Workload" ColumnName="Workload2StageTitle" /><ColumnExpression ColumnOwner="Workload" ColumnName="Workload2ResourcesTitle" /><ColumnExpression ColumnOwner="Workload" ColumnName="Hours" /><ColumnExpression ColumnOwner="Workload" ColumnName="WorkloadDate" /><ColumnExpression ColumnOwner="Workload" ColumnName="Year" /><ColumnExpression ColumnOwner="Workload" ColumnName="WeekNumber" /><ColumnExpression ColumnOwner="Workload" ColumnName="Task_x003a_ID" /></SelectedColumns><Filters><Filter Operator="=" Param="True"><ColumnExpression ColumnOwner="Workload" ColumnName="Year" /><FilterValue>2013</FilterValue></Filter><Filter Operator="=" Param="True"><ColumnExpression ColumnOwner="Workload" ColumnName="WeekNumber" /><FilterValue>19</FilterValue></Filter></Filters></QueryDefinition></rd:DesignerState>
       </Query>
       <Fields>
         <Field Name="Title">
@@ -127,7 +104,7 @@
     </DataSet>
     <DataSet Name="TaskDataSet">
       <Query>
-        <DataSourceName>Workload</DataSourceName>
+        <DataSourceName>AWTDataSource</DataSourceName>
         <CommandText>&lt;RSSharePointList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
   &lt;ListName&gt;Task&lt;/ListName&gt;
   &lt;ViewFields&gt;
@@ -185,7 +162,7 @@
     </DataSet>
     <DataSet Name="WorkloadWeekNumberDataSet">
       <Query>
-        <DataSourceName>Workload</DataSourceName>
+        <DataSourceName>AWTDataSource</DataSourceName>
         <QueryParameters>
           <QueryParameter Name="Year">
             <Value>=Parameters!Year.Value</Value>

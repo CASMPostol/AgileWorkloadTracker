@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "AWTReports", "AWTReports\AWTReports.rptproj", "{7B07A97F-813F-484E-90F4-C599092BCDEB}"
 EndProject
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "CAS", "CAS\CAS.rptproj", "{6F1F4F3A-EBAF-4404-98ED-ABC343C4669D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Default = Debug|Default
@@ -18,6 +20,13 @@ Global
 		{7B07A97F-813F-484E-90F4-C599092BCDEB}.Release|Default.ActiveCfg = Release
 		{7B07A97F-813F-484E-90F4-C599092BCDEB}.Release|Default.Build.0 = Release
 		{7B07A97F-813F-484E-90F4-C599092BCDEB}.Release|Default.Deploy.0 = Release
+		{6F1F4F3A-EBAF-4404-98ED-ABC343C4669D}.Debug|Default.ActiveCfg = DebugLocal
+		{6F1F4F3A-EBAF-4404-98ED-ABC343C4669D}.Debug|Default.Build.0 = DebugLocal
+		{6F1F4F3A-EBAF-4404-98ED-ABC343C4669D}.DebugLocal|Default.ActiveCfg = DebugLocal
+		{6F1F4F3A-EBAF-4404-98ED-ABC343C4669D}.DebugLocal|Default.Build.0 = DebugLocal
+		{6F1F4F3A-EBAF-4404-98ED-ABC343C4669D}.Release|Default.ActiveCfg = Release
+		{6F1F4F3A-EBAF-4404-98ED-ABC343C4669D}.Release|Default.Build.0 = Release
+		{6F1F4F3A-EBAF-4404-98ED-ABC343C4669D}.Release|Default.Deploy.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
