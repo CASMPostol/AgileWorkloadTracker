@@ -38,7 +38,7 @@
         <OutputPath>bin\DebugLocal</OutputPath>
         <TargetServerVersion>SSRS2008R2</TargetServerVersion>
         <TargetServerURL>http://casas:11227/sites/awt</TargetServerURL>
-        <TargetFolder>http://casas:11227/sites/awt/ReportLibrary/CASReports</TargetFolder>
+        <TargetFolder>http://casas:11227/sites/awt/ReportLibrary/Reports</TargetFolder>
         <TargetDataSourceFolder>http://casas:11227/sites/awt/ReportLibrary/Data Sources</TargetDataSourceFolder>
         <TargetDatasetFolder>http://casas:11227/sites/awt/ReportLibrary/Datasets</TargetDatasetFolder>
         <TargetReportPartFolder>http://casas:11227/sites/awt/ReportLibrary/Report Parts</TargetReportPartFolder>

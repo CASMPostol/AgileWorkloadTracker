@@ -41,10 +41,11 @@
       <Options>
         <OutputPath>bin\DebugLocal</OutputPath>
         <TargetServerVersion>SSRS2008R2</TargetServerVersion>
-        <TargetFolder>AWTReports</TargetFolder>
-        <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
-        <TargetDatasetFolder>Datasets</TargetDatasetFolder>
-        <TargetReportPartFolder>Report Parts</TargetReportPartFolder>
+        <TargetServerURL>http://casas:11227/sites/awt</TargetServerURL>
+        <TargetFolder>http://casas:11227/sites/awt/ReportLibrary/Reports</TargetFolder>
+        <TargetDataSourceFolder>http://casas:11227/sites/awt/Data Sources</TargetDataSourceFolder>
+        <TargetDatasetFolder>http://casas:11227/sites/awt/Datasets</TargetDatasetFolder>
+        <TargetReportPartFolder>http://casas:11227/sites/awt/Report Parts</TargetReportPartFolder>
       </Options>
     </Configuration>
     <Configuration>
