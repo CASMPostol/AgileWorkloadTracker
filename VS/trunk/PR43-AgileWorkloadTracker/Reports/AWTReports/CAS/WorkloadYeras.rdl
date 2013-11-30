@@ -2,16 +2,16 @@
 <Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:cl="http://schemas.microsoft.com/sqlserver/reporting/2010/01/componentdefinition" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition">
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="Workload">
-      <DataSourceReference>http://casas:11227/sites/awt/RS Data Connections/DataSources/Workload.rsds</DataSourceReference>
+    <DataSource Name="AWTDataSource">
+      <DataSourceReference>CASAWTDataSource</DataSourceReference>
       <rd:SecurityType>None</rd:SecurityType>
-      <rd:DataSourceID>879278cf-0ccd-47d8-ba29-42007b8bf374</rd:DataSourceID>
+      <rd:DataSourceID>750af9dc-f149-4594-aa33-2034b7368ab7</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
     <DataSet Name="DataSet1">
       <Query>
-        <DataSourceName>Workload</DataSourceName>
+        <DataSourceName>AWTDataSource</DataSourceName>
         <CommandText>&lt;RSSharePointList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
   &lt;ListName&gt;Workload&lt;/ListName&gt;
   &lt;ViewFields&gt;
