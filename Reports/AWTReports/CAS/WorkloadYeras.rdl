@@ -9,7 +9,7 @@
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="DataSet1">
+    <DataSet Name="Workload">
       <Query>
         <DataSourceName>AWTDataSource</DataSourceName>
         <CommandText>&lt;RSSharePointList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
@@ -559,7 +559,7 @@
                             </Style>
                           </ChartNoDataMessage>
                           <rd:DesignerMode>DataBar</rd:DesignerMode>
-                          <DataSetName>DataSet1</DataSetName>
+                          <DataSetName>Workload</DataSetName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -1252,7 +1252,7 @@
                               </Style>
                             </ChartNoDataMessage>
                             <rd:DesignerMode>DataBar</rd:DesignerMode>
-                            <DataSetName>DataSet1</DataSetName>
+                            <DataSetName>Workload</DataSetName>
                             <Style>
                               <Border>
                                 <Color>LightGrey</Color>
@@ -1505,7 +1505,7 @@
             <RepeatColumnHeaders>true</RepeatColumnHeaders>
             <FixedColumnHeaders>true</FixedColumnHeaders>
             <KeepTogether>true</KeepTogether>
-            <DataSetName>DataSet1</DataSetName>
+            <DataSetName>Workload</DataSetName>
             <Top>10.16mm</Top>
             <Left>0mm</Left>
             <Height>30mm</Height>
@@ -1827,7 +1827,7 @@
                     <VerticalAlign>Top</VerticalAlign>
                   </Style>
                 </ChartNoDataMessage>
-                <DataSetName>DataSet1</DataSetName>
+                <DataSetName>Workload</DataSetName>
                 <Top>1.32292mm</Top>
                 <Left>1.32292mm</Left>
                 <Height>165.93453mm</Height>
