@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="0800d978-43cd-4042-9107-ffd781075069" solutionId="0800d978-43cd-4042-9107-ffd781075069" resetWebServer="false" name="Website110 Upgrade Package" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
-  <features>
-    <featureReference itemId="0c6733d5-1c46-43ae-b699-13e6e50552fc" />
-  </features>
-</package>
