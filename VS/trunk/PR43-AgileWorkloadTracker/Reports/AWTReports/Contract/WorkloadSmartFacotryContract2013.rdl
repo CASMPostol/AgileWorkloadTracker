@@ -673,7 +673,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Hours</Value>
+                                  <Value EvaluationMode="Constant">Hours</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -1075,21 +1075,21 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox11">
+                        <Textbox Name="Textbox12">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Lookup(Fields!Project.Value, Fields!Title.Value, Fields!Accepted_hours.Value, "Project")</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox11</rd:DefaultName>
+                          <rd:DefaultName>Textbox12</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -1101,6 +1101,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -1260,21 +1261,21 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox12">
+                        <Textbox Name="Textbox11">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Lookup(Fields!Task.Value, Fields!Title.Value, Fields!Title.Value, "TasksList")</Value>
+                                  <Value />
                                   <Style />
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox12</rd:DefaultName>
+                          <rd:DefaultName>Textbox11</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -1286,7 +1287,6 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -1453,7 +1453,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Lookup(Cint(Fields!Task_ID.Value), CInt(Fields!ID.Value), Fields!Title.Value, "TasksList")</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -1809,7 +1809,7 @@
                               <Paragraph>
                                 <TextRuns>
                                   <TextRun>
-                                    <Value>Project1</Value>
+                                    <Value>Project</Value>
                                     <Style />
                                   </TextRun>
                                 </TextRuns>
@@ -2167,7 +2167,7 @@
                         <TablixMember>
                           <Group Name="Milestones">
                             <GroupExpressions>
-                              <GroupExpression>=Lookup(Fields!Task.Value, Fields!Title.Value, Fields!Milestone.Value, "TasksList")</GroupExpression>
+                              <GroupExpression>=Lookup(Cint(Fields!Task_ID.Value), CInt(Fields!ID.Value), Fields!Milestone.Value, "TasksList")</GroupExpression>
                             </GroupExpressions>
                           </Group>
                           <SortExpressions>
