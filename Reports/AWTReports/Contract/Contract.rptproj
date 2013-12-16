@@ -14,8 +14,8 @@
       <FullPath>WorkloadSmartFacotry.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>WorkloadSmartFacotryContract2013.rdl</Name>
-      <FullPath>WorkloadSmartFacotryContract2013.rdl</FullPath>
+      <Name>AnualContractReport.rdl</Name>
+      <FullPath>AnualContractReport.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
