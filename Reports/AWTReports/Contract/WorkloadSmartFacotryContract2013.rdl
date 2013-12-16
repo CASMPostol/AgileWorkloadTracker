@@ -552,7 +552,21 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>SmartFactory - report </Value>
+                    <Value>CAS Contract </Value>
+                    <Style>
+                      <FontFamily>Verdana</FontFamily>
+                      <FontSize>20pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!Contract.Value</Value>
+                    <Style>
+                      <FontFamily>Verdana</FontFamily>
+                      <FontSize>16pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> anual report </Value>
                     <Style>
                       <FontFamily>Verdana</FontFamily>
                       <FontSize>20pt</FontSize>
@@ -566,21 +580,14 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Parameters!Contract.Value</Value>
+                    <Value>Łódź </Value>
                     <Style>
                       <FontFamily>Verdana</FontFamily>
                       <FontSize>16pt</FontSize>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>, </Value>
-                    <Style>
-                      <FontFamily>Verdana</FontFamily>
-                      <FontSize>16pt</FontSize>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=Today.ToOADate()</Value>
+                    <Value>=FormatDateTime( Today, DateFormat.ShortDate)</Value>
                     <Style>
                       <FontFamily>Verdana</FontFamily>
                       <FontSize>16pt</FontSize>
@@ -621,7 +628,7 @@
                   <Width>17.32708mm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>16.35937mm</Width>
+                  <Width>16.61941mm</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>20mm</Width>
@@ -733,7 +740,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Accepted</Value>
+                                  <Value>Invoiced</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -2363,10 +2370,10 @@
                 <Value>=Lookup(Fields!Project.Value, Fields!Title.Value, Fields!Baseline_start.Value, "Project")</Value>
               </SortExpression>
             </SortExpressions>
-            <Top>34.27589mm</Top>
-            <Left>5.25992mm</Left>
+            <Top>34.01131mm</Top>
+            <Left>0mm</Left>
             <Height>36mm</Height>
-            <Width>260.48907mm</Width>
+            <Width>260.7491mm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -2381,7 +2388,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Rozliczenie prac</Value>
+                    <Value>Workload table</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -2389,8 +2396,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox70</rd:DefaultName>
-            <Top>2.75703cm</Top>
-            <Left>0.52599cm</Left>
+            <Top>2.6953cm</Top>
+            <Left>0cm</Left>
             <Height>0.6cm</Height>
             <Width>3.63771cm</Width>
             <ZIndex>2</ZIndex>
@@ -3747,7 +3754,7 @@
             <Top>8.62224cm</Top>
             <Left>0cm</Left>
             <Height>2.4cm</Height>
-            <Width>26.5749cm</Width>
+            <Width>26.57491cm</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -3756,6 +3763,36 @@
               <TextAlign>Right</TextAlign>
             </Style>
           </Tablix>
+          <Textbox Name="Textbox2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>MiIlestones table</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>7.98696cm</Top>
+            <Left>0cm</Left>
+            <Height>0.6cm</Height>
+            <Width>2.87042cm</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
         <Height>297mm</Height>
         <Style>
