@@ -1,11 +1,11 @@
 ﻿//<summary>
 //  Title   : class ElementWrapper
 //  System  : Microsoft Visual C# .NET 2012
-//  $LastChangedDate:$
-//  $Rev:$
-//  $LastChangedBy:$
+//  $LastChangedDate$
+//  $Rev$
+//  $LastChangedBy$
 //  $URL:$
-//  $Id:$
+//  $Id$
 //
 //  Copyright (C) 2013, CAS LODZ POLAND.
 //  TEL: +48 (42) 686 25 47
@@ -13,12 +13,7 @@
 //  http://www.cas.eu
 //</summary>
 
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CAS.AgileWorkloadTracker.DataModel.Linq;
 
 namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
@@ -52,16 +47,20 @@ namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
     #region override  object
     public override string ToString()
     {
-      return Element.Title;
+      if (Element == null)
+        return m_EmptyString;
+      else
+        return Element.Title;
     }
-
     #endregion
+
     #region INotifyPropertyChanged Members
     public event PropertyChangedEventHandler PropertyChanged;
     #endregion
 
     #region private
     private ElementType b_Element;
+    private const string m_EmptyString = " -- Selecr milestone -- ";
     #endregion
 
   }
