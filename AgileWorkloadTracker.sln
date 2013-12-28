@@ -23,8 +23,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPMetalParametersCreator", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EB9E9681-8DE4-4271-A4F8-BC04E41F2DEC}"
 	ProjectSection(SolutionItems) = preProject
+		..\PR39-CommonResources\T4Definitions\AssemblyInfo.t4 = ..\PR39-CommonResources\T4Definitions\AssemblyInfo.t4
 		create_branch.cmd = create_branch.cmd
 		create_tag.cmd = create_tag.cmd
+		..\..\SmartFactory\PR39-CommonResources\CASSnippets\INotifyPropertyChanged.snippet = ..\..\SmartFactory\PR39-CommonResources\CASSnippets\INotifyPropertyChanged.snippet
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AgileWorkloadTracker", "AgileWorkloadTracker", "{DC42B386-C955-4184-AC9B-52F7E8226047}"
