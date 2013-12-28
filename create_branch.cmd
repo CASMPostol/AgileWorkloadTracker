@@ -1,8 +1,8 @@
-rem//  $LastChangedDate: 2011-04-04 09:42:00 +0200 (Pn, 04 kwi 2011) $
-rem//  $Rev: 5816 $
-rem//  $LastChangedBy: mzbrzezny $
+rem//  $LastChangedDate$
+rem//  $Rev$
+rem//  $LastChangedBy$
 rem//  $URL: svn://svnserver.hq.cas.com.pl/VS/trunk/PR21-CommServer/Scripts/create_branch.cmd $
-rem//  $Id: create_branch.cmd 5816 2011-04-04 07:42:00Z mzbrzezny $
+rem//  $Id$
 if "%1"=="" goto ERROR
 set branchtype=%2
 if "%branchtype%"=="" goto setbranch
