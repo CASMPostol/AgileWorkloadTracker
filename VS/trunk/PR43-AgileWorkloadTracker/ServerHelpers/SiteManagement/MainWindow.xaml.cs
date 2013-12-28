@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SiteManagement
+namespace CAS.AgileWorkloadTracker.SiteManagement
 {
   /// <summary>
   /// Interaction logic for MainWindow.xaml
@@ -23,6 +23,14 @@ namespace SiteManagement
     public MainWindow()
     {
       InitializeComponent();
+      x_MainGrid.DataContext = new MainWindowData();
     }
-  }
+
+
+    private void x_RefreshButton_Click(object sender, System.Windows.RoutedEventArgs e)
+    {
+    	// TODO: Add event handler implementation here.
+    }
+
+   }
 }
