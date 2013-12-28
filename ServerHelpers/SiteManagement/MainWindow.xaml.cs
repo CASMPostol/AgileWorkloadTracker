@@ -1,17 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CAS.AgileWorkloadTracker.SiteManagement
 {
@@ -26,10 +14,29 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
       x_MainGrid.DataContext = new MainWindowData();
     }
 
-
     private void x_RefreshButton_Click(object sender, System.Windows.RoutedEventArgs e)
     {
-    	// TODO: Add event handler implementation here.
+      try
+      {
+        MainWindowData _mw = x_MainGrid.DataContext as MainWindowData;
+        _mw.GetMilestoneCollection();
+      }
+      catch (Exception ex)
+      {
+        ShowExceptionBox(ex);
+      }
+    }
+    private void ShowExceptionBox(Exception exception)
+    {
+      string _msg = String.Format("The operation has been aborted by ex: {0}", exception.Message);
+      MessageBox.Show( _msg, "Exception catched.", MessageBoxButton.OK, MessageBoxImage.Error);
+    }
+    private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+    {
+      MainWindowData _mw = x_MainGrid.DataContext as MainWindowData;
+      if (_mw == null)
+        return;
+      _mw.Dispose();
     }
 
    }
