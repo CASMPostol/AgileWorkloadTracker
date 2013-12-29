@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="SiteURL" Type="System.String" Scope="User">
-      <Value Profile="(Default)">CCCCCxxx</Value>
+      <Value Profile="(Default)">http://casas:11227/sites/awt</Value>
     </Setting>
   </Settings>
 </SettingsFile>

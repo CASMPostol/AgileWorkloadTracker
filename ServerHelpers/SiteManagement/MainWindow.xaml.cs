@@ -29,7 +29,8 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     public MainWindow()
     {
       InitializeComponent();
-      x_MainGrid.DataContext = new MainWindowData();
+      MainWindowData _dta = new MainWindowData();
+      x_MainGrid.DataContext = _dta;
     }
     private void x_RefreshButton_Click(object sender, System.Windows.RoutedEventArgs e)
     {
@@ -48,6 +49,8 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     {
       if (e.Error != null)
         ShowExceptionBox(e.Error);
+      else
+        x_MilestonesComboBox.SelectedIndex = 1;
       x_RefreshButton.IsEnabled = true;
     }
     private void ShowExceptionBox(Exception exception)
@@ -70,6 +73,8 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     }
     private void RunWorkerCompletedDoDispose(object sender, RunWorkerCompletedEventArgs e)
     {
+      if (e.Error != null)
+        ShowExceptionBox(e.Error);
       this.Close();
     }
 
