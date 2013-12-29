@@ -14,7 +14,7 @@
 //</summary>
 using System.Windows;
 
-namespace CAS.AgileWorkloadTracker.SiteManagement
+namespace CAS.SiteManagement
 {
   /// <summary>
   /// Interaction logic for App.xaml
