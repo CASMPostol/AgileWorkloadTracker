@@ -25,7 +25,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("CCCCCxxx")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://casas:11227/sites/awt")]
         public string SiteURL {
             get {
                 return ((string)(this["SiteURL"]));

@@ -34,7 +34,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     public MainWindowData()
     {
       SiteURL = Properties.Settings.Default.SiteURL;
-      MilestoneCollection = new ObservableCollection<Linq.ElementWrapper<DataModel.Linq.Milestone>>();
+      MilestoneCollection = new ObservableCollection<MilestoneWrapper>();
       m_BackgroundWorker.DoWork += m_BackgroundWorker_DoWork;
       m_BackgroundWorker.ProgressChanged += m_BackgroundWorker_ProgressChanged;
       m_BackgroundWorker.RunWorkerCompleted += m_BackgroundWorker_RunWorkerCompleted;
@@ -53,7 +53,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
         PropertyChanged.RaiseHandler<string>(value, ref b_SiteURL, "SiteURL", this);
       }
     }
-    public ObservableCollection<Linq.ElementWrapper<CAS.AgileWorkloadTracker.DataModel.Linq.Milestone>> MilestoneCollection
+    public ObservableCollection<MilestoneWrapper> MilestoneCollection
     {
       get
       {
@@ -61,7 +61,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
       }
       set
       {
-        PropertyChanged.RaiseHandler<System.Collections.ObjectModel.ObservableCollection<Linq.ElementWrapper<CAS.AgileWorkloadTracker.DataModel.Linq.Milestone>>>(value, ref b_MilestoneCollection, "MilestoneCollection", this);
+        PropertyChanged.RaiseHandler<ObservableCollection<MilestoneWrapper>>(value, ref b_MilestoneCollection, "MilestoneCollection", this);
       }
     }
     #endregion
@@ -99,7 +99,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     #endregion
 
     #region private
-    private System.Collections.ObjectModel.ObservableCollection<Linq.ElementWrapper<CAS.AgileWorkloadTracker.DataModel.Linq.Milestone>> b_MilestoneCollection;
+    private ObservableCollection<MilestoneWrapper> b_MilestoneCollection;
     private string b_SiteURL;
     private CAS.AgileWorkloadTracker.DataModel.Linq.Entities m_Entities;  //Must be disposed.
     private bool m_Disposed = false;
@@ -139,12 +139,12 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
       if (m_Entities != null)
         m_Entities.Dispose();
       m_Entities = new DataModel.Linq.Entities(SiteURL);
-      IQueryable<DataModel.Linq.Milestone> _mls = from _mlsx in m_Entities.Milestone orderby _mlsx.Title select _mlsx;
-      List<ElementWrapper<DataModel.Linq.Milestone>> _empty = new List<ElementWrapper<DataModel.Linq.Milestone>>();
-      _empty.Add(new ElementWrapper<DataModel.Linq.Milestone>(null));
+      IQueryable<DataModel.Linq.Milestone> _mls = from _mlsx in m_Entities.Milestone where _mlsx.Active.Value orderby _mlsx.Title select _mlsx;
+      List<MilestoneWrapper> _empty = new List<MilestoneWrapper>();
+      _empty.Add(new MilestoneWrapper(null));
       foreach (var _mstx in _mls)
-        _empty.Add(new ElementWrapper<DataModel.Linq.Milestone>(_mstx));
-      MilestoneCollection = new ObservableCollection<ElementWrapper<DataModel.Linq.Milestone>>(_empty);
+        _empty.Add(new MilestoneWrapper(_mstx) );
+      MilestoneCollection = new ObservableCollection<MilestoneWrapper>(_empty);
     }
     private void m_BackgroundWorker_DoDisconnect(object sender, DoWorkEventArgs e)
     {
@@ -154,6 +154,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
         return;
       m_Entities.Dispose();
       m_Entities = null;
+      Properties.Settings.Default.Save();
     }
     #endregion
 
