@@ -12,7 +12,6 @@
 //  mailto://techsupp@cas.eu
 //  http://www.cas.eu
 //</summary>
-      
 using System.Windows;
 
 namespace CAS.AgileWorkloadTracker.SiteManagement

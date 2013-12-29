@@ -25,5 +25,5 @@
 		<Label HorizontalAlignment="Left" Margin="0" Grid.Row="1" VerticalAlignment="Top" Content="Milestone" VerticalContentAlignment="Center" Padding="2"/>
 		<ComboBox Margin="0" VerticalAlignment="Center" Padding="1" Grid.Column="1" Grid.Row="1" ItemsSource="{Binding MilestoneCollection, Mode=OneWay, TargetNullValue=&lt; select milestone&gt;}">
 		</ComboBox>
-	</Grid>
+    </Grid>
 </Window>
