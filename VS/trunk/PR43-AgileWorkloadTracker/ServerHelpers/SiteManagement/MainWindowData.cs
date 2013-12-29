@@ -134,24 +134,17 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     }
     private void m_BackgroundWorker_DoConnect(object sender, DoWorkEventArgs e)
     {
-      try
-      {
-        e.Cancel = false;
-        e.Result = null;
-        if (m_Entities != null)
-          m_Entities.Dispose();
-        m_Entities = new DataModel.Linq.Entities(SiteURL);
-        IQueryable<DataModel.Linq.Milestone> _mls = from _mlsx in m_Entities.Milestone orderby _mlsx.Title select _mlsx;
-        List<ElementWrapper<DataModel.Linq.Milestone>> _empty = new List<ElementWrapper<DataModel.Linq.Milestone>>();
-        _empty.Add(new ElementWrapper<DataModel.Linq.Milestone>(null));
-        foreach (var _mstx in _mls)
-          _empty.Add(new ElementWrapper<DataModel.Linq.Milestone>(_mstx));
-        MilestoneCollection = new ObservableCollection<ElementWrapper<DataModel.Linq.Milestone>>(_empty);
-      }
-      catch (Exception _ex)
-      {
-        e.Result = _ex;
-      }
+      e.Cancel = false;
+      e.Result = null;
+      if (m_Entities != null)
+        m_Entities.Dispose();
+      m_Entities = new DataModel.Linq.Entities(SiteURL);
+      IQueryable<DataModel.Linq.Milestone> _mls = from _mlsx in m_Entities.Milestone orderby _mlsx.Title select _mlsx;
+      List<ElementWrapper<DataModel.Linq.Milestone>> _empty = new List<ElementWrapper<DataModel.Linq.Milestone>>();
+      _empty.Add(new ElementWrapper<DataModel.Linq.Milestone>(null));
+      foreach (var _mstx in _mls)
+        _empty.Add(new ElementWrapper<DataModel.Linq.Milestone>(_mstx));
+      MilestoneCollection = new ObservableCollection<ElementWrapper<DataModel.Linq.Milestone>>(_empty);
     }
     private void m_BackgroundWorker_DoDisconnect(object sender, DoWorkEventArgs e)
     {
@@ -160,6 +153,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
       if (m_Entities == null)
         return;
       m_Entities.Dispose();
+      m_Entities = null;
     }
     #endregion
 
