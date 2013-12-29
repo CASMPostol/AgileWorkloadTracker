@@ -37,14 +37,14 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
       {
         MainWindowData _mw = x_MainGrid.DataContext as MainWindowData;
         x_RefreshButton.IsEnabled = false;
-        _mw.GetMilestoneCollection(ReadMilestonesBackgroundWorkerCompleted);
+        _mw.Connect(ConnectBackgroundWorkerCompleted);
       }
       catch (Exception ex)
       {
         ShowExceptionBox(ex);
       }
     }
-    private void ReadMilestonesBackgroundWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+    private void ConnectBackgroundWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
     {
       if (e.Error != null)
         ShowExceptionBox(e.Error);
@@ -55,12 +55,23 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
       string _msg = String.Format("The operation has been aborted by ex: {0}", exception.Message);
       MessageBox.Show(_msg, "Exception catched.", MessageBoxButton.OK, MessageBoxImage.Error);
     }
-    private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+    private void Window_Closing(object sender, CancelEventArgs e)
     {
       MainWindowData _mw = x_MainGrid.DataContext as MainWindowData;
       if (_mw == null)
         return;
-      _mw.Dispose();
+      if (!_mw.Connected)
+        _mw.Dispose();
+      else
+      {
+        _mw.Disconnect(RunWorkerCompletedDoDispose);
+        e.Cancel = true;
+      }
     }
+    private void RunWorkerCompletedDoDispose(object sender, RunWorkerCompletedEventArgs e)
+    {
+      this.Close();
+    }
+
   }
 }

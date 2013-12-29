@@ -67,18 +67,29 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     #endregion
 
     #region API
-    internal void GetMilestoneCollection(RunWorkerCompletedEventHandler result)
+    internal void Connect(RunWorkerCompletedEventHandler connectionCompletedEventHandler)
     {
       if (m_BackgroundWorker.IsBusy)
         throw new System.ComponentModel.InvalidAsynchronousStateException("The operation cannot be started because the background worker is busy");
-      if (result == null)
+      if (connectionCompletedEventHandler == null)
         throw new ArgumentNullException("result");
       if (m_Disposed)
         throw new ObjectDisposedException(typeof(MainWindowData).Name);
-      m_BWDoWorkEventHandler = m_BackgroundWorker_DoGetMilestones;
-      m_BWCompletedEventHandler = result;
+      m_BWDoWorkEventHandler = m_BackgroundWorker_DoConnect;
+      m_BWCompletedEventHandler = connectionCompletedEventHandler;
       m_BackgroundWorker.RunWorkerAsync();
     }
+    internal void Disconnect(RunWorkerCompletedEventHandler runWorkerCompletedDoDispose)
+    {
+      if (!Connected)
+        return;
+      if (m_BackgroundWorker.IsBusy)
+        throw new System.ComponentModel.InvalidAsynchronousStateException("The operation cannot be started because the background worker is busy");
+      m_BWDoWorkEventHandler = m_BackgroundWorker_DoDisconnect;
+      m_BWCompletedEventHandler = runWorkerCompletedDoDispose;
+      m_BackgroundWorker.RunWorkerAsync();
+    }
+    internal bool Connected { get { return m_Entities != null; } }
     #endregion
 
     #endregion
@@ -92,12 +103,11 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     private string b_SiteURL;
     private CAS.AgileWorkloadTracker.DataModel.Linq.Entities m_Entities;  //Must be disposed.
     private bool m_Disposed = false;
-    private System.Threading.ManualResetEvent m_DisposeDone = null;
 
     #region BackgroundWorker
     private System.ComponentModel.BackgroundWorker m_BackgroundWorker = new BackgroundWorker()
       {
-        WorkerReportsProgress = false,
+        WorkerReportsProgress = true,
         WorkerSupportsCancellation = false
       };
     private DoWorkEventHandler m_BWDoWorkEventHandler = null;
@@ -107,10 +117,6 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     {
       m_BWCompletedEventHandler(sender, e);
       m_BWCompletedEventHandler = null;
-    }
-    private void m_BackgroundWorker_RunWorkerCompletedDoDispose(object sender, RunWorkerCompletedEventArgs e)
-    {
-      m_DisposeDone.Set();
     }
     private void m_BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
     {
@@ -126,48 +132,49 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
       m_BWDoWorkEventHandler(sender, e);
       m_BWDoWorkEventHandler = null;
     }
-    private void m_BackgroundWorker_DoGetMilestones(object sender, DoWorkEventArgs e)
+    private void m_BackgroundWorker_DoConnect(object sender, DoWorkEventArgs e)
+    {
+      try
+      {
+        e.Cancel = false;
+        e.Result = null;
+        if (m_Entities != null)
+          m_Entities.Dispose();
+        m_Entities = new DataModel.Linq.Entities(SiteURL);
+        IQueryable<DataModel.Linq.Milestone> _mls = from _mlsx in m_Entities.Milestone orderby _mlsx.Title select _mlsx;
+        List<ElementWrapper<DataModel.Linq.Milestone>> _empty = new List<ElementWrapper<DataModel.Linq.Milestone>>();
+        _empty.Add(new ElementWrapper<DataModel.Linq.Milestone>(null));
+        foreach (var _mstx in _mls)
+          _empty.Add(new ElementWrapper<DataModel.Linq.Milestone>(_mstx));
+        MilestoneCollection = new ObservableCollection<ElementWrapper<DataModel.Linq.Milestone>>(_empty);
+      }
+      catch (Exception _ex)
+      {
+        e.Result = _ex;
+      }
+    }
+    private void m_BackgroundWorker_DoDisconnect(object sender, DoWorkEventArgs e)
     {
       e.Cancel = false;
-      e.Result = false;
-      if (m_Entities != null)
-        m_Entities.Dispose();
-      m_Entities = new DataModel.Linq.Entities(SiteURL);
-      IQueryable<DataModel.Linq.Milestone> _mls = from _mlsx in m_Entities.Milestone orderby _mlsx.Title select _mlsx;
-      List<ElementWrapper<DataModel.Linq.Milestone>> _empty = new List<ElementWrapper<DataModel.Linq.Milestone>>();
-      _empty.Add(new ElementWrapper<DataModel.Linq.Milestone>(null));
-      foreach (var _mstx in _mls)
-        _empty.Add(new ElementWrapper<DataModel.Linq.Milestone>(_mstx));
-      MilestoneCollection = new ObservableCollection<ElementWrapper<DataModel.Linq.Milestone>>(_empty);
-    }
-    private void m_BackgroundWorker_DoDispose(object sender, DoWorkEventArgs e)
-    {
-      if (m_Entities != null)
-        m_Entities.Dispose();
-      m_Entities = null;
+      e.Result = null;
+      if (m_Entities == null)
+        return;
+      m_Entities.Dispose();
     }
     #endregion
 
     #endregion
-
 
     #region IDisposable Members
     public void Dispose()
     {
       if (m_Disposed)
         return;
-      if (m_BackgroundWorker.IsBusy)
-        throw new System.ComponentModel.InvalidAsynchronousStateException("The operation cannot be started because the background worker is busy");
-      m_DisposeDone = new System.Threading.ManualResetEvent(false);
-      m_BWDoWorkEventHandler = m_BackgroundWorker_DoDispose;
-      m_BWCompletedEventHandler = m_BackgroundWorker_RunWorkerCompletedDoDispose;
-      m_BackgroundWorker.RunWorkerAsync();
-      m_DisposeDone.WaitOne();
-      m_BackgroundWorker.Dispose();
+      if (m_BackgroundWorker == null)
+        m_BackgroundWorker.Dispose();
       m_BackgroundWorker = null;
       m_Disposed = true;
     }
     #endregion
-
   }
 }
