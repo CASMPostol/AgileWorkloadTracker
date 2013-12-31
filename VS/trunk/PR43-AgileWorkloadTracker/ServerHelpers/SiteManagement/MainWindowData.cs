@@ -89,12 +89,33 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
       m_BackgroundWorker.RunWorkerAsync();
     }
     internal bool Connected { get { return m_Entities != null; } }
+    internal void MakeInactive(MilestoneWrapper milestoneWrapper, RunWorkerCompletedEventHandler ConnectBackgroundWorkerCompleted)
+    {
+      CheckDisposed();
+      if (milestoneWrapper == null)
+        throw new ArgumentNullException("milestoneWrapper");
+      m_BWDoWorkEventHandler = m_BackgroundWorker_MakeInactive;
+      m_BWCompletedEventHandler = ConnectBackgroundWorkerCompleted;
+      m_BackgroundWorker.RunWorkerAsync(milestoneWrapper);
+    }
     #endregion
 
     #endregion
 
     #region INotifyPropertyChanged Members
     public event PropertyChangedEventHandler PropertyChanged;
+    #endregion
+
+    #region IDisposable Members
+    public void Dispose()
+    {
+      if (m_Disposed)
+        return;
+      if (m_BackgroundWorker == null)
+        m_BackgroundWorker.Dispose();
+      m_BackgroundWorker = null;
+      m_Disposed = true;
+    }
     #endregion
 
     #region private
@@ -131,6 +152,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
       m_BWDoWorkEventHandler(sender, e);
       m_BWDoWorkEventHandler = null;
     }
+    //Dedicated DoWork delegates
     private void m_BackgroundWorker_DoConnect(object sender, DoWorkEventArgs e)
     {
       e.Cancel = false;
@@ -138,7 +160,13 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
       if (m_Entities != null)
         m_Entities.Dispose();
       m_Entities = new DataModel.Linq.Entities(SiteURL);
-      IQueryable<DataModel.Linq.Milestone> _mls = from _mlsx in m_Entities.Milestone where _mlsx.Active.Value orderby _mlsx.Title select _mlsx;
+      IQueryable<DataModel.Linq.Milestone> _mls = from _mlsx in m_Entities.Milestone 
+                                                  let _prt = _mlsx.Milestone2ProjectTitle.Title
+                                                  where _mlsx.Active.Value
+                                                  orderby _mlsx.Title
+                                                  orderby _mlsx.SortOrder.GetValueOrDefault(-999999) ascending
+                                                  orderby _prt
+                                                  select _mlsx;
       List<MilestoneWrapper> _empty = new List<MilestoneWrapper>();
       _empty.Add(new MilestoneWrapper(null));
       foreach (var _mstx in _mls)
@@ -155,8 +183,14 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
       m_Entities = null;
       Properties.Settings.Default.Save();
     }
+    private void m_BackgroundWorker_MakeInactive(object sender, DoWorkEventArgs e)
+    {
+      BackgroundWorker _wrkr = sender as BackgroundWorker;
+      MilestoneWrapper _mlstn = e.Argument as MilestoneWrapper;
+      _mlstn.MakeInactive();
+      m_Entities.SubmitChanges();
+    }
     #endregion
-
 
     private void CheckDisposed()
     {
@@ -165,33 +199,5 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     }
     #endregion
 
-    #region IDisposable Members
-    public void Dispose()
-    {
-      if (m_Disposed)
-        return;
-      if (m_BackgroundWorker == null)
-        m_BackgroundWorker.Dispose();
-      m_BackgroundWorker = null;
-      m_Disposed = true;
-    }
-    #endregion
-
-    internal void MakeInactive(MilestoneWrapper milestoneWrapper, RunWorkerCompletedEventHandler ConnectBackgroundWorkerCompleted)
-    {
-      CheckDisposed();
-      if (milestoneWrapper == null)
-        throw new ArgumentNullException("milestoneWrapper");
-      m_BWDoWorkEventHandler = MakeInactive;
-      m_BWCompletedEventHandler = ConnectBackgroundWorkerCompleted;
-      m_BackgroundWorker.RunWorkerAsync(milestoneWrapper);
-    }
-    private void MakeInactive(object sender, DoWorkEventArgs e)
-    {
-      BackgroundWorker _wrkr = sender as BackgroundWorker;
-      MilestoneWrapper _mlstn = e.Argument as MilestoneWrapper;
-      _mlstn.MakeInactive();
-      m_Entities.SubmitChanges();
-    }
   }
 }
