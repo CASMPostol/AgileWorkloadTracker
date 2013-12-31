@@ -12,9 +12,11 @@
 //  mailto://techsupp@cas.eu
 //  http://www.cas.eu
 //</summary>
+
 using System;
 using System.ComponentModel;
 using System.Windows;
+using CAS.AgileWorkloadTracker.SiteManagement.Linq;
 
 namespace CAS.AgileWorkloadTracker.SiteManagement
 {
@@ -36,14 +38,17 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     {
       try
       {
-        MainWindowData _mw = x_MainGrid.DataContext as MainWindowData;
         x_RefreshButton.IsEnabled = false;
-        _mw.Connect(ConnectBackgroundWorkerCompleted);
+        MainWindowData.Connect(ConnectBackgroundWorkerCompleted);
       }
       catch (Exception ex)
       {
         ShowExceptionBox(ex);
       }
+    }
+    private MainWindowData MainWindowData
+    {
+      get { return x_MainGrid.DataContext as MainWindowData; }
     }
     private void ConnectBackgroundWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
     {
@@ -52,6 +57,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
       else
         x_MilestonesComboBox.SelectedIndex = 1;
       x_RefreshButton.IsEnabled = true;
+      x_ButtonsStackPanel.IsEnabled = true;
     }
     private void ShowExceptionBox(Exception exception)
     {
@@ -60,14 +66,13 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     }
     private void Window_Closing(object sender, CancelEventArgs e)
     {
-      MainWindowData _mw = x_MainGrid.DataContext as MainWindowData;
-      if (_mw == null)
+      if (DataContext == null)
         return;
-      if (!_mw.Connected)
-        _mw.Dispose();
+      if (!MainWindowData.Connected)
+        MainWindowData.Dispose();
       else
       {
-        _mw.Disconnect(RunWorkerCompletedDoDispose);
+        MainWindowData.Disconnect(RunWorkerCompletedDoDispose);
         e.Cancel = true;
       }
     }
@@ -76,6 +81,11 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
       if (e.Error != null)
         ShowExceptionBox(e.Error);
       this.Close();
+    }
+    private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+    {
+      x_ButtonsStackPanel.IsEnabled = false;
+      MainWindowData.MakeInactive((MilestoneWrapper)x_MilestonesComboBox.SelectedItem, ConnectBackgroundWorkerCompleted);
     }
 
   }

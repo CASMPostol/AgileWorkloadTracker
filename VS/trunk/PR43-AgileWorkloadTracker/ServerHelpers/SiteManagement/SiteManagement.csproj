@@ -73,9 +73,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="..\..\AgileWorkloadTracker\DataModel\Linq\Entities.cs">
-      <Link>Entities.cs</Link>
-    </Compile>
     <Compile Include="Linq\MilestoneWrapper.cs" />
     <Compile Include="ServerManagementExtensions.cs" />
     <Page Include="MainWindow.xaml">
@@ -128,6 +125,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\AgileWorkloadTracker\DataModel\DataModel4SOM.csproj">
+      <Project>{d25436c2-df34-48b9-ad93-22db904fd81d}</Project>
+      <Name>DataModel4SOM</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
