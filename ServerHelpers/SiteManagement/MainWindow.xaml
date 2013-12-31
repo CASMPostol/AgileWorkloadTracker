@@ -26,7 +26,7 @@
         <Label HorizontalAlignment="Left" Margin="0" Grid.Row="1" VerticalAlignment="Top" Content="Milestone" VerticalContentAlignment="Center" Padding="2"/>
 		<ComboBox Margin="0" Name="x_MilestonesComboBox" VerticalAlignment="Center" Padding="1" Grid.Column="1" Grid.Row="1" ItemsSource="{Binding MilestoneCollection, Mode=OneWay, TargetNullValue=&lt; select milestone&gt;}" IsSynchronizedWithCurrentItem="True">
         </ComboBox>
-		<TextBlock Margin="0" Grid.Row="3" TextWrapping="Wrap" Text="{Binding MilestoneCollection/Description}" Grid.ColumnSpan="2"/>
+		<TextBlock Margin="0" Grid.Row="3" TextWrapping="Wrap" Text="{Binding MilestoneCollection/Description}" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True"/>
 		<Label Content="Description" HorizontalAlignment="Left" Margin="0" Grid.Row="2" VerticalContentAlignment="Center" Grid.ColumnSpan="2" Padding="2"/>
 		<StackPanel Name="x_ButtonsStackPanel" Grid.ColumnSpan="3" Margin="0" Grid.Row="4">
 			<Button Content="Make inactive" HorizontalContentAlignment="Center" Padding="10,0" Margin="10,0" IsEnabled="{Binding MilestoneCollection/NotInProgress, FallbackValue=false, TargetNullValue=false}" Click="Button_Click"/>

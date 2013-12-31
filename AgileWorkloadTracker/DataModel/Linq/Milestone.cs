@@ -37,5 +37,13 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
         _rix.Adjust( edc );
       }
     }
+    /// <summary>
+    /// Calculates the workload.
+    /// </summary>
+    public void CalculateWorkload()
+    {
+      this.MilestoneHours = this.Requirements.Sum<Requirements>(a => a.CalculatedHours);
+    }
+
   }
 }
