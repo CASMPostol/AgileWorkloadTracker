@@ -73,8 +73,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
         throw new System.ComponentModel.InvalidAsynchronousStateException("The operation cannot be started because the background worker is busy");
       if (connectionCompletedEventHandler == null)
         throw new ArgumentNullException("result");
-      if (m_Disposed)
-        throw new ObjectDisposedException(typeof(MainWindowData).Name);
+      CheckDisposed();
       m_BWDoWorkEventHandler = m_BackgroundWorker_DoConnect;
       m_BWCompletedEventHandler = connectionCompletedEventHandler;
       m_BackgroundWorker.RunWorkerAsync();
@@ -143,7 +142,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
       List<MilestoneWrapper> _empty = new List<MilestoneWrapper>();
       _empty.Add(new MilestoneWrapper(null));
       foreach (var _mstx in _mls)
-        _empty.Add(new MilestoneWrapper(_mstx) );
+        _empty.Add(new MilestoneWrapper(_mstx));
       MilestoneCollection = new ObservableCollection<MilestoneWrapper>(_empty);
     }
     private void m_BackgroundWorker_DoDisconnect(object sender, DoWorkEventArgs e)
@@ -158,6 +157,12 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     }
     #endregion
 
+
+    private void CheckDisposed()
+    {
+      if (m_Disposed)
+        throw new ObjectDisposedException(typeof(MainWindowData).Name);
+    }
     #endregion
 
     #region IDisposable Members
@@ -171,5 +176,22 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
       m_Disposed = true;
     }
     #endregion
+
+    internal void MakeInactive(MilestoneWrapper milestoneWrapper, RunWorkerCompletedEventHandler ConnectBackgroundWorkerCompleted)
+    {
+      CheckDisposed();
+      if (milestoneWrapper == null)
+        throw new ArgumentNullException("milestoneWrapper");
+      m_BWDoWorkEventHandler = MakeInactive;
+      m_BWCompletedEventHandler = ConnectBackgroundWorkerCompleted;
+      m_BackgroundWorker.RunWorkerAsync(milestoneWrapper);
+    }
+    private void MakeInactive(object sender, DoWorkEventArgs e)
+    {
+      BackgroundWorker _wrkr = sender as BackgroundWorker;
+      MilestoneWrapper _mlstn = e.Argument as MilestoneWrapper;
+      _mlstn.MakeInactive();
+      m_Entities.SubmitChanges();
+    }
   }
 }

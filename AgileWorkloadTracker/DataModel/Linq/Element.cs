@@ -34,13 +34,15 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
     /// </summary>
     public const string TitleColunmName = "Title";
     /// <summary>
-    /// Try to get at index. 
+    /// Try to get at index.
     /// </summary>
     /// <typeparam name="t"></typeparam>
     /// <param name="_list">The _list.</param>
     /// <param name="_ID">The _ ID.</param>
+    /// <returns>
+    /// An instance of the <typeparamref name="t"/> for the selected index or null if <paramref name="_ID" /> is null or empty.
+    /// </returns>
     /// <exception cref="ApplicationException">Element cannot be found.</exception>
-    /// <returns>An instance of the <see cref="t"/> for the selected index or null if <paramref name="_ID"/> is null or empty.</returns>
     public static t TryGetAtIndex<t>( EntityList<t> _list, string _ID )
       where t: Element
     {
@@ -54,8 +56,12 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
     /// <typeparam name="t"></typeparam>
     /// <param name="_list">The _list.</param>
     /// <param name="_ID">The _ ID.</param>
+    /// <returns>
+    /// An instance of the <typeparamref name="t" /> for the selected index.
+    /// </returns>
+    /// <exception cref="System.ApplicationException">
+    /// </exception>
     /// <exception cref="ApplicationException">_ID is nuul or element cannot be found.</exception>
-    /// <returns>An instance of the <see cref="t"/> for the selected index.</returns>
     public static t GetAtIndex<t>( EntityList<t> _list, string _ID )
       where t: Element
     {

@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+#pragma warning disable 1591
 namespace CAS.AgileWorkloadTracker.DataModel.Linq {
 	using System;
 	
@@ -3738,3 +3739,4 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq {
 		NonFunctional = 4,
 	}
 }
+#pragma warning restore 1591

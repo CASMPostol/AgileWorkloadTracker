@@ -7,6 +7,10 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
 {
   partial class Projects
   {
+    /// <summary>
+    /// Adjusts the project.
+    /// </summary>
+    /// <param name="edc">The edc.</param>
     public void Adjust( Entities edc )
     {
       List<Tasks> _danglingTasks = ( from _tix in this.Tasks where _tix.Task2MilestoneResolvedInTitle == null select _tix ).ToList<Tasks>();
