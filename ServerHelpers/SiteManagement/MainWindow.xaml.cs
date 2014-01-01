@@ -83,6 +83,12 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     {
       MainWindowData.MakeInactive((MilestoneWrapper)x_MilestonesComboBox.SelectedItem, BackgroundWorkerCompleted);
     }
+    private void x_ForceMakeInactive_Click(object sender, System.Windows.RoutedEventArgs e)
+    {
+      if (x_MilestonesComboBox.SelectedIndex == X_TargetMilestoneCombo.SelectedIndex)
+        return;
+      this.MainWindowData.ForceMakeInactive((MilestoneWrapper)x_MilestonesComboBox.SelectedItem, (MilestoneWrapper)X_TargetMilestoneCombo.SelectedItem, BackgroundWorkerCompleted);
+    }
 
 	}
 }
