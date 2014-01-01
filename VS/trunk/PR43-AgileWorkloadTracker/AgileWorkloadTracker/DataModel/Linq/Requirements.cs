@@ -34,7 +34,10 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
         return;
       Requirements2MilestoneTitle.CalculateWorkload();
     }
-
+    internal Requirements MakeCopy(Milestone target)
+    {
+      throw new NotImplementedException();
+    }
     private void AdjustProjectLookup()
     {
       if (this.Requirements2ProjectsTitle == null || this.Requirements2ProjectsTitle != this.Requirements2MilestoneTitle.Milestone2ProjectTitle)

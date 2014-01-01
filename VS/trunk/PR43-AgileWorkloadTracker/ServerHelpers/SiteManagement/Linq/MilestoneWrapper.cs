@@ -32,7 +32,9 @@ namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
       : base(milestone)
     {
       if (milestone == null)
+      {
         return;
+      }
       b_ProjectTitle = milestone.Milestone2ProjectTitle.Title;
       List<DataModel.Linq.Tasks> _activeTasksList = (from _tsx in Element.Tasks0
                                                      let _rt = _tsx.Task2RequirementsTitle.Title
@@ -58,6 +60,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
           NotInProgress = false;
         }
       }
+      ForceInactivAllowed = !NotInProgress;
       _description.AppendLine();
       _description.AppendLine("{0}");
       b_Description = _description.ToString();
@@ -86,7 +89,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
     {
       get
       {
-        return String.Format( b_Description, NotInProgress ? Element.Active.GetValueOrDefault(false) ? "The milestone may be made inactive." : "The milestone is already be inactive." : "The milestone cannot be made inactive");
+        return String.Format(b_Description, NotInProgress ? Element.Active.GetValueOrDefault(false) ? "The milestone may be made inactive." : "The milestone is already be inactive." : "The milestone cannot be made inactive");
       }
       set
       {
@@ -115,17 +118,30 @@ namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
         RaiseHandler<string>(value, ref b_ProjectTitle, "ProjectTitle", this);
       }
     }
+    public bool ForceInactivAllowed
+    {
+      get
+      {
+        return b_ForceInactivAllowed;
+      }
+      set
+      {
+        RaiseHandler<bool>(value, ref b_ForceInactivAllowed, "ForceInactivAllowed", this);
+      }
+    }
     #endregion
 
     #region public API
     internal void MakeInactive()
     {
-      if (base.Element == null)
-        throw new ArgumentNullException("Element");
-      if (!NotInProgress)
-        throw new ApplicationException("MakeInactive - you try to inactivate still in progress milestone");
-      if (!Element.Active.GetValueOrDefault(false))
-        throw new ArgumentOutOfRangeException("Active", "The milestone is not active.");
+      CheckMakeInactivePosible();
+      Element.CalculateWorkload();
+      Element.Active = false;
+    }
+    internal void ForceMakeInactive(MilestoneWrapper target)
+    {
+      CheckMakeInactivePosible();
+      Element.ForceMakeInactive(target.Element);
       Element.CalculateWorkload();
       Element.Active = false;
     }
@@ -141,12 +157,20 @@ namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
     #endregion
 
     #region private
-    private string b_Description;
-    private int b_ActiveTasks;
-    private bool b_NotInProgress;
-    private string b_ProjectTitle;
+    private bool b_ForceInactivAllowed = false;
+    private string b_Description = String.Empty;
+    private int b_ActiveTasks = 0;
+    private bool b_NotInProgress = false;
+    private string b_ProjectTitle = "N/A";
+    private void CheckMakeInactivePosible()
+    {
+      if (base.Element == null)
+        throw new ArgumentNullException("Element");
+      if (!NotInProgress)
+        throw new ApplicationException("MakeInactive - you try to inactivate still in progress milestone");
+      if (!Element.Active.GetValueOrDefault(false))
+        throw new ArgumentOutOfRangeException("Active", "The milestone is not active.");
+    }
     #endregion
-
-
   }
 }

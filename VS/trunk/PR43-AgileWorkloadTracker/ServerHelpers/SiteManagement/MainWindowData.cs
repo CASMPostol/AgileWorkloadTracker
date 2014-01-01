@@ -105,9 +105,20 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
       CheckDisposed();
       if (milestoneWrapper == null)
         throw new ArgumentNullException("milestoneWrapper");
-      m_BWDoWorkEventHandler = m_BackgroundWorker_MakeInactive;
+      m_BWDoWorkEventHandler = m_BackgroundWorker_DoMakeInactive;
       m_BWCompletedEventHandler = completedEventHandler;
       StartBackgroundWorker(milestoneWrapper);
+    }
+    internal void ForceMakeInactive(MilestoneWrapper source, MilestoneWrapper target, RunWorkerCompletedEventHandler completedEventHandler)
+    {
+      CheckDisposed();
+      if (source == null)
+        throw new ArgumentNullException("source");
+      if (target == null)
+        throw new ArgumentNullException("target");
+      m_BWDoWorkEventHandler = m_BackgroundWorker_DoForceMakeInactive;
+      m_BWCompletedEventHandler = completedEventHandler;
+      StartBackgroundWorker(new ForceMakeInactiveArgument() { Source = source, Target = target });
     }
     #endregion
 
@@ -130,6 +141,11 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     #endregion
 
     #region private
+    private class ForceMakeInactiveArgument
+    {
+      public MilestoneWrapper Source { get; set; }
+      public MilestoneWrapper Target { get; set; }
+    }
     private ObservableCollection<MilestoneWrapper> b_MilestoneCollection;
     private string b_SiteURL;
     private CAS.AgileWorkloadTracker.DataModel.Linq.Entities m_Entities;  //Must be disposed.
@@ -206,11 +222,18 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
       m_Entities = null;
       Properties.Settings.Default.Save();
     }
-    private void m_BackgroundWorker_MakeInactive(object sender, DoWorkEventArgs e)
+    private void m_BackgroundWorker_DoMakeInactive(object sender, DoWorkEventArgs e)
     {
       BackgroundWorker _wrkr = sender as BackgroundWorker;
       MilestoneWrapper _mlstn = e.Argument as MilestoneWrapper;
       _mlstn.MakeInactive();
+      m_Entities.SubmitChanges();
+    }
+    private void m_BackgroundWorker_DoForceMakeInactive(object sender, DoWorkEventArgs e)
+    {
+      BackgroundWorker _wrkr = sender as BackgroundWorker;
+      ForceMakeInactiveArgument _agumnt = e.Argument as ForceMakeInactiveArgument;
+      _agumnt.Source.ForceMakeInactive(_agumnt.Target);
       m_Entities.SubmitChanges();
     }
     #endregion
