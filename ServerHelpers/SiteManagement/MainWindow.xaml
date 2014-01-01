@@ -1,35 +1,90 @@
 ﻿<Window
-        x:Class="CAS.AgileWorkloadTracker.SiteManagement.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Classic"
+        x:Class="CAS.AgileWorkloadTracker.SiteManagement.MainWindow"
         Title="Site management" Height="350" Width="525" 
         Closing="Window_Closing"  >
-    <Grid x:Name="x_MainGrid" DataContext="{Binding Mode=OneWay, Source={StaticResource MainWindowDataDataSource}}">
-        <!--<Grid.DataContext>
+	<Window.Resources>
+		<Style x:Key="ButtonFocusVisual">
+			<Setter Property="Control.Template">
+				<Setter.Value>
+					<ControlTemplate>
+						<Border>
+							<Rectangle Margin="4" SnapsToDevicePixels="true" Stroke="Black" StrokeThickness="1" StrokeDashArray="1 2"/>
+						</Border>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		<Style x:Key="x_PanelButtonStyle" TargetType="{x:Type Button}">
+			<Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+			<Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+			<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+			<Setter Property="BorderBrush" Value="{x:Static Themes:ClassicBorderDecorator.ClassicBorderBrush}"/>
+			<Setter Property="BorderThickness" Value="3"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="Padding" Value="0,0,1,1"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type Button}">
+						<Themes:ClassicBorderDecorator x:Name="ContentContainer" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="3" BorderStyle="Raised" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+							<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+						</Themes:ClassicBorderDecorator>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsKeyboardFocused" Value="true">
+								<Setter Property="BorderStyle" TargetName="ContentContainer" Value="RaisedFocused"/>
+							</Trigger>
+							<Trigger Property="IsDefaulted" Value="true">
+								<Setter Property="BorderStyle" TargetName="ContentContainer" Value="RaisedFocused"/>
+							</Trigger>
+							<Trigger Property="IsPressed" Value="true">
+								<Setter Property="BorderStyle" TargetName="ContentContainer" Value="RaisedPressed"/>
+							</Trigger>
+							<Trigger Property="ToggleButton.IsChecked" Value="true">
+								<Setter Property="BorderStyle" TargetName="ContentContainer" Value="RaisedPressed"/>
+							</Trigger>
+							<Trigger Property="IsEnabled" Value="false">
+								<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="Width" Value="150"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="Margin" Value="10,0"/>
+		</Style>
+	</Window.Resources>
+	<Grid x:Name="x_MainGrid" DataContext="{Binding Mode=OneWay, Source={StaticResource MainWindowDataDataSource}}">
+		<!--<Grid.DataContext>
 			<local:MainWindowData/>
 		</Grid.DataContext>-->
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="20"/>
-            <RowDefinition/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
-        <Label Content="Site URL" Margin="0" VerticalAlignment="Center" Padding="2" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="x_SiteURLTextBox" Grid.Column="1" Margin="0" TextWrapping="Wrap" VerticalAlignment="Top" Text="{Binding SiteURL, Mode=TwoWay, TargetNullValue=Enter site URL, UpdateSourceTrigger=LostFocus}" ScrollViewer.CanContentScroll="True" VerticalContentAlignment="Center"/>
-        <Button x:Name="x_RefreshButton" Content="Refresh" Grid.Column="2" Margin="0" VerticalAlignment="Top" Width="75" Click="x_RefreshButton_Click"/>
-        <Label HorizontalAlignment="Left" Margin="0" Grid.Row="1" VerticalAlignment="Top" Content="Milestone" VerticalContentAlignment="Center" Padding="2"/>
-		<ComboBox Margin="0" Name="x_MilestonesComboBox" VerticalAlignment="Center" Padding="1" Grid.Column="1" Grid.Row="1" ItemsSource="{Binding MilestoneCollection, Mode=OneWay, TargetNullValue=&lt; select milestone&gt;}" IsSynchronizedWithCurrentItem="True">
-        </ComboBox>
-		<TextBlock Margin="0" Grid.Row="3" TextWrapping="Wrap" Text="{Binding MilestoneCollection/Description}" Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True"/>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="20"/>
+			<RowDefinition/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition/>
+			<ColumnDefinition Width="Auto"/>
+		</Grid.ColumnDefinitions>
+		<Label Content="Site URL" Margin="0" VerticalAlignment="Center" Padding="2" VerticalContentAlignment="Center"/>
+		<TextBox x:Name="x_SiteURLTextBox" Grid.Column="1" Margin="0" TextWrapping="Wrap" VerticalAlignment="Top" Text="{Binding SiteURL, Mode=TwoWay, TargetNullValue=Enter site URL, UpdateSourceTrigger=LostFocus}" ScrollViewer.CanContentScroll="True" VerticalContentAlignment="Center"/>
+		<Button x:Name="x_RefreshButton" Content="Refresh" Grid.Column="2" Margin="0" VerticalAlignment="Top" Width="75" Click="x_RefreshButton_Click" IsEnabled="{Binding NotBusy}"/>
+		<Label HorizontalAlignment="Left" Margin="0" Grid.Row="1" VerticalAlignment="Top" Content="Milestone" VerticalContentAlignment="Center" Padding="2"/>
+		<ComboBox Margin="0" x:Name="x_MilestonesComboBox" VerticalAlignment="Center" Padding="1" Grid.Column="1" Grid.Row="1" ItemsSource="{Binding MilestoneCollection, Mode=OneWay, TargetNullValue=&lt; select milestone&gt;}" IsSynchronizedWithCurrentItem="True"/>
+		<ScrollViewer Grid.Row="3" Grid.ColumnSpan="2" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
+			<TextBlock Margin="0" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Text="{Binding MilestoneCollection/Description}"/>
+		</ScrollViewer>
 		<Label Content="Description" HorizontalAlignment="Left" Margin="0" Grid.Row="2" VerticalContentAlignment="Center" Grid.ColumnSpan="2" Padding="2"/>
-		<StackPanel Name="x_ButtonsStackPanel" Grid.ColumnSpan="3" Margin="0" Grid.Row="4">
-			<Button Content="Make inactive" HorizontalContentAlignment="Center" Padding="10,0" Margin="10,0" IsEnabled="{Binding MilestoneCollection/NotInProgress, FallbackValue=false, TargetNullValue=false}" Click="Button_Click"/>
+		<StackPanel x:Name="x_ButtonsStackPanel" Grid.ColumnSpan="3" Margin="0" Grid.Row="4" IsEnabled="{Binding NotBusy}" Orientation="Horizontal">
+			<Button x:Name="x_MakeInactiveButton" Padding="10,0" IsEnabled="{Binding MilestoneCollection/NotInProgress, FallbackValue=false, TargetNullValue=false}" Click="x_MakeInactiveButton_Click" Style="{DynamicResource x_PanelButtonStyle}" Content="Make inactive"/>
+			<Button x:Name="x_ForceMakeInactive" Content="Force Inactive" Style="{DynamicResource x_PanelButtonStyle}"/>
 		</StackPanel>
-    </Grid>
+	</Grid>
 </Window>

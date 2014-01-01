@@ -21,9 +21,13 @@ using CAS.AgileWorkloadTracker.SiteManagement;
 
 namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
 {
+  /// <summary>
+  /// MilestoneWrapper class
+  /// </summary>
   internal class MilestoneWrapper : ElementWrapper<DataModel.Linq.Milestone>
   {
 
+    #region ctor
     public MilestoneWrapper(DataModel.Linq.Milestone milestone)
       : base(milestone)
     {
@@ -58,6 +62,8 @@ namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
       _description.AppendLine("{0}");
       b_Description = _description.ToString();
     }
+    #endregion
+
     #region properties
     /// <summary>
     /// Gets or sets a value indicating whether the Milestone is not in progress - may be made inactive.
@@ -109,7 +115,6 @@ namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
         RaiseHandler<string>(value, ref b_ProjectTitle, "ProjectTitle", this);
       }
     }
-
     #endregion
 
     #region public API
