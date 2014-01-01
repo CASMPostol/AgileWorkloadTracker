@@ -64,39 +64,50 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
         PropertyChanged.RaiseHandler<ObservableCollection<MilestoneWrapper>>(value, ref b_MilestoneCollection, "MilestoneCollection", this);
       }
     }
+    public bool NotBusy
+    {
+      get
+      {
+        return b_NotBusy;
+      }
+      set
+      {
+        PropertyChanged.RaiseHandler<bool>(value, ref b_NotBusy, "NotBusy", this);
+      }
+    }
     #endregion
 
     #region API
-    internal void Connect(RunWorkerCompletedEventHandler connectionCompletedEventHandler)
+    internal void Connect(RunWorkerCompletedEventHandler completedEventHandler)
     {
       if (m_BackgroundWorker.IsBusy)
         throw new System.ComponentModel.InvalidAsynchronousStateException("The operation cannot be started because the background worker is busy");
-      if (connectionCompletedEventHandler == null)
+      if (completedEventHandler == null)
         throw new ArgumentNullException("result");
       CheckDisposed();
       m_BWDoWorkEventHandler = m_BackgroundWorker_DoConnect;
-      m_BWCompletedEventHandler = connectionCompletedEventHandler;
-      m_BackgroundWorker.RunWorkerAsync();
+      m_BWCompletedEventHandler = completedEventHandler;
+      StartBackgroundWorker();
     }
-    internal void Disconnect(RunWorkerCompletedEventHandler runWorkerCompletedDoDispose)
+    internal void Disconnect(RunWorkerCompletedEventHandler completedEventHandler)
     {
       if (!Connected)
         return;
       if (m_BackgroundWorker.IsBusy)
         throw new System.ComponentModel.InvalidAsynchronousStateException("The operation cannot be started because the background worker is busy");
       m_BWDoWorkEventHandler = m_BackgroundWorker_DoDisconnect;
-      m_BWCompletedEventHandler = runWorkerCompletedDoDispose;
-      m_BackgroundWorker.RunWorkerAsync();
+      m_BWCompletedEventHandler = completedEventHandler;
+      StartBackgroundWorker();
     }
     internal bool Connected { get { return m_Entities != null; } }
-    internal void MakeInactive(MilestoneWrapper milestoneWrapper, RunWorkerCompletedEventHandler ConnectBackgroundWorkerCompleted)
+    internal void MakeInactive(MilestoneWrapper milestoneWrapper, RunWorkerCompletedEventHandler completedEventHandler)
     {
       CheckDisposed();
       if (milestoneWrapper == null)
         throw new ArgumentNullException("milestoneWrapper");
       m_BWDoWorkEventHandler = m_BackgroundWorker_MakeInactive;
-      m_BWCompletedEventHandler = ConnectBackgroundWorkerCompleted;
-      m_BackgroundWorker.RunWorkerAsync(milestoneWrapper);
+      m_BWCompletedEventHandler = completedEventHandler;
+      StartBackgroundWorker(milestoneWrapper);
     }
     #endregion
 
@@ -123,8 +134,19 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     private string b_SiteURL;
     private CAS.AgileWorkloadTracker.DataModel.Linq.Entities m_Entities;  //Must be disposed.
     private bool m_Disposed = false;
+    private bool b_NotBusy = true;
 
     #region BackgroundWorker
+    private void StartBackgroundWorker()
+    {
+      NotBusy = false;
+      m_BackgroundWorker.RunWorkerAsync();
+    }
+    private void StartBackgroundWorker(object argument)
+    {
+      NotBusy = false;
+      m_BackgroundWorker.RunWorkerAsync(argument);
+    }
     private System.ComponentModel.BackgroundWorker m_BackgroundWorker = new BackgroundWorker()
       {
         WorkerReportsProgress = true,
@@ -137,6 +159,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     {
       m_BWCompletedEventHandler(sender, e);
       m_BWCompletedEventHandler = null;
+      NotBusy = true;
     }
     private void m_BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
     {
@@ -160,7 +183,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
       if (m_Entities != null)
         m_Entities.Dispose();
       m_Entities = new DataModel.Linq.Entities(SiteURL);
-      IQueryable<DataModel.Linq.Milestone> _mls = from _mlsx in m_Entities.Milestone 
+      IQueryable<DataModel.Linq.Milestone> _mls = from _mlsx in m_Entities.Milestone
                                                   let _prt = _mlsx.Milestone2ProjectTitle.Title
                                                   where _mlsx.Active.Value
                                                   orderby _mlsx.Title

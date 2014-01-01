@@ -38,8 +38,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     {
       try
       {
-        x_RefreshButton.IsEnabled = false;
-        MainWindowData.Connect(ConnectBackgroundWorkerCompleted);
+        MainWindowData.Connect(BackgroundWorkerCompleted);
       }
       catch (Exception ex)
       {
@@ -50,14 +49,12 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     {
       get { return x_MainGrid.DataContext as MainWindowData; }
     }
-    private void ConnectBackgroundWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+    private void BackgroundWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
     {
       if (e.Error != null)
         ShowExceptionBox(e.Error);
       else
         x_MilestonesComboBox.SelectedIndex = 1;
-      x_RefreshButton.IsEnabled = true;
-      x_ButtonsStackPanel.IsEnabled = true;
     }
     private void ShowExceptionBox(Exception exception)
     {
@@ -82,11 +79,10 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
         ShowExceptionBox(e.Error);
       this.Close();
     }
-    private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+    private void x_MakeInactiveButton_Click(object sender, System.Windows.RoutedEventArgs e)
     {
-      x_ButtonsStackPanel.IsEnabled = false;
-      MainWindowData.MakeInactive((MilestoneWrapper)x_MilestonesComboBox.SelectedItem, ConnectBackgroundWorkerCompleted);
+      MainWindowData.MakeInactive((MilestoneWrapper)x_MilestonesComboBox.SelectedItem, BackgroundWorkerCompleted);
     }
 
-  }
+	}
 }
