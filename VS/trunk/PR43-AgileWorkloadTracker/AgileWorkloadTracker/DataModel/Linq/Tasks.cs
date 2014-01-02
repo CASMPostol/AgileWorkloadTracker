@@ -44,6 +44,9 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
     #endregion
 
     #region private
+    private int c_ResolutionFixed = 2;
+    private int c_ResolutionFixLater = 5;
+    private int c_StatusResolved = 4;
     private void Connecr2Target(Entities edc, Requirements target, Category categoty)
     {
       this.Task2MilestoneResolvedInTitle = target.Requirements2MilestoneTitle;
@@ -82,6 +85,9 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
         Title = this.Title
       };
       edc.Task.InsertOnSubmit(_newTask);
+      this.Task2SResolutionTitle = Element.GetAtIndex<Resolution>(edc.Resolution, c_ResolutionFixLater);
+      this.Task2StatusTitle = Element.GetAtIndex<Status>(edc.Status, c_StatusResolved);
+      this.Active = this.Task2StatusTitle.Active.Value;
       return _newTask;
     }
     private void Adjust()

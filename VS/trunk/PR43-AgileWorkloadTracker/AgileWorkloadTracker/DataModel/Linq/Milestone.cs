@@ -55,7 +55,8 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
       if (target == null)
         throw new ArgumentNullException("target");
       Dictionary<int, DataModel.Linq.Requirements> _Requirements = new Dictionary<int, Requirements>();
-      foreach (DataModel.Linq.Tasks _tskx in Tasks0.Where(x => x.Active.GetValueOrDefault(false)))
+      List<Tasks> _tsks = Tasks0.Where(x => x.Active.GetValueOrDefault(false)).ToList();
+      foreach (DataModel.Linq.Tasks _tskx in _tsks)
       {
         Requirements _targetRequirement = null;
         if (_Requirements.ContainsKey(_tskx.Task2RequirementsTitle.Identyfikator.Value))

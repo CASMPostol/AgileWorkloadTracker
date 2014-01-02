@@ -210,7 +210,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
       _empty.Add(new MilestoneWrapper(null));
       foreach (var _mstx in _mls)
         _empty.Add(new MilestoneWrapper(_mstx));
-      MilestoneCollection = new ObservableCollection<MilestoneWrapper>(_empty);
+      e.Result = new ObservableCollection<MilestoneWrapper>(_empty);
     }
     private void m_BackgroundWorker_DoDisconnect(object sender, DoWorkEventArgs e)
     {

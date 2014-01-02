@@ -14,6 +14,7 @@
 //</summary>
 
 using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using CAS.AgileWorkloadTracker.SiteManagement.Linq;
@@ -53,9 +54,12 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     private void BackgroundWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
     {
       if (e.Error != null)
+      {
         ShowExceptionBox(e.Error);
-      else
-        x_MilestonesComboBox.SelectedIndex = 1;
+        return;
+      }
+      this.MainWindowData.MilestoneCollection = e.Result as ObservableCollection<MilestoneWrapper>;
+      x_MilestonesComboBox.SelectedIndex = 0;
     }
     private void ShowExceptionBox(Exception exception)
     {
@@ -82,18 +86,32 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     }
     private void x_MakeInactiveButton_Click(object sender, System.Windows.RoutedEventArgs e)
     {
-      MainWindowData.MakeInactive((MilestoneWrapper)x_MilestonesComboBox.SelectedItem, BackgroundWorkerCompleted);
+      try
+      {
+        MainWindowData.MakeInactive((MilestoneWrapper)x_MilestonesComboBox.SelectedItem, BackgroundWorkerCompleted);
+      }
+      catch (Exception _ex)
+      {
+        ShowExceptionBox(_ex);
+      }
     }
     private void x_ForceMakeInactive_Click(object sender, System.Windows.RoutedEventArgs e)
     {
-      if (x_MilestonesComboBox.SelectedIndex == X_TargetMilestoneCombo.SelectedIndex)
+      try
       {
-        string _msg = "Target milestone cannot be the same as the source.";
-        MessageBox.Show(_msg, "Wrong target milestone.", MessageBoxButton.OK, MessageBoxImage.Error);
-        return;
+        if (x_MilestonesComboBox.SelectedIndex == X_TargetMilestoneCombo.SelectedIndex)
+        {
+          string _msg = "Target milestone cannot be the same as the source.";
+          MessageBox.Show(_msg, "Wrong target milestone.", MessageBoxButton.OK, MessageBoxImage.Error);
+          return;
+        }
+        this.MainWindowData.ForceMakeInactive((MilestoneWrapper)x_MilestonesComboBox.SelectedItem, (MilestoneWrapper)X_TargetMilestoneCombo.SelectedItem, BackgroundWorkerCompleted);
       }
-      this.MainWindowData.ForceMakeInactive((MilestoneWrapper)x_MilestonesComboBox.SelectedItem, (MilestoneWrapper)X_TargetMilestoneCombo.SelectedItem, BackgroundWorkerCompleted);
+      catch (Exception _ex)
+      {
+        ShowExceptionBox(_ex);
+      }
     }
 
-	}
+  }
 }
