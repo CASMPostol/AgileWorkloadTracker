@@ -139,7 +139,6 @@ namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
     }
     internal void ForceMakeInactive(DataModel.Linq.Entities edc, MilestoneWrapper target)
     {
-      CheckMakeInactivePosible();
       Element.ForceMakeInactive(edc, target.Element);
     }
     #endregion

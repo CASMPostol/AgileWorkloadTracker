@@ -12,7 +12,7 @@
 //  mailto://techsupp@cas.eu
 //  http://www.cas.eu
 //</summary>
-      
+
 using System;
 using System.Linq;
 
@@ -39,12 +39,13 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
     {
       get
       {
+        if (this.Task2RequirementsTitle == null)
+          throw new ArgumentNullException("Task2RequirementsTitle", this.Title);
         if (this.Task2MilestoneResolvedInTitle == null || this.Task2MilestoneResolvedInTitle != this.Task2RequirementsTitle.Requirements2MilestoneTitle)
           throw new ArgumentOutOfRangeException("Task2MilestoneResolvedInTitle", this.Task2RequirementsTitle.Title);
         if (this.Task2ProjectTitle == null || this.Task2ProjectTitle != this.Task2RequirementsTitle.Requirements2ProjectsTitle)
           throw new ArgumentOutOfRangeException("Task2ProjectTitle", this.Title);
-        if (!Active.HasValue || this.Task2StatusTitle.Active.Value != Active.Value)
-          throw new ArgumentOutOfRangeException("Active", this.Title);
+        AdjustActive();
         return Workload.Sum<Workload>(_Workload => _Workload.Hours.GetValueOrDefault(0));
       }
     }
@@ -112,8 +113,17 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
         this.Task2MilestoneResolvedInTitle = this.Task2RequirementsTitle.Requirements2MilestoneTitle;
       if (this.Task2ProjectTitle == null || this.Task2ProjectTitle != this.Task2RequirementsTitle.Requirements2ProjectsTitle)
         this.Task2ProjectTitle = this.Task2RequirementsTitle.Requirements2ProjectsTitle;
-      if (!Active.HasValue || this.Task2StatusTitle.Active.Value != Active.Value)
-        Active = this.Task2StatusTitle.Active.Value;
+      AdjustActive();
+    }
+    private void AdjustActive()
+    {
+      if (this.Task2StatusTitle == null)
+        throw new ArgumentNullException("Task2StatusTitle", "The task has to have assigned status.");
+      if (! this.Task2StatusTitle.Active.HasValue)
+        throw new ArgumentOutOfRangeException("Task2StatusTitle.Active", "The status has to have assigned active bit.");
+      if (Active.HasValue && this.Task2StatusTitle.Active.Value == Active.Value)
+        return;
+      Active = this.Task2StatusTitle.Active.Value;
     }
     #endregion
 
