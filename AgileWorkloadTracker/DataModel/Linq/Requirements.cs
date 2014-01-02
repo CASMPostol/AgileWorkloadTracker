@@ -34,9 +34,21 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
         return;
       Requirements2MilestoneTitle.CalculateWorkload();
     }
-    internal Requirements MakeCopy(Milestone target)
+    internal Requirements MakeCopy(Entities edc, Milestone target)
     {
-      throw new NotImplementedException();
+      Requirements _ret = new Requirements()
+      {
+        Body = this.Body,
+        EstimatedHours = Math.Max(0, this.EstimatedHours.GetValueOrDefault(0) - this.Hours.GetValueOrDefault(0)),
+        Hours = 0,
+        RequirementPriority = this.RequirementPriority,
+        Requirements2MilestoneTitle = target,
+        Requirements2ProjectsTitle = target.Milestone2ProjectTitle,
+        RequirementsType = this.RequirementsType,
+        Title = String.Format("{0} - copy from: {0}", this.Title, this.Requirements2MilestoneTitle.Title)
+      };
+      edc.Requirements.InsertOnSubmit(_ret);
+      return _ret;
     }
     private void AdjustProjectLookup()
     {

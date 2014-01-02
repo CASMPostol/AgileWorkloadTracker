@@ -44,22 +44,28 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
     {
       this.MilestoneHours = this.Requirements.Sum<Requirements>(a => a.CalculatedHours);
     }
-    public void ForceMakeInactive(Milestone target)
+    /// <summary>
+    /// Forces the make inactive.
+    /// </summary>
+    /// <param name="edc">The object of <see cref="Entities"/>.</param>
+    /// <param name="target">The target.</param>
+    /// <exception cref="System.ArgumentNullException">target</exception>
+    public void ForceMakeInactive(Entities edc, Milestone target)
     {
       if (target == null)
         throw new ArgumentNullException("target");
-      Dictionary<int, DataModel.Linq.Requirements> m_Requirements = new Dictionary<int, Requirements>();
-      foreach (DataModel.Linq.Tasks _tskx in Tasks0)
+      Dictionary<int, DataModel.Linq.Requirements> _Requirements = new Dictionary<int, Requirements>();
+      foreach (DataModel.Linq.Tasks _tskx in Tasks0.Where(x => x.Active.GetValueOrDefault(false)))
       {
-        Requirements _target = null;
-        if (m_Requirements.ContainsKey(_tskx.Task2RequirementsTitle.Identyfikator.Value))
-          _target = m_Requirements[_tskx.Task2RequirementsTitle.Identyfikator.Value];
+        Requirements _targetRequirement = null;
+        if (_Requirements.ContainsKey(_tskx.Task2RequirementsTitle.Identyfikator.Value))
+          _targetRequirement = _Requirements[_tskx.Task2RequirementsTitle.Identyfikator.Value];
         else
         {
-          _target = _tskx.Task2RequirementsTitle.MakeCopy(target);
-          m_Requirements.Add(_tskx.Task2RequirementsTitle.Identyfikator.Value, _target);
+          _targetRequirement = _tskx.Task2RequirementsTitle.MakeCopy(edc, target);
+          _Requirements.Add(_tskx.Task2RequirementsTitle.Identyfikator.Value, _targetRequirement);
         }
-        _tskx.MoveToTarget(_target);
+        _tskx.MoveToTarget(edc, _targetRequirement);
       }
     }
   }
