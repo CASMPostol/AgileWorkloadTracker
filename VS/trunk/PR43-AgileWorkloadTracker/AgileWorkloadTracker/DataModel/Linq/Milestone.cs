@@ -1,10 +1,27 @@
-﻿using System;
+﻿//<summary>
+//  Title   : Entity partial class Milestone
+//  System  : Microsoft Visual C# .NET 2012
+//  $LastChangedDate$
+//  $Rev$
+//  $LastChangedBy$
+//  $URL:$
+//  $Id$
+//
+//  Copyright (C) 2013, CAS LODZ POLAND.
+//  TEL: +48 (42) 686 25 47
+//  mailto://techsupp@cas.eu
+//  http://www.cas.eu
+//</summary>
+      
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace CAS.AgileWorkloadTracker.DataModel.Linq
 {
+  /// <summary>
+  /// Entity partial class Milestone
+  /// </summary>
   partial class Milestone
   {
     internal void Adjust(Entities edc)
@@ -45,6 +62,14 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
       this.MilestoneHours = this.Requirements.Sum<Requirements>(a => a.CalculatedHours);
     }
     /// <summary>
+    /// Makes the instance inactive if possible.
+    /// </summary>
+    public void MakeInactive()
+    {
+      CalculateWorkload();
+      Inactive = true;
+    }
+    /// <summary>
     /// Forces the make inactive.
     /// </summary>
     /// <param name="edc">The object of <see cref="Entities"/>.</param>
@@ -68,6 +93,22 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
         }
         _tskx.MoveToTarget(edc, _targetRequirement);
       }
+      CalculateWorkload();
+      Inactive = true;
     }
+    private bool Inactive
+    {
+      get
+      {
+        return !this.Active.GetValueOrDefault(false);
+      }
+      set
+      {
+        if (value)
+          this.Default = false;
+        this.Active = !value;
+      }
+    }
+
   }
 }

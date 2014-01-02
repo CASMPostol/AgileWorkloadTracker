@@ -195,23 +195,9 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     private void m_BackgroundWorker_DoConnect(object sender, DoWorkEventArgs e)
     {
       e.Cancel = false;
-      e.Result = null;
-      if (m_Entities != null)
-        m_Entities.Dispose();
-      m_Entities = new DataModel.Linq.Entities(SiteURL);
-      IQueryable<DataModel.Linq.Milestone> _mls = from _mlsx in m_Entities.Milestone
-                                                  let _prt = _mlsx.Milestone2ProjectTitle.Title
-                                                  where _mlsx.Active.Value
-                                                  orderby _mlsx.Title
-                                                  orderby _mlsx.SortOrder.GetValueOrDefault(-999999) ascending
-                                                  orderby _prt
-                                                  select _mlsx;
-      List<MilestoneWrapper> _empty = new List<MilestoneWrapper>();
-      _empty.Add(new MilestoneWrapper(null));
-      foreach (var _mstx in _mls)
-        _empty.Add(new MilestoneWrapper(_mstx));
-      e.Result = new ObservableCollection<MilestoneWrapper>(_empty);
+      e.Result = GetMilestonesCollection();
     }
+
     private void m_BackgroundWorker_DoDisconnect(object sender, DoWorkEventArgs e)
     {
       e.Cancel = false;
@@ -228,6 +214,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
       MilestoneWrapper _mlstn = e.Argument as MilestoneWrapper;
       _mlstn.MakeInactive();
       m_Entities.SubmitChanges();
+      e.Result = GetMilestonesCollection();
     }
     private void m_BackgroundWorker_DoForceMakeInactive(object sender, DoWorkEventArgs e)
     {
@@ -235,9 +222,28 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
       ForceMakeInactiveArgument _agumnt = e.Argument as ForceMakeInactiveArgument;
       _agumnt.Source.ForceMakeInactive(m_Entities, _agumnt.Target);
       m_Entities.SubmitChanges();
+      e.Result = GetMilestonesCollection();
     }
     #endregion
 
+    private ObservableCollection<MilestoneWrapper> GetMilestonesCollection()
+    {
+      if (m_Entities != null)
+        m_Entities.Dispose();
+      m_Entities = new DataModel.Linq.Entities(SiteURL);
+      List<DataModel.Linq.Milestone> _mls = (from _mlsx in m_Entities.Milestone
+                                             let _prt = _mlsx.Milestone2ProjectTitle.Title
+                                             where _mlsx.Active.Value
+                                             orderby _mlsx.Title
+                                             orderby _mlsx.SortOrder.GetValueOrDefault(-99999) ascending
+                                             orderby _prt
+                                             select _mlsx).ToList();
+      List<MilestoneWrapper> _empty = new List<MilestoneWrapper>();
+      _empty.Add(new MilestoneWrapper(null));
+      foreach (var _mstx in _mls)
+        _empty.Add(new MilestoneWrapper(_mstx));
+      return new ObservableCollection<MilestoneWrapper>(_empty);
+    }
     private void CheckDisposed()
     {
       if (m_Disposed)
