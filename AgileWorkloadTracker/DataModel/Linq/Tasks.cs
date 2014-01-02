@@ -1,10 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
+﻿//<summary>
+//  Title   : partial class Tasks
+//  System  : Microsoft Visual C# .NET 2012
+//  $LastChangedDate$
+//  $Rev$
+//  $LastChangedBy$
+//  $URL:$
+//  $Id$
+//
+//  Copyright (C) 2013, CAS LODZ POLAND.
+//  TEL: +48 (42) 686 25 47
+//  mailto://techsupp@cas.eu
+//  http://www.cas.eu
+//</summary>
+      
+using System;
 using System.Linq;
-using System.Text;
 
 namespace CAS.AgileWorkloadTracker.DataModel.Linq
 {
+  /// <summary>
+  /// Entity partial class Tasks
+  /// </summary>
   partial class Tasks
   {
     #region public API
@@ -69,7 +85,7 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
         Active = this.Active,
         BaselineEnd = this.BaselineEnd,
         BaselineStart = this.BaselineStart,
-        Body = Body + String.Format("<div><p>copy from milestone {0}.</p></div><div>{1}</div>", targetRequirements.Requirements2MilestoneTitle.Title, _Cmnts),
+        Body = Body + String.Format("<div><p>copy from milestone {0}.</p></div><div>{1}</div>", this.Task2MilestoneResolvedInTitle.Title, _Cmnts),
         Task2CategoryTitle = null, // assigned in Connecr2Target 
         Task2MilestoneDefinedInTitle = this.Task2MilestoneDefinedInTitle,
         Task2MilestoneResolvedInTitle = null, // assigned in Connecr2Target

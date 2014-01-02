@@ -1,10 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
+﻿//<summary>
+//  Title   : Entity partial class Requirements
+//  System  : Microsoft Visual C# .NET 2012
+//  $LastChangedDate$
+//  $Rev$
+//  $LastChangedBy$
+//  $URL:$
+//  $Id$
+//
+//  Copyright (C) 2013, CAS LODZ POLAND.
+//  TEL: +48 (42) 686 25 47
+//  mailto://techsupp@cas.eu
+//  http://www.cas.eu
+//</summary>
+      
+using System;
 using System.Linq;
-using System.Text;
 
 namespace CAS.AgileWorkloadTracker.DataModel.Linq
 {
+  /// <summary>
+  /// Entity partial class Requirements
+  /// </summary>
   partial class Requirements
   {
     internal void Adjust(Entities edc)
@@ -38,14 +54,14 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
     {
       Requirements _ret = new Requirements()
       {
-        Body = this.Body,
+        Body = Body + String.Format("<div><p>copy from milestone {0}.</p></div>", this.Requirements2MilestoneTitle.Title),
         EstimatedHours = Math.Max(0, this.EstimatedHours.GetValueOrDefault(0) - this.Hours.GetValueOrDefault(0)),
         Hours = 0,
         RequirementPriority = this.RequirementPriority,
         Requirements2MilestoneTitle = target,
         Requirements2ProjectsTitle = target.Milestone2ProjectTitle,
         RequirementsType = this.RequirementsType,
-        Title = String.Format("{0} - copy from: {0}", this.Title, this.Requirements2MilestoneTitle.Title)
+        Title = String.Format("{0}-{1}", this.Title, target.Title)
       };
       edc.Requirements.InsertOnSubmit(_ret);
       return _ret;

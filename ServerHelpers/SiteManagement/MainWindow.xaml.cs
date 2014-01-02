@@ -36,17 +36,6 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
       MainWindowData _dta = new MainWindowData();
       x_MainGrid.DataContext = _dta;
     }
-    private void x_RefreshButton_Click(object sender, System.Windows.RoutedEventArgs e)
-    {
-      try
-      {
-        MainWindowData.Connect(BackgroundWorkerCompleted);
-      }
-      catch (Exception ex)
-      {
-        ShowExceptionBox(ex);
-      }
-    }
     private MainWindowData MainWindowData
     {
       get { return x_MainGrid.DataContext as MainWindowData; }
@@ -83,6 +72,17 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
       if (e.Error != null)
         ShowExceptionBox(e.Error);
       this.Close();
+    }
+    private void x_RefreshButton_Click(object sender, System.Windows.RoutedEventArgs e)
+    {
+      try
+      {
+        MainWindowData.Connect(BackgroundWorkerCompleted);
+      }
+      catch (Exception ex)
+      {
+        ShowExceptionBox(ex);
+      }
     }
     private void x_MakeInactiveButton_Click(object sender, System.Windows.RoutedEventArgs e)
     {
