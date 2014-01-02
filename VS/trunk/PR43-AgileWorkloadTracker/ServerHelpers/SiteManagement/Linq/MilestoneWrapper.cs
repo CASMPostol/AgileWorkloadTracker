@@ -138,10 +138,9 @@ namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
       Element.CalculateWorkload();
       Element.Active = false;
     }
-    internal void ForceMakeInactive(MilestoneWrapper target)
+    internal void ForceMakeInactive(DataModel.Linq.Entities edc, MilestoneWrapper target)
     {
-      CheckMakeInactivePosible();
-      Element.ForceMakeInactive(target.Element);
+      Element.ForceMakeInactive(edc, target.Element);
       Element.CalculateWorkload();
       Element.Active = false;
     }

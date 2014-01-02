@@ -3271,12 +3271,7 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq {
 				e.Item.Workload2TaskTitle = null;
 			}
 		}
-
-    internal void MoveToTarget(Requirements _target)
-    {
-      throw new NotImplementedException();
-    }
-  }
+	}
 	
 	/// <summary>
 	/// Task Comments Content Type

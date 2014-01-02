@@ -233,7 +233,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     {
       BackgroundWorker _wrkr = sender as BackgroundWorker;
       ForceMakeInactiveArgument _agumnt = e.Argument as ForceMakeInactiveArgument;
-      _agumnt.Source.ForceMakeInactive(_agumnt.Target);
+      _agumnt.Source.ForceMakeInactive(m_Entities, _agumnt.Target);
       m_Entities.SubmitChanges();
     }
     #endregion

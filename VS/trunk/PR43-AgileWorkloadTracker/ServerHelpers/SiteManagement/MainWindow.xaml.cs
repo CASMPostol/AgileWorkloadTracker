@@ -25,6 +25,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
   /// </summary>
   public partial class MainWindow : Window
   {
+
     /// <summary>
     /// Initializes a new instance of the <see cref="MainWindow"/> class.
     /// </summary>
@@ -86,7 +87,11 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     private void x_ForceMakeInactive_Click(object sender, System.Windows.RoutedEventArgs e)
     {
       if (x_MilestonesComboBox.SelectedIndex == X_TargetMilestoneCombo.SelectedIndex)
+      {
+        string _msg = "Target milestone cannot be the same as the source.";
+        MessageBox.Show(_msg, "Wrong target milestone.", MessageBoxButton.OK, MessageBoxImage.Error);
         return;
+      }
       this.MainWindowData.ForceMakeInactive((MilestoneWrapper)x_MilestonesComboBox.SelectedItem, (MilestoneWrapper)X_TargetMilestoneCombo.SelectedItem, BackgroundWorkerCompleted);
     }
 
