@@ -49,8 +49,10 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
       DateTime _end = DateTime.MinValue;
       foreach (Workload _wx in Workload)
         _wx.Update(ref _hours, ref _start, ref _end);
-      this.TaskStart = _start;
-      this.TaskEnd = _end;
+      if (_start != DateTime.MaxValue)
+        this.TaskStart = _start;
+      if (_end != DateTime.MinValue)
+        this.TaskEnd = _end;
       DataModelExtensions.UpdateWorkload(ref hours, ref start, ref end, _hours, _start, _end);
     }
     internal void MoveToTarget(Entities edc, Requirements target)
