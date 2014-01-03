@@ -67,6 +67,7 @@
     <Compile Include="Linq\Milestone.cs" />
     <Compile Include="Linq\Project.cs" />
     <Compile Include="Linq\Requirements.cs" />
+    <Compile Include="Linq\Status.cs" />
     <Compile Include="Linq\Tasks.cs" />
     <Compile Include="Linq\Workload.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
