@@ -12,7 +12,7 @@
 //  mailto://techsupp@cas.eu
 //  http://www.cas.eu
 //</summary>
-      
+
 using System;
 using System.Linq;
 
@@ -34,15 +34,17 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
         _tix.Adjust(edc);
       };
     }
-    internal double CalculatedHours
+    internal void Update(ref double hours, ref DateTime start, ref DateTime end)
     {
-      get
-      {
-        if (this.Requirements2ProjectsTitle == null || this.Requirements2ProjectsTitle != this.Requirements2MilestoneTitle.Milestone2ProjectTitle)
-          throw new ArgumentOutOfRangeException("Requirements2ProjectsTitle", this.Title);
-        Hours = this.Tasks.Sum<Tasks>(_Tasks => _Tasks.CalculatedHours);
-        return Hours.Value;
-      }
+      if (this.Requirements2ProjectsTitle == null || this.Requirements2ProjectsTitle != this.Requirements2MilestoneTitle.Milestone2ProjectTitle)
+        throw new ArgumentOutOfRangeException("Requirements2ProjectsTitle", this.Title);
+      double _hours = 0;
+      DateTime _start = DateTime.MaxValue;
+      DateTime _end = DateTime.MinValue;
+      foreach (Tasks _tx in this.Tasks)
+        _tx.Update(ref _hours, ref _start, ref _end);
+      DataModelExtensions.UpdateWorkload(ref hours, ref start, ref end, _hours, _start, _end);
+      this.Hours = _hours;
     }
     internal void CalculateWorkload()
     {

@@ -35,19 +35,23 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
         return;
       this.Task2RequirementsTitle.CalculateWorkload();
     }
-    internal double CalculatedHours
+    internal void Update(ref double hours, ref DateTime start, ref DateTime end)
     {
-      get
-      {
-        if (this.Task2RequirementsTitle == null)
-          throw new ArgumentNullException("Task2RequirementsTitle", this.Title);
-        if (this.Task2MilestoneResolvedInTitle == null || this.Task2MilestoneResolvedInTitle != this.Task2RequirementsTitle.Requirements2MilestoneTitle)
-          throw new ArgumentOutOfRangeException("Task2MilestoneResolvedInTitle", this.Task2RequirementsTitle.Title);
-        if (this.Task2ProjectTitle == null || this.Task2ProjectTitle != this.Task2RequirementsTitle.Requirements2ProjectsTitle)
-          throw new ArgumentOutOfRangeException("Task2ProjectTitle", this.Title);
-        AdjustActive();
-        return Workload.Sum<Workload>(_Workload => _Workload.Hours.GetValueOrDefault(0));
-      }
+      if (this.Task2RequirementsTitle == null)
+        throw new ArgumentNullException("Task2RequirementsTitle", this.Title);
+      if (this.Task2MilestoneResolvedInTitle == null || this.Task2MilestoneResolvedInTitle != this.Task2RequirementsTitle.Requirements2MilestoneTitle)
+        throw new ArgumentOutOfRangeException("Task2MilestoneResolvedInTitle", this.Task2RequirementsTitle.Title);
+      if (this.Task2ProjectTitle == null || this.Task2ProjectTitle != this.Task2RequirementsTitle.Requirements2ProjectsTitle)
+        throw new ArgumentOutOfRangeException("Task2ProjectTitle", this.Title);
+      AdjustActive();
+      double _hours = 0;
+      DateTime _start = DateTime.MaxValue;
+      DateTime _end = DateTime.MinValue;
+      foreach (Workload _wx in Workload)
+        _wx.Update(ref _hours, ref _start, ref _end);
+      this.TaskStart = _start;
+      this.TaskEnd = _end;
+      DataModelExtensions.UpdateWorkload(ref hours, ref start, ref end, _hours, _start, _end);
     }
     internal void MoveToTarget(Entities edc, Requirements target)
     {
@@ -119,7 +123,7 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
     {
       if (this.Task2StatusTitle == null)
         throw new ArgumentNullException("Task2StatusTitle", "The task has to have assigned status.");
-      if (! this.Task2StatusTitle.Active.HasValue)
+      if (!this.Task2StatusTitle.Active.HasValue)
         throw new ArgumentOutOfRangeException("Task2StatusTitle.Active", "The status has to have assigned active bit.");
       if (Active.HasValue && this.Task2StatusTitle.Active.Value == Active.Value)
         return;
