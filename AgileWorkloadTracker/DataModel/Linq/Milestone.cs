@@ -12,7 +12,7 @@
 //  mailto://techsupp@cas.eu
 //  http://www.cas.eu
 //</summary>
-      
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,9 +64,11 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
       DateTime _end = DateTime.MinValue;
       foreach (Requirements _wx in this.Requirements)
         _wx.Update(ref _hours, ref _start, ref _end);
-      this.MilestoneStart = _start;
-      this.MilestoneEnd = _end;
       this.MilestoneHours = _hours;
+      if (_start != DateTime.MaxValue)
+        this.MilestoneStart = _start;
+      if (_end != DateTime.MinValue)
+        this.MilestoneEnd = _end;
     }
     /// <summary>
     /// Makes the instance inactive if possible.
