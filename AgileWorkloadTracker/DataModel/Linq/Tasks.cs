@@ -57,11 +57,12 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
     }
     internal void MoveToTarget(Entities edc, Requirements target)
     {
+      AdjustActive();
       if (!this.Active.GetValueOrDefault(false))
         throw new ArgumentOutOfRangeException("Active", String.Format("Active cannot be {0} while moving the task to new requirement.", this.Active));
       Tasks _tsk = this;
       if (this.Workload.Any())
-        _tsk = MakeCopy(edc, target);
+        _tsk = MakeCopy(edc);
       _tsk.Connecr2Target(edc, target, this.Task2CategoryTitle);
     }
     #endregion
@@ -69,7 +70,6 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
     #region private
     private int c_ResolutionFixed = 2;
     private int c_ResolutionFixLater = 5;
-    private int c_StatusResolved = 4;
     private void Connecr2Target(Entities edc, Requirements target, Category categoty)
     {
       this.Task2MilestoneResolvedInTitle = target.Requirements2MilestoneTitle;
@@ -77,7 +77,7 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
       this.Task2RequirementsTitle = target;
       Task2CategoryTitle = Task2ProjectTitle == categoty.Category2ProjectsTitle ? categoty : Task2ProjectTitle.FindCategory(edc, this.Task2CategoryTitle.Title);
     }
-    private Tasks MakeCopy(Entities edc, Requirements targetRequirements)
+    private Tasks MakeCopy(Entities edc)
     {
       string _Cmnts = String.Empty;
       int _idx = 0;
@@ -87,9 +87,10 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
         if (_idx++ > 3)
           break;
       }
+      Status _newStae = Status.GetStatus(edc, Status.StatusValues.New);
       Tasks _newTask = new Tasks()
       {
-        Active = this.Active,
+        Active = _newStae.Active,
         BaselineEnd = this.BaselineEnd,
         BaselineStart = this.BaselineStart,
         Body = Body + String.Format("<div><p>copy from milestone {0}.</p></div><div>{1}</div>", this.Task2MilestoneResolvedInTitle.Title, _Cmnts),
@@ -97,11 +98,11 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
         Task2MilestoneDefinedInTitle = this.Task2MilestoneDefinedInTitle,
         Task2MilestoneResolvedInTitle = null, // assigned in Connecr2Target
         Task2ProjectTitle = null, // assigned in Connecr2Target
-        Task2RequirementsTitle = targetRequirements,
+        Task2RequirementsTitle = null, // assigned in Connecr2Target
         Task2ResourcesTitle = this.Task2ResourcesTitle,
         Task2SPriorityTitle = this.Task2SPriorityTitle,
         Task2SResolutionTitle = this.Task2SResolutionTitle,
-        Task2StatusTitle = this.Task2StatusTitle,
+        Task2StatusTitle = _newStae,
         Task2TypeTitle = this.Task2TypeTitle,
         TaskEnd = DateTime.Today,
         TaskStart = DateTime.Today,
@@ -109,7 +110,7 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
       };
       edc.Task.InsertOnSubmit(_newTask);
       this.Task2SResolutionTitle = Element.GetAtIndex<Resolution>(edc.Resolution, c_ResolutionFixLater);
-      this.Task2StatusTitle = Element.GetAtIndex<Status>(edc.Status, c_StatusResolved);
+      this.Task2StatusTitle = Status.GetStatus(edc, Status.StatusValues.Resolved);
       this.Active = this.Task2StatusTitle.Active.Value;
       return _newTask;
     }
