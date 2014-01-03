@@ -59,7 +59,14 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
     /// </summary>
     public void CalculateWorkload()
     {
-      this.MilestoneHours = this.Requirements.Sum<Requirements>(a => a.CalculatedHours);
+      double _hours = 0;
+      DateTime _start = DateTime.MaxValue;
+      DateTime _end = DateTime.MinValue;
+      foreach (Requirements _wx in this.Requirements)
+        _wx.Update(ref _hours, ref _start, ref _end);
+      this.MilestoneStart = _start;
+      this.MilestoneEnd = _end;
+      this.MilestoneHours = _hours;
     }
     /// <summary>
     /// Makes the instance inactive if possible.
