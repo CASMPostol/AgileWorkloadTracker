@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Classic"
         x:Class="CAS.AgileWorkloadTracker.SiteManagement.MainWindow"
-        Title="Site management" Height="350" Width="525" 
-        Closing="Window_Closing"  >
+        Title="Milestone management" 
+        Closing="Window_Closing" Icon="AWT_Ico.ico" SizeToContent="WidthAndHeight" ToolTip="Use to manage milestone" Width="600" Height="400"  >
 	<Window.Resources>
 		<Style x:Key="ButtonFocusVisual">
 			<Setter Property="Control.Template">
@@ -57,7 +57,7 @@
 			<Setter Property="Margin" Value="10,0"/>
 		</Style>
 	</Window.Resources>
-	<Grid x:Name="x_MainGrid" DataContext="{Binding Mode=OneWay, Source={StaticResource MainWindowDataDataSource}}">
+	<Grid x:Name="x_MainGrid" DataContext="{Binding Mode=OneWay, Source={StaticResource MainWindowDataDataSource}}" MinWidth="400" MinHeight="300">
 		<!--<Grid.DataContext>
 			<local:MainWindowData/>
 		</Grid.DataContext>-->
@@ -65,8 +65,8 @@
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="20"/>
-			<RowDefinition/>
 			<RowDefinition Height="Auto"/>
+			<RowDefinition/>
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
@@ -77,16 +77,16 @@
 		<Label Content="Site URL" Margin="0" VerticalAlignment="Center" Padding="2" VerticalContentAlignment="Center"/>
 		<TextBox x:Name="x_SiteURLTextBox" Grid.Column="1" Margin="0" TextWrapping="Wrap" VerticalAlignment="Top" Text="{Binding SiteURL, Mode=TwoWay, TargetNullValue=Enter site URL, UpdateSourceTrigger=LostFocus}" ScrollViewer.CanContentScroll="True" VerticalContentAlignment="Center"/>
 		<Button x:Name="x_RefreshButton" Content="Refresh" Grid.Column="2" Margin="0" VerticalAlignment="Top" Width="75" Click="x_RefreshButton_Click" IsEnabled="{Binding NotBusy}"/>
-		<Label HorizontalAlignment="Left" Margin="0" Grid.Row="1" VerticalAlignment="Top" Content="Milestone" VerticalContentAlignment="Center" Padding="2"/>
+		<Label HorizontalAlignment="Left" Margin="0" Grid.Row="1" VerticalAlignment="Top" Content="Source" VerticalContentAlignment="Center" Padding="2"/>
 		<ComboBox Margin="0" x:Name="x_MilestonesComboBox" VerticalAlignment="Center" Padding="1" Grid.Column="1" Grid.Row="1" ItemsSource="{Binding MilestoneCollection, Mode=OneWay, TargetNullValue=&lt; select milestone&gt;}" IsSynchronizedWithCurrentItem="True" Grid.ColumnSpan="2"/>
-		<ScrollViewer Grid.Row="3" Grid.ColumnSpan="3" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
+		<Label Content="Target" Margin="0" Grid.Row="2" VerticalAlignment="Center" Padding="2" VerticalContentAlignment="Center"/>
+		<ComboBox x:Name="X_TargetMilestoneCombo" Margin="0" Grid.Row="2" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" IsSynchronizedWithCurrentItem="False" ItemsSource="{Binding MilestoneCollection}"/>
+		<Label Content="Description" HorizontalAlignment="Left" Margin="0" Grid.Row="3" VerticalContentAlignment="Center" Grid.ColumnSpan="2" Padding="2"/>
+		<ScrollViewer Grid.Row="4" Grid.ColumnSpan="3" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
 			<TextBlock Margin="0" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Text="{Binding MilestoneCollection/Description}"/>
 		</ScrollViewer>
-		<Label Content="Description" HorizontalAlignment="Left" Margin="0" Grid.Row="2" VerticalContentAlignment="Center" Grid.ColumnSpan="2" Padding="2"/>
-		<Label Content="Target" Margin="0" Grid.Row="4" VerticalAlignment="Center" Padding="2" VerticalContentAlignment="Center"/>
-		<ComboBox x:Name="X_TargetMilestoneCombo" Margin="0" Grid.Row="4" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" IsSynchronizedWithCurrentItem="False" ItemsSource="{Binding MilestoneCollection}"/>
 		<StackPanel x:Name="x_ButtonsStackPanel" Grid.ColumnSpan="3" Margin="0" Grid.Row="5" IsEnabled="{Binding NotBusy}" Orientation="Horizontal">
-			<Button x:Name="x_MakeInactiveButton" Padding="10,0" IsEnabled="{Binding MilestoneCollection/NotInProgress, FallbackValue=false, TargetNullValue=false}" Click="x_MakeInactiveButton_Click" Style="{DynamicResource x_PanelButtonStyle}" Content="Make inactive"/>
+			<Button x:Name="x_MakeInactiveButton" Padding="10,0" Click="x_MakeInactiveButton_Click" Style="{DynamicResource x_PanelButtonStyle}" Content="Update"/>
 			<Button x:Name="x_ForceMakeInactive" Content="Force Inactive" Style="{DynamicResource x_PanelButtonStyle}" IsEnabled="{Binding MilestoneCollection/ForceInactivAllowed, FallbackValue=false, TargetNullValue=false}" Click="x_ForceMakeInactive_Click"/>
 		</StackPanel>
 	</Grid>

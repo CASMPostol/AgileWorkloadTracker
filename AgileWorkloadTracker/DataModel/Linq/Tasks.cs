@@ -35,7 +35,7 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
         return;
       this.Task2RequirementsTitle.CalculateWorkload();
     }
-    internal void Update(ref double hours, ref DateTime start, ref DateTime end)
+    internal void Update(ref double hours, ref DateTime start, ref DateTime end, ref bool allInactive)
     {
       if (this.Task2RequirementsTitle == null)
         throw new ArgumentNullException("Task2RequirementsTitle", this.Title);
@@ -43,7 +43,7 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
         throw new ArgumentOutOfRangeException("Task2MilestoneResolvedInTitle", this.Task2RequirementsTitle.Title);
       if (this.Task2ProjectTitle == null || this.Task2ProjectTitle != this.Task2RequirementsTitle.Requirements2ProjectsTitle)
         throw new ArgumentOutOfRangeException("Task2ProjectTitle", this.Title);
-      AdjustActive();
+      AdjustActive(ref allInactive);
       double _hours = 0;
       DateTime _start = DateTime.MaxValue;
       DateTime _end = DateTime.MinValue;
@@ -114,6 +114,7 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
       this.Active = this.Task2StatusTitle.Active.Value;
       return _newTask;
     }
+    //TODO not used 
     private void Adjust()
     {
       if (this.Task2MilestoneResolvedInTitle == null || this.Task2MilestoneResolvedInTitle != this.Task2RequirementsTitle.Requirements2MilestoneTitle)
@@ -121,6 +122,12 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
       if (this.Task2ProjectTitle == null || this.Task2ProjectTitle != this.Task2RequirementsTitle.Requirements2ProjectsTitle)
         this.Task2ProjectTitle = this.Task2RequirementsTitle.Requirements2ProjectsTitle;
       AdjustActive();
+    }
+    private void AdjustActive(ref bool allInactive)
+    {
+      AdjustActive();
+      if (Active.Value)
+        allInactive = false;
     }
     private void AdjustActive()
     {

@@ -34,7 +34,7 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
         _tix.Adjust(edc);
       };
     }
-    internal void Update(ref double hours, ref DateTime start, ref DateTime end)
+    internal void Update(ref double hours, ref DateTime start, ref DateTime end, ref bool allInactive)
     {
       if (this.Requirements2ProjectsTitle == null || this.Requirements2ProjectsTitle != this.Requirements2MilestoneTitle.Milestone2ProjectTitle)
         throw new ArgumentOutOfRangeException("Requirements2ProjectsTitle", this.Title);
@@ -42,7 +42,7 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
       DateTime _start = DateTime.MaxValue;
       DateTime _end = DateTime.MinValue;
       foreach (Tasks _tx in this.Tasks)
-        _tx.Update(ref _hours, ref _start, ref _end);
+        _tx.Update(ref _hours, ref _start, ref _end, ref allInactive);
       DataModelExtensions.UpdateWorkload(ref hours, ref start, ref end, _hours, _start, _end);
       this.Hours = _hours;
     }
