@@ -57,8 +57,10 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
     /// <summary>
     /// Calculates the workload.
     /// </summary>
-    public void CalculateWorkload()
+    public void Update()
     {
+      if (this.Milestone2ProjectTitle == null)
+        throw new ArgumentNullException("Milestone2ProjectTitle");
       double _hours = 0;
       DateTime _start = DateTime.MaxValue;
       DateTime _end = DateTime.MinValue;
@@ -69,13 +71,15 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
         this.MilestoneStart = _start;
       if (_end != DateTime.MinValue)
         this.MilestoneEnd = _end;
+      if (this.Milestone2StageTitle == null)
+        this.Milestone2StageTitle = this.Milestone2ProjectTitle.Project2StageTitle;
     }
     /// <summary>
     /// Makes the instance inactive if possible.
     /// </summary>
     public void MakeInactive()
     {
-      CalculateWorkload();
+      Update();
       Inactive = true;
     }
     /// <summary>
@@ -102,7 +106,7 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
         }
         _tskx.MoveToTarget(edc, _targetRequirement);
       }
-      CalculateWorkload();
+      Update();
       Inactive = true;
     }
     private bool Inactive

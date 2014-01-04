@@ -50,7 +50,7 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
     {
       if (Requirements2MilestoneTitle == null)
         return;
-      Requirements2MilestoneTitle.CalculateWorkload();
+      Requirements2MilestoneTitle.Update();
     }
     internal Requirements MakeCopy(Entities edc, Milestone target)
     {
