@@ -100,7 +100,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
       StartBackgroundWorker();
     }
     internal bool Connected { get { return m_Entities != null; } }
-    internal void MakeInactive(MilestoneWrapper milestoneWrapper, RunWorkerCompletedEventHandler completedEventHandler)
+    internal void Update(MilestoneWrapper milestoneWrapper, RunWorkerCompletedEventHandler completedEventHandler)
     {
       CheckDisposed();
       if (milestoneWrapper == null)
@@ -212,7 +212,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     {
       BackgroundWorker _wrkr = sender as BackgroundWorker;
       MilestoneWrapper _mlstn = e.Argument as MilestoneWrapper;
-      _mlstn.MakeInactive();
+      _mlstn.Update();
       m_Entities.SubmitChanges();
       e.Result = GetMilestonesCollection();
     }

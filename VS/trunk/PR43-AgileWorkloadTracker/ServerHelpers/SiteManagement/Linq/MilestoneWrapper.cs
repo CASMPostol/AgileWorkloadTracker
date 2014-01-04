@@ -132,13 +132,16 @@ namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
     #endregion
 
     #region public API
-    internal void MakeInactive()
+    internal void Update()
     {
-      CheckMakeInactivePosible();
-      Element.MakeInactive();
+      if (base.Element == null)
+        throw new ArgumentNullException("Element");
+      Element.Update();
     }
     internal void ForceMakeInactive(DataModel.Linq.Entities edc, MilestoneWrapper target)
     {
+      if (base.Element == null)
+        throw new ArgumentNullException("Element");
       Element.ForceMakeInactive(edc, target.Element);
     }
     #endregion
@@ -158,15 +161,6 @@ namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
     private int b_ActiveTasks = 0;
     private bool b_NotInProgress = false;
     private string b_ProjectTitle = "N/A";
-    private void CheckMakeInactivePosible()
-    {
-      if (base.Element == null)
-        throw new ArgumentNullException("Element");
-      if (!NotInProgress)
-        throw new ApplicationException("MakeInactive - you try to inactivate still in progress milestone");
-      if (!Element.Active.GetValueOrDefault(false))
-        throw new ArgumentOutOfRangeException("Active", "The milestone is not active.");
-    }
     #endregion
   }
 }

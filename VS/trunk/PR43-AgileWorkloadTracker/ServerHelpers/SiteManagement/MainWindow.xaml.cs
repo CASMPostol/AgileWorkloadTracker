@@ -88,7 +88,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     {
       try
       {
-        MainWindowData.MakeInactive((MilestoneWrapper)x_MilestonesComboBox.SelectedItem, BackgroundWorkerCompleted);
+        MainWindowData.Update((MilestoneWrapper)x_MilestonesComboBox.SelectedItem, BackgroundWorkerCompleted);
       }
       catch (Exception _ex)
       {

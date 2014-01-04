@@ -64,8 +64,9 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
       double _hours = 0;
       DateTime _start = DateTime.MaxValue;
       DateTime _end = DateTime.MinValue;
+      bool _AllInactive = true;
       foreach (Requirements _wx in this.Requirements)
-        _wx.Update(ref _hours, ref _start, ref _end);
+        _wx.Update(ref _hours, ref _start, ref _end, ref _AllInactive);
       this.MilestoneHours = _hours;
       if (_start != DateTime.MaxValue)
         this.MilestoneStart = _start;
@@ -73,14 +74,8 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
         this.MilestoneEnd = _end;
       if (this.Milestone2StageTitle == null)
         this.Milestone2StageTitle = this.Milestone2ProjectTitle.Project2StageTitle;
-    }
-    /// <summary>
-    /// Makes the instance inactive if possible.
-    /// </summary>
-    public void MakeInactive()
-    {
-      Update();
-      Inactive = true;
+      if (_AllInactive)
+        Inactive = true;
     }
     /// <summary>
     /// Forces the make inactive.

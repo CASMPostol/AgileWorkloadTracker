@@ -33,7 +33,7 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
       if (this.Workload2ProjectTitle == null)
         throw new ArgumentNullException("Workload2ProjectTitle", this.Title);
       if (this.Workload2ProjectTitle != this.Workload2TaskTitle.Task2ProjectTitle)
-        throw new ArgumentOutOfRangeException("Workload2ProjectTitle", WrongProjectMessage());
+        this.Workload2ProjectTitle = this.Workload2TaskTitle.Task2ProjectTitle;
       if (this.Workload2StageTitle == null)
         this.Workload2StageTitle = this.Workload2ProjectTitle.Project2StageTitle;
       DataModelExtensions.UpdateWorkload(ref hours, ref start, ref end, MyHours, MyDate, MyDate);
