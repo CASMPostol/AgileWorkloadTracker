@@ -3271,7 +3271,8 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq {
 				e.Item.Workload2TaskTitle = null;
 			}
 		}
-	}
+
+  }
 	
 	/// <summary>
 	/// Task Comments Content Type

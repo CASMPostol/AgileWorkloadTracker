@@ -144,6 +144,12 @@ namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
         throw new ArgumentNullException("Element");
       Element.ForceMakeInactive(edc, target.Element);
     }
+    internal void Move(DataModel.Linq.Entities edc, MilestoneWrapper target)
+    {
+      if (base.Element == null)
+        throw new ArgumentNullException("Element");
+      Element.Move(edc, target.Element);
+    }
     #endregion
 
     #region object
@@ -162,5 +168,6 @@ namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
     private bool b_NotInProgress = false;
     private string b_ProjectTitle = "N/A";
     #endregion
+
   }
 }

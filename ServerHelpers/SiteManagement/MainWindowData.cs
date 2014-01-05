@@ -120,6 +120,24 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
       m_BWCompletedEventHandler = completedEventHandler;
       StartBackgroundWorker(new ForceMakeInactiveArgument() { Source = source, Target = target });
     }
+
+    internal void Move(MilestoneWrapper source, MilestoneWrapper target, RunWorkerCompletedEventHandler completedEventHandler)
+    {
+      CheckDisposed();
+      if (source == null)
+        throw new ArgumentNullException("source");
+      if (target == null)
+        throw new ArgumentNullException("target");
+      m_BWDoWorkEventHandler = m_BackgroundWorker_DoMove;
+      m_BWCompletedEventHandler = completedEventHandler;
+      StartBackgroundWorker(new ForceMakeInactiveArgument() { Source = source, Target = target });
+    }
+
+    internal static void GetRequirements(MilestoneWrapper milestoneWrapper, Action<object, RunWorkerCompletedEventArgs> GetRequirementsCompleted)
+    {
+      throw new NotImplementedException();
+    }
+
     #endregion
 
     #endregion
@@ -221,6 +239,14 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
       BackgroundWorker _wrkr = sender as BackgroundWorker;
       ForceMakeInactiveArgument _agumnt = e.Argument as ForceMakeInactiveArgument;
       _agumnt.Source.ForceMakeInactive(m_Entities, _agumnt.Target);
+      m_Entities.SubmitChanges();
+      e.Result = GetMilestonesCollection();
+    }
+    private void m_BackgroundWorker_DoMove(object sender, DoWorkEventArgs e)
+    {
+      BackgroundWorker _wrkr = sender as BackgroundWorker;
+      ForceMakeInactiveArgument _agumnt = e.Argument as ForceMakeInactiveArgument;
+      _agumnt.Source.Move(m_Entities, _agumnt.Target);
       m_Entities.SubmitChanges();
       e.Result = GetMilestonesCollection();
     }
