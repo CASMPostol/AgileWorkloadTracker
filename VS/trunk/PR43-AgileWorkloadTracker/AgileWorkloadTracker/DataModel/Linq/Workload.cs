@@ -14,9 +14,6 @@
 //</summary>
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using CAS.SharePoint;
 
 namespace CAS.AgileWorkloadTracker.DataModel.Linq
@@ -28,15 +25,17 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
   {
     internal void Update(ref double hours, ref DateTime start, ref DateTime end)
     {
+      MakeConsistent();
+      DataModelExtensions.UpdateWorkload(ref hours, ref start, ref end, MyHours, MyDate, MyDate);
+    }
+    internal void MakeConsistent()
+    {
       if (this.Workload2TaskTitle == null)
         throw new ArgumentNullException("Workload2TaskTitle", this.Title);
-      if (this.Workload2ProjectTitle == null)
-        throw new ArgumentNullException("Workload2ProjectTitle", this.Title);
       if (this.Workload2ProjectTitle != this.Workload2TaskTitle.Task2ProjectTitle)
         this.Workload2ProjectTitle = this.Workload2TaskTitle.Task2ProjectTitle;
       if (this.Workload2StageTitle == null)
         this.Workload2StageTitle = this.Workload2ProjectTitle.Project2StageTitle;
-      DataModelExtensions.UpdateWorkload(ref hours, ref start, ref end, MyHours, MyDate, MyDate);
     }
     private DateTime MyDate
     {

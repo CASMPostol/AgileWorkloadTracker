@@ -24,10 +24,12 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
   partial class Tasks
   {
     #region public API
-    internal void Adjust(Entities edc)
+    internal void MakeConsistent(Entities edc)
     {
-      foreach (Workload _wix in from _ix in this.Workload where _ix.Workload2ProjectTitle.Identyfikator != this.Task2ProjectTitle.Identyfikator select _ix)
-        _wix.Workload2ProjectTitle = this.Task2ProjectTitle;
+      AdjustActive();
+      Connecr2Target(edc);
+      foreach (Workload _wx in Workload)
+        _wx.MakeConsistent();
     }
     internal void CalculateWorkload()
     {
@@ -63,19 +65,25 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
       Tasks _tsk = this;
       if (this.Workload.Any())
         _tsk = MakeCopy(edc);
-      _tsk.Connecr2Target(edc, target, this.Task2CategoryTitle);
+      _tsk.Connecr2Target(edc, target);
     }
+
     #endregion
 
     #region private
     private int c_ResolutionFixed = 2;
     private int c_ResolutionFixLater = 5;
-    private void Connecr2Target(Entities edc, Requirements target, Category categoty)
+    private void Connecr2Target(Entities edc, Requirements target)
     {
-      this.Task2MilestoneResolvedInTitle = target.Requirements2MilestoneTitle;
-      this.Task2ProjectTitle = target.Requirements2MilestoneTitle.Milestone2ProjectTitle;
       this.Task2RequirementsTitle = target;
-      Task2CategoryTitle = Task2ProjectTitle == categoty.Category2ProjectsTitle ? categoty : Task2ProjectTitle.FindCategory(edc, this.Task2CategoryTitle.Title);
+      Connecr2Target(edc);
+    }
+    private void Connecr2Target(Entities edc)
+    {
+      this.Task2MilestoneResolvedInTitle = this.Task2RequirementsTitle.Requirements2MilestoneTitle;
+      this.Task2ProjectTitle = this.Task2RequirementsTitle.Requirements2MilestoneTitle.Milestone2ProjectTitle;
+      if ((this.Task2CategoryTitle != null) && (Task2ProjectTitle != this.Task2CategoryTitle.Category2ProjectsTitle))
+        this.Task2CategoryTitle = Task2ProjectTitle.FindCategory(edc, this.Task2CategoryTitle.Title);
     }
     private Tasks MakeCopy(Entities edc)
     {
@@ -115,14 +123,14 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
       return _newTask;
     }
     //TODO not used 
-    private void Adjust()
-    {
-      if (this.Task2MilestoneResolvedInTitle == null || this.Task2MilestoneResolvedInTitle != this.Task2RequirementsTitle.Requirements2MilestoneTitle)
-        this.Task2MilestoneResolvedInTitle = this.Task2RequirementsTitle.Requirements2MilestoneTitle;
-      if (this.Task2ProjectTitle == null || this.Task2ProjectTitle != this.Task2RequirementsTitle.Requirements2ProjectsTitle)
-        this.Task2ProjectTitle = this.Task2RequirementsTitle.Requirements2ProjectsTitle;
-      AdjustActive();
-    }
+    //private void Adjust()
+    //{
+    //  if (this.Task2MilestoneResolvedInTitle == null || this.Task2MilestoneResolvedInTitle != this.Task2RequirementsTitle.Requirements2MilestoneTitle)
+    //    this.Task2MilestoneResolvedInTitle = this.Task2RequirementsTitle.Requirements2MilestoneTitle;
+    //  if (this.Task2ProjectTitle == null || this.Task2ProjectTitle != this.Task2RequirementsTitle.Requirements2ProjectsTitle)
+    //    this.Task2ProjectTitle = this.Task2RequirementsTitle.Requirements2ProjectsTitle;
+    //  AdjustActive();
+    //}
     private void AdjustActive(ref bool allInactive)
     {
       AdjustActive();

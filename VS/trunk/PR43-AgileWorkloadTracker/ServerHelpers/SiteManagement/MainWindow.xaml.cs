@@ -40,16 +40,6 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     {
       get { return x_MainGrid.DataContext as MainWindowData; }
     }
-    private void BackgroundWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-    {
-      if (e.Error != null)
-      {
-        ShowExceptionBox(e.Error);
-        return;
-      }
-      this.MainWindowData.MilestoneCollection = e.Result as ObservableCollection<MilestoneWrapper>;
-      x_MilestonesComboBox.SelectedIndex = 0;
-    }
     private void ShowExceptionBox(Exception exception)
     {
       string _msg = String.Format("The operation has been aborted by ex: {0}", exception.Message);
@@ -73,6 +63,31 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
         ShowExceptionBox(e.Error);
       this.Close();
     }
+
+    private void BackgroundWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+    {
+      if (e.Error != null)
+      {
+        ShowExceptionBox(e.Error);
+        return;
+      }
+      this.MainWindowData.MilestoneCollection = e.Result as ObservableCollection<MilestoneWrapper>;
+      x_MilestonesComboBox.SelectedIndex = 0;
+    }
+
+    private void GetRequirementsCompleted(object sender, RunWorkerCompletedEventArgs e)
+    {
+      if (e.Error != null)
+      {
+        ShowExceptionBox(e.Error);
+        return;
+      }
+      //TODO
+      //this.MainWindowData.MilestoneCollection = e.Result as ObservableCollection<MilestoneWrapper>;
+      //x_MilestonesComboBox.SelectedIndex = 0;
+    }
+
+    #region Buttons event handlers
     private void x_RefreshButton_Click(object sender, System.Windows.RoutedEventArgs e)
     {
       try
@@ -112,6 +127,35 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
         ShowExceptionBox(_ex);
       }
     }
+    private void x_EditRequirementsButton_Click(object sender, System.Windows.RoutedEventArgs e)
+    {
+      try
+      {
+        MainWindowData.GetRequirements((MilestoneWrapper)x_MilestonesComboBox.SelectedItem, GetRequirementsCompleted);
+      }
+      catch (Exception _ex)
+      {
+        ShowExceptionBox(_ex);
+      }
+    }
+    private void x_MoveButton_Click(object sender, System.Windows.RoutedEventArgs e)
+    {
+      try
+      {
+        if (x_MilestonesComboBox.SelectedIndex == X_TargetMilestoneCombo.SelectedIndex)
+        {
+          string _msg = "Target milestone cannot be the same as the source.";
+          MessageBox.Show(_msg, "Wrong target milestone.", MessageBoxButton.OK, MessageBoxImage.Error);
+          return;
+        }
+        this.MainWindowData.Move((MilestoneWrapper)x_MilestonesComboBox.SelectedItem, (MilestoneWrapper)X_TargetMilestoneCombo.SelectedItem, BackgroundWorkerCompleted);
+      }
+      catch (Exception _ex)
+      {
+        ShowExceptionBox(_ex);
+      }
+    }
+    #endregion
 
   }
 }

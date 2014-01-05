@@ -2,9 +2,10 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Classic"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
         x:Class="CAS.AgileWorkloadTracker.SiteManagement.MainWindow"
         Title="Milestone management" 
-        Closing="Window_Closing" Icon="AWT_Ico.ico" SizeToContent="WidthAndHeight" ToolTip="Use to manage milestone" Width="600" Height="400"  >
+        Closing="Window_Closing" Icon="AWT_Ico.ico" ToolTip="Use to manage milestone" SizeToContent="WidthAndHeight"  d:DesignWidth="765" d:DesignHeight="376" MinWidth="700" MinHeight="400"  >
 	<Window.Resources>
 		<Style x:Key="ButtonFocusVisual">
 			<Setter Property="Control.Template">
@@ -57,7 +58,7 @@
 			<Setter Property="Margin" Value="10,0"/>
 		</Style>
 	</Window.Resources>
-	<Grid x:Name="x_MainGrid" DataContext="{Binding Mode=OneWay, Source={StaticResource MainWindowDataDataSource}}" MinWidth="400" MinHeight="300">
+	<Grid x:Name="x_MainGrid" DataContext="{Binding Mode=OneWay, Source={StaticResource MainWindowDataDataSource}}" MinWidth="400" MinHeight="300" Margin="2">
 		<!--<Grid.DataContext>
 			<local:MainWindowData/>
 		</Grid.DataContext>-->
@@ -88,6 +89,8 @@
 		<StackPanel x:Name="x_ButtonsStackPanel" Grid.ColumnSpan="3" Margin="0" Grid.Row="5" IsEnabled="{Binding NotBusy}" Orientation="Horizontal">
 			<Button x:Name="x_MakeInactiveButton" Padding="10,0" Click="x_MakeInactiveButton_Click" Style="{DynamicResource x_PanelButtonStyle}" Content="Update"/>
 			<Button x:Name="x_ForceMakeInactive" Content="Force Inactive" Style="{DynamicResource x_PanelButtonStyle}" IsEnabled="{Binding MilestoneCollection/ForceInactivAllowed, FallbackValue=false, TargetNullValue=false}" Click="x_ForceMakeInactive_Click"/>
+			<Button x:Name="x_MoveButton" Content="Move" Style="{DynamicResource x_PanelButtonStyle}" ToolTip="Move milestone before the selected milestone in the same project." Click="x_MoveButton_Click"/>
+			<Button x:Name="x_EditRequirementsButton" Content="Edit Requirements" Style="{DynamicResource x_PanelButtonStyle}" ToolTip="Move around requirements between source and target milestones." Click="x_EditRequirementsButton_Click"/>
 		</StackPanel>
 	</Grid>
 </Window>
