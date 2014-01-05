@@ -87,9 +87,10 @@
 			<TextBlock Margin="0" TextWrapping="Wrap" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Text="{Binding MilestoneCollection/Description}"/>
 		</ScrollViewer>
 		<StackPanel x:Name="x_ButtonsStackPanel" Grid.ColumnSpan="3" Margin="0" Grid.Row="5" IsEnabled="{Binding NotBusy}" Orientation="Horizontal">
-			<Button x:Name="x_MakeInactiveButton" Padding="10,0" Click="x_MakeInactiveButton_Click" Style="{DynamicResource x_PanelButtonStyle}" Content="Update"/>
-			<Button x:Name="x_ForceMakeInactive" Content="Force Inactive" Style="{DynamicResource x_PanelButtonStyle}" IsEnabled="{Binding MilestoneCollection/ForceInactivAllowed, FallbackValue=false, TargetNullValue=false}" Click="x_ForceMakeInactive_Click"/>
-			<Button x:Name="x_MoveButton" Content="Move" Style="{DynamicResource x_PanelButtonStyle}" ToolTip="Move milestone before the selected milestone in the same project." Click="x_MoveButton_Click"/>
+			<Button x:Name="x_MakeInactiveButton" Padding="10,0" Click="x_MakeInactiveButton_Click" Style="{DynamicResource x_PanelButtonStyle}" Content="Update" ToolTip="Updates source milestone." />
+			<Button x:Name="x_ForceMakeInactive" Content="Force Inactive" Style="{DynamicResource x_PanelButtonStyle}" IsEnabled="{Binding MilestoneCollection/ForceInactivAllowed, FallbackValue=false, TargetNullValue=false}" Click="x_ForceMakeInactive_Click" 
+                    ToolTip="Inactivates source milestone and copies all started tasks to selected milestone. Taksks not started are moved."/>
+			<Button x:Name="x_MoveButton" Content="Move" Style="{DynamicResource x_PanelButtonStyle}" ToolTip="Moves source milestone before the target milestone in the same project." Click="x_MoveButton_Click"/>
 			<Button x:Name="x_EditRequirementsButton" Content="Edit Requirements" Style="{DynamicResource x_PanelButtonStyle}" ToolTip="Move around requirements between source and target milestones." Click="x_EditRequirementsButton_Click"/>
 		</StackPanel>
 	</Grid>
