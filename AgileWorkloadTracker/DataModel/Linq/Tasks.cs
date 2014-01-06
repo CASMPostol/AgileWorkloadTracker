@@ -26,10 +26,18 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
     #region public API
     internal void MakeConsistent(Entities edc)
     {
+      if (this.Task2RequirementsTitle == null)
+        throw new ArgumentNullException("Task2RequirementsTitle", this.Title);
       AdjustActive();
-      Connecr2Target(edc);
+      Connecr2Target(edc, this.Task2RequirementsTitle);
       foreach (Workload _wx in Workload)
         _wx.MakeConsistent();
+    }
+    internal void MakeConsistent(Entities edc, Func<Entities, Requirements> createDefault)
+    {
+      if (this.Task2RequirementsTitle == null)
+        this.Task2RequirementsTitle = createDefault(edc);
+      MakeConsistent(edc);
     }
     internal void CalculateWorkload()
     {
@@ -76,10 +84,6 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
     private void Connecr2Target(Entities edc, Requirements target)
     {
       this.Task2RequirementsTitle = target;
-      Connecr2Target(edc);
-    }
-    private void Connecr2Target(Entities edc)
-    {
       this.Task2MilestoneResolvedInTitle = this.Task2RequirementsTitle.Requirements2MilestoneTitle;
       this.Task2ProjectTitle = this.Task2RequirementsTitle.Requirements2MilestoneTitle.Milestone2ProjectTitle;
       if ((this.Task2CategoryTitle != null) && (Task2ProjectTitle != this.Task2CategoryTitle.Category2ProjectsTitle))

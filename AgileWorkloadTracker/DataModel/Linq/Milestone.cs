@@ -78,6 +78,28 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
         this.MilestoneStart = _start;
       if (_end != DateTime.MinValue)
         this.MilestoneEnd = _end;
+    }
+    /// <summary>
+    /// Calculates the workload.
+    /// </summary>
+    public void Update(Entities edc)
+    {
+      if (this.Milestone2ProjectTitle == null)
+        throw new ArgumentNullException("Milestone2ProjectTitle");
+      double _hours = 0;
+      DateTime _start = DateTime.MaxValue;
+      DateTime _end = DateTime.MinValue;
+      bool _AllInactive = true;
+      b_DefaulktRequiremenr = null;
+      foreach (Tasks _tsx in Tasks0)
+        _tsx.MakeConsistent(edc, CreateDefault);
+      foreach (Requirements _rqrx in this.Requirements)
+        _rqrx.Update(ref _hours, ref _start, ref _end, ref _AllInactive);
+      this.MilestoneHours = _hours;
+      if (_start != DateTime.MaxValue)
+        this.MilestoneStart = _start;
+      if (_end != DateTime.MinValue)
+        this.MilestoneEnd = _end;
       if (this.Milestone2StageTitle == null)
         this.Milestone2StageTitle = this.Milestone2ProjectTitle.Project2StageTitle;
       if (_AllInactive)
@@ -107,7 +129,7 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
         }
         _tskx.MoveToTarget(edc, _targetRequirement);
       }
-      Update();
+      Update(edc);
     }
     /// <summary>
     /// Moves this instance of <see cref="Milestone"/> to a new project before the selected milestone <paramref name="target"/>.
@@ -126,11 +148,18 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
       this.Milestone2StageTitle = this.Milestone2ProjectTitle.Project2StageTitle;
       foreach (DataModel.Linq.Requirements _rqrx in this.Requirements)
         _rqrx.MakeConsistent(edc);
-      Update();
+      Update(edc);
     }
     #endregion
 
     #region private
+    private Requirements b_DefaulktRequiremenr = null;
+    private Requirements CreateDefault(Entities edc)
+    {
+      if (b_DefaulktRequiremenr == null)
+        b_DefaulktRequiremenr = Linq.Requirements.CreateDefault(edc, this);
+      return b_DefaulktRequiremenr;
+    }
     private bool Inactive
     {
       get

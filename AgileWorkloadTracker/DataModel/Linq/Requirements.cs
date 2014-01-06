@@ -29,10 +29,6 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
     {
       foreach (Tasks _tix in this.Tasks)
       {
-        if (_tix.Task2MilestoneResolvedInTitle != this.Requirements2MilestoneTitle)
-          _tix.Task2MilestoneResolvedInTitle = this.Requirements2MilestoneTitle;
-        if (_tix.Task2ProjectTitle != this.Requirements2ProjectsTitle)
-          _tix.Task2ProjectTitle = this.Requirements2ProjectsTitle;
         _tix.MakeConsistent(edc);
       };
     }
@@ -87,6 +83,20 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
       };
       edc.Requirements.InsertOnSubmit(_ret);
       return _ret;
+    }
+    internal static Requirements CreateDefault(Entities edc, Milestone milestone)
+    {
+      string _defMilestoneTitle = String.Format("Dangling Tasks for {0}", milestone.Title);
+      Requirements _defR = new Requirements()
+      {
+        Body = String.Format("<div><p>Dangling Tasks for milestione {0} ID={1}.</p></div>", milestone.Title, milestone.Identyfikator.Value),
+        Requirements2MilestoneTitle = milestone,
+        Requirements2ProjectsTitle = milestone.Milestone2ProjectTitle,
+        RequirementsType = new Nullable<RequirementsType>(),
+        Title = _defMilestoneTitle, 
+      };
+      edc.Requirements.InsertOnSubmit(_defR);
+      return _defR;
     }
     #endregion
 
