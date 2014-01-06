@@ -132,11 +132,11 @@ namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
     #endregion
 
     #region public API
-    internal void Update()
+    internal void Update(DataModel.Linq.Entities edc)
     {
       if (base.Element == null)
         throw new ArgumentNullException("Element");
-      Element.Update();
+      Element.Update(edc);
     }
     internal void ForceMakeInactive(DataModel.Linq.Entities edc, MilestoneWrapper target)
     {

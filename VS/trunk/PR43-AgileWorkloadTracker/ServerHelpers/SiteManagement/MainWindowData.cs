@@ -230,7 +230,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     {
       BackgroundWorker _wrkr = sender as BackgroundWorker;
       MilestoneWrapper _mlstn = e.Argument as MilestoneWrapper;
-      _mlstn.Update();
+      _mlstn.Update(m_Entities);
       m_Entities.SubmitChanges();
       e.Result = GetMilestonesCollection();
     }
