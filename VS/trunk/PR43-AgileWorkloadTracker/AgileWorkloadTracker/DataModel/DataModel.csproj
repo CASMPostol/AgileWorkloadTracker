@@ -75,6 +75,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataModelExtensions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Linq\Element.cs" />
     <Compile Include="Linq\Entities.cs" />
@@ -82,7 +83,9 @@
     <Compile Include="Linq\Milestone.cs" />
     <Compile Include="Linq\Project.cs" />
     <Compile Include="Linq\Requirements.cs" />
+    <Compile Include="Linq\Status.cs" />
     <Compile Include="Linq\Tasks.cs" />
+    <Compile Include="Linq\Workload.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

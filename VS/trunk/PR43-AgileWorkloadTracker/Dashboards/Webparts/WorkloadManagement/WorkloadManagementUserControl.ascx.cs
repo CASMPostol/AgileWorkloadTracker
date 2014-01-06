@@ -607,7 +607,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
       get
       {
         if ( p_MyProjects == null )
-          p_MyProjects = from _association in Me.Estimation let _pidx = _association.Estimation2ProjectTitle where _pidx.Active.GetValueOrDefault( true ) select _pidx;
+          p_MyProjects = from _association in Me.Estimation let _pidx = _association.Estimation2ProjectTitle where _pidx != null && _pidx.Active.GetValueOrDefault(true) select _pidx;
         return p_MyProjects;
       }
     }
