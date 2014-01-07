@@ -72,7 +72,7 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
     {
       Requirements _ret = new Requirements()
       {
-        Body = Body + String.Format("<div><p>copy from milestone {0}.</p></div>", this.Requirements2MilestoneTitle.Title),
+        Body = Body + String.Format("<div><p>copy from milestone {0}[{1}].</p></div>", this.Requirements2MilestoneTitle.Title, this.Requirements2MilestoneTitle.Identyfikator.Value),
         EstimatedHours = Math.Max(0, this.EstimatedHours.GetValueOrDefault(0) - this.Hours.GetValueOrDefault(0)),
         Hours = 0,
         RequirementPriority = this.RequirementPriority,
@@ -89,7 +89,7 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
       string _defMilestoneTitle = String.Format("Dangling Tasks for {0}", milestone.Title);
       Requirements _defR = new Requirements()
       {
-        Body = String.Format("<div><p>Dangling Tasks for milestione {0} ID={1}.</p></div>", milestone.Title, milestone.Identyfikator.Value),
+        Body = String.Format("<div><p>Dangling Tasks for milestione {0}[{1}].</p></div>", milestone.Title, milestone.Identyfikator.Value),
         Requirements2MilestoneTitle = milestone,
         Requirements2ProjectsTitle = milestone.Milestone2ProjectTitle,
         RequirementsType = new Nullable<RequirementsType>(),
