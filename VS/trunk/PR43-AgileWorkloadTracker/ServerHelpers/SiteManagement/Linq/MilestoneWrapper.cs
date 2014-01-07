@@ -46,7 +46,8 @@ namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
       double _hours = 0;
       foreach (var _at in _activeTasksList)
         _hours += _at.Workload.Sum(x => x.Hours.GetValueOrDefault(0));
-      _description.AppendFormat("Accepted Hours={0:f0}, Estimated Hours={1:f0}, Hours in progress {2:f2}", milestone.AcceptedHours.GetValueOrDefault(0), milestone.EstimatedHours.GetValueOrDefault(0), _hours);
+      _description.AppendFormat("Hours={4:f0} Accepted Hours={0:f0} Estimated Hours={1:f0} Hours in progress {2:f2} Tasks {3}",
+                                 milestone.AcceptedHours.GetValueOrDefault(0), milestone.EstimatedHours.GetValueOrDefault(0), _hours, Element.Tasks0.Count(), milestone.MilestoneHours.GetValueOrDefault(0));
       _description.AppendLine();
       _description.AppendLine("Requirements:");
       NotInProgress = true;
