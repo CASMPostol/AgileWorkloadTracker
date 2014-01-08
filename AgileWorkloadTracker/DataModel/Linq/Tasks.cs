@@ -106,7 +106,7 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
         BaselineEnd = this.BaselineEnd,
         BaselineStart = this.BaselineStart,
         Body = Body + String.Format("<div><p>copy from milestone {0}.</p></div><div>{1}</div>", this.Task2MilestoneResolvedInTitle.Title, _Cmnts),
-        Task2CategoryTitle = null, // assigned in Connecr2Target 
+        Task2CategoryTitle =this.Task2CategoryTitle,
         Task2MilestoneDefinedInTitle = this.Task2MilestoneDefinedInTitle,
         Task2MilestoneResolvedInTitle = null, // assigned in Connecr2Target
         Task2ProjectTitle = null, // assigned in Connecr2Target
