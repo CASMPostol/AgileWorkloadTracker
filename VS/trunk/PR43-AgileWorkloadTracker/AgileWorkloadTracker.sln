@@ -44,6 +44,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiteManagement", "ServerHel
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataModel4SOM", "AgileWorkloadTracker\DataModel\DataModel4SOM.csproj", "{D25436C2-DF34-48B9-AD93-22DB904FD81D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scripts", "Scripts\Scripts.csproj", "{A46DAE36-02EA-4302-A476-7AF770CB20C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -174,6 +176,16 @@ Global
 		{D25436C2-DF34-48B9-AD93-22DB904FD81D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{D25436C2-DF34-48B9-AD93-22DB904FD81D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{D25436C2-DF34-48B9-AD93-22DB904FD81D}.Release|x86.ActiveCfg = Release|Any CPU
+		{A46DAE36-02EA-4302-A476-7AF770CB20C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A46DAE36-02EA-4302-A476-7AF770CB20C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A46DAE36-02EA-4302-A476-7AF770CB20C0}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A46DAE36-02EA-4302-A476-7AF770CB20C0}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A46DAE36-02EA-4302-A476-7AF770CB20C0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A46DAE36-02EA-4302-A476-7AF770CB20C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A46DAE36-02EA-4302-A476-7AF770CB20C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A46DAE36-02EA-4302-A476-7AF770CB20C0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A46DAE36-02EA-4302-A476-7AF770CB20C0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A46DAE36-02EA-4302-A476-7AF770CB20C0}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -189,5 +201,6 @@ Global
 		{23A9A63B-E396-4F45-9F6C-8E9BAA44BFDB} = {B898970E-9012-47B7-B7EF-9060EA698D57}
 		{3E8F983E-BAB2-499F-8BA6-2032B252F90E} = {B898970E-9012-47B7-B7EF-9060EA698D57}
 		{D25436C2-DF34-48B9-AD93-22DB904FD81D} = {B898970E-9012-47B7-B7EF-9060EA698D57}
+		{A46DAE36-02EA-4302-A476-7AF770CB20C0} = {B898970E-9012-47B7-B7EF-9060EA698D57}
 	EndGlobalSection
 EndGlobal
