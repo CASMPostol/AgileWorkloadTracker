@@ -16,13 +16,14 @@
 using System;
 using System.ComponentModel;
 using CAS.AgileWorkloadTracker.DataModel.Linq;
+using CAS.SharePoint.ComponentModel;
 
 namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
 {
   /// <summary>
   /// Wrapper of the <see cref="Element"/> to be used by the user interface
   /// </summary>
-  /// <typeparam name="ElementType">The type of the lement type.</typeparam>
+  /// <typeparam name="ElementType">The type of <see cref="ElementWrapper"/>.</typeparam>
   internal class ElementWrapper<ElementType> : INotifyPropertyChanged
     where ElementType : Element
   {

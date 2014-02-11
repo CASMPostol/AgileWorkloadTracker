@@ -19,25 +19,24 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using CAS.AgileWorkloadTracker.SiteManagement.Linq;
+using CAS.SharePoint.ViewModel;
 
 namespace CAS.AgileWorkloadTracker.SiteManagement
 {
+
   /// <summary>
   /// class MainWindowData
   /// </summary>
-  sealed internal class MainWindowData : System.ComponentModel.INotifyPropertyChanged, IDisposable
+  sealed internal class MainWindowData : ViewModelBackgroundWorker
   {
 
     #region public
 
-    #region ctor
+    #region creator
     public MainWindowData()
     {
       SiteURL = Properties.Settings.Default.SiteURL;
       MilestoneCollection = new ObservableCollection<MilestoneWrapper>();
-      m_BackgroundWorker.DoWork += m_BackgroundWorker_DoWork;
-      m_BackgroundWorker.ProgressChanged += m_BackgroundWorker_ProgressChanged;
-      m_BackgroundWorker.RunWorkerCompleted += m_BackgroundWorker_RunWorkerCompleted;
     }
     #endregion
 
@@ -50,7 +49,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
       }
       set
       {
-        PropertyChanged.RaiseHandler<string>(value, ref b_SiteURL, "SiteURL", this);
+        RaiseHandler<string>(value, ref b_SiteURL, "SiteURL", this);
       }
     }
     public ObservableCollection<MilestoneWrapper> MilestoneCollection
@@ -61,18 +60,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
       }
       set
       {
-        PropertyChanged.RaiseHandler<ObservableCollection<MilestoneWrapper>>(value, ref b_MilestoneCollection, "MilestoneCollection", this);
-      }
-    }
-    public bool NotBusy
-    {
-      get
-      {
-        return b_NotBusy;
-      }
-      set
-      {
-        PropertyChanged.RaiseHandler<bool>(value, ref b_NotBusy, "NotBusy", this);
+        RaiseHandler<ObservableCollection<MilestoneWrapper>>(value, ref b_MilestoneCollection, "MilestoneCollection", this);
       }
     }
     #endregion
@@ -80,12 +68,12 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     #region API
     internal void Connect(RunWorkerCompletedEventHandler completedEventHandler)
     {
-      if (m_BackgroundWorker.IsBusy)
+      if (!NotBusy)
         throw new System.ComponentModel.InvalidAsynchronousStateException("The operation cannot be started because the background worker is busy");
       if (completedEventHandler == null)
         throw new ArgumentNullException("result");
-      CheckDisposed();
-      m_BWDoWorkEventHandler = m_BackgroundWorker_DoConnect;
+      CheckDisposed<MainWindowData>();
+      m_BWDoWorkEventHandler = BackgroundWorker_DoConnect;
       m_BWCompletedEventHandler = completedEventHandler;
       StartBackgroundWorker();
     }
@@ -93,68 +81,58 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     {
       if (!Connected)
         return;
-      if (m_BackgroundWorker.IsBusy)
+      if (!NotBusy)
         throw new System.ComponentModel.InvalidAsynchronousStateException("The operation cannot be started because the background worker is busy");
-      m_BWDoWorkEventHandler = m_BackgroundWorker_DoDisconnect;
+      m_BWDoWorkEventHandler = BackgroundWorker_DoDisconnect;
       m_BWCompletedEventHandler = completedEventHandler;
       StartBackgroundWorker();
     }
     internal bool Connected { get { return m_Entities != null; } }
     internal void Update(MilestoneWrapper milestoneWrapper, RunWorkerCompletedEventHandler completedEventHandler)
     {
-      CheckDisposed();
+      CheckDisposed<MainWindowData>();
       if (milestoneWrapper == null)
         throw new ArgumentNullException("milestoneWrapper");
-      m_BWDoWorkEventHandler = m_BackgroundWorker_DoMakeInactive;
+      m_BWDoWorkEventHandler = BackgroundWorker_DoMakeInactive;
       m_BWCompletedEventHandler = completedEventHandler;
       StartBackgroundWorker(milestoneWrapper);
     }
     internal void ForceMakeInactive(MilestoneWrapper source, MilestoneWrapper target, RunWorkerCompletedEventHandler completedEventHandler)
     {
-      CheckDisposed();
+      CheckDisposed<MainWindowData>();
       if (source == null)
         throw new ArgumentNullException("source");
       if (target == null)
         throw new ArgumentNullException("target");
-      m_BWDoWorkEventHandler = m_BackgroundWorker_DoForceMakeInactive;
+      m_BWDoWorkEventHandler = BackgroundWorker_DoForceMakeInactive;
       m_BWCompletedEventHandler = completedEventHandler;
       StartBackgroundWorker(new ForceMakeInactiveArgument() { Source = source, Target = target });
     }
-
     internal void Move(MilestoneWrapper source, MilestoneWrapper target, RunWorkerCompletedEventHandler completedEventHandler)
     {
-      CheckDisposed();
+      CheckDisposed<MainWindowData>();
       if (source == null)
         throw new ArgumentNullException("source");
       if (target == null)
         throw new ArgumentNullException("target");
-      m_BWDoWorkEventHandler = m_BackgroundWorker_DoMove;
+      m_BWDoWorkEventHandler = BackgroundWorker_DoMove;
       m_BWCompletedEventHandler = completedEventHandler;
       StartBackgroundWorker(new ForceMakeInactiveArgument() { Source = source, Target = target });
     }
-
     internal static void GetRequirements(MilestoneWrapper milestoneWrapper, Action<object, RunWorkerCompletedEventArgs> GetRequirementsCompleted)
     {
       throw new NotImplementedException();
     }
-
     #endregion
 
-    #endregion
-
-    #region INotifyPropertyChanged Members
-    public event PropertyChangedEventHandler PropertyChanged;
     #endregion
 
     #region IDisposable Members
-    public void Dispose()
+    protected override void Dispose(bool disposing)
     {
-      if (m_Disposed)
-        return;
-      if (m_BackgroundWorker == null)
-        m_BackgroundWorker.Dispose();
-      m_BackgroundWorker = null;
-      m_Disposed = true;
+      if (disposing)
+        DisposeEntities();
+      base.Dispose(disposing);
     }
     #endregion
 
@@ -166,96 +144,60 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     }
     private ObservableCollection<MilestoneWrapper> b_MilestoneCollection;
     private string b_SiteURL;
-    private CAS.AgileWorkloadTracker.DataModel.Linq.Entities m_Entities;  //Must be disposed.
-    private bool m_Disposed = false;
-    private bool b_NotBusy = true;
+    private DataModel.Linq.Entities m_Entities;  //Must be disposed.
 
     #region BackgroundWorker
-    private void StartBackgroundWorker()
-    {
-      NotBusy = false;
-      m_BackgroundWorker.RunWorkerAsync();
-    }
-    private void StartBackgroundWorker(object argument)
-    {
-      NotBusy = false;
-      m_BackgroundWorker.RunWorkerAsync(argument);
-    }
-    private System.ComponentModel.BackgroundWorker m_BackgroundWorker = new BackgroundWorker()
-      {
-        WorkerReportsProgress = true,
-        WorkerSupportsCancellation = false
-      };
     private DoWorkEventHandler m_BWDoWorkEventHandler = null;
     private RunWorkerCompletedEventHandler m_BWCompletedEventHandler = null;
     private ProgressChangedEventHandler m_BWProgressChangedEventHandler = null;
-    private void m_BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-    {
-      m_BWCompletedEventHandler(sender, e);
-      m_BWCompletedEventHandler = null;
-      NotBusy = true;
-    }
-    private void m_BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-    {
-      if (m_BWProgressChangedEventHandler != null)
-        m_BWProgressChangedEventHandler(sender, e);
-    }
-    private void m_BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-    {
-      e.Cancel = false;
-      e.Result = false;
-      if (m_BWDoWorkEventHandler == null)
-        return;
-      m_BWDoWorkEventHandler(sender, e);
-      m_BWDoWorkEventHandler = null;
-    }
     //Dedicated DoWork delegates
-    private void m_BackgroundWorker_DoConnect(object sender, DoWorkEventArgs e)
+    private object BackgroundWorker_DoConnect(object argument, Action<ProgressChangedEventArgs> progress, Func<bool> cancellationPending)
     {
-      e.Cancel = false;
-      e.Result = GetMilestonesCollection();
+      return GetMilestonesCollection();
     }
-
-    private void m_BackgroundWorker_DoDisconnect(object sender, DoWorkEventArgs e)
+    private object BackgroundWorker_DoDisconnect(object argument, Action<ProgressChangedEventArgs> progress, Func<bool> cancellationPending)
     {
-      e.Cancel = false;
-      e.Result = null;
-      if (m_Entities == null)
-        return;
-      m_Entities.Dispose();
-      m_Entities = null;
+      progress(new ProgressChangedEventArgs(0, "DoDisconnect starting"));
+      DisposeEntities();
       Properties.Settings.Default.Save();
+      progress(new ProgressChangedEventArgs(100, "DoDisconnect ending"));
+      return null;
     }
-    private void m_BackgroundWorker_DoMakeInactive(object sender, DoWorkEventArgs e)
+    private object BackgroundWorker_DoMakeInactive(object argument, Action<ProgressChangedEventArgs> progress, Func<bool> cancellationPending)
     {
-      BackgroundWorker _wrkr = sender as BackgroundWorker;
-      MilestoneWrapper _mlstn = e.Argument as MilestoneWrapper;
+      progress(new ProgressChangedEventArgs(0, "DoMakeInactive starting"));
+      MilestoneWrapper _mlstn = argument as MilestoneWrapper;
       _mlstn.Update(m_Entities);
       m_Entities.SubmitChanges();
-      e.Result = GetMilestonesCollection();
+      ObservableCollection<MilestoneWrapper> _ret = GetMilestonesCollection();
+      progress(new ProgressChangedEventArgs(100, "DoMakeInactive ending"));
+      return _ret;
     }
-    private void m_BackgroundWorker_DoForceMakeInactive(object sender, DoWorkEventArgs e)
+    private object BackgroundWorker_DoForceMakeInactive(object argument, Action<ProgressChangedEventArgs> progress, Func<bool> cancellationPending)
     {
-      BackgroundWorker _wrkr = sender as BackgroundWorker;
-      ForceMakeInactiveArgument _agumnt = e.Argument as ForceMakeInactiveArgument;
+      progress(new ProgressChangedEventArgs(0, "DoForceMakeInactive starting"));
+      ForceMakeInactiveArgument _agumnt = argument as ForceMakeInactiveArgument;
       _agumnt.Source.ForceMakeInactive(m_Entities, _agumnt.Target);
       m_Entities.SubmitChanges();
-      e.Result = GetMilestonesCollection();
+      ObservableCollection<MilestoneWrapper> _ret = GetMilestonesCollection();
+      progress(new ProgressChangedEventArgs(100, "DoForceMakeInactive ending"));
+      return _ret;
     }
-    private void m_BackgroundWorker_DoMove(object sender, DoWorkEventArgs e)
+    private object BackgroundWorker_DoMove(object argument, Action<ProgressChangedEventArgs> progress, Func<bool> cancellationPending)
     {
-      BackgroundWorker _wrkr = sender as BackgroundWorker;
-      ForceMakeInactiveArgument _agumnt = e.Argument as ForceMakeInactiveArgument;
+      progress(new ProgressChangedEventArgs(0, "DoMove starting"));
+      ForceMakeInactiveArgument _agumnt = argument as ForceMakeInactiveArgument;
       _agumnt.Source.Move(m_Entities, _agumnt.Target);
       m_Entities.SubmitChanges();
-      e.Result = GetMilestonesCollection();
+      ObservableCollection<MilestoneWrapper> _ret = GetMilestonesCollection();
+      progress(new ProgressChangedEventArgs(100, "DoMove ending"));
+      return _ret;
     }
     #endregion
 
     private ObservableCollection<MilestoneWrapper> GetMilestonesCollection()
     {
-      if (m_Entities != null)
-        m_Entities.Dispose();
+      DisposeEntities();
       m_Entities = new DataModel.Linq.Entities(SiteURL);
       List<DataModel.Linq.Milestone> _mls = (from _mlsx in m_Entities.Milestone
                                              let _prt = _mlsx.Milestone2ProjectTitle.Title
@@ -270,10 +212,27 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
         _empty.Add(new MilestoneWrapper(_mstx));
       return new ObservableCollection<MilestoneWrapper>(_empty);
     }
-    private void CheckDisposed()
+    private void DisposeEntities()
     {
-      if (m_Disposed)
-        throw new ObjectDisposedException(typeof(MainWindowData).Name);
+      if (m_Entities == null)
+        return;
+      m_Entities.Dispose();
+      m_Entities = null;
+    }
+    #endregion
+
+    #region BaseModelViewBackgroundWorker implementation
+    protected override ViewModelBackgroundWorker.DoWorkEventHandler GetDoWorkEventHandler
+    {
+      get { return m_BWDoWorkEventHandler; }
+    }
+    protected override RunWorkerCompletedEventHandler CompletedEventHandler
+    {
+      get { return m_BWCompletedEventHandler; }
+    }
+    protected override ProgressChangedEventHandler ProgressChangedEventHandler
+    {
+      get { return m_BWProgressChangedEventHandler; }
     }
     #endregion
 
