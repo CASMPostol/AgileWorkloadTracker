@@ -22,7 +22,7 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
   /// <summary>
   /// Entity partial class Milestone
   /// </summary>
-  partial class Milestone
+  partial class Milestone : IComparable<Milestone>
   {
 
     #region public API
@@ -175,5 +175,28 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
     }
     #endregion
 
+    #region IComparable<Milestone> Members
+    /// <summary>
+    /// Compares the current object with another object of the same type.
+    /// </summary>
+    /// <param name="other">An object to compare with this object.</param>
+    /// <returns>
+    /// A value that indicates the relative order of the objects being compared. The return value has the following meanings: 
+    /// Value Meaning Less than zero This object is less than the <paramref name="other" /> parameter.
+    /// Zero This object is equal to <paramref name="other" />. 
+    /// Greater than zero This object is greater than <paramref name="other" />.
+    /// </returns>
+    public int CompareTo(Milestone other)
+    {
+      string _xProjectTitle = this.Milestone2ProjectTitle == null ? " " : this.Milestone2ProjectTitle.Title;
+      string _yProjectTitle = other.Milestone2ProjectTitle == null ? " " : other.Milestone2ProjectTitle.Title;
+      int _result = _xProjectTitle.CompareTo(_yProjectTitle);
+      if (_result == 0)
+        _result = this.SortOrder.GetValueOrDefault(-99999).CompareTo(other.SortOrder.GetValueOrDefault(-99999));
+      if (_result == 0)
+        _result = this.Title.CompareTo(other.Title);
+      return _result;
+    }
+    #endregion
   }
 }

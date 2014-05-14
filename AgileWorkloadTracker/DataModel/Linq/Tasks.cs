@@ -21,7 +21,7 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
   /// <summary>
   /// Entity partial class Tasks
   /// </summary>
-  partial class Tasks
+  partial class Tasks : IComparable<Tasks>
   {
     #region public API
     internal void MakeConsistent(Entities edc)
@@ -75,7 +75,6 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
         _tsk = MakeCopy(edc);
       _tsk.Connecr2Target(edc, target);
     }
-
     #endregion
 
     #region private
@@ -106,7 +105,7 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
         BaselineEnd = this.BaselineEnd,
         BaselineStart = this.BaselineStart,
         Body = Body + String.Format("<div><p>copy from milestone {0}.</p></div><div>{1}</div>", this.Task2MilestoneResolvedInTitle.Title, _Cmnts),
-        Task2CategoryTitle =this.Task2CategoryTitle,
+        Task2CategoryTitle = this.Task2CategoryTitle,
         Task2MilestoneDefinedInTitle = this.Task2MilestoneDefinedInTitle,
         Task2MilestoneResolvedInTitle = null, // assigned in Connecr2Target
         Task2ProjectTitle = null, // assigned in Connecr2Target
@@ -153,5 +152,30 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
     }
     #endregion
 
+
+    #region IComparable<Tasks> Members
+
+    /// <summary>
+    /// Compares the current object with another object of the same type.
+    /// </summary>
+    /// <param name="other">An object to compare with this object.</param>
+    /// <returns>
+    /// A value that indicates the relative order of the objects being compared. The return value has the following meanings: 
+    /// Value Meaning:
+    /// Less than zero This object is less than the <paramref name="other" /> parameter.
+    /// Zero This object is equal to <paramref name="other" />. 
+    /// Greater than zero This object is greater than <paramref name="other" />.
+    /// </returns>
+    public int CompareTo(Tasks other)
+    {
+      string _xRequirementTitle = this.Task2RequirementsTitle == null ? " " : this.Task2RequirementsTitle.Title;
+      string _yRequirementTitle = other.Task2RequirementsTitle == null ? " " : other.Task2RequirementsTitle.Title;
+      int _result = _xRequirementTitle.CompareTo(_yRequirementTitle);
+      if (_result == 0)
+        _result = this.Title.CompareTo(other.Title);
+      return _result;
+    }
+
+    #endregion
   }
 }
