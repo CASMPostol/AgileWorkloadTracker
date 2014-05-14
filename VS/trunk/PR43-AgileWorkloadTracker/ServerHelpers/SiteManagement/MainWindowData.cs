@@ -200,12 +200,9 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
       DisposeEntities();
       m_Entities = new DataModel.Linq.Entities(SiteURL);
       List<DataModel.Linq.Milestone> _mls = (from _mlsx in m_Entities.Milestone
-                                             let _prt = _mlsx.Milestone2ProjectTitle.Title
-                                             where _mlsx.Active.Value
-                                             orderby _mlsx.Title
-                                             orderby _mlsx.SortOrder.GetValueOrDefault(-99999) ascending
-                                             orderby _prt
+                                             where _mlsx.Active.GetValueOrDefault(true)
                                              select _mlsx).ToList();
+      _mls.Sort();
       List<MilestoneWrapper> _empty = new List<MilestoneWrapper>();
       _empty.Add(new MilestoneWrapper(null));
       foreach (var _mstx in _mls)

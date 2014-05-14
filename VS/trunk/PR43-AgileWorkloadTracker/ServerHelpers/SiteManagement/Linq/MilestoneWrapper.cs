@@ -27,7 +27,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
   internal class MilestoneWrapper : ElementWrapper<DataModel.Linq.Milestone>
   {
 
-    #region ctor
+    #region creator
     public MilestoneWrapper(DataModel.Linq.Milestone milestone)
       : base(milestone)
     {
@@ -37,10 +37,9 @@ namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
       }
       b_ProjectTitle = milestone.Milestone2ProjectTitle.Title;
       List<DataModel.Linq.Tasks> _activeTasksList = (from _tsx in Element.Tasks0
-                                                     let _rt = _tsx.Task2RequirementsTitle.Title
                                                      where _tsx.Active.GetValueOrDefault(false)
-                                                     orderby _rt
                                                      select _tsx).ToList();
+      _activeTasksList.Sort();
       b_ActiveTasks = _activeTasksList.Count;
       StringBuilder _description = new StringBuilder();
       double _hours = 0;
