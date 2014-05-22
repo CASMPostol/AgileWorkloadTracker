@@ -325,7 +325,7 @@ namespace CAS.ITRDataAccess.SharePoint
           if ( !_row.IsID_PRACOWNIKANull() )
             _new.Workload2ResourcesTitle = GetOrAdd<Resources>( m_Entities.Resources, m_ResourcesDictionaryTimeTracking, _row.ID_PRACOWNIKA );
           _new.Workload2StageTitle = _new.Workload2ProjectTitle.Project2StageTitle;
-          _new.WorkloadDate = _row.IsDATANull() ? SPExtensions.DateTimeNull : _row.DATA;
+          _new.WorkloadDate = _row.IsDATANull() ? SPExtensions.SPMinimum : _row.DATA;
           _new.Workload2TaskTitle = CreateTask( m_Entities, _row.RODZAJPRACYRow, _new.Workload2ProjectTitle, _new.Workload2ResourcesTitle, _new.WorkloadDate.Value );
           _new.ReadOnly = true;
           _new.WeekNumber = WeekNumber( _new.WorkloadDate.Value );
@@ -385,7 +385,7 @@ namespace CAS.ITRDataAccess.SharePoint
         if ( !_newProject.ProjectType.HasValue )
           _newProject.ProjectType = _row.PODKATEGORIERow == null ? ProjectType.None : ProjectsMapping.m_ProjectTypeMapping[ _row.PODKATEGORIERow.ID ];
         if ( !_newProject.ProjectWarrantyDate.HasValue )
-          _newProject.ProjectWarrantyDate = _row.IsDATA_GWARANCJANull() ? SPExtensions.DateTimeNull : _row.DATA_GWARANCJA;
+          _newProject.ProjectWarrantyDate = _row.IsDATA_GWARANCJANull() ? SPExtensions.SPMinimum : _row.DATA_GWARANCJA;
       }
       m_Entities.SubmitChanges();
     }
@@ -397,14 +397,14 @@ namespace CAS.ITRDataAccess.SharePoint
         Contracts _newContract = Create<Contracts>( m_Entities.Contracts, m_ContractDictionary, _row.IsNAZWA_KROTKANull() ? "N/A" : _row.NAZWA_KROTKA, _row.ID );
         _newContract.Body = _row.IsPRZEDMIOTNull() ? "N/A" : _row.PRZEDMIOT.SPValidSubstring();
         _newContract.Body = _row.IsPRZEDMIOTNull() ? "N/A/" : _row.PRZEDMIOT.SPValidSubstring();
-        _newContract.ContractDate = _row.IsDATA_UMOWYNull() ? SPExtensions.DateTimeNull : _row.DATA_UMOWY;
-        _newContract.ContractEndDate = _row.IsKONIECNull() ? SPExtensions.DateTimeNull : _row.KONIEC;
+        _newContract.ContractDate = _row.IsDATA_UMOWYNull() ? SPExtensions.SPMinimum : _row.DATA_UMOWY;
+        _newContract.ContractEndDate = _row.IsKONIECNull() ? SPExtensions.SPMinimum : _row.KONIEC;
         _newContract.ContractNumber = _row.IsNUMERNull() ? "N/A" : _row.NUMER;
         _newContract.ContractOffer = _row.IsOFERTANull() ? "N/A" : _row.OFERTA;
         _newContract.Contracts2PartnersTitle = _row.IsID_INWESTORANull() ? null : GetOrAdd<Partners>( m_Entities.Partners, m_PartnersDictionary, _row.ID_INWESTORA );
         _newContract.ContractSubject = _row.IsNAZWA_KROTKANull() ? "N/A" : _row.NAZWA_KROTKA;
         _newContract.ContractValue = _row.IsKONTRAKTNull() ? 0 : Convert.ToDouble( _row.KONTRAKT );
-        _newContract.ContractWarrantyDate = _row.IsGWARANCJANull() ? SPExtensions.DateTimeNull : _row.GWARANCJA;
+        _newContract.ContractWarrantyDate = _row.IsGWARANCJANull() ? SPExtensions.SPMinimum : _row.GWARANCJA;
         _newContract.Currency = _row.IsWALUTANull() ? Currency.Invalid : GetCurrency( _row.WALUTA );
       }
       m_Entities.SubmitChanges();
