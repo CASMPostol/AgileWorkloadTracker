@@ -219,19 +219,44 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     #endregion
 
     #region BaseModelViewBackgroundWorker implementation
+    /// <summary>
+    /// Gets the do work event handler.
+    /// </summary>
+    /// <value>
+    /// The do work event handler.
+    /// </value>
     protected override ViewModelBackgroundWorker.DoWorkEventHandler GetDoWorkEventHandler
     {
       get { return m_BWDoWorkEventHandler; }
     }
+    /// <summary>
+    /// Gets the completed event handler.
+    /// </summary>
+    /// <value>
+    /// The completed event handler.
+    /// </value>
     protected override RunWorkerCompletedEventHandler CompletedEventHandler
     {
       get { return m_BWCompletedEventHandler; }
     }
+    /// <summary>
+    /// Gets the progress changed event handler.
+    /// </summary>
+    /// <value>
+    /// The progress changed event handler.
+    /// </value>
     protected override ProgressChangedEventHandler ProgressChangedEventHandler
     {
       get { return m_BWProgressChangedEventHandler; }
     }
+    /// <summary>
+    /// Called when the NotBusy has been changed].
+    /// </summary>
+    protected override void OnNotBusyChanged()
+    {
+    }
     #endregion
+
 
   }
 }
