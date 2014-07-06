@@ -1,19 +1,4 @@
-﻿//<summary>
-//  Title   : Assembly information
-//  System  : Microsoft Visual C# .NET 2012
-//  $LastChangedDate$
-//  $Rev$
-//  $LastChangedBy$
-//  $URL$
-//  $Id$
-//
-//  Copyright (C) 2013, CAS LODZ POLAND.
-//  TEL: +48 (42) 686 25 47
-//  mailto://techsupp@cas.eu
-//  http://www.cas.eu
-//</summary>
-      
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -35,6 +20,6 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("99B74909-7289-4CE0-B9D7-62F168C63190")]
-[assembly: AssemblyVersion("1.10.03.*")]
-[assembly: AssemblyFileVersion("1.10.03")]
+[assembly: AssemblyVersion("1.10.05.*")]
+[assembly: AssemblyFileVersion("1.10.05")]
 
