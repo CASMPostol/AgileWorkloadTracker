@@ -2404,7 +2404,6 @@
             </Paragraphs>
             <rd:DefaultName>Textbox70</rd:DefaultName>
             <Top>2.6953cm</Top>
-            <Left>0cm</Left>
             <Height>0.6cm</Height>
             <Width>3.63771cm</Width>
             <ZIndex>2</ZIndex>
@@ -3759,7 +3758,6 @@
               </Filter>
             </Filters>
             <Top>8.62224cm</Top>
-            <Left>0cm</Left>
             <Height>2.4cm</Height>
             <Width>26.57491cm</Width>
             <ZIndex>3</ZIndex>
@@ -3786,7 +3784,6 @@
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
             <Top>7.98696cm</Top>
-            <Left>0cm</Left>
             <Height>0.6cm</Height>
             <Width>2.87042cm</Width>
             <ZIndex>4</ZIndex>
@@ -3850,12 +3847,16 @@
       <DataType>Integer</DataType>
       <DefaultValue>
         <Values>
-          <Value>2013</Value>
+          <Value>2014</Value>
         </Values>
       </DefaultValue>
       <Prompt>Select year</Prompt>
       <ValidValues>
         <ParameterValues>
+          <ParameterValue>
+            <Value>2014</Value>
+            <Label>2014</Label>
+          </ParameterValue>
           <ParameterValue>
             <Value>2013</Value>
             <Label>2013</Label>
