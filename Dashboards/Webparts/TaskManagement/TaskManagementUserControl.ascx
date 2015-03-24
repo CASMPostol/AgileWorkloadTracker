@@ -142,10 +142,26 @@
                         </asp:TableRow>
                         <asp:TableRow>
                             <asp:TableCell>
-                                <asp:Label ID="m_DueDateLabel" runat="server" CssClass="Label" Text="DueDate" />
+                                <asp:Label ID="m_DueDateLabel" runat="server" CssClass="Label" Text="Due date" />
                             </asp:TableCell>
                             <asp:TableCell>
                                 <SharePoint:DateTimeControl ID="m_DueDateDateTimeControl" DateOnly="true" runat="server" />
+                            </asp:TableCell>
+                        </asp:TableRow>
+                        <asp:TableRow>
+                            <asp:TableCell>
+                                <<asp:Label ID="m_WorkloadStart" runat="server" CssClass="Label" Text="Workload - start" />
+                            </asp:TableCell>
+                            <asp:TableCell>
+                                <SharePoint:DateTimeControl ID="m_WorkloadStartDateTimeControl" DateOnly="false" runat="server" />
+                            </asp:TableCell>
+                        </asp:TableRow>
+                        <asp:TableRow>
+                            <asp:TableCell>
+                                <<asp:Label ID="m_WorkloadEnd" runat="server" CssClass="Label" Text="Workload - end" />
+                            </asp:TableCell>
+                            <asp:TableCell>
+                                <SharePoint:DateTimeControl ID="m_WorkloadEndDateTimeControl" DateOnly="false" runat="server" />
                             </asp:TableCell>
                         </asp:TableRow>
                     </asp:Table>
