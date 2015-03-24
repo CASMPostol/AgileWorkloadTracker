@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
-  <ContentType ID="0x01005d39260836ce498d8e0d443ad5cad3ac"
+  <ContentType ID="0x01085d39260836ce498d8e0d443ad5cad3ac"
                Name="Tasks"
                Group="CAS Agile Workload Tracker"
                Description="Tasks Content Type"
@@ -11,7 +11,7 @@
       <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" DisplayName="Task" />
       <FieldRef ID="{77D4EF86-BA42-4604-9C33-BEF60CAFBF51}" Name="Task2ProjectTitle" />
       <FieldRef ID="{23B9AC4B-8670-4407-934C-698BD8591876}" Name="Task2CategoryTitle" />
-      <FieldRef ID="{10DE0472-6E78-472E-B9DF-E883DA6F35D8}" Name="Task2ResourcesTitle" />
+      <FieldRef ID="{53101f38-dd2e-458c-b245-0c236cc13d1a}" Name="AssignedTo" />
       <FieldRef ID="{3CDE96BD-665B-45B6-9EFB-368262C8140D}" Name="Task2MilestoneDefinedInTitle" />
       <FieldRef ID="{689D6173-44B0-4953-839F-4AFBBCB51138}" Name="Task2MilestoneResolvedInTitle" />
       <FieldRef ID="{25CF1009-2486-4500-BD14-F22F92F60E16}" Name="Task2RequirementsTitle" />
@@ -20,11 +20,13 @@
       <FieldRef ID="{AF244E9A-DE86-43B9-BA90-0904FE6BCBB8}" Name="Task2SResolutionTitle" />
       <FieldRef ID="{3738BE6B-264A-4AAF-A178-30C5790657AE}" Name="Task2TypeTitle" />
       <FieldRef ID="{7662cd2c-f069-4dba-9e35-082cf976e170}" Name="Body" />
+      <FieldRef ID="{cd21b4c2-6841-4f9e-a23a-738a65f99889}" Name="TaskDueDate" />
       <FieldRef ID="{EAA41E78-ABA3-4C11-8AEA-A40990B0E772}" Name="TaskStart" />
       <FieldRef ID="{E38C4128-D2B4-4DF1-987C-DD56881EB75E}" Name="TaskEnd" />
       <FieldRef ID="{0F5E1501-65E9-413E-BE58-3637B68349F6}" Name="BaselineStart" />
       <FieldRef ID="{C00DF562-CE82-4551-A325-7E08106E8600}" Name="BaselineEnd" />
       <FieldRef ID="{50EDDF56-D28E-44C6-B6CB-109FBCDE886F}" Name="Active" />
+      <FieldRef ID="{2B9FEE87-CC98-4CA5-8BA7-C547D05AFCDD}" Name="Hours" />
     </FieldRefs>
   </ContentType>
 </Elements>

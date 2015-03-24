@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PR44-SharePoint", "PR44-SharePoint", "{D7623CBA-3272-4F38-ACF9-2AFF107DDAEA}"
 	ProjectSection(SolutionItems) = preProject
@@ -43,6 +43,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakeConsistent", "ServerHelpers\MakeConsistent\MakeConsistent.csproj", "{A588FB6F-FECC-4F6D-8A50-191AF542AF55}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharePoint", "..\PR44-SharePoint\Libraries\SharePoint\SharePoint.csproj", "{B9D9FCCA-6132-4BF5-BC17-32EA752D6AD7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPExplorer", "..\..\SmartFactory\PR44-SharePoint\Tools\SPExplorer\SPExplorer.csproj", "{66ABD095-6B8F-411D-9BCF-744287833269}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -182,6 +184,18 @@ Global
 		{B9D9FCCA-6132-4BF5-BC17-32EA752D6AD7}.Release|x64.ActiveCfg = Release|x64
 		{B9D9FCCA-6132-4BF5-BC17-32EA752D6AD7}.Release|x64.Build.0 = Release|x64
 		{B9D9FCCA-6132-4BF5-BC17-32EA752D6AD7}.Release|x86.ActiveCfg = Release|Any CPU
+		{66ABD095-6B8F-411D-9BCF-744287833269}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66ABD095-6B8F-411D-9BCF-744287833269}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66ABD095-6B8F-411D-9BCF-744287833269}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{66ABD095-6B8F-411D-9BCF-744287833269}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{66ABD095-6B8F-411D-9BCF-744287833269}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{66ABD095-6B8F-411D-9BCF-744287833269}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{66ABD095-6B8F-411D-9BCF-744287833269}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66ABD095-6B8F-411D-9BCF-744287833269}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66ABD095-6B8F-411D-9BCF-744287833269}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{66ABD095-6B8F-411D-9BCF-744287833269}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{66ABD095-6B8F-411D-9BCF-744287833269}.Release|x64.ActiveCfg = Release|Any CPU
+		{66ABD095-6B8F-411D-9BCF-744287833269}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -196,5 +210,6 @@ Global
 		{A46DAE36-02EA-4302-A476-7AF770CB20C0} = {B898970E-9012-47B7-B7EF-9060EA698D57}
 		{A588FB6F-FECC-4F6D-8A50-191AF542AF55} = {B898970E-9012-47B7-B7EF-9060EA698D57}
 		{B9D9FCCA-6132-4BF5-BC17-32EA752D6AD7} = {D7623CBA-3272-4F38-ACF9-2AFF107DDAEA}
+		{66ABD095-6B8F-411D-9BCF-744287833269} = {B898970E-9012-47B7-B7EF-9060EA698D57}
 	EndGlobalSection
 EndGlobal

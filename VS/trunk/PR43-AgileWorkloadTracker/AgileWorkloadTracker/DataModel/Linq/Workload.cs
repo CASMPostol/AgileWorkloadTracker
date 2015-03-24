@@ -30,10 +30,10 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
     }
     internal void MakeConsistent()
     {
-      if (this.Workload2TaskTitle == null)
+      if (this.Workload2TaskID == null)
         throw new ArgumentNullException("Workload2TaskTitle", this.Title);
-      if (this.Workload2ProjectTitle != this.Workload2TaskTitle.Task2ProjectTitle)
-        this.Workload2ProjectTitle = this.Workload2TaskTitle.Task2ProjectTitle;
+      if (this.Workload2ProjectTitle != this.Workload2TaskID.Task2ProjectTitle)
+        this.Workload2ProjectTitle = this.Workload2TaskID.Task2ProjectTitle;
       if (this.Workload2StageTitle == null)
         this.Workload2StageTitle = this.Workload2ProjectTitle.Project2StageTitle;
     }

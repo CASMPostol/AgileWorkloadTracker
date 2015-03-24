@@ -9,6 +9,8 @@
       <FieldRef ID="{3A0E382C-AEC2-4CD2-9964-2E68AEEFCCA7}" Name="RequirementsType" />
       <FieldRef ID="{3F44DBFA-1B29-4E79-8929-051D138FBF49}" Name="Requirements2ProjectsTitle" />
       <FieldRef ID="{3AA591F4-6EE6-4938-8626-C9CA0BBBA3EC}" Name="Requirements2MilestoneTitle" />
+      <FieldRef ID="{2B9FEE87-CC98-4CA5-8BA7-C547D05AFCDD}" Name="Hours" />
+      <FieldRef ID="{90E4BBCA-984F-469D-A2E3-26526DF153C6}" Name="EstimatedHours" />
     </FieldRefs>
   </ContentType>
 </Elements>

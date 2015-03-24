@@ -2,7 +2,7 @@
 <List VersioningEnabled="TRUE" xmlns:ows="Microsoft SharePoint" Title="TaskListTemplate" FolderCreation="FALSE" Direction="$Resources:Direction;" Url="Lists/Website-TaskListTemplate" BaseType="0" xmlns="http://schemas.microsoft.com/sharepoint/">
   <MetaData>
     <ContentTypes>
-      <ContentType ID="0x01005d39260836ce498d8e0d443ad5cad3ac"
+      <ContentType ID="0x01085d39260836ce498d8e0d443ad5cad3ac"
                Name="Tasks"
                Group="CAS Agile Workload Tracker"
                Description="Tasks Content Type"
@@ -13,7 +13,7 @@
           <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" DisplayName="Task" />
           <FieldRef ID="{77D4EF86-BA42-4604-9C33-BEF60CAFBF51}" Name="Task2ProjectTitle" />
           <FieldRef ID="{23B9AC4B-8670-4407-934C-698BD8591876}" Name="Task2CategoryTitle" />
-          <FieldRef ID="{10DE0472-6E78-472E-B9DF-E883DA6F35D8}" Name="Task2ResourcesTitle" />
+          <FieldRef ID="{53101f38-dd2e-458c-b245-0c236cc13d1a}" Name="AssignedTo" />
           <FieldRef ID="{3CDE96BD-665B-45B6-9EFB-368262C8140D}" Name="Task2MilestoneDefinedInTitle" />
           <FieldRef ID="{689D6173-44B0-4953-839F-4AFBBCB51138}" Name="Task2MilestoneResolvedInTitle" />
           <FieldRef ID="{25CF1009-2486-4500-BD14-F22F92F60E16}" Name="Task2RequirementsTitle" />
@@ -27,6 +27,7 @@
           <FieldRef ID="{0F5E1501-65E9-413E-BE58-3637B68349F6}" Name="BaselineStart" />
           <FieldRef ID="{C00DF562-CE82-4551-A325-7E08106E8600}" Name="BaselineEnd" />
           <FieldRef ID="{50EDDF56-D28E-44C6-B6CB-109FBCDE886F}" Name="Active" />
+          <FieldRef ID="{2B9FEE87-CC98-4CA5-8BA7-C547D05AFCDD}" Name="Hours" />
         </FieldRefs>
       </ContentType>
     </ContentTypes>
@@ -64,7 +65,7 @@
           </FieldRef>
           <FieldRef ID="{77D4EF86-BA42-4604-9C33-BEF60CAFBF51}" Name="Task2ProjectTitle" />
           <FieldRef ID="{23B9AC4B-8670-4407-934C-698BD8591876}" Name="Task2CategoryTitle" />
-          <FieldRef ID="{10DE0472-6E78-472E-B9DF-E883DA6F35D8}" Name="Task2ResourcesTitle" />
+          <FieldRef ID="{53101f38-dd2e-458c-b245-0c236cc13d1a}" Name="AssignedTo" />
           <FieldRef ID="{3CDE96BD-665B-45B6-9EFB-368262C8140D}" Name="Task2MilestoneDefinedInTitle" />
           <FieldRef ID="{689D6173-44B0-4953-839F-4AFBBCB51138}" Name="Task2MilestoneResolvedInTitle" />
           <FieldRef ID="{25CF1009-2486-4500-BD14-F22F92F60E16}" Name="Task2RequirementsTitle" />
@@ -78,6 +79,7 @@
           <FieldRef ID="{0F5E1501-65E9-413E-BE58-3637B68349F6}" Name="BaselineStart" />
           <FieldRef ID="{C00DF562-CE82-4551-A325-7E08106E8600}" Name="BaselineEnd" />
           <FieldRef ID="{50EDDF56-D28E-44C6-B6CB-109FBCDE886F}" Name="Active" />
+          <FieldRef ID="{2B9FEE87-CC98-4CA5-8BA7-C547D05AFCDD}" Name="Hours" />
         </ViewFields>
         <Query>
           <OrderBy>
@@ -90,103 +92,7 @@
           <ParameterBinding Name="NoAnnouncementsHowTo" Location="Resource(wss,noXinviewofY_DEFAULT)" />
         </ParameterBindings>
       </View>
-      <View BaseViewID="2" Type="HTML" WebPartZoneID="Main" DisplayName="My active tasks" DefaultView="FALSE" MobileView="TRUE" MobileDefaultView="FALSE" SetupPath="pages\viewpage.aspx" ImageUrl="/_layouts/images/generic.png" Url="MyActiveTasks.aspx">
-        <Toolbar Type="Standard" />
-        <XslLink Default="TRUE">main.xsl</XslLink>
-        <RowLimit Paged="TRUE">15</RowLimit>
-        <ViewFields>
-          <FieldRef ID="{0EE32675-C015-41AD-B9FD-2D2A72B2B662}" Name="Task2SPriorityTitle" />
-          <FieldRef Name="LinkTitle">
-          </FieldRef>
-          <FieldRef ID="{3CDE96BD-665B-45B6-9EFB-368262C8140D}" Name="Task2MilestoneDefinedInTitle" />
-          <FieldRef ID="{689D6173-44B0-4953-839F-4AFBBCB51138}" Name="Task2MilestoneResolvedInTitle" />
-          <FieldRef ID="{51684BCE-00ED-49FA-9E37-CEFC7DBAB2D6}" Name="Task2StatusTitle" />
-          <FieldRef ID="{3738BE6B-264A-4AAF-A178-30C5790657AE}" Name="Task2TypeTitle" />
-        </ViewFields>
-        <Query>
-          <Where>
-            <And>
-            <Neq>
-              <FieldRef Name="Task2StatusTitle" />
-              <Value Type="Lookup">Closed</Value>
-            </Neq>
-              <Neq>
-                <FieldRef Name="Task2StatusTitle" />
-                <Value Type="Lookup">Resolved</Value>
-              </Neq>
-            </And>
-          </Where>
-          <OrderBy>
-            <FieldRef Name="Created" Ascending="TRUE">
-            </FieldRef>
-          </OrderBy>
-        </Query>
-        <ParameterBindings>
-          <ParameterBinding Name="NoAnnouncements" Location="Resource(wss,noXinviewofY_LIST)" />
-          <ParameterBinding Name="NoAnnouncementsHowTo" Location="Resource(wss,noXinviewofY_DEFAULT)" />
-        </ParameterBindings>
-      </View>
-      <View BaseViewID="3" Type="HTML" WebPartZoneID="Main" DisplayName="My resolved tasks" DefaultView="FALSE" MobileView="TRUE" MobileDefaultView="FALSE" SetupPath="pages\viewpage.aspx" ImageUrl="/_layouts/images/generic.png" Url="MyResolvedTasks.aspx">
-        <Toolbar Type="None" />
-        <XslLink Default="TRUE">main.xsl</XslLink>
-        <RowLimit Paged="TRUE">15</RowLimit>
-        <ViewFields>
-          <FieldRef Name="LinkTitle">
-          </FieldRef>
-          <FieldRef ID="{3CDE96BD-665B-45B6-9EFB-368262C8140D}" Name="Task2MilestoneDefinedInTitle" />
-          <FieldRef ID="{689D6173-44B0-4953-839F-4AFBBCB51138}" Name="Task2MilestoneResolvedInTitle" />
-          <FieldRef ID="{0EE32675-C015-41AD-B9FD-2D2A72B2B662}" Name="Task2SPriorityTitle" />
-          <FieldRef ID="{AF244E9A-DE86-43B9-BA90-0904FE6BCBB8}" Name="Task2SResolutionTitle" />
-          <FieldRef ID="{3738BE6B-264A-4AAF-A178-30C5790657AE}" Name="Task2TypeTitle" />
-        </ViewFields>
-        <Query>
-          <Where>
-              <Eq>
-                <FieldRef Name="Task2StatusTitle" />
-                <Value Type="Lookup">Resolved</Value>
-              </Eq>
-          </Where>
-          <OrderBy>
-            <FieldRef Name="Created">
-            </FieldRef>
-          </OrderBy>
-        </Query>
-        <ParameterBindings>
-          <ParameterBinding Name="NoAnnouncements" Location="Resource(wss,noXinviewofY_LIST)" />
-          <ParameterBinding Name="NoAnnouncementsHowTo" Location="Resource(wss,noXinviewofY_DEFAULT)" />
-        </ParameterBindings>
-      </View>
-      <View BaseViewID="4" Type="HTML" WebPartZoneID="Main" DisplayName="My closed tasks" DefaultView="FALSE" MobileView="TRUE" MobileDefaultView="FALSE" SetupPath="pages\viewpage.aspx" ImageUrl="/_layouts/images/generic.png" Url="MyClosedTasks.aspx">
-        <Toolbar Type="None" />
-        <XslLink Default="TRUE">main.xsl</XslLink>
-        <RowLimit Paged="TRUE">15</RowLimit>
-        <ViewFields>
-          <FieldRef Name="LinkTitle">
-          </FieldRef>
-          <FieldRef ID="{3CDE96BD-665B-45B6-9EFB-368262C8140D}" Name="Task2MilestoneDefinedInTitle" />
-          <FieldRef ID="{689D6173-44B0-4953-839F-4AFBBCB51138}" Name="Task2MilestoneResolvedInTitle" />
-          <FieldRef ID="{0EE32675-C015-41AD-B9FD-2D2A72B2B662}" Name="Task2SPriorityTitle" />
-          <FieldRef ID="{AF244E9A-DE86-43B9-BA90-0904FE6BCBB8}" Name="Task2SResolutionTitle" />
-          <FieldRef ID="{3738BE6B-264A-4AAF-A178-30C5790657AE}" Name="Task2TypeTitle" />
-        </ViewFields>
-        <Query>
-          <Where>
-            <Eq>
-              <FieldRef Name="Task2StatusTitle" />
-              <Value Type="Lookup">Closed</Value>
-            </Eq>
-          </Where>
-          <OrderBy>
-            <FieldRef Name="Created">
-            </FieldRef>
-          </OrderBy>
-        </Query>
-        <ParameterBindings>
-          <ParameterBinding Name="NoAnnouncements" Location="Resource(wss,noXinviewofY_LIST)" />
-          <ParameterBinding Name="NoAnnouncementsHowTo" Location="Resource(wss,noXinviewofY_DEFAULT)" />
-        </ParameterBindings>
-      </View>
-      <View BaseViewID="5" Type="HTML" WebPartZoneID="Main" DisplayName="Tasks Management" DefaultView="FALSE" MobileView="TRUE" MobileDefaultView="FALSE" SetupPath="pages\viewpage.aspx" ImageUrl="/_layouts/images/generic.png" Url="TasksManagement.aspx">
+      <View BaseViewID="2" Type="HTML" WebPartZoneID="Main" DisplayName="Tasks Management" DefaultView="FALSE" MobileView="TRUE" MobileDefaultView="FALSE" SetupPath="pages\viewpage.aspx" ImageUrl="/_layouts/images/generic.png" Url="TasksManagement.aspx">
         <Toolbar Type="None" />
         <XslLink Default="TRUE">main.xsl</XslLink>
         <RowLimit Paged="TRUE">15</RowLimit>
@@ -199,7 +105,9 @@
           <FieldRef ID="{23B9AC4B-8670-4407-934C-698BD8591876}" Name="Task2CategoryTitle" />
           <FieldRef ID="{689D6173-44B0-4953-839F-4AFBBCB51138}" Name="Task2MilestoneResolvedInTitle" />
           <FieldRef ID="{51684BCE-00ED-49FA-9E37-CEFC7DBAB2D6}" Name="Task2StatusTitle" />
-          <FieldRef ID="{10DE0472-6E78-472E-B9DF-E883DA6F35D8}" Name="Task2ResourcesTitle" />
+          <FieldRef ID="{53101f38-dd2e-458c-b245-0c236cc13d1a}" Name="AssignedTo" />
+          <FieldRef ID="{28cf69c5-fa48-462a-b5cd-27b6f9d2bd5f}" Name="Modified" />
+          <FieldRef ID="{AF244E9A-DE86-43B9-BA90-0904FE6BCBB8}" Name="Task2SResolutionTitle" />
         </ViewFields>
         <Query>
           <Where>

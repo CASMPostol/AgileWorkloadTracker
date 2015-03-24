@@ -9,7 +9,7 @@
     <Folder TargetName="_cts/Estimation" />
     <FieldRefs>
       <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" Hidden="TRUE" />
-      <FieldRef ID="{6D672D9A-9665-4A13-8744-259D680C6F77}" Name="Estimation2ResourcesTitle" />
+      <FieldRef ID="{53101f38-dd2e-458c-b245-0c236cc13d1a}" Name="AssignedTo" />
       <FieldRef ID="{229EF4A8-C42E-4DAD-98A2-C9C25AFE9EFF}" Name="Estimation2ProjectTitle" />
       <FieldRef ID="{FB496A0B-6E13-424A-B513-16762C0699BD}" Name="EstimatedWorkload" />
     </FieldRefs>

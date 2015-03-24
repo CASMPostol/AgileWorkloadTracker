@@ -2,7 +2,7 @@
 <List xmlns:ows="Microsoft SharePoint" Title="HoursListTemplate" FolderCreation="FALSE" Direction="$Resources:Direction;" Url="Lists/Website-HoursListTemplate" BaseType="0" xmlns="http://schemas.microsoft.com/sharepoint/">
   <MetaData>
     <ContentTypes>
-      <ContentType ID="0x0100ce075a94aa894cdaa771e6a734832a77"
+      <ContentType ID="0x0102ce075a94aa894cdaa771e6a734832a77"
                Name="Workload"
                Group="CAS Agile Workload Tracker"
                Description="Workload Content Type"
@@ -11,14 +11,14 @@
         <Folder TargetName="_cts/Workload" />
         <FieldRefs>
           <FieldRef ID="{294A1B63-BEB9-4860-AE0C-41B5EECE9E41}" Name="Workload2ProjectTitle" />
-          <FieldRef ID="{8E9CE62A-E7D5-4A96-9384-A88C384A40DF}" Name="Workload2TaskTitle" />
+          <FieldRef ID="{8E9CE62A-E7D5-4A96-9384-A88C384A40DF}" Name="Workload2TaskID" />
           <FieldRef ID="{1165525F-54E1-4725-9826-8F15AFD07002}" Name="Workload2StageTitle" />
-          <FieldRef ID="{BB5BB442-045C-48C1-8E71-18F751EDBAB9}" Name="Workload2ResourcesTitle" />
-          <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" DisplayName="Description" />
-          <FieldRef ID="{185EA532-C9E0-40C2-AF0E-BFA6EAF95D07}" Name="WorkloadDate" />
-          <FieldRef ID="{2B9FEE87-CC98-4CA5-8BA7-C547D05AFCDD}" Name="Hours" />
-          <FieldRef ID="{ABF84DC1-F369-43EA-8A52-B71BAFA7FBFA}" Name="WeekNumber" />
-          <FieldRef ID="{26791A03-DE90-4D0A-94BD-8C4A84F7445A}" Name="Year" />
+          <FieldRef ID="{53101f38-dd2e-458c-b245-0c236cc13d1a}" Name="AssignedTo" />
+          <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" />
+          <FieldRef ID="{64cd368d-2f95-4bfc-a1f9-8d4324ecb007}" Name="StartDate"/>
+          <FieldRef ID="{2684f9f2-54be-429f-ba06-76754fc056bf}" Name="EndDate" />
+          <FieldRef ID="{2DB380B8-4767-46B0-9E92-EF72355D22FB}" Name="WorkloadHours" />
+          <FieldRef ID="{9da97a8a-1da5-4a77-98d3-4bc10456e700}" Name="Comments" />
           <FieldRef ID="{1D1AE8A0-9CD0-49B1-8F30-5CAFA5976CC0}" Name="ReadOnly" />
         </FieldRefs>
       </ContentType>
@@ -52,14 +52,14 @@
         <RowLimit Paged="TRUE">30</RowLimit>
         <ViewFields>
           <FieldRef ID="{294A1B63-BEB9-4860-AE0C-41B5EECE9E41}" Name="Workload2ProjectTitle" />
-          <FieldRef ID="{8E9CE62A-E7D5-4A96-9384-A88C384A40DF}" Name="Workload2TaskTitle" />
+          <FieldRef ID="{8E9CE62A-E7D5-4A96-9384-A88C384A40DF}" Name="Workload2TaskID" />
           <FieldRef ID="{1165525F-54E1-4725-9826-8F15AFD07002}" Name="Workload2StageTitle" />
-          <FieldRef ID="{BB5BB442-045C-48C1-8E71-18F751EDBAB9}" Name="Workload2ResourcesTitle" />
-          <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" DisplayName="Description" />
-          <FieldRef ID="{185EA532-C9E0-40C2-AF0E-BFA6EAF95D07}" Name="WorkloadDate" />
-          <FieldRef ID="{2B9FEE87-CC98-4CA5-8BA7-C547D05AFCDD}" Name="Hours" />
-          <FieldRef ID="{ABF84DC1-F369-43EA-8A52-B71BAFA7FBFA}" Name="WeekNumber" />
-          <FieldRef ID="{26791A03-DE90-4D0A-94BD-8C4A84F7445A}" Name="Year" />
+          <FieldRef ID="{53101f38-dd2e-458c-b245-0c236cc13d1a}" Name="AssignedTo" />
+          <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" />
+          <FieldRef ID="{64cd368d-2f95-4bfc-a1f9-8d4324ecb007}" Name="StartDate"/>
+          <FieldRef ID="{2684f9f2-54be-429f-ba06-76754fc056bf}" Name="EndDate" />
+          <FieldRef ID="{2DB380B8-4767-46B0-9E92-EF72355D22FB}" Name="WorkloadHours" />
+          <FieldRef ID="{9da97a8a-1da5-4a77-98d3-4bc10456e700}" Name="Comments" />
           <FieldRef ID="{1D1AE8A0-9CD0-49B1-8F30-5CAFA5976CC0}" Name="ReadOnly" />
         </ViewFields>
         <Query>
@@ -72,58 +72,7 @@
           <ParameterBinding Name="NoAnnouncements" Location="Resource(wss,noXinviewofY_LIST)" />
           <ParameterBinding Name="NoAnnouncementsHowTo" Location="Resource(wss,noXinviewofY_DEFAULT)" />
         </ParameterBindings>
-      </View>
-      <View BaseViewID="2" Type="HTML" WebPartZoneID="Main" DisplayName="My workload" DefaultView="FALSE" MobileView="TRUE" MobileDefaultView="FALSE" SetupPath="pages\viewpage.aspx" ImageUrl="/_layouts/images/generic.png" Url="MyWorkload.aspx">
-        <Toolbar Type="Standard" />
-        <XslLink Default="TRUE">main.xsl</XslLink>
-        <RowLimit Paged="TRUE">30</RowLimit>
-        <ViewFields>
-          <FieldRef ID="{294A1B63-BEB9-4860-AE0C-41B5EECE9E41}" Name="Workload2ProjectTitle" />
-          <FieldRef ID="{8E9CE62A-E7D5-4A96-9384-A88C384A40DF}" Name="Workload2TaskTitle" />
-          <FieldRef ID="{1165525F-54E1-4725-9826-8F15AFD07002}" Name="Workload2StageTitle" />
-          <FieldRef ID="{BB5BB442-045C-48C1-8E71-18F751EDBAB9}" Name="Workload2ResourcesTitle" />
-          <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" DisplayName="Description" />
-          <FieldRef ID="{185EA532-C9E0-40C2-AF0E-BFA6EAF95D07}" Name="WorkloadDate" />
-          <FieldRef ID="{2B9FEE87-CC98-4CA5-8BA7-C547D05AFCDD}" Name="Hours" />
-        </ViewFields>
-        <Query>
-          <OrderBy>
-            <FieldRef Name="ID">
-            </FieldRef>
-          </OrderBy>
-        </Query>
-        <ParameterBindings>
-          <ParameterBinding Name="NoAnnouncements" Location="Resource(wss,noXinviewofY_LIST)" />
-          <ParameterBinding Name="NoAnnouncementsHowTo" Location="Resource(wss,noXinviewofY_DEFAULT)" />
-        </ParameterBindings>
-      </View>
-      <View BaseViewID="3" Type="HTML" WebPartZoneID="Main" DisplayName="Workload summary" DefaultView="FALSE" MobileView="TRUE" MobileDefaultView="FALSE" SetupPath="pages\viewpage.aspx" ImageUrl="/_layouts/images/generic.png" Url="WorkloadSummary.aspx">
-        <Aggregations Value="On">
-          <FieldRef Name="Hours" Type="SUM" />
-        </Aggregations>
-        <Toolbar Type="None" />
-        <XslLink Default="TRUE">main.xsl</XslLink>
-        <RowLimit Paged="TRUE">100</RowLimit>
-        <ViewFields>
-          <FieldRef ID="{ABF84DC1-F369-43EA-8A52-B71BAFA7FBFA}" Name="WeekNumber" />
-          <FieldRef ID="{26791A03-DE90-4D0A-94BD-8C4A84F7445A}" Name="Year" />
-          <FieldRef ID="{185EA532-C9E0-40C2-AF0E-BFA6EAF95D07}" Name="WorkloadDate" />
-          <FieldRef ID="{8E9CE62A-E7D5-4A96-9384-A88C384A40DF}" Name="Workload2TaskTitle" />
-          <FieldRef ID="{BB5BB442-045C-48C1-8E71-18F751EDBAB9}" Name="Workload2ResourcesTitle" />
-          <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" DisplayName="Description" />
-          <FieldRef ID="{2B9FEE87-CC98-4CA5-8BA7-C547D05AFCDD}" Name="Hours" />
-        </ViewFields>
-        <Query>
-          <OrderBy>
-            <FieldRef Name="Created" Ascending="FALSE">
-            </FieldRef>
-          </OrderBy>
-        </Query>
-        <ParameterBindings>
-          <ParameterBinding Name="NoAnnouncements" Location="Resource(wss,noXinviewofY_LIST)" />
-          <ParameterBinding Name="NoAnnouncementsHowTo" Location="Resource(wss,noXinviewofY_DEFAULT)" />
-        </ParameterBindings>
-      </View>
+      </View>    
     </Views>
     <Forms>
       <Form Type="DisplayForm" Url="DispForm.aspx" SetupPath="pages\form.aspx" WebPartZoneID="Main" />

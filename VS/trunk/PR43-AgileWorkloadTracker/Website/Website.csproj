@@ -101,17 +101,11 @@
     <None Include="ContentTypes\Resolution\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{3e297c61-b340-4e14-9135-961e6b176d19}</SharePointProjectItemId>
     </None>
-    <None Include="ContentTypes\Resources\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{31ed6ebb-bafe-4929-8e8e-d1dcecee0db3}</SharePointProjectItemId>
-    </None>
     <None Include="ContentTypes\Stage\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{d2aca013-2c26-40f3-9f10-059a1bde0fbf}</SharePointProjectItemId>
     </None>
     <None Include="ContentTypes\Status\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{5b5f7e65-68e1-4db9-b2f3-a430860d09c3}</SharePointProjectItemId>
-    </None>
-    <None Include="ContentTypes\TaskComments\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{3c8ef904-a4ad-41b9-a950-f395701ae63b}</SharePointProjectItemId>
     </None>
     <None Include="ContentTypes\Tasks\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{8a51afd8-f1be-48eb-9516-6f97015f3132}</SharePointProjectItemId>
@@ -128,14 +122,8 @@
     <None Include="Fields\Fields\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{80eea8e7-44ab-4436-af6d-acad27b75246}</SharePointProjectItemId>
     </None>
-    <None Include="Fields\Fields_0110\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{dc366331-8caf-4632-95ed-4e37b23fc82f}</SharePointProjectItemId>
-    </None>
     <None Include="Fields\LookupFields\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{9e78353d-face-4f57-95be-8a6a980bf355}</SharePointProjectItemId>
-    </None>
-    <None Include="Fields\LookupFields_0110\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{04ddedc1-bb08-4f2d-ad3a-8e5ce4cf9366}</SharePointProjectItemId>
     </None>
     <None Include="key.snk" />
     <None Include="Lists\CategoryListTemplate\CategoryList\SharePointProjectItem.spdata">
@@ -192,12 +180,6 @@
     <None Include="Lists\ResolutionListTemplate\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{6bc32eb8-a82b-431b-b2b7-6bcf658c3127}</SharePointProjectItemId>
     </None>
-    <None Include="Lists\ResourcesListTemplate\ResourcesList\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{7df40daa-135f-464e-8871-7158ac63470d}</SharePointProjectItemId>
-    </None>
-    <None Include="Lists\ResourcesListTemplate\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{8d5a02a8-c94a-4847-b36c-43bee866950f}</SharePointProjectItemId>
-    </None>
     <None Include="Lists\StageListTemplate\StageList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{70a8f5d1-5c9a-43e9-a07f-43362c77ef3f}</SharePointProjectItemId>
     </None>
@@ -209,12 +191,6 @@
     </None>
     <None Include="Lists\StatusListTemplate\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{326693f7-cda6-4324-a2b2-f92012cf9a19}</SharePointProjectItemId>
-    </None>
-    <None Include="Lists\TaskCommentsListTemplate\TaskCommentsList\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{6a29b2ad-7dc7-4d67-b397-ee2aaadbcbfe}</SharePointProjectItemId>
-    </None>
-    <None Include="Lists\TaskCommentsListTemplate\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{76916b7e-8491-4809-819e-994a3c2708f8}</SharePointProjectItemId>
     </None>
     <None Include="Lists\TaskListTemplate\TaskList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{0aa9c80e-4d00-4cd3-ba3e-a28038a2cdd8}</SharePointProjectItemId>
@@ -229,10 +205,10 @@
       <SharePointProjectItemId>{98221b36-7a9c-4907-bc1d-d6e70938a9aa}</SharePointProjectItemId>
     </None>
     <None Include="Lists\WorkloadListTemplate\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{69da074e-d7f4-4c84-b0ba-4b37e6990375}</SharePointProjectItemId>
+      <SharePointProjectItemId>{66ffecd1-3ccc-45e1-9f78-5f3e552a8153}</SharePointProjectItemId>
     </None>
     <None Include="Lists\WorkloadListTemplate\WorkloadList\SharePointProjectItem.spdata">
-      <SharePointProjectItemId>{da73a843-0083-4a96-a2a6-fb3f30e64719}</SharePointProjectItemId>
+      <SharePointProjectItemId>{df42fb43-9d2e-4a7d-a46a-09d034b969f1}</SharePointProjectItemId>
     </None>
     <None Include="Package\Package.package">
       <PackageId>{f224c84d-bdc8-4fae-8444-ed652e9f1a3a}</PackageId>
@@ -254,10 +230,18 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ContentTypes\Category\Elements.xml" />
-    <Content Include="ContentTypes\Contracts\Elements.xml" />
-    <Content Include="ContentTypes\Estimation\Elements.xml" />
-    <Content Include="ContentTypes\Milestone\Elements.xml" />
+    <Content Include="ContentTypes\Category\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="ContentTypes\Contracts\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="ContentTypes\Estimation\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="ContentTypes\Milestone\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="ContentTypes\Partners\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -269,16 +253,10 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="ContentTypes\Resolution\Elements.xml" />
-    <Content Include="ContentTypes\Resources\Elements.xml">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="ContentTypes\Stage\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="ContentTypes\Status\Elements.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="ContentTypes\TaskComments\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="ContentTypes\Tasks\Elements.xml">
@@ -295,11 +273,7 @@
     <Content Include="Fields\Fields\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Fields\Fields_0110\Elements.xml" />
     <Content Include="Fields\LookupFields\Elements.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Fields\LookupFields_0110\Elements.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Lists\CategoryListTemplate\Elements.xml" />
@@ -347,9 +321,6 @@
     <Content Include="Lists\ResolutionListTemplate\Elements.xml" />
     <Content Include="Lists\ResolutionListTemplate\ResolutionList\Elements.xml" />
     <Content Include="Lists\ResolutionListTemplate\Schema.xml" />
-    <Content Include="Lists\ResourcesListTemplate\Elements.xml" />
-    <Content Include="Lists\ResourcesListTemplate\ResourcesList\Elements.xml" />
-    <Content Include="Lists\ResourcesListTemplate\Schema.xml" />
     <Content Include="Lists\StageListTemplate\Elements.xml" />
     <Content Include="Lists\StageListTemplate\StageList\Elements.xml">
       <SubType>Designer</SubType>
@@ -360,13 +331,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Lists\StatusListTemplate\Schema.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Lists\TaskCommentsListTemplate\Elements.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Lists\TaskCommentsListTemplate\TaskCommentsList\Elements.xml" />
-    <Content Include="Lists\TaskCommentsListTemplate\Schema.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Lists\TaskListTemplate\Elements.xml" />
@@ -381,9 +345,7 @@
     <Content Include="Lists\TypeListTemplate\Schema.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Lists\WorkloadListTemplate\Elements.xml">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Lists\WorkloadListTemplate\Elements.xml" />
     <Content Include="Lists\WorkloadListTemplate\Schema.xml">
       <SubType>Designer</SubType>
     </Content>

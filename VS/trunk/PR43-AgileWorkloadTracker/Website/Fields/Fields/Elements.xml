@@ -272,15 +272,6 @@
    Group="CAS Agile Workload Tracker"
     />
   <Field
-    ID="{185EA532-C9E0-40C2-AF0E-BFA6EAF95D07}"
-    Name="WorkloadDate"
-    Group="CAS Agile Workload Tracker"
-    Type="DateTime"
-    Format="DateOnly"
-    DisplayName="Date">
-    <Default>[today]</Default>
-  </Field>
-  <Field
    Name="Hours"
    ID="{2B9FEE87-CC98-4CA5-8BA7-C547D05AFCDD}"
    Type="Number"
@@ -289,16 +280,39 @@
    Group="CAS Agile Workload Tracker"
     />
   <Field
-    Type="User"
-    DisplayName="User"
-    List="UserInfo"
-    Required="FALSE"
-    EnforceUniqueValues="FALSE"
-    ShowField="Title"
-    UserSelectionMode="PeopleOnly"
-    UserSelectionScope="0"
+    Name="EstimatedHours"
+    ID="{90E4BBCA-984F-469D-A2E3-26526DF153C6}"
+    Type="Number"
+    DisplayName="Estimated hours"
     Group="CAS Agile Workload Tracker"
-    ID="{78E726A0-C701-4CA3-B4CF-E21A575A822F}"
-    Name="EmployeeADAccount"
-    Overwrite="TRUE"  />
+    />
+  <Field
+    Name="AcceptedHours"
+    ID="{9C5A91D3-2BBC-4C97-97B8-300C1911FD60}"
+    Type="Number"
+    DisplayName="Accepted hours"
+    Group="CAS Agile Workload Tracker"
+    />
+  <Field
+    Name="MilestoneDescription"
+    ID="{97440A61-7DD1-44F8-B7AE-8917B74870EC}"
+    Type="Text"
+    DisplayName="Description"
+    Group="CAS Agile Workload Tracker"
+    />
+  <Field
+    Name="PONumber"
+    ID="{65B029E6-ADCE-47CA-B668-DFFCA6D9E0C6}"
+    Type="Text"
+    DisplayName="PO number"
+    Group="CAS Agile Workload Tracker"
+    />
+  <Field ID="{2DB380B8-4767-46B0-9E92-EF72355D22FB}"
+    Name="WorkloadHours"
+    DisplayName="Hours"
+    Type="Calculated"
+    ResultType="Text"
+    Group="CAS Agile Workload Tracker" >
+    <Formula>=1</Formula>
+  </Field>
 </Elements>
