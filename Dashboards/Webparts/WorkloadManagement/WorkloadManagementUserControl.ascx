@@ -82,10 +82,18 @@
                                     </asp:TableRow>
                                     <asp:TableRow>
                                         <asp:TableCell>
-                                            <asp:Label runat="server" ID="m_WorkloadHoursLabel" Text="Hours" CssClass="Label"></asp:Label>
+                                            <<asp:Label ID="m_WorkloadStart" runat="server" CssClass="Label" Text="Workload - start" />
                                         </asp:TableCell>
                                         <asp:TableCell>
-                                            <asp:TextBox runat="server" ID="m_WorkloadHoursTextBox" CssClass="TextBoxShort"></asp:TextBox>
+                                            <SharePoint:DateTimeControl ID="m_WorkloadStartDateTimeControl" DateOnly="false" runat="server" />
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow>
+                                        <asp:TableCell>
+                                            <<asp:Label ID="m_WorkloadEnd" runat="server" CssClass="Label" Text="Workload - end" />
+                                        </asp:TableCell>
+                                        <asp:TableCell>
+                                            <SharePoint:DateTimeControl ID="m_WorkloadEndDateTimeControl" DateOnly="false" runat="server" />
                                         </asp:TableCell>
                                     </asp:TableRow>
                                 </asp:Table>
