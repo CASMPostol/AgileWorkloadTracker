@@ -16,6 +16,9 @@
           <FieldRef ID="{0F5E1501-65E9-413E-BE58-3637B68349F6}" Name="BaselineStart" />
           <FieldRef ID="{C00DF562-CE82-4551-A325-7E08106E8600}" Name="BaselineEnd" />
           <FieldRef ID="{85338B8B-4B38-4810-B55E-55AFF4C4EF02}" Name="Default" />
+          <FieldRef ID="{9C5A91D3-2BBC-4C97-97B8-300C1911FD60}" Name="AcceptedHours" />
+          <FieldRef ID="{90E4BBCA-984F-469D-A2E3-26526DF153C6}" Name="EstimatedHours" />
+          <FieldRef ID="{97440A61-7DD1-44F8-B7AE-8917B74870EC}" Name="MilestoneDescription" />
         </FieldRefs>
       </ContentType>
     </ContentTypes>

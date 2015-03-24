@@ -1,171 +1,220 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Web xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Class="Entities" AccessModifier="Public" xmlns="http://schemas.microsoft.com/SharePoint/2009/spmetal">
-  <List Name="Category" />
-  <List Name="Contracts" />
-  <List Name="Estimation" />
-  <!--<List Name="List Template Gallery" />-->
-  <List Name="Master Page Gallery" />
-  <List Name="Milestone" />
-  <List Name="Partners" />
-  <List Name="Priority" />
-  <List Name="Projects" />
-  <List Name="Requirements" />
-  <List Name="Resolution" />
-  <List Name="Resources" />
-  <!--<List Name="Solution Gallery" />-->
-  <List Name="Stage" />
-  <List Name="Status" />
-  <List Name="Style Library" />
-  <List Name="Task" />
-  <List Name="Task comments" />
-  <!--<List Name="Theme Gallery" />-->
-  <List Name="Type" />
-  <!--<List Name="User Information List" />-->
-  <!--<List Name="Web Part Gallery" />-->
-  <List Name="Workload" />
-  <ExcludeOtherLists/>
-  <ContentType Name="Element" Class="Element">
+  <List Name="Category" Member="Category" />
+  <List Name="Contracts" Member="Contracts" />
+  <List Name="Estimation" Member="Estimation" />
+  <List Name="Milestone" Member="Milestone" />
+  <List Name="Partners" Member="Partners" />
+  <List Name="Priority" Member="Priority" />
+  <List Name="Projects" Member="Projects" />
+  <List Name="Requirements" Member="Requirements" />
+  <List Name="Resolution" Member="Resolution" />
+  <List Name="Stage" Member="Stage" />
+  <List Name="Status" Member="Status" />
+  <List Name="Task" Member="Task" />
+  <List Name="Type" Member="Type" />
+  <List Name="User Information List" Member="User Information List" />
+  <List Name="Workload" Member="Workload" />
+  <ExcludeOtherLists />
+  <ContentType Name="Item" Class="Item">
     <!--<Column Name="ContentType" Member="ContentType" />-->
     <Column Name="Title" Member="Title" />
+    <!--<ExcludeOtherColumns />-->
   </ContentType>
   <ContentType Name="Projects" Class="Projects">
-    <Column Name="Title" Member="Title" />
-    <Column Name="ProjectType" Member="ProjectType" />
-    <Column Name="ProjectNumber" Member="ProjectNumber" />
-    <Column Name="Active" Member="Active" />
-    <Column Name="ProjectHours" Member="ProjectHours" />
-    <Column Name="ProjectStartDate" Member="ProjectStartDate" />
-    <Column Name="ProjectEndDate" Member="ProjectEndDate" />
-    <Column Name="ProjectWarrantyDate" Member="ProjectWarrantyDate" />
-    <Column Name="ProjectBudget" Member="ProjectBudget" />
-    <Column Name="Currency" Member="Currency" />
-    <Column Name="Body" Member="Body" />
-    <Column Name="Project2ResourcesTitle" Member="Project2ResourcesTitle" />
-    <Column Name="Project2ContractTitle" Member="Project2ContractTitle" />
-    <Column Name="Project2StageTitle" Member="Project2StageTitle" />
-    <Column Name="EstimatedHours" Member="EstimatedHours" />
     <Column Name="AcceptedHours" Member="AcceptedHours" />
-    <Column Name="MilestoneHours" Member="MilestoneHours" />
-    <Column Name="Project2PartnersTitle" Member="Project2PartnersTitle" />
-    <Column Name="BaselineStart" Member="BaselineStart" />
+    <Column Name="Active" Member="Active" />
+    <Column Name="AssignedTo" Member="AssignedTo" />
     <Column Name="BaselineEnd" Member="BaselineEnd" />
+    <Column Name="BaselineStart" Member="BaselineStart" />
+    <Column Name="Body" Member="Body" />
+    <Column Name="Currency" Member="Currency" />
+    <Column Name="EstimatedHours" Member="EstimatedHours" />
+    <Column Name="MilestoneHours" Member="MilestoneHours" />
     <Column Name="PONumber" Member="PONumber" />
+    <Column Name="Project2ContractTitle" Member="Project2ContractTitle" />
+    <Column Name="Project2PartnersTitle" Member="Project2PartnersTitle" />
+    <Column Name="Project2StageTitle" Member="Project2StageTitle" />
+    <Column Name="ProjectBudget" Member="ProjectBudget" />
+    <Column Name="ProjectEndDate" Member="ProjectEndDate" />
+    <Column Name="ProjectHours" Member="ProjectHours" />
+    <Column Name="ProjectNumber" Member="ProjectNumber" />
+    <Column Name="ProjectStartDate" Member="ProjectStartDate" />
+    <Column Name="ProjectType" Member="ProjectType" />
+    <Column Name="ProjectWarrantyDate" Member="ProjectWarrantyDate" />
+    <Column Name="Title" Member="Title" />
+    <!--<ExcludeOtherColumns />-->
   </ContentType>
   <ContentType Name="Estimation" Class="Estimation">
-    <Column Name="Estimation2ResourcesTitle" Member="Estimation2ResourcesTitle" />
-    <Column Name="Estimation2ProjectTitle" Member="Estimation2ProjectTitle" />
+    <Column Name="AssignedTo" Member="AssignedTo" />
     <Column Name="EstimatedWorkload" Member="EstimatedWorkload" />
+    <Column Name="Estimation2ProjectTitle" Member="Estimation2ProjectTitle" />
+    <!--<Column Name="Title" Member="Title" />-->
+    <!--<ExcludeOtherColumns />-->
   </ContentType>
   <ContentType Name="Category" Class="Category">
-    <Column Name="Title" Member="Title" />
     <Column Name="Category2ProjectsTitle" Member="Category2ProjectsTitle" />
+    <Column Name="Title" Member="Title" />
+    <!--<ExcludeOtherColumns />-->
   </ContentType>
   <ContentType Name="Type" Class="Type">
     <Column Name="Title" Member="Title" />
-  </ContentType>
-  <ContentType Name="Tasks" Class="Tasks">
-    <Column Name="Title" Member="Title" />
-    <Column Name="Task2ProjectTitle" Member="Task2ProjectTitle" />
-    <Column Name="Task2CategoryTitle" Member="Task2CategoryTitle" />
-    <Column Name="Task2ResourcesTitle" Member="Task2ResourcesTitle" />
-    <Column Name="Task2MilestoneDefinedInTitle" Member="Task2MilestoneDefinedInTitle" />
-    <Column Name="Task2MilestoneResolvedInTitle" Member="Task2MilestoneResolvedInTitle" />
-    <Column Name="Task2RequirementsTitle" Member="Task2RequirementsTitle" />
-    <Column Name="Task2StatusTitle" Member="Task2StatusTitle" />
-    <Column Name="Task2SPriorityTitle" Member="Task2SPriorityTitle" />
-    <Column Name="Task2SResolutionTitle" Member="Task2SResolutionTitle" />
-    <Column Name="Task2TypeTitle" Member="Task2TypeTitle" />
-    <Column Name="Body" Member="Body" />
-    <Column Name="TaskStart" Member="TaskStart" />
-    <Column Name="TaskEnd" Member="TaskEnd" />
-    <Column Name="BaselineStart" Member="BaselineStart" />
-    <Column Name="BaselineEnd" Member="BaselineEnd" />
-    <Column Name="Active" Member="Active" />
+    <!--<ExcludeOtherColumns />-->
   </ContentType>
   <ContentType Name="Status" Class="Status">
-    <Column Name="Title" Member="Title" />
     <Column Name="Active" Member="Active" />
+    <Column Name="Title" Member="Title" />
+    <!--<ExcludeOtherColumns />-->
   </ContentType>
   <ContentType Name="Stage" Class="Stage">
     <Column Name="Title" Member="Title" />
+    <!--<ExcludeOtherColumns />-->
   </ContentType>
   <ContentType Name="Resolution" Class="Resolution">
     <Column Name="Title" Member="Title" />
+    <!--<ExcludeOtherColumns />-->
   </ContentType>
   <ContentType Name="Priority" Class="Priority">
     <Column Name="Title" Member="Title" />
+    <!--<ExcludeOtherColumns />-->
   </ContentType>
   <ContentType Name="Requirements" Class="Requirements">
-    <Column Name="Title" Member="Title" />
-    <Column Name="RequirementPriority" Member="RequirementPriority" />
     <Column Name="Body" Member="Body" />
-    <Column Name="RequirementsType" Member="RequirementsType" />
-    <Column Name="Requirements2ProjectsTitle" Member="Requirements2ProjectsTitle" />
-    <Column Name="Requirements2MilestoneTitle" Member="Requirements2MilestoneTitle" />
     <Column Name="EstimatedHours" Member="EstimatedHours" />
     <Column Name="Hours" Member="Hours" />
-  </ContentType>
-  <ContentType Name="Resources" Class="Resources">
+    <Column Name="RequirementPriority" Member="RequirementPriority" />
+    <Column Name="Requirements2MilestoneTitle" Member="Requirements2MilestoneTitle" />
+    <Column Name="Requirements2ProjectsTitle" Member="Requirements2ProjectsTitle" />
+    <Column Name="RequirementsType" Member="RequirementsType" />
     <Column Name="Title" Member="Title" />
-    <Column Name="EmployeeADAccount" Member="EmployeeADAccount" />
-    <Column Name="JobTitle" Member="JobTitle" />
-    <Column Name="EMail" Member="EMail" />
-  </ContentType>
-  <ContentType Name="Workload" Class="Workload">
-    <Column Name="Workload2ProjectTitle" Member="Workload2ProjectTitle" />
-    <Column Name="Workload2TaskTitle" Member="Workload2TaskTitle" />
-    <Column Name="Workload2StageTitle" Member="Workload2StageTitle" />
-    <Column Name="Workload2ResourcesTitle" Member="Workload2ResourcesTitle" />
-    <Column Name="Title" Member="Title" />
-    <Column Name="WorkloadDate" Member="WorkloadDate" />
-    <Column Name="Hours" Member="Hours" />
-    <Column Name="WeekNumber" Member="WeekNumber" />
-    <Column Name="Year" Member="Year" />
-    <Column Name="ReadOnly" Member="ReadOnly" />
+    <!--<ExcludeOtherColumns />-->
   </ContentType>
   <ContentType Name="Contracts" Class="Contracts">
-    <Column Name="Title" Member="Title" />
-    <Column Name="Contracts2PartnersTitle" Member="Contracts2PartnersTitle" />
-    <Column Name="ContractNumber" Member="ContractNumber" />
-    <Column Name="ContractSubject" Member="ContractSubject" />
+    <Column Name="Body" Member="Body" />
     <Column Name="ContractDate" Member="ContractDate" />
     <Column Name="ContractEndDate" Member="ContractEndDate" />
-    <Column Name="ContractWarrantyDate" Member="ContractWarrantyDate" />
+    <Column Name="ContractNumber" Member="ContractNumber" />
     <Column Name="ContractOffer" Member="ContractOffer" />
+    <Column Name="Contracts2PartnersTitle" Member="Contracts2PartnersTitle" />
+    <Column Name="ContractSubject" Member="ContractSubject" />
     <Column Name="ContractValue" Member="ContractValue" />
+    <Column Name="ContractWarrantyDate" Member="ContractWarrantyDate" />
     <Column Name="Currency" Member="Currency" />
-    <Column Name="Body" Member="Body" />
-  </ContentType>
-  <ContentType Name="TaskComments" Class="TaskComments">
-    <Column Name="TaskComments2TaskTitle" Member="TaskComments2TaskTitle" />
-    <Column Name="Body" Member="Body" />
+    <Column Name="Title" Member="Title" />
+    <!--<ExcludeOtherColumns />-->
   </ContentType>
   <ContentType Name="Partners" Class="Partners">
-    <Column Name="Title" Member="Title" />
-    <Column Name="WorkCountry" Member="WorkCountry" />
-    <Column Name="WorkCity" Member="WorkCity" />
-    <Column Name="WorkZip" Member="WorkZip" />
-    <Column Name="WorkAddress" Member="WorkAddress" />
-    <Column Name="WorkPhone" Member="WorkPhone" />
-    <Column Name="WorkFax" Member="WorkFax" />
+    <Column Name="Body" Member="Body" />
     <Column Name="CellPhone" Member="CellPhone" />
     <Column Name="EMail" Member="EMail" />
-    <Column Name="Body" Member="Body" />
+    <Column Name="Title" Member="Title" />
+    <Column Name="WorkAddress" Member="WorkAddress" />
+    <Column Name="WorkCity" Member="WorkCity" />
+    <Column Name="WorkCountry" Member="WorkCountry" />
+    <Column Name="WorkFax" Member="WorkFax" />
+    <Column Name="WorkPhone" Member="WorkPhone" />
+    <Column Name="WorkZip" Member="WorkZip" />
+    <!--<ExcludeOtherColumns />-->
   </ContentType>
   <ContentType Name="Milestone" Class="Milestone">
-    <Column Name="Title" Member="Title" />
-    <Column Name="Milestone2StageTitle" Member="Milestone2StageTitle" />
-    <Column Name="Milestone2ProjectTitle" Member="Milestone2ProjectTitle" />
-    <Column Name="Active" Member="Active" />
-    <Column Name="MilestoneHours" Member="MilestoneHours" />
-    <Column Name="SortOrder" Member="SortOrder" />
-    <Column Name="MilestoneStart" Member="MilestoneStart" />
-    <Column Name="MilestoneEnd" Member="MilestoneEnd" />
-    <Column Name="BaselineStart" Member="BaselineStart" />
-    <Column Name="BaselineEnd" Member="BaselineEnd" />
-    <Column Name="Default" Member="Default" />
     <Column Name="AcceptedHours" Member="AcceptedHours" />
+    <Column Name="Active" Member="Active" />
+    <Column Name="BaselineEnd" Member="BaselineEnd" />
+    <Column Name="BaselineStart" Member="BaselineStart" />
+    <Column Name="Default" Member="Default" />
     <Column Name="EstimatedHours" Member="EstimatedHours" />
+    <Column Name="Milestone2ProjectTitle" Member="Milestone2ProjectTitle" />
+    <Column Name="Milestone2StageTitle" Member="Milestone2StageTitle" />
     <Column Name="MilestoneDescription" Member="MilestoneDescription" />
+    <Column Name="MilestoneEnd" Member="MilestoneEnd" />
+    <Column Name="MilestoneHours" Member="MilestoneHours" />
+    <Column Name="MilestoneStart" Member="MilestoneStart" />
+    <Column Name="SortOrder" Member="SortOrder" />
+    <Column Name="Title" Member="Title" />
+    <!--<ExcludeOtherColumns />-->
   </ContentType>
+  <ContentType Name="Users" Class="Users">
+    <Column Name="Comment" Member="Comment" />
+    <Column Name="ContactInfo" Member="ContactInfo" />
+    <Column Name="ContentType" Member="ContentType" />
+    <Column Name="From" Member="From" />
+    <Column Name="GoFromHome" Member="GoFromHome" />
+    <Column Name="GoingHome" Member="GoingHome" />
+    <Column Name="Name" Member="Name" />
+    <Column Name="Title" Member="Title" />
+    <Column Name="Until" Member="Until" />
+    <Column Name="Whereabout" Member="Whereabout" />
+    <!--<ExcludeOtherColumns />-->
+  </ContentType>
+  <ContentType Name="Event" Class="Event">
+    <Column Name="Category" Member="Category" />
+    <Column Name="Comments" Member="Comments" />
+    <Column Name="ContentType" Member="ContentType" />
+    <Column Name="Duration" Member="Duration" />
+    <Column Name="EndDate" Member="EndDate" />
+    <Column Name="EventCanceled" Member="EventCanceled" />
+    <Column Name="EventType" Member="EventType" />
+    <Column Name="fAllDayEvent" Member="fAllDayEvent" />
+    <Column Name="fRecurrence" Member="fRecurrence" />
+    <Column Name="Location" Member="Location" />
+    <Column Name="MasterSeriesItemID" Member="MasterSeriesItemID" />
+    <Column Name="RecurrenceData" Member="RecurrenceData" />
+    <Column Name="RecurrenceID" Member="RecurrenceID" />
+    <Column Name="StartDate" Member="StartDate" />
+    <Column Name="TimeZone" Member="TimeZone" />
+    <Column Name="Title" Member="Title" />
+    <Column Name="UID" Member="UID" />
+    <Column Name="Workspace" Member="Workspace" />
+    <Column Name="WorkspaceLink" Member="WorkspaceLink" />
+    <Column Name="XMLTZone" Member="XMLTZone" />
+    <!--<ExcludeOtherColumns />-->
+  </ContentType>
+  <ContentType Name="Workload" Class="Workload">
+    <Column Name="AssignedTo" Member="AssignedTo" />
+    <Column Name="Comments" Member="Comments" />
+    <Column Name="EndDate" Member="EndDate" />
+    <Column Name="ReadOnly" Member="ReadOnly" />
+    <Column Name="StartDate" Member="StartDate" />
+    <Column Name="Title" Member="Title" />
+    <Column Name="Workload2ProjectTitle" Member="Workload2ProjectTitle" />
+    <Column Name="Workload2StageTitle" Member="Workload2StageTitle" />
+    <Column Name="Workload2TaskID" Member="Workload2TaskID" />
+    <Column Name="WorkloadHours" Member="WorkloadHours" />
+    <!--<ExcludeOtherColumns />-->
+  </ContentType>
+  <ContentType Name="Task" Class="Task">
+    <Column Name="AssignedTo" Member="AssignedTo" />
+    <Column Name="Body" Member="Body" />
+    <Column Name="ContentType" Member="ContentType" />
+    <Column Name="PercentComplete" Member="PercentComplete" />
+    <Column Name="Priority" Member="Priority" />
+    <Column Name="StartDate" Member="StartDate" />
+    <Column Name="TaskDueDate" Member="TaskDueDate" />
+    <Column Name="TaskStatus" Member="TaskStatus" />
+    <Column Name="Title" Member="Title" />
+    <!--<ExcludeOtherColumns />-->
+  </ContentType>
+  <ContentType Name="Tasks" Class="Tasks">
+    <Column Name="Active" Member="Active" />
+    <Column Name="AssignedTo" Member="AssignedTo" />
+    <Column Name="BaselineEnd" Member="BaselineEnd" />
+    <Column Name="BaselineStart" Member="BaselineStart" />
+    <Column Name="Body" Member="Body" />
+    <Column Name="Hours" Member="Hours" />
+    <Column Name="Task2CategoryTitle" Member="Task2CategoryTitle" />
+    <Column Name="Task2MilestoneDefinedInTitle" Member="Task2MilestoneDefinedInTitle" />
+    <Column Name="Task2MilestoneResolvedInTitle" Member="Task2MilestoneResolvedInTitle" />
+    <Column Name="Task2ProjectTitle" Member="Task2ProjectTitle" />
+    <Column Name="Task2RequirementsTitle" Member="Task2RequirementsTitle" />
+    <Column Name="Task2SPriorityTitle" Member="Task2SPriorityTitle" />
+    <Column Name="Task2SResolutionTitle" Member="Task2SResolutionTitle" />
+    <Column Name="Task2StatusTitle" Member="Task2StatusTitle" />
+    <Column Name="Task2TypeTitle" Member="Task2TypeTitle" />
+    <Column Name="TaskDueDate" Member="TaskDueDate" />
+    <Column Name="TaskEnd" Member="TaskEnd" />
+    <Column Name="TaskStart" Member="TaskStart" />
+    <Column Name="Title" Member="Title" />
+    <!--<ExcludeOtherColumns />-->
+  </ContentType>
+  <!--<ExcludeOtherContentTypes />-->
 </Web>

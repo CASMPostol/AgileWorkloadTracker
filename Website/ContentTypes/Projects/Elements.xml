@@ -19,9 +19,16 @@
       <FieldRef ID="{3377518E-0E08-44C1-9A75-22A6680A5A83}" Name="ProjectBudget" />
       <FieldRef ID="{0A8C105D-2805-4DA0-85C4-99D2CE5B86E1}" Name="Currency" />
       <FieldRef ID="{7662cd2c-f069-4dba-9e35-082cf976e170}" Name="Body" />
-      <FieldRef ID="{DBEF0351-9BA4-407F-8F2F-4D5ECF70F0D4}" Name="Project2ResourcesTitle" />
+      <FieldRef ID="{53101f38-dd2e-458c-b245-0c236cc13d1a}" Name="AssignedTo" />
       <FieldRef ID="{69A5CEAC-AC11-4177-85C7-567BF662AC62}" Name="Project2ContractTitle" />
       <FieldRef ID="{6CD370BF-B6C2-4231-B324-EC1FA5C71BC8}" Name="Project2StageTitle" />
+      <FieldRef ID="{90E4BBCA-984F-469D-A2E3-26526DF153C6}" Name="EstimatedHours" />
+      <FieldRef ID="{9C5A91D3-2BBC-4C97-97B8-300C1911FD60}" Name="AcceptedHours" />
+      <FieldRef ID="{BCBAD9EE-E764-4E79-A158-7F551B05ECE3}" Name="MilestoneHours" />
+      <FieldRef ID="{F62057C4-51AC-4D33-8AF7-83939DBF4B1D}" Name="Project2PartnersTitle" />
+      <FieldRef ID="{0F5E1501-65E9-413E-BE58-3637B68349F6}" Name="BaselineStart" />
+      <FieldRef ID="{C00DF562-CE82-4551-A325-7E08106E8600}" Name="BaselineEnd" />
+      <FieldRef ID="{65B029E6-ADCE-47CA-B668-DFFCA6D9E0C6}" Name="PONumber" />
     </FieldRefs>
   </ContentType>
 </Elements>

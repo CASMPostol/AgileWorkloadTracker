@@ -1,9 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
-  <ListInstance Title="Workload"
-                OnQuickLaunch="TRUE"
-                TemplateType="10003"
-                Url="Lists/WorkloadList"
-                Description="Workload List Instance">
-  </ListInstance>
+  <ListInstance Title="Workload" OnQuickLaunch="TRUE" TemplateType="10003" Url="Lists/WorkloadList" Description="Workload List Instance"></ListInstance>
 </Elements>
