@@ -166,22 +166,40 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement {
         protected global::System.Web.UI.WebControls.TextBox m_WorkloadDescriptionTextBox;
         
         /// <summary>
-        /// m_WorkloadHoursLabel control.
+        /// m_WorkloadStart control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label m_WorkloadHoursLabel;
+        protected global::System.Web.UI.WebControls.Label m_WorkloadStart;
         
         /// <summary>
-        /// m_WorkloadHoursTextBox control.
+        /// m_WorkloadStartDateTimeControl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox m_WorkloadHoursTextBox;
+        protected global::Microsoft.SharePoint.WebControls.DateTimeControl m_WorkloadStartDateTimeControl;
+        
+        /// <summary>
+        /// m_WorkloadEnd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label m_WorkloadEnd;
+        
+        /// <summary>
+        /// m_WorkloadEndDateTimeControl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Microsoft.SharePoint.WebControls.DateTimeControl m_WorkloadEndDateTimeControl;
         
         /// <summary>
         /// Panel3 control.
