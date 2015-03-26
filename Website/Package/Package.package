@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="f224c84d-bdc8-4fae-8444-ed652e9f1a3a" solutionId="f224c84d-bdc8-4fae-8444-ed652e9f1a3a" resetWebServer="false" name="Agile Workload Tracker Website 1.10.0.0" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
-  <features>
-    <featureReference itemId="26be2f85-61c8-4212-b8f4-fa500cd71747" />
-  </features>
-</package>

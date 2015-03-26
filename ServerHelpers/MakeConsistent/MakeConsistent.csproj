@@ -68,12 +68,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\AgileWorkloadTracker\DataModel\DataModel4SOM.csproj">
-      <Project>{d25436c2-df34-48b9-ad93-22db904fd81d}</Project>
-      <Name>DataModel4SOM</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
