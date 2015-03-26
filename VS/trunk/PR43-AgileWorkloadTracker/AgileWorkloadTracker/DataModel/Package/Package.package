@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="84d2b745-0dfa-4ed3-bfe6-4a00ee1c5a8b" solutionId="84d2b745-0dfa-4ed3-bfe6-4a00ee1c5a8b" resetWebServer="false" name="DataModel" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
-  <assemblies>
-    <customAssembly location="CAS.SharePoint.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\..\..\CommonBinaries\PR42-SmartFactory\CAS.SharePoint.dll" />
-  </assemblies>
-  <features>
-    <featureReference itemId="75cc7c06-888d-4ad7-a780-477b93ea6de3" />
-  </features>
-</package>

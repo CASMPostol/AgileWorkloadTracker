@@ -136,10 +136,6 @@
       <Project>{b9d9fcca-6132-4bf5-bc17-32ea752d6ad7}</Project>
       <Name>SharePoint</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\AgileWorkloadTracker\DataModel\DataModel4SOM.csproj">
-      <Project>{d25436c2-df34-48b9-ad93-22db904fd81d}</Project>
-      <Name>DataModel4SOM</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="AWT_Ico.ico" />

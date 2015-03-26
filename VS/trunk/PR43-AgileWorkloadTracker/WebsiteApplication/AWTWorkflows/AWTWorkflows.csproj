@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D079F747-023B-4E7E-859D-ED4C6F4CF1D0}</ProjectGuid>
+    <ProjectGuid>{51AF61B3-3932-4C51-9AFC-A5CFCBA8B091}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CAS.AgileWorkloadTracker.DataModel</RootNamespace>
-    <AssemblyName>CASAgileWorkloadTrackerDataModel</AssemblyName>
+    <RootNamespace>CAS.AgileWorkloadTracker.Workflows</RootNamespace>
+    <AssemblyName>CASAgileWorkloadTrackerWorkflows</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BB1F664B-9266-4fd6-B973-E1E44974B511};{14822709-B5A1-4724-98CA-57A101D1B079};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -41,21 +41,28 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.SharePoint.Linq, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SharePoint.WorkflowActions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Workflow.Activities" />
+    <Reference Include="System.Workflow.ComponentModel" />
+    <Reference Include="System.Workflow.Runtime" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.SharePoint" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Features\DataModel\DataModel.feature">
-      <FeatureId>{75cc7c06-888d-4ad7-a780-477b93ea6de3}</FeatureId>
+    <None Include="CalculateProject\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{70507aa9-bb4e-4608-a020-153df9c8a0bf}</SharePointProjectItemId>
+    </None>
+    <None Include="Features\AWTWorkflows\AWTWorkflows.feature">
+      <FeatureId>{a65df859-f0a1-47a2-bb9d-03930e314363}</FeatureId>
     </None>
     <None Include="key.snk" />
-    <None Include="Linq\Scripts\GetEntities.ps1" />
     <None Include="Package\Package.package">
-      <PackageId>{84d2b745-0dfa-4ed3-bfe6-4a00ee1c5a8b}</PackageId>
+      <PackageId>{234d9250-0dbf-4a59-abbe-e4bac19eaff3}</PackageId>
     </None>
     <None Include="Package\Package.Template.xml">
       <DependentUpon>Package.package</DependentUpon>
@@ -66,20 +73,21 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AWTDataModel\AWTDataModel.csproj">
+      <Project>{d079f747-023b-4e7e-859d-ed4c6f4cf1d0}</Project>
+      <Name>DataModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataModelExtensions.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Linq\Element.cs" />
-    <Compile Include="Linq\Entities.cs" />
-    <Compile Include="Linq\Entities.partial.cs" />
-    <Compile Include="Linq\Milestone.cs" />
-    <Compile Include="Linq\Project.cs" />
-    <Compile Include="Linq\Requirements.cs" />
-    <Compile Include="Linq\Status.cs" />
-    <Compile Include="Linq\Tasks.cs" />
-    <Compile Include="Linq\Workload.cs" />
+    <Compile Include="CalculateProject\CalculateProject.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CalculateProject\CalculateProject.Designer.cs">
+      <DependentUpon>CalculateProject.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -87,16 +95,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Features\DataModel\DataModel.Template.xml">
-      <DependentUpon>DataModel.feature</DependentUpon>
+    <Content Include="CalculateProject\Elements.xml" />
+    <Content Include="Features\AWTWorkflows\AWTWorkflows.Template.xml">
+      <DependentUpon>AWTWorkflows.feature</DependentUpon>
     </Content>
-    <Content Include="Linq\Scripts\Parameters.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\PR44-SharePoint\Libraries\SharePoint\SharePoint.csproj">
-      <Project>{b9d9fcca-6132-4bf5-bc17-32ea752d6ad7}</Project>
-      <Name>SharePoint</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
