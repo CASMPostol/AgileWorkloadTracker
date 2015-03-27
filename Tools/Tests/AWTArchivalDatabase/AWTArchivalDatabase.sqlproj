@@ -57,5 +57,30 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="AWTCreateTables" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AWTArchivalDatabase.dbmdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="AWTCreateTables.sql" />
+    <Build Include="AWTDropTables.sql" />
+    <Build Include="AWTCreateTables\ArchivingLogs.sql" />
+    <Build Include="AWTCreateTables\ArchivingOperationLogs.sql" />
+    <Build Include="AWTCreateTables\Category.sql" />
+    <Build Include="AWTCreateTables\Contracts.sql" />
+    <Build Include="AWTCreateTables\Estimation.sql" />
+    <Build Include="AWTCreateTables\History.sql" />
+    <Build Include="AWTCreateTables\Milestone.sql" />
+    <Build Include="AWTCreateTables\Partners.sql" />
+    <Build Include="AWTCreateTables\Priority.sql" />
+    <Build Include="AWTCreateTables\Projects.sql" />
+    <Build Include="AWTCreateTables\Requirements.sql" />
+    <Build Include="AWTCreateTables\Resolution.sql" />
+    <Build Include="AWTCreateTables\SPStatus.sql" />
+    <Build Include="AWTCreateTables\Stage.sql" />
+    <Build Include="AWTCreateTables\Task.sql" />
+    <Build Include="AWTCreateTables\Type.sql" />
+    <Build Include="AWTCreateTables\Workload.sql" />
   </ItemGroup>
 </Project>

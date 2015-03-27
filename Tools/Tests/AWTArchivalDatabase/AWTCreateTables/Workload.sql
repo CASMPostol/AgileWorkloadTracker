@@ -1,0 +1,25 @@
+if exists (select * from INFORMATION_SCHEMA.TABLES where TABLE_NAME = 'Workload')
+  drop table  Workload;
+CREATE TABLE [dbo].[Workload] (
+    [AssignedTo]             NVARCHAR(max)   NULL,
+    [Author]                 NVARCHAR(max)   NULL,
+    [Comments]               NVARCHAR(max)   NULL,
+    [Created]                DATETIME        NULL,
+    [Editor]                 NVARCHAR(max)   NULL,
+    [EndDate]                DATETIME        NULL,
+    [ID]                     INT             NOT NULL,
+    [Modified]               DATETIME        NULL,
+    [owshiddenversion]       INT             NULL,
+    [ReadOnly]               BIT             NULL,
+    [StartDate]              DATETIME        NULL,
+    [Title]                  NVARCHAR(max)   NOT NULL,
+    [Workload2ProjectTitle]  INT             NULL,
+    [Workload2StageTitle]    INT             NULL,
+    [Workload2TaskID]        INT             NULL,
+    [WorkloadHours]          FLOAT           NULL,
+    [OnlySQL]				 BIT			 NOT NULL,	
+	CONSTRAINT [PK_Workload_ID] PRIMARY KEY CLUSTERED ([ID] ASC) ,
+    CONSTRAINT [FK_Workload_Projects] FOREIGN KEY ([Workload2ProjectTitle]) REFERENCES [dbo].[Projects] ([ID]),
+    CONSTRAINT [FK_Workload_Stage] FOREIGN KEY ([Workload2StageTitle]) REFERENCES [dbo].[Stage] ([ID]),
+    CONSTRAINT [FK_Workload_Task] FOREIGN KEY ([Workload2TaskID]) REFERENCES [dbo].[Task] ([ID]),
+);
