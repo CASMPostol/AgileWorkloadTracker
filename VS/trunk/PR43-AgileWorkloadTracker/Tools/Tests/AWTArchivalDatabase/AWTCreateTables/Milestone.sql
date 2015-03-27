@@ -1,0 +1,28 @@
+if exists (select * from INFORMATION_SCHEMA.TABLES where TABLE_NAME = 'Milestone')
+  drop table  Milestone;
+CREATE TABLE [dbo].[Milestone] (
+    [AcceptedHours]          FLOAT           NULL,
+    [Active]                 BIT             NULL,
+    [Author]                 NVARCHAR(max)   NULL,
+    [BaselineEnd]            DATETIME        NULL,
+    [BaselineStart]          DATETIME        NULL,
+    [Created]                DATETIME        NULL,
+    [Default]                BIT             NULL,
+    [Editor]                 NVARCHAR(max)   NULL,
+    [EstimatedHours]         FLOAT           NULL,
+    [ID]                     INT             NOT NULL,
+    [Milestone2ProjectTitle] INT             NULL,
+    [Milestone2StageTitle]   INT             NULL,
+    [MilestoneDescription]   NVARCHAR(max)   NULL,
+    [MilestoneEnd]           DATETIME        NULL,
+    [MilestoneHours]         FLOAT           NULL,
+    [MilestoneStart]         DATETIME        NULL,
+    [Modified]               DATETIME        NULL,
+    [owshiddenversion]       INT             NULL,
+    [SortOrder]              FLOAT           NULL,
+    [Title]                  NVARCHAR(max)   NOT NULL,
+    [OnlySQL]				 BIT			 NOT NULL,	
+	CONSTRAINT [PK_Milestone_ID] PRIMARY KEY CLUSTERED ([ID] ASC) ,
+    CONSTRAINT [FK_Milestone_Projects] FOREIGN KEY ([Milestone2ProjectTitle]) REFERENCES [dbo].[Projects] ([ID]),
+    CONSTRAINT [FK_Milestone_Stage] FOREIGN KEY ([Milestone2StageTitle]) REFERENCES [dbo].[Stage] ([ID]),
+);
