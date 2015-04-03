@@ -4,7 +4,7 @@
 //  $LastChangedDate$
 //  $Rev$
 //  $LastChangedBy$
-//  $URL:$
+//  $URL$
 //  $Id$
 //
 //  Copyright (C) 2013, CAS LODZ POLAND.
@@ -13,6 +13,7 @@
 //  http://www.cas.eu
 //</summary>
 
+using CAS.SharePoint.Linq;
 using System;
 using System.Linq;
 
@@ -21,8 +22,9 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
   /// <summary>
   /// Entity partial class Tasks
   /// </summary>
-  partial class Tasks : IComparable<Tasks>
+  public partial class Tasks : IComparable<Tasks>
   {
+
     #region public API
     internal void MakeConsistent(Entities edc)
     {
@@ -39,7 +41,7 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
         this.Task2RequirementsTitle = createDefault(edc);
       MakeConsistent(edc);
     }
-    internal void CalculateWorkload()
+    public void CalculateWorkload()
     {
       if (this.Task2RequirementsTitle == null)
         return;
@@ -75,10 +77,20 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
         _tsk = MakeCopy(edc);
       _tsk.Connecr2Target(edc, target);
     }
+    internal double WorkloadHours
+    {
+      get
+      {
+        if (this.Task2MilestoneResolvedInTitle == null || this.Task2MilestoneResolvedInTitle != this.Task2RequirementsTitle.Requirements2MilestoneTitle)
+          this.Task2MilestoneResolvedInTitle = this.Task2RequirementsTitle.Requirements2MilestoneTitle;
+        if (this.Task2ProjectTitle == null || this.Task2ProjectTitle != this.Task2RequirementsTitle.Requirements2ProjectsTitle)
+          this.Task2ProjectTitle = this.Task2RequirementsTitle.Requirements2ProjectsTitle;
+        return Workload.Sum<Workload>(a => a.MyHours);
+      }
+    }
     #endregion
 
     #region private
-    private int c_ResolutionFixed = 2;
     private int c_ResolutionFixLater = 5;
     private void Connecr2Target(Entities edc, Requirements target)
     {
@@ -90,37 +102,46 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
     }
     private Tasks MakeCopy(Entities edc)
     {
-      string _Cmnts = String.Empty;
-      int _idx = 0;
-      foreach (Linq.TaskComments _cx in TaskComments)
-      {
-        _Cmnts += _cx.Body;
-        if (_idx++ > 3)
-          break;
-      }
-      Status _newStae = Status.GetStatus(edc, Status.StatusValues.New);
+      string _Comments = String.Empty;
+      //int _idx = 0;
+      //Should copy 3 last comments 
+      //foreach (Linq.TaskComments _cx in TaskComments)
+      //{
+      //  _Cmnts += _cx.Body;
+      //  if (_idx++ > 3)
+      //    break;
+      //}
+      Status _newStatus = Status.GetStatus(edc, Status.StatusValues.New);
       Tasks _newTask = new Tasks()
       {
-        Active = _newStae.Active,
+        AssignedTo = AssignedTo,
+        Active = _newStatus.Active,
         BaselineEnd = this.BaselineEnd,
         BaselineStart = this.BaselineStart,
-        Body = Body + String.Format("<div><p>copy from milestone {0}.</p></div><div>{1}</div>", this.Task2MilestoneResolvedInTitle.Title, _Cmnts),
+        Body = Body + String.Format("<div><p>copy from milestone {0}.</p></div><div>{1}</div>", this.Task2MilestoneResolvedInTitle.Title, _Comments),
+        ContentType = this.ContentType,
+        Hours = 0,
+        PercentComplete = 0,
+        Priority = this.Priority,
+        StartDate = DateTime.Now,
         Task2CategoryTitle = this.Task2CategoryTitle,
         Task2MilestoneDefinedInTitle = this.Task2MilestoneDefinedInTitle,
         Task2MilestoneResolvedInTitle = null, // assigned in Connecr2Target
         Task2ProjectTitle = null, // assigned in Connecr2Target
         Task2RequirementsTitle = null, // assigned in Connecr2Target
-        Task2ResourcesTitle = this.Task2ResourcesTitle,
         Task2SPriorityTitle = this.Task2SPriorityTitle,
         Task2SResolutionTitle = this.Task2SResolutionTitle,
-        Task2StatusTitle = _newStae,
+        Task2StatusTitle = _newStatus,
         Task2TypeTitle = this.Task2TypeTitle,
+        TaskDueDate = this.TaskDueDate,
+        TaskStatus = this.TaskStatus,
         TaskEnd = DateTime.Today,
         TaskStart = DateTime.Today,
-        Title = this.Title
+        Title = this.Title,
+        Version = this.Version,
       };
       edc.Task.InsertOnSubmit(_newTask);
-      this.Task2SResolutionTitle = Element.GetAtIndex<Resolution>(edc.Resolution, c_ResolutionFixLater);
+      this.Task2SResolutionTitle = edc.Resolution.GetAtIndex<Resolution>(c_ResolutionFixLater);
       this.Task2StatusTitle = Status.GetStatus(edc, Status.StatusValues.Resolved);
       this.Active = this.Task2StatusTitle.Active.Value;
       return _newTask;
@@ -152,7 +173,6 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
     }
     #endregion
 
-
     #region IComparable<Tasks> Members
 
     /// <summary>
@@ -177,5 +197,6 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
     }
 
     #endregion
+
   }
 }

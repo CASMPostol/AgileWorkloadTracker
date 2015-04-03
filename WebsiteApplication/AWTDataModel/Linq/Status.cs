@@ -13,6 +13,7 @@
 //  http://www.cas.eu
 //</summary>
 
+using CAS.SharePoint.Linq;
 
 namespace CAS.AgileWorkloadTracker.DataModel.Linq
 {
@@ -33,7 +34,7 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
     }
     internal static Status GetStatus(Entities edc, StatusValues value)
     {
-      return Element.GetAtIndex<Status>(edc.Status, (int)value);
+      return edc.Status.GetAtIndex<Status>((int)value);
     }
   }
 }

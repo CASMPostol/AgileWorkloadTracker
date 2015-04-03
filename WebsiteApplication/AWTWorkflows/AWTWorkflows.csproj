@@ -73,6 +73,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\PR44-SharePoint\Libraries\SharePoint\SharePoint.csproj">
+      <Project>{b9d9fcca-6132-4bf5-bc17-32ea752d6ad7}</Project>
+      <Name>SharePoint</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AWTDataModel\AWTDataModel.csproj">
       <Project>{d079f747-023b-4e7e-859d-ed4c6f4cf1d0}</Project>
       <Name>AWTDataModel</Name>

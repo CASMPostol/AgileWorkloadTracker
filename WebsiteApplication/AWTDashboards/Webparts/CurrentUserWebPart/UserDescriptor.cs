@@ -1,9 +1,25 @@
-﻿using System;
+﻿//_______________________________________________________________
+//  Title   : UserDescriptor
+//  System  : Microsoft VisualStudio 2013 / C#
+//  $LastChangedDate$
+//  $Rev$
+//  $LastChangedBy$
+//  $URL: $
+//  $Id$
+//
+//  Copyright (C) 2015, CAS LODZ POLAND.
+//  TEL: +48 (42) 686 25 47
+//  mailto://techsupp@cas.eu
+//  http://www.cas.eu
+//_______________________________________________________________
+
+using CAS.AgileWorkloadTracker.DataModel.Linq;
+using CAS.SharePoint.Linq;
+using Microsoft.SharePoint;
+using System;
 using System.ComponentModel;
 using System.Data;
 using System.Web.UI.WebControls.WebParts;
-using CAS.AgileWorkloadTracker.Linq;
-using Microsoft.SharePoint;
 
 namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.CurrentUserWebPart
 {
@@ -28,10 +44,10 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.CurrentUserWebPart
       row[_NameColumnName] = this.User = _user.Name;
       using (Entities edc = new Entities(SPContext.Current.Web.Url))
       {
-        Resources _Partner = Resources.FindForUser(edc, _user);
+        Item _Partner = Users.FindSPUser(edc, _user);
         if (_Partner != null)
         {
-          row[_CompanyIDColumnName] = _Partner.Identyfikator.ToString();
+          row[_CompanyIDColumnName] = _Partner.Id.ToString();
           row[_CompanyTitleColumnName] = Company = _Partner.Title;
         }
         else
@@ -86,8 +102,8 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.CurrentUserWebPart
     private const string _LoginNameColumnName = "LoginName";
     private const string _NameColumnName = "Name";
     private const string _NotesColumnName = "Notes";
-    private const string _CompanyTitleColumnName = Element.TitleColunmName;
-    private const string _CompanyIDColumnName = Element.IDColunmName;
+    private const string _CompanyTitleColumnName = SPLinqExtensions.TitleColumnName;
+    private const string _CompanyIDColumnName = SPLinqExtensions.IDColumnName;
     private DataRowView Row0 { get { return DefaultView[0]; } }
     private void AddColumn(string _name)
     {
