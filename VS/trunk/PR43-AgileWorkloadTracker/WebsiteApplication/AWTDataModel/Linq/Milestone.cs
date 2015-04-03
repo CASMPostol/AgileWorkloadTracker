@@ -4,7 +4,7 @@
 //  $LastChangedDate$
 //  $Rev$
 //  $LastChangedBy$
-//  $URL:$
+//  $URL$
 //  $Id$
 //
 //  Copyright (C) 2013, CAS LODZ POLAND.
@@ -120,12 +120,12 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
       foreach (DataModel.Linq.Tasks _tskx in _tsks)
       {
         Requirements _targetRequirement = null;
-        if (_Requirements.ContainsKey(_tskx.Task2RequirementsTitle.Identyfikator.Value))
-          _targetRequirement = _Requirements[_tskx.Task2RequirementsTitle.Identyfikator.Value];
+        if (_Requirements.ContainsKey(_tskx.Task2RequirementsTitle.Id.Value))
+          _targetRequirement = _Requirements[_tskx.Task2RequirementsTitle.Id.Value];
         else
         {
           _targetRequirement = _tskx.Task2RequirementsTitle.MakeCopy(edc, target);
-          _Requirements.Add(_tskx.Task2RequirementsTitle.Identyfikator.Value, _targetRequirement);
+          _Requirements.Add(_tskx.Task2RequirementsTitle.Id.Value, _targetRequirement);
         }
         _tskx.MoveToTarget(edc, _targetRequirement);
       }
@@ -198,5 +198,6 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
       return _result;
     }
     #endregion
+
   }
 }

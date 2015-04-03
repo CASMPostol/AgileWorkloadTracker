@@ -8,7 +8,7 @@ rem//  $URL: svn://svnserver.hq.cas.com.pl/VS/trunk/PR42-SmartFactory/Scripts/Cr
 rem//  $Id: CreateTag.tt 9645 2013-08-29 11:53:38Z mpostol $
 
 <#
-  string _rel =  AWTTagVersion.Replace(".", "_");
+  string _rel =  AWTAssemblyFileVersion.Replace(".", "_");
 #>
 
 set branchtype=tags

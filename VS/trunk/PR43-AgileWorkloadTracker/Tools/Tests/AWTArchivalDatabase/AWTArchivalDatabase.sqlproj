@@ -60,9 +60,6 @@
     <Folder Include="AWTCreateTables" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="AWTArchivalDatabase.dbmdl" />
-  </ItemGroup>
-  <ItemGroup>
     <Build Include="AWTCreateTables.sql" />
     <Build Include="AWTDropTables.sql" />
     <Build Include="AWTCreateTables\ArchivingLogs.sql" />

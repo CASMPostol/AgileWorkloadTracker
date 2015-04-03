@@ -79,6 +79,7 @@
     <Compile Include="Linq\Requirements.cs" />
     <Compile Include="Linq\Status.cs" />
     <Compile Include="Linq\Tasks.cs" />
+    <Compile Include="Linq\Users.cs" />
     <Compile Include="Linq\Workload.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <AutoGen>True</AutoGen>
@@ -90,7 +91,9 @@
     <Content Include="Features\AWTDataModel\AWTDataModel.Template.xml">
       <DependentUpon>AWTDataModel.feature</DependentUpon>
     </Content>
-    <Content Include="Linq\Scripts\Parameters.xml" />
+    <Content Include="Linq\Scripts\Parameters.xml">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\PR44-SharePoint\Libraries\SharePoint\SharePoint.csproj">

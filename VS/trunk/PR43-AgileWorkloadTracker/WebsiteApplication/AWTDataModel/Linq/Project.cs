@@ -4,7 +4,7 @@
 //  $LastChangedDate$
 //  $Rev$
 //  $LastChangedBy$
-//  $URL:$
+//  $URL$
 //  $Id$
 //
 //  Copyright (C) 2013, CAS LODZ POLAND.

@@ -4,7 +4,7 @@
 //  $LastChangedDate$
 //  $Rev$
 //  $LastChangedBy$
-//  $URL:$
+//  $URL$
 //  $Id$
 //
 //  Copyright (C) 2013, CAS LODZ POLAND.
@@ -68,11 +68,26 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
         return;
       Requirements2MilestoneTitle.Update();
     }
+    /// <summary>
+    /// Previous Hours: updated lookups Projects and Milestone and sums workload reported for all related tasks. 
+    /// </summary>
+    /// <value>The calculate hours.</value>
+    internal double CalculateHours
+    {
+      get
+      {
+        if (this.Requirements2ProjectsTitle == null || this.Requirements2ProjectsTitle != this.Requirements2MilestoneTitle.Milestone2ProjectTitle)
+          this.Requirements2ProjectsTitle = this.Requirements2MilestoneTitle.Milestone2ProjectTitle;
+        double _hours = this.Tasks.Sum<Tasks>(a => a.Hours.GetValueOrDefault(0));
+        RequirementPriority = Convert.ToInt32(Math.Round(_hours));
+        return _hours;
+      }
+    }
     internal Requirements MakeCopy(Entities edc, Milestone target)
     {
       Requirements _ret = new Requirements()
       {
-        Body = Body + String.Format("<div><p>copy from milestone {0}[{1}].</p></div>", this.Requirements2MilestoneTitle.Title, this.Requirements2MilestoneTitle.Identyfikator.Value),
+        Body = Body + String.Format("<div><p>copy from milestone {0}[{1}].</p></div>", this.Requirements2MilestoneTitle.Title, this.Requirements2MilestoneTitle.Id.Value),
         EstimatedHours = Math.Max(0, this.EstimatedHours.GetValueOrDefault(0) - this.Hours.GetValueOrDefault(0)),
         Hours = 0,
         RequirementPriority = this.RequirementPriority,
@@ -89,11 +104,11 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
       string _defMilestoneTitle = String.Format("Dangling Tasks for {0}", milestone.Title);
       Requirements _defR = new Requirements()
       {
-        Body = String.Format("<div><p>Dangling Tasks for milestione {0}[{1}].</p></div>", milestone.Title, milestone.Identyfikator.Value),
+        Body = String.Format("<div><p>Dangling Tasks for milestone {0}[{1}].</p></div>", milestone.Title, milestone.Id.Value),
         Requirements2MilestoneTitle = milestone,
         Requirements2ProjectsTitle = milestone.Milestone2ProjectTitle,
         RequirementsType = new Nullable<RequirementsType>(),
-        Title = _defMilestoneTitle, 
+        Title = _defMilestoneTitle,
       };
       edc.Requirements.InsertOnSubmit(_defR);
       return _defR;

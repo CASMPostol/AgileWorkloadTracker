@@ -23,12 +23,12 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
   /// </summary>
   public partial class Workload
   {
-    internal void Update(ref double hours, ref DateTime start, ref DateTime end)
+    public void Update(ref double hours, ref DateTime start, ref DateTime end)
     {
       MakeConsistent();
       DataModelExtensions.UpdateWorkload(ref hours, ref start, ref end, MyHours, MyDate, MyDate);
     }
-    internal void MakeConsistent()
+    public void MakeConsistent()
     {
       if (this.Workload2TaskID == null)
         throw new ArgumentNullException("Workload2TaskTitle", this.Title);
@@ -37,17 +37,17 @@ namespace CAS.AgileWorkloadTracker.DataModel.Linq
       if (this.Workload2StageTitle == null)
         this.Workload2StageTitle = this.Workload2ProjectTitle.Project2StageTitle;
     }
-    private DateTime MyDate
+    public DateTime MyDate
     {
-      get { return this.WorkloadDate.ValueOrException<DateTime>("DataModel.Linq.Workload", "Start", "WorkloadDate"); }
+      get { return this.StartDate.ValueOrException<DateTime>("DataModel.Linq.Workload", "Start", "WorkloadDate").Date; }
     }
-    private double MyHours
+    public double MyHours
     {
-      get { return this.Hours.ValueOrException<double>("DataModel.Linq.Workload", "MyHours", "Hours"); }
+      get { return (this.EndDate.Value - this.StartDate.Value).Duration().TotalMinutes / 60.0; }
     }
     private string WrongProjectMessage()
     {
-      return String.Format("Workload {0} lookup on task {1} of the project has wrong project lookup {3}", Title, Workload2TaskTitle.Title, Workload2TaskTitle.Task2ProjectTitle.Title, Workload2ProjectTitle.Title);
+      return String.Format("Workload {0} lookup on task {1} of the project has wrong project lookup {3}", Title, Workload2TaskID.Title, Workload2TaskID.Task2ProjectTitle.Title, Workload2ProjectTitle.Title);
     }
   }
 }

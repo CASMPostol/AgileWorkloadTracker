@@ -13,37 +13,37 @@
 //  http://www.cas.eu
 //</summary>
 
-using System;
-using System.Linq;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 using CAS.AgileWorkloadTracker.Dashboards.Linq;
-using CAS.AgileWorkloadTracker.Linq;
+using CAS.AgileWorkloadTracker.DataModel.Linq;
 using CAS.SharePoint;
 using CAS.SharePoint.Linq;
 using CAS.SharePoint.Web;
 using Microsoft.SharePoint;
+using System;
+using System.Linq;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
 {
   /// <summary>
   /// Workload Management User Control
   /// </summary>
-  [CLSCompliant( false )]
-  public partial class WorkloadManagementUserControl: UserControl
+  [CLSCompliant(false)]
+  public partial class WorkloadManagementUserControl : UserControl
   {
     public WorkloadManagementUserControl()
     {
       try
       {
         At = "LocalStateMachine";
-        m_StateMachineEngine = new LocalStateMachine( this );
+        m_StateMachineEngine = new LocalStateMachine(this);
         At = "DataContextManagement";
-        m_DataContext = new DataContextManagement<Entities>( this );
+        m_DataContext = new DataContextManagement<Entities>(this);
       }
-      catch ( Exception _ex )
+      catch (Exception _ex)
       {
-        ShowActionResult( GenericStateMachineEngine.ActionResult.Exception( _ex, "WorkloadManagementUserControl" ) );
+        GenericStateMachineEngine.ActionResult.Exception(_ex, "WorkloadManagementUserControl").CreateActionResultControl(x => this.Controls.Add(x));
       }
     }
 
@@ -57,11 +57,11 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
       #endregion
 
       #region public
-      public ControlState( ControlState _old )
+      public ControlState(ControlState oldControlState)
       {
-        if ( _old == null )
+        if (oldControlState == null)
           return;
-        InterfaceState = _old.InterfaceState;
+        InterfaceState = oldControlState.InterfaceState;
       }
       #endregion
     }
@@ -69,87 +69,88 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     /// Raises the <see cref="E:System.Web.UI.Control.Init"/> event.
     /// </summary>
     /// <param name="e">An <see cref="T:System.EventArgs"/> object that contains the event data.</param>
-    protected override void OnInit( EventArgs e )
+    protected override void OnInit(EventArgs e)
     {
-      Page.RegisterRequiresControlState( this );
-      base.OnInit( e );
+      Page.RegisterRequiresControlState(this);
+      base.OnInit(e);
     }
     /// <summary>
     /// Page Load method
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    protected void Page_Load( object sender, EventArgs e )
+    protected void Page_Load(object sender, EventArgs e)
     {
       try
       {
-        if ( !this.IsPostBack )
+        if (!this.IsPostBack)
         {
-          At = "InitMahine";
-          m_StateMachineEngine.InitMahine();
+          At = "InitializeMachine";
+          m_StateMachineEngine.InitializeMachine();
           //Grid setup
           m_GridView.EmptyDataText = "No workload defined";
-          m_GridView.Columns.Add( new BoundField() { DataField = "Hours", HeaderText = "Workload [h]" } );
-          m_GridView.Columns.Add( new BoundField() { DataField = "Project", HeaderText = "Project" } );
-          m_GridView.Columns.Add( new BoundField() { DataField = "Task", HeaderText = "Task" } );
+          m_GridView.Columns.Add(new BoundField() { DataField = "Hours", HeaderText = "Workload [h]" });
+          m_GridView.Columns.Add(new BoundField() { DataField = "Project", HeaderText = "Project" });
+          m_GridView.Columns.Add(new BoundField() { DataField = "Task", HeaderText = "Task" });
           //m_GridView.Columns.Add( new BoundField() { DataField = "Description", HeaderText = "Description", Visible = true } );
           string _urlFormat = @"~/sites/awt/Lists/WorkloadList/DispForm.aspx?ID={0}";
-          m_GridView.Columns.Add( new HyperLinkField() { DataTextField = "Description", HeaderText = "Workload", DataNavigateUrlFields = new string[] { "ID" }, DataNavigateUrlFormatString = _urlFormat, Visible = true } );
-          m_GridView.Columns.Add( new BoundField() { DataField = "ID", HeaderText = "ID", Visible = false } );
+          m_GridView.Columns.Add(new HyperLinkField() { DataTextField = "Description", HeaderText = "Workload", DataNavigateUrlFields = new string[] { "ID" }, DataNavigateUrlFormatString = _urlFormat, Visible = true });
+          m_GridView.Columns.Add(new BoundField() { DataField = "ID", HeaderText = "ID", Visible = false });
           m_GridView.DataKeyNames = new String[] { "ID" };
           //Calendar setup
           m_Calendar.SelectedDate = DateTime.Now.Date;
           m_Calendar.VisibleDate = DateTime.Now.Date;
           m_GridViewProjectSummary.AutoGenerateColumns = true;
           m_GridViewProjectSummary.DataKeyNames = new String[] { "Scope" };
-          //DropDownList'c setup 
-          At = "ShouwUserInformation";
-          if ( ShouwUserInformation() )
+          //DropDownList setup 
+          At = "ShowUserInformation";
+          if (ShowUserInformation())
           {
+            Entities _edc = m_DataContext.DataContext;
             At = "FillupProjectDropDown";
             FillupProjectDropDown();
             At = "FillupMilestoneDropDown";
             FillupMilestoneDropDown();
             At = "FillupTaskaDropDown";
-            FillupTaskaDropDown();
+            FillupTaskDropDown();
             At = "FindForUser";
-            FillupWorkflowGridView();
+            FillupWorkflowGridView(_edc);
             At = "FillupGridViewProjectSummary";
-            FillupGridViewProjectSummary();
+            FillupGridViewProjectSummary(m_DataContext.DataContext);
           }
           else
             m_PanelAddEdit.Enabled = false;
         }
-        m_ProjectDropDown.SelectedIndexChanged += new EventHandler( m_ProjectDropDown_SelectedIndexChanged );
+        m_ProjectDropDown.SelectedIndexChanged += new EventHandler(m_ProjectDropDown_SelectedIndexChanged);
         m_MilestoneDropDown.SelectedIndexChanged += m_MilestoneDropDown_SelectedIndexChanged;
-        m_ButtonSave.Click += new EventHandler( m_StateMachineEngine.SaveButton_Click );
-        m_ButtonAddNew.Click += new EventHandler( m_StateMachineEngine.NewButton_Click );
-        m_ButtonCancel.Click += new EventHandler( m_StateMachineEngine.CancelButton_Click );
-        m_ButtonEdit.Click += new EventHandler( m_StateMachineEngine.EditButton_Click );
-        m_ButtonDelete.Click += new EventHandler( m_StateMachineEngine.DeleteButton_Click );
+        m_ButtonSave.Click += new EventHandler(m_StateMachineEngine.SaveButton_Click);
+        m_ButtonAddNew.Click += new EventHandler(m_StateMachineEngine.NewButton_Click);
+        m_ButtonCancel.Click += new EventHandler(m_StateMachineEngine.CancelButton_Click);
+        m_ButtonEdit.Click += new EventHandler(m_StateMachineEngine.EditButton_Click);
+        m_ButtonDelete.Click += new EventHandler(m_StateMachineEngine.DeleteButton_Click);
       }
-      catch ( ApplicationError _ax )
+      catch (ApplicationError _ax)
       {
-        this.Controls.Add( _ax.CreateMessage( At, true ) );
+        this.Controls.Add(_ax.CreateMessage(At, true));
       }
-      catch ( Exception _ex )
+      catch (Exception _ex)
       {
-        ShowActionResult( GenericStateMachineEngine.ActionResult.Exception( _ex, "Page_Load" ) );
+        GenericStateMachineEngine.ActionResult.Exception(_ex, "Page_Load").CreateActionResultControl(x => this.Controls.Add(x));
       }
     }
     /// <summary>
     /// Loads the state of the control.
     /// </summary>
     /// <param name="savedState">The state.</param>
-    protected override void LoadControlState( object savedState )
+    protected override void LoadControlState(object savedState)
     {
-      if ( savedState != null )
+      if (savedState != null)
       {
         m_ControlState = (ControlState)savedState;
-        m_StateMachineEngine.InitMahine( m_ControlState.InterfaceState );
+        m_StateMachineEngine.InitializeMachine(m_ControlState.InterfaceState);
       }
       else
-        m_StateMachineEngine.InitMahine();
+        m_StateMachineEngine.InitializeMachine();
     }
     /// <summary>
     /// Saves any server control state changes that have occurred since the time the page was posted back to the server.
@@ -165,32 +166,32 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     /// Raises the <see cref="E:System.Web.UI.Control.PreRender"/> event.
     /// </summary>
     /// <param name="e">An <see cref="T:System.EventArgs"/> object that contains the event data.</param>
-    protected override void OnPreRender( EventArgs e )
+    protected override void OnPreRender(EventArgs e)
     {
-      SetEnabled( m_ControlState.SetEnabled );
-      if ( m_GridView.SelectedIndex == -1 )
+      SetEnabled(m_ControlState.SetEnabled);
+      if (m_GridView.SelectedIndex == -1)
       {
         m_ButtonDelete.Enabled = false;
         m_ButtonEdit.Enabled = false;
       }
-      base.OnPreRender( e );
+      base.OnPreRender(e);
     }
     #endregion
 
     #region State machine
     private LocalStateMachine m_StateMachineEngine;
-    private class LocalStateMachine: StateMachine
+    private class LocalStateMachine : StateMachine
     {
       #region public
-      internal LocalStateMachine( WorkloadManagementUserControl _parent )
+      internal LocalStateMachine(WorkloadManagementUserControl parent)
       {
-        m_Parent = _parent;
+        m_Parent = parent;
       }
-      internal void InitMahine( InterfaceState _ControlState )
+      internal void InitializeMachine(InterfaceState _ControlState)
       {
         m_Parent.m_ControlState.InterfaceState = _ControlState;
       }
-      internal void InitMahine()
+      internal void InitializeMachine()
       {
         m_Parent.m_ControlState.InterfaceState = InterfaceState.ViewState;
         EnterState();
@@ -204,23 +205,23 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
       }
       protected override GenericStateMachineEngine.ActionResult Create()
       {
-        return m_Parent.CreateNewWokload();
+        return m_Parent.CreateNewWorkload();
       }
       protected override GenericStateMachineEngine.ActionResult Delete()
       {
         return m_Parent.Delete();
       }
-      protected override void SetEnabled( GenericStateMachineEngine.ControlsSet _buttons )
+      protected override void SetEnabled(GenericStateMachineEngine.ControlsSet buttons)
       {
-        m_Parent.m_ControlState.SetEnabled = _buttons;
+        m_Parent.m_ControlState.SetEnabled = buttons;
       }
-      protected override void ShowActionResult( GenericStateMachineEngine.ActionResult _rslt )
+      protected override void ShowActionResult(GenericStateMachineEngine.ActionResult actionResult)
       {
-        m_Parent.ShowActionResult( _rslt );
+        actionResult.CreateActionResultControl(x => m_Parent.Controls.Add(x));
       }
-      protected override void SMError( GenericStateMachineEngine.InterfaceEvent interfaceEvent )
+      protected override void SMError(GenericStateMachineEngine.InterfaceEvent interfaceEvent)
       {
-        m_Parent.ShowActionResult( GenericStateMachineEngine.ActionResult.Exception( new ApplicationException( "State Machine Error" ), "SMError" ) );
+        GenericStateMachineEngine.ActionResult.Exception(new ApplicationException("State Machine Error"), "SMError").CreateActionResultControl(x => m_Parent.Controls.Add(x));
       }
       protected override GenericStateMachineEngine.ActionResult Update()
       {
@@ -234,7 +235,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
         }
         set
         {
-          if ( m_Parent.m_ControlState.InterfaceState == value )
+          if (m_Parent.m_ControlState.InterfaceState == value)
             return;
           m_Parent.m_ControlState.InterfaceState = value;
           EnterState();
@@ -247,46 +248,56 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
       #endregion
 
     }
-    private GenericStateMachineEngine.ActionResult CreateNewWokload()
+    private GenericStateMachineEngine.ActionResult CreateNewWorkload()
     {
-      if ( !Page.IsValid )
-        return GenericStateMachineEngine.ActionResult.NotValidated( "Required information must be provided." );
+      if (!Page.IsValid)
+        return GenericStateMachineEngine.ActionResult.NotValidated("Required information must be provided.");
       try
       {
-        double _hours = TextBoxToHours( m_WorkloadHoursTextBox, m_WorkloadHoursLabel.Text );
-        if ( m_TaskDropDown.SelectedValue.IsNullOrEmpty() )
-          return GenericStateMachineEngine.ActionResult.NotValidated( "You must select a task to create new workload" );
-        Tasks _task = Element.GetAtIndex<Tasks>( m_DataContext.DataContext.Task, m_TaskDropDown.SelectedValue );
+        if (m_TaskDropDown.SelectedValue.IsNullOrEmpty())
+          return GenericStateMachineEngine.ActionResult.NotValidated("You must select a task to create new workload");
+        Tasks _task = m_DataContext.DataContext.Task.GetAtIndex<Tasks>(m_TaskDropDown.SelectedValue);
         At = "newOne";
+        Entities _edc = m_DataContext.DataContext;
         Workload _newOne = new Workload()
         {
-          Hours = _hours,
+          AssignedTo = Me,
+          Comments = m_WorkloadDescriptionTextBox.Text, //TODO not sure what to do
+          Duration = 0,
+          EndDate = m_WorkloadEndDateTimeControl.SelectedDate,
+          EventCanceled = false,
+          EventType = 0,
+          FAllDayEvent = false,
+          FRecurrence = false,
+          Location = "In office",
+          MasterSeriesItemID = 0,
+          ReadOnly = false,
+          RecurrenceData = "",
+          RecurrenceID = DateTime.Today,
+          StartDate = m_WorkloadStartDateTimeControl.SelectedDate,
           Title = m_WorkloadDescriptionTextBox.Text,
           Workload2ProjectTitle = SelectedProject,
           Workload2StageTitle = SelectedProject == null ? null : SelectedProject.Project2StageTitle,
-          Workload2TaskTitle = _task,
-          WorkloadDate = m_Calendar.SelectedDate.Date == DateTime.Today ? DateTime.Now : m_Calendar.SelectedDate.Date,
-          ReadOnly = false,
-          WeekNumber = m_Calendar.SelectedDate.Date.WeekNumber(),
-          Year = m_Calendar.SelectedDate.Date.Year
+          Workload2TaskID = _task,
+          UID = new Guid(),
         };
         At = "InsertOnSubmit";
-        m_DataContext.DataContext.Workload.InsertOnSubmit( _newOne );
+        _edc.Workload.InsertOnSubmit(_newOne);
         At = "SubmitChanges #1";
         m_DataContext.DataContext.SubmitChanges();
-        _newOne.Workload2ResourcesTitle = Me;
+        _newOne.AssignedTo = Me;
         At = "SubmitChanges #2";
         m_DataContext.DataContext.SubmitChanges();
-        FillupWorkflowGridView();
-        FillupGridViewProjectSummary();
+        FillupWorkflowGridView(_edc);
+        FillupGridViewProjectSummary(_edc);
       }
-      catch ( ApplicationError _ax )
+      catch (ApplicationError _ax)
       {
-        return GenericStateMachineEngine.ActionResult.Exception( _ax, "CreateNewWokload at: " + At );
+        return GenericStateMachineEngine.ActionResult.Exception(_ax, "CreateNewWorkload at: " + At);
       }
-      catch ( Exception _ex )
+      catch (Exception _ex)
       {
-        return GenericStateMachineEngine.ActionResult.Exception( _ex, "CreateNewWokload at: " + At );
+        return GenericStateMachineEngine.ActionResult.Exception(_ex, "CreateNewWorkload at: " + At);
       }
       return GenericStateMachineEngine.ActionResult.Success;
     }
@@ -294,34 +305,35 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     {
       try
       {
-        Workload _wkl = Element.GetAtIndex<Workload>( m_DataContext.DataContext.Workload, m_GridView.SelectedDataKey.Value.ToString() );
+        Entities _edc = m_DataContext.DataContext;
+        Workload _wkl = _edc.Workload.GetAtIndex<Workload>(m_GridView.SelectedDataKey.Value.ToString());
         m_GridView.SelectedIndex = -1;
-        m_DataContext.DataContext.Workload.RecycleOnSubmit( _wkl );
+        m_DataContext.DataContext.Workload.RecycleOnSubmit(_wkl);
         m_DataContext.DataContext.SubmitChanges();
-        FillupWorkflowGridView();
+        FillupWorkflowGridView(_edc);
       }
-      catch ( Exception _ex )
+      catch (Exception _ex)
       {
-        return GenericStateMachineEngine.ActionResult.Exception( _ex, "Delete" );
+        return GenericStateMachineEngine.ActionResult.Exception(_ex, "Delete");
       }
       return GenericStateMachineEngine.ActionResult.Success;
     }
-    private void SetEnabled( GenericStateMachineEngine.ControlsSet _set )
+    private void SetEnabled(GenericStateMachineEngine.ControlsSet controlsSet)
     {
-      m_WorkloadHoursTextBox.Enabled = ( _set & GenericStateMachineEngine.ControlsSet.EditModeOn ) != 0;
-      m_WorkloadDescriptionTextBox.Enabled = ( _set & GenericStateMachineEngine.ControlsSet.EditModeOn ) != 0;
-      bool _viewMode = ( _set & GenericStateMachineEngine.ControlsSet.EditModeOn ) == 0;
+      m_WorkloadEndDateTimeControl.Enabled = (controlsSet & GenericStateMachineEngine.ControlsSet.EditModeOn) != 0;
+      m_WorkloadDescriptionTextBox.Enabled = (controlsSet & GenericStateMachineEngine.ControlsSet.EditModeOn) != 0;
+      bool _viewMode = (controlsSet & GenericStateMachineEngine.ControlsSet.EditModeOn) == 0;
       //m_ProjectDropDown.Enabled = (_set & GenericStateMachineEngine.ControlsSet.EditModeOn) != 0;
       m_TaskDropDown.Enabled = !_viewMode;
       m_MilestoneDropDown.Enabled = !_viewMode;
       m_GridView.Enabled = _viewMode;
       m_Calendar.Enabled = _viewMode;
       //Buttons
-      m_ButtonSave.Enabled = ( _set & GenericStateMachineEngine.ControlsSet.SaveOn ) != 0;
-      m_ButtonDelete.Enabled = ( _set & GenericStateMachineEngine.ControlsSet.DeleteOn ) != 0;
-      m_ButtonCancel.Enabled = ( _set & GenericStateMachineEngine.ControlsSet.CancelOn ) != 0;
-      m_ButtonEdit.Enabled = ( ( _set & GenericStateMachineEngine.ControlsSet.EditOn ) != 0 );
-      m_ButtonAddNew.Enabled = ( _set & GenericStateMachineEngine.ControlsSet.NewOn ) != 0;
+      m_ButtonSave.Enabled = (controlsSet & GenericStateMachineEngine.ControlsSet.SaveOn) != 0;
+      m_ButtonDelete.Enabled = (controlsSet & GenericStateMachineEngine.ControlsSet.DeleteOn) != 0;
+      m_ButtonCancel.Enabled = (controlsSet & GenericStateMachineEngine.ControlsSet.CancelOn) != 0;
+      m_ButtonEdit.Enabled = ((controlsSet & GenericStateMachineEngine.ControlsSet.EditOn) != 0);
+      m_ButtonAddNew.Enabled = (controlsSet & GenericStateMachineEngine.ControlsSet.NewOn) != 0;
     }
     private GenericStateMachineEngine.ActionResult Show()
     {
@@ -329,203 +341,205 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
       {
         UpdateWorkload();
       }
-      catch ( Exception _ex )
+      catch (Exception _ex)
       {
-        return GenericStateMachineEngine.ActionResult.Exception( _ex, "GenericStateMachineEngine.ActionResult" );
+        return GenericStateMachineEngine.ActionResult.Exception(_ex, "GenericStateMachineEngine.ActionResult");
       };
       return GenericStateMachineEngine.ActionResult.Success;
     }
     private GenericStateMachineEngine.ActionResult Update()
     {
-      double _hours = TextBoxToHours( m_WorkloadHoursTextBox, m_WorkloadHoursLabel.Text );
       try
       {
-        int _indx = m_GridView.SelectedIndex;
-        Workload _wkl = Element.GetAtIndex<Workload>( m_DataContext.DataContext.Workload, m_GridView.SelectedDataKey.Value.ToString() );
-        Tasks _task = m_TaskDropDown.GetSelected<Tasks>( m_DataContext.DataContext.Task );
-        _wkl.Hours = _hours;
+        int _idx = m_GridView.SelectedIndex;
+        Entities _edc = m_DataContext.DataContext;
+        Workload _wkl = _edc.Workload.GetAtIndex<Workload>(m_GridView.SelectedDataKey.Value.ToString());
+        Tasks _task = m_TaskDropDown.GetSelected<Tasks>(m_DataContext.DataContext.Task);
         _wkl.Title = m_WorkloadDescriptionTextBox.Text;
-        _wkl.WorkloadDate = m_Calendar.SelectedDate.Date;
+        _wkl.EndDate = m_WorkloadEndDateTimeControl.SelectedDate;
+        _wkl.StartDate = m_WorkloadStartDateTimeControl.SelectedDate;
         _wkl.Workload2ProjectTitle = SelectedProject;
         _wkl.Workload2StageTitle = SelectedProject == null ? null : SelectedProject.Project2StageTitle;
-        _wkl.Workload2TaskTitle = _task;
+        _wkl.Workload2TaskID = _task;
         _task.CalculateWorkload();
         m_DataContext.DataContext.SubmitChanges();
-        FillupWorkflowGridView();
-        m_GridView.SelectedIndex = _indx;
+        FillupWorkflowGridView(_edc);
+        m_GridView.SelectedIndex = _idx;
         UpdateWorkload();
-        FillupGridViewProjectSummary();
+        FillupGridViewProjectSummary(_edc);
       }
-      catch ( ApplicationError _ae )
+      catch (ApplicationError _ae)
       {
-        return GenericStateMachineEngine.ActionResult.Exception( _ae, "GenericStateMachineEngine.ActionResult" );
+        return GenericStateMachineEngine.ActionResult.Exception(_ae, "GenericStateMachineEngine.ActionResult");
       }
-      catch ( Exception _ex )
+      catch (Exception _ex)
       {
-        return GenericStateMachineEngine.ActionResult.Exception( _ex, "GenericStateMachineEngine.ActionResult" );
+        return GenericStateMachineEngine.ActionResult.Exception(_ex, "GenericStateMachineEngine.ActionResult");
       }
       return GenericStateMachineEngine.ActionResult.Success;
     }
     private void ClearUserInterface()
     {
+      Entities edc = m_DataContext.DataContext;
       m_GridView.SelectedIndex = -1;
       m_WorkloadDescriptionTextBox.Text = String.Empty;
-      Workload _lastWorkload = ( from _wlx in Me.Workload where _wlx.WorkloadDate.GetValueOrDefault().Date == DateTime.Today.Date orderby _wlx.WorkloadDate descending select _wlx ).FirstOrDefault();
-      DateTime _lastActivityTime = DateTime.Today.Date + TimeSpan.FromHours( 8 );
-      if ( _lastWorkload != null && _lastActivityTime < _lastWorkload.WorkloadDate )
-        _lastActivityTime = _lastWorkload.WorkloadDate.Value;
-      m_WorkloadHoursTextBox.Text = ( ( DateTime.Now - _lastActivityTime ).TotalMinutes / 60.0 ).ToString();
+      Workload _lastWorkload = (from _wlx in Me.Workload(edc) where _wlx.StartDate.GetValueOrDefault().Date == DateTime.Today.Date orderby _wlx.StartDate descending select _wlx).FirstOrDefault();
+      DateTime _lastActivityTime = DateTime.Today.Date + TimeSpan.FromHours(8);
+      if (_lastWorkload != null && _lastActivityTime < _lastWorkload.EndDate.Value)
+        _lastActivityTime = _lastWorkload.EndDate.Value;
+      m_WorkloadEndDateTimeControl.SelectedDate = DateTime.Now;
+      m_WorkloadStartDateTimeControl.SelectedDate = _lastActivityTime;
     }
     #endregion
 
     #region helpers
-    private double TextBoxToHours( TextBox _textBox, string _label )
+    private double TextBoxToHours(TextBox textBox, string label)
     {
       try
       {
-        return Convert.ToDouble( _textBox.Text );
+        return Convert.ToDouble(textBox.Text);
       }
-      catch ( Exception )
+      catch (Exception)
       {
-        throw new ApplicationException( String.Format( "{0} texbox has wrong number", _label ) );
+        throw new ApplicationException(String.Format("{0} TexBox has wrong number", label));
       }
     }
-    private bool ShouwUserInformation()
+    private bool ShowUserInformation()
     {
-      if ( Me == null )
+      if (Me == null)
       {
-        this.Controls.Add( new Literal() { Text = String.Format( CAS.SharePoint.Web.CommonDefinitions.ErrorMessageFormat, "User not recognized - you must be added to the Recourses" ) } );
+        this.Controls.Add(new Literal() { Text = String.Format(CAS.SharePoint.Web.CommonDefinitions.ErrorMessageFormat, "User not recognized - you must be added to the Recourses") });
         return false;
       }
       else
       {
-        this.Controls.Add( new Literal() { Text = String.Format( CAS.SharePoint.Web.CommonDefinitions.ErrorMessageFormat, "Welcome: " + Me.EmployeeADAccountTitle ) } );
+        this.Controls.Add(new Literal() { Text = String.Format(CAS.SharePoint.Web.CommonDefinitions.ErrorMessageFormat, "Welcome: " + Me.Name) });
         return true;
       }
     }
-    private void FillupWorkflowGridView()
+    private void FillupWorkflowGridView(Entities edc)
     {
-      if ( Me == null )
+      if (Me == null)
         m_GridView.DataSource = null;
       else
       {
         At = "m_GridView.DataSource";
-        m_GridView.DataSource = from _wlidx in Me.Workload
-                                where _wlidx.WorkloadDate.Value.Date == m_Calendar.SelectedDate.Date
+        m_GridView.DataSource = from _workload in Me.Workload(this.m_DataContext.DataContext)
+                                where _workload.StartDate.Value.Date == m_Calendar.SelectedDate.Date
                                 select new
                                 {
-                                  Hours = _wlidx.Hours.GetValueOrDefault( 0 ),
-                                  Project = _wlidx.Workload2ProjectTitle == null ? m_SelectProjectDropDownEntry : _wlidx.Workload2ProjectTitle.Title,
-                                  Task = _wlidx.Workload2TaskTitle == null ? m_SelectTaskDropDownEntry : _wlidx.Workload2TaskTitle.Title,
-                                  Description = _wlidx.Title,
-                                  ID = _wlidx.Identyfikator
+                                  Hours = _workload.MyHours,
+                                  Project = _workload.Workload2ProjectTitle == null ? m_SelectProjectDropDownEntry : _workload.Workload2ProjectTitle.Title,
+                                  Task = _workload.Workload2TaskID == null ? m_SelectTaskDropDownEntry : _workload.Workload2TaskID.Title,
+                                  Description = _workload.Title,
+                                  ID = _workload.Id
                                 };
       }
       m_GridView.DataBind();
       ClearUserInterface();
     }
-    private void FillupTaskaDropDown()
+    private void FillupTaskDropDown()
     {
       m_TaskDropDown.Items.Clear();
-      if ( SelectedMilestone == null )
-        m_TaskDropDown.Items.Add( new ListItem( m_SelectMilestoneDropDownEntry, String.Empty ) { Selected = true } );
+      if (SelectedMilestone == null)
+        m_TaskDropDown.Items.Add(new ListItem(m_SelectMilestoneDropDownEntry, String.Empty) { Selected = true });
       else
       {
-        IQueryable<Tasks> _tasks = from _tidx in SelectedMilestone.Tasks0
-                                   let _stts = _tidx.Task2StatusTitle
-                                   where ( _stts == null ? true : _stts.Active.GetValueOrDefault( true ) ) &&
-                                         ( _tidx.Task2ResourcesTitle == null || _tidx.Task2ResourcesTitle == Me )
-                                   orderby _tidx.Title ascending
-                                   select _tidx;
-        m_TaskDropDown.EntityListDataSource( _tasks );
+        IQueryable<Tasks> _tasks = from _task in SelectedMilestone.Tasks0
+                                   let _status = _task.Task2StatusTitle
+                                   where (_status == null ? true : _status.Active.GetValueOrDefault(true)) &&
+                                         (_task.AssignedTo == null || _task.AssignedTo == Me)
+                                   orderby _task.Title ascending
+                                   select _task;
+        m_TaskDropDown.EntityListDataSource(_tasks);
       }
     }
     private void FillupMilestoneDropDown()
     {
       m_MilestoneDropDown.Items.Clear();
-      if ( SelectedProject == null )
-        m_MilestoneDropDown.Items.Add( new ListItem( m_SelectProjectDropDownEntry, String.Empty ) { Selected = true } );
+      if (SelectedProject == null)
+        m_MilestoneDropDown.Items.Add(new ListItem(m_SelectProjectDropDownEntry, String.Empty) { Selected = true });
       else
       {
-        IQueryable<Milestone> _mstns = from _tidx in SelectedProject.Milestone
-                                       where _tidx.Active.GetValueOrDefault( false )
-                                       orderby _tidx.SortOrder ascending
-                                       select _tidx;
-        m_MilestoneDropDown.EntityListDataSource<Milestone>( _mstns );
-        Milestone _default = ( from _amx in _mstns
-                               where _amx.Default.GetValueOrDefault( false )
-                               select _amx ).FirstOrDefault();
-        m_MilestoneDropDown.SelectItem4Element( _default );
+        IQueryable<Milestone> _milestones = from _milestone in SelectedProject.Milestone
+                                            where _milestone.Active.GetValueOrDefault(false)
+                                            orderby _milestone.SortOrder ascending
+                                            select _milestone;
+        m_MilestoneDropDown.EntityListDataSource<Milestone>(_milestones);
+        Milestone _default = (from _amx in _milestones
+                              where _amx.Default.GetValueOrDefault(false)
+                              select _amx).FirstOrDefault();
+        m_MilestoneDropDown.SelectItem4Element(_default);
       }
     }
     private void FillupProjectDropDown()
     {
       m_ProjectDropDown.Items.Clear();
-      m_ProjectDropDown.Items.Add( new ListItem( m_SelectProjectDropDownEntry, String.Empty ) { Selected = true } );
-      if ( Me == null || MyProjects == null )
+      m_ProjectDropDown.Items.Add(new ListItem(m_SelectProjectDropDownEntry, String.Empty) { Selected = true });
+      if (Me == null || MyProjects == null)
         return;
-      foreach ( var _row2 in MyProjects )
-        m_ProjectDropDown.Items.Add( new ListItem( _row2.Title, _row2.Identyfikator.ToString() ) );
+      foreach (var _row2 in MyProjects)
+        m_ProjectDropDown.Items.Add(new ListItem(_row2.Title, _row2.Id.ToString()));
     }
-    private void FillupGridViewProjectSummary()
+    private void FillupGridViewProjectSummary(Entities edc)
     {
-      m_GridViewProjectSummary.DataSource = WorkloadSummary.WorkloadSummaryList( MyProjects, Me );
+      m_GridViewProjectSummary.DataSource = WorkloadSummary.WorkloadSummaryList(edc, MyProjects, Me);
       m_GridViewProjectSummary.DataBind();
     }
     private void UpdateWorkload()
     {
-      if ( m_GridView.SelectedIndex < 0 )
+      if (m_GridView.SelectedIndex < 0)
         return;
       string _selection = m_GridView.SelectedDataKey.Value.ToString();
-      Workload _workload = Element.GetAtIndex<Workload>( m_DataContext.DataContext.Workload, _selection );
+      Workload _workload = m_DataContext.DataContext.Workload.GetAtIndex<Workload>(_selection);
       m_WorkloadDescriptionTextBox.Text = _workload.Title;
-      m_WorkloadHoursTextBox.Text = _workload.Hours.GetValueOrDefault( 0 ).ToString();
-      m_ProjectDropDown.SelectItem4Element( _workload.Workload2ProjectTitle );
+      m_WorkloadStartDateTimeControl.SelectedDate = _workload.StartDate.GetValueOrDefault(Extensions.SPMinimum);
+      m_WorkloadEndDateTimeControl.SelectedDate = _workload.EndDate.GetValueOrDefault(DateTime.Now);
+      m_ProjectDropDown.SelectItem4Element(_workload.Workload2ProjectTitle);
       FillupMilestoneDropDown();
-      m_MilestoneDropDown.SelectItem4Element( _workload.Workload2TaskTitle != null ? _workload.Workload2TaskTitle.Task2MilestoneResolvedInTitle : null );
-      FillupTaskaDropDown();
-      m_TaskDropDown.SelectItem4Element( _workload.Workload2TaskTitle );
+      m_MilestoneDropDown.SelectItem4Element(_workload.Workload2TaskID != null ? _workload.Workload2TaskID.Task2MilestoneResolvedInTitle : null);
+      FillupTaskDropDown();
+      m_TaskDropDown.SelectItem4Element(_workload.Workload2TaskID);
     }
     #endregion
 
     #region event handlers
-    private void m_ProjectDropDown_SelectedIndexChanged( object sender, EventArgs e )
+    private void m_ProjectDropDown_SelectedIndexChanged(object sender, EventArgs e)
     {
       try
       {
-        if ( SelectedProject == null || Me == null )
+        if (SelectedProject == null || Me == null)
           return;
         FillupMilestoneDropDown();
-        FillupTaskaDropDown();
+        FillupTaskDropDown();
       }
-      catch ( Exception _ex )
+      catch (Exception _ex)
       {
-        ShowActionResult( GenericStateMachineEngine.ActionResult.Exception( _ex, "m_ProjectDropDown_SelectedIndexChanged" ) );
+        GenericStateMachineEngine.ActionResult.Exception(_ex, "m_ProjectDropDown_SelectedIndexChanged").CreateActionResultControl(x => this.Controls.Add(x));
       }
     }
-
-    private void m_MilestoneDropDown_SelectedIndexChanged( object sender, EventArgs e )
+    private void m_MilestoneDropDown_SelectedIndexChanged(object sender, EventArgs e)
     {
       try
       {
-        if ( SelectedProject == null || Me == null )
+        if (SelectedProject == null || Me == null)
           return;
-        FillupTaskaDropDown();
+        FillupTaskDropDown();
       }
-      catch ( Exception _ex )
+      catch (Exception _ex)
       {
-        ShowActionResult( GenericStateMachineEngine.ActionResult.Exception( _ex, "m_MilestoneDropDown_SelectedIndexChanged" ) );
+        GenericStateMachineEngine.ActionResult.Exception(_ex, "m_MilestoneDropDown_SelectedIndexChanged").CreateActionResultControl(x => this.Controls.Add(x));
       }
     }
-    protected void m_GridView_SelectedIndexChanged( object sender, EventArgs e )
+    protected void m_GridView_SelectedIndexChanged(object sender, EventArgs e)
     {
       try
       {
         UpdateWorkload();
       }
-      catch ( Exception _ex )
+      catch (Exception _ex)
       {
-        ShowActionResult( GenericStateMachineEngine.ActionResult.Exception( _ex, "m_GridView_SelectedIndexChanged" ) );
+        GenericStateMachineEngine.ActionResult.Exception(_ex, "m_GridView_SelectedIndexChanged").CreateActionResultControl(x => this.Controls.Add(x));
       }
     }
     /// <summary>
@@ -533,24 +547,25 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    protected void m_Calendar_SelectionChanged( object sender, EventArgs e )
+    protected void m_Calendar_SelectionChanged(object sender, EventArgs e)
     {
       try
       {
-        m_WorkloadHoursTextBox.Text = String.Empty;
+        m_WorkloadEndDateTimeControl.SelectedDate = m_Calendar.SelectedDate.Date + TimeSpan.FromHours(16);
+        m_WorkloadStartDateTimeControl.SelectedDate = m_Calendar.SelectedDate.Date + TimeSpan.FromHours(8);
         m_WorkloadDescriptionTextBox.Text = String.Empty;
-        if ( Me == null )
+        if (Me == null)
           return;
-        double _hoursADay = ( from _widx in Me.Workload
-                              where _widx.WorkloadDate.Value.Date == m_Calendar.SelectedDate.Date
-                              select _widx ).Sum( _x => _x.Hours.GetValueOrDefault( 0 ) );
-        string _rprtTemplate = "You have reported {0} working hours for the selected day {1:D}";
-        m_HoursADayLabel.Text = String.Format( _rprtTemplate, _hoursADay, m_Calendar.SelectedDate.Date );
-        FillupWorkflowGridView();
+        double _hoursADay = (from _workload in Me.Workload(m_DataContext.DataContext)
+                             where _workload.StartDate.Value.Date == m_Calendar.SelectedDate.Date
+                             select _workload).Sum(_x => _x.MyHours);
+        string _template = "You have reported {0} working hours for the selected day {1:D}";
+        m_HoursADayLabel.Text = String.Format(_template, _hoursADay, m_Calendar.SelectedDate.Date);
+        FillupWorkflowGridView(m_DataContext.DataContext);
       }
-      catch ( Exception _ex )
+      catch (Exception _ex)
       {
-        ShowActionResult( GenericStateMachineEngine.ActionResult.Exception( _ex, "m_Calendar_SelectionChanged" ) );
+        GenericStateMachineEngine.ActionResult.Exception(_ex, "m_Calendar_SelectionChanged").CreateActionResultControl(x => this.Controls.Add(x));
       }
     }
     #endregion
@@ -562,22 +577,21 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     private const string m_SelectTaskDropDownEntry = "  -- select task -- ";
     private const string m_keyCurrentYear = "CurrentYear";
     private DataContextManagement<Entities> m_DataContext = null;
-    private ControlState m_ControlState = new ControlState( null );
-    private CAS.AgileWorkloadTracker.Linq.Resources p_me = null;
-    private CAS.AgileWorkloadTracker.Linq.Resources Me
+    private ControlState m_ControlState = new ControlState(null);
+    private Users b_Me = null;
+    private Users Me
     {
       get
       {
         try
         {
-          if ( p_me == null )
-            p_me = Resources.FindForUser( m_DataContext.DataContext, SPContext.Current.Web.CurrentUser );
-          return p_me;
-
+          if (b_Me == null)
+            b_Me = Users.FindSPUser(m_DataContext.DataContext, SPContext.Current.Web.CurrentUser);
+          return b_Me;
         }
-        catch ( Exception xe )
+        catch (Exception xe)
         {
-          throw new ApplicationError( "Me", "", xe.Message, xe );
+          throw new ApplicationError("Me", "", xe.Message, xe);
         }
       }
     }
@@ -586,8 +600,8 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     {
       get
       {
-        if ( p_Milestone == null && m_ProjectDropDown.SelectedIndex > 0 )
-          p_Milestone = Element.GetAtIndex<Milestone>( m_DataContext.DataContext.Milestone, m_MilestoneDropDown.SelectedValue );
+        if (p_Milestone == null && m_ProjectDropDown.SelectedIndex > 0)
+          p_Milestone = m_DataContext.DataContext.Milestone.GetAtIndex<Milestone>(m_MilestoneDropDown.SelectedValue);
         return p_Milestone;
       }
     }
@@ -596,8 +610,8 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     {
       get
       {
-        if ( p_Projects == null && m_ProjectDropDown.SelectedIndex > 0 )
-          p_Projects = Element.GetAtIndex<Projects>( m_DataContext.DataContext.Projects, m_ProjectDropDown.SelectedValue );
+        if (p_Projects == null && m_ProjectDropDown.SelectedIndex > 0)
+          p_Projects = m_DataContext.DataContext.Projects.GetAtIndex<Projects>(m_ProjectDropDown.SelectedValue);
         return p_Projects;
       }
     }
@@ -606,30 +620,9 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Webparts.WorkloadManagement
     {
       get
       {
-        if ( p_MyProjects == null )
-          p_MyProjects = from _association in Me.Estimation let _pidx = _association.Estimation2ProjectTitle where _pidx != null && _pidx.Active.GetValueOrDefault(true) select _pidx;
+        if (p_MyProjects == null)
+          p_MyProjects = from _association in Me.Estimation(m_DataContext.DataContext) let _pidx = _association.Estimation2ProjectTitle where _pidx != null && _pidx.Active.GetValueOrDefault(true) select _pidx;
         return p_MyProjects;
-      }
-    }
-    #endregion
-
-    #region errors handling
-    internal void ShowActionResult( GenericStateMachineEngine.ActionResult _rslt )
-    {
-      if ( _rslt.LastActionResult == GenericStateMachineEngine.ActionResult.Result.Success )
-        return;
-      if ( _rslt.LastActionResult == GenericStateMachineEngine.ActionResult.Result.Exception )
-      {
-#if DEBUG
-        string _format = CommonDefinitions.Convert2ErrorMessageFormat( "Exception at: {0}/{1} of : {2}." );
-        this.Controls.Add( new Literal() { Text = String.Format( _format, _rslt.ActionException.Source, At, _rslt.ActionException.Message ) } );
-#endif
-        Anons.WriteEntry( _rslt.ActionException.Source, _rslt.ActionException.Message );
-      }
-      else
-      {
-        string _format = CommonDefinitions.Convert2ErrorMessageFormat( "Validation error at: {0}/{1} of : {2}." );
-        this.Controls.Add( new Literal() { Text = String.Format( _format, At, _rslt.ActionException.Message ) } );
       }
     }
     #endregion

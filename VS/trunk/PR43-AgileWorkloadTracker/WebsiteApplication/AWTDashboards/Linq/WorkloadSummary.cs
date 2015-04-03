@@ -1,10 +1,23 @@
-﻿using System;
+﻿//_______________________________________________________________
+//  Title   : WorkloadSummary
+//  System  : Microsoft VisualStudio 2013 / C#
+//  $LastChangedDate$
+//  $Rev$
+//  $LastChangedBy$
+//  $URL: $
+//  $Id$
+//
+//  Copyright (C) 2015, CAS LODZ POLAND.
+//  TEL: +48 (42) 686 25 47
+//  mailto://techsupp@cas.eu
+//  http://www.cas.eu
+//_______________________________________________________________
+
+using CAS.AgileWorkloadTracker.DataModel.Linq;
+using CAS.SharePoint;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Microsoft.SharePoint.Linq;
-using CAS.AgileWorkloadTracker.Linq;
-using CAS.SharePoint;
 
 namespace CAS.AgileWorkloadTracker.Dashboards.Linq
 {
@@ -13,10 +26,10 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Linq
 
     #region public
     /// <summary>
-    /// Gets or sets the scope OF calculation.
+    /// Gets or sets the scope of calculation.
     /// </summary>
     /// <value>
-    /// The labeb describing the scope.
+    /// The label describing the scope.
     /// </value>
     public string Scope { get; set; }
     /// <summary>
@@ -41,41 +54,41 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Linq
     /// </value>
     public double Reported { get; set; }
     /// <summary>
-    /// Summarises the Workload in all available scopes.
+    /// Summarizes the Workload in all available scopes.
     /// </summary>
     /// <param name="projects">The _projects.</param>
     /// <param name="me">The _me.</param>
     /// <param name="selectedProject">The selected project.</param>
     /// <returns></returns>
-    public static List<WorkloadSummary> WorkloadSummaryList( IQueryable<Projects> projects, Resources me )
+    public static List<WorkloadSummary> WorkloadSummaryList(Entities edc, IQueryable<Projects> projects, Users me)
     {
       try
       {
         List<WorkloadSummary> _ret = new List<WorkloadSummary>();
         WorkloadSummary _AllInAllProjects = null;
-        if ( projects != null )
+        if (projects != null)
         {
-          _AllInAllProjects = AllInAllProjects( projects );
-          _ret.Add( _AllInAllProjects );
+          _AllInAllProjects = AllInAllProjects(projects);
+          _ret.Add(_AllInAllProjects);
         }
-        if ( me != null )
+        if (me != null)
         {
-          double _myAvailableHours = _AllInAllProjects == null ? 0 : _AllInAllProjects.Available - Math.Max( _AllInAllProjects.Allocated, _AllInAllProjects.Reported );
-          _ret.Add( UserInAllProjets( me, _myAvailableHours ) );
+          double _myAvailableHours = _AllInAllProjects == null ? 0 : _AllInAllProjects.Available - Math.Max(_AllInAllProjects.Allocated, _AllInAllProjects.Reported);
+          _ret.Add(UserInAllProjects(edc, me, _myAvailableHours));
         }
-        foreach ( var _selectedProject in projects )
+        foreach (var _selectedProject in projects)
         {
-          WorkloadSummary _AllInSelectedProject = AllInSelectedProject( _selectedProject );
-          _ret.Add( _AllInSelectedProject );
-          if ( me != null )
+          WorkloadSummary _AllInSelectedProject = AllInSelectedProject(_selectedProject);
+          _ret.Add(_AllInSelectedProject);
+          if (me != null)
           {
-            double _availableForMe = _selectedProject.ProjectHours.GetValueOrDefault( 0 ) - Math.Max( _AllInSelectedProject.Allocated, _AllInSelectedProject.Reported );
-            _ret.Add( UserInSelectedProject( me, _selectedProject, _availableForMe ) );
+            double _availableForMe = _selectedProject.ProjectHours.GetValueOrDefault(0) - Math.Max(_AllInSelectedProject.Allocated, _AllInSelectedProject.Reported);
+            _ret.Add(UserInSelectedProject(me, _selectedProject, _availableForMe));
           }
         }
         return _ret;
       }
-      catch ( Exception _ex)
+      catch (Exception _ex)
       {
         throw new ApplicationError("WorkloadSummaryList", "N/A", _ex.Message, _ex);
       }
@@ -83,41 +96,41 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Linq
     #endregion
 
     #region private
-    private static WorkloadSummary UserInSelectedProject( Resources _me, Projects SelectedProject, double _availableForMe )
+    private static WorkloadSummary UserInSelectedProject(Users me, Projects SelectedProject, double _availableForMe)
     {
-      WorkloadSummary _ret = new WorkloadSummary() { Scope = String.Format( @"You in the project: {0}", SelectedProject.Title ), Available = _availableForMe };
-      var _myEstimates = from _eidx in SelectedProject.Estimation where _eidx.Estimation2ResourcesTitle == _me select _eidx;
-      _ret.Allocated = _myEstimates.Sum( _x => _x.EstimatedWorkload.GetValueOrDefault( 0 ) );
-      var _myWokloads = from _widx in SelectedProject.Workload where _widx.Workload2ResourcesTitle == _me select _widx;
-      _ret.Reported = _myWokloads.Sum( _x => _x.Hours.GetValueOrDefault( 0 ) );
+      WorkloadSummary _ret = new WorkloadSummary() { Scope = String.Format(@"You in the project: {0}", SelectedProject.Title), Available = _availableForMe };
+      var _myEstimates = from _Estimation in SelectedProject.Estimation where _Estimation.AssignedTo.Id == me.Id select _Estimation;
+      _ret.Allocated = _myEstimates.Sum(_x => _x.EstimatedWorkload.GetValueOrDefault(0));
+      var _myWorkloads = from _workload in SelectedProject.Workload where _workload.AssignedTo.Id == me.Id select _workload;
+      _ret.Reported = _myWorkloads.Sum(_x => _x.MyHours);
       return _ret;
     }
-    private static WorkloadSummary AllInSelectedProject( Projects SelectedProject )
+    private static WorkloadSummary AllInSelectedProject(Projects SelectedProject)
     {
-      WorkloadSummary _ret = new WorkloadSummary() { Scope = String.Format( @"All users in the project: {0}", SelectedProject.Title ) };
-      _ret.Allocated = SelectedProject.Estimation.Sum( _x => _x.EstimatedWorkload.GetValueOrDefault( 0 ) );
-      _ret.Reported = SelectedProject.Workload.Sum( _x => _x.Hours.GetValueOrDefault( 0 ) );
-      _ret.Available = SelectedProject.ProjectHours.GetValueOrDefault( 0 );
+      WorkloadSummary _ret = new WorkloadSummary() { Scope = String.Format(@"All users in the project: {0}", SelectedProject.Title) };
+      _ret.Allocated = SelectedProject.Estimation.Sum(_x => _x.EstimatedWorkload.GetValueOrDefault(0));
+      _ret.Reported = SelectedProject.Workload.Sum(_x => _x.MyHours);
+      _ret.Available = SelectedProject.ProjectHours.GetValueOrDefault(0);
       return _ret;
     }
-    private static WorkloadSummary UserInAllProjets( Resources _me, double _myAvailableHours )
+    private static WorkloadSummary UserInAllProjects(Entities edc, Users me, double myAvailableHours)
     {
       WorkloadSummary _ret = new WorkloadSummary() { Scope = "You in all projects" };
-      _ret.Available = _myAvailableHours;
-      var _myActiveWorkloads = from _widx in _me.Workload where _widx.Workload2ProjectTitle.Active.GetValueOrDefault( true ) select _widx;
-      _ret.Reported = _myActiveWorkloads.Sum( _wld => _wld.Hours.GetValueOrDefault( 0 ) );
-      var _myActiveEstimate = from _estimate in _me.Estimation where _estimate.Estimation2ProjectTitle.Active.GetValueOrDefault( true ) select _estimate;
-      _ret.Allocated = _myActiveEstimate.Sum( _est => _est.EstimatedWorkload.GetValueOrDefault( 0 ) );
+      _ret.Available = myAvailableHours;
+      var _myActiveWorkloads = from _widx in edc.Workload where _widx.Workload2ProjectTitle.Active.GetValueOrDefault(true) && _widx.AssignedTo.Id == me.Id select _widx;
+      _ret.Reported = _myActiveWorkloads.Sum(_wld => _wld.MyHours);
+      var _myActiveEstimate = from _estimate in edc.Estimation where _estimate.Estimation2ProjectTitle.Active.GetValueOrDefault(true) && _estimate.AssignedTo.Id == me.Id select _estimate;
+      _ret.Allocated = _myActiveEstimate.Sum(_est => _est.EstimatedWorkload.GetValueOrDefault(0));
       return _ret;
     }
-    private static WorkloadSummary AllInAllProjects( IQueryable<Projects> _projects )
+    private static WorkloadSummary AllInAllProjects(IQueryable<Projects> projects)
     {
       WorkloadSummary _ret = new WorkloadSummary() { Scope = "All users in all projects" };
-      _ret.Available = _projects.Sum( _idx => _idx.ProjectHours.GetValueOrDefault( 0 ) );
-      var _allEstmations = from _pix in _projects let _eent = _pix.Estimation from _eix in _eent select _eix;
-      _ret.Allocated = _allEstmations.Sum( _x => _x.EstimatedWorkload.GetValueOrDefault( 0 ) );
-      var _allWorkloads = from _pix in _projects let _wkEnt = _pix.Workload from _widx in _wkEnt select _widx;
-      _ret.Reported = _allWorkloads.Sum( _x => _x.Hours.GetValueOrDefault( 0 ) );
+      _ret.Available = projects.Sum(_idx => _idx.ProjectHours.GetValueOrDefault(0));
+      IEnumerable<Estimation> _allEstimations = from _pix in projects let _estimation = _pix.Estimation from _eix in _estimation select _eix;
+      _ret.Allocated = _allEstimations.Sum(_x => _x.EstimatedWorkload.GetValueOrDefault(0));
+      IEnumerable<Workload> _allWorkloads = from _pix in projects let _workload = _pix.Workload from _widx in _workload select _widx;
+      _ret.Reported = _allWorkloads.Sum(_x => _x.MyHours);
       return _ret;
     }
     private WorkloadSummary() { }

@@ -1,38 +1,19 @@
-﻿using System.Reflection;
+﻿
+using System;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Security;
 
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-[assembly: AssemblyTitle("Website")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("AWT Website")]
+[assembly: AssemblyDescription("Smart Factory Agile Workload Tracker website data content definitions")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("CAS")]
-[assembly: AssemblyProduct("Website")]
-[assembly: AssemblyCopyright("Copyright © CAS 2013")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyProduct("Smart Factory Agile Workload Tracker")]
+[assembly: AssemblyCopyright("Copyright (c) 2000-2015 CAS LODZ POLAND")]
+[assembly: AssemblyTrademark("Smart Factory AWT")]
 [assembly: AssemblyCulture("")]
-
-// Setting ComVisible to false makes the types in this assembly not visible 
-// to COM components.  If you need to access a type in this assembly from 
-// COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
+[assembly: Guid("55085B3F-33D3-4DA5-86B0-E484C1F62307")]
+[assembly: AssemblyVersion("2.00.00.*")]
+[assembly: AssemblyFileVersion("2.00.00")]
 
-// The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("3c290ef1-a0fa-46bb-bc4a-f6b22c832e5a")]
-
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Build and Revision Numbers 
-// by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: AllowPartiallyTrustedCallers()]

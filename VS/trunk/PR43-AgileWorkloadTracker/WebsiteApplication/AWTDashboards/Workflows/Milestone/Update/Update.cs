@@ -29,7 +29,8 @@ using System.Workflow.Activities.Rules;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.Workflow;
 using Microsoft.SharePoint.WorkflowActions;
-using CAS.AgileWorkloadTracker.Linq;
+using CAS.AgileWorkloadTracker.DataModel.Linq;
+using CAS.SharePoint.Linq;
 
 namespace CAS.AgileWorkloadTracker.Dashboards.Workflows.Milestone.Update
 {
@@ -58,7 +59,7 @@ namespace CAS.AgileWorkloadTracker.Dashboards.Workflows.Milestone.Update
     {
       using ( Entities _edc = new Entities( this.workflowProperties.Web.Url ) )
       {
-        CAS.AgileWorkloadTracker.Linq.Milestone _mlstne = Element.GetAtIndex<CAS.AgileWorkloadTracker.Linq.Milestone>( _edc.Milestone, workflowProperties.ItemId );
+        CAS.AgileWorkloadTracker.DataModel.Linq.Milestone _mlstne = _edc.Milestone.GetAtIndex<CAS.AgileWorkloadTracker.DataModel.Linq.Milestone>(workflowProperties.ItemId);
         _mlstne.MilestoneHours = _mlstne.Requirements.Sum<Requirements>( a => a.Hours );
         _hours = _mlstne.MilestoneHours.Value;
         _tasks = _mlstne.Tasks0.Count;
