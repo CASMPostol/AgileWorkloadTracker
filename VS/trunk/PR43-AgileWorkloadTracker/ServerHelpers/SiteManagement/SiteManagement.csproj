@@ -56,6 +56,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
+    <Reference Include="CAS.Common.350">
+      <HintPath>..\..\packages\CAS.Common.2.20.00\lib\net35\CAS.Common.350.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Expression.Interactions" />
     <Reference Include="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.SharePoint.Linq, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
@@ -124,6 +127,7 @@
     <None Include="app.config" />
     <None Include="app.manifest" />
     <None Include="cas.snk" />
+    <None Include="packages.config" />
     <None Include="Properties\AssemblyInfo.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AssemblyInfo.cs</LastGenOutput>
@@ -141,6 +145,10 @@
     <ProjectReference Include="..\..\..\PR44-SharePoint\Libraries\SharePoint\SharePoint.csproj">
       <Project>{b9d9fcca-6132-4bf5-bc17-32ea752d6ad7}</Project>
       <Name>SharePoint</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WebsiteApplication\AWTDataModel\AWTDataModel.csproj">
+      <Project>{d079f747-023b-4e7e-859d-ed4c6f4cf1d0}</Project>
+      <Name>AWTDataModel</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
