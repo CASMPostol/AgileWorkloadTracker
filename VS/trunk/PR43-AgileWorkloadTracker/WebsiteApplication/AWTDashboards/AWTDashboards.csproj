@@ -152,6 +152,7 @@
       <SharePointProjectItemId>{efec32db-6b6f-4943-8e35-f36de2a5221c}</SharePointProjectItemId>
       <SubType>Designer</SubType>
     </None>
+    <None Include="Linq\Scripts\GetEntities.ps1" />
     <None Include="Package\Package.package">
       <PackageId>{92f33941-32f8-4ccd-a47e-35ce3cc13bcd}</PackageId>
     </None>
@@ -207,6 +208,7 @@
       <DependentUpon>AWTDashboards.feature</DependentUpon>
     </Content>
     <Content Include="Layouts\AWT_Dashboards\CAS_AWT.css" />
+    <Content Include="Linq\Scripts\Parameters.xml" />
     <Content Include="WebPartPages\AddEditTasksTemplate.aspx" />
     <Content Include="WebPartPages\AddEditWorkloadTemplate.aspx" />
     <Content Include="WebPartPages\Elements.xml">
