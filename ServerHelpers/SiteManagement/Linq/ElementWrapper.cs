@@ -25,7 +25,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
   /// </summary>
   /// <typeparam name="ElementType">The type of <see cref="ElementWrapper"/>.</typeparam>
   internal class ElementWrapper<ElementType> : INotifyPropertyChanged
-    where ElementType : Item
+    where ElementType : Element
   {
 
     #region public
