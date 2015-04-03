@@ -23,7 +23,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
   /// <summary>
   /// Wrapper of the <see cref="Element"/> to be used by the user interface
   /// </summary>
-  /// <typeparam name="ElementType">The type of <see cref="ElementWrapper"/>.</typeparam>
+  /// <typeparam name="ElementType">The type of <see cref="ElementWrapper{ElementType}"/>.</typeparam>
   internal class ElementWrapper<ElementType> : INotifyPropertyChanged
     where ElementType : Element
   {
@@ -61,7 +61,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
 
     #region private
     private ElementType b_Element;
-    private const string m_EmptyString = " -- Selecr milestone -- ";
+    private const string m_EmptyString = " -- Select milestone -- ";
     /// <summary>
     /// Extension method that sets a new value in a variable and then executes the event handler if the new value
     /// differs from the old one.  Used to easily implement INotifyPropeprtyChanged.
