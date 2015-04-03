@@ -16,7 +16,7 @@
 using System;
 using System.ComponentModel;
 using CAS.AgileWorkloadTracker.DataModel.Linq;
-using CAS.SharePoint.ComponentModel;
+using CAS.Common.ComponentModel;
 
 namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
 {
@@ -25,7 +25,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
   /// </summary>
   /// <typeparam name="ElementType">The type of <see cref="ElementWrapper"/>.</typeparam>
   internal class ElementWrapper<ElementType> : INotifyPropertyChanged
-    where ElementType : Element
+    where ElementType : Item
   {
 
     #region public

@@ -13,13 +13,13 @@
 //  http://www.cas.eu
 //</summary>
 
+using CAS.AgileWorkloadTracker.SiteManagement.Linq;
+using CAS.Common.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using CAS.AgileWorkloadTracker.SiteManagement.Linq;
-using CAS.SharePoint.ViewModel;
 
 namespace CAS.AgileWorkloadTracker.SiteManagement
 {
