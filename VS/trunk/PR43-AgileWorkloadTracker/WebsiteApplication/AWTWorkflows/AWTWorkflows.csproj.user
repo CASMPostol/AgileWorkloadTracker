@@ -13,13 +13,13 @@
           <HistoryListGuid>{d8a6f7e6-96a8-4094-b2a8-c5d33312eef1}</HistoryListGuid>
           <TaskList>Workflows Tasks</TaskList>
           <TaskListGuid>{c5d0f121-3967-4bcd-a913-17c12e0ab170}</TaskListGuid>
-          <AutoAssociate>true</AutoAssociate>
+          <AutoAssociate>false</AutoAssociate>
           <ManualStart>true</ManualStart>
           <ListURL>http://casmp/sites/a01/Lists/ProjectsList/AllItems.aspx</ListURL>
           <TargetList>Projects</TargetList>
           <TargetListGuid>{6d0825e6-e19e-4356-9b23-4ad5d6dc53ae}</TargetListGuid>
           <StartOnCreate>false</StartOnCreate>
-          <StartOnChange>false</StartOnChange>
+          <StartOnChange>true</StartOnChange>
         </ProjectItemStore>
       </FlavorProperties>
     </VisualStudio>
