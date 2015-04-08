@@ -13,8 +13,9 @@
 //  http://www.cas.eu
 //</summary>
 
-using CAS.AgileWorkloadTracker.SiteManagement.Linq;
+using CAS.AgileWorkloadTracker.DataModel110.Linq;
 using CAS.Common.ViewModel;
+using CAS.SharePoint.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -27,7 +28,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
   /// <summary>
   /// class MainWindowData
   /// </summary>
-  sealed internal class MainWindowData : ViewModelBackgroundWorker
+  sealed internal class MainWindowData : ViewModelBackgroundWorker, IPreRender
   {
 
     #region public
@@ -36,7 +37,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     public MainWindowData()
     {
       SiteURL = Properties.Settings.Default.SiteURL;
-      MilestoneCollection = new ObservableCollection<MilestoneWrapper>();
+      MilestoneCollection = new ObservableCollection<IMilestoneWrapper>();
     }
     #endregion
 
@@ -52,7 +53,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
         RaiseHandler<string>(value, ref b_SiteURL, "SiteURL", this);
       }
     }
-    public ObservableCollection<MilestoneWrapper> MilestoneCollection
+    public ObservableCollection<IMilestoneWrapper> MilestoneCollection
     {
       get
       {
@@ -60,7 +61,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
       }
       set
       {
-        RaiseHandler<ObservableCollection<MilestoneWrapper>>(value, ref b_MilestoneCollection, "MilestoneCollection", this);
+        RaiseHandler<ObservableCollection<IMilestoneWrapper>>(value, ref b_MilestoneCollection, "MilestoneCollection", this);
       }
     }
     #endregion
@@ -87,8 +88,8 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
       m_BWCompletedEventHandler = completedEventHandler;
       StartBackgroundWorker();
     }
-    internal bool Connected { get { return m_Entities != null; } }
-    internal void Update(MilestoneWrapper milestoneWrapper, RunWorkerCompletedEventHandler completedEventHandler)
+    internal bool Connected { get { return EntitiesWrapper.Connected; } }
+    internal void Update(IMilestoneWrapper milestoneWrapper, RunWorkerCompletedEventHandler completedEventHandler)
     {
       CheckDisposed<MainWindowData>();
       if (milestoneWrapper == null)
@@ -97,7 +98,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
       m_BWCompletedEventHandler = completedEventHandler;
       StartBackgroundWorker(milestoneWrapper);
     }
-    internal void ForceMakeInactive(MilestoneWrapper source, MilestoneWrapper target, RunWorkerCompletedEventHandler completedEventHandler)
+    internal void ForceMakeInactive(IMilestoneWrapper source, IMilestoneWrapper target, RunWorkerCompletedEventHandler completedEventHandler)
     {
       CheckDisposed<MainWindowData>();
       if (source == null)
@@ -108,7 +109,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
       m_BWCompletedEventHandler = completedEventHandler;
       StartBackgroundWorker(new ForceMakeInactiveArgument() { Source = source, Target = target });
     }
-    internal void Move(MilestoneWrapper source, MilestoneWrapper target, RunWorkerCompletedEventHandler completedEventHandler)
+    internal void Move(IMilestoneWrapper source, IMilestoneWrapper target, RunWorkerCompletedEventHandler completedEventHandler)
     {
       CheckDisposed<MainWindowData>();
       if (source == null)
@@ -119,7 +120,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
       m_BWCompletedEventHandler = completedEventHandler;
       StartBackgroundWorker(new ForceMakeInactiveArgument() { Source = source, Target = target });
     }
-    internal static void GetRequirements(MilestoneWrapper milestoneWrapper, Action<object, RunWorkerCompletedEventArgs> GetRequirementsCompleted)
+    internal static void GetRequirements(IMilestoneWrapper milestoneWrapper, Action<object, RunWorkerCompletedEventArgs> GetRequirementsCompleted)
     {
       throw new NotImplementedException();
     }
@@ -139,12 +140,11 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     #region private
     private class ForceMakeInactiveArgument
     {
-      public MilestoneWrapper Source { get; set; }
-      public MilestoneWrapper Target { get; set; }
+      public IMilestoneWrapper Source { get; set; }
+      public IMilestoneWrapper Target { get; set; }
     }
-    private ObservableCollection<MilestoneWrapper> b_MilestoneCollection;
+    private ObservableCollection<IMilestoneWrapper> b_MilestoneCollection;
     private string b_SiteURL;
-    private DataModel.Linq.Entities m_Entities;  //Must be disposed.
 
     #region BackgroundWorker
     private DoWorkEventHandler m_BWDoWorkEventHandler = null;
@@ -153,7 +153,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     //Dedicated DoWork delegates
     private object BackgroundWorker_DoConnect(object argument, Action<ProgressChangedEventArgs> progress, Func<bool> cancellationPending)
     {
-      return GetMilestonesCollection();
+      return EntitiesWrapper.GetMilestonesCollection(SiteURL, this);
     }
     private object BackgroundWorker_DoDisconnect(object argument, Action<ProgressChangedEventArgs> progress, Func<bool> cancellationPending)
     {
@@ -166,10 +166,10 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     private object BackgroundWorker_DoMakeInactive(object argument, Action<ProgressChangedEventArgs> progress, Func<bool> cancellationPending)
     {
       progress(new ProgressChangedEventArgs(0, "DoMakeInactive starting"));
-      MilestoneWrapper _mlstn = argument as MilestoneWrapper;
-      _mlstn.Update(m_Entities);
-      m_Entities.SubmitChanges();
-      ObservableCollection<MilestoneWrapper> _ret = GetMilestonesCollection();
+      IMilestoneWrapper _mlstn = argument as IMilestoneWrapper;
+      _mlstn.Update();
+      EntitiesWrapper.SubmitChanges();
+      ObservableCollection<IMilestoneWrapper> _ret = EntitiesWrapper.GetMilestonesCollection(SiteURL, this);
       progress(new ProgressChangedEventArgs(100, "DoMakeInactive ending"));
       return _ret;
     }
@@ -177,9 +177,9 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     {
       progress(new ProgressChangedEventArgs(0, "DoForceMakeInactive starting"));
       ForceMakeInactiveArgument _agumnt = argument as ForceMakeInactiveArgument;
-      _agumnt.Source.ForceMakeInactive(m_Entities, _agumnt.Target);
-      m_Entities.SubmitChanges();
-      ObservableCollection<MilestoneWrapper> _ret = GetMilestonesCollection();
+      _agumnt.Source.ForceMakeInactive(_agumnt.Target);
+      EntitiesWrapper.SubmitChanges();
+      ObservableCollection<IMilestoneWrapper> _ret = EntitiesWrapper.GetMilestonesCollection(SiteURL, this);
       progress(new ProgressChangedEventArgs(100, "DoForceMakeInactive ending"));
       return _ret;
     }
@@ -187,34 +187,19 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     {
       progress(new ProgressChangedEventArgs(0, "DoMove starting"));
       ForceMakeInactiveArgument _agumnt = argument as ForceMakeInactiveArgument;
-      _agumnt.Source.Move(m_Entities, _agumnt.Target);
-      m_Entities.SubmitChanges();
-      ObservableCollection<MilestoneWrapper> _ret = GetMilestonesCollection();
+      _agumnt.Source.Move(_agumnt.Target);
+      EntitiesWrapper.SubmitChanges();
+      ObservableCollection<IMilestoneWrapper> _ret = EntitiesWrapper.GetMilestonesCollection(SiteURL, this);
       progress(new ProgressChangedEventArgs(100, "DoMove ending"));
       return _ret;
     }
     #endregion
 
-    private ObservableCollection<MilestoneWrapper> GetMilestonesCollection()
-    {
-      DisposeEntities();
-      m_Entities = new DataModel.Linq.Entities(SiteURL);
-      List<DataModel.Linq.Milestone> _mls = (from _mlsx in m_Entities.Milestone
-                                             where _mlsx.Active.GetValueOrDefault(true)
-                                             select _mlsx).ToList();
-      _mls.Sort();
-      List<MilestoneWrapper> _empty = new List<MilestoneWrapper>();
-      _empty.Add(new MilestoneWrapper(null));
-      foreach (var _mstx in _mls)
-        _empty.Add(new MilestoneWrapper(_mstx));
-      return new ObservableCollection<MilestoneWrapper>(_empty);
-    }
     private void DisposeEntities()
     {
-      if (m_Entities == null)
+      if (PreRender == null)
         return;
-      m_Entities.Dispose();
-      m_Entities = null;
+      PreRender(this, EventArgs.Empty);
     }
     #endregion
 
@@ -257,6 +242,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     }
     #endregion
 
+    public event EventHandler PreRender;
 
   }
 }

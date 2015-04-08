@@ -144,6 +144,10 @@
       <Project>{b9d9fcca-6132-4bf5-bc17-32ea752d6ad7}</Project>
       <Name>SharePoint</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Library\AWTDataModel110\AWTDataModel110.csproj">
+      <Project>{d0cff6bb-54a0-4179-a495-f73b7df13b89}</Project>
+      <Name>AWTDataModel110</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="AWT_Ico.ico" />

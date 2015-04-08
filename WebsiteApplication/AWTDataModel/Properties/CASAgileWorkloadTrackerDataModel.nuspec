@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>CAS.AgileWorkloadTracker.DataModel</id>
+        <version>1.10.0.21688</version>
+        <title>Agile Workload Tracker DataModel</title>
+        <authors>CAS</authors>
+        <owners>CAS</owners>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Smart Factory Agile Workload Tracker Linq entities and helper functions.</description>
+        <summary>Agile Workload Tracker DataModel</summary>
+        <releaseNotes>Backward compatibility package - Recovered from previous version</releaseNotes>
+        <copyright>Copyright (c) 2000-2015 CAS LODZ POLAND</copyright>
+        <tags>Agile Workload Tracker, Linq, Data Model,</tags>
+        <dependencies>
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="..\bin\210\CAS.AWTDataModel4SOM.xml" target="lib\net35\CAS.AWTDataModel4SOM.xml" />
+        <file src="..\bin\210\CAS.AWTDataModel4SOM.pdb" target="lib\net35\CAS.AWTDataModel4SOM.pdb" />
+        <file src="..\bin\210\CAS.AWTDataModel4SOM.dll" target="lib\net35\CAS.AWTDataModel4SOM.dll" />
+    </files>
+</package>

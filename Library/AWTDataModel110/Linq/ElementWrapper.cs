@@ -18,13 +18,13 @@ using System.ComponentModel;
 using CAS.AgileWorkloadTracker.DataModel.Linq;
 using CAS.Common.ComponentModel;
 
-namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
+namespace CAS.AgileWorkloadTracker.DataModel110.Linq
 {
   /// <summary>
   /// Wrapper of the <see cref="Element"/> to be used by the user interface
   /// </summary>
   /// <typeparam name="ElementType">The type of <see cref="ElementWrapper{ElementType}"/>.</typeparam>
-  internal class ElementWrapper<ElementType> : INotifyPropertyChanged
+  public class ElementWrapper<ElementType> : INotifyPropertyChanged
     where ElementType : Element
   {
 
@@ -47,6 +47,10 @@ namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
     #endregion
 
     #region override  object
+    /// <summary>
+    /// Returns a <see cref="System.String" /> that represents this instance.
+    /// </summary>
+    /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
     public override string ToString()
     {
       if (Element == null)
@@ -56,6 +60,9 @@ namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
     #endregion
 
     #region INotifyPropertyChanged Members
+    /// <summary>
+    /// Occurs when a property value changes.
+    /// </summary>
     public event PropertyChangedEventHandler PropertyChanged;
     #endregion
 
@@ -64,12 +71,12 @@ namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
     private const string m_EmptyString = " -- Select milestone -- ";
     /// <summary>
     /// Extension method that sets a new value in a variable and then executes the event handler if the new value
-    /// differs from the old one.  Used to easily implement INotifyPropeprtyChanged.
+    /// differs from the old one.  Used to easily implement INotifyPropertyChanged.
     /// </summary>
     /// <typeparam name="T">The type of values being handled (usually the type of the property).</typeparam>
     /// <param name="newValue">The new value to set.</param>
     /// <param name="oldValue">The old value to replace (and the value holder).</param>
-    /// <param name="propertyName">The property's name as required by <typeparamref name="System.ComponentModel.PropertyChangedEventArgs" />.</param>
+    /// <param name="propertyName">The property's name as required by <see cref="System.ComponentModel.PropertyChangedEventArgs"/>.</param>
     /// <param name="sender">The object to be appointed as the executioner of the handler.</param>
     /// <returns>
     /// A boolean value that indicates if the new value was truly different from the old value according to <code>object.Equals()</code>.
