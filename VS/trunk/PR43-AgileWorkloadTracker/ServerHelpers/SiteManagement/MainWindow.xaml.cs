@@ -13,11 +13,11 @@
 //  http://www.cas.eu
 //</summary>
 
+using CAS.AgileWorkloadTracker.DataModel110.Linq;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
-using CAS.AgileWorkloadTracker.SiteManagement.Linq;
 
 namespace CAS.AgileWorkloadTracker.SiteManagement
 {
@@ -71,7 +71,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
         ShowExceptionBox(e.Error);
         return;
       }
-      this.MainWindowData.MilestoneCollection = e.Result as ObservableCollection<MilestoneWrapper>;
+      this.MainWindowData.MilestoneCollection = e.Result as ObservableCollection<IMilestoneWrapper>;
       x_MilestonesComboBox.SelectedIndex = 0;
     }
 
@@ -103,7 +103,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     {
       try
       {
-        MainWindowData.Update((MilestoneWrapper)x_MilestonesComboBox.SelectedItem, BackgroundWorkerCompleted);
+        MainWindowData.Update((IMilestoneWrapper)x_MilestonesComboBox.SelectedItem, BackgroundWorkerCompleted);
       }
       catch (Exception _ex)
       {
@@ -120,7 +120,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
           MessageBox.Show(_msg, "Wrong target milestone.", MessageBoxButton.OK, MessageBoxImage.Error);
           return;
         }
-        this.MainWindowData.ForceMakeInactive((MilestoneWrapper)x_MilestonesComboBox.SelectedItem, (MilestoneWrapper)X_TargetMilestoneCombo.SelectedItem, BackgroundWorkerCompleted);
+        this.MainWindowData.ForceMakeInactive((IMilestoneWrapper)x_MilestonesComboBox.SelectedItem, (IMilestoneWrapper)X_TargetMilestoneCombo.SelectedItem, BackgroundWorkerCompleted);
       }
       catch (Exception _ex)
       {
@@ -131,7 +131,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     {
       try
       {
-        MainWindowData.GetRequirements((MilestoneWrapper)x_MilestonesComboBox.SelectedItem, GetRequirementsCompleted);
+        MainWindowData.GetRequirements((IMilestoneWrapper)x_MilestonesComboBox.SelectedItem, GetRequirementsCompleted);
       }
       catch (Exception _ex)
       {
@@ -148,7 +148,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
           MessageBox.Show(_msg, "Wrong target milestone.", MessageBoxButton.OK, MessageBoxImage.Error);
           return;
         }
-        this.MainWindowData.Move((MilestoneWrapper)x_MilestonesComboBox.SelectedItem, (MilestoneWrapper)X_TargetMilestoneCombo.SelectedItem, BackgroundWorkerCompleted);
+        this.MainWindowData.Move((IMilestoneWrapper)x_MilestonesComboBox.SelectedItem, (IMilestoneWrapper)X_TargetMilestoneCombo.SelectedItem, BackgroundWorkerCompleted);
       }
       catch (Exception _ex)
       {

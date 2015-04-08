@@ -17,17 +17,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using CAS.AgileWorkloadTracker.SiteManagement;
 
-namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
+namespace CAS.AgileWorkloadTracker.DataModel110.Linq
 {
   /// <summary>
   /// MilestoneWrapper class
   /// </summary>
-  internal class MilestoneWrapper : ElementWrapper<DataModel.Linq.Milestone>
+  internal class MilestoneWrapper : ElementWrapper<DataModel.Linq.Milestone>, CAS.AgileWorkloadTracker.DataModel110.Linq.IMilestoneWrapper
   {
 
     #region creator
+    /// <summary>
+    /// Initializes a new instance of the <see cref="MilestoneWrapper"/> class.
+    /// </summary>
+    /// <param name="milestone">The milestone.</param>
     public MilestoneWrapper(DataModel.Linq.Milestone milestone)
       : base(milestone)
     {
@@ -60,7 +63,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
           NotInProgress = false;
         }
       }
-      ForceInactivAllowed = !NotInProgress;
+      ForceInactiveAllowed = !NotInProgress;
       _description.AppendLine();
       _description.AppendLine("{0}");
       b_Description = _description.ToString();
@@ -85,6 +88,10 @@ namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
         RaiseHandler<bool>(value, ref b_NotInProgress, "NotInProgress", this);
       }
     }
+    /// <summary>
+    /// Gets or sets the description.
+    /// </summary>
+    /// <value>The description.</value>
     public string Description
     {
       get
@@ -96,6 +103,10 @@ namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
         RaiseHandler<string>(value, ref b_Description, "Description", this);
       }
     }
+    /// <summary>
+    /// Gets or sets the active tasks.
+    /// </summary>
+    /// <value>The active tasks.</value>
     public int ActiveTasks
     {
       get
@@ -107,6 +118,10 @@ namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
         RaiseHandler<int>(value, ref b_ActiveTasks, "ActiveTasks", this);
       }
     }
+    /// <summary>
+    /// Gets or sets the project title.
+    /// </summary>
+    /// <value>The project title.</value>
     public string ProjectTitle
     {
       get
@@ -118,7 +133,11 @@ namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
         RaiseHandler<string>(value, ref b_ProjectTitle, "ProjectTitle", this);
       }
     }
-    public bool ForceInactivAllowed
+    /// <summary>
+    /// Gets or sets a value indicating whether [force inactiv allowed].
+    /// </summary>
+    /// <value><c>true</c> if [force inactiv allowed]; otherwise, <c>false</c>.</value>
+    public bool ForceInactiveAllowed
     {
       get
       {
@@ -132,27 +151,45 @@ namespace CAS.AgileWorkloadTracker.SiteManagement.Linq
     #endregion
 
     #region public API
-    internal void Update(DataModel.Linq.Entities edc)
+    /// <summary>
+    /// Updates this instance.
+    /// </summary>
+    /// <exception cref="System.ArgumentNullException">Element</exception>
+    public void Update()
     {
       if (base.Element == null)
         throw new ArgumentNullException("Element");
-      Element.Update(edc);
+      Element.Update(EntitiesWrapper.Entities);
     }
-    internal void ForceMakeInactive(DataModel.Linq.Entities edc, MilestoneWrapper target)
+    /// <summary>
+    /// Forces the make inactive.
+    /// </summary>
+    /// <param name="target">The target.</param>
+    /// <exception cref="System.ArgumentNullException">Element</exception>
+    public void ForceMakeInactive(IMilestoneWrapper target)
     {
       if (base.Element == null)
         throw new ArgumentNullException("Element");
-      Element.ForceMakeInactive(edc, target.Element);
+      Element.ForceMakeInactive(EntitiesWrapper.Entities, ((MilestoneWrapper)target).Element);
     }
-    internal void Move(DataModel.Linq.Entities edc, MilestoneWrapper target)
+    /// <summary>
+    /// Moves the specified target.
+    /// </summary>
+    /// <param name="target">The target.</param>
+    /// <exception cref="System.ArgumentNullException">Element</exception>
+    public void Move(IMilestoneWrapper target)
     {
       if (base.Element == null)
         throw new ArgumentNullException("Element");
-      Element.Move(edc, target.Element);
+      Element.Move(EntitiesWrapper.Entities, ((MilestoneWrapper)target).Element);
     }
     #endregion
 
     #region object
+    /// <summary>
+    /// Returns a <see cref="System.String" /> that represents this instance.
+    /// </summary>
+    /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
     public override string ToString()
     {
       if (Element == null)
