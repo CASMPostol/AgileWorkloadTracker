@@ -7,7 +7,7 @@ Name="[NAME]" ==> Name="MyWorkflow" -->
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
   <Workflow
      Name="Count Project"
-     Description="My SharePoint Workflow"
+     Description="Calculated total workload of the project"
      Id="96d787bc-8abd-4c2f-8a0f-03408817003b"
      CodeBesideClass="CAS.AgileWorkloadTracker.Workflows.CountProject.CalculateProject"
      CodeBesideAssembly="$assemblyname$">

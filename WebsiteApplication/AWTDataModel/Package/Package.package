@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="84d2b745-0dfa-4ed3-bfe6-4a00ee1c5a8b" solutionId="84d2b745-0dfa-4ed3-bfe6-4a00ee1c5a8b" resetWebServer="false" name="CAS Agile Workload Tracker Data Model" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="84d2b745-0dfa-4ed3-bfe6-4a00ee1c5a8b" solutionId="f3977208-6268-4ca9-9231-cba3eed8b268" resetWebServer="false" name="CAS Agile Workload Tracker Data Model 2.0" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
   <assemblies>
     <customAssembly location="CAS.SharePoint.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="..\..\..\CommonBinaries\PR42-SmartFactory\CAS.SharePoint.dll" />
   </assemblies>

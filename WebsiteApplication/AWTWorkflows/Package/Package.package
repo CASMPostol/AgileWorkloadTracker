@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="234d9250-0dbf-4a59-abbe-e4bac19eaff3" solutionId="234d9250-0dbf-4a59-abbe-e4bac19eaff3" resetWebServer="false" name="CAS Agile Workload Tracker Workflows" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="234d9250-0dbf-4a59-abbe-e4bac19eaff3" solutionId="59e58e55-6f80-4a9c-81a5-89acca127d6f" resetWebServer="false" name="CAS Agile Workload Tracker Workflows 2.0" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
   <features>
     <featureReference itemId="a65df859-f0a1-47a2-bb9d-03930e314363" />
   </features>
