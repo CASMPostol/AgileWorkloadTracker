@@ -1,0 +1,68 @@
+﻿<Window x:Class="CAS.AgileWorkloadTracker.SiteManagement.Shell"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://www.codeplex.com/prism"
+        xmlns:inf="clr-namespace:CAS.AgileWorkloadTracker.SiteManagement.Infrastructure"
+        WindowStartupLocation="CenterScreen" 
+        WindowState="Maximized"
+        ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+        ScrollViewer.VerticalScrollBarVisibility="Auto"
+        Icon="AWT_Ico.ico"
+        Width="Auto"
+        Height="Auto"
+        MinHeight="750"
+        MinWidth="850"
+        Title="{Binding Path=Title}">
+    <Window.Background>
+        <ImageBrush ImageSource="Imgs/Background.jpg"  Stretch="Fill"/>
+    </Window.Background>
+    <TabControl Background="{x:Null}" BorderThickness="0">
+        <TabItem Header="Main window" Style="{DynamicResource CASMainTabItemStyle}">
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Margin="0,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition />
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <!-- Logo -->
+                <DockPanel Grid.Row="0" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5">
+                    <TextBlock Style="{DynamicResource CASTextBlockHeader}" Margin="10,10,10,10">Agile Workload Tracker Management</TextBlock>
+                </DockPanel>
+
+                <!-- Content -->
+
+                <DockPanel x:Name="DetailsGrid" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="0" Margin="0" VerticalAlignment="Top">
+                    <ContentControl x:Name="ActionContent" prism:RegionManager.RegionName="{x:Static inf:RegionNames.ActionRegion}" MinHeight="50">
+                    </ContentControl>
+                </DockPanel>
+
+                <!-- Buttons -->
+
+                <DockPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom">
+                    <ItemsControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.ButtonsRegion}"/>
+                </DockPanel>
+
+                <!-- Progress Panel -->
+
+                <DockPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom">
+                    <ItemsControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.ProgressRegion}"/>
+                </DockPanel>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Application log" Style="{DynamicResource CASMainTabItemStyle}">
+
+            <!-- Diagnostic -->
+
+            <Grid x:Name="DiagnosticRegion" Margin="20" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <ItemsControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.DiagnosticRegion}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                </ScrollViewer>
+            </Grid>
+        </TabItem>
+    </TabControl>
+
+</Window>

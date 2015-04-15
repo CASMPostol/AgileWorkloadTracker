@@ -13,10 +13,10 @@
 //  http://www.cas.eu
 //</summary>
 
-using System;
-using System.ComponentModel;
 using CAS.AgileWorkloadTracker.DataModel.Linq;
 using CAS.Common.ComponentModel;
+using System;
+using System.ComponentModel;
 
 namespace CAS.AgileWorkloadTracker.DataModel110.Linq
 {
@@ -24,7 +24,7 @@ namespace CAS.AgileWorkloadTracker.DataModel110.Linq
   /// Wrapper of the <see cref="Element"/> to be used by the user interface
   /// </summary>
   /// <typeparam name="ElementType">The type of <see cref="ElementWrapper{ElementType}"/>.</typeparam>
-  public class ElementWrapper<ElementType> : INotifyPropertyChanged
+  public class ElementWrapper<ElementType> : PropertyChangedBase
     where ElementType : Element
   {
 
@@ -41,7 +41,7 @@ namespace CAS.AgileWorkloadTracker.DataModel110.Linq
       }
       set
       {
-        PropertyChanged.RaiseHandler<ElementType>(value, ref b_Element, "Element", this);
+        RaiseHandler<ElementType>(value, ref b_Element, "Element", this);
       }
     }
     #endregion
@@ -59,45 +59,9 @@ namespace CAS.AgileWorkloadTracker.DataModel110.Linq
     }
     #endregion
 
-    #region INotifyPropertyChanged Members
-    /// <summary>
-    /// Occurs when a property value changes.
-    /// </summary>
-    public event PropertyChangedEventHandler PropertyChanged;
-    #endregion
-
     #region private
     private ElementType b_Element;
     private const string m_EmptyString = " -- Select milestone -- ";
-    /// <summary>
-    /// Extension method that sets a new value in a variable and then executes the event handler if the new value
-    /// differs from the old one.  Used to easily implement INotifyPropertyChanged.
-    /// </summary>
-    /// <typeparam name="T">The type of values being handled (usually the type of the property).</typeparam>
-    /// <param name="newValue">The new value to set.</param>
-    /// <param name="oldValue">The old value to replace (and the value holder).</param>
-    /// <param name="propertyName">The property's name as required by <see cref="System.ComponentModel.PropertyChangedEventArgs"/>.</param>
-    /// <param name="sender">The object to be appointed as the executioner of the handler.</param>
-    /// <returns>
-    /// A boolean value that indicates if the new value was truly different from the old value according to <code>object.Equals()</code>.
-    /// </returns>
-    protected bool RaiseHandler<T>(T newValue, ref T oldValue, string propertyName, object sender)
-    {
-      bool changed = !Object.Equals(oldValue, newValue);
-      if (changed)
-      {
-        //Save the new value. 
-        oldValue = newValue;
-        //Raise the event 
-        if (PropertyChanged != null)
-        {
-          PropertyChanged(sender, new PropertyChangedEventArgs(propertyName));
-        }
-      }
-      //Signal what happened. 
-      return changed;
-    }
-
     #endregion
 
   }

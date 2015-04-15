@@ -5,5 +5,14 @@
     <Setting Name="SiteURL" Type="System.String" Scope="User">
       <Value Profile="(Default)">http://casas:11227/sites/awt</Value>
     </Setting>
+    <Setting Name="TraceSourceName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">CAS.AWTManagement</Value>
+    </Setting>
+    <Setting Name="LogFileName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">CAS.AWTManagement.Log</Value>
+    </Setting>
+    <Setting Name="LogSourceLevel" Type="System.Diagnostics.SourceLevels" Scope="User">
+      <Value Profile="(Default)">All</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

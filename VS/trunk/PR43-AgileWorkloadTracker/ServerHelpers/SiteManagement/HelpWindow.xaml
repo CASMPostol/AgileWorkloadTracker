@@ -1,0 +1,103 @@
+﻿<Window x:Class="CAS.AgileWorkloadTracker.SiteManagement.HelpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Shepherd Route Editor - Help"
+        Icon="AWT_Ico.ico"
+        Height="Auto" 
+        Width="Auto" 
+        MinHeight="400" 
+        MinWidth="500"
+        WindowStyle="ThreeDBorderWindow"
+        SizeToContent="WidthAndHeight">
+    <Window.Background>
+        <ImageBrush ImageSource="Imgs/Background.jpg"  Stretch="Fill"/>
+    </Window.Background>
+    <ScrollViewer>
+        <DockPanel>
+            <StackPanel DockPanel.Dock="Top" Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="5" Grid.Row="0" TextWrapping="Wrap">
+            <Bold>Shepherd Management Wizard - Help</Bold><LineBreak/>
+            Here are answers to common questions about Shepherd Management Wizard
+                    </TextBlock>
+                    <Label Name="x_Version">Rel. x.x.x</Label>
+                </StackPanel>
+                <Expander  Header="Setup connection" Style="{DynamicResource CASExpanderBlack}">
+                    <TextBlock Style="{DynamicResource CASTextBlockBlack}" Margin="5" TextWrapping="Wrap">
+                    To set up connection for a Route Import enter Shepherd website url address, press Connect button and Route Edit.<LineBreak/>
+                       To run archiving process you must also enter SQL Server Name and Database Name, then press Connect button and Archive.
+                    </TextBlock>
+                </Expander>
+                <TextBlock Margin="5" Grid.Row="0" TextWrapping="Wrap">
+                <Bold>Routes Import</Bold><LineBreak/>
+                </TextBlock>
+                <Expander  Header="How to create XML file?" Style="{DynamicResource CASExpanderBlack}">
+                    <TextBlock Style="{DynamicResource CASTextBlockBlack}" Margin="5" TextWrapping="Wrap">
+                Copy data required from Global Logistics Price List to the excel file maped with schema. Selece "Developer" and Export option. Save to the xml file.
+                    </TextBlock>
+                </Expander>
+                <Expander Header="How to connect to the Shepherd website?">
+                    <TextBlock Style="{DynamicResource CASTextBlockBlack}" Margin="5" TextWrapping="Wrap">
+                Enter Shepherd website URL to the text box and press Connect button. When the connection is established and all required dictionary data will be read, connection status will change from False to True.
+                    </TextBlock>
+                </Expander>
+                <Expander Header="Is Routs For Year required?">
+                    <TextBlock Style="{DynamicResource CASTextBlockBlack}" Margin="5" TextWrapping="Wrap">
+                Title for each route is created as a combination of variables: [Year] To: [City], by: [Partner], of: [Commodity]. [City], [Partner] and [Commodity] are taken directly from route. [Year] must be entered manual - this value will apply to all routes imported.
+                    </TextBlock>
+                </Expander>
+                <Expander Header="How to import XML file?">
+                    <TextBlock Style="{DynamicResource CASTextBlockBlack}" Margin="5" TextWrapping="Wrap">
+                Press Import XML button and browse for xml file. All data read from selected xml file will be displayed at proper tabs.
+                    </TextBlock>
+                </Expander>
+                <Expander Header="How to upload data from XML file to Shepherd website?">
+                    <TextBlock Style="{DynamicResource CASTextBlockBlack}" Margin="5" TextWrapping="Wrap">
+            Connect to the Shepherd website. Import xml file and press Uptade routes button. When finished, message about successful import will be displayed at Import log tab.
+                    </TextBlock>
+                </Expander>
+                <TextBlock Margin="5" Grid.Row="0" TextWrapping="Wrap">
+                <Bold>Archiving Shepherd Data</Bold><LineBreak/>
+                </TextBlock>
+                <Expander Header="Cleanup">
+                    <TextBlock Style="{DynamicResource CASTextBlockBlack}" Margin="5" TextWrapping="Wrap">
+                    During Cleanup phase program removes unnecessary data from lists:<LineBreak />
+                        • Time Slot - all passed Time Slots<LineBreak />
+                        • Shipping Point - all Shipping Points which are not assigned to a Warehouse<LineBreak />
+                        • Time Slot Template - all templates which are not assigned to any Shipping Point<LineBreak />
+                        • Drivers Team - all entries which do not have any lookup to Shipping or Driver<LineBreak />
+                        Cleanup will also check for the lists consistency. Detected errors must be fixed before the synchronization and archiving phase. You may add a missing lookup or delete entry. Lists tested for consistency are:<LineBreak/>
+                        • Load Description - if they have a lookup to Shipping<LineBreak/>
+                        • Driver - if they have a lookup to Partner <LineBreak/>
+                        • Truck - if they have a lookup to Partner <LineBreak/>
+                        • Destination Market - if they have lookup to City or Market<LineBreak/>
+                        • Carrier Performance Report - if they have lookup to Partner<LineBreak/>
+                        • Route - if they have all required lookups<LineBreak/>
+                        • City - if they have lookup to Country<LineBreak/>
+                        • Security Escort Route<LineBreak/>                        
+                    </TextBlock>
+                </Expander>
+                <Expander Header="Synchronization">
+                    <TextBlock Style="{DynamicResource CASTextBlockBlack}" Margin="5" TextWrapping="Wrap">
+                    During Synchronization phase all data from SharePoint website will be synchronized with data in SQL Database. Any changes made at Shepherd lists after previuos synchronization will be commited.
+                    </TextBlock>
+                </Expander>
+                <Expander Header="Archiving">
+                    <TextBlock Style="{DynamicResource CASTextBlockBlack}" Margin="5" TextWrapping="Wrap">
+                    Archiving phase removes old entries from SharePoint and saves them in the database. Lists archived during this phase:<LineBreak/>
+                        • Shipping - all shippings older then Archiving Period will be archived in database. Alarms and Events and Time Slots with a lookup on this Shipping will be deleted<LineBreak/>
+                        • Load Description - all Load Descriptions with a lookup to the archived Shipping<LineBreak/>
+                        • Drivers Team - all Drivers Team with a lookup to the archived Shipping<LineBreak/>
+                        • Driver - all Drivers marker by Partner as "To Be Deleted"<LineBreak/>
+                        • Trucks - all Trucks marker by Partner as "To Be Deleted"<LineBreak/>
+                        • Trailer - all Trailers marker by Partner as "To Be Deleted"<LineBreak/>
+                        • Routes - all routes older than 1 year + Archiving Period with no lookups from Shipping list<LineBreak/>
+                        • Security Escort Routes - all security escort routes older than 1 year + Archiving Period with no lookups from Shipping list<LineBreak/>
+                        • Business Description - all Bussiness Description with no lookup from Route / Security Escort Route<LineBreak/>
+                        • Carrier Performance Report - all reports older than Archiving Period
+                    </TextBlock>
+                </Expander>
+            </StackPanel>
+        </DockPanel>
+    </ScrollViewer>
+</Window>
