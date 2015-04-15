@@ -3,6 +3,7 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Windows;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -15,14 +16,13 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("<#=AssemblyCopyright#>")]
 [assembly: AssemblyTrademark("<#=SFAssemblyTrademark#>")]
 [assembly: AssemblyCulture("")]
-
-// Setting ComVisible to false makes the types in this assembly not visible
-// to COM components.  If you need to access a type in this assembly from 
-// COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
-// The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("52a878e1-45db-4416-b2c5-1cedc59bf4b5")]
-[assembly: AssemblyVersion("<#=AWTAssemblyVersion#>")]
-[assembly: AssemblyFileVersion("<#=AWTAssemblyFileVersion#>")]
+[assembly: AssemblyVersion("<#=AWTAssemblyVersion#>.*")]
+[assembly: AssemblyFileVersion("<#=AWTAssemblyVersion#>")]
+[assembly: ThemeInfo(
+    ResourceDictionaryLocation.None, //where theme specific resource dictionaries are located
+    ResourceDictionaryLocation.SourceAssembly //where the generic resource dictionary is located
+)]
 
 <#@ include file = "..\..\..\..\PR39-CommonResources\T4Definitions\AssemblyInfo.t4" #>

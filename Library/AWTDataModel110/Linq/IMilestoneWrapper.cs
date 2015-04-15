@@ -22,7 +22,7 @@ namespace CAS.AgileWorkloadTracker.DataModel110.Linq
   /// </summary>
   public interface IMilestoneWrapper : INotifyPropertyChanged
   {
-    
+
     /// <summary>
     /// Gets or sets the active tasks.
     /// </summary>
@@ -38,16 +38,6 @@ namespace CAS.AgileWorkloadTracker.DataModel110.Linq
     /// </summary>
     /// <value><c>true</c> if [force inactive allowed]; otherwise, <c>false</c>.</value>
     bool ForceInactiveAllowed { get; set; }
-    /// <summary>
-    /// Forces the make inactive.
-    /// </summary>
-    /// <param name="target">The target.</param>
-    void ForceMakeInactive(IMilestoneWrapper target);
-    /// <summary>
-    /// Moves the specified target.
-    /// </summary>
-    /// <param name="target">The target.</param>
-    void Move(IMilestoneWrapper target);
     /// <summary>
     /// Gets or sets a value indicating whether [not in progress].
     /// </summary>
@@ -66,7 +56,20 @@ namespace CAS.AgileWorkloadTracker.DataModel110.Linq
     /// <summary>
     /// Updates this instance.
     /// </summary>
-    void Update();
+    /// <param name="siteURL">The site URL.</param>
+    void Update(string siteURL);
+    /// <summary>
+    /// Forces the make inactive.
+    /// </summary>
+    /// <param name="target">The target.</param>
+    /// <param name="siteURL">The site URL.</param>
+    void ForceMakeInactive(IMilestoneWrapper target, string siteURL);
+    /// <summary>
+    /// Moves the specified target.
+    /// </summary>
+    /// <param name="target">The target.</param>
+    /// <param name="siteURL">The site URL.</param>
+    void Move(IMilestoneWrapper target, string siteURL);
 
   }
 }

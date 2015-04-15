@@ -43,19 +43,14 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
     private void ShowExceptionBox(Exception exception)
     {
       string _msg = String.Format("The operation has been aborted by ex: {0}", exception.Message);
-      MessageBox.Show(_msg, "Exception catched.", MessageBoxButton.OK, MessageBoxImage.Error);
+      MessageBox.Show(_msg, "Exception caught.", MessageBoxButton.OK, MessageBoxImage.Error);
     }
     private void Window_Closing(object sender, CancelEventArgs e)
     {
       if (DataContext == null)
         return;
-      if (!MainWindowData.Connected)
-        MainWindowData.Dispose();
-      else
-      {
-        MainWindowData.Disconnect(RunWorkerCompletedDoDispose);
-        e.Cancel = true;
-      }
+      MainWindowData.Disconnect(RunWorkerCompletedDoDispose);
+      e.Cancel = true;
     }
     private void RunWorkerCompletedDoDispose(object sender, RunWorkerCompletedEventArgs e)
     {
@@ -69,6 +64,7 @@ namespace CAS.AgileWorkloadTracker.SiteManagement
       if (e.Error != null)
       {
         ShowExceptionBox(e.Error);
+        MainWindowData.Connected = false;
         return;
       }
       this.MainWindowData.MilestoneCollection = e.Result as ObservableCollection<IMilestoneWrapper>;

@@ -13,6 +13,7 @@
 //  http://www.cas.eu
 //</summary>
 
+using CAS.AgileWorkloadTracker.DataModel.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace CAS.AgileWorkloadTracker.DataModel110.Linq
   /// <summary>
   /// MilestoneWrapper class
   /// </summary>
-  internal class MilestoneWrapper : ElementWrapper<DataModel.Linq.Milestone>, CAS.AgileWorkloadTracker.DataModel110.Linq.IMilestoneWrapper
+  internal class MilestoneWrapper : ElementWrapper<DataModel.Linq.Milestone>, IMilestoneWrapper
   {
 
     #region creator
@@ -141,11 +142,11 @@ namespace CAS.AgileWorkloadTracker.DataModel110.Linq
     {
       get
       {
-        return b_ForceInactivAllowed;
+        return b_ForceInactiveAllowed;
       }
       set
       {
-        RaiseHandler<bool>(value, ref b_ForceInactivAllowed, "ForceInactivAllowed", this);
+        RaiseHandler<bool>(value, ref b_ForceInactiveAllowed, "ForceInactivAllowed", this);
       }
     }
     #endregion
@@ -155,33 +156,52 @@ namespace CAS.AgileWorkloadTracker.DataModel110.Linq
     /// Updates this instance.
     /// </summary>
     /// <exception cref="System.ArgumentNullException">Element</exception>
-    public void Update()
+    public void Update(string siteURL)
     {
-      if (base.Element == null)
-        throw new ArgumentNullException("Element");
-      Element.Update(EntitiesWrapper.Entities);
+      using (Entities m_Context = new Entities(siteURL))
+      {
+        if (base.Element == null)
+          throw new ArgumentNullException("Element");
+        Milestone _ms = Milestone.GetAtIndex<Milestone>(m_Context.Milestone, Element.Identyfikator.Value);
+        Element.Update(m_Context);
+        m_Context.SubmitChanges();
+      }
     }
     /// <summary>
     /// Forces the make inactive.
     /// </summary>
     /// <param name="target">The target.</param>
+    /// <param name="siteURL">The site URL.</param>
     /// <exception cref="System.ArgumentNullException">Element</exception>
-    public void ForceMakeInactive(IMilestoneWrapper target)
+    public void ForceMakeInactive(IMilestoneWrapper target, string siteURL)
     {
-      if (base.Element == null)
-        throw new ArgumentNullException("Element");
-      Element.ForceMakeInactive(EntitiesWrapper.Entities, ((MilestoneWrapper)target).Element);
+      using (Entities m_Context = new Entities(siteURL))
+      {
+        if (base.Element == null)
+          throw new ArgumentNullException("Element");
+        Milestone _source = Milestone.GetAtIndex<Milestone>(m_Context.Milestone, Element.Identyfikator.Value);
+        Milestone _target = Milestone.GetAtIndex<Milestone>(m_Context.Milestone, ((MilestoneWrapper)target).Element.Identyfikator.Value);
+        _source.ForceMakeInactive(m_Context, _target);
+        m_Context.SubmitChanges();
+      }
     }
     /// <summary>
     /// Moves the specified target.
     /// </summary>
     /// <param name="target">The target.</param>
+    /// <param name="siteURL">The site URL.</param>
     /// <exception cref="System.ArgumentNullException">Element</exception>
-    public void Move(IMilestoneWrapper target)
+    public void Move(IMilestoneWrapper target, string siteURL)
     {
-      if (base.Element == null)
-        throw new ArgumentNullException("Element");
-      Element.Move(EntitiesWrapper.Entities, ((MilestoneWrapper)target).Element);
+      using (Entities m_Context = new Entities(siteURL))
+      {
+        if (base.Element == null)
+          throw new ArgumentNullException("Element");
+        Milestone _source = Milestone.GetAtIndex<Milestone>(m_Context.Milestone, Element.Identyfikator.Value);
+        Milestone _target = Milestone.GetAtIndex<Milestone>(m_Context.Milestone, ((MilestoneWrapper)target).Element.Identyfikator.Value);
+        _source.Move(m_Context, _target);
+        m_Context.SubmitChanges();
+      }
     }
     #endregion
 
@@ -199,7 +219,7 @@ namespace CAS.AgileWorkloadTracker.DataModel110.Linq
     #endregion
 
     #region private
-    private bool b_ForceInactivAllowed = false;
+    private bool b_ForceInactiveAllowed = false;
     private string b_Description = String.Empty;
     private int b_ActiveTasks = 0;
     private bool b_NotInProgress = false;
