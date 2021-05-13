@@ -1,0 +1,4 @@
+# Agile Management of Research Projects in the Contract Context
+
+The agile management approach helps us to guide software development projects towards the most valuable outcome possible with the goal to accommodate the unpredictability of the project that adversely affects the expected results and workload assessment. It is, therefore, proposed to be applied also to high-risk innovative research projects based on a fixed-price contract. A methodology based on Scrum and supporting tools derived from a generic business process model are proposed with the aim of harmonizing and embedding agile principles as contract rules. The case study result proves that convergence between management rules based on an agile approach and business objectives leads to a real improvement in key performance indicators and customer satisfaction index. The proposed methodology is recognized as a practical approach to make the project an adaptive process.
+
